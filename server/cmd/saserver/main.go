@@ -16,6 +16,7 @@ import (
 	"os/signal"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"sa/server/internal/data"
@@ -26,7 +27,7 @@ import (
 )
 
 // version is stamped by scripts/build-linux.sh.
-var version = "v0.2.4-LYNX-dev"
+var version = "v0.2.5-LYNX-dev"
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "--version" {
@@ -68,7 +69,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
 	// 每条线路一个独立的世界（原版每条线路是一台 gmsv），共用账号与角色存档

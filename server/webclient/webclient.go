@@ -4,7 +4,9 @@ package webclient
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"embed"
+	"fmt"
 	"io/fs"
 	"net/http"
 	"os"
@@ -27,10 +29,47 @@ func Handler(external string) http.Handler {
 	} else {
 		files, _ = fs.Sub(bundled, "static")
 	}
-	return handler(files)
+	return handler(files, external == "")
 }
 
-func handler(files fs.FS) http.Handler {
+func published(name string) bool {
+	if name != "index.html" && !(strings.HasPrefix(name, "dist/") && strings.HasSuffix(name, ".js")) {
+		return false
+	}
+	for _, part := range strings.Split(name, "/") {
+		if part == "" || strings.HasPrefix(part, ".") || strings.Contains(part, "\\") {
+			return false
+		}
+	}
+	return fs.ValidPath(name)
+}
+
+type clientFile struct {
+	content []byte
+	etag    string
+}
+
+func readClientFile(files fs.FS, name string) (clientFile, error) {
+	content, err := fs.ReadFile(files, name)
+	// The weak validator identifies decoded content across identity/gzip variants.
+	return clientFile{content, fmt.Sprintf(`W/"%x"`, sha256.Sum256(content))}, err
+}
+
+func handler(files fs.FS, snapshot bool) http.Handler {
+	// Bundled files are immutable for this process: read/hash each published file
+	// once. Explicit external clients are reread so edits cannot retain stale tags.
+	var cached map[string]clientFile
+	if snapshot {
+		cached = make(map[string]clientFile)
+		fs.WalkDir(files, ".", func(name string, entry fs.DirEntry, err error) error {
+			if err == nil && !entry.IsDir() && published(name) {
+				if file, err := readClientFile(files, name); err == nil {
+					cached[name] = file
+				}
+			}
+			return nil
+		})
+	}
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if r.Method != http.MethodGet && r.Method != http.MethodHead {
@@ -42,17 +81,17 @@ func handler(files fs.FS) http.Handler {
 		if name == "" {
 			name = "index.html"
 		}
-		valid := name == "index.html" || (strings.HasPrefix(name, "dist/") && strings.HasSuffix(name, ".js"))
-		for _, part := range strings.Split(name, "/") {
-			if part == "" || strings.HasPrefix(part, ".") || strings.Contains(part, "\\") {
-				valid = false
-			}
-		}
-		if !valid || !fs.ValidPath(name) {
+		if !published(name) {
 			http.NotFound(w, r)
 			return
 		}
-		content, err := fs.ReadFile(files, name)
+		file, ok := cached[name]
+		var err error
+		if !snapshot {
+			file, err = readClientFile(files, name)
+		} else if !ok {
+			err = fs.ErrNotExist
+		}
 		if err != nil {
 			if name == "index.html" {
 				w.Header().Set("Cache-Control", "no-store")
@@ -71,6 +110,7 @@ func handler(files fs.FS) http.Handler {
 			w.Header().Set("Cache-Control", "no-cache")
 			w.Header().Set("Content-Type", "text/javascript; charset=utf-8")
 		}
-		http.ServeContent(w, r, name, time.Time{}, bytes.NewReader(content))
+		w.Header().Set("ETag", file.etag)
+		http.ServeContent(w, r, name, time.Time{}, bytes.NewReader(file.content))
 	})
 }

@@ -1,0 +1,24 @@
+{
+  "idle_ms": 1500,
+  "mutations": {
+    "total": 761,
+    "attributes": 761,
+    "childList": 0,
+    "byAttribute": {
+      "data-phase": 95,
+      "hidden": 285,
+      "role": 95,
+      "aria-modal": 95,
+      "aria-label": 190,
+      "style": 1
+    }
+  },
+  "metrics_delta": {
+    "LayoutCount": 0,
+    "RecalcStyleCount": 182,
+    "ScriptDuration": 0.097789,
+    "LayoutDuration": 0,
+    "RecalcStyleDuration": 0.009165,
+    "TaskDuration": 0.19065600000000002
+  }
+}

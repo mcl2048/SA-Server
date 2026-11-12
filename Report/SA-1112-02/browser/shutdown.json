@@ -1,0 +1,21 @@
+{
+  "binary_sha256": "b7b08408cbf374971971c8ee275601c242d7c72350f1d1ece13bfecabe5f1e5c",
+  "online_socket_kept_until_SIGTERM": true,
+  "database_before": [
+    1006,
+    18,
+    25
+  ],
+  "in_memory_position": [
+    1000,
+    47,
+    82
+  ],
+  "database_after_shutdown": [
+    1000,
+    47,
+    82
+  ],
+  "position_flushed": true,
+  "gameplay_through_real_UI": true
+}

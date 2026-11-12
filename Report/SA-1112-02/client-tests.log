@@ -1,0 +1,33 @@
+✔ preview caps high-DPR copies, composites overlay and throttles to 15fps (7.479634ms)
+✔ hidden sheets, CSS-hidden previews and desktop mode do not copy frames (0.733252ms)
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (8.444258ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (2.206787ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (5.149266ms)
+✔ field direction releases on up, cancellation, lost capture and mode change (2.538618ms)
+✔ battle commands and targets remain human readable in a bounded sheet (4.855671ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (3.859366ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (7.919096ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (13.345498ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (5.389105ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (6.01714ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (10.071779ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (1.673701ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (4.854624ms)
+✓ dirTo 与 MOVE 表一致
+✓ 到达 (6,2)，路线 556565
+✓ 步数等于切比雪夫距离
+✓ 只用目标方向及其相邻方向
+✓ 斜步与直步交错分布（不是先斜走完再直走），路线 55556565655656556565
+✓ 一侧被挡仍能到达，路线 7566
+✓ 正前方是墙时原版路线为空
+✓ 停在目标前一格并朝向目标（lastDir=5）
+全部通过
+✔ client/test/route.test.ts (215.347977ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 618.407107

@@ -3,7 +3,7 @@
 // 运行：node client/build.mjs   输出到 client/dist/
 import { stripTypeScriptTypes } from "node:module";
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync, lstatSync, rmSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -11,6 +11,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "src");
 const out = join(dirname(fileURLToPath(import.meta.url)), "dist");
 const seen = new Set();
 const sources = new Map();
+const output = new Map();
 const imports = /(from\s+["'])(\.{1,2}\/[^"']+)\.ts(["'])/g;
 const resolveImport = (rel, path) => relative(root, join(dirname(join(root, rel)), path + ".ts")).replaceAll("\\", "/");
 function collect(rel) {
@@ -34,11 +35,20 @@ function build(rel) {
     build(resolveImport(rel, path));
     return `${a}${path}.js?v=${version}${b}`;
   }).replace(/[\t ]+$/gm, "");
-  const file = join(out, rel.replace(/\.ts$/, ".js"));
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, js);
+  output.set(rel.replace(/\.ts$/, ".js"), js);
 }
 
 build("main.ts");
+// dist is exclusively generated. Finish parsing all sources before replacing it,
+// so a failed source conversion cannot partially overwrite the previous build.
+if (out !== join(dirname(htmlPath), "dist")) throw Error("unexpected client output path");
+try { if (lstatSync(out).isSymbolicLink()) throw Error("symlink at client dist"); }
+catch (error) { if (error.code !== "ENOENT") throw error; }
+rmSync(out, { recursive: true, force: true });
+for (const [rel, js] of output) {
+  const file = join(out, rel);
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, js);
+}
 writeFileSync(htmlPath, template.replace(/src="dist\/main\.js"/, `src="dist/main.js?v=${version}"`));
 console.log(`已构建 ${seen.size} 个文件 → client/dist/：${[...seen].join(", ")}`);

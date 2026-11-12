@@ -75,6 +75,20 @@ test("narrow desktop remains desktop; modes move and restore the original stage"
   assert.equal(changes, 3);
 });
 
+test("IME confirmation never reaches native submit handlers or prevents composition", () => {
+  const box = new InputBox(canvas as any, 10, 10, 100, 20);
+  let submits = 0;
+  box.el.addEventListener("keydown", e => { if (e.key === "Enter") submits++; });
+  const key = (values: Record<string, any> = {}) => fire(box.el, "keydown", { key: "Enter", ...values });
+  assert.equal(key({ isComposing: true }).defaultPrevented, false);
+  key({ keyCode: 229 });
+  fire(box.el, "compositionstart"); key();
+  assert.equal(submits, 0);
+  fire(box.el, "compositionend"); key(); assert.equal(submits, 1);
+  fire(box.el, "compositionstart"); fire(box.el, "blur"); key(); assert.equal(submits, 2);
+  box.remove();
+});
+
 test("mobile taps release once; drag, multitouch, cancel, lost capture and blur never click", () => {
   view.setDeviceMode("mobile");
   const mouse = new Mouse(); mouse.attach(canvas as any);

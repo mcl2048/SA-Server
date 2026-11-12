@@ -1,0 +1,10 @@
+PASS native-login-enter-keeps-original-password-focus {}
+PASS login-modal-escape-dismisses-and-restores-inputs {}
+PASS mobile-panel-cancels-existing-route {"before": {"x": 12, "y": 25, "target": [13, 20], "want": -1, "layout": "field"}, "opened": {"x": 13, "y": 21, "target": null, "want": -1, "layout": "full"}, "after": {"x": 13, "y": 21, "target": null, "want": -1, "layout": "full"}, "moves_after_panel": []}
+PASS dpad-real-touch-release {"held": {"x": 12, "y": 22, "target": null, "want": 0, "layout": "field"}, "released": {"x": 11, "y": 23, "target": null, "want": -1, "layout": "field"}, "stopped": {"x": 11, "y": 23, "target": null, "want": -1, "layout": "field"}}
+PASS ime-enter-never-submits {"events": [{"kind": "isComposing", "visible": 1, "sent": []}, {"kind": "keyCode229", "visible": 1, "sent": []}, {"kind": "composition-tracked", "visible": 1, "sent": []}]}
+PASS normal-chat-enter-submits-once {"messages": [{"t": "Chat", "channel": "near", "text": "组合确认不应提交", "color": 0, "area": 3}]}
+PASS native-confirm-escape-cancels-without-return-home {}
+PASS auto-encounter-pauses-under-mobile-sheet {"opened": {"x": 11, "y": 23, "target": null, "want": -1, "layout": "full"}, "after": {"x": 11, "y": 23, "target": null, "want": -1, "layout": "full"}, "moves_after_enable": []}
+PASS desktop-keyup-inside-mode-releases-direction {"after_keyup": {"x": 12, "y": 24, "target": null, "want": -1, "layout": "field"}, "after_wait": {"x": 12, "y": 24, "target": null, "want": -1, "layout": "field"}}
+PASS no-browser-page-errors {"errors": []}

@@ -4,7 +4,7 @@
 
 
 
-import { isMobile } from "./mobile-view.js?v=9b200814243b1211";
+import { isMobile } from "./mobile-view.js?v=472f28ee5f8169e2";
 
 export const OFFSET_640                   = [80, 60];
 
@@ -397,6 +397,16 @@ export class InputBox {
     Object.assign(el.dataset, { logicalX: String(x), logicalY: String(y), logicalWidth: String(w), logicalHeight: String(h) });
     el.autocomplete = "off";
     el.spellcheck = false;
+    // IME confirmation belongs to the browser. Guard at capture phase before
+    // chat/login/NPC and other native key handlers can treat it as a submit or
+    // cancel. Do not preventDefault: that would interrupt candidate selection.
+    let composing = false;
+    el.addEventListener("compositionstart", () => { composing = true; });
+    el.addEventListener("compositionend", () => { composing = false; });
+    el.addEventListener("blur", () => { composing = false; });
+    el.addEventListener("keydown", e => {
+      if (composing || e.isComposing || e.keyCode === 229) e.stopImmediatePropagation();
+    }, { capture: true });
     Object.assign(el.style, {
       position: "absolute", background: "transparent", border: "0", outline: "none", padding: "0",
       color: FONT.WHITE, fontFamily: FONT_FAMILY, textShadow: "1px 1px 0 #000", caretColor: "#fff",

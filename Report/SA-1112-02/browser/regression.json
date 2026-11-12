@@ -1,0 +1,149 @@
+{
+  "runtime_kind": "final-embedded-v0.2.5-LYNX",
+  "results": [
+    {
+      "case": "native-login-enter-keeps-original-password-focus",
+      "pass": true
+    },
+    {
+      "case": "login-modal-escape-dismisses-and-restores-inputs",
+      "pass": true
+    },
+    {
+      "case": "mobile-panel-cancels-existing-route",
+      "pass": true,
+      "before": {
+        "x": 12,
+        "y": 25,
+        "target": [
+          13,
+          20
+        ],
+        "want": -1,
+        "layout": "field"
+      },
+      "opened": {
+        "x": 13,
+        "y": 21,
+        "target": null,
+        "want": -1,
+        "layout": "full"
+      },
+      "after": {
+        "x": 13,
+        "y": 21,
+        "target": null,
+        "want": -1,
+        "layout": "full"
+      },
+      "moves_after_panel": []
+    },
+    {
+      "case": "dpad-real-touch-release",
+      "pass": true,
+      "held": {
+        "x": 12,
+        "y": 22,
+        "target": null,
+        "want": 0,
+        "layout": "field"
+      },
+      "released": {
+        "x": 11,
+        "y": 23,
+        "target": null,
+        "want": -1,
+        "layout": "field"
+      },
+      "stopped": {
+        "x": 11,
+        "y": 23,
+        "target": null,
+        "want": -1,
+        "layout": "field"
+      }
+    },
+    {
+      "case": "ime-enter-never-submits",
+      "pass": true,
+      "events": [
+        {
+          "kind": "isComposing",
+          "visible": 1,
+          "sent": []
+        },
+        {
+          "kind": "keyCode229",
+          "visible": 1,
+          "sent": []
+        },
+        {
+          "kind": "composition-tracked",
+          "visible": 1,
+          "sent": []
+        }
+      ]
+    },
+    {
+      "case": "normal-chat-enter-submits-once",
+      "pass": true,
+      "messages": [
+        {
+          "t": "Chat",
+          "channel": "near",
+          "text": "组合确认不应提交",
+          "color": 0,
+          "area": 3
+        }
+      ]
+    },
+    {
+      "case": "native-confirm-escape-cancels-without-return-home",
+      "pass": true
+    },
+    {
+      "case": "auto-encounter-pauses-under-mobile-sheet",
+      "pass": true,
+      "opened": {
+        "x": 11,
+        "y": 23,
+        "target": null,
+        "want": -1,
+        "layout": "full"
+      },
+      "after": {
+        "x": 11,
+        "y": 23,
+        "target": null,
+        "want": -1,
+        "layout": "full"
+      },
+      "moves_after_enable": []
+    },
+    {
+      "case": "desktop-keyup-inside-mode-releases-direction",
+      "pass": true,
+      "after_keyup": {
+        "x": 12,
+        "y": 24,
+        "target": null,
+        "want": -1,
+        "layout": "field"
+      },
+      "after_wait": {
+        "x": 12,
+        "y": 24,
+        "target": null,
+        "want": -1,
+        "layout": "field"
+      }
+    },
+    {
+      "case": "no-browser-page-errors",
+      "pass": true,
+      "errors": []
+    }
+  ],
+  "page_errors": [],
+  "ime_scope": "Synthetic composition and keyboard events; not physical-device IME"
+}

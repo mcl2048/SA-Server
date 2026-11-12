@@ -1,5 +1,5 @@
-import { InputBox,                                    } from "./ui.js?v=9b200814243b1211";
-import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=9b200814243b1211";
+import { InputBox,                                    } from "./ui.js?v=472f28ee5f8169e2";
+import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=472f28ee5f8169e2";
 
 
 
@@ -78,6 +78,8 @@ export class MobileShell {
           layout = "";
           focusBeforeSheet                     = null;
           mobile = false;
+          presentation = "";
+          inputSnapshot             = [];
 
                    ui    ;
                    hooks                  ;
@@ -124,7 +126,8 @@ export class MobileShell {
         if (e.key === "Escape" && isMobile()) { e.preventDefault(); this.command("back"); }
         if (e.key === "Tab" && this.layout === "full") this.trapFocus(e);
       });
-      el.addEventListener("keyup", e => e.stopPropagation());
+      // Key releases must reach the global key-state tracker, even when focus
+      // moved into chrome after a canvas keydown. Keyup never dispatches actions.
     }
     document.addEventListener("sa-device-change", () => { this.modeSelect.value = getDeviceMode(); this.hooks.cancel(); this.frame(this.state); });
     addEventListener("blur", () => this.hooks.cancel());
@@ -134,17 +137,33 @@ export class MobileShell {
   frame(state                  )       {
     this.state = state;
     const mobile = isMobile();
-    this.modeSelect.value = getDeviceMode();
+    if (this.modeSelect.value !== getDeviceMode()) this.modeSelect.value = getDeviceMode();
     if (!mobile) {
       if (this.mobile) { this.hooks.cancel(); this.restoreInputs(); }
-      this.mobile = false; this.root.hidden = true; this.layout = ""; setMobileScene(false); return;
+      this.mobile = false;
+      if (!this.root.hidden) this.root.hidden = true;
+      this.layout = ""; this.presentation = ""; this.inputSnapshot = [];
+      setMobileScene(false); return;
     }
-    this.mobile = true; this.root.hidden = false;
-    this.root.dataset.phase = state.phase;
     const all = this.ui.getMobileActions().filter(isControl);
+    const boxes = [...InputBox.live];
+    const visual = window.visualViewport;
+    // Native UI is immediate-mode, but the DOM is retained. Unchanged native
+    // frames must not rewrite attributes, invalidate styles or sort text again.
+    // Input identity is checked separately so replacement fields at the same
+    // logical coordinates are still adopted immediately.
+    const signature = JSON.stringify([state, all, this.ui.texts, this.ui.bottomLine,
+      boxes.map(b => [b.el.style.display, b.el.type]),
+      visual?.offsetLeft ?? 0, visual?.offsetTop ?? 0, visual?.width ?? innerWidth, visual?.height ?? innerHeight]);
+    if (this.mobile && signature === this.presentation && boxes.length === this.inputSnapshot.length
+      && boxes.every((box, i) => box === this.inputSnapshot[i])) return;
+    this.presentation = signature; this.inputSnapshot = boxes;
+    this.mobile = true;
+    if (this.root.hidden) this.root.hidden = false;
+    if (this.root.dataset.phase !== state.phase) this.root.dataset.phase = state.phase;
     const npc = all.some(h => /^(?:npc-|psel-)/.test(h.id));
     const modal = all.some(h => /^modal-/.test(h.id));
-    this.dismiss.hidden = !npc;
+    if (this.dismiss.hidden !== !npc) this.dismiss.hidden = !npc;
     const fieldNormal = state.phase === "field" && !state.panel && !npc && !modal;
     const layout = fieldNormal ? "field" : state.phase === "battle" && !npc && !modal ? "battle" : "full";
     const changed = layout !== this.layout;
@@ -155,7 +174,6 @@ export class MobileShell {
     }
     // Chrome has position:relative and may have zero height before a full sheet opens.
     // Anchor full screens to the visual viewport, not that collapsed containing block.
-    const visual = window.visualViewport;
     for (const [key, value] of Object.entries({ left: `${visual?.offsetLeft ?? 0}px`, top: `${visual?.offsetTop ?? 0}px`, width: `${visual?.width ?? innerWidth}px`, height: `${visual?.height ?? innerHeight}px`, maxHeight: `${visual?.height ?? innerHeight}px` })) {
       if (layout === "full") this.root.style.setProperty(key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`), value);
       else this.root.style.removeProperty(key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`));
@@ -431,9 +449,9 @@ export class MobileShell {
 .mobile-shell-input{display:block;margin-bottom:12px}.mobile-shell-input span{display:block;margin-bottom:4px;color:#ffdf97}.mobile-shell-input input{font-family:inherit!important;min-height:46px;max-width:100%}.mobile-shell-inputs>button{margin-bottom:8px;width:100%}
 .mobile-shell-toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:6px 8px;border-top:1px solid #69877b;flex:none}.mobile-shell-toolbar button{padding:6px 2px}
 .mobile-shell-field{padding:6px 10px;flex:none}.mobile-shell-chat{max-height:76px;overflow:auto;font-size:16px;color:#cde2cf}.mobile-shell-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-shell-dpad{display:grid;grid-template-areas:'. up .' 'left down right';grid-template-columns:44px 44px 44px;gap:4px}.mobile-shell-dpad button{padding:4px;font-size:23px}.mobile-shell-tools{display:grid;gap:4px}.mobile-shell-zoom{display:flex;gap:4px}.mobile-shell-zoom button{padding:6px 8px;flex:1}
-.mobile-shell[data-layout='full']{position:fixed;inset:0;z-index:10;background:#10292d}.mobile-shell[data-layout='full'] .mobile-shell-sheet{flex:1}.mobile-shell[data-layout='battle']{max-height:55vh;max-height:55dvh}.mobile-shell[data-layout='battle'] .mobile-shell-sheet{max-height:calc(55dvh - 65px)}
+.mobile-shell[data-layout='full']{position:fixed;inset:0;z-index:10;background:#10292d;padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}.mobile-shell[data-layout='full'] .mobile-shell-sheet{flex:1}.mobile-shell[data-layout='battle']{max-height:55vh;max-height:55dvh}.mobile-shell[data-layout='battle'] .mobile-shell-sheet{max-height:calc(55dvh - 65px)}
 .mobile-shell[data-layout='field'] .mobile-shell-sheet{max-height:150px;flex:none;padding:6px 10px}.mobile-shell[data-layout='field'] .mobile-shell-info{display:none}.mobile-shell[data-layout='field'] .mobile-shell-inputs{display:flex;align-items:end;gap:6px}.mobile-shell[data-layout='field'] .mobile-shell-input{flex:1;min-width:0;margin:0}.mobile-shell[data-layout='field'] .mobile-shell-input span{display:none}.mobile-shell[data-layout='field'] .mobile-shell-inputs>button{width:auto;margin:0}
-#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#eee;background:#163236eF;border:1px solid #84988d;border-radius:8px;font:13px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24464a;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:6px;bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:44px;min-width:44px}
+#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#eee;background:#163236eF;border:1px solid #84988d;border-radius:8px;font:13px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24464a;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:calc(env(safe-area-inset-top) + 6px);right:calc(env(safe-area-inset-right) + 6px);bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:44px;min-width:44px}
 @media(max-height:580px){.mobile-shell[data-layout='field'] .mobile-shell-chat{display:none}.mobile-shell-controls{gap:6px}.mobile-shell-toolbar{grid-template-columns:repeat(8,minmax(0,1fr))}.mobile-shell-toolbar button{font-size:13px;padding:4px 0}.mobile-shell-dpad{grid-template-areas:'left up down right';grid-template-columns:repeat(4,44px)}}
 `;
     document.head.append(style);

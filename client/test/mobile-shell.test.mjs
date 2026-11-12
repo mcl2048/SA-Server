@@ -72,6 +72,21 @@ test("desktop shell stays hidden; original inputs retain identity, focus and edi
   box.remove();
 });
 
+test("unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted", () => {
+  setDeviceMode("mobile"); hits = []; frame();
+  const original = shell.syncInputs;
+  let calls = 0;
+  shell.syncInputs = function(...args) { calls++; return original.apply(this, args); };
+  for (let i = 0; i < 60; i++) frame();
+  assert.equal(calls, 0);
+  const first = new InputBox(canvas, 456, 154, 92, 16); frame();
+  assert.equal(calls, 1); assert.equal(first.el.dataset.mobileManaged, "true");
+  first.remove(); const second = new InputBox(canvas, 456, 154, 92, 16); frame();
+  assert.equal(calls, 2); assert.equal(second.el.dataset.mobileManaged, "true");
+  second.remove(); frame();
+  shell.syncInputs = original;
+});
+
 test("only reachable controls render; removed controls cannot dispatch stale queued actions", () => {
   setDeviceMode("mobile");
   hits = [{ id: "ok", x1: 400, y1: 296, x2: 480, y2: 395 }, { id: "modal-block", x1: 0, y1: 0, x2: 800, y2: 600 }]; frame();

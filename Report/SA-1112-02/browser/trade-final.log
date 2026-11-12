@@ -1,0 +1,14 @@
+trade setting 交    易： Ｎ  Ｏ
+{
+  "case": "mobile-trade-back",
+  "client_trade_open": false,
+  "peer_trade_open": false,
+  "commands_after_back": [
+    {
+      "t": "Trade",
+      "cmd": "cancel",
+      "slot": 0,
+      "amount": 0
+    }
+  ]
+}

@@ -1,24 +1,24 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=9b200814243b1211";
-import { Sound, setSfx } from "./audio.js?v=9b200814243b1211";
-import { MAP_BGM } from "./soundtable.js?v=9b200814243b1211";
-import { Connection, trafficRates } from "./net.js?v=9b200814243b1211";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=9b200814243b1211";
-import { Renderer } from "./renderer.js?v=9b200814243b1211";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=9b200814243b1211";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=9b200814243b1211";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=9b200814243b1211";
-import { ACTION_KEYS } from "./actions.js?v=9b200814243b1211";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=9b200814243b1211";
-import { BattleScreen } from "./battle.js?v=9b200814243b1211";
-import { Shop } from "./shop.js?v=9b200814243b1211";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=9b200814243b1211";
-import { loadAi } from "./ai.js?v=9b200814243b1211";
-import { AiMemory } from "./aismart.js?v=9b200814243b1211";
-import { isMobile, setMobileScene } from "./mobile-view.js?v=9b200814243b1211";
-import { MobileShell } from "./mobile-shell.js?v=9b200814243b1211";
-import { drawMobilePreview } from "./mobile-preview.js?v=9b200814243b1211";
+import { Assets } from "./assets.js?v=472f28ee5f8169e2";
+import { Sound, setSfx } from "./audio.js?v=472f28ee5f8169e2";
+import { MAP_BGM } from "./soundtable.js?v=472f28ee5f8169e2";
+import { Connection, trafficRates } from "./net.js?v=472f28ee5f8169e2";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=472f28ee5f8169e2";
+import { Renderer } from "./renderer.js?v=472f28ee5f8169e2";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=472f28ee5f8169e2";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=472f28ee5f8169e2";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=472f28ee5f8169e2";
+import { ACTION_KEYS } from "./actions.js?v=472f28ee5f8169e2";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=472f28ee5f8169e2";
+import { BattleScreen } from "./battle.js?v=472f28ee5f8169e2";
+import { Shop } from "./shop.js?v=472f28ee5f8169e2";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=472f28ee5f8169e2";
+import { loadAi } from "./ai.js?v=472f28ee5f8169e2";
+import { AiMemory } from "./aismart.js?v=472f28ee5f8169e2";
+import { isMobile, setMobileScene } from "./mobile-view.js?v=472f28ee5f8169e2";
+import { MobileShell } from "./mobile-shell.js?v=472f28ee5f8169e2";
+import { drawMobilePreview } from "./mobile-preview.js?v=472f28ee5f8169e2";
 
 
 const params = new URLSearchParams(location.search);
@@ -628,7 +628,7 @@ class FieldScreen                   {
     const stop = (why        ) => { this.enc = null; chat(`自动遇敌停止：${why}`, FONT.RED); };
     if (f.floor !== e.floor) return stop("换了地图");
     if (f.wantDir >= 0 || (f.target !== null && f.target !== e.target)) return stop("手动移动");
-    if (battle || modal || this.input || f.follower || s.moving(now) || f.target !== null) return;
+    if (battle || modal || this.input || (isMobile() && this.openCount() > 0) || f.follower || s.moving(now) || f.target !== null) return;
     if (selfStatus && selfStatus.maxHp > 0 && selfStatus.hp * 5 < selfStatus.maxHp) return stop("耐久力太低");
     if (s.x !== e.x || s.y !== e.y) { e.target = [e.x, e.y]; f.target = e.target; return; }
     // 先试上次的方向，再按顺序找旁边一格能走、不是传送点的
@@ -932,6 +932,12 @@ class FieldScreen                   {
     chat,
   });
 
+  /** Cancel both held movement and an earlier click-to-walk/talk intent. */
+  cancelMobileMotion() {
+    this.talkTarget = null;
+    if (field) { field.wantDir = -1; field.target = null; }
+  }
+
   /** Mobile chrome invokes the same menu/state transitions as desktop shortcuts. */
   mobileCommand(name        ) {
     if (!isMobile()) return;
@@ -958,7 +964,7 @@ class FieldScreen                   {
       if (m.actions.open) m.actions.toggle();
       if (m.mail.open) m.mail.toggle();
       if (m.family.open) m.family.close();
-      if (m.trade.open) m.trade.close();
+      if (m.trade.open) app.net?.send({ t: "Trade", cmd: "cancel", slot: 0, amount: 0 });
       if (m.vendor.open) m.vendor.close(true);
       this.chatWnd = false;
       if (this.panel.etcOpen) this.panel.toggleEtc();
@@ -1041,7 +1047,7 @@ const mobile = new MobileShell(ui, {
     mobileDirection = isMobile() && screen instanceof FieldScreen && !modal && !battle && !screen.openCount() ? dir : -1;
     if (mobileDirection >= 0 && field) field.target = null;
   },
-  cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (field) field.wantDir = -1; } },
+  cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });
 const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); };
 document.addEventListener("sa-device-change", releaseMobileInput);
@@ -1049,6 +1055,7 @@ addEventListener("blur", releaseMobileInput);
 document.addEventListener("visibilitychange", () => { if (document.hidden) releaseMobileInput(); });
 
 function mobileFrame() {
+  if (!isMobile()) { mobile.frame({ phase: "desktop", panel: false }); return; }
   const f = screen instanceof FieldScreen ? screen : null;
   const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0);
   setMobileScene(!!f && !panel && !battle);

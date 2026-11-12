@@ -1,0 +1,12 @@
+✔ repeated builds match, removed imports and retired JS cannot enter the release (1191.867293ms)
+✔ staging refuses unrelated embedded data before changing the previous client (691.171143ms)
+✔ failed TypeScript parsing preserves prior output and entry version (689.96368ms)
+✔ builder and stager reject output symlinks without modifying the target (575.967289ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3438.315115

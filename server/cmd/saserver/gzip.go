@@ -4,6 +4,7 @@ import (
 	"compress/gzip"
 	"net/http"
 	"path"
+	"strconv"
 	"strings"
 	"sync"
 )
@@ -13,26 +14,69 @@ var gzipTypes = map[string]bool{".js": true, ".json": true, ".html": true, ".css
 
 var gzipPool = sync.Pool{New: func() any { w, _ := gzip.NewWriterLevel(nil, gzip.BestSpeed); return w }}
 
+// acceptsGzip honors an explicit gzip exclusion over a wildcard. Coding names
+// and q parameter names are case-insensitive; malformed qualities are rejected.
+func acceptsGzip(value string) bool {
+	gzipQ, wildcardQ := -1.0, -1.0
+	for _, item := range strings.Split(value, ",") {
+		parts := strings.Split(item, ";")
+		coding := strings.ToLower(strings.TrimSpace(parts[0]))
+		if coding != "gzip" && coding != "*" {
+			continue
+		}
+		q := 1.0
+		for _, param := range parts[1:] {
+			name, value, ok := strings.Cut(strings.TrimSpace(param), "=")
+			if strings.EqualFold(name, "q") {
+				parsed, err := strconv.ParseFloat(strings.TrimSpace(value), 64)
+				if !ok || err != nil || !(parsed >= 0 && parsed <= 1) {
+					q = 0
+				} else {
+					q = parsed
+				}
+			}
+		}
+		if coding == "gzip" {
+			gzipQ = q
+		} else {
+			wildcardQ = q
+		}
+	}
+	if gzipQ >= 0 {
+		return gzipQ > 0
+	}
+	return wildcardQ > 0
+}
+
 // gzipped 把文字类的静态文件按请求的 Accept-Encoding 用 gzip 送出（客户端脚本与 tiles.json 等约 1 MB → 290 KB）。
 // 为了简单不处理 Range 请求：要压缩的文件把 Range 拿掉，整个送。
 func gzipped(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// A HEAD response has no body; closing a gzip writer would otherwise
-		// emit an empty gzip stream into it. Keep the uncompressed metadata.
-		if r.Method == http.MethodHead || !gzipTypes[strings.ToLower(path.Ext(r.URL.Path))] || !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+		if !gzipTypes[strings.ToLower(path.Ext(r.URL.Path))] {
+			next.ServeHTTP(w, r)
+			return
+		}
+		// Include Vary for identity, gzip, HEAD and 304 alike: a shared cache
+		// must never reuse the identity response for a gzip-only request.
+		w.Header().Add("Vary", "Accept-Encoding")
+		if !acceptsGzip(strings.Join(r.Header.Values("Accept-Encoding"), ",")) {
 			next.ServeHTTP(w, r)
 			return
 		}
 		r.Header.Del("Range")
-		gw := gzipPool.Get().(*gzip.Writer)
-		gw.Reset(w)
-		z := &gzipWriter{ResponseWriter: w, gz: gw}
-		defer func() {
-			if z.on {
-				gw.Close()
-			}
-			gzipPool.Put(gw)
-		}()
+		z := &gzipWriter{ResponseWriter: w, head: r.Method == http.MethodHead}
+		// HEAD advertises the GET representation but never emits a gzip trailer.
+		if !z.head {
+			gw := gzipPool.Get().(*gzip.Writer)
+			gw.Reset(w)
+			z.gz = gw
+			defer func() {
+				if z.on {
+					gw.Close()
+				}
+				gzipPool.Put(gw)
+			}()
+		}
 		next.ServeHTTP(z, r)
 	})
 }
@@ -42,6 +86,7 @@ type gzipWriter struct {
 	http.ResponseWriter
 	gz      *gzip.Writer
 	on      bool
+	head    bool
 	started bool
 }
 
@@ -49,7 +94,6 @@ func (z *gzipWriter) WriteHeader(code int) {
 	if !z.started {
 		z.started = true
 		h := z.Header()
-		h.Add("Vary", "Accept-Encoding")
 		if code == http.StatusOK {
 			z.on = true
 			h.Set("Content-Encoding", "gzip")
@@ -62,6 +106,9 @@ func (z *gzipWriter) WriteHeader(code int) {
 func (z *gzipWriter) Write(b []byte) (int, error) {
 	if !z.started {
 		z.WriteHeader(http.StatusOK)
+	}
+	if z.head {
+		return len(b), nil
 	}
 	if z.on {
 		return z.gz.Write(b)

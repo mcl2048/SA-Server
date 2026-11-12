@@ -1,0 +1,212 @@
+{
+  "binary_sha256": "b7b08408cbf374971971c8ee275601c242d7c72350f1d1ece13bfecabe5f1e5c",
+  "browser": "156.0.8078.4",
+  "engine": "Chromium headless with SwiftShader WebGL2",
+  "device": "390x844 touch, DPR3; viewport matrix; fine-pointer desktop contexts",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "automatic-mobile-login-layout",
+      "pass": true,
+      "details": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "case": "native-input-focus-composition-and-viewport-resize",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "real-login-lines-and-character-entry",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "system-readable-actions",
+      "pass": true,
+      "details": [
+        "回记录点",
+        "原地登出",
+        "聊天设定",
+        "背景音乐",
+        "音效设定",
+        "鼠标设定",
+        "开启 / 关闭声音",
+        "个人信息",
+        "显示 / 隐藏人物",
+        "战斗设定",
+        "经验显示设定",
+        "GM 指令",
+        "关闭系统菜单"
+      ]
+    },
+    {
+      "case": "six-common-native-panels-open-and-close",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "real-chat-send",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "isolated-server-approved-gm-fixtures-via-chat",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "inventory-real-name-and-native-use",
+      "pass": true,
+      "details": {
+        "slot_action": "inv-9"
+      }
+    },
+    {
+      "case": "server-pet-visible-in-readable-panel",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "touch-held-direction-moves-and-release-stops",
+      "pass": true,
+      "details": {
+        "before": {
+          "x": 47,
+          "y": 82,
+          "floor": 1000,
+          "want": -1,
+          "target": null
+        },
+        "after": {
+          "x": 50,
+          "y": 85,
+          "floor": 1000,
+          "want": -1,
+          "target": null
+        }
+      }
+    },
+    {
+      "case": "touch-cancel-releases-direction",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "pinch-pan-and-remaining-finger-never-move",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "five-viewport-rotation-matrix-and-pixel-budget",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "manual-desktop-and-auto-restore",
+      "pass": true,
+      "details": null
+    },
+    {
+      "case": "battle-native-guard-command",
+      "pass": true,
+      "details": {
+        "battle_commands": 1
+      }
+    },
+    {
+      "case": "battle-native-attack-target-and-return",
+      "pass": true,
+      "details": {
+        "target": "t-15"
+      }
+    },
+    {
+      "case": "desktop-original-contain-1440x900",
+      "pass": true,
+      "details": {
+        "mobile": false,
+        "stage": {
+          "x": 120,
+          "y": 0,
+          "width": 1200,
+          "height": 900,
+          "top": 0,
+          "right": 1320,
+          "bottom": 900,
+          "left": 120
+        },
+        "canvas": [
+          1200,
+          900
+        ]
+      }
+    },
+    {
+      "case": "desktop-original-contain-390x844",
+      "pass": true,
+      "details": {
+        "mobile": false,
+        "stage": {
+          "x": 0,
+          "y": 275.75,
+          "width": 390,
+          "height": 292.5,
+          "top": 275.75,
+          "right": 390,
+          "bottom": 568.25,
+          "left": 0
+        },
+        "canvas": [
+          390,
+          292
+        ]
+      }
+    }
+  ],
+  "page_errors": [],
+  "sent_message_types": {
+    "BattleCommand": 2,
+    "CharEnter": 1,
+    "CharList": 1,
+    "Chat": 10,
+    "ItemUse": 1,
+    "MapReq": 10,
+    "Move": 4,
+    "NpcListReq": 1,
+    "Ping": 4,
+    "QuestReq": 1,
+    "SelectLine": 1
+  },
+  "received_message_types": [
+    "AddressBook",
+    "AuthResult",
+    "BattleEnd",
+    "BattleStart",
+    "BattleTurn",
+    "CharListResult",
+    "ChatMsg",
+    "EnterFloor",
+    "FamilyStatus",
+    "Flags",
+    "GmMenu",
+    "Hello",
+    "Inventory",
+    "LineSelected",
+    "MapData",
+    "NpcList",
+    "ObjAppear",
+    "ObjMark",
+    "ObjSprite",
+    "Pets",
+    "Pong",
+    "QuestLog",
+    "Self",
+    "ServerList",
+    "Status"
+  ]
+}

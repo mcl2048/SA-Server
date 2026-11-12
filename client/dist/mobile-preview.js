@@ -1,4 +1,4 @@
-import { isMobile } from "./mobile-view.js?v=9b200814243b1211";
+import { isMobile } from "./mobile-view.js?v=472f28ee5f8169e2";
 
 const MAX_WIDTH = 400;
 const MAX_HEIGHT = 300;

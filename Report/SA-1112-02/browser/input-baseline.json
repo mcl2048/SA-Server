@@ -1,0 +1,108 @@
+{
+  "results": [
+    {
+      "case": "mobile-path-continues-behind-panel",
+      "before": {
+        "x": 14,
+        "y": 24,
+        "target": [
+          12,
+          29
+        ],
+        "want": -1,
+        "input": false,
+        "modal": false,
+        "layout": "field"
+      },
+      "opened": {
+        "x": 14,
+        "y": 25,
+        "target": [
+          12,
+          29
+        ],
+        "want": -1,
+        "input": false,
+        "modal": false,
+        "layout": "full"
+      },
+      "after": {
+        "x": 12,
+        "y": 28,
+        "target": [
+          12,
+          29
+        ],
+        "want": -1,
+        "input": false,
+        "modal": false,
+        "layout": "full"
+      },
+      "moves_after_panel": [
+        {
+          "t": "Move",
+          "x": 14,
+          "y": 25,
+          "dir": 0
+        },
+        {
+          "t": "Move",
+          "x": 13,
+          "y": 26,
+          "dir": 1
+        },
+        {
+          "t": "Move",
+          "x": 12,
+          "y": 26,
+          "dir": 7
+        },
+        {
+          "t": "Move",
+          "x": 12,
+          "y": 27,
+          "dir": 7
+        }
+      ]
+    },
+    {
+      "case": "chat-ime-enter",
+      "input_count": 0,
+      "chat_sent": [
+        {
+          "t": "Chat",
+          "channel": "near",
+          "text": "拼音确认未发送",
+          "color": 0,
+          "area": 3
+        }
+      ]
+    },
+    {
+      "case": "desktop-key-release-inside-mode",
+      "focus": "<summary aria-label=\"界面模式\">界面</summary>",
+      "after_keyup": {
+        "x": 13,
+        "y": 30,
+        "target": null,
+        "want": 6,
+        "input": false,
+        "modal": false,
+        "layout": "field"
+      },
+      "after_wait": {
+        "x": 13,
+        "y": 30,
+        "target": null,
+        "want": 6,
+        "input": false,
+        "modal": false,
+        "layout": "field"
+      }
+    }
+  ],
+  "page_errors": [],
+  "reviewed_commit": "43f63a2e54067ec973f97e710e9c13321e165755",
+  "runtime_kind": "final-release-embedded-binary",
+  "ime_scope": "Synthetic compositionstart and keydown isComposing=true keyCode229; not physical-device IME"
+}

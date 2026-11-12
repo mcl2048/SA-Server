@@ -1,0 +1,12 @@
+{
+  "compared": "original desktop login artwork crop",
+  "crop": [
+    240,
+    90,
+    1200,
+    810
+  ],
+  "pixels": 691200,
+  "changed_pixels": 0,
+  "mean_absolute_error": 0.0
+}

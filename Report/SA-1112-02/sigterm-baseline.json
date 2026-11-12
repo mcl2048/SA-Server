@@ -1,0 +1,14 @@
+[
+  {
+    "signal": "SIGTERM",
+    "returncode": -15,
+    "graceful_saved_exit_log": false,
+    "last_log": "time=2026-11-12T22:51:36.064Z level=INFO msg=服务端已启动 version=v0.2.4-LYNX url=http://127.0.0.1:38321/"
+  },
+  {
+    "signal": "SIGINT",
+    "returncode": 0,
+    "graceful_saved_exit_log": true,
+    "last_log": "time=2026-11-12T22:51:39.113Z level=INFO msg=已退出，在线角色位置已保存"
+  }
+]

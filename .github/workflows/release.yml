@@ -107,10 +107,8 @@ jobs:
       - name: 构建并准备内嵌客户端
         run: |
           node client/build.mjs
-          mkdir -p server/webclient/static/dist
-          cp client/index.html server/webclient/static/index.html
-          cp client/dist/*.js server/webclient/static/dist/
-          node --experimental-strip-types --test client/test/*.test.*
+          node scripts/stage-client.mjs
+          node --experimental-strip-types --test client/test/*.test.* scripts/build-client.test.mjs
 
       - name: 构建服务端（纯 Go 的 SQLite，不需要 cgo，直接交叉编译）
         working-directory: server

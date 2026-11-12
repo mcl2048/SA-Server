@@ -1,0 +1,6 @@
+{
+  "case": "mobile-trade-back",
+  "client_trade_open": false,
+  "peer_trade_open": true,
+  "commands_after_back": []
+}

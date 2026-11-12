@@ -1,0 +1,90 @@
+=== RUN   TestBuiltRoutes
+=== RUN   TestBuiltRoutes/GET/
+=== RUN   TestBuiltRoutes/GET/index.html
+=== RUN   TestBuiltRoutes/GET/dist/main.js?v=release
+=== RUN   TestBuiltRoutes/HEAD/dist/main.js
+=== RUN   TestBuiltRoutes/GET/src/private.ts
+=== RUN   TestBuiltRoutes/GET/dist/private.map
+=== RUN   TestBuiltRoutes/GET/dist/../index.html
+=== RUN   TestBuiltRoutes/GET/dist/%2e%2e/index.html
+=== RUN   TestBuiltRoutes/GET/dist/.private.js
+=== RUN   TestBuiltRoutes/GET/dist/
+=== RUN   TestBuiltRoutes/GET/config.yaml
+=== RUN   TestBuiltRoutes/GET/dist/missing.js
+=== RUN   TestBuiltRoutes/POST/
+--- PASS: TestBuiltRoutes (0.02s)
+    --- PASS: TestBuiltRoutes/GET/ (0.00s)
+    --- PASS: TestBuiltRoutes/GET/index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/main.js?v=release (0.00s)
+    --- PASS: TestBuiltRoutes/HEAD/dist/main.js (0.00s)
+    --- PASS: TestBuiltRoutes/GET/src/private.ts (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/private.map (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/../index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/%2e%2e/index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/.private.js (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/ (0.00s)
+    --- PASS: TestBuiltRoutes/GET/config.yaml (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/missing.js (0.00s)
+    --- PASS: TestBuiltRoutes/POST/ (0.00s)
+=== RUN   TestContentValidatorAndExternalUpdates
+--- PASS: TestContentValidatorAndExternalUpdates (0.00s)
+=== RUN   TestMissingBuildAndExplicitExternal
+--- PASS: TestMissingBuildAndExplicitExternal (0.00s)
+PASS
+ok  	sa/server/webclient	1.116s
+=== RUN   TestClientSelectionBeforePathNormalization
+=== RUN   TestClientSelectionBeforePathNormalization/omitted
+=== RUN   TestClientSelectionBeforePathNormalization/legacy_default
+=== RUN   TestClientSelectionBeforePathNormalization/explicit_embedded
+=== RUN   TestClientSelectionBeforePathNormalization/external_default_directory
+=== RUN   TestClientSelectionBeforePathNormalization/custom_external
+=== RUN   TestClientSelectionBeforePathNormalization/local_override
+=== RUN   TestClientSelectionBeforePathNormalization/local_embedded
+--- PASS: TestClientSelectionBeforePathNormalization (0.02s)
+    --- PASS: TestClientSelectionBeforePathNormalization/omitted (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/legacy_default (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/explicit_embedded (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/external_default_directory (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/custom_external (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/local_override (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/local_embedded (0.00s)
+=== RUN   TestClientGzipHEAD
+--- PASS: TestClientGzipHEAD (0.00s)
+=== RUN   TestCheckKeys
+--- PASS: TestCheckKeys (0.00s)
+=== RUN   TestRulesPartialOverride
+--- PASS: TestRulesPartialOverride (0.00s)
+=== RUN   TestGzipNegotiationAndClientValidators
+=== RUN   TestGzipNegotiationAndClientValidators/#00
+=== RUN   TestGzipNegotiationAndClientValidators/br
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=0
+=== RUN   TestGzipNegotiationAndClientValidators/br,_gzip;q=0,_identity;q=1
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=0,_*;q=1
+=== RUN   TestGzipNegotiationAndClientValidators/notgzip
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=NaN
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=2
+=== RUN   TestGzipNegotiationAndClientValidators/gzip
+=== RUN   TestGzipNegotiationAndClientValidators/GZip
+=== RUN   TestGzipNegotiationAndClientValidators/br,_gzip;q=0.5
+=== RUN   TestGzipNegotiationAndClientValidators/*;q=0.5
+--- PASS: TestGzipNegotiationAndClientValidators (0.05s)
+    --- PASS: TestGzipNegotiationAndClientValidators/#00 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=0 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br,_gzip;q=0,_identity;q=1 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=0,_*;q=1 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/notgzip (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=NaN (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=2 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip (0.01s)
+    --- PASS: TestGzipNegotiationAndClientValidators/GZip (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br,_gzip;q=0.5 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/*;q=0.5 (0.01s)
+=== RUN   TestGzipStatic
+--- PASS: TestGzipStatic (0.05s)
+=== RUN   TestShutdownServerHelper
+--- PASS: TestShutdownServerHelper (0.00s)
+=== RUN   TestSIGTERMSavesOnlinePosition
+--- PASS: TestSIGTERMSavesOnlinePosition (8.40s)
+PASS
+ok  	sa/server/cmd/saserver	9.601s
