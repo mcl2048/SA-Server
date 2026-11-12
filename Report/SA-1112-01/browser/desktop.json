@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "case": "desktop-original-mouse-register-create-enter",
+      "pass": true
+    },
+    {
+      "case": "desktop-original-canvas-five-menus",
+      "pass": true
+    },
+    {
+      "case": "desktop-enter-chat-and-submit",
+      "pass": true
+    },
+    {
+      "case": "narrow-fine-pointer-stays-desktop",
+      "pass": true
+    }
+  ],
+  "page_errors": []
+}

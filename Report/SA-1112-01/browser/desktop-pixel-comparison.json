@@ -1,0 +1,16 @@
+{
+  "stage_rect": [
+    240,
+    90,
+    1200,
+    810
+  ],
+  "original_image_size": [
+    1440,
+    900
+  ],
+  "changed_pixels": 0,
+  "total_pixels": 691200,
+  "mean_absolute_channel_difference": 0.0,
+  "pixel_identical": true
+}

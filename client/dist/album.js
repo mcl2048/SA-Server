@@ -4,16 +4,16 @@
 //   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（共 570 种、72 页）
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
-                                              
-import { PET_ALBUM_TBL } from "./albumdata.js?v=mw9rd6qz";
-import { FONT, SYS, measure,         } from "./ui.js?v=mw9rd6qz";
+
+import { PET_ALBUM_TBL } from "./albumdata.js?v=9b200814243b1211";
+import { FONT, SYS, measure,         } from "./ui.js?v=9b200814243b1211";
 
 const MAX_PET_KIND = 570, PAGE = 8;
 const CG = { WND: 26230, NEW_ICON: 26231, PREV: 26180, NEXT: 26182, CLOSE: 26042 };
 // 照相钮不能用的宠物形象（menu.cpp 照相的检查）
 const NO_SNAP = new Set([100451, 100432, 101280, 101281, 100015, 100018, 101279, 100401, 101414, 101167, 101172, 102011, 102012]);
 
-                                                                                                                                                                             
+
 
                                       // ["gt" / "eq", 比较值, 减去的量（eq 时是结果）]
 // 形象图号 − 100250 → 表的下标（CheckNewPet 的分段对照；照相的版本多一段、改一段）

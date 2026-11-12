@@ -4,20 +4,20 @@
 // 参数的输入方式按 GmItem.kinds（server/internal/world/gm.go 的 gmMenu）：直接打字、从清单挑（道具 / 敌人 / 玩家，
 // 清单向服务端要一次就记着，玩家每次重要）、选自己的宠物、几个固定的选项。服务端的回应（ChatMsg，from "GM"）列在下方。
 
-                                                                                       
-import { ANIM, findAction,             } from "./assets.js?v=mw9rd6qz";
-import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=mw9rd6qz";
 
-                         
-         
-                            
-                                                  
-                                                  
+import { ANIM, findAction,             } from "./assets.js?v=9b200814243b1211";
+import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=9b200814243b1211";
+
+
+
+
+
+
                                                                      
                                                                      
                                                           
-                                                 
- 
+                                             
+
 
 const W = 9, H = 9; // 576×432
 const ROW = 22;

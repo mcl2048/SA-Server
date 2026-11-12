@@ -2,7 +2,7 @@
 // 没变就直接用存着的，不再向服务端要。一层楼存一笔：{ ver, w, h, tiles, objs, walk }，walk 为 0 的格子是还没拿到资料的。
 // 浏览器不给用 IndexedDB（私密浏览、被关掉）时就当作没有快取，照常向服务端要。
 
-                                                                                                                         
+
 
 const DB = "sa-map", STORE = "floors";
 let dbp                                     = null;

@@ -10,12 +10,12 @@
 // 实景（settings.mapArt，预设开）：同一次解码顺便把那张图缩成一半存起来（TileColors.sprite），地图照画面的等角投影把地块与物件的图
 // 缩小画上去（物件按深度排序、盖过地块），和离线渲染的整张地图一样；图还没解码好的格子先用平均色的菱形。
 
-                                          
-                                                   
-import { FONT, measure,         } from "./ui.js?v=mw9rd6qz";
-import { settings, saveSettings } from "./menus.js?v=mw9rd6qz";
 
-                                           
+
+import { FONT, measure,         } from "./ui.js?v=9b200814243b1211";
+import { settings, saveSettings } from "./menus.js?v=9b200814243b1211";
+
+
 
 /** 地图图号 → 平均色（getAutoMapColor） */
 export class TileColors {
@@ -121,13 +121,13 @@ function average(page           , x0        , y0        , w        , h        , 
 
 // ---------------- 地图窗口 ----------------
 
-                          
-         
-                 
-               
-                        
+
+
+
+
+
                                                                       
- 
+
 
 const ZOOMS = [2, 3, 4, 6, 8, 12, 16]; // 一格的半宽（像素）；格子菱形半高是它的 3/4（画面 64×48 的比例）
 const W = 10, H = 10;                   // 窗口 640×480

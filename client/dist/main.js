@@ -1,22 +1,25 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=mw9rd6qz";
-import { Sound, setSfx } from "./audio.js?v=mw9rd6qz";
-import { MAP_BGM } from "./soundtable.js?v=mw9rd6qz";
-import { Connection, trafficRates } from "./net.js?v=mw9rd6qz";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=mw9rd6qz";
-import { Renderer } from "./renderer.js?v=mw9rd6qz";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=mw9rd6qz";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=mw9rd6qz";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=mw9rd6qz";
-import { ACTION_KEYS } from "./actions.js?v=mw9rd6qz";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=mw9rd6qz";
-import { BattleScreen } from "./battle.js?v=mw9rd6qz";
-import { Shop } from "./shop.js?v=mw9rd6qz";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=mw9rd6qz";
-import { loadAi } from "./ai.js?v=mw9rd6qz";
-import { AiMemory } from "./aismart.js?v=mw9rd6qz";
-                                                                                                                                                                                                                   
+import { Assets } from "./assets.js?v=9b200814243b1211";
+import { Sound, setSfx } from "./audio.js?v=9b200814243b1211";
+import { MAP_BGM } from "./soundtable.js?v=9b200814243b1211";
+import { Connection, trafficRates } from "./net.js?v=9b200814243b1211";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=9b200814243b1211";
+import { Renderer } from "./renderer.js?v=9b200814243b1211";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=9b200814243b1211";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=9b200814243b1211";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=9b200814243b1211";
+import { ACTION_KEYS } from "./actions.js?v=9b200814243b1211";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=9b200814243b1211";
+import { BattleScreen } from "./battle.js?v=9b200814243b1211";
+import { Shop } from "./shop.js?v=9b200814243b1211";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=9b200814243b1211";
+import { loadAi } from "./ai.js?v=9b200814243b1211";
+import { AiMemory } from "./aismart.js?v=9b200814243b1211";
+import { isMobile, setMobileScene } from "./mobile-view.js?v=9b200814243b1211";
+import { MobileShell } from "./mobile-shell.js?v=9b200814243b1211";
+import { drawMobilePreview } from "./mobile-preview.js?v=9b200814243b1211";
+
 
 const params = new URLSearchParams(location.search);
 const ASSETS = params.get("assets") ?? "/assets/";
@@ -29,6 +32,10 @@ const overlay = document.getElementById("overlay")                     ;
 const ctx2d = overlay.getContext("2d") ;
 const renderer = new Renderer(canvas);
 const assets = new Assets(ASSETS, renderer);
+// Keep the desktop cache policy; phones evict cold, non-core pages sooner.
+const updateTextureBudget = () => { assets.gpuBudget = (isMobile() ? 128 : 512) * 1024 * 1024; };
+updateTextureBudget();
+document.addEventListener("sa-device-change", updateTextureBudget);
 const audio = new Sound(ASSETS, () => settings); // 声音（audio.ts）
 setSfx((no, x) => audio.se(no, x));
 // 界面音效：这一帧放过开关窗口 / 错误等的声音，就不再放点击声 217（原版每个按钮只放一个声音）
@@ -79,8 +86,8 @@ function updatePalette(now        , floorPalette        ) {
 // ---------------------------------------------------------------------------
 // 模态窗口：commonMsgWin（宽度随文字、居中、黄色ＯＫ）与 commonYesNoWindow
 
-                                                                                                                                
-                                                                                                  
+
+
 let modal               = null;
 
 // 道具店（shop.ts）：回传照 NPC 窗口的 NpcWindowReply，data 是原版的字串
@@ -410,6 +417,7 @@ const app      = {
   },
   disconnect() { const c = app.net; app.net = null; c?.close(); },
   go(s        ) {
+    if (isMobile()) releaseMobileInput();
     screen.leave?.(); screen = s; s.enter?.();
     audio.ambientFrame([], 0); // 离开地图画面（登出、断线）：海浪、风声等循环的环境音停掉，不然在选人物画面还一直响
     // 选人物的画面放 BGM 2（login.cpp 1672），回到标题、选线路淡出（原版标题、选线路都没有音乐）
@@ -547,7 +555,7 @@ class FieldScreen                   {
           moveMode = false; // 原版 MOUSE_CURSOR_MODE_MOVE
           moveTick = 0;
           turnAt = 0;
-          menus = new Menus(ui, {
+           menus = new Menus(ui, {
     get status() { return selfStatus; },
     party: () => party,
     selfId: () => field?.self?.id ?? -1,
@@ -773,14 +781,17 @@ class FieldScreen                   {
     // Ctrl+R：把上次密语的对象填进输入行（原版 chat.cpp 的 JOY_CTRL_R）
     if (keyPressed.has("Ctrl+r") && !modal && !this.input && lastTell) this.openChatInput(`/tell ${lastTell} `);
     f.locked = this.menus.vendor.open || !!f.self?.vendor; // 摆着摊 / 看着摊位不能走（iOnStreetVendor）
-    f.wantDir = this.input || battle ? -1 : keyDir(); // 快速战斗中留在地图画面，但不能走
+    // Mobile directions share the existing prediction/protocol, and never move behind a sheet.
+    f.wantDir = this.input || battle || (isMobile() && (modal || this.openCount() > 0)) ? -1
+      : isMobile() && mobileDirection >= 0 ? mobileDirection : keyDir();
     this.encountFrame(f, now);
 
     // 鼠标操作（原版 map.cpp moveProc / drawGrid / turnAround）
     const onField = mouse.x >= 0 && !modal && !ui.overUi() && f.self !== null && !battle;
     const grid = onField ? f.screenToGrid(mouse.x, mouse.y, 400, 324) : null;
     // 按住左键 1 秒（MOVE_MODE_CHANGE_TIME）进入跟随模式：每 250ms 朝光标所在格重新走，再点一下退出
-    if (mouse.down && onField && now - mouse.downAt >= 1000) this.moveMode = true;
+    if (isMobile()) this.moveMode = false; // D-pad owns held movement; a touch hold must not latch follow mode.
+    if (!isMobile() && mouse.down && onField && now - mouse.downAt >= 1000) this.moveMode = true;
     if (this.moveMode) {
       if (mouse.clicked) this.moveMode = false;
       else if (grid && now - this.moveTick >= 250) { this.moveTick = now; this.talkTarget = null; f.target = grid; }
@@ -921,6 +932,77 @@ class FieldScreen                   {
     chat,
   });
 
+  /** Mobile chrome invokes the same menu/state transitions as desktop shortcuts. */
+  mobileCommand(name        ) {
+    if (!isMobile()) return;
+    mobileDirection = -1;
+    mouse.cancel();
+    if (name === "back") {
+      if (this.input) { this.input.remove(); this.input = null; return; }
+      if (modal) {
+        if (modal.kind === "msg") { const then = modal.then; modal = null; then?.(); }
+        else if (modal.kind === "yesno") { const then = modal.then; modal = null; then(false); }
+        else keyPressed.add("Escape");
+        return;
+      }
+      // Close through existing per-window APIs to release inputs and held inventory state.
+      const m = this.menus;
+      if (m.items.open) m.items.toggle();
+      if (m.petWnd.open) m.petWnd.close();
+      if (m.statusOpen) m.toggleStatus();
+      if (m.systemOpen) m.toggleSystem();
+      if (m.mapOpen) m.toggleMap();
+      if (m.quests.open) m.toggleQuests();
+      if (m.ai.open) m.ai.close();
+      if (m.gm.open) m.gm.close();
+      if (m.actions.open) m.actions.toggle();
+      if (m.mail.open) m.mail.toggle();
+      if (m.family.open) m.family.close();
+      if (m.trade.open) m.trade.close();
+      if (m.vendor.open) m.vendor.close(true);
+      this.chatWnd = false;
+      if (this.panel.etcOpen) this.panel.toggleEtc();
+      return;
+    }
+    // A modal consumes all other actions; no toolbar shortcut bypasses it.
+    if (modal || battle) return;
+    if (name === "send-chat") { if (this.input) this.sendChat(); return; }
+    if (this.input && name !== "chat") return;
+    if (name === "chat") { if (!this.input) this.openChatInput(); this.input?.focus(); return; }
+    const m = this.menus;
+    if (name === "items") m.toggleItems();
+    else if (name === "pets") m.togglePets();
+    else if (name === "status") m.toggleStatus();
+    else if (name === "quests") m.toggleQuests();
+    else if (name === "map") m.toggleMap();
+    else if (name === "system") m.toggleSystem();
+    else if (name === "interact" && field?.self && !m.windowOpen()) {
+      const f = field, s = f.self ;
+      // Match desktop click-to-talk and right-click pickup contracts without privileged commands.
+      const nearby = [...f.actors.values()].filter(a => a.kind === "npc" && Math.max(Math.abs(a.x - s.x), Math.abs(a.y - s.y)) <= 3)
+        .sort((a, b) => Math.hypot(a.x - s.x, a.y - s.y) - Math.hypot(b.x - s.x, b.y - s.y));
+      if (nearby[0]) this.talkTarget = nearby[0].id;
+      else app.net?.send({ t: "PickUp", dir: -1 });
+    }
+  }
+
+  mobileSummary()           {
+    const m = this.menus;
+    if (m.items.open) return [`石币 ${inventory.gold}`, ...inventory.items.map(it => `${it.slot < 9 ? "装备" : "背包"}${it.slot + 1}：${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}　${it.memo || it.magicMemo || ""}`)];
+    if (m.petWnd.open) return (pets?.pets ?? []).map(p => `${p.freeName || p.name}　Lv.${p.level}　HP ${p.hp}/${p.maxHp}　${p.state}　忠诚 ${p.loyalty}　${p.skills.map(sk => sk.name).join("、")}`);
+    // QuestWindow already draws its current filtered page; never dump the full catalogue above controls.
+    if (m.quests.open) return [];
+    if (m.statusOpen && selfStatus) {
+      const s = selfStatus;
+      return [`${s.name}　Lv.${s.level}　转生 ${s.trans}`, `HP ${s.hp}/${s.maxHp}　MP ${s.mp}/${s.maxMp}`,
+        `攻击 ${s.atk}　防御 ${s.def}　敏捷 ${s.agi}　魅力 ${s.charm}`,
+        `体力 ${s.vital}　腕力 ${s.str}　耐力 ${s.tgh}　速度 ${s.dex}　剩余点数 ${s.points}`,
+        `属性 地${s.attrs[0] ?? 0} 水${s.attrs[1] ?? 0} 火${s.attrs[2] ?? 0} 风${s.attrs[3] ?? 0}`,
+        `经验 ${s.exp}/${s.nextExp}　DP ${s.dp}`, ...s.detail];
+    }
+    return [];
+  }
+
           sendChat() {
     const text = this.input?.value.trim();
     if (text) {
@@ -940,8 +1022,57 @@ let frames = 0, fps = 0, fpsAt = performance.now(), workMs = 0;
 let closePendingAt = 0;       // 窗口数减少的时刻（关窗口的声音等 CLOSE_SE_DELAY 再放）
 const CLOSE_SE_DELAY = 250;
 
+// A DOM action enters the ordinary previous-frame hit path. Its screen/modal context
+// must still match; a delayed tap cannot click through into a newly opened dialog.
+let mobileDirection = -1;
+let pendingMobileAction                                                             = null;
+const mobile = new MobileShell(ui, {
+  action(id) { if (isMobile()) pendingMobileAction = { id, screen, modal }; },
+  command(name) {
+    if (!isMobile()) return;
+    if (screen instanceof FieldScreen) screen.mobileCommand(name);
+    else if (name === "back") {
+      if (modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); }
+      else if (modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); }
+      else { mouse.rightClicked = true; keyPressed.add("Escape"); }
+    }
+  },
+  direction(dir) {
+    mobileDirection = isMobile() && screen instanceof FieldScreen && !modal && !battle && !screen.openCount() ? dir : -1;
+    if (mobileDirection >= 0 && field) field.target = null;
+  },
+  cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (field) field.wantDir = -1; } },
+});
+const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); };
+document.addEventListener("sa-device-change", releaseMobileInput);
+addEventListener("blur", releaseMobileInput);
+document.addEventListener("visibilitychange", () => { if (document.hidden) releaseMobileInput(); });
+
+function mobileFrame() {
+  const f = screen instanceof FieldScreen ? screen : null;
+  const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0);
+  setMobileScene(!!f && !panel && !battle);
+  const phase = battle && !battle.quick ? "battle" : f ? "field" : screen instanceof LoginScreen ? "login"
+    : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
+  const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "石器时代";
+  mobile.frame({ phase, panel, status,
+    title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
+    summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
+    actionLabels: Object.fromEntries([
+      ...inventory.items.map(it => [`inv-${it.slot}`, `${it.slot < 9 ? "装备" : "物品"}${it.slot + 1} · ${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}`]),
+      ...(pets?.pets ?? []).map(p => [`pet-name${p.slot}`, `${p.freeName || p.name} Lv.${p.level}`]),
+    ]),
+  });
+}
+
 function frame(now        ) {
   const workAt = performance.now();
+  const queued = pendingMobileAction;
+  pendingMobileAction = null;
+  if (queued && isMobile() && queued.screen === screen && queued.modal === modal) {
+    const hit = ui.getMobileActions().find(h => h.id === queued.id);
+    if (hit) { mouse.x = (hit.x1 + hit.x2) / 2; mouse.y = (hit.y1 + hit.y2) / 2; mouse.clicked = true; }
+  }
   ui.begin();
   if (!(screen instanceof FieldScreen) && !battle) updatePalette(now, 0); // 登录画面固定用 0 号调色板（PaletteChange(DEF_PAL)）
   try {
@@ -952,6 +1083,7 @@ function frame(now        ) {
     console.error(e); // 一帧出错不能让整个渲染循环停掉
   }
   drawModal();
+  mobileFrame();
   // 开关窗口的声音（202 / 203），这一帧没有别的界面音效时，点到按钮放 217
   const open = (modal ? 1 : 0) + (screen instanceof FieldScreen ? screen.openCount() : 0);
   // 关窗口的声音（203）延后一点再放：回上一页、NPC 换页是"关一个、马上开一个"，那种只放开窗口的 202，不要两声一起响
@@ -967,6 +1099,7 @@ function frame(now        ) {
   fitOverlay(overlay, ctx2d);
   ctx2d.clearRect(0, 0, 800, 600);
   drawOverlay(ctx2d, ui);
+  drawMobilePreview(canvas, overlay);
   InputBox.layoutAll();
   keyPressed.clear();
   assets.tick();
@@ -1004,6 +1137,8 @@ function drawLoading(text        , p        ) {
   ctx2d.textAlign = "left";
 }
 
+// Initialize before the async boot; the cursor loader can complete in the same microtask turn.
+let gameCursor = "auto";
 (async () => {
   try {
     fitView(canvas);
@@ -1031,7 +1166,6 @@ function drawLoading(text        , p        ) {
 })();
 
 // 滑鼠设定：正常 = 原版光标，平滑 = 系统光标
-let gameCursor = "auto";
 function applyCursor() { canvas.style.cursor = settings.smoothCursor ? "auto" : gameCursor; }
 
 // 调试与自动化测试入口

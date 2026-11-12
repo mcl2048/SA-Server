@@ -6,27 +6,27 @@
 // 每一项一行：左边项目名、中间现在的值（◀ ▶ 切换，点值本身也会往下切）、下面灰字说明（按窗口宽度折行，最多两行）；
 // 改了马上存（ai.ts saveAi）。对象的选项按精灵 / 技能的范围给（只能对自己的就只有"自己"；"其他人"类的可以选自己、宠物 / 主人、敌人）。
 
-                                                        
-import { AUTO, TARGET_LABEL, defaultAi, loadAi, saveAi,                                               } from "./ai.js?v=mw9rd6qz";
-import { FONT, measure,         } from "./ui.js?v=mw9rd6qz";
 
-                         
-         
-                   
+import { AUTO, TARGET_LABEL, defaultAi, loadAi, saveAi,                                               } from "./ai.js?v=9b200814243b1211";
+import { FONT, measure,         } from "./ui.js?v=9b200814243b1211";
+
+
+
+
                                                           
                                                                
-                     
-                                                  
-                      
+
+
+
                                       
-                                    
- 
+
+
 
 const W = 8, H = 9;                 // 512×432
 const X = (800 - W * 64) / 2, Y = 60;
 const INNER = W * 64 - 56;          // 文字可用的宽度
 const TABS = ["基本", "人物", "宠物", "其他"]         ;
-                               
+
 
 /** 按像素宽度折行（中英文混排，measure 用的是界面字体），最多 max 行，超出的截掉加"…" */
 function wrapPx(text        , maxW        , max = 2)           {

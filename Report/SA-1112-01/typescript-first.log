@@ -1,0 +1,56 @@
+client/src/assets.ts(63,56): error TS2345: Argument of type 'DecompressionStream' is not assignable to parameter of type 'ReadableWritablePair<Uint8Array<ArrayBuffer>, Uint8Array<ArrayBufferLike>>'.
+  Types of property 'writable' are incompatible.
+    Type 'WritableStream<BufferSource>' is not assignable to type 'WritableStream<Uint8Array<ArrayBufferLike>>'.
+      Type 'BufferSource' is not assignable to type 'Uint8Array<ArrayBufferLike>'.
+        Type 'ArrayBuffer' is missing the following properties from type 'Uint8Array<ArrayBufferLike>': BYTES_PER_ELEMENT, buffer, byteOffset, copyWithin, and 29 more.
+client/src/battle.ts(462,46): error TS2339: Property 'stat' does not exist on type 'BattleEvent'.
+client/src/battle.ts(463,90): error TS2339: Property 'statVal' does not exist on type 'BattleEvent'.
+client/src/battle.ts(463,129): error TS2339: Property 'statVal' does not exist on type 'BattleEvent'.
+client/src/battle.ts(803,33): error TS2339: Property 'icon' does not exist on type 'BattleEvent'.
+client/src/battle.ts(881,51): error TS2339: Property 'icon' does not exist on type 'BattleEvent'.
+client/src/battle.ts(929,36): error TS2339: Property 'icon' does not exist on type 'BattleEvent'.
+client/src/field.ts(235,51): error TS2345: Argument of type '{ id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; }' is not assignable to parameter of type 'ObjInfo'.
+  Type '{ id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; }' is missing the following properties from type 'ObjInfo': level, leader, battle, help, and 5 more.
+client/src/field.ts(283,17): error TS2322: Type 'Uint16Array<ArrayBufferLike>' is not assignable to type 'Uint16Array<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+client/src/field.ts(283,35): error TS2322: Type 'Uint16Array<ArrayBufferLike>' is not assignable to type 'Uint16Array<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+client/src/field.ts(283,52): error TS2322: Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'Uint8Array<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+client/src/field.ts(283,69): error TS2322: Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'Uint8Array<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+client/src/field.ts(289,7): error TS2322: Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'Uint8Array<ArrayBuffer>'.
+  Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+    Type 'SharedArrayBuffer' is not assignable to type 'ArrayBuffer'.
+      Types of property '[Symbol.toStringTag]' are incompatible.
+        Type '"SharedArrayBuffer"' is not assignable to type '"ArrayBuffer"'.
+client/src/main.ts(21,59): error TS2724: '"./proto.gen.ts"' has no exported member named 'PartyMember'. Did you mean 'S2CPartyMember'?
+client/src/main.ts(274,76): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(275,125): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(288,68): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(294,79): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(308,67): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(309,74): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(315,66): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(321,66): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(1046,30): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(1046,59): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(1046,89): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(1046,118): error TS2341: Property 'menus' is private and only accessible within class 'FieldScreen'.
+client/src/main.ts(1143,5): error TS2448: Block-scoped variable 'gameCursor' used before its declaration.
+client/src/menus.ts(9,15): error TS2724: '"./proto.gen.ts"' has no exported member named 'PartyMember'. Did you mean 'S2CPartyMember'?
+client/src/mobile-shell.ts(369,25): error TS2488: Type 'NodeListOf<HTMLElement>' must have a '[Symbol.iterator]()' method that returns an iterator.
+client/src/screens.ts(363,55): error TS2345: Argument of type '{ id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; }' is not assignable to parameter of type 'ObjInfo'.
+  Type '{ id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; }' is missing the following properties from type 'ObjInfo': level, leader, battle, help, and 5 more.

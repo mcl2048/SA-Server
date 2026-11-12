@@ -17,25 +17,25 @@
 // 学习：每场战斗看实际的结果——每种敌人一次打我方多少、自己与宠物每种技能一次打掉多少（没打中算 0）——
 // 存在 localStorage（sa.ai.learn.<角色名>），下一场就用学到的数字估，越打越准。
 
-                                                        
-                                                               
 
-                               
-                                                                                                                  
+
+
+
+
                                                                              
- 
 
-                               
-             
-                 
-                                      
-                 
-                
-                                                                
-                        
+
+
+
+
+
+
+
+
+
                                                     
-                
- 
+
+
 
 const DISABLED = new Set([2, 3, 4, 9]); // 麻、眠、石、障：不能行动
 const STATUS_CHAR                         = { 1: "毒", 2: "麻", 3: "眠", 4: "石", 5: "醉", 6: "乱", 8: "毒" };
@@ -112,7 +112,7 @@ export class AiMemory {
 
 // ---------------- 每回合的决定 ----------------
 
-                                                                                                                                              
+
 
 export function smartChoose(s            , c              )                                              {
   const out                                              = { kind: "none", target: -1, item: -1, label: "", chat: [], pet: [-1, -1], key: "", petKey: "" };

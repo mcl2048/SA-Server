@@ -1,0 +1,8 @@
+{
+  "url": "https://github.com/OpenGameSys/stoneage-web/releases/download/v0.2.3/assets-v0.2.3.zip",
+  "bytes": 1233027874,
+  "sha256": "d675799f8ba5cf1338c6c32e0bca788076a4da4ab990a5f8234ef7bcbeff2baf",
+  "verified": true,
+  "entries": 9720,
+  "runtime_resource_policy": "Official archive extracted locally for real-game tests, not committed 1.23GB assets; source/build instructions retain upstreamdownload"
+}

@@ -1,0 +1,10 @@
+Scope: focused cmd/saserver and webclient tests, NOT full Go race suite
+Started UTC: 2026-11-12T14:21:21.680908+00:00
+Command: /home/coder/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/bin/go test -race -count=1 -p 1 ./cmd/saserver ./webclient
+Environment: GOMAXPROCS=2 GOMEMLIMIT=400MiB CGO_ENABLED=1
+go version go1.27.3 linux/amd64
+ok  	sa/server/cmd/saserver	1.172s
+ok  	sa/server/webclient	1.049s
+
+Finished UTC: 2026-11-12T14:23:47.002002+00:00
+Exit code: 0

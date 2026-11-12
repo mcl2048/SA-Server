@@ -8,16 +8,16 @@
 //     "自动"按精灵 / 技能的范围选）。补血、复活、解状态、逃跑这些紧急的事永远先做，固定的行动是"没事时做什么"。
 // 设定窗口在 aisetting.ts。
 
-                                                                                                  
+
 export const TARGET_LABEL                           = {
   auto: "自动", self: "自己", pet: "宠物", owner: "主人", enemy: "敌人", allies: "我方全体", enemies: "敌方全体", all: "全体",
 };
 
 /** 一个回合的行动：kind 是 auto（智能判断）、attack（普通攻击）、guard（防御）、magic（人物的精灵，name 是咒术名）、skill（宠物的技能，name 是技能名） */
-                                                                                                                   
 
-                             
-       
+
+
+
                                                         
                                 
                                         
@@ -27,7 +27,7 @@ export const TARGET_LABEL                           = {
                                   
                                  
                                   
- 
+
 
 export const AUTO           = { kind: "auto", name: "", target: "auto" };
 
@@ -71,13 +71,13 @@ export function saveAi(name        , s            ) {
 }
 
 /** 送出的指令（battle.ts 换成 BattleCommand / BattlePetCommand） */
-                            
-                                                                                       
-                 
-               
+
+
+
+
                                       
                                   
-                                             
+                                          
                                                             
-                  
- 
+
+

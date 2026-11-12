@@ -1,0 +1,1006 @@
+{"Time":"2026-11-12T14:02:28.927842464Z","Action":"start","Package":"sa/server/cmd/saserver"}
+{"Time":"2026-11-12T14:02:28.939533987Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization"}
+{"Time":"2026-11-12T14:02:28.939603825Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization","Output":"=== RUN   TestClientSelectionBeforePathNormalization\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.939643675Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/omitted"}
+{"Time":"2026-11-12T14:02:28.93966196Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/omitted","Output":"=== RUN   TestClientSelectionBeforePathNormalization/omitted\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.940373085Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/omitted","Output":"--- PASS: TestClientSelectionBeforePathNormalization/omitted (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.940569987Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/omitted","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.940836235Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/legacy_default"}
+{"Time":"2026-11-12T14:02:28.940856525Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/legacy_default","Output":"=== RUN   TestClientSelectionBeforePathNormalization/legacy_default\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.942381083Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/legacy_default","Output":"--- PASS: TestClientSelectionBeforePathNormalization/legacy_default (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.942528859Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/legacy_default","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.942549861Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/explicit_embedded"}
+{"Time":"2026-11-12T14:02:28.942564206Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/explicit_embedded","Output":"=== RUN   TestClientSelectionBeforePathNormalization/explicit_embedded\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.944585775Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/explicit_embedded","Output":"--- PASS: TestClientSelectionBeforePathNormalization/explicit_embedded (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.944636874Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/explicit_embedded","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.944656862Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/external_default_directory"}
+{"Time":"2026-11-12T14:02:28.944671765Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/external_default_directory","Output":"=== RUN   TestClientSelectionBeforePathNormalization/external_default_directory\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.945776522Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/external_default_directory","Output":"--- PASS: TestClientSelectionBeforePathNormalization/external_default_directory (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.945924077Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/external_default_directory","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.946059475Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/custom_external"}
+{"Time":"2026-11-12T14:02:28.946153202Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/custom_external","Output":"=== RUN   TestClientSelectionBeforePathNormalization/custom_external\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.947822005Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/custom_external","Output":"--- PASS: TestClientSelectionBeforePathNormalization/custom_external (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.948123205Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/custom_external","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.951590685Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_override"}
+{"Time":"2026-11-12T14:02:28.951617248Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_override","Output":"=== RUN   TestClientSelectionBeforePathNormalization/local_override\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.952129307Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_override","Output":"--- PASS: TestClientSelectionBeforePathNormalization/local_override (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.952158095Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_override","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.952181087Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_embedded"}
+{"Time":"2026-11-12T14:02:28.952195142Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_embedded","Output":"=== RUN   TestClientSelectionBeforePathNormalization/local_embedded\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.954014653Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_embedded","Output":"--- PASS: TestClientSelectionBeforePathNormalization/local_embedded (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.954054112Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization/local_embedded","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.954074262Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization","Output":"--- PASS: TestClientSelectionBeforePathNormalization (0.02s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.954091013Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientSelectionBeforePathNormalization","Elapsed":0.02}
+{"Time":"2026-11-12T14:02:28.954108485Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestClientGzipHEAD"}
+{"Time":"2026-11-12T14:02:28.954122256Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientGzipHEAD","Output":"=== RUN   TestClientGzipHEAD\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.955391996Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestClientGzipHEAD","Output":"--- PASS: TestClientGzipHEAD (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.955429192Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestClientGzipHEAD","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.955507364Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestCheckKeys"}
+{"Time":"2026-11-12T14:02:28.955522228Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestCheckKeys","Output":"=== RUN   TestCheckKeys\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.956568591Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestCheckKeys","Output":"--- PASS: TestCheckKeys (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.956607193Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestCheckKeys","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.956648403Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestRulesPartialOverride"}
+{"Time":"2026-11-12T14:02:28.956664572Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestRulesPartialOverride","Output":"=== RUN   TestRulesPartialOverride\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.956682554Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestRulesPartialOverride","Output":"--- PASS: TestRulesPartialOverride (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.956698961Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestRulesPartialOverride","Elapsed":0}
+{"Time":"2026-11-12T14:02:28.956715552Z","Action":"run","Package":"sa/server/cmd/saserver","Test":"TestGzipStatic"}
+{"Time":"2026-11-12T14:02:28.956728887Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestGzipStatic","Output":"=== RUN   TestGzipStatic\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.975272852Z","Action":"output","Package":"sa/server/cmd/saserver","Test":"TestGzipStatic","Output":"--- PASS: TestGzipStatic (0.02s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.975321886Z","Action":"pass","Package":"sa/server/cmd/saserver","Test":"TestGzipStatic","Elapsed":0.02}
+{"Time":"2026-11-12T14:02:28.975341877Z","Action":"output","Package":"sa/server/cmd/saserver","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:28.977852192Z","Action":"output","Package":"sa/server/cmd/saserver","Output":"ok  \tsa/server/cmd/saserver\t0.049s\n"}
+{"Time":"2026-11-12T14:02:28.977904471Z","Action":"pass","Package":"sa/server/cmd/saserver","Elapsed":0.05}
+{"Time":"2026-11-12T14:02:30.758557691Z","Action":"start","Package":"sa/server/internal/battle"}
+{"Time":"2026-11-12T14:02:30.765362379Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestDerive"}
+{"Time":"2026-11-12T14:02:30.7654732Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestDerive","Output":"=== RUN   TestDerive\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.765823377Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestDerive","Output":"--- PASS: TestDerive (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767274671Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestDerive","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767315564Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestAttrAdjust"}
+{"Time":"2026-11-12T14:02:30.767332667Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestAttrAdjust","Output":"=== RUN   TestAttrAdjust\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767353873Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestAttrAdjust","Output":"--- PASS: TestAttrAdjust (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767423934Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestAttrAdjust","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767494506Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestGuardReducesDamage"}
+{"Time":"2026-11-12T14:02:30.767521597Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGuardReducesDamage","Output":"=== RUN   TestGuardReducesDamage\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767541826Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGuardReducesDamage","Output":"--- PASS: TestGuardReducesDamage (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767558273Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestGuardReducesDamage","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767574353Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestTurnAndOutcome"}
+{"Time":"2026-11-12T14:02:30.767588036Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestTurnAndOutcome","Output":"=== RUN   TestTurnAndOutcome\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767604686Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestTurnAndOutcome","Output":"--- PASS: TestTurnAndOutcome (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767633252Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestTurnAndOutcome","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767650671Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestEscapeAndTimeout"}
+{"Time":"2026-11-12T14:02:30.767664537Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEscapeAndTimeout","Output":"=== RUN   TestEscapeAndTimeout\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.76768746Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEscapeAndTimeout","Output":"--- PASS: TestEscapeAndTimeout (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767704471Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestEscapeAndTimeout","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767719751Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestEnemyAITargetsPlayer"}
+{"Time":"2026-11-12T14:02:30.767767557Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyAITargetsPlayer","Output":"=== RUN   TestEnemyAITargetsPlayer\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767791672Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyAITargetsPlayer","Output":"--- PASS: TestEnemyAITargetsPlayer (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767812252Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestEnemyAITargetsPlayer","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767828624Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestKillExp"}
+{"Time":"2026-11-12T14:02:30.76784265Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestKillExp","Output":"=== RUN   TestKillExp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767862245Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestKillExp","Output":"--- PASS: TestKillExp (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.767878423Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestKillExp","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.767893492Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestPickEnemiesFromRealData"}
+{"Time":"2026-11-12T14:02:30.767907327Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPickEnemiesFromRealData","Output":"=== RUN   TestPickEnemiesFromRealData\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.869761241Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPickEnemiesFromRealData","Output":"--- PASS: TestPickEnemiesFromRealData (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.869854366Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestPickEnemiesFromRealData","Elapsed":0.1}
+{"Time":"2026-11-12T14:02:30.869879388Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestUltimate"}
+{"Time":"2026-11-12T14:02:30.869894397Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestUltimate","Output":"=== RUN   TestUltimate\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.869926902Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestUltimate","Output":"--- PASS: TestUltimate (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.869945513Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestUltimate","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.869966567Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestEnemyGuardScale"}
+{"Time":"2026-11-12T14:02:30.869980904Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyGuardScale","Output":"=== RUN   TestEnemyGuardScale\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.881344268Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyGuardScale","Output":"--- PASS: TestEnemyGuardScale (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.881382591Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestEnemyGuardScale","Elapsed":0.01}
+{"Time":"2026-11-12T14:02:30.881418092Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestPickEnemiesByItem"}
+{"Time":"2026-11-12T14:02:30.881434442Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPickEnemiesByItem","Output":"=== RUN   TestPickEnemiesByItem\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.959784559Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPickEnemiesByItem","Output":"--- PASS: TestPickEnemiesByItem (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.959863425Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestPickEnemiesByItem","Elapsed":0.08}
+{"Time":"2026-11-12T14:02:30.959886252Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestFieldChangeAndFirecracker"}
+{"Time":"2026-11-12T14:02:30.959900565Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFieldChangeAndFirecracker","Output":"=== RUN   TestFieldChangeAndFirecracker\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.959933534Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFieldChangeAndFirecracker","Output":"--- PASS: TestFieldChangeAndFirecracker (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.959951765Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestFieldChangeAndFirecracker","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.959968945Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestBecomeFox"}
+{"Time":"2026-11-12T14:02:30.95998338Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBecomeFox","Output":"=== RUN   TestBecomeFox\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960001398Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBecomeFox","Output":"--- PASS: TestBecomeFox (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960017183Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestBecomeFox","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960037713Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestBecomePig"}
+{"Time":"2026-11-12T14:02:30.960051689Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBecomePig","Output":"=== RUN   TestBecomePig\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960068647Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBecomePig","Output":"--- PASS: TestBecomePig (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960084272Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestBecomePig","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960099252Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestFirekill"}
+{"Time":"2026-11-12T14:02:30.960113117Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFirekill","Output":"=== RUN   TestFirekill\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960181169Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFirekill","Output":"--- PASS: TestFirekill (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960198515Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestFirekill","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960213886Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestItemArgNum"}
+{"Time":"2026-11-12T14:02:30.960227527Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestItemArgNum","Output":"=== RUN   TestItemArgNum\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96024377Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestItemArgNum","Output":"--- PASS: TestItemArgNum (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960259365Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestItemArgNum","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960273856Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestBattleItems"}
+{"Time":"2026-11-12T14:02:30.960295182Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBattleItems","Output":"=== RUN   TestBattleItems\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960330372Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBattleItems","Output":"--- PASS: TestBattleItems (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96034881Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestBattleItems","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960364005Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestPetLoyalCheck"}
+{"Time":"2026-11-12T14:02:30.960377813Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPetLoyalCheck","Output":"=== RUN   TestPetLoyalCheck\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960405505Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPetLoyalCheck","Output":"--- PASS: TestPetLoyalCheck (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960422867Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestPetLoyalCheck","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960509589Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestPetEscapeWithOwner"}
+{"Time":"2026-11-12T14:02:30.960530128Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPetEscapeWithOwner","Output":"=== RUN   TestPetEscapeWithOwner\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960548453Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPetEscapeWithOwner","Output":"--- PASS: TestPetEscapeWithOwner (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96056484Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestPetEscapeWithOwner","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960580287Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestSekkan"}
+{"Time":"2026-11-12T14:02:30.960593739Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSekkan","Output":"=== RUN   TestSekkan\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960616376Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSekkan","Output":"--- PASS: TestSekkan (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960632788Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestSekkan","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960647286Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestCaptureRate"}
+{"Time":"2026-11-12T14:02:30.960660755Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestCaptureRate","Output":"=== RUN   TestCaptureRate\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960676832Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestCaptureRate","Output":"--- PASS: TestCaptureRate (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96069214Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestCaptureRate","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960706672Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestRideHeal"}
+{"Time":"2026-11-12T14:02:30.960720076Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestRideHeal","Output":"=== RUN   TestRideHeal\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960736406Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestRideHeal","Output":"--- PASS: TestRideHeal (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.960751864Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestRideHeal","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.960773219Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestSkillNoCounterMercyUnregistered"}
+{"Time":"2026-11-12T14:02:30.960787614Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSkillNoCounterMercyUnregistered","Output":"=== RUN   TestSkillNoCounterMercyUnregistered\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96129379Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSkillNoCounterMercyUnregistered","Output":"--- PASS: TestSkillNoCounterMercyUnregistered (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961335138Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestSkillNoCounterMercyUnregistered","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961353739Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestGyrateAndTear"}
+{"Time":"2026-11-12T14:02:30.961372395Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGyrateAndTear","Output":"=== RUN   TestGyrateAndTear\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961389973Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGyrateAndTear","Output":"--- PASS: TestGyrateAndTear (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961406311Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestGyrateAndTear","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961421528Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestFallGroundAndSetDuck"}
+{"Time":"2026-11-12T14:02:30.961546896Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFallGroundAndSetDuck","Output":"=== RUN   TestFallGroundAndSetDuck\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961573779Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestFallGroundAndSetDuck","Output":"--- PASS: TestFallGroundAndSetDuck (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961597823Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestFallGroundAndSetDuck","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961614118Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestAbductAndSteal"}
+{"Time":"2026-11-12T14:02:30.961628092Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestAbductAndSteal","Output":"=== RUN   TestAbductAndSteal\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961645095Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestAbductAndSteal","Output":"--- PASS: TestAbductAndSteal (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961660768Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestAbductAndSteal","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961679271Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestBattleModelAndRegret"}
+{"Time":"2026-11-12T14:02:30.961698421Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBattleModelAndRegret","Output":"=== RUN   TestBattleModelAndRegret\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961716063Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBattleModelAndRegret","Output":"--- PASS: TestBattleModelAndRegret (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961731911Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestBattleModelAndRegret","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961752388Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestVaryAndDeeppoison"}
+{"Time":"2026-11-12T14:02:30.961766321Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestVaryAndDeeppoison","Output":"=== RUN   TestVaryAndDeeppoison\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961782616Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestVaryAndDeeppoison","Output":"--- PASS: TestVaryAndDeeppoison (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.961798228Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestVaryAndDeeppoison","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.961812895Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestEarthRoundKeepsTarget"}
+{"Time":"2026-11-12T14:02:30.961826294Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEarthRoundKeepsTarget","Output":"=== RUN   TestEarthRoundKeepsTarget\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.962427763Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEarthRoundKeepsTarget","Output":"--- PASS: TestEarthRoundKeepsTarget (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.962782954Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestEarthRoundKeepsTarget","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.963043657Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestOptParse"}
+{"Time":"2026-11-12T14:02:30.963071008Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestOptParse","Output":"=== RUN   TestOptParse\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96315966Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestOptParse","Output":"--- PASS: TestOptParse (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.963187502Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestOptParse","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.963203965Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestContinuationAttackHitsN"}
+{"Time":"2026-11-12T14:02:30.963217916Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestContinuationAttackHitsN","Output":"=== RUN   TestContinuationAttackHitsN\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.963301241Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestContinuationAttackHitsN","Output":"--- PASS: TestContinuationAttackHitsN (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96332724Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestContinuationAttackHitsN","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.963343335Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestStatusPoisonAndSleep"}
+{"Time":"2026-11-12T14:02:30.963357598Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestStatusPoisonAndSleep","Output":"=== RUN   TestStatusPoisonAndSleep\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.963432629Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestStatusPoisonAndSleep","Output":"--- PASS: TestStatusPoisonAndSleep (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.963532383Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestStatusPoisonAndSleep","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.963550607Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestStatusInflictChance"}
+{"Time":"2026-11-12T14:02:30.963564829Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestStatusInflictChance","Output":"=== RUN   TestStatusInflictChance\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967040922Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestStatusInflictChance","Output":"--- PASS: TestStatusInflictChance (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967076606Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestStatusInflictChance","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.967094349Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestCounterHappens"}
+{"Time":"2026-11-12T14:02:30.967108447Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestCounterHappens","Output":"=== RUN   TestCounterHappens\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96749225Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestCounterHappens","Output":"--- PASS: TestCounterHappens (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967527804Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestCounterHappens","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.967584029Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestGuardBreakAndGuardian"}
+{"Time":"2026-11-12T14:02:30.96760574Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGuardBreakAndGuardian","Output":"=== RUN   TestGuardBreakAndGuardian\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967629953Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestGuardBreakAndGuardian","Output":"--- PASS: TestGuardBreakAndGuardian (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967646368Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestGuardBreakAndGuardian","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.967662243Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestEnemyHealRevive"}
+{"Time":"2026-11-12T14:02:30.967688338Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyHealRevive","Output":"=== RUN   TestEnemyHealRevive\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967713274Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestEnemyHealRevive","Output":"--- PASS: TestEnemyHealRevive (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967734437Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestEnemyHealRevive","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.967751357Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestChargeAndEarthRound"}
+{"Time":"2026-11-12T14:02:30.967765617Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestChargeAndEarthRound","Output":"=== RUN   TestChargeAndEarthRound\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967782278Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestChargeAndEarthRound","Output":"--- PASS: TestChargeAndEarthRound (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.967798017Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestChargeAndEarthRound","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.967812948Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestSurprise"}
+{"Time":"2026-11-12T14:02:30.967826739Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSurprise","Output":"=== RUN   TestSurprise\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.968130101Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestSurprise","Output":"--- PASS: TestSurprise (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.96815768Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestSurprise","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.968173932Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestPlayerMultiHit"}
+{"Time":"2026-11-12T14:02:30.968187741Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPlayerMultiHit","Output":"=== RUN   TestPlayerMultiHit\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.968443016Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestPlayerMultiHit","Output":"--- PASS: TestPlayerMultiHit (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.968584269Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestPlayerMultiHit","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.968691631Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestRidePoison"}
+{"Time":"2026-11-12T14:02:30.968889936Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestRidePoison","Output":"=== RUN   TestRidePoison\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.968944917Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestRidePoison","Output":"--- PASS: TestRidePoison (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.969025412Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestRidePoison","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.969047911Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestBoomerangRow"}
+{"Time":"2026-11-12T14:02:30.969061959Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBoomerangRow","Output":"=== RUN   TestBoomerangRow\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.969087039Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestBoomerangRow","Output":"--- PASS: TestBoomerangRow (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.969175719Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestBoomerangRow","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.969193112Z","Action":"run","Package":"sa/server/internal/battle","Test":"TestThrowWeapons"}
+{"Time":"2026-11-12T14:02:30.969207408Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestThrowWeapons","Output":"=== RUN   TestThrowWeapons\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.969552088Z","Action":"output","Package":"sa/server/internal/battle","Test":"TestThrowWeapons","Output":"--- PASS: TestThrowWeapons (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.969585291Z","Action":"pass","Package":"sa/server/internal/battle","Test":"TestThrowWeapons","Elapsed":0}
+{"Time":"2026-11-12T14:02:30.969601586Z","Action":"output","Package":"sa/server/internal/battle","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:30.974492566Z","Action":"output","Package":"sa/server/internal/battle","Output":"ok  \tsa/server/internal/battle\t0.216s\n"}
+{"Time":"2026-11-12T14:02:30.974556476Z","Action":"pass","Package":"sa/server/internal/battle","Elapsed":0.216}
+{"Time":"2026-11-12T14:02:32.006792996Z","Action":"start","Package":"sa/server/internal/data"}
+{"Time":"2026-11-12T14:02:32.0125495Z","Action":"run","Package":"sa/server/internal/data","Test":"TestLoadRealData"}
+{"Time":"2026-11-12T14:02:32.012615412Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"=== RUN   TestLoadRealData\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.167623512Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:32: 楼层 1382，图号属性 20250，传送点 5832，可显示 NPC 3062，警告 0\n"}
+{"Time":"2026-11-12T14:02:34.16770695Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:44: 出生村庄 0：1006 萨姆吉尔的村长家 30x40\n"}
+{"Time":"2026-11-12T14:02:34.167738225Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:44: 出生村庄 1：2006 玛丽娜丝的村长家 40x30\n"}
+{"Time":"2026-11-12T14:02:34.167755117Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:44: 出生村庄 2：3006 加加的村长家 40x30\n"}
+{"Time":"2026-11-12T14:02:34.167770511Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:44: 出生村庄 3：4006 卡鲁它那的村长家 30x40\n"}
+{"Time":"2026-11-12T14:02:34.169368389Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"    data_test.go:56: 传送目标不可走：36 / 5832\n"}
+{"Time":"2026-11-12T14:02:34.169415448Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadRealData","Output":"--- PASS: TestLoadRealData (2.16s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.169598445Z","Action":"pass","Package":"sa/server/internal/data","Test":"TestLoadRealData","Elapsed":2.16}
+{"Time":"2026-11-12T14:02:34.169626247Z","Action":"run","Package":"sa/server/internal/data","Test":"TestParseFloorHeader"}
+{"Time":"2026-11-12T14:02:34.169640965Z","Action":"output","Package":"sa/server/internal/data","Test":"TestParseFloorHeader","Output":"=== RUN   TestParseFloorHeader\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.169707728Z","Action":"output","Package":"sa/server/internal/data","Test":"TestParseFloorHeader","Output":"--- PASS: TestParseFloorHeader (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.169733106Z","Action":"pass","Package":"sa/server/internal/data","Test":"TestParseFloorHeader","Elapsed":0}
+{"Time":"2026-11-12T14:02:34.169749606Z","Action":"run","Package":"sa/server/internal/data","Test":"TestWalkableRule"}
+{"Time":"2026-11-12T14:02:34.169768116Z","Action":"output","Package":"sa/server/internal/data","Test":"TestWalkableRule","Output":"=== RUN   TestWalkableRule\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.169786807Z","Action":"output","Package":"sa/server/internal/data","Test":"TestWalkableRule","Output":"--- PASS: TestWalkableRule (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.169802666Z","Action":"pass","Package":"sa/server/internal/data","Test":"TestWalkableRule","Elapsed":0}
+{"Time":"2026-11-12T14:02:34.169817436Z","Action":"run","Package":"sa/server/internal/data","Test":"TestLoadItems"}
+{"Time":"2026-11-12T14:02:34.169847781Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadItems","Output":"=== RUN   TestLoadItems\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.347402826Z","Action":"output","Package":"sa/server/internal/data","Test":"TestLoadItems","Output":"--- PASS: TestLoadItems (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:34.347593947Z","Action":"pass","Package":"sa/server/internal/data","Test":"TestLoadItems","Elapsed":0.18}
+{"Time":"2026-11-12T14:02:34.347617972Z","Action":"run","Package":"sa/server/internal/data","Test":"TestNpcArgAndWindows"}
+{"Time":"2026-11-12T14:02:34.347632768Z","Action":"output","Package":"sa/server/internal/data","Test":"TestNpcArgAndWindows","Output":"=== RUN   TestNpcArgAndWindows\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:36.229637986Z","Action":"output","Package":"sa/server/internal/data","Test":"TestNpcArgAndWindows","Output":"    data_test.go:139: NPC 功能：map[:111 Action:8 Airplane:36 Bankman:18 Bus:7 Charm:9 Dengon:39 Duelranking:7 ExChangeMan:767 FMPKCallMan:6 FMPKMan:14 FMWarpMan:15 Familyman:21 FmDengon:21 FmHealer:9 FmLetter:4 Healer:5 ItemShop:300 ItemchangeMan:28 Janken:9 LuckyMan:4 ManorSman:10 Mic:4 NPCEnemy:353 PetShop:21 PetSkillShop:26 PoolItemShop:9 Quiz:22 Riderman:4 SavePoint:27 Scheduleman:5 SignBoard:225 TimeMan:34 TownPeople:529 Transmigration:1 WarpMan:292 WindowHealer:32 Windowman:30]\n"}
+{"Time":"2026-11-12T14:02:36.22995025Z","Action":"output","Package":"sa/server/internal/data","Test":"TestNpcArgAndWindows","Output":"--- PASS: TestNpcArgAndWindows (1.88s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:36.229997392Z","Action":"pass","Package":"sa/server/internal/data","Test":"TestNpcArgAndWindows","Elapsed":1.88}
+{"Time":"2026-11-12T14:02:36.2300868Z","Action":"output","Package":"sa/server/internal/data","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:36.267672259Z","Action":"output","Package":"sa/server/internal/data","Output":"ok  \tsa/server/internal/data\t4.261s\n"}
+{"Time":"2026-11-12T14:02:36.267757866Z","Action":"pass","Package":"sa/server/internal/data","Elapsed":4.261}
+{"Time":"2026-11-12T14:02:36.269733538Z","Action":"start","Package":"sa/server/internal/proto"}
+{"Time":"2026-11-12T14:02:36.26977266Z","Action":"output","Package":"sa/server/internal/proto","Output":"?   \tsa/server/internal/proto\t[no test files]\n"}
+{"Time":"2026-11-12T14:02:36.269795482Z","Action":"skip","Package":"sa/server/internal/proto","Elapsed":0}
+{"Time":"2026-11-12T14:02:38.360106426Z","Action":"start","Package":"sa/server/internal/server"}
+{"Time":"2026-11-12T14:02:38.369259515Z","Action":"run","Package":"sa/server/internal/server","Test":"TestAuthLimiterBackoff"}
+{"Time":"2026-11-12T14:02:38.369354288Z","Action":"output","Package":"sa/server/internal/server","Test":"TestAuthLimiterBackoff","Output":"=== RUN   TestAuthLimiterBackoff\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:38.369388245Z","Action":"output","Package":"sa/server/internal/server","Test":"TestAuthLimiterBackoff","Output":"--- PASS: TestAuthLimiterBackoff (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:38.36940652Z","Action":"pass","Package":"sa/server/internal/server","Test":"TestAuthLimiterBackoff","Elapsed":0}
+{"Time":"2026-11-12T14:02:38.369428706Z","Action":"run","Package":"sa/server/internal/server","Test":"TestValidCharName"}
+{"Time":"2026-11-12T14:02:38.369529675Z","Action":"output","Package":"sa/server/internal/server","Test":"TestValidCharName","Output":"=== RUN   TestValidCharName\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:38.36955781Z","Action":"output","Package":"sa/server/internal/server","Test":"TestValidCharName","Output":"--- PASS: TestValidCharName (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:38.369575468Z","Action":"pass","Package":"sa/server/internal/server","Test":"TestValidCharName","Elapsed":0}
+{"Time":"2026-11-12T14:02:38.369590748Z","Action":"output","Package":"sa/server/internal/server","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:38.370386931Z","Action":"output","Package":"sa/server/internal/server","Output":"ok  \tsa/server/internal/server\t0.010s\n"}
+{"Time":"2026-11-12T14:02:38.370428298Z","Action":"pass","Package":"sa/server/internal/server","Elapsed":0.01}
+{"Time":"2026-11-12T14:02:39.393938068Z","Action":"start","Package":"sa/server/internal/store"}
+{"Time":"2026-11-12T14:02:39.40353935Z","Action":"run","Package":"sa/server/internal/store","Test":"TestStore"}
+{"Time":"2026-11-12T14:02:39.403609035Z","Action":"output","Package":"sa/server/internal/store","Test":"TestStore","Output":"=== RUN   TestStore\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:39.495989774Z","Action":"output","Package":"sa/server/internal/store","Test":"TestStore","Output":"--- PASS: TestStore (0.09s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:39.496075935Z","Action":"pass","Package":"sa/server/internal/store","Test":"TestStore","Elapsed":0.09}
+{"Time":"2026-11-12T14:02:39.496098423Z","Action":"output","Package":"sa/server/internal/store","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:02:39.498155335Z","Action":"output","Package":"sa/server/internal/store","Output":"ok  \tsa/server/internal/store\t0.104s\n"}
+{"Time":"2026-11-12T14:02:39.49821291Z","Action":"pass","Package":"sa/server/internal/store","Elapsed":0.104}
+{"Time":"2026-11-12T14:03:09.008261649Z","Action":"start","Package":"sa/server/internal/world"}
+{"Time":"2026-11-12T14:03:09.022680481Z","Action":"run","Package":"sa/server/internal/world","Test":"TestAddressBook"}
+{"Time":"2026-11-12T14:03:09.024851979Z","Action":"output","Package":"sa/server/internal/world","Test":"TestAddressBook","Output":"=== RUN   TestAddressBook\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.477779603Z","Action":"output","Package":"sa/server/internal/world","Test":"TestAddressBook","Output":"--- PASS: TestAddressBook (5.45s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.477951732Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestAddressBook","Elapsed":5.45}
+{"Time":"2026-11-12T14:03:14.478046525Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemCrush"}
+{"Time":"2026-11-12T14:03:14.478093939Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemCrush","Output":"=== RUN   TestItemCrush\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.754051328Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemCrush","Output":"--- PASS: TestItemCrush (0.28s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.754171931Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemCrush","Elapsed":0.28}
+{"Time":"2026-11-12T14:03:14.754199172Z","Action":"run","Package":"sa/server/internal/world","Test":"TestDuel"}
+{"Time":"2026-11-12T14:03:14.754219883Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDuel","Output":"=== RUN   TestDuel\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.996103292Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDuel","Output":"--- PASS: TestDuel (0.24s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:14.998762572Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestDuel","Elapsed":0.24}
+{"Time":"2026-11-12T14:03:14.998884572Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeTicket"}
+{"Time":"2026-11-12T14:03:15.002968755Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeTicket","Output":"=== RUN   TestExchangeTicket\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:15.252336266Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeTicket","Output":"--- PASS: TestExchangeTicket (0.25s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:15.253741641Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeTicket","Elapsed":0.25}
+{"Time":"2026-11-12T14:03:15.25378956Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeQuest"}
+{"Time":"2026-11-12T14:03:15.254095903Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeQuest","Output":"=== RUN   TestExchangeQuest\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:15.568364981Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeQuest","Output":"--- PASS: TestExchangeQuest (0.32s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:15.568532256Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeQuest","Elapsed":0.32}
+{"Time":"2026-11-12T14:03:15.568562891Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeKeyWord"}
+{"Time":"2026-11-12T14:03:15.568581707Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeKeyWord","Output":"=== RUN   TestExchangeKeyWord\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:16.000665671Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeKeyWord","Output":"--- PASS: TestExchangeKeyWord (0.43s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:16.00074005Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeKeyWord","Elapsed":0.43}
+{"Time":"2026-11-12T14:03:16.000763366Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeConditions"}
+{"Time":"2026-11-12T14:03:16.000777747Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeConditions","Output":"=== RUN   TestExchangeConditions\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:16.394720302Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeConditions","Output":"--- PASS: TestExchangeConditions (0.40s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:16.397322778Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeConditions","Elapsed":0.4}
+{"Time":"2026-11-12T14:03:16.39739253Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeSweep"}
+{"Time":"2026-11-12T14:03:16.397413549Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeSweep","Output":"=== RUN   TestExchangeSweep\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:19.826427412Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeSweep","Output":"    exchangeman_test.go:315: 767 个 NPC，打开 1955 次窗口\n"}
+{"Time":"2026-11-12T14:03:19.827309204Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeSweep","Output":"--- PASS: TestExchangeSweep (3.43s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:19.827388624Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeSweep","Elapsed":3.43}
+{"Time":"2026-11-12T14:03:19.827418447Z","Action":"run","Package":"sa/server/internal/world","Test":"TestFamily"}
+{"Time":"2026-11-12T14:03:19.827433398Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFamily","Output":"=== RUN   TestFamily\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:19.976689901Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFamily","Output":"--- PASS: TestFamily (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:19.976769371Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestFamily","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:19.976792203Z","Action":"run","Package":"sa/server/internal/world","Test":"TestFamilyLeaderChange"}
+{"Time":"2026-11-12T14:03:19.976806944Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFamilyLeaderChange","Output":"=== RUN   TestFamilyLeaderChange\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.106830487Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFamilyLeaderChange","Output":"--- PASS: TestFamilyLeaderChange (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.106911344Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestFamilyLeaderChange","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:20.106936499Z","Action":"run","Package":"sa/server/internal/world","Test":"TestChatFlood"}
+{"Time":"2026-11-12T14:03:20.106952387Z","Action":"output","Package":"sa/server/internal/world","Test":"TestChatFlood","Output":"=== RUN   TestChatFlood\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.246278782Z","Action":"output","Package":"sa/server/internal/world","Test":"TestChatFlood","Output":"--- PASS: TestChatFlood (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.246351732Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestChatFlood","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:20.246375047Z","Action":"run","Package":"sa/server/internal/world","Test":"TestFlush"}
+{"Time":"2026-11-12T14:03:20.246401545Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFlush","Output":"=== RUN   TestFlush\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.383593368Z","Action":"output","Package":"sa/server/internal/world","Test":"TestFlush","Output":"--- PASS: TestFlush (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.383666269Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestFlush","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:20.383689556Z","Action":"run","Package":"sa/server/internal/world","Test":"TestManorWar"}
+{"Time":"2026-11-12T14:03:20.383703688Z","Action":"output","Package":"sa/server/internal/world","Test":"TestManorWar","Output":"=== RUN   TestManorWar\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.531898919Z","Action":"output","Package":"sa/server/internal/world","Test":"TestManorWar","Output":"--- PASS: TestManorWar (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.531988782Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestManorWar","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:20.532028273Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBusRide"}
+{"Time":"2026-11-12T14:03:20.532112073Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBusRide","Output":"=== RUN   TestBusRide\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.715306085Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBusRide","Output":"--- PASS: TestBusRide (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.715380377Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBusRide","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:20.715403701Z","Action":"run","Package":"sa/server/internal/world","Test":"TestManorRide"}
+{"Time":"2026-11-12T14:03:20.715418685Z","Action":"output","Package":"sa/server/internal/world","Test":"TestManorRide","Output":"=== RUN   TestManorRide\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.83665347Z","Action":"output","Package":"sa/server/internal/world","Test":"TestManorRide","Output":"--- PASS: TestManorRide (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:20.836961866Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestManorRide","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:20.836990743Z","Action":"run","Package":"sa/server/internal/world","Test":"TestHostileClientInputs"}
+{"Time":"2026-11-12T14:03:20.837006065Z","Action":"output","Package":"sa/server/internal/world","Test":"TestHostileClientInputs","Output":"=== RUN   TestHostileClientInputs\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.452213007Z","Action":"output","Package":"sa/server/internal/world","Test":"TestHostileClientInputs","Output":"--- PASS: TestHostileClientInputs (9.62s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.452289356Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestHostileClientInputs","Elapsed":9.62}
+{"Time":"2026-11-12T14:03:30.452313158Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMOnlyForConfiguredAccounts"}
+{"Time":"2026-11-12T14:03:30.452327607Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMOnlyForConfiguredAccounts","Output":"=== RUN   TestGMOnlyForConfiguredAccounts\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.581689099Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMOnlyForConfiguredAccounts","Output":"--- PASS: TestGMOnlyForConfiguredAccounts (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.58179769Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMOnlyForConfiguredAccounts","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:30.582331273Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetExt"}
+{"Time":"2026-11-12T14:03:30.58236196Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetExt","Output":"=== RUN   TestPetExt\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.686336572Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetExt","Output":"--- PASS: TestPetExt (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.68641159Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetExt","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:30.686435332Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMCommandsReplyAndLists"}
+{"Time":"2026-11-12T14:03:30.686553848Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMCommandsReplyAndLists","Output":"=== RUN   TestGMCommandsReplyAndLists\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.875616668Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMCommandsReplyAndLists","Output":"--- PASS: TestGMCommandsReplyAndLists (0.19s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:30.875692502Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMCommandsReplyAndLists","Elapsed":0.19}
+{"Time":"2026-11-12T14:03:30.875732364Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMMoreCommands"}
+{"Time":"2026-11-12T14:03:30.875758712Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMMoreCommands","Output":"=== RUN   TestGMMoreCommands\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.001517601Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMMoreCommands","Output":"--- PASS: TestGMMoreCommands (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.00170195Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMMoreCommands","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:31.001804611Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMDetailAndMore"}
+{"Time":"2026-11-12T14:03:31.001829744Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMDetailAndMore","Output":"=== RUN   TestGMDetailAndMore\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.114947473Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMDetailAndMore","Output":"--- PASS: TestGMDetailAndMore (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.115019966Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMDetailAndMore","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:31.115061149Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMSetPasswordAndSecret"}
+{"Time":"2026-11-12T14:03:31.115077694Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMSetPasswordAndSecret","Output":"=== RUN   TestGMSetPasswordAndSecret\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.267555786Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMSetPasswordAndSecret","Output":"--- PASS: TestGMSetPasswordAndSecret (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.26931452Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMSetPasswordAndSecret","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:31.26935702Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGroundItem"}
+{"Time":"2026-11-12T14:03:31.269373774Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundItem","Output":"=== RUN   TestGroundItem\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.408231588Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundItem","Output":"--- PASS: TestGroundItem (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.408305028Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGroundItem","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:31.408328863Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGroundGold"}
+{"Time":"2026-11-12T14:03:31.408357664Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundGold","Output":"=== RUN   TestGroundGold\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.531964484Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundGold","Output":"--- PASS: TestGroundGold (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.532037518Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGroundGold","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:31.532060665Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGroundPet"}
+{"Time":"2026-11-12T14:03:31.532075552Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundPet","Output":"=== RUN   TestGroundPet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.662122347Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGroundPet","Output":"--- PASS: TestGroundPet (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.662196205Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGroundPet","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:31.66222018Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemsBatch2"}
+{"Time":"2026-11-12T14:03:31.662235768Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemsBatch2","Output":"=== RUN   TestItemsBatch2\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.836291101Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemsBatch2","Output":"--- PASS: TestItemsBatch2 (0.17s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.836667589Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemsBatch2","Elapsed":0.17}
+{"Time":"2026-11-12T14:03:31.837625644Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemRecoveryPet"}
+{"Time":"2026-11-12T14:03:31.83766697Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemRecoveryPet","Output":"=== RUN   TestItemRecoveryPet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.956227247Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemRecoveryPet","Output":"--- PASS: TestItemRecoveryPet (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:31.956341366Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemRecoveryPet","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:31.956366098Z","Action":"run","Package":"sa/server/internal/world","Test":"TestSkillCanned"}
+{"Time":"2026-11-12T14:03:31.956380573Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSkillCanned","Output":"=== RUN   TestSkillCanned\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.073631195Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSkillCanned","Output":"--- PASS: TestSkillCanned (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.07370408Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestSkillCanned","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:32.073727361Z","Action":"run","Package":"sa/server/internal/world","Test":"TestAddExp"}
+{"Time":"2026-11-12T14:03:32.073984877Z","Action":"output","Package":"sa/server/internal/world","Test":"TestAddExp","Output":"=== RUN   TestAddExp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.18717651Z","Action":"output","Package":"sa/server/internal/world","Test":"TestAddExp","Output":"--- PASS: TestAddExp (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.187247919Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestAddExp","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:32.187270376Z","Action":"run","Package":"sa/server/internal/world","Test":"TestConstitution"}
+{"Time":"2026-11-12T14:03:32.187284944Z","Action":"output","Package":"sa/server/internal/world","Test":"TestConstitution","Output":"=== RUN   TestConstitution\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.3049025Z","Action":"output","Package":"sa/server/internal/world","Test":"TestConstitution","Output":"--- PASS: TestConstitution (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.305255787Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestConstitution","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:32.305298464Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemWarp"}
+{"Time":"2026-11-12T14:03:32.305314985Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemWarp","Output":"=== RUN   TestItemWarp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.457843249Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemWarp","Output":"--- PASS: TestItemWarp (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.458094278Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemWarp","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:32.459531Z","Action":"run","Package":"sa/server/internal/world","Test":"TestMetamo"}
+{"Time":"2026-11-12T14:03:32.459565968Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMetamo","Output":"=== RUN   TestMetamo\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.58470258Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMetamo","Output":"--- PASS: TestMetamo (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.584901296Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestMetamo","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:32.585071579Z","Action":"run","Package":"sa/server/internal/world","Test":"TestJigsaw"}
+{"Time":"2026-11-12T14:03:32.585095681Z","Action":"output","Package":"sa/server/internal/world","Test":"TestJigsaw","Output":"=== RUN   TestJigsaw\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.686885213Z","Action":"output","Package":"sa/server/internal/world","Test":"TestJigsaw","Output":"--- PASS: TestJigsaw (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.686955134Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestJigsaw","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:32.686978007Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarpManParty"}
+{"Time":"2026-11-12T14:03:32.686992062Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManParty","Output":"=== RUN   TestWarpManParty\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.805256558Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManParty","Output":"--- PASS: TestWarpManParty (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.805327314Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarpManParty","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:32.805349147Z","Action":"run","Package":"sa/server/internal/world","Test":"TestDuelDisconnectDP"}
+{"Time":"2026-11-12T14:03:32.805363859Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDuelDisconnectDP","Output":"=== RUN   TestDuelDisconnectDP\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.928844762Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDuelDisconnectDP","Output":"--- PASS: TestDuelDisconnectDP (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:32.929842362Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestDuelDisconnectDP","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:32.931207267Z","Action":"run","Package":"sa/server/internal/world","Test":"TestLuckOncePerSADay"}
+{"Time":"2026-11-12T14:03:32.931365225Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLuckOncePerSADay","Output":"=== RUN   TestLuckOncePerSADay\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.182940386Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLuckOncePerSADay","Output":"--- PASS: TestLuckOncePerSADay (0.25s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.183039178Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestLuckOncePerSADay","Elapsed":0.25}
+{"Time":"2026-11-12T14:03:33.183093543Z","Action":"run","Package":"sa/server/internal/world","Test":"TestDropAtLogout"}
+{"Time":"2026-11-12T14:03:33.183139429Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDropAtLogout","Output":"=== RUN   TestDropAtLogout\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.420658453Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDropAtLogout","Output":"--- PASS: TestDropAtLogout (0.24s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.420896475Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestDropAtLogout","Elapsed":0.24}
+{"Time":"2026-11-12T14:03:33.420942477Z","Action":"run","Package":"sa/server/internal/world","Test":"TestProfessionEquip"}
+{"Time":"2026-11-12T14:03:33.420959248Z","Action":"output","Package":"sa/server/internal/world","Test":"TestProfessionEquip","Output":"=== RUN   TestProfessionEquip\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.539218596Z","Action":"output","Package":"sa/server/internal/world","Test":"TestProfessionEquip","Output":"--- PASS: TestProfessionEquip (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.539296728Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestProfessionEquip","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:33.53932086Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNoEscapeFloor"}
+{"Time":"2026-11-12T14:03:33.539335843Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNoEscapeFloor","Output":"=== RUN   TestNoEscapeFloor\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.646577879Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNoEscapeFloor","Output":"--- PASS: TestNoEscapeFloor (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.646702284Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNoEscapeFloor","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:33.646726266Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWorldChannelLimits"}
+{"Time":"2026-11-12T14:03:33.646740729Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWorldChannelLimits","Output":"=== RUN   TestWorldChannelLimits\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.763607949Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWorldChannelLimits","Output":"--- PASS: TestWorldChannelLimits (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.764340593Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWorldChannelLimits","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:33.764381019Z","Action":"run","Package":"sa/server/internal/world","Test":"TestMagicFieldRecovery"}
+{"Time":"2026-11-12T14:03:33.764397769Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMagicFieldRecovery","Output":"=== RUN   TestMagicFieldRecovery\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.878768463Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMagicFieldRecovery","Output":"--- PASS: TestMagicFieldRecovery (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.878842406Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestMagicFieldRecovery","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:33.878902679Z","Action":"run","Package":"sa/server/internal/world","Test":"TestMagicBattle"}
+{"Time":"2026-11-12T14:03:33.878917886Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMagicBattle","Output":"=== RUN   TestMagicBattle\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.98638317Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMagicBattle","Output":"--- PASS: TestMagicBattle (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:33.986509007Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestMagicBattle","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:33.98654505Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetMerge"}
+{"Time":"2026-11-12T14:03:33.986561127Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetMerge","Output":"=== RUN   TestPetMerge\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.264167394Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetMerge","Output":"--- PASS: TestPetMerge (0.28s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.264292527Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetMerge","Elapsed":0.28}
+{"Time":"2026-11-12T14:03:34.264322879Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetFixItem"}
+{"Time":"2026-11-12T14:03:34.26433831Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFixItem","Output":"=== RUN   TestPetFixItem\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.398877028Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFixItem","Output":"--- PASS: TestPetFixItem (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.398950905Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetFixItem","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:34.398982313Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetInslay"}
+{"Time":"2026-11-12T14:03:34.398997379Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetInslay","Output":"=== RUN   TestPetInslay\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.5233902Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetInslay","Output":"--- PASS: TestPetInslay (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.523558135Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetInslay","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:34.523587781Z","Action":"run","Package":"sa/server/internal/world","Test":"TestEquipNoEnemy"}
+{"Time":"2026-11-12T14:03:34.523602943Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEquipNoEnemy","Output":"=== RUN   TestEquipNoEnemy\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.83937035Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEquipNoEnemy","Output":"--- PASS: TestEquipNoEnemy (0.32s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.839522693Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestEquipNoEnemy","Elapsed":0.32}
+{"Time":"2026-11-12T14:03:34.839557867Z","Action":"run","Package":"sa/server/internal/world","Test":"TestEquipNoEnemyLogin"}
+{"Time":"2026-11-12T14:03:34.839573862Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEquipNoEnemyLogin","Output":"=== RUN   TestEquipNoEnemyLogin\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.991666547Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEquipNoEnemyLogin","Output":"--- PASS: TestEquipNoEnemyLogin (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:34.991740197Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestEquipNoEnemyLogin","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:34.991763789Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyWarp"}
+{"Time":"2026-11-12T14:03:34.991778581Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyWarp","Output":"=== RUN   TestNpcEnemyWarp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.091899734Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyWarp","Output":"--- PASS: TestNpcEnemyWarp (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.091973884Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyWarp","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:35.092529117Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyHideAndRevive"}
+{"Time":"2026-11-12T14:03:35.092552034Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyHideAndRevive","Output":"=== RUN   TestNpcEnemyHideAndRevive\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.206174501Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyHideAndRevive","Output":"--- PASS: TestNpcEnemyHideAndRevive (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.206249218Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyHideAndRevive","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:35.206288818Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemySteal"}
+{"Time":"2026-11-12T14:03:35.206316023Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemySteal","Output":"=== RUN   TestNpcEnemySteal\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.318435055Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemySteal","Output":"--- PASS: TestNpcEnemySteal (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.318625276Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemySteal","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:35.318648066Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyDoujyou"}
+{"Time":"2026-11-12T14:03:35.31866239Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyDoujyou","Output":"=== RUN   TestNpcEnemyDoujyou\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.424531393Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyDoujyou","Output":"--- PASS: TestNpcEnemyDoujyou (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.424605242Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyDoujyou","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:35.424628893Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyNewEvent"}
+{"Time":"2026-11-12T14:03:35.42464421Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyNewEvent","Output":"=== RUN   TestNpcEnemyNewEvent\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.579521192Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyNewEvent","Output":"--- PASS: TestNpcEnemyNewEvent (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.579599513Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyNewEvent","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:35.579623817Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyLose"}
+{"Time":"2026-11-12T14:03:35.57963857Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyLose","Output":"=== RUN   TestNpcEnemyLose\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.787744613Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyLose","Output":"--- PASS: TestNpcEnemyLose (0.21s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:35.788612811Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyLose","Elapsed":0.21}
+{"Time":"2026-11-12T14:03:35.788696136Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemyBump"}
+{"Time":"2026-11-12T14:03:35.788728894Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyBump","Output":"=== RUN   TestNpcEnemyBump\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:36.796583447Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemyBump","Output":"--- PASS: TestNpcEnemyBump (1.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:36.805372257Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemyBump","Elapsed":1}
+{"Time":"2026-11-12T14:03:36.807807455Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcArgNum"}
+{"Time":"2026-11-12T14:03:36.812557201Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcArgNum","Output":"=== RUN   TestNpcArgNum\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:36.812606234Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcArgNum","Output":"--- PASS: TestNpcArgNum (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:36.812625884Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcArgNum","Elapsed":0}
+{"Time":"2026-11-12T14:03:36.812642503Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcEnemySweep"}
+{"Time":"2026-11-12T14:03:36.813521297Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemySweep","Output":"=== RUN   TestNpcEnemySweep\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.311193834Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemySweep","Output":"    npcenemy_test.go:360: 353 个战斗 NPC，开打 329 场\n"}
+{"Time":"2026-11-12T14:03:37.314223189Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcEnemySweep","Output":"--- PASS: TestNpcEnemySweep (0.52s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.314263785Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcEnemySweep","Elapsed":0.52}
+{"Time":"2026-11-12T14:03:37.314287269Z","Action":"run","Package":"sa/server/internal/world","Test":"TestDengon"}
+{"Time":"2026-11-12T14:03:37.314302329Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDengon","Output":"=== RUN   TestDengon\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.492012915Z","Action":"output","Package":"sa/server/internal/world","Test":"TestDengon","Output":"--- PASS: TestDengon (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.492085644Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestDengon","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:37.49211809Z","Action":"run","Package":"sa/server/internal/world","Test":"TestCharm"}
+{"Time":"2026-11-12T14:03:37.492328533Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCharm","Output":"=== RUN   TestCharm\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.627853503Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCharm","Output":"--- PASS: TestCharm (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.628394574Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestCharm","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:37.628765592Z","Action":"run","Package":"sa/server/internal/world","Test":"TestLuckyMan"}
+{"Time":"2026-11-12T14:03:37.628788196Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLuckyMan","Output":"=== RUN   TestLuckyMan\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.751548324Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLuckyMan","Output":"--- PASS: TestLuckyMan (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.751622488Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestLuckyMan","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:37.752189827Z","Action":"run","Package":"sa/server/internal/world","Test":"TestJanken"}
+{"Time":"2026-11-12T14:03:37.752383895Z","Action":"output","Package":"sa/server/internal/world","Test":"TestJanken","Output":"=== RUN   TestJanken\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.859009944Z","Action":"output","Package":"sa/server/internal/world","Test":"TestJanken","Output":"--- PASS: TestJanken (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.859081924Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestJanken","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:37.859105391Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBankman"}
+{"Time":"2026-11-12T14:03:37.859120648Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBankman","Output":"=== RUN   TestBankman\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.969848284Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBankman","Output":"--- PASS: TestBankman (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:37.969922766Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBankman","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:37.970581536Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemChange"}
+{"Time":"2026-11-12T14:03:37.970604758Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemChange","Output":"=== RUN   TestItemChange\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.109272919Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemChange","Output":"--- PASS: TestItemChange (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.109350999Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemChange","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:38.109387115Z","Action":"run","Package":"sa/server/internal/world","Test":"TestMic"}
+{"Time":"2026-11-12T14:03:38.109403937Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMic","Output":"=== RUN   TestMic\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.241528516Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMic","Output":"--- PASS: TestMic (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.241605734Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestMic","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:38.241629068Z","Action":"run","Package":"sa/server/internal/world","Test":"TestActionNpc"}
+{"Time":"2026-11-12T14:03:38.241643487Z","Action":"output","Package":"sa/server/internal/world","Test":"TestActionNpc","Output":"=== RUN   TestActionNpc\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.370329753Z","Action":"output","Package":"sa/server/internal/world","Test":"TestActionNpc","Output":"--- PASS: TestActionNpc (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.370411917Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestActionNpc","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:38.370436134Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarpManFree"}
+{"Time":"2026-11-12T14:03:38.370539418Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManFree","Output":"=== RUN   TestWarpManFree\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.505990633Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManFree","Output":"--- PASS: TestWarpManFree (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.506140617Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarpManFree","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:38.506165911Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarpManTicket"}
+{"Time":"2026-11-12T14:03:38.506180992Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManTicket","Output":"=== RUN   TestWarpManTicket\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.67000102Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManTicket","Output":"--- PASS: TestWarpManTicket (0.16s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.67039742Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarpManTicket","Elapsed":0.16}
+{"Time":"2026-11-12T14:03:38.670512869Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarpManPay"}
+{"Time":"2026-11-12T14:03:38.670539091Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManPay","Output":"=== RUN   TestWarpManPay\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.793630297Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManPay","Output":"--- PASS: TestWarpManPay (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.79371594Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarpManPay","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:38.793750708Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarpManPassword"}
+{"Time":"2026-11-12T14:03:38.793775509Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManPassword","Output":"=== RUN   TestWarpManPassword\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.971837299Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarpManPassword","Output":"--- PASS: TestWarpManPassword (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:38.971953387Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarpManPassword","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:38.971977905Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWindowman"}
+{"Time":"2026-11-12T14:03:38.971992777Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWindowman","Output":"=== RUN   TestWindowman\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.106014934Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWindowman","Output":"--- PASS: TestWindowman (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.106181807Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWindowman","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:39.106282254Z","Action":"run","Package":"sa/server/internal/world","Test":"TestSavePoint"}
+{"Time":"2026-11-12T14:03:39.106301016Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSavePoint","Output":"=== RUN   TestSavePoint\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.284876093Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSavePoint","Output":"--- PASS: TestSavePoint (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.284969888Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestSavePoint","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:39.285000621Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTimeMan"}
+{"Time":"2026-11-12T14:03:39.285053508Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTimeMan","Output":"=== RUN   TestTimeMan\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.536920175Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTimeMan","Output":"--- PASS: TestTimeMan (0.25s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:39.536993119Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTimeMan","Elapsed":0.25}
+{"Time":"2026-11-12T14:03:39.537015314Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcDialogSweep"}
+{"Time":"2026-11-12T14:03:39.537030196Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcDialogSweep","Output":"=== RUN   TestNpcDialogSweep\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.546978948Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcDialogSweep","Output":"    npcs_test.go:343: 829 个 NPC，打开 2488 次窗口\n"}
+{"Time":"2026-11-12T14:03:40.550331052Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcDialogSweep","Output":"--- PASS: TestNpcDialogSweep (1.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.550372397Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcDialogSweep","Elapsed":1.01}
+{"Time":"2026-11-12T14:03:40.550395012Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNurseAcrossCounter"}
+{"Time":"2026-11-12T14:03:40.550409851Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseAcrossCounter","Output":"=== RUN   TestNurseAcrossCounter\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.684589546Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseAcrossCounter","Output":"--- PASS: TestNurseAcrossCounter (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.684695225Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNurseAcrossCounter","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:40.684720582Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNurseFee"}
+{"Time":"2026-11-12T14:03:40.68473541Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseFee","Output":"=== RUN   TestNurseFee\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.806624912Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseFee","Output":"--- PASS: TestNurseFee (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.806698044Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNurseFee","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:40.806721404Z","Action":"run","Package":"sa/server/internal/world","Test":"TestParty"}
+{"Time":"2026-11-12T14:03:40.806736742Z","Action":"output","Package":"sa/server/internal/world","Test":"TestParty","Output":"=== RUN   TestParty\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.938343009Z","Action":"output","Package":"sa/server/internal/world","Test":"TestParty","Output":"--- PASS: TestParty (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:40.938417399Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestParty","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:40.938565041Z","Action":"run","Package":"sa/server/internal/world","Test":"TestCapture"}
+{"Time":"2026-11-12T14:03:40.93859483Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCapture","Output":"=== RUN   TestCapture\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.059621916Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCapture","Output":"--- PASS: TestCapture (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.059704168Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestCapture","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:41.059732866Z","Action":"run","Package":"sa/server/internal/world","Test":"TestCaptureRules"}
+{"Time":"2026-11-12T14:03:41.125940072Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCaptureRules","Output":"=== RUN   TestCaptureRules\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.25890722Z","Action":"output","Package":"sa/server/internal/world","Test":"TestCaptureRules","Output":"--- PASS: TestCaptureRules (0.20s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.259002109Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestCaptureRules","Elapsed":0.2}
+{"Time":"2026-11-12T14:03:41.259048202Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetBattle"}
+{"Time":"2026-11-12T14:03:41.259082484Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetBattle","Output":"=== RUN   TestPetBattle\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.377969772Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetBattle","Output":"--- PASS: TestPetBattle (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.378044464Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetBattle","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:41.378071754Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetBattleSharedExp"}
+{"Time":"2026-11-12T14:03:41.378091337Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetBattleSharedExp","Output":"=== RUN   TestPetBattleSharedExp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.504974084Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetBattleSharedExp","Output":"--- PASS: TestPetBattleSharedExp (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.506546474Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetBattleSharedExp","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:41.50659298Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetLevelUp"}
+{"Time":"2026-11-12T14:03:41.506614578Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetLevelUp","Output":"=== RUN   TestPetLevelUp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.62280713Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetLevelUp","Output":"--- PASS: TestPetLevelUp (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.622884159Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetLevelUp","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:41.622912905Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetLoyalty"}
+{"Time":"2026-11-12T14:03:41.622933184Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetLoyalty","Output":"=== RUN   TestPetLoyalty\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.755129202Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetLoyalty","Output":"--- PASS: TestPetLoyalty (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.755208782Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetLoyalty","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:41.755236728Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetWindow"}
+{"Time":"2026-11-12T14:03:41.75525935Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetWindow","Output":"=== RUN   TestPetWindow\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.858551642Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetWindow","Output":"--- PASS: TestPetWindow (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.858715873Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetWindow","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:41.858835498Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNursePetHeal"}
+{"Time":"2026-11-12T14:03:41.858853799Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNursePetHeal","Output":"=== RUN   TestNursePetHeal\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.970277841Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNursePetHeal","Output":"--- PASS: TestNursePetHeal (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:41.970367619Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNursePetHeal","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:41.970400742Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetDeathLoss"}
+{"Time":"2026-11-12T14:03:41.970422597Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetDeathLoss","Output":"=== RUN   TestPetDeathLoss\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.190225969Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetDeathLoss","Output":"--- PASS: TestPetDeathLoss (0.22s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.190534053Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetDeathLoss","Elapsed":0.22}
+{"Time":"2026-11-12T14:03:42.190698969Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetFollow"}
+{"Time":"2026-11-12T14:03:42.190805519Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFollow","Output":"=== RUN   TestPetFollow\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.370776357Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFollow","Output":"--- PASS: TestPetFollow (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.370847852Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetFollow","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:42.370870072Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetFollowLogout"}
+{"Time":"2026-11-12T14:03:42.370885235Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFollowLogout","Output":"=== RUN   TestPetFollowLogout\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.494244505Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetFollowLogout","Output":"--- PASS: TestPetFollowLogout (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.4943163Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetFollowLogout","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:42.494378325Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetItem"}
+{"Time":"2026-11-12T14:03:42.494401583Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetItem","Output":"=== RUN   TestPetItem\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.60944064Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetItem","Output":"--- PASS: TestPetItem (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.609570448Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetItem","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:42.609594124Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetConditions"}
+{"Time":"2026-11-12T14:03:42.611524407Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetConditions","Output":"=== RUN   TestPetConditions\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.774141269Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetConditions","Output":"--- PASS: TestPetConditions (0.16s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.774213636Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetConditions","Elapsed":0.16}
+{"Time":"2026-11-12T14:03:42.774250129Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeDelPet"}
+{"Time":"2026-11-12T14:03:42.774327507Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeDelPet","Output":"=== RUN   TestExchangeDelPet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.887169353Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeDelPet","Output":"--- PASS: TestExchangeDelPet (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:42.887239483Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeDelPet","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:42.887262111Z","Action":"run","Package":"sa/server/internal/world","Test":"TestExchangeGetPet"}
+{"Time":"2026-11-12T14:03:42.887276629Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeGetPet","Output":"=== RUN   TestExchangeGetPet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.011424416Z","Action":"output","Package":"sa/server/internal/world","Test":"TestExchangeGetPet","Output":"--- PASS: TestExchangeGetPet (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.011603595Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestExchangeGetPet","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:43.011627653Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetShopSell"}
+{"Time":"2026-11-12T14:03:43.011642366Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopSell","Output":"=== RUN   TestPetShopSell\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.11988574Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopSell","Output":"--- PASS: TestPetShopSell (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.119957409Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetShopSell","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:43.119981369Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetShopPool"}
+{"Time":"2026-11-12T14:03:43.11999581Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopPool","Output":"=== RUN   TestPetShopPool\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.233655047Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopPool","Output":"--- PASS: TestPetShopPool (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.233729055Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetShopPool","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:43.233753015Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetSkillShop"}
+{"Time":"2026-11-12T14:03:43.23376761Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetSkillShop","Output":"=== RUN   TestPetSkillShop\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.356552613Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetSkillShop","Output":"--- PASS: TestPetSkillShop (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.356627021Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetSkillShop","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:43.356651153Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetSwap"}
+{"Time":"2026-11-12T14:03:43.356665903Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetSwap","Output":"=== RUN   TestPetSwap\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.487714913Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetSwap","Output":"--- PASS: TestPetSwap (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.487787323Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetSwap","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:43.487810166Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetTalkMarefia"}
+{"Time":"2026-11-12T14:03:43.487824738Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTalkMarefia","Output":"=== RUN   TestPetTalkMarefia\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.630890639Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTalkMarefia","Output":"--- PASS: TestPetTalkMarefia (0.14s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.630974662Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetTalkMarefia","Elapsed":0.14}
+{"Time":"2026-11-12T14:03:43.630999052Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetTalkOwnerAndChat"}
+{"Time":"2026-11-12T14:03:43.631013979Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTalkOwnerAndChat","Output":"=== RUN   TestPetTalkOwnerAndChat\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.785800288Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTalkOwnerAndChat","Output":"--- PASS: TestPetTalkOwnerAndChat (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:43.785885724Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetTalkOwnerAndChat","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:43.785918743Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuestTear"}
+{"Time":"2026-11-12T14:03:43.78594165Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestTear","Output":"=== RUN   TestQuestTear\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.021864795Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestTear","Output":"--- PASS: TestQuestTear (0.24s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.021948293Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuestTear","Elapsed":0.24}
+{"Time":"2026-11-12T14:03:44.021982282Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuestUnmet"}
+{"Time":"2026-11-12T14:03:44.022005615Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestUnmet","Output":"=== RUN   TestQuestUnmet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.177909315Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestUnmet","Output":"--- PASS: TestQuestUnmet (0.16s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.178027543Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuestUnmet","Elapsed":0.16}
+{"Time":"2026-11-12T14:03:44.178082468Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuestLumberjack"}
+{"Time":"2026-11-12T14:03:44.17810162Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestLumberjack","Output":"=== RUN   TestQuestLumberjack\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.342679044Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestLumberjack","Output":"--- PASS: TestQuestLumberjack (0.16s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.342750362Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuestLumberjack","Elapsed":0.16}
+{"Time":"2026-11-12T14:03:44.34277316Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuestLog"}
+{"Time":"2026-11-12T14:03:44.342787798Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestLog","Output":"=== RUN   TestQuestLog\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.533548115Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuestLog","Output":"--- PASS: TestQuestLog (0.19s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.533633718Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuestLog","Elapsed":0.19}
+{"Time":"2026-11-12T14:03:44.533666207Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuizData"}
+{"Time":"2026-11-12T14:03:44.534247412Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuizData","Output":"=== RUN   TestQuizData\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.626314323Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuizData","Output":"--- PASS: TestQuizData (0.09s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.626386384Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuizData","Elapsed":0.09}
+{"Time":"2026-11-12T14:03:44.62642234Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuiz"}
+{"Time":"2026-11-12T14:03:44.626496367Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuiz","Output":"=== RUN   TestQuiz\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.749541759Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuiz","Output":"--- PASS: TestQuiz (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.749616726Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuiz","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:44.749638098Z","Action":"run","Package":"sa/server/internal/world","Test":"TestQuizChoices"}
+{"Time":"2026-11-12T14:03:44.749652464Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuizChoices","Output":"=== RUN   TestQuizChoices\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.862299213Z","Action":"output","Package":"sa/server/internal/world","Test":"TestQuizChoices","Output":"--- PASS: TestQuizChoices (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.862371076Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestQuizChoices","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:44.862394603Z","Action":"run","Package":"sa/server/internal/world","Test":"TestRideTiger"}
+{"Time":"2026-11-12T14:03:44.862409526Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideTiger","Output":"=== RUN   TestRideTiger\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.976567983Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideTiger","Output":"--- PASS: TestRideTiger (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:44.976641342Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestRideTiger","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:44.976682702Z","Action":"run","Package":"sa/server/internal/world","Test":"TestRideFall"}
+{"Time":"2026-11-12T14:03:44.976701397Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideFall","Output":"=== RUN   TestRideFall\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.087349458Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideFall","Output":"--- PASS: TestRideFall (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.087424745Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestRideFall","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:45.087546151Z","Action":"run","Package":"sa/server/internal/world","Test":"TestRideLicence"}
+{"Time":"2026-11-12T14:03:45.087565461Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideLicence","Output":"=== RUN   TestRideLicence\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.210708017Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRideLicence","Output":"--- PASS: TestRideLicence (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.210783815Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestRideLicence","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:45.210806612Z","Action":"run","Package":"sa/server/internal/world","Test":"TestRiderman"}
+{"Time":"2026-11-12T14:03:45.210821403Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRiderman","Output":"=== RUN   TestRiderman\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.332958777Z","Action":"output","Package":"sa/server/internal/world","Test":"TestRiderman","Output":"--- PASS: TestRiderman (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.333033777Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestRiderman","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:45.333056958Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTellChannel"}
+{"Time":"2026-11-12T14:03:45.3336192Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTellChannel","Output":"=== RUN   TestTellChannel\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.483077381Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTellChannel","Output":"--- PASS: TestTellChannel (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.485830475Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTellChannel","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:45.485883827Z","Action":"run","Package":"sa/server/internal/world","Test":"TestSameDecorationType"}
+{"Time":"2026-11-12T14:03:45.485902403Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSameDecorationType","Output":"=== RUN   TestSameDecorationType\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.610727725Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSameDecorationType","Output":"--- PASS: TestSameDecorationType (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.610802317Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestSameDecorationType","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:45.610824815Z","Action":"run","Package":"sa/server/internal/world","Test":"TestUltimateFliesHome"}
+{"Time":"2026-11-12T14:03:45.610839619Z","Action":"output","Package":"sa/server/internal/world","Test":"TestUltimateFliesHome","Output":"=== RUN   TestUltimateFliesHome\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.784086408Z","Action":"output","Package":"sa/server/internal/world","Test":"TestUltimateFliesHome","Output":"--- PASS: TestUltimateFliesHome (0.17s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.784156484Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestUltimateFliesHome","Elapsed":0.17}
+{"Time":"2026-11-12T14:03:45.784179573Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBattleTimeLimit"}
+{"Time":"2026-11-12T14:03:45.78456933Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleTimeLimit","Output":"=== RUN   TestBattleTimeLimit\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.890541526Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleTimeLimit","Output":"--- PASS: TestBattleTimeLimit (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.891165494Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBattleTimeLimit","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:45.891198018Z","Action":"run","Package":"sa/server/internal/world","Test":"TestMigrateExp"}
+{"Time":"2026-11-12T14:03:45.891213681Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMigrateExp","Output":"=== RUN   TestMigrateExp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.976328563Z","Action":"output","Package":"sa/server/internal/world","Test":"TestMigrateExp","Output":"--- PASS: TestMigrateExp (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:45.976400787Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestMigrateExp","Elapsed":0.08}
+{"Time":"2026-11-12T14:03:45.976423479Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTradeIntactAndBusy"}
+{"Time":"2026-11-12T14:03:45.976486064Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTradeIntactAndBusy","Output":"=== RUN   TestTradeIntactAndBusy\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.125313704Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTradeIntactAndBusy","Output":"--- PASS: TestTradeIntactAndBusy (0.15s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.125721098Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTradeIntactAndBusy","Elapsed":0.15}
+{"Time":"2026-11-12T14:03:46.125756966Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTradeTakePetClearsRide"}
+{"Time":"2026-11-12T14:03:46.125771882Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTradeTakePetClearsRide","Output":"=== RUN   TestTradeTakePetClearsRide\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.243721225Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTradeTakePetClearsRide","Output":"--- PASS: TestTradeTakePetClearsRide (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.243798489Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTradeTakePetClearsRide","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:46.243837124Z","Action":"run","Package":"sa/server/internal/world","Test":"TestVendorSnapshot"}
+{"Time":"2026-11-12T14:03:46.243853783Z","Action":"output","Package":"sa/server/internal/world","Test":"TestVendorSnapshot","Output":"=== RUN   TestVendorSnapshot\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.4103769Z","Action":"output","Package":"sa/server/internal/world","Test":"TestVendorSnapshot","Output":"--- PASS: TestVendorSnapshot (0.17s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.410526809Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestVendorSnapshot","Elapsed":0.17}
+{"Time":"2026-11-12T14:03:46.410562902Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetShopRejectsAwayPet"}
+{"Time":"2026-11-12T14:03:46.411074173Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopRejectsAwayPet","Output":"=== RUN   TestPetShopRejectsAwayPet\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.588853212Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetShopRejectsAwayPet","Output":"--- PASS: TestPetShopRejectsAwayPet (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.588926194Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetShopRejectsAwayPet","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:46.58956023Z","Action":"run","Package":"sa/server/internal/world","Test":"TestSaveQueueCoalesces"}
+{"Time":"2026-11-12T14:03:46.589584704Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSaveQueueCoalesces","Output":"=== RUN   TestSaveQueueCoalesces\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.671770275Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSaveQueueCoalesces","Output":"--- PASS: TestSaveQueueCoalesces (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.671841702Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestSaveQueueCoalesces","Elapsed":0.08}
+{"Time":"2026-11-12T14:03:46.671864555Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemShop"}
+{"Time":"2026-11-12T14:03:46.671879869Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemShop","Output":"=== RUN   TestItemShop\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.784845349Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemShop","Output":"--- PASS: TestItemShop (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.784930375Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemShop","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:46.786279873Z","Action":"run","Package":"sa/server/internal/world","Test":"TestLimitShop"}
+{"Time":"2026-11-12T14:03:46.786322459Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLimitShop","Output":"=== RUN   TestLimitShop\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.908416182Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLimitShop","Output":"--- PASS: TestLimitShop (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:46.908572405Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestLimitShop","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:46.908597495Z","Action":"run","Package":"sa/server/internal/world","Test":"TestShopSweep"}
+{"Time":"2026-11-12T14:03:46.908612424Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopSweep","Output":"=== RUN   TestShopSweep\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.241557191Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopSweep","Output":"    shop_test.go:166: 300 家店，打开 1039 次商店窗口\n"}
+{"Time":"2026-11-12T14:03:47.244350233Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopSweep","Output":"--- PASS: TestShopSweep (0.34s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.244537481Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestShopSweep","Elapsed":0.34}
+{"Time":"2026-11-12T14:03:47.245641149Z","Action":"run","Package":"sa/server/internal/world","Test":"TestShopFame"}
+{"Time":"2026-11-12T14:03:47.245689171Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopFame","Output":"=== RUN   TestShopFame\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.344422738Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopFame","Output":"--- PASS: TestShopFame (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.344598192Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestShopFame","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:47.344622374Z","Action":"run","Package":"sa/server/internal/world","Test":"TestShopExpress"}
+{"Time":"2026-11-12T14:03:47.345130786Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopExpress","Output":"=== RUN   TestShopExpress\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.455827347Z","Action":"output","Package":"sa/server/internal/world","Test":"TestShopExpress","Output":"--- PASS: TestShopExpress (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.456610855Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestShopExpress","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:47.456690122Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPoolItemShop"}
+{"Time":"2026-11-12T14:03:47.456707615Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPoolItemShop","Output":"=== RUN   TestPoolItemShop\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.643695888Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPoolItemShop","Output":"--- PASS: TestPoolItemShop (0.19s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.643766153Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPoolItemShop","Elapsed":0.19}
+{"Time":"2026-11-12T14:03:47.643788726Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTrade"}
+{"Time":"2026-11-12T14:03:47.643804733Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTrade","Output":"=== RUN   TestTrade\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.811811989Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTrade","Output":"--- PASS: TestTrade (0.17s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.811884676Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTrade","Elapsed":0.17}
+{"Time":"2026-11-12T14:03:47.811909064Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTransmigrationFirst"}
+{"Time":"2026-11-12T14:03:47.811923947Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransmigrationFirst","Output":"=== RUN   TestTransmigrationFirst\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.929876656Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransmigrationFirst","Output":"--- PASS: TestTransmigrationFirst (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:47.929950635Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTransmigrationFirst","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:47.929973726Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTransmigrationRefuse"}
+{"Time":"2026-11-12T14:03:47.929989021Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransmigrationRefuse","Output":"=== RUN   TestTransmigrationRefuse\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.040036842Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransmigrationRefuse","Output":"--- PASS: TestTransmigrationRefuse (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.040144609Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTransmigrationRefuse","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:48.040169442Z","Action":"run","Package":"sa/server/internal/world","Test":"TestPetTransmigration"}
+{"Time":"2026-11-12T14:03:48.04018506Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTransmigration","Output":"=== RUN   TestPetTransmigration\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.159158405Z","Action":"output","Package":"sa/server/internal/world","Test":"TestPetTransmigration","Output":"--- PASS: TestPetTransmigration (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.159230819Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestPetTransmigration","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:48.159260976Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGMTensei"}
+{"Time":"2026-11-12T14:03:48.159563729Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMTensei","Output":"=== RUN   TestGMTensei\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.342149048Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGMTensei","Output":"--- PASS: TestGMTensei (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.342223894Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGMTensei","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:48.342246069Z","Action":"run","Package":"sa/server/internal/world","Test":"TestTransQuestHints"}
+{"Time":"2026-11-12T14:03:48.342260623Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransQuestHints","Output":"=== RUN   TestTransQuestHints\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.466809592Z","Action":"output","Package":"sa/server/internal/world","Test":"TestTransQuestHints","Output":"--- PASS: TestTransQuestHints (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.466881854Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestTransQuestHints","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:48.466904694Z","Action":"run","Package":"sa/server/internal/world","Test":"TestStreetVendor"}
+{"Time":"2026-11-12T14:03:48.466919478Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStreetVendor","Output":"=== RUN   TestStreetVendor\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.598054479Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStreetVendor","Output":"--- PASS: TestStreetVendor (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.59812719Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestStreetVendor","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:48.598149284Z","Action":"run","Package":"sa/server/internal/world","Test":"TestStreetVendorLimits"}
+{"Time":"2026-11-12T14:03:48.598164523Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStreetVendorLimits","Output":"=== RUN   TestStreetVendorLimits\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.712996958Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStreetVendorLimits","Output":"--- PASS: TestStreetVendorLimits (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.713106836Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestStreetVendorLimits","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:48.713135096Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcCondPartyTimeDP"}
+{"Time":"2026-11-12T14:03:48.713150217Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcCondPartyTimeDP","Output":"=== RUN   TestNpcCondPartyTimeDP\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.844906199Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcCondPartyTimeDP","Output":"--- PASS: TestNpcCondPartyTimeDP (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.844979821Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcCondPartyTimeDP","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:48.845003097Z","Action":"run","Package":"sa/server/internal/world","Test":"TestGymRandomize"}
+{"Time":"2026-11-12T14:03:48.845018142Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGymRandomize","Output":"=== RUN   TestGymRandomize\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.92059765Z","Action":"output","Package":"sa/server/internal/world","Test":"TestGymRandomize","Output":"--- PASS: TestGymRandomize (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.92067051Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestGymRandomize","Elapsed":0.08}
+{"Time":"2026-11-12T14:03:48.920708035Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBusPathsContiguous"}
+{"Time":"2026-11-12T14:03:48.92072507Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBusPathsContiguous","Output":"=== RUN   TestBusPathsContiguous\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.998289199Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBusPathsContiguous","Output":"--- PASS: TestBusPathsContiguous (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:48.998360172Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBusPathsContiguous","Elapsed":0.08}
+{"Time":"2026-11-12T14:03:48.998383553Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWatchBattle"}
+{"Time":"2026-11-12T14:03:48.998398327Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWatchBattle","Output":"=== RUN   TestWatchBattle\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.125148777Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWatchBattle","Output":"--- PASS: TestWatchBattle (0.13s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.125219184Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWatchBattle","Elapsed":0.13}
+{"Time":"2026-11-12T14:03:49.12524161Z","Action":"run","Package":"sa/server/internal/world","Test":"TestEnterSeeMoveChat"}
+{"Time":"2026-11-12T14:03:49.125256793Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEnterSeeMoveChat","Output":"=== RUN   TestEnterSeeMoveChat\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.246981991Z","Action":"output","Package":"sa/server/internal/world","Test":"TestEnterSeeMoveChat","Output":"--- PASS: TestEnterSeeMoveChat (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.247107742Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestEnterSeeMoveChat","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:49.247139822Z","Action":"run","Package":"sa/server/internal/world","Test":"TestStepRateLimit"}
+{"Time":"2026-11-12T14:03:49.247155417Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStepRateLimit","Output":"=== RUN   TestStepRateLimit\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.351202712Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStepRateLimit","Output":"--- PASS: TestStepRateLimit (0.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.351275293Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestStepRateLimit","Elapsed":0.1}
+{"Time":"2026-11-12T14:03:49.351401431Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcTalk"}
+{"Time":"2026-11-12T14:03:49.351544479Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcTalk","Output":"=== RUN   TestNpcTalk\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.461157741Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcTalk","Output":"    world_test.go:224: 饲育员：要通过ＪＢＡ认定的话就一定要接受审查。而要接受审查，等级就一定要超过４０才行。\n"}
+{"Time":"2026-11-12T14:03:49.46170805Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcTalk","Output":"--- PASS: TestNpcTalk (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.461746285Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcTalk","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:49.461769019Z","Action":"run","Package":"sa/server/internal/world","Test":"TestSignBoard"}
+{"Time":"2026-11-12T14:03:49.461784152Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSignBoard","Output":"=== RUN   TestSignBoard\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.644874454Z","Action":"output","Package":"sa/server/internal/world","Test":"TestSignBoard","Output":"--- PASS: TestSignBoard (0.18s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.644952068Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestSignBoard","Elapsed":0.18}
+{"Time":"2026-11-12T14:03:49.644990063Z","Action":"run","Package":"sa/server/internal/world","Test":"TestWarp"}
+{"Time":"2026-11-12T14:03:49.645007776Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarp","Output":"=== RUN   TestWarp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.755208411Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarp","Output":"    world_test.go:299: 传送：60339(23,6) → 60338 火山洞窟第一层 (45,3)\n"}
+{"Time":"2026-11-12T14:03:49.75854329Z","Action":"output","Package":"sa/server/internal/world","Test":"TestWarp","Output":"--- PASS: TestWarp (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.758604673Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestWarp","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:49.758630796Z","Action":"run","Package":"sa/server/internal/world","Test":"TestStatusOnEnter"}
+{"Time":"2026-11-12T14:03:49.75864785Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStatusOnEnter","Output":"=== RUN   TestStatusOnEnter\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.873111876Z","Action":"output","Package":"sa/server/internal/world","Test":"TestStatusOnEnter","Output":"--- PASS: TestStatusOnEnter (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.873183441Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestStatusOnEnter","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:49.873206329Z","Action":"run","Package":"sa/server/internal/world","Test":"TestChatRange"}
+{"Time":"2026-11-12T14:03:49.873221702Z","Action":"output","Package":"sa/server/internal/world","Test":"TestChatRange","Output":"=== RUN   TestChatRange\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.873247755Z","Action":"output","Package":"sa/server/internal/world","Test":"TestChatRange","Output":"--- PASS: TestChatRange (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.873265178Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestChatRange","Elapsed":0}
+{"Time":"2026-11-12T14:03:49.873281098Z","Action":"run","Package":"sa/server/internal/world","Test":"TestReturnHome"}
+{"Time":"2026-11-12T14:03:49.873295138Z","Action":"output","Package":"sa/server/internal/world","Test":"TestReturnHome","Output":"=== RUN   TestReturnHome\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.991370024Z","Action":"output","Package":"sa/server/internal/world","Test":"TestReturnHome","Output":"--- PASS: TestReturnHome (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:49.991521516Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestReturnHome","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:49.991559202Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBattleFlow"}
+{"Time":"2026-11-12T14:03:49.991575732Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleFlow","Output":"=== RUN   TestBattleFlow\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.16016686Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleFlow","Output":"--- PASS: TestBattleFlow (0.17s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.16023927Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBattleFlow","Elapsed":0.17}
+{"Time":"2026-11-12T14:03:50.160723936Z","Action":"run","Package":"sa/server/internal/world","Test":"TestLevelUpAndStatUp"}
+{"Time":"2026-11-12T14:03:50.160759925Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLevelUpAndStatUp","Output":"=== RUN   TestLevelUpAndStatUp\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.272749117Z","Action":"output","Package":"sa/server/internal/world","Test":"TestLevelUpAndStatUp","Output":"--- PASS: TestLevelUpAndStatUp (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.272822446Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestLevelUpAndStatUp","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:50.272846712Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNurseHeals"}
+{"Time":"2026-11-12T14:03:50.272876274Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseHeals","Output":"=== RUN   TestNurseHeals\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.391800319Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNurseHeals","Output":"--- PASS: TestNurseHeals (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.391880634Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNurseHeals","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:50.391904088Z","Action":"run","Package":"sa/server/internal/world","Test":"TestItemsEquipAndUse"}
+{"Time":"2026-11-12T14:03:50.391935509Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemsEquipAndUse","Output":"=== RUN   TestItemsEquipAndUse\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.498338905Z","Action":"output","Package":"sa/server/internal/world","Test":"TestItemsEquipAndUse","Output":"--- PASS: TestItemsEquipAndUse (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.499816092Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestItemsEquipAndUse","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:50.499851282Z","Action":"run","Package":"sa/server/internal/world","Test":"TestBattleDrops"}
+{"Time":"2026-11-12T14:03:50.499867352Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleDrops","Output":"=== RUN   TestBattleDrops\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.614693387Z","Action":"output","Package":"sa/server/internal/world","Test":"TestBattleDrops","Output":"--- PASS: TestBattleDrops (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.614765225Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestBattleDrops","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:50.614787641Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNegativeDefQuick"}
+{"Time":"2026-11-12T14:03:50.615340367Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNegativeDefQuick","Output":"=== RUN   TestNegativeDefQuick\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.737646693Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNegativeDefQuick","Output":"--- PASS: TestNegativeDefQuick (0.12s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.737719372Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNegativeDefQuick","Elapsed":0.12}
+{"Time":"2026-11-12T14:03:50.737743906Z","Action":"run","Package":"sa/server/internal/world","Test":"TestNpcList"}
+{"Time":"2026-11-12T14:03:50.737758507Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcList","Output":"=== RUN   TestNpcList\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.85067904Z","Action":"output","Package":"sa/server/internal/world","Test":"TestNpcList","Output":"--- PASS: TestNpcList (0.11s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.850903561Z","Action":"pass","Package":"sa/server/internal/world","Test":"TestNpcList","Elapsed":0.11}
+{"Time":"2026-11-12T14:03:50.851534863Z","Action":"output","Package":"sa/server/internal/world","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:50.936872798Z","Action":"output","Package":"sa/server/internal/world","Output":"ok  \tsa/server/internal/world\t41.924s\n"}
+{"Time":"2026-11-12T14:03:50.937002874Z","Action":"pass","Package":"sa/server/internal/world","Elapsed":41.93}
+{"Time":"2026-11-12T14:03:52.82042705Z","Action":"start","Package":"sa/server/tests"}
+{"Time":"2026-11-12T14:03:52.831851535Z","Action":"run","Package":"sa/server/tests","Test":"TestRegisterNeedsSecret"}
+{"Time":"2026-11-12T14:03:52.83192064Z","Action":"output","Package":"sa/server/tests","Test":"TestRegisterNeedsSecret","Output":"=== RUN   TestRegisterNeedsSecret\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:54.310183538Z","Action":"output","Package":"sa/server/tests","Test":"TestRegisterNeedsSecret","Output":"--- PASS: TestRegisterNeedsSecret (1.48s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:54.310289861Z","Action":"pass","Package":"sa/server/tests","Test":"TestRegisterNeedsSecret","Elapsed":1.48}
+{"Time":"2026-11-12T14:03:54.31033143Z","Action":"run","Package":"sa/server/tests","Test":"TestResetPassword"}
+{"Time":"2026-11-12T14:03:54.310360021Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPassword","Output":"=== RUN   TestResetPassword\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:55.620283413Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPassword","Output":"--- PASS: TestResetPassword (1.31s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:55.620359211Z","Action":"pass","Package":"sa/server/tests","Test":"TestResetPassword","Elapsed":1.31}
+{"Time":"2026-11-12T14:03:55.620381321Z","Action":"run","Package":"sa/server/tests","Test":"TestResetPasswordLockout"}
+{"Time":"2026-11-12T14:03:55.620395633Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPasswordLockout","Output":"=== RUN   TestResetPasswordLockout\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:57.164283631Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPasswordLockout","Output":"--- PASS: TestResetPasswordLockout (1.54s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:57.164358615Z","Action":"pass","Package":"sa/server/tests","Test":"TestResetPasswordLockout","Elapsed":1.54}
+{"Time":"2026-11-12T14:03:57.164381376Z","Action":"run","Package":"sa/server/tests","Test":"TestResetPasswordWithoutSecret"}
+{"Time":"2026-11-12T14:03:57.164395888Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPasswordWithoutSecret","Output":"=== RUN   TestResetPasswordWithoutSecret\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:57.240971223Z","Action":"output","Package":"sa/server/tests","Test":"TestResetPasswordWithoutSecret","Output":"--- PASS: TestResetPasswordWithoutSecret (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:57.241075688Z","Action":"pass","Package":"sa/server/tests","Test":"TestResetPasswordWithoutSecret","Elapsed":0.08}
+{"Time":"2026-11-12T14:03:57.241101521Z","Action":"run","Package":"sa/server/tests","Test":"TestAccountInfoAndChange"}
+{"Time":"2026-11-12T14:03:57.241116748Z","Action":"output","Package":"sa/server/tests","Test":"TestAccountInfoAndChange","Output":"=== RUN   TestAccountInfoAndChange\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:58.642719784Z","Action":"output","Package":"sa/server/tests","Test":"TestAccountInfoAndChange","Output":"--- PASS: TestAccountInfoAndChange (1.40s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:03:58.642794862Z","Action":"pass","Package":"sa/server/tests","Test":"TestAccountInfoAndChange","Elapsed":1.4}
+{"Time":"2026-11-12T14:03:58.642819043Z","Action":"run","Package":"sa/server/tests","Test":"TestReservedGMAndLockout"}
+{"Time":"2026-11-12T14:03:58.642833943Z","Action":"output","Package":"sa/server/tests","Test":"TestReservedGMAndLockout","Output":"=== RUN   TestReservedGMAndLockout\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:02.756507443Z","Action":"output","Package":"sa/server/tests","Test":"TestReservedGMAndLockout","Output":"--- PASS: TestReservedGMAndLockout (4.10s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:02.765671629Z","Action":"pass","Package":"sa/server/tests","Test":"TestReservedGMAndLockout","Elapsed":4.1}
+{"Time":"2026-11-12T14:04:02.766058972Z","Action":"run","Package":"sa/server/tests","Test":"TestCannotDeleteOnlineChar"}
+{"Time":"2026-11-12T14:04:02.766080605Z","Action":"output","Package":"sa/server/tests","Test":"TestCannotDeleteOnlineChar","Output":"=== RUN   TestCannotDeleteOnlineChar\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:06.785680396Z","Action":"output","Package":"sa/server/tests","Test":"TestCannotDeleteOnlineChar","Output":"--- PASS: TestCannotDeleteOnlineChar (4.05s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:06.794293245Z","Action":"pass","Package":"sa/server/tests","Test":"TestCannotDeleteOnlineChar","Elapsed":4.05}
+{"Time":"2026-11-12T14:04:06.794536838Z","Action":"run","Package":"sa/server/tests","Test":"TestCharEnterOtherAccountCannotKick"}
+{"Time":"2026-11-12T14:04:06.794582365Z","Action":"output","Package":"sa/server/tests","Test":"TestCharEnterOtherAccountCannotKick","Output":"=== RUN   TestCharEnterOtherAccountCannotKick\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:10.215737985Z","Action":"output","Package":"sa/server/tests","Test":"TestCharEnterOtherAccountCannotKick","Output":"--- PASS: TestCharEnterOtherAccountCannotKick (3.42s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:10.215814208Z","Action":"pass","Package":"sa/server/tests","Test":"TestCharEnterOtherAccountCannotKick","Elapsed":3.42}
+{"Time":"2026-11-12T14:04:10.215839214Z","Action":"run","Package":"sa/server/tests","Test":"TestTwoPlayers"}
+{"Time":"2026-11-12T14:04:10.215854915Z","Action":"output","Package":"sa/server/tests","Test":"TestTwoPlayers","Output":"=== RUN   TestTwoPlayers\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:13.681238832Z","Action":"output","Package":"sa/server/tests","Test":"TestTwoPlayers","Output":"--- PASS: TestTwoPlayers (3.47s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:13.681346826Z","Action":"pass","Package":"sa/server/tests","Test":"TestTwoPlayers","Elapsed":3.47}
+{"Time":"2026-11-12T14:04:13.68137949Z","Action":"run","Package":"sa/server/tests","Test":"TestCreateRules"}
+{"Time":"2026-11-12T14:04:13.681400113Z","Action":"output","Package":"sa/server/tests","Test":"TestCreateRules","Output":"=== RUN   TestCreateRules\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:17.372253371Z","Action":"output","Package":"sa/server/tests","Test":"TestCreateRules","Output":"--- PASS: TestCreateRules (3.69s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:17.372330294Z","Action":"pass","Package":"sa/server/tests","Test":"TestCreateRules","Elapsed":3.69}
+{"Time":"2026-11-12T14:04:17.3723587Z","Action":"run","Package":"sa/server/tests","Test":"TestRejectsBeforeLogin"}
+{"Time":"2026-11-12T14:04:17.372378244Z","Action":"output","Package":"sa/server/tests","Test":"TestRejectsBeforeLogin","Output":"=== RUN   TestRejectsBeforeLogin\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:20.632081137Z","Action":"output","Package":"sa/server/tests","Test":"TestRejectsBeforeLogin","Output":"--- PASS: TestRejectsBeforeLogin (3.26s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:20.63215777Z","Action":"pass","Package":"sa/server/tests","Test":"TestRejectsBeforeLogin","Elapsed":3.26}
+{"Time":"2026-11-12T14:04:20.632186835Z","Action":"output","Package":"sa/server/tests","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:20.904414001Z","Action":"output","Package":"sa/server/tests","Output":"ok  \tsa/server/tests\t28.082s\n"}
+{"Time":"2026-11-12T14:04:20.904568254Z","Action":"pass","Package":"sa/server/tests","Elapsed":28.084}
+{"Time":"2026-11-12T14:04:21.336612271Z","Action":"start","Package":"sa/server/tools/assetindex"}
+{"Time":"2026-11-12T14:04:21.336753196Z","Action":"output","Package":"sa/server/tools/assetindex","Output":"?   \tsa/server/tools/assetindex\t[no test files]\n"}
+{"Time":"2026-11-12T14:04:21.336973343Z","Action":"skip","Package":"sa/server/tools/assetindex","Elapsed":0}
+{"Time":"2026-11-12T14:04:22.854548347Z","Action":"start","Package":"sa/server/tools/protogen"}
+{"Time":"2026-11-12T14:04:22.854641912Z","Action":"output","Package":"sa/server/tools/protogen","Output":"?   \tsa/server/tools/protogen\t[no test files]\n"}
+{"Time":"2026-11-12T14:04:22.854740958Z","Action":"skip","Package":"sa/server/tools/protogen","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.033202454Z","Action":"start","Package":"sa/server/webclient"}
+{"Time":"2026-11-12T14:04:24.049556454Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes"}
+{"Time":"2026-11-12T14:04:24.050298335Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes","Output":"=== RUN   TestBuiltRoutes\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.050350965Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/"}
+{"Time":"2026-11-12T14:04:24.050435611Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/","Output":"=== RUN   TestBuiltRoutes/GET/\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.050868545Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/","Output":"--- PASS: TestBuiltRoutes/GET/ (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.050898684Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.050917112Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/index.html"}
+{"Time":"2026-11-12T14:04:24.051028424Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/index.html","Output":"=== RUN   TestBuiltRoutes/GET/index.html\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.051363501Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/index.html","Output":"--- PASS: TestBuiltRoutes/GET/index.html (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.051680366Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/index.html","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.051970452Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/main.js?v=release"}
+{"Time":"2026-11-12T14:04:24.05199611Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/main.js?v=release","Output":"=== RUN   TestBuiltRoutes/GET/dist/main.js?v=release\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.052252767Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/main.js?v=release","Output":"--- PASS: TestBuiltRoutes/GET/dist/main.js?v=release (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.052512117Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/main.js?v=release","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.052544262Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/HEAD/dist/main.js"}
+{"Time":"2026-11-12T14:04:24.052560051Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/HEAD/dist/main.js","Output":"=== RUN   TestBuiltRoutes/HEAD/dist/main.js\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.052794122Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/HEAD/dist/main.js","Output":"--- PASS: TestBuiltRoutes/HEAD/dist/main.js (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.053094365Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/HEAD/dist/main.js","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.053121755Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/src/private.ts"}
+{"Time":"2026-11-12T14:04:24.053136331Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/src/private.ts","Output":"=== RUN   TestBuiltRoutes/GET/src/private.ts\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.053271313Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/src/private.ts","Output":"--- PASS: TestBuiltRoutes/GET/src/private.ts (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.05354588Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/src/private.ts","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.053582931Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/private.map"}
+{"Time":"2026-11-12T14:04:24.053598988Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/private.map","Output":"=== RUN   TestBuiltRoutes/GET/dist/private.map\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.053923143Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/private.map","Output":"--- PASS: TestBuiltRoutes/GET/dist/private.map (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.05428104Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/private.map","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.054300551Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/../index.html"}
+{"Time":"2026-11-12T14:04:24.054501715Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/../index.html","Output":"=== RUN   TestBuiltRoutes/GET/dist/../index.html\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.054538157Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/../index.html","Output":"--- PASS: TestBuiltRoutes/GET/dist/../index.html (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.054556476Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/../index.html","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.054761626Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/%2e%2e/index.html"}
+{"Time":"2026-11-12T14:04:24.054784962Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/%2e%2e/index.html","Output":"=== RUN   TestBuiltRoutes/GET/dist/%2e%2e/index.html\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.054803831Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/%2e%2e/index.html","Output":"--- PASS: TestBuiltRoutes/GET/dist/%2e%2e/index.html (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.055201963Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/%2e%2e/index.html","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.05551548Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/.private.js"}
+{"Time":"2026-11-12T14:04:24.055545922Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/.private.js","Output":"=== RUN   TestBuiltRoutes/GET/dist/.private.js\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.055696908Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/.private.js","Output":"--- PASS: TestBuiltRoutes/GET/dist/.private.js (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.055987443Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/.private.js","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.056006909Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/"}
+{"Time":"2026-11-12T14:04:24.056231164Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/","Output":"=== RUN   TestBuiltRoutes/GET/dist/\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.056259363Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/","Output":"--- PASS: TestBuiltRoutes/GET/dist/ (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.056276561Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.056727404Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/config.yaml"}
+{"Time":"2026-11-12T14:04:24.056758161Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/config.yaml","Output":"=== RUN   TestBuiltRoutes/GET/config.yaml\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.056778934Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/config.yaml","Output":"--- PASS: TestBuiltRoutes/GET/config.yaml (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.057055644Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/config.yaml","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.057080571Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/missing.js"}
+{"Time":"2026-11-12T14:04:24.057095174Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/missing.js","Output":"=== RUN   TestBuiltRoutes/GET/dist/missing.js\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.057366549Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/missing.js","Output":"--- PASS: TestBuiltRoutes/GET/dist/missing.js (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.058487611Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/GET/dist/missing.js","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.058548516Z","Action":"run","Package":"sa/server/webclient","Test":"TestBuiltRoutes/POST/"}
+{"Time":"2026-11-12T14:04:24.058565025Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/POST/","Output":"=== RUN   TestBuiltRoutes/POST/\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.059122179Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes/POST/","Output":"--- PASS: TestBuiltRoutes/POST/ (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.059152702Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes/POST/","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.059172471Z","Action":"output","Package":"sa/server/webclient","Test":"TestBuiltRoutes","Output":"--- PASS: TestBuiltRoutes (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.059190944Z","Action":"pass","Package":"sa/server/webclient","Test":"TestBuiltRoutes","Elapsed":0}
+{"Time":"2026-11-12T14:04:24.059206915Z","Action":"run","Package":"sa/server/webclient","Test":"TestMissingBuildAndExplicitExternal"}
+{"Time":"2026-11-12T14:04:24.059221584Z","Action":"output","Package":"sa/server/webclient","Test":"TestMissingBuildAndExplicitExternal","Output":"=== RUN   TestMissingBuildAndExplicitExternal\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.059255393Z","Action":"output","Package":"sa/server/webclient","Test":"TestMissingBuildAndExplicitExternal","Output":"--- PASS: TestMissingBuildAndExplicitExternal (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.059274328Z","Action":"pass","Package":"sa/server/webclient","Test":"TestMissingBuildAndExplicitExternal","Elapsed":0.01}
+{"Time":"2026-11-12T14:04:24.059325763Z","Action":"output","Package":"sa/server/webclient","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-12T14:04:24.060530842Z","Action":"output","Package":"sa/server/webclient","Output":"ok  \tsa/server/webclient\t0.027s\n"}
+{"Time":"2026-11-12T14:04:24.060664411Z","Action":"pass","Package":"sa/server/webclient","Elapsed":0.028}

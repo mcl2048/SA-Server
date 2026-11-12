@@ -1,0 +1,18 @@
+PASS automatic-mobile-login-layout {"x": 0, "y": 0, "width": 390, "height": 844}
+PASS native-input-focus-composition-and-viewport-resize null
+PASS real-login-lines-and-character-entry null
+PASS system-readable-actions ["回记录点", "原地登出", "聊天设定", "背景音乐", "音效设定", "鼠标设定", "开启 / 关闭声音", "个人信息", "显示 / 隐藏人物", "战斗设定", "经验显示设定", "GM 指令", "关闭系统菜单"]
+PASS six-common-native-panels-open-and-close null
+PASS real-chat-send null
+PASS isolated-server-approved-gm-fixtures-via-chat null
+PASS inventory-real-name-and-native-use {"slot_action": "inv-2"}
+PASS server-pet-visible-in-readable-panel null
+PASS touch-held-direction-moves-and-release-stops {"before": {"x": 47, "y": 82, "floor": 1000, "want": -1, "target": null}, "after": {"x": 50, "y": 85, "floor": 1000, "want": -1, "target": null}}
+PASS touch-cancel-releases-direction null
+PASS pinch-pan-and-remaining-finger-never-move null
+PASS five-viewport-rotation-matrix-and-pixel-budget null
+PASS manual-desktop-and-auto-restore null
+PASS battle-native-guard-command {"battle_commands": 1}
+PASS battle-native-attack-target-and-return {"target": "t-15"}
+PASS desktop-original-contain-1440x900 {"mobile": false, "stage": {"x": 120, "y": 0, "width": 1200, "height": 900, "top": 0, "right": 1320, "bottom": 900, "left": 120}, "canvas": [1200, 900]}
+PASS desktop-original-contain-390x844 {"mobile": false, "stage": {"x": 0, "y": 275.75, "width": 390, "height": 292.5, "top": 275.75, "right": 390, "bottom": 568.25, "left": 0}, "canvas": [390, 292]}

@@ -5,11 +5,11 @@
 //   创建角色：选形象与颜色（selCharGraNo / selCharGraColorWin）→ 设定（editCharParam）→ 出生地（selHomeTown）
 // 原版 640×480 坐标的画面统一加 OFFSET_640 放到 800×600 中央。
 
-import { md5 } from "./md5.js?v=mw9rd6qz";
-import { Actor } from "./field.js?v=mw9rd6qz";
-                                           
-                                                               
-import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=mw9rd6qz";
+import { md5 } from "./md5.js?v=9b200814243b1211";
+import { Actor } from "./field.js?v=9b200814243b1211";
+
+
+import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=9b200814243b1211";
 
 const [OX, OY] = OFFSET_640;
 
@@ -27,27 +27,27 @@ export const CG = {
 export const HOMETOWNS = ["萨姆吉尔村", "玛丽娜丝村", "加加村", "卡鲁它那村"];
 
 /** 各画面共享的应用状态与操作（由 main.ts 实现） */
-                      
-         
-                            
-                         
-                                 
-                     
-                           
-                                                                         
-                                                                                    
-                        
-                   
-                       
-                   
-                                  
- 
 
-                         
-                 
-                 
-                           
- 
+
+
+
+
+
+
+                                                            
+                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ---------------------------------------------------------------------------
 // 输入账号密码。这一版的面板图（26301「失落的世界」）与代码里 2.5 版的坐标不同，热区按面板图本身的位置。
@@ -350,7 +350,7 @@ const SEL_POS = [[305, 290], [240, 360], [410, 500], [330, 400], [200, 240], [48
 const SEL_HIT = [[-32, -56, 63, 65], [-21, -72, 42, 88], [-19, -78, 38, 94], [-20, -67, 41, 80], [-30, -80, 60, 100], [-36, -84, 72, 100],
   [-30, -51, 59, 64], [-19, -77, 40, 88], [-18, -72, 34, 83], [-22, -72, 43, 89], [-18, -78, 35, 90], [-20, -76, 40, 90]];
 
-                                                                     
+
 
 export class MakeSelectScreen                   {
           app     ;

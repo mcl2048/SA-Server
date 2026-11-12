@@ -1,17 +1,17 @@
 // 按需加载导出资源（格式见 h5/CLAUDE.md 的"资源格式规格"第 10 节）。
 // 取图接口是同步的：数据没到就返回 null 并在后台开始加载，下一帧再画。
 
-                                                       
 
-                                                                                                                              
-                                                                                                                                      
-                                                                                
+
+
+
+
 
 export const ANIM = { ATTACK: 0, DAMAGE: 1, DEAD: 2, STAND: 3, WALK: 4, HAND: 6, GUARD: 10, THROW: 12 }; // loadsprbin.h ANIM_LIST
 const SETS = ["i8", "rgba"];
 
 // 显存里的图集页：没用了很久、总量超过 gpuBudget 时先释放（core 是登录前预加载的界面页，不释放）
-                                                                        
+
 
 export class Assets {
           manifest     ;
@@ -57,7 +57,7 @@ export class Assets {
     if (!res.ok || !res.body) throw new Error(`index.bin.gz: ${res.status}`);
     const total = Number(res.headers.get("Content-Length") ?? 0);
     let got = 0;
-    const counted = res.body.pipeThrough(new TransformStream                        ({
+    const counted = res.body.pipeThrough(new TransformStream                                                  ({
       transform(chunk, ctl) { got += chunk.byteLength; if (total) progress(got / total); ctl.enqueue(chunk); },
     }));
     const buf = await new Response(counted.pipeThrough(new DecompressionStream("gzip"))).arrayBuffer();

@@ -5,15 +5,15 @@
 //   · 新出现"进行中"的任务自动追踪并在聊天栏提示，变成"已完成"的提示后取消追踪；
 //   · 追踪的编号按角色存 localStorage sa.quest.track.<角色名>。
 
-                                                 
-import { FONT, measure,         } from "./ui.js?v=mw9rd6qz";
 
-                            
-         
-                                          
+import { FONT, measure,         } from "./ui.js?v=9b200814243b1211";
+
+
+
+
                                    
                                                 
- 
+
 
 const W = 8, H = 8;         // 窗口 512×384
 const X = 16, Y = 84;       // 靠左放，右边留给任务的详细说明框（DW 格宽）

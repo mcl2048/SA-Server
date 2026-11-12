@@ -5,19 +5,19 @@
 //   购买窗口：店家的摊位名、清单（点一行勾选，"详情"要那一项的资料显示在下方），合计、身上的石币，"购买" / "离开"。
 //   摆着摊、看着摊位时都不能走（服务端挡，这里 Field.locked 也不送 Move）。
 
-                                                                                                    
-import { FONT, InputBox, measure,         } from "./ui.js?v=mw9rd6qz";
 
-                             
-         
-                            
-                     
-                    
-                    
-                 
-                                                                                                 
-                                          
- 
+import { FONT, InputBox, measure,         } from "./ui.js?v=9b200814243b1211";
+
+
+
+
+
+
+
+
+
+
+
 
 const W = 9, H = 8;
 const X = (800 - W * 64) / 2, Y = 56;
@@ -25,7 +25,7 @@ const PAGE = 10, ROW = 22, LIST_Y = 96;
 const MAX_SELL = 20, MAX_PRICE = 10000000;
 const EQUIP_SLOTS = 9;
 
-                                                                             
+
 
 export class VendorWindow {
   open = false;

@@ -3,13 +3,13 @@
 //   屏幕 x = (gx + gy) × 32，屏幕 y = (gy − gx) × 24
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
-import { album } from "./album.js?v=mw9rd6qz";
-import { ANIM, findAction,                              } from "./assets.js?v=mw9rd6qz";
-import { sfx } from "./audio.js?v=mw9rd6qz";
-                                           
-                                                                                 
-import { loadFloor, saveFloor,                } from "./mapcache.js?v=mw9rd6qz";
-                                          
+import { album } from "./album.js?v=9b200814243b1211";
+import { ANIM, findAction,                              } from "./assets.js?v=9b200814243b1211";
+import { sfx } from "./audio.js?v=9b200814243b1211";
+
+
+import { loadFloor, saveFloor,                } from "./mapcache.js?v=9b200814243b1211";
+
 
 export const MOVE                     = [[-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1]];
 export let STEP_MS = 260;     // 自己每走一格的时长；原版 260 ms（服务端最短 200 ms，留出余量），服务端按 rules.walkSpeed 缩放后在 EnterFloor.step 送来
@@ -39,7 +39,7 @@ export class Actor {
   vendor = "";  // 摆着的摊位名（CHAR_STREETVENDOR_OPEN，画在头上）
   mind = 0; mindAt = 0; // 心情图示（_MIND_ICON：动画编号；睡觉 / 咖啡 / 强调循环播，其余播一遍就消失）
 
-  constructor(o         ) {
+  constructor(o                                                                                         ) {
     this.id = o.id; this.name = o.name; this.sprite = o.sprite; this.kind = o.kind; this.level = o.level;
     this.x = this.fromX = o.x; this.y = this.fromY = o.y; this.dir = o.dir;
     this.leader = !!o.leader; this.battle = o.battle ?? 0; this.help = !!o.help; this.act = o.action ?? -1; this.family = o.family ?? "";
@@ -187,29 +187,29 @@ export function routeTo(sx        , sy        , mx        , my        , hit     
   return { route, lastDir };
 }
 
-                                                                                            
+
 
 const overlap = (a      , b      ) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 
 /** 头顶文字（名字、聊天气泡），交给 2D 覆盖层绘制 */
-                                                                                               
+
 
 /** 一层楼看过的格子（世界地图用）：floor 是楼层，version 是资料到了几批、seenVersion 是看过的格子变了几次 */
-                            
-                                                    
-                                                                            
-                                       
- 
 
-                                                                                                                                                                                       
+
+
+
+
+
+
 
 export class Field {
   floor = -1; floorName = ""; palette = 0; width = 0; height = 0;
-          tiles = new Uint16Array(0);
-          objs = new Uint16Array(0);
-          walk = new Uint8Array(0);   // 0 未知、1 不可走、2 可走、3 传送点
+          tiles                               = new Uint16Array(0);
+          objs                               = new Uint16Array(0);
+          walk                              = new Uint8Array(0);   // 0 未知、1 不可走、2 可走、3 传送点
   // 走过看过的格子（原版 map\<楼层>.dat 的 MAP_SEE_FLAG）：自动地图只画这些格子。按楼层存在 localStorage，重新整理也留着
-  seen = new Uint8Array(0);
+  seen                              = new Uint8Array(0);
           seenDirty = false;
   // 这次上线去过的楼层的地图资料，回到同一层时不必重新请求
           cache = new Map                    (); // 去过的楼层的格子资料（本次连线里），世界地图看别层用

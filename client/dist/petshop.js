@@ -4,8 +4,8 @@
 //                 技能清单 → 要让谁学 → 要在哪一格 → "让[宠物]将[技能]学起来吗？" → 回传 "第几个技能|第几只|第几格|价格"
 // 窗口座标照原版 800×600（_NEW_RESOMODE）。
 
-import { FONT, Ui, measure } from "./ui.js?v=mw9rd6qz";
-                                                            
+import { FONT, Ui, measure } from "./ui.js?v=9b200814243b1211";
+
 
 const CG = {
   SKILLSHOP_WIN: 26139, EXIT_BTN: 26096, RETURN_BTN: 26043, YES_BTN: 26094, NO_BTN: 26095,
@@ -57,8 +57,8 @@ export function drawPetSelect(ui    , win              , pets           , reply 
   if (esc) reply(-1, "");
 }
 
-                                                                    
-                                            
+
+
 
 /** 宠物技能店（serverWindowType6） */
 export class PetSkillShop {

@@ -6,23 +6,23 @@
 //   聊天设定（2）、音效设定（3）、背景音乐（4）、滑鼠设定（6）
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
-                                                                                                                                
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=mw9rd6qz";
-import { ItemWindow } from "./items.js?v=mw9rd6qz";
-import { TradeWindow } from "./trade.js?v=mw9rd6qz";
-import { ActionWindow } from "./actions.js?v=mw9rd6qz";
-import { MailWindow } from "./mail.js?v=mw9rd6qz";
-import { FamilyWindow } from "./family.js?v=mw9rd6qz";
-import { PetWindow } from "./pets.js?v=mw9rd6qz";
-import { MapWindow } from "./worldmap.js?v=mw9rd6qz";
-import { md5 } from "./md5.js?v=mw9rd6qz";
-import { VendorWindow } from "./vendor.js?v=mw9rd6qz";
-                                        
-                                          
-import { AiWindow } from "./aisetting.js?v=mw9rd6qz";
-import { GmWindow } from "./gm.js?v=mw9rd6qz";
-import { QuestWindow } from "./quests.js?v=mw9rd6qz";
-import { album } from "./album.js?v=mw9rd6qz";
+
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=9b200814243b1211";
+import { ItemWindow } from "./items.js?v=9b200814243b1211";
+import { TradeWindow } from "./trade.js?v=9b200814243b1211";
+import { ActionWindow } from "./actions.js?v=9b200814243b1211";
+import { MailWindow } from "./mail.js?v=9b200814243b1211";
+import { FamilyWindow } from "./family.js?v=9b200814243b1211";
+import { PetWindow } from "./pets.js?v=9b200814243b1211";
+import { MapWindow } from "./worldmap.js?v=9b200814243b1211";
+import { md5 } from "./md5.js?v=9b200814243b1211";
+import { VendorWindow } from "./vendor.js?v=9b200814243b1211";
+
+
+import { AiWindow } from "./aisetting.js?v=9b200814243b1211";
+import { GmWindow } from "./gm.js?v=9b200814243b1211";
+import { QuestWindow } from "./quests.js?v=9b200814243b1211";
+import { album } from "./album.js?v=9b200814243b1211";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {
@@ -42,15 +42,15 @@ const TRANS_STR = ["零", "壹", "贰", "参", "肆", "伍"];
 // ---------------------------------------------------------------------------
 // 用户设定（原版 saveUserSetting 存在本机文件里，这里存 localStorage）
 
-                           
+
                                                        
                                                             
                                                               
                                                    
                                                                                    
                                                   
-                                    
-                                  
+
+
                                                       
                                 
                                             
@@ -59,7 +59,7 @@ const TRANS_STR = ["零", "壹", "贰", "参", "肆", "伍"];
                                                                 
                                                                    
                                                            
- 
+
 
 const DEFAULTS           = {
   chatLines: 6, chatColor: 0, voice: 3, bgmVolume: 15, bgmPitches: {}, seVolume: 15,
@@ -81,45 +81,45 @@ const clamp = (v        , lo        , hi        ) => Math.max(lo, Math.min(hi, v
 // ---------------------------------------------------------------------------
 
 /** 菜单需要的外部操作（由 main.ts 的 FieldScreen 提供） */
-                           
-                           
+
+
                                                            
-                   
-                                                                             
+
+
                                                                           
                                                                  
-                   
-                    
-                                 
-                                              
-                                                                        
+
+
+
+
+
                                                     
-                              
-                                                                      
+
+                                                  
                                                      
                                                                             
-                                           
-                                              
+
+
                                                                            
                                                                         
-                                             
+
                                                                                               
                                                                                          
                                                                                     
-                                              
+
                                                            
                                                                                      
                                                                 
                                                             
-                          
-                                               
+
+                                            
                                                                            
-                 
+
                                                                     
-                                                                   
+
                                                                                 
-                     
-                                                           
+
+                                                       
                                                                     
                                                                        
                                                                              
@@ -129,19 +129,19 @@ const clamp = (v        , lo        , hi        ) => Math.max(lo, Math.min(hi, v
                                                                                                              
                                                                                   
                                                                                    
-                                                                
-                                                       
+                                                            
+
 
 
                                                            
-                                    
-                                                         
- 
 
-                                                                                           
+                                                        
+
+
+
 
 /** 战斗结果窗口里的一只宠物 */
-                                                                        
+
 
 export class Menus {
   statusOpen = false;  // MenuToggleFlag & JOY_CTRL_S

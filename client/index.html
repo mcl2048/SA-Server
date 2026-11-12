@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>石器时代 H5</title>
 <style>
   /* 4:3 的画面按窗口大小等比缩放（放大、缩小都跟着窗口），永远完整显示、不出现卷轴 */
@@ -17,6 +17,22 @@
   #hud { position: fixed; left: 4px; bottom: 2px; z-index: 10; color: #d0d2da; font-size: 12px; line-height: 16px; white-space: pre;
     background: rgba(0, 0, 0, 0.72); padding: 2px 6px; border-radius: 3px; pointer-events: none; }
   #hud:empty { display: none; }
+  /* Desktop rules above are deliberately unchanged. Only the mobile mode owns these hosts. */
+  #mobile-root { display: none; }
+  html.sa-mobile #mobile-root {
+    display: flex; flex-direction: column; position: fixed; inset: 0 auto auto 0;
+    width: 100vw; height: 100dvh; box-sizing: border-box; overflow: hidden;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background: #10171c;
+  }
+  html.sa-mobile #mobile-viewport { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; }
+  html.sa-mobile #mobile-chrome { position: relative; flex: none; min-width: 0; z-index: 2; }
+  html.sa-mobile #mobile-viewport > .stage {
+    position: absolute; width: 800px; height: 600px; left: var(--mobile-left, 50%); top: var(--mobile-top, 0px);
+    transform: translateX(-50%) scale(var(--mobile-scale, .85)); transform-origin: center top;
+  }
+  html.sa-mobile #view { touch-action: none; user-select: none; -webkit-user-select: none; }
+  html.sa-mobile input { font-size: 16px; }
 </style>
 </head>
 <body>
@@ -24,7 +40,8 @@
   <canvas id="view" width="800" height="600"></canvas>
   <canvas id="overlay" width="800" height="600"></canvas>
 </div>
+<div id="mobile-root"><div id="mobile-viewport"></div><div id="mobile-chrome"></div></div>
 <div id="hud"></div>
-<script type="module" src="dist/main.js?v=mw9rd6qz"></script>
+<script type="module" src="dist/main.js?v=9b200814243b1211"></script>
 </body>
 </html>

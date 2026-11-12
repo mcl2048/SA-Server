@@ -10,9 +10,9 @@
 //   名字 (x + 148, y + 17)、最大 HP / 攻 / 防 / 敏 从 (x + 222, y + 40) 起；26047 / 26048 箭头在 (x + 188 / 236, y + 142) 换宠物（跳过骑着的）；
 //   宠物页没有咒术钮与金钱。拖到宠物身上或双击宠物装备就装上（lssproto_PetItemEquip_send，骑着的宠物"骑宠不可装装备！"）。
 
-                                                                               
-import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=mw9rd6qz";
-import { ANIM, findAction } from "./assets.js?v=mw9rd6qz";
+
+import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=9b200814243b1211";
+import { ANIM, findAction } from "./assets.js?v=9b200814243b1211";
 
 // 宠物的地图技能（加工等，menu.cpp 的 mixFlag）：右键点道具栏标记，再到宠物窗口的技能页点技能。
 //   标记（第一个决定种类，之后的要同种）：料理（flg 4）要有"料理"、金属 / 宝石（8 / 16）要有"镶宝石"（精工）、耐久不满（32）要有"修复"，
@@ -35,16 +35,16 @@ const JIGSAW                             = [
 ];
 const JIGSAW_FRAME = 25251;
 
-                   
-                                             
-                                    
+
+
+
                                    
                                                  
-                                          
-                                                     
-                                                                        
-                               
- 
+
+
+
+
+
 
 // 咒术钮 CG_ITEM_WND_JUJUTU_BTN、咒术窗口 CG_JUJUTU_WND、选对象的窗口 CG_ITEM_WND_SELECT_WND、回上一页 CG_RETURN_BTN
 const CG = { ITEM_WND: 26388, CLOSE_BTN: 26042, JUJUTU_BTN: 26069, JUJUTU_WND: 26068, SELECT_WND: 26070, RETURN_BTN: 26043,
@@ -73,26 +73,26 @@ export function petEquipSlot(type        )         {
   return type < ITEM_PET_HEAD || type > ITEM_PET_FIN ? -1 : Math.min(6, type - ITEM_PET_HEAD);
 }
 
-                           
-         
-                  
+
+
+
                                                                                                                                   
-               
-                 
+
+
                                                             
                                                                               
-                                       
+
                                                                                      
                                                      
                                                                                           
-                                                                   
+
                                                                   
-                                                                               
+
                                                                  
                                                                                                         
                                                                           
                                                                                   
- 
+
 
 export class ItemWindow {
   open = false;

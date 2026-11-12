@@ -8,8 +8,8 @@
 //   邮件历史 MAIL_WND_HISTORY：底图 26203，每人 20 封（原版存在 data\mail.dat，这里存 localStorage sa.mail.<角色名>）
 // 输入框原版是 28 字节一行的多行框，这里用一行（最多 140 字节）。
 
-                                                                     
-import { FONT, InputBox, boxColor, measure,         } from "./ui.js?v=mw9rd6qz";
+
+import { FONT, InputBox, boxColor, measure,         } from "./ui.js?v=9b200814243b1211";
 
 const CG = {
   WND: 26082, SEND_WND: 26200, PET_SEND_WND: 26201, ITEM_BTN: 26202, HISTORY_WND: 26203,
@@ -19,24 +19,24 @@ const CG = {
 const MAX_BOOK = 80, PER_PAGE = 4, HISTORY_MAX = 20;
 const TRANS = ["零", "壹", "贰", "参", "肆", "伍"];
 
-                                                                                                                                    
 
-                           
-         
-                            
+
+
+
+
                                                   
                                                  
-                    
-                     
-                    
-                       
-                      
-                                                                                     
-                                                                                              
+
+
+
+
+
+
+
                                                              
-                          
-                                          
- 
+
+
+
 
 export class MailWindow {
   open = false;

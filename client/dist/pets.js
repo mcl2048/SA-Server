@@ -12,9 +12,9 @@
 // 扩展资料（额外新功能，extPanel）：一览页滑鼠停在名字上、或在详细资料页时，窗口右边列出服务端算好的 PetInfo.ext
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
-                                                                 
-import { ANIM, findAction } from "./assets.js?v=mw9rd6qz";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=mw9rd6qz";
+
+import { ANIM, findAction } from "./assets.js?v=9b200814243b1211";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=9b200814243b1211";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,
@@ -32,20 +32,20 @@ const PET_WND_ATTR_X = 159, PET_WND_ATTR_Y = 5;
 // _LIZARDPOSITION：龙蜥的图偏低，画高一点
 const LIZARDS = [101493, 101494, 101495, 101496];
 
-                          
-         
+
+
                                                              
-                         
+
                                                                      
-                                                             
+
                                                                       
-                                                                      
+                                                                     
                                                        
                                                         
                                                                 
-                                 
+
                                                                                          
- 
+
 
 /** GBK 字节数（全角 2、半角 1），原版字串长度都按字节算 */
 function bytes(s        )         { let n = 0; for (const ch of s) n += ch.charCodeAt(0) > 0xff ? 2 : 1; return n; }

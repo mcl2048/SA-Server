@@ -1,8 +1,8 @@
 // 与服务端的 WebSocket 连接。消息类型由 proto.gen.ts 提供（由 proto/messages.json 生成）。
 
-import { fillDefaults,                                  } from "./proto.gen.js?v=mw9rd6qz";
+import { fillDefaults,                                  } from "./proto.gen.js?v=9b200814243b1211";
 
-                                                    
+
 
 /**
  * 流量统计（?debug 的 HUD 用）：每秒一格，留最近 TRAFFIC_WINDOW 秒的收 / 送消息数与位元组数。

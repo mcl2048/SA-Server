@@ -6,8 +6,8 @@
 // 清单上的"回"回传 "0"（服务端回选单），Esc 直接关掉。窗口座标照原版 800×600（_NEW_RESOMODE）。
 // 声望照 _NEW_MANOR_LAW 的客户端：有声望价的道具显示"声望Ｆ 价钱Ｓ"，声望不够标灰。
 
-import { FONT, Ui, measure } from "./ui.js?v=mw9rd6qz";
-                                                              
+import { FONT, Ui, measure } from "./ui.js?v=9b200814243b1211";
+
 
 const CG = {
   ITEMSHOP_WIN: 26138, ITEMSHOP_KOSU_WIN: 26140,
@@ -18,12 +18,12 @@ const CG = {
 };
 const PAGE_ITEMS = 8; // MAX_SHOP_ITEM
 
-                           
-                                                
-                 
-                  
+
+
+
+
                                                 
- 
+
 
 /** getStrSplit：先按换行切，再按 GBK 字节宽（全角 2）折行，最多 lines 行 */
 function split(text        , maxBytes        , lines        )           {
@@ -41,7 +41,7 @@ function split(text        , maxBytes        , lines        )           {
 }
 const pad = (n        , width        ) => String(n).padStart(width);
 
-                                                                               
+
 
 export class Shop {
   win                       = null;

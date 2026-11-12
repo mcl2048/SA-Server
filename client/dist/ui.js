@@ -2,8 +2,9 @@
 // 每帧重新登记要画的图和文字；鼠标命中按"上一帧最上层的那个"判定（原版也是用上一帧的 HitDispNo）。
 // 坐标为 800×600 逻辑像素。原版 640×480 坐标的界面用 OFFSET_640 平移到画面中央。
 
-                                          
-                                          
+
+
+import { isMobile } from "./mobile-view.js?v=9b200814243b1211";
 
 export const OFFSET_640                   = [80, 60];
 
@@ -26,30 +27,100 @@ export function boxColor(now = performance.now())         {
   return BOX_COLOR_TBL[0][0];
 }
 
-                                                                                                                    
-                                                                             
-                                                                                                      
+
+
+
+
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
-                                                                         
+
 
 export class Mouse {
   x = -1; y = -1; down = false; clicked = false; rightClicked = false;
   downAt = 0; // 左键按下的时刻（原版 mouseLeftPushTime 用）
+  /** Shells may cancel a held pointer before opening a sheet or changing scenes. */
+  cancel() { this.down = this.clicked = this.rightClicked = false; this.x = this.y = -1; this.cancelPointers?.(); }
+          cancelPointers             ;
   attach(canvas                   ) {
     const pos = (e            ) => {
-      const r = canvas.getBoundingClientRect(); // 画布的像素数跟着显示大小变（fitView），滑鼠要换算成 800×600 的逻辑座标
+      // Bounding rect includes the mobile crop/scale; backing pixel budget never affects hits.
+      const r = canvas.getBoundingClientRect();
       this.x = (e.clientX - r.left) * (800 / r.width);
       this.y = (e.clientY - r.top) * (600 / r.height);
     };
-    canvas.addEventListener("mousemove", pos);
+    // Keep the original desktop event timing, right click, and mouse behavior.
+    canvas.addEventListener("mousemove", e => { if (!isMobile()) pos(e); });
     canvas.addEventListener("mousedown", (e) => {
+      if (isMobile()) return; // Ignore compatibility mouse events following a touch.
       pos(e);
       if (e.button === 0) { this.down = true; this.clicked = true; this.downAt = performance.now(); }
       if (e.button === 2) this.rightClicked = true;
     });
-    addEventListener("mouseup", () => { this.down = false; });
-    canvas.addEventListener("mouseleave", () => { this.x = this.y = -1; });
+    addEventListener("mouseup", () => { if (!isMobile()) this.down = false; });
+    canvas.addEventListener("mouseleave", () => { if (!isMobile()) this.x = this.y = -1; });
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+
+    const pointers = new Map                                                  ();
+    let aborted = false;
+    this.cancelPointers = () => {
+      aborted = true;
+      const ids = [...pointers.keys()];
+      pointers.clear();
+      for (const id of ids) if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
+    };
+    canvas.addEventListener("pointerdown", e => {
+      if (!isMobile()) return;
+      e.preventDefault();
+      if (!pointers.size) aborted = false;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, button: e.button });
+      canvas.setPointerCapture(e.pointerId);
+      if (pointers.size > 1) {
+        // Multi-touch is never a game click, even when fingers lift in separate frames.
+        aborted = true; this.down = this.clicked = this.rightClicked = false;
+        return;
+      }
+      pos(e);
+      this.down = e.button === 0;
+      this.downAt = performance.now();
+    });
+    canvas.addEventListener("pointermove", e => {
+      if (!isMobile()) return;
+      const start = pointers.get(e.pointerId);
+      if (!start) { if (e.pointerType === "mouse") pos(e); return; }
+      e.preventDefault();
+      if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10) {
+        aborted = true; this.down = false;
+      }
+      if (pointers.size === 1) pos(e);
+    });
+    canvas.addEventListener("pointerup", e => {
+      if (!isMobile()) return;
+      const start = pointers.get(e.pointerId);
+      if (!start) return;
+      e.preventDefault();
+      pos(e);
+      // Check final distance too: a browser may coalesce the last move.
+      if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10) aborted = true;
+      const tap = pointers.size === 1 && !aborted;
+      pointers.delete(e.pointerId);
+      this.down = false;
+      if (tap) {
+        if (start.button === 0) this.clicked = true;
+        if (start.button === 2) this.rightClicked = true;
+      }
+      if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    });
+    const abortPointer = (e              ) => {
+      if (!isMobile() || !pointers.has(e.pointerId)) return;
+      aborted = true; pointers.delete(e.pointerId);
+      this.down = this.clicked = this.rightClicked = false;
+      this.x = this.y = -1;
+    };
+    canvas.addEventListener("pointercancel", abortPointer);
+    canvas.addEventListener("lostpointercapture", abortPointer);
+    addEventListener("blur", () => { if (isMobile()) this.cancel(); });
+    document.addEventListener("visibilitychange", () => { if (isMobile() && document.hidden) this.cancel(); });
+    document.addEventListener("sa-device-change", () => this.cancel());
+    document.addEventListener("sa-mobile-gesture", () => this.cancel());
   }
 }
 
@@ -83,6 +154,19 @@ export class Ui {
     this.bottomLine = "";
     this.clickSound = false;
     this.interactive.clear();
+  }
+
+  /** Snapshot reachable actions for screen-space controls; never bypass a modal blocker. */
+  getMobileActions()                       {
+    return this.hits.filter(h => !/(?:^|-)(?:block|wnd|bg)$/.test(h.id)
+      && h.x2 > h.x1 && h.y2 > h.y1
+      && this.hitAt((h.x1 + h.x2) / 2, (h.y1 + h.y2) / 2) === h.id)
+      .map(h => {
+        // Use the text's vertical center; padding must not merge a neighboring menu row.
+        const nearby = this.texts.filter(t => t.x >= h.x1 - 3 && t.x <= h.x2 + 3
+          && t.y + (t.size ?? FONT_SIZE) / 2 >= h.y1 && t.y + (t.size ?? FONT_SIZE) / 2 < h.y2);
+        return { ...h, label: nearby.map(t => t.text.trim()).filter(Boolean).join(" ") || undefined };
+      });
   }
 
           hitAt(x        , y        )         {
@@ -237,15 +321,23 @@ function trackDeviceSize(canvas                   , maxW        , maxH        ) 
   return deviceSize.get(canvas) ;
 }
 
+function mobilePixelBudget(size                  )                   {
+  if (!isMobile()) return size;
+  const [w, h] = size;
+  // Limit mobile DPR and total texture dimensions; preserve the backing aspect ratio.
+  const ratio = Math.min(1, 2 / (devicePixelRatio || 1), 2048 / w, 1536 / h);
+  return [Math.max(1, Math.round(w * ratio)), Math.max(1, Math.round(h * ratio))];
+}
+
 /** WebGL 画布：场景在 Renderer 里按 800×600 画，再放大到这个大小 */
 export function fitView(canvas                   ) {
-  const [w, h] = trackDeviceSize(canvas, 4096, 3072);
+  const [w, h] = mobilePixelBudget(trackDeviceSize(canvas, 4096, 3072));
   if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
 }
 
 /** 2D 覆盖层：字与方框按实际像素画（800×600 的字被拉大后，字和 1 像素的黑色阴影会糊成重影），逻辑座标仍是 800×600 */
 export function fitOverlay(canvas                   , ctx                          ) {
-  const [w, h] = trackDeviceSize(canvas, 3200, 2400);
+  const [w, h] = mobilePixelBudget(trackDeviceSize(canvas, 3200, 2400));
   if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
   ctx.setTransform(canvas.width / 800, 0, 0, canvas.height / 600, 0, 0);
 }
@@ -301,6 +393,8 @@ export class InputBox {
     const el = document.createElement("input");
     el.type = opts.password ? "password" : "text";
     if (opts.maxLength) el.maxLength = opts.maxLength;
+    // Keep logical coordinates accessible when a mobile shell reparents this input.
+    Object.assign(el.dataset, { logicalX: String(x), logicalY: String(y), logicalWidth: String(w), logicalHeight: String(h) });
     el.autocomplete = "off";
     el.spellcheck = false;
     Object.assign(el.style, {
@@ -314,13 +408,24 @@ export class InputBox {
   }
 
   layout() {
+    // A sheet owns screen-space position/font/size once it adopts the input.
+    if (isMobile() && this.el.dataset.mobileManaged === "true") return;
     const r = this.canvas.getBoundingClientRect(), p = this.canvas.parentElement .getBoundingClientRect();
     const k = r.width / 800; // 逻辑座标 → CSS 像素
     const [x, y, w, h] = this.rect;
-    Object.assign(this.el.style, {
-      left: `${r.left - p.left + x * k}px`, top: `${r.top - p.top + y * k}px`,
-      width: `${w * k}px`, height: `${h * k}px`, fontSize: `${FONT_SIZE * k}px`,
-    });
+    if (isMobile()) {
+      // The mobile stage is itself transformed. Its children still use logical CSS
+      // coordinates; applying k here again would double-scale the input position.
+      Object.assign(this.el.style, {
+        left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px`,
+        fontSize: `${Math.max(16, 16 / Math.max(k, .01))}px`,
+      });
+    } else {
+      Object.assign(this.el.style, {
+        left: `${r.left - p.left + x * k}px`, top: `${r.top - p.top + y * k}px`,
+        width: `${w * k}px`, height: `${h * k}px`, fontSize: `${FONT_SIZE * k}px`,
+      });
+    }
   }
 
   get value() { return this.el.value; }

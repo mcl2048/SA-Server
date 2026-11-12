@@ -4,8 +4,8 @@
 // main.ts 的 fitView）用"锐利的双线性"放大到画布：像素内部不插值、只在相邻像素的交界处用一个屏幕像素过渡，
 // 非整数倍放大时既不糊也没有宽窄不一的像素；缩小时退化成双线性（近似面积平均），比浏览器把 800×600 的画布拉伸要清楚。
 
-                                                                                       
-                                                                                                         
+
+
 
 const VS = `#version 300 es
 in vec2 aPos; in vec2 aUv; out vec2 vUv; uniform vec2 uView;
@@ -39,8 +39,8 @@ void main(){
 
 const FLOATS_PER_QUAD = 24; // 两个三角形 × 3 顶点 × (x, y, u, v)
 
-                                                                                                                                      
-                                                                                                                                                 
+
+
 
 export class Renderer {
            gl                        ;

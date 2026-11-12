@@ -2,6 +2,26 @@
 
 根据《石器时代8.0》原客户端的美术资源重新实现的 **HTML5 客户端 + Go 服务端**，浏览器打开就能玩。完整代码完全开放，随意自定义！
 
+## 当前交付：v0.2.4-LYNX
+
+本仓库集成了与原二进制对应的上游 v0.2.3 源码（`b28455eb9e25033ded04bd5ac43f6f143b26e6be`），增加手机适配；桌面保留原 800×600、4:3 完整画面和鼠标操作。触屏手机自动启用可读面板、方向按钮、双指缩放与平移。右侧“界面”可选择自动、桌面或手机，也支持 `?device=auto|desktop|mobile`。
+
+交付文件为 `bin/saserver`（静态 Linux AMD64）与 `bin/saserver.sha256`。该二进制内嵌匹配的网页客户端，默认 `client: client` 即使用内嵌版本；需要自定义外部页面时设为 `client: ./client` 或其他明确目录。运行仍需要 `config.yaml`、`gamedata/` 和单独下载的 `assets/`，数据库沿用配置的位置。
+
+在项目根目录执行：
+
+```bash
+sha256sum -c bin/saserver.sha256
+bin/saserver --version
+bin/saserver
+```
+
+从源码构建本版本执行 `scripts/build-linux.sh`，使用 Node.js 24+ 和 Go 1.27+；可设置 `GO_BIN`、`VERSION`。脚本先构建网页、复制到嵌入目录，再构建二进制，避免网页与二进制不一致。客户端缓存版本由源码和页面内容计算，相同输入重复构建保持一致。
+
+资源使用官方 [assets-v0.2.3.zip](https://github.com/OpenGameSys/stoneage-web/releases/download/v0.2.3/assets-v0.2.3.zip)，压缩包大小 **1,233,027,874 字节**，SHA-256 为 `d675799f8ba5cf1338c6c32e0bca788076a4da4ab990a5f8234ef7bcbeff2baf`。压缩包自带 `assets/` 顶层目录，解到项目根目录，确认 `assets/manifest.json` 存在。资源文件未纳入本仓库；本地已下载并校验的副本可以直接运行。
+
+手机操作、构建说明与验证边界见 [手机适配说明](docs/手机适配.md)，本次验收见 [SA-1112-01 报告](Report/SA-1112-01/ACCEPTANCE.md)。
+
 ## 项目介绍
 
 - **客户端**：TypeScript + WebGL2，不依赖 npm 与任何框架。8 位图用调色板纹理查色，所以昼夜调色板切换和原版一样平滑；
@@ -54,7 +74,7 @@ Linux / macOS 是 `bin/saserver`（第一次要 `chmod +x bin/saserver`；macOS 
 ### 方式二：从源码构建
 
 需要 [Go 1.27+](https://go.dev/dl/)（服务端）和 [Node.js 22.13+](https://nodejs.org/)（客户端，只用来去掉 TypeScript 类型，不需要 `npm install`）。
-`assets/` 与 `gamedata/` 都在仓库里，clone 下来就齐了（约 1 GB）。
+`gamedata/` 已包含在仓库，`assets/` 需按上面的资源说明单独下载。当前内嵌客户端版本请优先用 `scripts/build-linux.sh` 完成整体构建；以下命令保留上游开发流程的说明。
 
 在 `server` 目录编译服务端：
 

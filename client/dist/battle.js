@@ -12,14 +12,19 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=mw9rd6qz";
-import { sfx, setSfx } from "./audio.js?v=mw9rd6qz";
-                                                                                                                                                                      
-import { battleItems } from "./items.js?v=mw9rd6qz";
-import { album } from "./album.js?v=mw9rd6qz";
-                                          
-import { smartChoose,                                  } from "./aismart.js?v=mw9rd6qz";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=mw9rd6qz";
+import { ANIM, findAction,                              } from "./assets.js?v=9b200814243b1211";
+import { sfx, setSfx } from "./audio.js?v=9b200814243b1211";
+
+import { battleItems } from "./items.js?v=9b200814243b1211";
+import { album } from "./album.js?v=9b200814243b1211";
+
+import { smartChoose,                                  } from "./aismart.js?v=9b200814243b1211";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=9b200814243b1211";
+
+// Legacy presentation metadata is optional: the current server computes these
+// internally but its BattleEvent wire schema/conversion omits them. Keep this
+// reader compatible without changing generated protocol types or gameplay.
+
 
 const CG = {
   BTN_ATTACK: 25100, BTN_JUJUTU: 25102, BTN_CAPTURE: 25104, BTN_HELP: 25106, BTN_GUARD: 25108,
@@ -189,21 +194,21 @@ class Fighter {
 }
 
 /** 一个会随时间变化的小特效：浮起的数字 / 图示、命中火花 */
-                                                                            
+
 
                                       // 返回 true 表示这一步播完
 
-                             
-         
-                 
+
+
+
                                      
-                                                  
+
                                                 
-                                                          
+
                                                                                         
-                         
-                            
-                                          
+
+
+
                               
                                           
                                                     
@@ -212,7 +217,7 @@ class Fighter {
                                                                    
                                                             
                                                        
- 
+
 
 export class BattleScreen {
           host            ;
@@ -933,7 +938,7 @@ export class BattleScreen {
       if (!launched && now - at > 2500) launched = true;
       return launched;
     });
-                                                                                                                        
+
     const legs        = [];
     let idx = 0, legAt = 0, cur                          = null, flying = false, caught = false;
     steps.push((now) => {
