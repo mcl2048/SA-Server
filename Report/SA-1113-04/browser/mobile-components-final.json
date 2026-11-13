@@ -1,0 +1,235 @@
+{
+  "browser": "156.0.8078.4",
+  "baseline": false,
+  "results": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "aligned": {
+        "rowIds": [
+          "stat-0",
+          "add-0",
+          "stat-1",
+          "add-1",
+          "stat-2",
+          "add-2",
+          "stat-3",
+          "add-3",
+          "st-pclose"
+        ],
+        "orderCorrect": true,
+        "pairs": [
+          {
+            "y": 542,
+            "nextY": 542,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 594,
+            "nextY": 594,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 646,
+            "nextY": 646,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 698,
+            "nextY": 698,
+            "height": 44,
+            "nextHeight": 44
+          }
+        ],
+        "shortTargets": [],
+        "fieldBeforeSheet": true
+      },
+      "scroll": {
+        "sheet": 237,
+        "chrome": 18,
+        "actions": [],
+        "all": 3200,
+        "client": 160
+      },
+      "errors": [],
+      "scope": "real Chromium / actual Ui and MobileShell / synthetic menu content"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "aligned": {
+        "rowIds": [
+          "stat-0",
+          "add-0",
+          "stat-1",
+          "add-1",
+          "stat-2",
+          "add-2",
+          "stat-3",
+          "add-3",
+          "st-pclose"
+        ],
+        "orderCorrect": true,
+        "pairs": [
+          {
+            "y": 594.5,
+            "nextY": 594.5,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 646.5,
+            "nextY": 646.5,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 698.5,
+            "nextY": 698.5,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 750.5,
+            "nextY": 750.5,
+            "height": 44,
+            "nextHeight": 44
+          }
+        ],
+        "shortTargets": [],
+        "fieldBeforeSheet": true
+      },
+      "scroll": {
+        "sheet": 125,
+        "chrome": 0,
+        "actions": [],
+        "all": 3200,
+        "client": 292
+      },
+      "errors": [],
+      "scope": "real Chromium / actual Ui and MobileShell / synthetic menu content"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "aligned": {
+        "rowIds": [
+          "stat-0",
+          "add-0",
+          "stat-1",
+          "add-1",
+          "stat-2",
+          "add-2",
+          "stat-3",
+          "add-3",
+          "st-pclose"
+        ],
+        "orderCorrect": true,
+        "pairs": [
+          {
+            "y": 291,
+            "nextY": 341,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 391,
+            "nextY": 441,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 491,
+            "nextY": 541,
+            "height": 44,
+            "nextHeight": 44
+          },
+          {
+            "y": 591,
+            "nextY": 641,
+            "height": 44,
+            "nextHeight": 44
+          }
+        ],
+        "shortTargets": [],
+        "fieldBeforeSheet": true
+      },
+      "scroll": {
+        "sheet": 279,
+        "chrome": 0,
+        "actions": [],
+        "all": 3072,
+        "client": 170
+      },
+      "errors": [],
+      "scope": "real Chromium / actual Ui and MobileShell / synthetic menu content"
+    },
+    {
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "aligned": {
+        "rowIds": [
+          "stat-0",
+          "add-0",
+          "stat-1",
+          "add-1",
+          "stat-2",
+          "add-2",
+          "stat-3",
+          "add-3",
+          "st-pclose"
+        ],
+        "orderCorrect": true,
+        "pairs": [
+          {
+            "y": 236,
+            "nextY": 286,
+            "height": 44,
+            "nextHeight": 49.59375
+          },
+          {
+            "y": 341.59375,
+            "nextY": 391.59375,
+            "height": 44,
+            "nextHeight": 49.59375
+          },
+          {
+            "y": 447.1875,
+            "nextY": 497.1875,
+            "height": 44,
+            "nextHeight": 49.59375
+          },
+          {
+            "y": 552.78125,
+            "nextY": 602.78125,
+            "height": 44,
+            "nextHeight": 49.59375
+          }
+        ],
+        "shortTargets": [],
+        "fieldBeforeSheet": true
+      },
+      "scroll": {
+        "sheet": 308,
+        "chrome": 0,
+        "actions": [],
+        "all": 4264,
+        "client": 155
+      },
+      "errors": [],
+      "scope": "real Chromium / actual Ui and MobileShell / synthetic menu content"
+    }
+  ],
+  "failures": []
+}

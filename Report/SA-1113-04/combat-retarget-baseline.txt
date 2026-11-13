@@ -1,0 +1,15 @@
+--- FAIL: TestAutomationPartyCaptureSurvivesAttackRetargeting (4.10s)
+    automation_cooperation_test.go:213: capture retarget safety failed: turn=1 otherHP=0 captureHP=0
+    automation_cooperation_test.go:219: automatic action retargeted onto capture: {Actor:5 Kind:attack Target:15 Result:critical Damage:1459 HP:0 Dead:true OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHp:10000 MpDamage:0 Guarded:true PetDamage:0 RideHp:0 Fall:false Effect:0 ActorMp:0 Shoot:0 Fly:2 Name: Sprite:0 Level:0 MaxHp:0 Att: OwnerSlot:0 BagSlot:0}
+FAIL
+FAIL	sa/server/internal/world	4.179s
+--- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget (0.00s)
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/chosen-side (0.00s)
+        ai_legality_test.go:52: skill target=8 want=20, command {Kind:attack Target:0 Skill:0x344c9d5803c0 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/row (0.00s)
+        ai_legality_test.go:52: skill target=10 want=26, command {Kind:attack Target:0 Skill:0x344c9d580480 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all-rows (0.00s)
+        ai_legality_test.go:52: skill target=11 want=20, command {Kind:attack Target:0 Skill:0x344c9d580540 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+FAIL
+FAIL	sa/server/internal/battle	0.027s
+FAIL

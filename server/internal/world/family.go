@@ -171,6 +171,11 @@ type Families struct {
 	ranking []*family          // 综合声望排行（按 total 由高到低），famRank 时重排
 	wars    map[int]*fmWar     // 家族对战的排程（fmwar.go），kv "fmwars"
 	warHome map[int]*World     // 哪条线路在管这场（不存档）
+	// queueMu protects admission and closing, separately from the business-state
+	// lock. Producers hold a read lock until their accepted job is in the FIFO.
+	queueMu  sync.RWMutex
+	closed   bool
+	saveDone chan struct{}
 }
 
 type manorState struct {
@@ -181,8 +186,9 @@ type manorState struct {
 // NewFamilies 读出全部家族（开机时 AC 读 data/family）。
 func NewFamilies(db store.Store, log *slog.Logger) *Families {
 	f := &Families{db: db, log: log, list: map[int]*family{}, byChar: map[int64]*family{},
-		online: map[int64]*World{}, change: map[int64]int64{}, saves: make(chan func(), 4096)}
+		online: map[int64]*World{}, change: map[int64]int64{}, saves: make(chan func(), 4096), saveDone: make(chan struct{})}
 	go func() {
+		defer close(f.saveDone)
 		for s := range f.saves {
 			s()
 		}
@@ -232,41 +238,65 @@ func NewFamilies(db store.Store, log *slog.Logger) *Families {
 	return f
 }
 
+// Close stops new persistence submissions and joins every already accepted
+// family/KV write. The shared owner calls it after all world producers stop,
+// before closing their Store. Concurrent/repeated Close calls are safe.
+// Queue completion does not hide database errors; each job logs its own failure.
+func (f *Families) Close() {
+	f.queueMu.Lock()
+	if !f.closed {
+		f.closed = true
+		close(f.saves)
+	}
+	f.queueMu.Unlock()
+	<-f.saveDone
+}
+
+func (f *Families) submitSave(job func()) {
+	f.queueMu.RLock()
+	defer f.queueMu.RUnlock()
+	if f.closed {
+		f.log.Warn("家族存档队列已关闭，拒绝新的写入")
+		return
+	}
+	f.saves <- job
+}
+
 // save 在锁里把资料编好，交给存档协程写。
 func (f *Families) save(fm *family) {
 	b, _ := json.Marshal(fm)
 	id, s := fm.ID, string(b)
-	f.saves <- func() {
+	f.submitSave(func() {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		if err := f.db.SaveFamily(ctx, id, s); err != nil {
 			f.log.Error("保存家族失败", "id", id, "err", err)
 		}
-	}
+	})
 }
 
 func (f *Families) remove(fm *family) {
 	id := fm.ID
 	delete(f.list, id)
-	f.saves <- func() {
+	f.submitSave(func() {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		if err := f.db.DeleteFamily(ctx, id); err != nil {
 			f.log.Error("删除家族失败", "id", id, "err", err)
 		}
-	}
+	})
 }
 
 func (f *Families) saveKV(key string, v any) {
 	b, _ := json.Marshal(v)
 	s := string(b)
-	f.saves <- func() {
+	f.submitSave(func() {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		if err := f.db.PutKV(ctx, key, s); err != nil {
 			f.log.Error("保存失败", "key", key, "err", err)
 		}
-	}
+	})
 }
 
 // tell 把 fn 送到 id 所在的线路去做（不在线就不做）。fn 在那条线路的协程里执行，要用家族资料时自己拿锁。

@@ -1,0 +1,7 @@
+=== RUN   TestWorldShutdownConcurrentFlushAndDo
+    shutdown_concurrency_test.go:95: SHUTDOWN_CONCURRENCY_REACHED: world stopped; Flush=32/32 Do=0/32
+    shutdown_concurrency_test.go:101: Do/Flush remained blocked after the world stopped: Flush=32/32 Do=0/32
+--- FAIL: TestWorldShutdownConcurrentFlushAndDo (2.41s)
+FAIL
+FAIL	sa/server/internal/world	2.477s
+FAIL

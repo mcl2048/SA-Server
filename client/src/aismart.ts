@@ -143,8 +143,10 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
     return { x, lethal, deficit, need: lethal || low ? deficit * weight(x) * (lethal ? 2 : 1) : 0 };
   }).filter((n) => n.need > 0).sort((a, b) => b.need - a.need);
 
-  const spells = c.inv.filter((it) => it.magic && it.magicField !== 2 && Math.floor(it.magicMp * 80 / 100) <= meF.mp); // 光精 MP 八折（同原版的 AI）
-  const items = c.inv.filter((it) => it.slot >= 9);
+  // magicMp is already the authoritative equipment cost, including family
+  // discounts. Applying another local discount generates unaffordable turns.
+  const spells = c.inv.filter((it) => it.slot >= 0 && it.slot < 9 && it.magic && it.magicField !== 2 && it.magicMp <= meF.mp);
+  const items = c.inv.filter((it) => it.slot >= 9 && it.field !== 2 && it.usable);
   let done = false;
   const send = (kind: AiCommand["kind"], target: number, item: number, label: string, key = "") => {
     out.kind = kind; out.target = target; out.item = item; out.label = label; out.key = key; done = true;
@@ -176,7 +178,7 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
     if (dead) {
       const m = spells.find((x) => x.magicFunc === "MAGIC_Ressurect" || x.magicFunc === "MAGIC_ResAndDef");
       const it = items.find((x) => x.memo.includes("气绝回复"));
-      if (m) send("magic", dead.slot, m.slot, `复活：${dead.name}`);
+      if (m) send("magic", m.magicTarget === 2 || m.magicTarget === 8 ? side : dead.slot, m.slot, `复活：${dead.name}`);
       else if (it) send("item", dead.slot, it.slot, `复活：${dead.name}（${it.name}）`);
     }
   }
@@ -195,8 +197,8 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
 
   // 补气：MP 连最便宜的补血精灵都放不了
   if (!done) {
-    const allHeals = c.inv.filter((it) => it.magicFunc === "MAGIC_Recovery");
-    const cheapest = Math.min(...allHeals.map((m) => Math.floor(m.magicMp * 80 / 100)));
+    const allHeals = c.inv.filter((it) => it.slot >= 0 && it.slot < 9 && it.magicField !== 2 && it.magicFunc === "MAGIC_Recovery");
+    const cheapest = Math.min(...allHeals.map((m) => m.magicMp));
     const mpItem = items.find((it) => it.memo.includes("气") && it.memo.includes("回复") && !it.memo.includes("耐久力"));
     if (allHeals.length && meF.mp < cheapest && mpItem) send("item", me, mpItem.slot, "补气");
   }
@@ -276,6 +278,16 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
   // 宠物
   const petF = f(pet);
   if (c.pet && petF && petF.hp > 0) {
+    // Capture safety overrides every fixed pet plan, as it does on the
+    // authoritative server. An attack plan must never kill the owner's target.
+    if (out.kind === "capture" || out.kind === "escape") {
+      const usable = c.pet.skills.filter(sk => sk.field === 0 || sk.field === 1);
+      const mercy = out.kind === "capture" ? usable.find(sk => sk.func === PET_MERCY) : undefined;
+      const guard = usable.find(sk => sk.id === 2 || sk.func === "PETSKILL_NormalGuard");
+      if (mercy) { out.pet = [mercy.slot, out.target]; out.petKey = `pet:${c.pet.name}:${mercy.id}`; }
+      else if (guard) out.pet = [guard.slot, pet];
+      return out;
+    }
     // 宠物固定的行动（设定）：普通攻击 = 技能 1、防御 = 技能 2，其余按名字找；对象照设定
     const pact = c.first ? s.petFirst : s.petThen;
     if (pact.kind !== "auto") {
@@ -291,12 +303,8 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
     const petPrior = Math.max(1, c.pet.atk * 0.5);
     const meDanger = needs.find((n) => n.x.slot === me);
     for (const sk of c.pet.skills) {
-      if (sk.field === 2 || PET_AVOID.has(sk.func) && sk.func !== PET_MERCY) continue;
+      if (sk.field === 2 || PET_AVOID.has(sk.func)) continue; // mercy is handled by the capture override above
       const key = `pet:${c.pet.name}:${sk.id}`;
-      if (sk.func === PET_MERCY) {
-        if (captureTarget && (out.kind === "capture")) pplans.push({ value: 1e6, slot: sk.slot, target: captureTarget.slot, key });
-        continue;
-      }
       if (PET_GUARD.has(sk.func)) { pplans.push({ value: meDanger ? meDanger.need * 0.8 : 0, slot: sk.slot, target: me, key: "" }); continue; }
       if (PET_DEFEND.has(sk.func)) {
         const pn = needs.find((n) => n.x.slot === pet);

@@ -1,0 +1,4 @@
+=== RUN   TestGzipTransportFailureAbortsResponse
+--- PASS: TestGzipTransportFailureAbortsResponse (0.00s)
+PASS
+ok  	sa/server/cmd/saserver	0.018s

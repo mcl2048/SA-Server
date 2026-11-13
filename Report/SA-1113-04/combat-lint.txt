@@ -1,0 +1,59 @@
+internal/world/family.go:211:17: Error return value of `json.Unmarshal` is not checked (errcheck)
+		json.Unmarshal([]byte(s), &f.manors)
+		              ^
+internal/world/family.go:215:17: Error return value of `json.Unmarshal` is not checked (errcheck)
+		json.Unmarshal([]byte(s), &f.wars)
+		              ^
+internal/world/family.go:230:17: Error return value of `json.Unmarshal` is not checked (errcheck)
+		json.Unmarshal([]byte(s), &f.fmsMemo)
+		              ^
+internal/world/mapver.go:25:13: Error return value of `fmt.Fprintf` is not checked (errcheck)
+	fmt.Fprintf(h, "%dx%d;", f.W, f.H)
+	           ^
+internal/world/mapver.go:45:14: Error return value of `fmt.Fprintf` is not checked (errcheck)
+		fmt.Fprintf(h, "w%d,%d;", p[0], p[1])
+		           ^
+internal/world/mapver.go:62:14: Error return value of `fmt.Fprintf` is not checked (errcheck)
+		fmt.Fprintf(h, "t%d:%d,%v;", n, a.Walkable, a.HaveHeight)
+		           ^
+internal/world/migrate_test.go:52:16: Error return value of `db.Close` is not checked (errcheck)
+	defer db.Close()
+	              ^
+internal/world/shutdown_mail_test.go:36:16: Error return value of `db.Close` is not checked (errcheck)
+	defer db.Close()
+	              ^
+internal/world/world_test.go:70:47: Error return value of `db.Close` is not checked (errcheck)
+	t.Cleanup(func() { cancel(); <-done; db.Close() })
+	                                             ^
+internal/battle/battle.go:1389:2: ineffectual assignment to luck (ineffassign)
+	luck := 1
+	^
+internal/battle/battle.go:603:15: QF1001: could apply De Morgan's law (staticcheck)
+		if f.Pet && !(b.Turn == 1 && b.Surprised == 1-f.Side()) { // 偷袭成功的那一方第一回合不判定（BSIDE_FLG_SURPRISE）
+		            ^
+internal/battle/item2.go:257:6: QF1001: could apply De Morgan's law (staticcheck)
+		if !((c.Kind == Attack || c.Kind == Guard || c.Kind == None) && basic) {
+		   ^
+internal/battle/magic.go:311:9: QF1001: could apply De Morgan's law (staticcheck)
+		ok := !(st == StNocast && t.Pet) && b.statusChance(f, t, st, per, 30, 1)
+		      ^
+internal/world/fmwar.go:667:2: QF1002: could use tagged switch on x.Flag (staticcheck)
+	switch {
+	^
+internal/world/itemuse3.go:38:2: QF1012: Use fmt.Fprintf(...) instead of WriteString(fmt.Sprintf(...)) (staticcheck)
+	sb.WriteString(fmt.Sprintf("                               Page:%d\n", page+1))
+	^
+internal/world/family.go:171:2: field ranking is unused (unused)
+	ranking []*family          // 综合声望排行（按 total 由高到低），famRank 时重排
+	^
+internal/world/fmwar.go:81:17: func (*fmWar).sides is unused (unused)
+func (x *fmWar) sides() (int, int) { return x.Host, x.Guest }
+                ^
+internal/world/item.go:420:17: func (*World).recovery is unused (unused)
+func (w *World) recovery(arg string) (hp, mp, charm int, full bool) {
+                ^
+18 issues:
+* errcheck: 9
+* ineffassign: 1
+* staticcheck: 5
+* unused: 3

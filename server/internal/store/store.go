@@ -119,6 +119,8 @@ type Store interface {
 	PutKV(ctx context.Context, key, value string) error
 	PutMail(ctx context.Context, to int64, body string) error
 	TakeMails(ctx context.Context, to int64) ([]string, error)
+	// RestoreMails 原子恢复已取出但未投递的原信；允许超过新邮件准入容量，避免断线/停服丢信。仅内部恢复调用。
+	RestoreMails(ctx context.Context, to int64, bodies []string) error
 	Close() error
 }
 
@@ -606,6 +608,44 @@ func (s *sqliteStore) PutMail(ctx context.Context, to int64, body string) error 
 	return nil
 }
 
+// RestoreMails restores mail already accepted by PutMail but not delivered by
+// the world. New mail may have filled the mailbox while delivery was pending:
+// restoring that original mail must not apply the new-mail admission limit.
+// Commit the entire batch together so a retry cannot duplicate a partial restore.
+func (s *sqliteStore) RestoreMails(ctx context.Context, to int64, bodies []string) (err error) {
+	if len(bodies) == 0 {
+		return nil
+	}
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if rollbackErr := tx.Rollback(); rollbackErr != nil && !errors.Is(rollbackErr, sql.ErrTxDone) {
+			// Commit or context cancellation normally leaves the transaction
+			// done. Any other cleanup failure must not hide the original error.
+			err = errors.Join(err, rollbackErr)
+		}
+	}()
+	stmt, err := tx.PrepareContext(ctx, `INSERT INTO mails(to_char, body, created_at) VALUES(?, ?, ?)`)
+	if err != nil {
+		return err
+	}
+	defer func() { err = errors.Join(err, stmt.Close()) }()
+	restoredAt := time.Now().Unix()
+	for _, body := range bodies {
+		if _, err := stmt.ExecContext(ctx, to, body, restoredAt); err != nil {
+			return err
+		}
+	}
+	// Close before committing so a statement-cleanup failure still rolls back
+	// the batch, rather than reporting failure after the mail was committed.
+	if err := stmt.Close(); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
 // TakeMails 按寄出的顺序取出 to 的邮件并删掉；超过 MailKeep 的不要了。
 func (s *sqliteStore) TakeMails(ctx context.Context, to int64) ([]string, error) {
 	tx, err := s.db.BeginTx(ctx, nil)
@@ -613,7 +653,9 @@ func (s *sqliteStore) TakeMails(ctx context.Context, to int64) ([]string, error)
 		return nil, err
 	}
 	defer tx.Rollback()
-	rows, err := tx.QueryContext(ctx, `SELECT body FROM mails WHERE to_char = ? AND created_at >= ? ORDER BY id LIMIT ?`, to, time.Now().Add(-MailKeep).Unix(), MailMax)
+	// A restored backlog can temporarily exceed MailMax. Read every valid row
+	// before deleting, otherwise the old LIMIT silently discards accepted mail.
+	rows, err := tx.QueryContext(ctx, `SELECT body FROM mails WHERE to_char = ? AND created_at >= ? ORDER BY id`, to, time.Now().Add(-MailKeep).Unix())
 	if err != nil {
 		return nil, err
 	}

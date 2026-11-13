@@ -1,0 +1,6 @@
+--- FAIL: TestAutomaticGroupMagicExcludesPendingCapture (0.00s)
+    ai_capture_test.go:69: group magic filter affected wrong targets: captureHP=1 otherHP=10000
+FAIL
+FAIL	sa/server/internal/battle	0.014s
+ok  	sa/server/internal/world	2.071s
+FAIL

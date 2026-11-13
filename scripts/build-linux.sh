@@ -2,7 +2,7 @@
 # Build a matching web client and static Linux AMD64 server from any directory.
 set -euo pipefail
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
-version="${VERSION:-v0.2.10-LYNX}"
+version="${VERSION:-v0.2.11-LYNX}"
 go_bin="${GO_BIN:-go}"
 if [[ ! "$version" =~ ^[A-Za-z0-9._+-]+$ ]]; then
   echo 'VERSION must contain only letters, digits, dot, underscore, plus or hyphen' >&2
@@ -16,7 +16,9 @@ node "$root/scripts/stage-client.mjs"
 mkdir -p "$root/bin"
 # Build to a sibling first: failed compilation leaves the existing release intact.
 output="$root/bin/.saserver.build.$$"
-(cd "$root/server" && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 "$go_bin" build -p 1 -trimpath -ldflags "-s -w -X main.version=$version" -o "$output" ./cmd/saserver)
+# The explicit version and recorded inputs identify the release. Excluding the
+# transient dirty/commit stamp keeps identical source/client inputs reproducible.
+(cd "$root/server" && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 "$go_bin" build -p 1 -trimpath -buildvcs=false -ldflags "-s -w -X main.version=$version" -o "$output" ./cmd/saserver)
 chmod 0755 "$output"
 # Both paths are fixed children of the resolved repository root.
 [[ "$output" == "$root/bin/.saserver.build."* && -f "$output" ]]

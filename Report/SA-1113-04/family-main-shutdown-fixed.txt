@@ -1,0 +1,5 @@
+=== RUN   TestSIGTERMWaitsForSharedFamilySaveQueue
+    shutdown_test.go:59: SIGTERM completed after 9.079327717s for 1 online players (slow=false, slowFamily=true)
+--- PASS: TestSIGTERMWaitsForSharedFamilySaveQueue (19.13s)
+PASS
+ok  	sa/server/cmd/saserver	19.143s

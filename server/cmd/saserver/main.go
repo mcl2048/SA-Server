@@ -27,7 +27,7 @@ import (
 )
 
 // version is stamped by scripts/build-linux.sh.
-var version = "v0.2.10-LYNX-dev"
+var version = "v0.2.11-LYNX-dev"
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "--version" {
@@ -84,7 +84,7 @@ func main() {
 		gname := group.Name
 		for _, n := range group.Lines {
 			id := len(lines) + 1
-			w := world.New(game, db, log.With("line", gname+n), int64(id))
+			w := world.New(game, db, log.With("line", gname+n), int64(id), families)
 			w.GMs = gms
 			w.Rules = rules
 			w.Name = gname + n
@@ -152,10 +152,17 @@ func main() {
 		os.Exit(1)
 	}
 	<-worldDone
+	// Family/KV persistence has a separate worker shared by every line. World
+	// completion only drains character queues; join the shared worker before DB.
+	if families != nil {
+		families.Close()
+	}
 	// Shutdown closes listeners before in-flight HTTP handlers finish. Join it
 	// before closing their shared database handle in the main defer.
 	<-httpDone
-	log.Info("已退出，在线角色位置已保存")
+	// Queue completion is not a disk-success guarantee: each job logs its own
+	// context/I/O failure. Keep the shutdown message factual under those errors.
+	log.Info("已退出，在线角色存档队列已排空")
 }
 
 // noListing 是不列目录的 http.FileSystem：打开到目录时只给 index.html，没有就 404（不把源码目录列给人看）。

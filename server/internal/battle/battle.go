@@ -19,7 +19,6 @@ import (
 	"math"
 	"math/rand/v2"
 	"sort"
-	"strconv"
 	"strings"
 
 	"sa/server/internal/data"
@@ -118,7 +117,8 @@ type Fighter struct {
 	reversed bool
 
 	// 敌人专用
-	Tactics string // 行动方针（enemy.txt 第 2 栏）
+	Tactics string        // 行动方针（enemy.txt 第 2 栏）
+	ai      *enemyTactics // allocated only for enemies; immutable parsing, refreshed if Tactics changes
 	Skills  [7]*data.Skill
 	Rare    int
 	Exp     int // 打倒后给的经验
@@ -282,6 +282,9 @@ type Command struct {
 	Kind   Kind
 	Target int
 	Skill  *data.Skill // 敌人使用的技能（nil 为普通行动）
+	// Automatic is set only by the world-owned strategy, never by a packet.
+	// It makes that action respect the side's actual pending capture targets.
+	Automatic bool
 
 	// 使用道具（item.go）：道具的 usefunc、参数、名字、在道具栏的格位，以及道具带的咒术（光镜守的种类）
 	ItemFunc, ItemArg, ItemName string
@@ -383,6 +386,9 @@ type Battle struct {
 	OnTooth func(a, d *Fighter)
 	// Recalled 是换宠物时收回的宠物（petSwap），世界层在回合结束后结算
 	Recalled []*Fighter
+	// Only active while an automatic actor executes. Manual actions and normal
+	// target/reward queries keep their original semantics outside that action.
+	autoAvoidTargets uint32
 }
 
 func New(rnd *rand.Rand) *Battle { return &Battle{Rnd: rnd, Surprised: -1, guardian: map[int]int{}} }
@@ -456,7 +462,7 @@ func (b *Battle) alive(side int) []int {
 func (b *Battle) targetable(side int) []int {
 	var out []int
 	for _, i := range b.alive(side) {
-		if !b.F[i].hidden {
+		if !b.F[i].hidden && b.autoAvoidTargets&(1<<i) == 0 {
 			out = append(out, i)
 		}
 	}
@@ -507,9 +513,23 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 	b.Turn++
 	b.guardian = map[int]int{}
 	all := map[int]Command{}
+	var captureTargets [2]uint32
+	var avoidTargets [Slots]uint32
+	for slot, c := range cmds {
+		if c.Kind != Capture || slot < 0 || slot >= Slots || c.Target < 0 || c.Target >= Slots {
+			continue
+		}
+		actor, target := b.F[slot], b.F[c.Target]
+		if actor.Alive() && actor.Player && target.Alive() && target.Side() != actor.Side() && target.Seed != nil && target.Seed.Capture && actor.Level+5 >= target.Level && (b.CanCapture == nil || b.CanCapture(actor, target)) {
+			captureTargets[actor.Side()] |= 1 << c.Target
+		}
+	}
 	for i, f := range b.F {
 		if !f.Alive() {
 			continue
+		}
+		if c := cmds[i]; c.Automatic {
+			avoidTargets[i] = captureTargets[f.Side()]
 		}
 		// 每回合把工作值恢复成基本值（技能的加减只在当回合有效）；酒醉时速度减半
 		f.Atk, f.Def, f.Quick = f.FixAtk, f.FixDef, f.FixQuick
@@ -574,17 +594,26 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 		if done, _ := b.Over(); done {
 			break
 		}
+		b.autoAvoidTargets = avoidTargets[o.slot]
 		c, ok := b.statusSeq(f, all[o.slot], &ev)
 		if !ok || !f.Alive() {
+			b.autoAvoidTargets = 0
 			continue
 		}
 		if f.Pet && !(b.Turn == 1 && b.Surprised == 1-f.Side()) { // 偷袭成功的那一方第一回合不判定（BSIDE_FLG_SURPRISE）
 			if c, ok = b.loyalCheck(f, c, &ev); !ok {
+				b.autoAvoidTargets = 0
 				continue
 			}
 		}
+		if c.Kind == Capture {
+			// Status or loyalty may have replaced the capture with an attack.
+			// Only the capture that survives those checks may reach its target.
+			b.autoAvoidTargets = 0
+		}
 		b.act(f, c, &ev)
 		b.afterAct(f, &ev)
+		b.autoAvoidTargets = 0
 	}
 	b.tickMagicStatus()
 	// 战场属性的回合数：到了就回到无属性（"BV|15|0|"）
@@ -805,7 +834,7 @@ func statEvents(f *Fighter, opt string, ev *[]Event) {
 // attackSeq 是一次完整的攻击：可能连击几下，之后双方轮流反击。
 func (b *Battle) attackSeq(a *Fighter, target int, o attackOpts, ev *[]Event) {
 	hits := max(1, o.hits)
-	t := b.pickTarget(a, target)
+	t := b.pickTarget(a, target, o.mercy)
 	if t == nil {
 		*ev = append(*ev, Event{Actor: a.Slot, Kind: None, Target: -1, HP: a.HP, Status: a.Status(), Guardian: -1})
 		return
@@ -819,7 +848,7 @@ func (b *Battle) attackSeq(a *Fighter, target int, o attackOpts, ev *[]Event) {
 			if o.randomNext {
 				next = b.crazedTarget(t.Side())
 			}
-			if t = b.pickTarget(a, next); t == nil {
+			if t = b.pickTarget(a, next, o.mercy); t == nil {
 				break
 			}
 		}
@@ -854,8 +883,9 @@ func (b *Battle) attackSeq(a *Fighter, target int, o attackOpts, ev *[]Event) {
 }
 
 // pickTarget：指定的目标还在就打它，否则改打对方随机一个（BATTLE_TargetAdjust / BATTLE_DefaultAttacker）。
-func (b *Battle) pickTarget(a *Fighter, slot int) *Fighter {
-	if slot >= 0 && slot < Slots && b.F[slot].Alive() && !b.F[slot].hidden && slot != a.Slot {
+func (b *Battle) pickTarget(a *Fighter, slot int, mercy ...bool) *Fighter {
+	allowProtected := len(mercy) > 0 && mercy[0]
+	if slot >= 0 && slot < Slots && b.F[slot].Alive() && !b.F[slot].hidden && slot != a.Slot && (allowProtected || b.autoAvoidTargets&(1<<slot) == 0) {
 		return b.F[slot]
 	}
 	cand := b.targetable(1 - a.Side())
@@ -869,6 +899,12 @@ func (b *Battle) pickTarget(a *Fighter, slot int) *Fighter {
 // 返回事件与"之后能否反击"（会心、对方防御、对方倒下时不能）。
 func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event, bool) {
 	e := Event{Actor: a.Slot, Kind: Attack, Target: d.Slot, Guardian: -1, Skill: o.name}
+	// A multi-hit skill or a counter can bypass pickTarget. Keep the exclusion
+	// at the damage boundary as well; mercy is explicitly nonlethal.
+	if b.autoAvoidTargets&(1<<d.Slot) != 0 && !o.mercy {
+		e.Kind, e.HP, e.Status, e.ActorHP = None, d.HP, d.Status(), a.HP
+		return e, false
+	}
 	if isCounter {
 		e.Kind = Counter
 	} else {
@@ -891,6 +927,15 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 				e.Guardian = g
 			}
 		}
+	}
+	if b.autoAvoidTargets&(1<<d.Slot) != 0 && !o.mercy {
+		// Guardians change the actual damage recipient after target selection.
+		// Skip the strike rather than bypassing their protection rule; report
+		// the unchanged original target so no client receives a phantom HP loss.
+		original := b.F[e.Target]
+		e.Kind, e.Guardian, e.Shoot, e.Icon = None, -1, 0, 0
+		e.HP, e.Status, e.ActorHP = original.HP, original.Status(), a.HP
+		return e, false
 	}
 	var dmg int
 	if o.mdfyElem > 0 {
@@ -1388,103 +1433,6 @@ func (b *Battle) escapeCheck(f *Fighter) bool {
 	}
 	esc = max(1, esc)
 	return b.randi(1, 100) < esc
-}
-
-// tactic 读出行动方针里某一项的数值，如 "at:10;1;1" 的 at → [10 1 1]。
-func tactic(opt, key string, n int) []int {
-	out := make([]int, n)
-	for _, part := range strings.Split(opt, "|") {
-		k, v, ok := strings.Cut(part, ":")
-		if !ok || strings.TrimSpace(k) != key {
-			continue
-		}
-		for i, s := range strings.Split(v, ";") {
-			if i >= n {
-				break
-			}
-			out[i], _ = strconv.Atoi(strings.TrimSpace(s))
-		}
-	}
-	return out
-}
-
-// enemyAI 是 BATTLE_ai_normal：按 at/gu/ma/es/wa 的权重随机决定攻击、防御、逃跑或用第几个技能。
-// 攻击与技能的目标：at 第二项 1 全部 / 2 只打人物 / 3 只打宠物（找不到时改为全部）；第三项 1 随机 / 2 HP 最高 / 3 HP 最低。
-// 魔法（ma）还没有实现，抽到时改为普通攻击。
-func (b *Battle) enemyAI(f *Fighter) Command {
-	at := tactic(f.Tactics, "at", 3)
-	gu := tactic(f.Tactics, "gu", 1)
-	switch {
-	case b.NoEnemyGuard:
-		gu[0] = 0
-	case b.GuardScale > 0 && b.GuardScale != 1:
-		gu[0] = int(math.Round(float64(gu[0]) * b.GuardScale))
-	}
-	ma := tactic(f.Tactics, "ma", 1)
-	es := tactic(f.Tactics, "es", 1)
-	wa := tactic(f.Tactics, "wa", 7)
-	total := at[0] + gu[0] + ma[0] + es[0]
-	for _, w := range wa {
-		total += w
-	}
-	kind, skill := Attack, -1
-	if total > 0 {
-		r := b.randi(0, total-1)
-		switch {
-		case at[0] != 0 && r < at[0]:
-		case gu[0] != 0 && r < at[0]+gu[0]:
-			kind = Guard
-		case ma[0] != 0 && r < at[0]+gu[0]+ma[0]:
-		case es[0] != 0 && r < at[0]+gu[0]+ma[0]+es[0]:
-			kind = Escape
-		default:
-			acc := at[0] + gu[0] + ma[0] + es[0]
-			for i, w := range wa {
-				acc += w
-				if w != 0 && r < acc {
-					skill = i
-					break
-				}
-			}
-		}
-	}
-	if kind != Attack {
-		return Command{Kind: kind}
-	}
-	targets := func(filter int) []int {
-		var out []int
-		for _, i := range b.targetable(1 - f.Side()) {
-			p := b.F[i].Player && i%SideOffset < 5
-			if filter == 2 && !p || filter == 3 && p {
-				continue
-			}
-			out = append(out, i)
-		}
-		return out
-	}
-	cand := targets(at[1])
-	if len(cand) == 0 {
-		cand = targets(1)
-	}
-	if len(cand) == 0 {
-		return Command{Kind: None}
-	}
-	t := cand[0]
-	switch at[2] {
-	case 2, 3:
-		for _, i := range cand[1:] {
-			if at[2] == 2 && b.F[i].HP > b.F[t].HP || at[2] == 3 && b.F[i].HP < b.F[t].HP {
-				t = i
-			}
-		}
-	default:
-		t = cand[b.randi(0, len(cand)-1)]
-	}
-	c := Command{Kind: Attack, Target: t}
-	if skill >= 0 {
-		c.Skill = f.Skills[skill]
-	}
-	return c
 }
 
 // poisonDown 是 Compute_Down 的一份：(四项基本状态和 / 100 − 20) / 4，至少 1，最多扣到剩 1。

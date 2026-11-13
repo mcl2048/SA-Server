@@ -1,0 +1,12 @@
+=== RUN   TestRestoreMailsPreservesFullMailbox
+    mail_restore_test.go:33: pending mail restoration is not implemented
+--- FAIL: TestRestoreMailsPreservesFullMailbox (0.03s)
+=== RUN   TestRestoreMailsRollsBackPartialFailure
+    mail_restore_test.go:69: pending mail restoration is not implemented
+--- FAIL: TestRestoreMailsRollsBackPartialFailure (0.02s)
+=== RUN   TestRestoreMailsHonorsCanceledContext
+    mail_restore_test.go:86: pending mail restoration is not implemented
+--- FAIL: TestRestoreMailsHonorsCanceledContext (0.02s)
+FAIL
+FAIL	sa/server/internal/store	0.089s
+FAIL

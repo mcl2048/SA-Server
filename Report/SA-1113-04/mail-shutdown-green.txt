@@ -1,0 +1,8 @@
+=== RUN   TestFlush
+--- PASS: TestFlush (2.68s)
+=== RUN   TestSaveQueueCoalesces
+--- PASS: TestSaveQueueCoalesces (0.04s)
+=== RUN   TestShutdownRestoresDequeuedMail
+--- PASS: TestShutdownRestoresDequeuedMail (0.14s)
+PASS
+ok  	sa/server/internal/world	2.931s

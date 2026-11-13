@@ -1,0 +1,2 @@
+ok  	sa/server/internal/store	9.635s
+ok  	sa/server/webclient	4.726s

@@ -1,0 +1,9 @@
+goos: linux
+goarch: amd64
+pkg: sa/server/internal/battle
+cpu: Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+BenchmarkEnemyAI-2   	  170098	      6444 ns/op	     886 B/op	      17 allocs/op
+BenchmarkEnemyAI-2   	  173312	      6466 ns/op	     886 B/op	      17 allocs/op
+BenchmarkEnemyAI-2   	  138888	      7801 ns/op	     886 B/op	      17 allocs/op
+PASS
+ok  	sa/server/internal/battle	6.398s

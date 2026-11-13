@@ -1,0 +1,3 @@
+(node:582319) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"browser":"156.0.8078.4","scope":"real Chromium UI components with synthetic content; production position manager installed","cases":[{"case":"primary menu stays visible ahead of a long native social list","passed":false},{"case":"drawer scrolls from a button without firing its action","before":{"top":0,"max":797},"after":0,"fired":[],"passed":false}],"failures":["inherited toolbar order pushes primary menus below the long list","button touch action blocks drawer scrolling or fires a command"]}

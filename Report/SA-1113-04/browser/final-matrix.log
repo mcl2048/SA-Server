@@ -1,0 +1,41 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","stage":"real-matrix"}
+{"variant":"final","matrix_step":"desktop-enter"}
+{"variant":"final","matrix_step":"desktop-authenticated"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-status"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-item"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-pet"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-map"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-system"}
+{"variant":"final","matrix_case":"separate desktop context and native mouse menus"}
+{"variant":"final","matrix_case":"classic 320x568"}
+{"variant":"final","matrix_case":"classic 390x844"}
+{"variant":"final","matrix_case":"classic 430x932"}
+{"variant":"final","matrix_case":"classic 844x390"}
+{"variant":"final","matrix_case":"classic 568x320"}
+{"variant":"final","matrix_case":"classic native items"}
+{"variant":"final","matrix_case":"classic native pets"}
+{"variant":"final","matrix_case":"classic native status"}
+{"variant":"final","matrix_case":"classic native quests"}
+{"variant":"final","matrix_case":"classic native map"}
+{"variant":"final","matrix_case":"classic native system"}
+{"variant":"final","matrix_case":"immersive 320x568"}
+{"variant":"final","matrix_case":"immersive 390x844"}
+{"variant":"final","matrix_case":"immersive 430x932"}
+{"variant":"final","matrix_case":"immersive 844x390"}
+{"variant":"final","matrix_case":"immersive 568x320"}
+{"variant":"final","matrix_case":"immersive native items"}
+{"variant":"final","matrix_case":"immersive native pets"}
+{"variant":"final","matrix_case":"immersive native status"}
+{"variant":"final","matrix_case":"immersive native quests"}
+{"variant":"final","matrix_case":"immersive native map"}
+{"variant":"final","matrix_case":"immersive native system"}
+{"variant":"final","matrix_case":"real joystick move and release"}
+{"variant":"final","matrix_case":"production short-screen drawer touch scroll"}
+{"variant":"final","matrix_case":"normal battle starts with an unobstructed native-scale player"}
+{"variant":"final","matrix_case":"native manual battle, pet submenu, target and victory back"}
+{"variant":"final","matrix_case":"server-acknowledged normal automatic battle"}
+{"variant":"final","matrix_case":"server-acknowledged quick automatic battle"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1113-04/browser/final-real-game.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

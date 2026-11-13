@@ -70,7 +70,7 @@ func magicNum(opt, key string, def int) int {
 func (b *Battle) magicTargets(toNo int, dead bool) []int {
 	ok := func(i int) bool {
 		f := b.F[i]
-		if f == nil || f.Escaped || f.hidden {
+		if f == nil || f.Escaped || f.hidden || b.autoAvoidTargets&(1<<i) != 0 {
 			return false
 		}
 		if dead {
@@ -457,7 +457,7 @@ func charPos(slot int) (row, col int) {
 
 // attMagicArea 是 BATTLE_MultiAttMagic 的范围：attmagic.bin 的 siField 以目标为中心套上去（只算目标那一方、还站着的人）。
 func (b *Battle) attMagicArea(field [3][5]bool, toNo int) []int {
-	alive := func(s int) bool { return b.F[s].Alive() && !b.F[s].hidden }
+	alive := func(s int) bool { return b.F[s].Alive() && !b.F[s].hidden && b.autoAvoidTargets&(1<<s) == 0 }
 	var out []int
 	switch {
 	case toNo >= 0 && toNo < Slots:

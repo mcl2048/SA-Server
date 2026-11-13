@@ -1,0 +1,71 @@
+goos: linux
+goarch: amd64
+pkg: sa/server/cmd/saserver
+cpu: Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+BenchmarkEmbeddedClientGzip/main.js/serial-2         	    1612	    148207 ns/op	 542.22 MB/s	  132465 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/serial-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/main.js/serial-2         	    1530	    136583 ns/op	 588.37 MB/s	  132465 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/serial-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/main.js/serial-2         	    2176	    162728 ns/op	 493.84 MB/s	  132464 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/serial-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/main.js/parallel-2       	    2883	     90676 ns/op	 886.24 MB/s	  132465 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/parallel-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/main.js/parallel-2       	    2710	     80449 ns/op	 998.90 MB/s	  132466 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/parallel-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/main.js/parallel-2       	    2088	    100745 ns/op	 797.67 MB/s	  132467 B/op	      28 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/main.js/parallel-2
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+    gzip_bench_test.go:45: decoded=80361 sha256=4223155b7d3818fed7b7832817570cc8a8d36adb5f2114c4261ac5e9193edfba
+BenchmarkEmbeddedClientGzip/ui.js/serial-2           	    8750	     27466 ns/op	 810.64 MB/s	   21870 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/serial-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+BenchmarkEmbeddedClientGzip/ui.js/serial-2           	   10000	     30578 ns/op	 728.15 MB/s	   21869 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/serial-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+BenchmarkEmbeddedClientGzip/ui.js/serial-2           	    7585	     39857 ns/op	 558.62 MB/s	   21870 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/serial-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+BenchmarkEmbeddedClientGzip/ui.js/parallel-2         	   13402	     19638 ns/op	1133.78 MB/s	   21870 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/parallel-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+BenchmarkEmbeddedClientGzip/ui.js/parallel-2         	    8122	     30553 ns/op	 728.74 MB/s	   21870 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/parallel-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+BenchmarkEmbeddedClientGzip/ui.js/parallel-2         	   12058	     28732 ns/op	 774.93 MB/s	   21870 B/op	      27 allocs/op
+--- BENCH: BenchmarkEmbeddedClientGzip/ui.js/parallel-2
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+    gzip_bench_test.go:45: decoded=22265 sha256=c6c0f41d4b03f5d1bd1f3731e837dc09532321764b1d04a855d77f1487944160
+PASS
+ok  	sa/server/cmd/saserver	7.189s

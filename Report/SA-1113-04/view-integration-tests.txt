@@ -1,0 +1,47 @@
+(node:404230) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (8.212436ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (2.742692ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.020688ms)
+(node:404231) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compact HP/MP rows clamp values and horizontal bounds on both viewports (4.260648ms)
+✔ five enemy damage labels remain inside every stage edge throughout the bounce (2.986374ms)
+✔ HP/MP rows lie below actual model bounds including tall pets and riding HP (2.268417ms)
+✔ absent legacy event metadata never creates NaN labels or invalid skill icons (2.454744ms)
+✔ snapshot dead players and pets on both sides choose genuine DEAD pose and revive (13.920328ms)
+✔ crowded real battle formation keeps every full HP/MP/riding row disjoint and inside the stage (18.92698ms)
+✔ portrait immersive scene fills the viewport at native scale or larger without stretching (2.854195ms)
+✔ landscape immersive scene keeps native character pixels and crops vertically (0.44524ms)
+✔ focusing edge targets never reveals empty space outside the original scene (1.374582ms)
+✔ invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale (0.533981ms)
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (16.001135ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (7.757848ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (9.98113ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (6.225113ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (3.531631ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (4.067616ms)
+✔ battle commands and targets remain human readable in a bounded sheet (7.379342ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (19.152846ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (6.139604ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (2.82979ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (4.570473ms)
+✔ native column registration is presented in visual row order and keeps action identity (1.421459ms)
+✔ immersive scene exposes a cancellable menu tray and restores classic panels (2.875844ms)
+✔ immersive battle camera stays a view command and native targets keep their real IDs (2.032795ms)
+✔ switching to desktop during browser fullscreen retains the explicit exit control (1.864129ms)
+✔ quick battle preserves its field context and native battle panels restore the complete layout (3.423698ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (6.330938ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (2.584117ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (4.641161ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (1.692258ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (1.648476ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (2.265049ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1042.832701

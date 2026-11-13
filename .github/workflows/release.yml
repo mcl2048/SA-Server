@@ -27,7 +27,7 @@ permissions:
   contents: write   # 建 Release、上传文件要写权限
 
 env:
-  NODE_VERSION: "24"
+  NODE_VERSION: "26.13.1"
 
 jobs:
   # 决定要构建哪些 ref（标签或分支）与要不要发布，后面的 job 用矩阵对每个 ref 并行跑
@@ -118,7 +118,7 @@ jobs:
           CGO_ENABLED: "0"
           VERSION: ${{ steps.ver.outputs.ver }}
           SUFFIX: ${{ steps.ver.outputs.suffix }}
-        run: go build -trimpath -ldflags "-s -w -X main.version=$VERSION" -o "../bin/saserver$SUFFIX" ./cmd/saserver
+        run: go build -trimpath -buildvcs=false -ldflags "-s -w -X main.version=$VERSION" -o "../bin/saserver$SUFFIX" ./cmd/saserver
 
       - name: 打包
         env:

@@ -1,0 +1,8 @@
+=== RUN   TestSIGTERMSavesOnlinePosition
+    shutdown_test.go:51: SIGTERM completed after 53.951422ms for 1 online players (slow=false)
+--- PASS: TestSIGTERMSavesOnlinePosition (3.18s)
+=== RUN   TestSIGTERMWaitsForSlowSaveQueue
+    shutdown_test.go:55: SIGTERM completed after 16.080253655s for 4 online players (slow=true)
+--- PASS: TestSIGTERMWaitsForSlowSaveQueue (17.81s)
+PASS
+ok  	sa/server/cmd/saserver	21.017s

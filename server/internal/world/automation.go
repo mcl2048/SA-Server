@@ -254,18 +254,21 @@ func (w *World) automationBattle(e *entity, a *autoPlayState, now time.Time) {
 	// Commands already submitted manually before enabling auto are left untouched.
 	turn := room.turn
 	player, _, _ := w.chooseAutomation(e, a)
+	if ft.cmd != nil {
+		player = *ft.cmd
+	} // pets must honor a pre-existing manual capture/escape too
 	for _, slot := range ft.petSlots() {
 		if !ft.b.F[slot].Alive() {
 			continue
 		}
 		skill, target := w.chooseAutomationPet(e, a, slot, player)
-		w.battlePetCommand(e, skill, target, slot)
+		w.submitBattlePetCommand(e, skill, target, true, slot)
 		if e.fight != ft || room.turn != turn {
 			return
 		}
 	}
 	if ft.cmd == nil && ft.b.F[ft.slot].Alive() {
-		w.battleCommand(e, string(player.Kind), player.Target, player.ItemSlot)
+		w.battleCommand(e, string(player.Kind), player.Target, player.ItemSlot, true)
 	}
 	if e.fight == ft {
 		a.nextTurn = now.Add(time.Second)
@@ -305,6 +308,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 		skill, target := w.chooseAutomationPet(e, a, ft.slot+5, cmd)
 		return cmd, skill, target
 	}
+	protected, myCapture := w.automationCapturePlan(e, a)
 	enemies, allies := []*battle.Fighter{}, []*battle.Fighter{}
 	for _, f := range ft.b.F {
 		if f == nil || f.Escaped {
@@ -319,6 +323,9 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 	target := -1
 	bestScore := -1.0
 	for _, f := range enemies {
+		if protected&(1<<f.Slot) != 0 {
+			continue
+		}
 		score := float64(min(max(1, me.Atk/2), f.HP)) + float64(f.Level)*.75
 		if me.Atk/2 >= f.HP {
 			score += float64(f.Level) * 5
@@ -329,6 +336,9 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 		}
 	}
 	cmd := battle.Command{Kind: battle.Attack, Target: target, ItemSlot: -1}
+	if target < 0 {
+		cmd.Kind = battle.Guard
+	}
 	side, other := 20+me.Side(), 21-me.Side()
 	// Estimate pressure conservatively when no browser-learned history exists.
 	threat, hpSum := 0, 0
@@ -377,11 +387,13 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 		goto petChoice
 	}
 	if s.Capture {
-		for _, f := range enemies {
-			if f.Level == 1 && f.Seed != nil && f.Seed.Capture && w.canCapture(e, f) {
-				cmd = battle.Command{Kind: battle.Capture, Target: f.Slot}
-				goto petChoice
-			}
+		if myCapture >= 0 {
+			cmd = battle.Command{Kind: battle.Capture, Target: myCapture}
+			goto petChoice
+		}
+		if protected != 0 {
+			cmd = battle.Command{Kind: battle.Guard, Target: -1}
+			goto petChoice
 		}
 		if roomCanEscape(w, e) {
 			cmd = battle.Command{Kind: battle.Escape, Target: -1}
@@ -402,7 +414,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 				m, mp := w.equipMagic(e, slot)
 				if m != nil && m.Name == action.Name && m.Field != 2 && mp <= me.MP {
 					t := automationMagicTarget(m.Target, action.Target, me, pet, target, side, other)
-					if t >= 0 {
+					if t >= 0 && !automationCaptureInScope(protected, t) {
 						cmd = battle.Command{Kind: battle.Magic, Target: t, ItemSlot: slot}
 						goto petChoice
 					}
@@ -415,7 +427,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 				m, mp := w.equipMagic(e, slot)
 				if m != nil && m.Func == "MAGIC_AttMagic" && m.Field != 2 && mp <= me.MP && count >= 2 {
 					t := automationMagicTarget(m.Target, "enemy", me, pet, target, side, other)
-					if t >= 0 {
+					if t >= 0 && !automationCaptureInScope(protected, t) {
 						cmd = battle.Command{Kind: battle.Magic, Target: t, ItemSlot: slot}
 						break
 					}
@@ -440,10 +452,11 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 	me, pet := ft.b.F[ft.slot], ft.b.F[slot]
 	s := a.settings
 	side, other := 20+me.Side(), 21-me.Side()
+	protected, _ := w.automationCapturePlan(e, a)
 	enemies := []*battle.Fighter{}
 	target := -1
 	for _, f := range ft.b.F {
-		if f != nil && f.Alive() && f.Side() != me.Side() {
+		if f != nil && f.Alive() && f.Side() != me.Side() && protected&(1<<f.Slot) == 0 {
 			enemies = append(enemies, f)
 			if target < 0 || f.HP < ft.b.F[target].HP {
 				target = f.Slot
@@ -451,9 +464,6 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		}
 	}
 	skill, pt := -1, target
-	if target < 0 {
-		return -1, -1
-	}
 	if _, owned := ft.petBagSlot(slot); !owned || !pet.Alive() {
 		return skill, pt
 	}
@@ -473,6 +483,14 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		}
 		return -1, -1
 	}
+	if target < 0 {
+		for slot, sk := range pet.Skills {
+			if sk != nil && (sk.Field == 0 || sk.Field == 1) && sk.ID == 2 {
+				return slot, pet.Slot
+			}
+		}
+		return -1, -1
+	}
 	action := s.PetThen
 	if roomFirstTurn(ft.room) {
 		action = s.PetFirst
@@ -483,7 +501,10 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		}
 		match := action.Kind == "attack" && sk.ID == 1 || action.Kind == "guard" && sk.ID == 2 || action.Kind == "skill" && sk.Name == action.Name
 		if match && !(ownerDown && (sk.Func == "PETSKILL_Guardian" || action.Target == "owner")) {
-			return slot, automationPetTarget(sk.Target, action.Target, me.Slot, pet.Slot, target, side, other)
+			t := automationPetTarget(sk.Target, action.Target, me.Slot, pet.Slot, target, side, other)
+			if !automationCaptureInScope(protected, t) {
+				return slot, t
+			}
 		}
 	}
 	// Score only known combat skills. Stealing, sacrifice, transforming and
@@ -504,6 +525,9 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 			continue
 		}
 		t := automationPetTarget(sk.Target, "enemy", me.Slot, pet.Slot, target, side, other)
+		if automationCaptureInScope(protected, t) {
+			continue
+		}
 		value := factor
 		if sk.Target == 3 || sk.Target == 4 {
 			value *= float64(len(enemies))
@@ -593,7 +617,11 @@ func automationPetTarget(kind int, want string, me, pet, enemy, side, other int)
 }
 func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive bool) (battle.Command, bool) {
 	me := e.fight.b.F[e.fight.slot]
-	best, bestAmount := -1, 0
+	best, bestAmount, bestMP := -1, 0, 0
+	deficit := max(1, target.MaxHP-target.HP)
+	if target.Ride != nil && target.Ride.HP > 0 && !target.Ride.Fell {
+		deficit += max(0, target.Ride.MaxHP-target.Ride.HP)
+	}
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
 		if m == nil || m.Field == 2 || mp > me.MP {
@@ -603,8 +631,15 @@ func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive boo
 		if !valid || m.Target == 0 && target.Slot != me.Slot {
 			continue
 		}
-		if amount := data.Atoi(m.Option); best < 0 || amount > bestAmount {
-			best, bestAmount = slot, amount
+		amount := data.Atoi(m.Option)
+		if revive && amount == 0 {
+			amount = target.MaxHP
+		}
+		// Prefer the smallest estimated sufficient heal, then the largest
+		// insufficient one. Equal recovery favors lower actual MP consumption.
+		better := best < 0 || amount >= deficit && (bestAmount < deficit || amount < bestAmount) || amount < deficit && bestAmount < deficit && amount > bestAmount || amount == bestAmount && mp < bestMP
+		if better {
+			best, bestAmount, bestMP = slot, amount, mp
 		}
 	}
 	if best >= 0 {

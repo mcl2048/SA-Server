@@ -1,0 +1,23 @@
+{
+  "baseline_commit": "31a8848",
+  "baseline_scope": "exact Do/Flush declarations in compatible current World.go",
+  "world_sha256": "29a497c10afaaf5b57e019ba87bc9d85c0337a86fde6527a8e09dba136207cd0",
+  "test_sha256": "a2cd1ca6a8ce77c3be11dbbafebb1677852a66410d18484165ee31f72623b07d",
+  "overlay": "/tmp/sa111304-shutdown-cross-_ec0hcj1/overlay.json",
+  "runs": {
+    "red": {
+      "exit_code": 1,
+      "reached": true,
+      "product_timeout": true,
+      "expected_result": true,
+      "wall_seconds_including_compile": 51.307
+    },
+    "green": {
+      "exit_code": 0,
+      "reached": true,
+      "product_timeout": false,
+      "expected_result": true,
+      "wall_seconds_including_compile": 52.234
+    }
+  }
+}

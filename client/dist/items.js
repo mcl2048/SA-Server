@@ -11,8 +11,8 @@
 //   宠物页没有咒术钮与金钱。拖到宠物身上或双击宠物装备就装上（lssproto_PetItemEquip_send，骑着的宠物"骑宠不可装装备！"）。
 
 
-import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=8215e83e5e3ed1aa";
-import { ANIM, findAction } from "./assets.js?v=8215e83e5e3ed1aa";
+import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=e5c6eee3f928fb08";
+import { ANIM, findAction } from "./assets.js?v=e5c6eee3f928fb08";
 
 // 宠物的地图技能（加工等，menu.cpp 的 mixFlag）：右键点道具栏标记，再到宠物窗口的技能页点技能。
 //   标记（第一个决定种类，之后的要同种）：料理（flg 4）要有"料理"、金属 / 宝石（8 / 16）要有"镶宝石"（精工）、耐久不满（32）要有"修复"，

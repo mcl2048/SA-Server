@@ -1,0 +1,5 @@
+--- FAIL: TestAutomaticAttackDoesNotDamageCapturableGuardian (0.00s)
+    ai_capture_test.go:115: guardian redirection killed capture target: [{Actor:0 Kind:attack Target:10 Result:critical Damage:10212 HP:0 Dead:true OK:false Skill: Status:0 Guardian:15 Combo:false ActorHP:10000 MPDamage:0 Guarded:true PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:2 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:10 Kind:guard Target:-1 Result: Damage:0 HP:5000 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:0 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:1 Kind:capture Target:10 Result: Damage:0 HP:5000 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:10000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+FAIL
+FAIL	sa/server/internal/battle	0.009s
+FAIL

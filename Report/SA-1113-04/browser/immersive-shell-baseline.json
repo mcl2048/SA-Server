@@ -1,0 +1,273 @@
+{
+  "browser": "156.0.8078.4",
+  "scope": "real Chromium / actual source Ui and shell / synthetic menu, input and target data / no physical device certification",
+  "baseline": true,
+  "results": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "field": {
+        "stage": {
+          "x": -240,
+          "y": -16,
+          "w": 800,
+          "h": 600
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "w": 320,
+          "h": 568
+        },
+        "toggle": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "actionable": false,
+        "stick": {
+          "x": 12,
+          "y": 460,
+          "w": 96,
+          "h": 96
+        },
+        "menuHidden": true,
+        "display": "immersive",
+        "context": "field"
+      },
+      "stableDom": 0,
+      "menu": {
+        "skipped": true
+      },
+      "panel": {
+        "complete": true,
+        "inputManaged": true,
+        "sameFocus": true,
+        "value": "输入法验收",
+        "menuHidden": true
+      },
+      "battle": {
+        "targets": 10,
+        "target9": true,
+        "scroll": 332
+      },
+      "fullscreen": {
+        "native": true,
+        "display": "immersive",
+        "text": "已进入浏览器全屏。"
+      },
+      "desktop": {
+        "mobile": false,
+        "shellHidden": true,
+        "stageParent": "BODY",
+        "mobileControlsHidden": true
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "field": {
+        "stage": {
+          "x": -367.6666259765625,
+          "y": 0,
+          "w": 1125.333251953125,
+          "h": 844
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "w": 390,
+          "h": 844
+        },
+        "toggle": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "actionable": false,
+        "stick": {
+          "x": 12,
+          "y": 736,
+          "w": 96,
+          "h": 96
+        },
+        "menuHidden": true,
+        "display": "immersive",
+        "context": "field"
+      },
+      "stableDom": 0,
+      "menu": {
+        "skipped": true
+      },
+      "panel": {
+        "complete": true,
+        "inputManaged": true,
+        "sameFocus": true,
+        "value": "输入法验收",
+        "menuHidden": true
+      },
+      "battle": {
+        "targets": 10,
+        "target9": true,
+        "scroll": 131
+      },
+      "fullscreen": {
+        "native": true,
+        "display": "immersive",
+        "text": "已进入浏览器全屏。"
+      },
+      "desktop": {
+        "mobile": false,
+        "shellHidden": true,
+        "stageParent": "BODY",
+        "mobileControlsHidden": true
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "field": {
+        "stage": {
+          "x": 0.000030517578125,
+          "y": -121.5,
+          "w": 844,
+          "h": 632.9999389648438
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "w": 844,
+          "h": 390
+        },
+        "toggle": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "actionable": false,
+        "stick": {
+          "x": 12,
+          "y": 282,
+          "w": 96,
+          "h": 96
+        },
+        "menuHidden": true,
+        "display": "immersive",
+        "context": "field"
+      },
+      "stableDom": 0,
+      "menu": {
+        "skipped": true
+      },
+      "panel": {
+        "complete": true,
+        "inputManaged": true,
+        "sameFocus": true,
+        "value": "输入法验收",
+        "menuHidden": true
+      },
+      "battle": {
+        "targets": 10,
+        "target9": true,
+        "scroll": 191
+      },
+      "fullscreen": {
+        "native": true,
+        "display": "immersive",
+        "text": "已进入浏览器全屏。"
+      },
+      "desktop": {
+        "mobile": false,
+        "shellHidden": true,
+        "stageParent": "BODY",
+        "mobileControlsHidden": true
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "field": {
+        "stage": {
+          "x": -116,
+          "y": -140,
+          "w": 800,
+          "h": 600
+        },
+        "viewport": {
+          "x": 0,
+          "y": 0,
+          "w": 568,
+          "h": 320
+        },
+        "toggle": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "actionable": false,
+        "stick": {
+          "x": 12,
+          "y": 212,
+          "w": 96,
+          "h": 96
+        },
+        "menuHidden": true,
+        "display": "immersive",
+        "context": "field"
+      },
+      "stableDom": 0,
+      "menu": {
+        "skipped": true
+      },
+      "panel": {
+        "complete": true,
+        "inputManaged": true,
+        "sameFocus": true,
+        "value": "输入法验收",
+        "menuHidden": true
+      },
+      "battle": {
+        "targets": 10,
+        "target9": true,
+        "scroll": 216
+      },
+      "fullscreen": {
+        "native": true,
+        "display": "immersive",
+        "text": "已进入浏览器全屏。"
+      },
+      "desktop": {
+        "mobile": false,
+        "shellHidden": true,
+        "stageParent": "BODY",
+        "mobileControlsHidden": true
+      },
+      "errors": []
+    }
+  ],
+  "failures": [
+    "320: menu dock placement",
+    "320: menu touch hit blocked",
+    "390: menu dock placement",
+    "390: menu touch hit blocked",
+    "844: menu dock placement",
+    "844: menu touch hit blocked",
+    "568: menu dock placement",
+    "568: menu touch hit blocked"
+  ]
+}

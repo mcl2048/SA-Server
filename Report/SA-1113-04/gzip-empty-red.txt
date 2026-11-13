@@ -1,0 +1,6 @@
+=== RUN   TestGzipEmptySuccessHasValidStream
+    client_http_test.go:68: empty successful gzip representation must still have a valid stream: EOF
+--- FAIL: TestGzipEmptySuccessHasValidStream (0.00s)
+FAIL
+FAIL	sa/server/cmd/saserver	0.018s
+FAIL

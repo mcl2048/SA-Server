@@ -1,0 +1,28 @@
+{
+  "browser": "156.0.8078.4",
+  "scope": "real Chromium UI components with synthetic content; production position manager installed",
+  "cases": [
+    {
+      "case": "classic preference survives immersive layout and drag",
+      "original": {
+        "x": 40,
+        "y": -25
+      },
+      "returned": {
+        "x": 60,
+        "y": -45
+      },
+      "inherited": 1,
+      "passed": false
+    },
+    {
+      "case": "long press survives an animating battle camera",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "classic saved position was applied/overwritten in immersive mode",
+    "camera layout repeatedly cancels the position edit timer",
+    "locator.boundingBox: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.mobile-shell-tray [data-mobile-control=items]')\u001b[22m\n"
+  ]
+}

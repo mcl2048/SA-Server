@@ -27,7 +27,7 @@ test("five enemy damage labels remain inside every stage edge throughout the bou
  for(const mobile of [false,true]){
   setDeviceMode(mobile?"mobile":"desktop");
   const {screen,pics}=uiScreen();
-  for(const x of [0,160,320,640,800])screen.popup({x,y:60,rect:[x-20,-10,40,70]},100,{text:"999999"});
+  for(const x of [0,160,320,640,800])screen.popup({f:{slot:15},x,y:60,rect:[x-20,-10,40,70]},100,{text:"999999"});
   for(const age of [0,100,200,400,800,1200])for(const f of screen.fx)f.draw(0,age);
   assert.ok(pics.every(p=>p.y>=4&&p.y+p.canvas.height<=596&&p.x>=4&&p.x+p.canvas.width<=796));
   assert.ok(pics.every(p=>p.canvas.color==="#ffdf45"));

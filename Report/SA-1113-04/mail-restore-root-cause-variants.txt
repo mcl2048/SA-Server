@@ -1,0 +1,26 @@
+## Isolated root-cause variant: old_take_limit
+Exit 1
+=== RUN   TestRestoreMailsPreservesFullMailbox
+    mail_restore_test.go:29: a restored backlog must be delivered whole, got 50 messages
+--- FAIL: TestRestoreMailsPreservesFullMailbox (0.04s)
+=== RUN   TestRestoreMailsRollsBackPartialFailure
+--- PASS: TestRestoreMailsRollsBackPartialFailure (0.02s)
+=== RUN   TestRestoreMailsHonorsCanceledContext
+--- PASS: TestRestoreMailsHonorsCanceledContext (0.02s)
+FAIL
+FAIL	sa/server/internal/store	0.088s
+FAIL
+
+## Isolated root-cause variant: old_capacity_and_nonatomic_restore
+Exit 1
+=== RUN   TestRestoreMailsPreservesFullMailbox
+    mail_restore_test.go:19: existing new mail must not discard already accepted original mail: 信箱满了
+--- FAIL: TestRestoreMailsPreservesFullMailbox (0.03s)
+=== RUN   TestRestoreMailsRollsBackPartialFailure
+    mail_restore_test.go:59: part of a failed restore was committed: count=2 err=<nil>
+--- FAIL: TestRestoreMailsRollsBackPartialFailure (0.02s)
+=== RUN   TestRestoreMailsHonorsCanceledContext
+--- PASS: TestRestoreMailsHonorsCanceledContext (0.02s)
+FAIL
+FAIL	sa/server/internal/store	0.088s
+FAIL

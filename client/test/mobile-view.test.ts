@@ -157,3 +157,17 @@ test("mobile backing budgets and managed input layout do not change desktop sizi
   view.setDeviceMode("desktop"); box.layout(); assert.notEqual(box.el.style.left, "77px");
   box.remove();
 });
+
+test("a new immersive scene immediately reveals its intended focus and recenters the field", () => {
+  coarse = false; // Do not conflate coarse input with prefers-reduced-motion in this fixture.
+  view.setDeviceMode("mobile");
+  view.setMobileDisplayMode("immersive");
+  view.setMobileContext("battle");
+  view.setSceneFocus(0, 300, 100); flush();
+  assert.ok(Math.abs(parseFloat(stage.style["--mobile-left"]) - 562.6666666666666) < 1e-9);
+  view.setMobileContext("panel"); flush();
+  view.setMobileContext("field");
+  view.setSceneFocus(400, 324, 200); flush();
+  assert.equal(stage.style["--mobile-left"], "195px", "player remains centered after a menu/scene transition");
+  view.setMobileDisplayMode("classic"); view.setDeviceMode("desktop"); flush();
+});

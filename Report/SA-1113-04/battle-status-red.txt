@@ -1,0 +1,26 @@
+(node:403513) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (9.777355ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (2.571288ms)
+✖ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.163804ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 513.330637
+
+✖ failing tests:
+
+test at client/test/battle-camera.test.ts:39:1
+✖ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.163804ms)
+  TypeError [Error]: screen.mobileStatus is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-camera.test.ts:44:23)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

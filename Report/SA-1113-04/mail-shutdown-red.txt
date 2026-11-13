@@ -1,0 +1,6 @@
+=== RUN   TestShutdownRestoresDequeuedMail
+    shutdown_mail_test.go:74: shutdown must retain its dequeued letter: []
+--- FAIL: TestShutdownRestoresDequeuedMail (3.45s)
+FAIL
+FAIL	sa/server/internal/world	3.528s
+FAIL

@@ -1,0 +1,10 @@
+=== RUN   TestFamiliesCloseDrainsSnapshotsAndKV
+--- PASS: TestFamiliesCloseDrainsSnapshotsAndKV (0.05s)
+=== RUN   TestFamiliesConcurrentCloseAndSubmission
+--- PASS: TestFamiliesConcurrentCloseAndSubmission (0.02s)
+=== RUN   TestSharedFamiliesSurviveIndividualWorldShutdown
+--- PASS: TestSharedFamiliesSurviveIndividualWorldShutdown (0.02s)
+=== RUN   TestOwnedFamiliesJoinAndReplacement
+--- PASS: TestOwnedFamiliesJoinAndReplacement (0.03s)
+PASS
+ok  	sa/server/internal/world	0.152s

@@ -4,12 +4,14 @@ package webclient
 
 import (
 	"bytes"
+	"compress/gzip"
 	"crypto/sha256"
 	"embed"
 	"fmt"
 	"io/fs"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -47,12 +49,48 @@ func published(name string) bool {
 type clientFile struct {
 	content []byte
 	etag    string
+	gzip    []byte
 }
 
 func readClientFile(files fs.FS, name string) (clientFile, error) {
 	content, err := fs.ReadFile(files, name)
 	// The weak validator identifies decoded content across identity/gzip variants.
-	return clientFile{content, fmt.Sprintf(`W/"%x"`, sha256.Sum256(content))}, err
+	return clientFile{content: content, etag: fmt.Sprintf(`W/"%x"`, sha256.Sum256(content))}, err
+}
+
+// These limits cover only additional compressed copies. Published embedded
+// originals were already cached; no Assets file is loaded by this handler.
+const maxGzipCacheBytes = 4 << 20
+const maxGzipFileBytes = 2 << 20
+
+func compressedClientFile(content []byte, remaining int) []byte {
+	if len(content) == 0 || len(content) > maxGzipFileBytes || remaining <= 0 {
+		return nil
+	}
+	var encoded bytes.Buffer
+	writer, err := gzip.NewWriterLevel(&encoded, gzip.BestSpeed)
+	if err != nil {
+		return nil // Compression is optional; identity and streaming remain valid.
+	}
+	_, writeErr := writer.Write(content)
+	closeErr := writer.Close()
+	if writeErr != nil || closeErr != nil || encoded.Len() >= len(content) || encoded.Len() > remaining {
+		return nil
+	}
+	// Copy the finished stream so the cache does not retain Buffer's spare
+	// capacity; the payload budget is independent of compression growth steps.
+	return bytes.Clone(encoded.Bytes())
+}
+
+func varyEncoding(header http.Header) {
+	for _, value := range header.Values("Vary") {
+		for _, field := range strings.Split(value, ",") {
+			if field = strings.TrimSpace(field); field == "*" || strings.EqualFold(field, "Accept-Encoding") {
+				return
+			}
+		}
+	}
+	header.Add("Vary", "Accept-Encoding")
 }
 
 func handler(files fs.FS, snapshot bool) http.Handler {
@@ -61,9 +99,14 @@ func handler(files fs.FS, snapshot bool) http.Handler {
 	var cached map[string]clientFile
 	if snapshot {
 		cached = make(map[string]clientFile)
+		remaining := maxGzipCacheBytes
 		fs.WalkDir(files, ".", func(name string, entry fs.DirEntry, err error) error {
 			if err == nil && !entry.IsDir() && published(name) {
 				if file, err := readClientFile(files, name); err == nil {
+					if name != "art/login.png" {
+						file.gzip = compressedClientFile(file.content, remaining)
+						remaining -= len(file.gzip)
+					}
 					cached[name] = file
 				}
 			}
@@ -115,6 +158,21 @@ func handler(files fs.FS, snapshot bool) http.Handler {
 			}
 		}
 		w.Header().Set("ETag", file.etag)
-		http.ServeContent(w, r, name, time.Time{}, bytes.NewReader(file.content))
+		content := file.content
+		if name != "art/login.png" {
+			varyEncoding(w.Header())
+		}
+		if len(file.gzip) > 0 && AcceptsGzip(strings.Join(r.Header.Values("Accept-Encoding"), ",")) {
+			// Range bytes refer to the decoded script; serving part of a gzip
+			// stream would produce an invalid program. Preserve identity ranges.
+			if r.Header.Get("Range") != "" {
+				r = r.Clone(r.Context())
+				r.Header.Del("Range")
+			}
+			content = file.gzip
+			w.Header().Set("Content-Encoding", "gzip")
+			w.Header().Set("Content-Length", strconv.Itoa(len(content)))
+		}
+		http.ServeContent(w, r, name, time.Time{}, bytes.NewReader(content))
 	})
 }

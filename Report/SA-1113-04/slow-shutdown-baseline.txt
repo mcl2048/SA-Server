@@ -1,0 +1,30 @@
+=== RUN   TestSIGTERMWaitsForSlowSaveQueue
+    shutdown_test.go:55: SIGTERM completed after 10.045400555s for 4 online players (slow=true)
+    shutdown_test.go:55: online position not flushed for character 1: floor=1006 x=15 y=22
+        time=2026-11-13T13:40:10.178Z level=INFO msg=设定 file=/tmp/TestSIGTERMWaitsForSlowSaveQueue4293267059/001/config.yaml addr=127.0.0.1:41155 gms="[shutdownfixture0 shutdownfixture1 shutdownfixture2 shutdownfixture3]" maxChars=2 rules="{CharMaxLevel:140 PetMaxLevel:140 CharMaxTrans:6 PetMaxTrans:2 BattleGoldRate:0 ExpRate:1 ShareExp:true DropRate:1 EncounterRate:0 TurnTime:30 LevelUpPoints:3 GroundItem:20 GroundPet:30 GroundGold:1800 FamilyFee:10000 NoEscape:[12345 142 40001 40002 40003 40004 40005 40006 40007 40008 40009 40010 8252 8253 8254 8256] WorldTrans:5 WorldLevel:140 WorldFame:1 AllServTrans:5 AllServLevel:140 AllServFame:1 BusStep:300 VendorTax:0 WalkSpeed:1 BattleSpeed:1 PetDeathLoss:0 EnemyGuard:0.5}"
+        time=2026-11-13T13:40:13.402Z level=INFO msg=原版数据已加载 floors=1382 tileAttrs=20250 warnings=0 took=3.224115336s
+        time=2026-11-13T13:40:13.416Z level=INFO msg=经验存档已换成原版语义 characters=4 changed=4
+        time=2026-11-13T13:40:13.422Z level=INFO msg=线路已启动 count=1
+        time=2026-11-13T13:40:13.445Z level=INFO msg=服务端已启动 version=v0.2.10-LYNX-dev url=http://127.0.0.1:41155/
+        time=2026-11-13T13:40:13.512Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture0 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.538Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture1 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.565Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture2 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.586Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture3 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:23.604Z level=INFO msg=已退出，在线角色位置已保存
+        PASS
+    shutdown_test.go:55: online position not flushed for character 2: floor=1006 x=15 y=22
+        time=2026-11-13T13:40:10.178Z level=INFO msg=设定 file=/tmp/TestSIGTERMWaitsForSlowSaveQueue4293267059/001/config.yaml addr=127.0.0.1:41155 gms="[shutdownfixture0 shutdownfixture1 shutdownfixture2 shutdownfixture3]" maxChars=2 rules="{CharMaxLevel:140 PetMaxLevel:140 CharMaxTrans:6 PetMaxTrans:2 BattleGoldRate:0 ExpRate:1 ShareExp:true DropRate:1 EncounterRate:0 TurnTime:30 LevelUpPoints:3 GroundItem:20 GroundPet:30 GroundGold:1800 FamilyFee:10000 NoEscape:[12345 142 40001 40002 40003 40004 40005 40006 40007 40008 40009 40010 8252 8253 8254 8256] WorldTrans:5 WorldLevel:140 WorldFame:1 AllServTrans:5 AllServLevel:140 AllServFame:1 BusStep:300 VendorTax:0 WalkSpeed:1 BattleSpeed:1 PetDeathLoss:0 EnemyGuard:0.5}"
+        time=2026-11-13T13:40:13.402Z level=INFO msg=原版数据已加载 floors=1382 tileAttrs=20250 warnings=0 took=3.224115336s
+        time=2026-11-13T13:40:13.416Z level=INFO msg=经验存档已换成原版语义 characters=4 changed=4
+        time=2026-11-13T13:40:13.422Z level=INFO msg=线路已启动 count=1
+        time=2026-11-13T13:40:13.445Z level=INFO msg=服务端已启动 version=v0.2.10-LYNX-dev url=http://127.0.0.1:41155/
+        time=2026-11-13T13:40:13.512Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture0 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.538Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture1 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.565Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture2 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:13.586Z level=INFO msg=上线 line=ShutdownTestOne char=ShutdownFixture3 floor=1006 x=15 y=22 gm=true
+        time=2026-11-13T13:40:23.604Z level=INFO msg=已退出，在线角色位置已保存
+        PASS
+--- FAIL: TestSIGTERMWaitsForSlowSaveQueue (13.57s)
+FAIL
+FAIL	sa/server/cmd/saserver	13.589s
+FAIL

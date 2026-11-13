@@ -151,13 +151,16 @@ type World struct {
 	// saves 是存档队列：由一个协程按顺序写库，保证同一角色的新存档不会被旧存档盖掉。
 	// enqueue 按 key 合并：同一个 key 还没写时只换掉要写的内容，不再排一笔（道具栏一秒动 40 次也只写一次），
 	// 队列里顶多每个在线角色各一笔，不会被刷爆而卡住世界协程
-	saves      chan func()
-	saveMu     sync.Mutex
-	saveLatest map[string]func()
-	started    time.Time          // 开机时间（记录点报"本星球已经启动了…"）
-	timeMen    []*entity          // 按时间换图的 NPC（TimeMan）
-	quizzes    map[int]*quizState // 角色 ID → 正在进行的猜谜（quiz.go）
-	fam        *Families          // 家族（所有线路共用，family.go）
+	saves        chan func()
+	saveDone     chan struct{} // Closed only after the single saver has drained and exited.
+	stopping     chan struct{} // Fences external commands before the final save snapshot.
+	saveMu       sync.Mutex
+	saveLatest   map[string]func()
+	started      time.Time          // 开机时间（记录点报"本星球已经启动了…"）
+	timeMen      []*entity          // 按时间换图的 NPC（TimeMan）
+	quizzes      map[int]*quizState // 角色 ID → 正在进行的猜谜（quiz.go）
+	fam          *Families          // 家族（所有线路共用，family.go）
+	ownsFamilies bool               // Standalone worlds close their private saver; shared owner joins once.
 	// inbox 是别的线路送来的事（post），世界协程在 Do 之后与 wake 时做
 	inboxMu sync.Mutex
 	inbox   []func()
@@ -165,14 +168,22 @@ type World struct {
 }
 
 // New 创建一条线路的世界。seed 决定 NPC 的随机出生位置（不同线路的 NPC 站位可以不同）。
-func New(game *data.Game, db store.Store, log *slog.Logger, seed int64) *World {
+// sharedFamilies avoids loading/starting another saver. Register each shared
+// world with ShareFamilies before Run; the shared owner closes it after all Run calls end.
+func New(game *data.Game, db store.Store, log *slog.Logger, seed int64, sharedFamilies ...*Families) *World {
 	w := &World{game: game, db: db, log: log, cmds: make(chan func(), 1024),
 		floors: map[int]map[int]*entity{}, players: map[int]*entity{}, now: time.Now,
-		rnd: rand.New(rand.NewPCG(uint64(seed), 1)), saves: make(chan func(), 4096), started: time.Now(),
+		rnd: rand.New(rand.NewPCG(uint64(seed), 1)), saves: make(chan func(), 4096), saveDone: make(chan struct{}), stopping: make(chan struct{}), started: time.Now(),
 		quizzes: map[int]*quizState{}, wake: make(chan struct{}, 1), Rules: DefaultRules()}
 
-	w.fam = NewFamilies(db, log)
+	if len(sharedFamilies) > 0 && sharedFamilies[0] != nil {
+		w.fam = sharedFamilies[0]
+	} else {
+		w.fam = NewFamilies(db, log)
+		w.ownsFamilies = true
+	}
 	go func() {
+		defer close(w.saveDone)
 		for f := range w.saves {
 			f()
 		}
@@ -238,16 +249,36 @@ func (w *World) Run(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
+			close(w.stopping)
+			// A saver may already have taken mail from SQLite and posted its
+			// delivery to the world inbox. Drain those callbacks before taking
+			// the final snapshot; a stopping callback restores its original mail.
+			// Posting is synchronous/nonblocking, so this fence establishes that
+			// all older jobs have published their callbacks without a goroutine
+			// waiting on a world that is no longer accepting external commands.
+			fence := make(chan struct{})
+			w.saves <- func() { close(fence) }
+			waiting := true
+			for waiting {
+				select {
+				case <-w.wake:
+					w.drain()
+				case <-fence:
+					waiting = false
+				}
+			}
+			w.drain()
 			for _, e := range w.players {
 				w.save(e)
 				w.saveProgress(e)
 			}
-			// 等存档队列写完再退出
-			done := make(chan struct{})
-			w.saves <- func() { close(done) }
-			select {
-			case <-done:
-			case <-time.After(10 * time.Second):
+			// The world owns all remaining producers. Flush uses the world
+			// command queue too, so closing here cannot race a migration fence.
+			// Never trade pending player saves for a fixed ten-second deadline.
+			close(w.saves)
+			<-w.saveDone
+			if w.ownsFamilies {
+				w.fam.Close()
 			}
 			return
 		case f := <-w.cmds:
@@ -288,12 +319,21 @@ func (w *World) Panics() int64 { return w.panics.Load() }
 // Do 把 f 投递到世界协程执行，并等待它完成（f panic 时也一定放行，不会让调用的人卡住）。
 func (w *World) Do(f func()) {
 	done := make(chan struct{})
-	w.cmds <- func() {
+	command := func() {
 		defer close(done)
 		w.safe(f)
 		w.drain()
 	}
-	<-done
+	select {
+	case <-w.stopping:
+		return
+	case w.cmds <- command:
+	}
+	select {
+	case <-done:
+	case <-w.stopping:
+		// In-flight sockets cannot wait forever behind a stopped world.
+	}
 }
 
 // post 把 f 交给世界协程稍后执行，不等待、不会阻塞（别的线路、家族资料送来的事用它，避免互相等待）。
@@ -325,10 +365,18 @@ func (w *World) drain() {
 // Families 回传这条线路用的家族资料；ShareFamilies 让几条线路共用同一份（cmd/saserver 在 Run 之前设定）。
 func (w *World) Families() *Families { return w.fam }
 func (w *World) ShareFamilies(f *Families) {
+	// Startup ownership transfer. Never close a saver owned by another world.
+	old, owned := w.fam, w.ownsFamilies
 	w.fam = f
+	w.ownsFamilies = false
 	f.mu.Lock()
-	f.worlds = append(f.worlds, w)
+	if !slices.Contains(f.worlds, w) {
+		f.worlds = append(f.worlds, w)
+	}
 	f.mu.Unlock()
+	if old != f && owned {
+		old.Close()
+	}
 }
 
 // ---------------- 进入与离开 ----------------
@@ -1183,10 +1231,14 @@ func (w *World) refreshView(e *entity) {
 
 // announce 让附近的其他玩家看到 e（新出现）。
 func (w *World) announce(e *entity) {
+	var appearance *proto.ObjAppear
 	for _, o := range w.floors[e.floor] {
 		if o != e && o.client != nil && (o.kind != "player" || o.attached()) && near(o, e) && !o.visible[e.id] {
 			o.visible[e.id] = true
-			o.client.Send(&proto.ObjAppear{Objs: []proto.ObjInfo{e.info()}})
+			if appearance == nil {
+				appearance = &proto.ObjAppear{Objs: []proto.ObjInfo{e.info()}}
+			}
+			o.client.Send(appearance)
 		}
 	}
 }
@@ -1196,6 +1248,12 @@ func (w *World) broadcastMove(e *entity) {
 	if e.client != nil { // 溜着的宠物没有自己的画面
 		w.refreshView(e)
 	}
+	// These messages describe one immutable world event. Share its value among
+	// recipients instead of allocating one identical object per nearby player.
+	// Neither the world nor transports may mutate it after Send.
+	var movement *proto.ObjMove
+	var appearance *proto.ObjAppear
+	var disappearance *proto.ObjDisappear
 	for _, o := range w.floors[e.floor] {
 		if o == e || o.client == nil || (o.kind == "player" && !o.attached()) {
 			continue
@@ -1203,13 +1261,22 @@ func (w *World) broadcastMove(e *entity) {
 		in := near(o, e)
 		switch {
 		case in && o.visible[e.id]:
-			o.client.Send(&proto.ObjMove{ID: e.id, X: e.x, Y: e.y, Dir: e.dir})
+			if movement == nil {
+				movement = &proto.ObjMove{ID: e.id, X: e.x, Y: e.y, Dir: e.dir}
+			}
+			o.client.Send(movement)
 		case in:
 			o.visible[e.id] = true
-			o.client.Send(&proto.ObjAppear{Objs: []proto.ObjInfo{e.info()}})
+			if appearance == nil {
+				appearance = &proto.ObjAppear{Objs: []proto.ObjInfo{e.info()}}
+			}
+			o.client.Send(appearance)
 		case o.visible[e.id]:
 			delete(o.visible, e.id)
-			o.client.Send(&proto.ObjDisappear{IDs: []int{e.id}})
+			if disappearance == nil {
+				disappearance = &proto.ObjDisappear{IDs: []int{e.id}}
+			}
+			o.client.Send(disappearance)
 		}
 	}
 }
@@ -1263,15 +1330,34 @@ func (w *World) saveAll() {
 // Flush 等存档队列里排在前面的写入都做完（换线路重登前要等旧线路存完，不然读到旧存档）。
 func (w *World) Flush(timeout time.Duration) bool {
 	done := make(chan struct{})
+	timer := time.NewTimer(timeout)
+	defer timer.Stop()
+	// Only the world sends to saves. A timeout may leave a harmless fence in
+	// cmds; it cannot send concurrently with the world closing its saver.
+	command := func() { w.saves <- func() { close(done) } }
 	select {
-	case w.saves <- func() { close(done) }:
-	case <-time.After(timeout):
+	case w.cmds <- command:
+	case <-w.stopping:
+		select {
+		case <-w.saveDone:
+			return true
+		case <-timer.C:
+			return false
+		}
+	case <-timer.C:
 		return false
 	}
 	select {
 	case <-done:
 		return true
-	case <-time.After(timeout):
+	case <-w.stopping:
+		select {
+		case <-w.saveDone:
+			return true
+		case <-timer.C:
+			return false
+		}
+	case <-timer.C:
 		return false
 	}
 }

@@ -1,0 +1,38 @@
+{
+  "browser": "156.0.8078.4",
+  "scope": "real Chromium UI components with synthetic content; production position manager installed",
+  "cases": [
+    {
+      "case": "classic preference survives immersive layout and drag",
+      "original": {
+        "x": 40,
+        "y": -25
+      },
+      "returned": {
+        "x": 60,
+        "y": -45
+      },
+      "inherited": 1,
+      "passed": false
+    },
+    {
+      "case": "long press survives an animating battle camera",
+      "passed": false
+    },
+    {
+      "case": "drawer scrolls from a button without firing its action",
+      "before": {
+        "top": 0,
+        "max": 164
+      },
+      "after": 0,
+      "fired": [],
+      "passed": false
+    }
+  ],
+  "failures": [
+    "classic saved position was applied/overwritten in immersive mode",
+    "camera layout repeatedly cancels the position edit timer",
+    "button touch action blocks drawer scrolling or fires a command"
+  ]
+}

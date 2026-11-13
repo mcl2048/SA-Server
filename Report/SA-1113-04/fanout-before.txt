@@ -1,0 +1,15 @@
+goos: linux
+goarch: amd64
+pkg: sa/server/internal/world
+cpu: Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+BenchmarkBroadcastMoveFanout/100-2         	   10521	     22846 ns/op	    3200 B/op	     100 allocs/op
+BenchmarkBroadcastMoveFanout/100-2         	   10000	     20802 ns/op	    3200 B/op	     100 allocs/op
+BenchmarkBroadcastMoveFanout/100-2         	    9650	     25428 ns/op	    3200 B/op	     100 allocs/op
+BenchmarkBroadcastMoveFanout/1000-2        	     352	    585196 ns/op	   32000 B/op	    1000 allocs/op
+BenchmarkBroadcastMoveFanout/1000-2        	     466	    503543 ns/op	   32000 B/op	    1000 allocs/op
+BenchmarkBroadcastMoveFanout/1000-2        	     363	    562325 ns/op	   32000 B/op	    1000 allocs/op
+BenchmarkBroadcastMoveFanout/5000-2        	     108	   2513471 ns/op	  160000 B/op	    5000 allocs/op
+BenchmarkBroadcastMoveFanout/5000-2        	     100	   3021960 ns/op	  160000 B/op	    5000 allocs/op
+BenchmarkBroadcastMoveFanout/5000-2        	      74	   3601967 ns/op	  160076 B/op	    5000 allocs/op
+PASS
+ok  	sa/server/internal/world	3.450s

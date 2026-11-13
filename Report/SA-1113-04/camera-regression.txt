@@ -1,0 +1,25 @@
+(node:480677) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (8.885199ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (3.263674ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.157669ms)
+✔ enemy camera prefers a live opponent and falls back to corpses after the last defeat (0.978094ms)
+✔ portrait immersive scene fills the viewport at native scale or larger without stretching (3.147984ms)
+✔ landscape immersive scene keeps native character pixels and crops vertically (0.469556ms)
+✔ focusing edge targets never reveals empty space outside the original scene (0.881024ms)
+✔ invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale (0.475727ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (18.425177ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (4.199983ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (14.453624ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (2.876334ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (1.835223ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (6.86069ms)
+✔ a new immersive scene immediately reveals its intended focus and recenters the field (6.820945ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 963.792832

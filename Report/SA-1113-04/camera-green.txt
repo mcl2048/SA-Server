@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: self and enemy camera preferences use native battle positions without submitting commands
+ok 1 - self and enemy camera preferences use native battle positions without submitting commands
+  ---
+  duration_ms: 11.941586
+  type: 'test'
+  ...
+# Subtest: automatic camera follows the actual actor and switches to a visible damage target
+ok 2 - automatic camera follows the actual actor and switches to a visible damage target
+  ---
+  duration_ms: 4.321488
+  type: 'test'
+  ...
+# Subtest: each owned live pet uses its bag skills and sends one independent action
+ok 3 - each owned live pet uses its bag skills and sends one independent action
+  ---
+  duration_ms: 39.438386
+  type: 'test'
+  ...
+# Subtest: pet tabs select another pending pet without borrowing another owner's pet
+ok 4 - pet tabs select another pending pet without borrowing another owner's pet
+  ---
+  duration_ms: 8.209185
+  type: 'test'
+  ...
+# Subtest: server automation prevents normal, quick and reconnect duplicate client commands
+ok 5 - server automation prevents normal, quick and reconnect duplicate client commands
+  ---
+  duration_ms: 32.7699
+  type: 'test'
+  ...
+# Subtest: resume restores turn, submitted pets, status and positions without an intro or first-turn AI
+ok 6 - resume restores turn, submitted pets, status and positions without an intro or first-turn AI
+  ---
+  duration_ms: 1.538126
+  type: 'test'
+  ...
+# Subtest: turn resolution clears previous pending menus and opens fresh per-pet submissions
+ok 7 - turn resolution clears previous pending menus and opens fresh per-pet submissions
+  ---
+  duration_ms: 5.114265
+  type: 'test'
+  ...
+# Subtest: resetPets atomically removes old pets and updates full layout without a new intro
+ok 8 - resetPets atomically removes old pets and updates full layout without a new intro
+  ---
+  duration_ms: 1.282169
+  type: 'test'
+  ...
+# Subtest: pet layout movement preserves submissions and selected skills by bag identity
+ok 9 - pet layout movement preserves submissions and selected skills by bag identity
+  ---
+  duration_ms: 3.421344
+  type: 'test'
+  ...
+# Subtest: PetOut uses event bag and owner while the Pets snapshot still names another primary
+ok 10 - PetOut uses event bag and owner while the Pets snapshot still names another primary
+  ---
+  duration_ms: 6.141897
+  type: 'test'
+  ...
+# Subtest: quick display never restarts client automation after both live auto switches are off
+ok 11 - quick display never restarts client automation after both live auto switches are off
+  ---
+  duration_ms: 1.697347
+  type: 'test'
+  ...
+# Subtest: quick display switches preserve the same fighters, queued work, turn and submissions and load the background once
+ok 12 - quick display switches preserve the same fighters, queued work, turn and submissions and load the background once
+  ---
+  duration_ms: 110.222785
+  type: 'test'
+  ...
+# Subtest: leaving fast playback preserves the remaining real command time on its advanced animation clock
+ok 13 - leaving fast playback preserves the remaining real command time on its advanced animation clock
+  ---
+  duration_ms: 1.644416
+  type: 'test'
+  ...
+# Subtest: watch mode and dead pets never expose a command slot
+ok 14 - watch mode and dead pets never expose a command slot
+  ---
+  duration_ms: 0.871349
+  type: 'test'
+  ...
+# Subtest: portrait immersive scene fills the viewport at native scale or larger without stretching
+ok 15 - portrait immersive scene fills the viewport at native scale or larger without stretching
+  ---
+  duration_ms: 22.870504
+  type: 'test'
+  ...
+# Subtest: landscape immersive scene keeps native character pixels and crops vertically
+ok 16 - landscape immersive scene keeps native character pixels and crops vertically
+  ---
+  duration_ms: 1.765147
+  type: 'test'
+  ...
+# Subtest: focusing edge targets never reveals empty space outside the original scene
+ok 17 - focusing edge targets never reveals empty space outside the original scene
+  ---
+  duration_ms: 6.757463
+  type: 'test'
+  ...
+# Subtest: invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale
+ok 18 - invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale
+  ---
+  duration_ms: 0.477003
+  type: 'test'
+  ...
+# Subtest: portrait fills the full width and keeps 4:3 without borrowing control height
+ok 19 - portrait fills the full width and keeps 4:3 without borrowing control height
+  ---
+  duration_ms: 16.362104
+  type: 'test'
+  ...
+# Subtest: landscape fills height where possible, stays centered and preserves independent rails
+ok 20 - landscape fills height where possible, stays centered and preserves independent rails
+  ---
+  duration_ms: 1.72887
+  type: 'test'
+  ...
+# Subtest: dragged controls stay within the browser after large moves and rotation
+ok 21 - dragged controls stay within the browser after large moves and rotation
+  ---
+  duration_ms: 3.959904
+  type: 'test'
+  ...
+# Subtest: narrow desktop remains desktop; modes move and restore the original stage
+ok 22 - narrow desktop remains desktop; modes move and restore the original stage
+  ---
+  duration_ms: 6.179556
+  type: 'test'
+  ...
+# Subtest: IME confirmation never reaches native submit handlers or prevents composition
+ok 23 - IME confirmation never reaches native submit handlers or prevents composition
+  ---
+  duration_ms: 3.012908
+  type: 'test'
+  ...
+# Subtest: mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+ok 24 - mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+  ---
+  duration_ms: 5.007572
+  type: 'test'
+  ...
+# Subtest: two-finger scene pinch cancels game hold, clamps zoom and resets view
+ok 25 - two-finger scene pinch cancels game hold, clamps zoom and resets view
+  ---
+  duration_ms: 2.251916
+  type: 'test'
+  ...
+# Subtest: mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+ok 26 - mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+  ---
+  duration_ms: 1.709753
+  type: 'test'
+  ...
+# Subtest: mobile backing budgets and managed input layout do not change desktop sizing
+ok 27 - mobile backing budgets and managed input layout do not change desktop sizing
+  ---
+  duration_ms: 2.357443
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1628.112298

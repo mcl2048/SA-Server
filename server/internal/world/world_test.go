@@ -64,8 +64,16 @@ func setup(t *testing.T) (*World, store.Store, *data.Game) {
 	}
 	w := New(gameOnce.g, db, slog.New(slog.NewTextHandler(io.Discard, nil)), 1)
 	ctx, cancel := context.WithCancel(context.Background())
-	go w.Run(ctx)
-	t.Cleanup(func() { cancel(); db.Close() })
+	done := make(chan struct{})
+	go func() { w.Run(ctx); close(done) }()
+	// Match production ownership: join all final writes before closing SQLite.
+	t.Cleanup(func() {
+		cancel()
+		<-done
+		if err := db.Close(); err != nil {
+			t.Error(err)
+		}
+	})
 	return w, db, gameOnce.g
 }
 

@@ -1,26 +1,26 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=8215e83e5e3ed1aa";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=8215e83e5e3ed1aa";
-import { Sound, setSfx } from "./audio.js?v=8215e83e5e3ed1aa";
-import { MAP_BGM } from "./soundtable.js?v=8215e83e5e3ed1aa";
-import { Connection, trafficRates } from "./net.js?v=8215e83e5e3ed1aa";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=8215e83e5e3ed1aa";
-import { Renderer,              } from "./renderer.js?v=8215e83e5e3ed1aa";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=8215e83e5e3ed1aa";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=8215e83e5e3ed1aa";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=8215e83e5e3ed1aa";
-import { ACTION_KEYS } from "./actions.js?v=8215e83e5e3ed1aa";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=8215e83e5e3ed1aa";
-import { BattleScreen } from "./battle.js?v=8215e83e5e3ed1aa";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=8215e83e5e3ed1aa";
-import { Shop } from "./shop.js?v=8215e83e5e3ed1aa";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=8215e83e5e3ed1aa";
-import { loadAi } from "./ai.js?v=8215e83e5e3ed1aa";
-import { AiMemory } from "./aismart.js?v=8215e83e5e3ed1aa";
-import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.js?v=8215e83e5e3ed1aa";
-import { MobileShell } from "./mobile-shell.js?v=8215e83e5e3ed1aa";
-import { installControlPositions } from "./mobile-position.js?v=8215e83e5e3ed1aa";
+import { Assets } from "./assets.js?v=e5c6eee3f928fb08";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=e5c6eee3f928fb08";
+import { Sound, setSfx } from "./audio.js?v=e5c6eee3f928fb08";
+import { MAP_BGM } from "./soundtable.js?v=e5c6eee3f928fb08";
+import { Connection, trafficRates } from "./net.js?v=e5c6eee3f928fb08";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=e5c6eee3f928fb08";
+import { Renderer,              } from "./renderer.js?v=e5c6eee3f928fb08";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=e5c6eee3f928fb08";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=e5c6eee3f928fb08";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=e5c6eee3f928fb08";
+import { ACTION_KEYS } from "./actions.js?v=e5c6eee3f928fb08";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=e5c6eee3f928fb08";
+import { BattleScreen } from "./battle.js?v=e5c6eee3f928fb08";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=e5c6eee3f928fb08";
+import { Shop } from "./shop.js?v=e5c6eee3f928fb08";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=e5c6eee3f928fb08";
+import { loadAi } from "./ai.js?v=e5c6eee3f928fb08";
+import { AiMemory } from "./aismart.js?v=e5c6eee3f928fb08";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=e5c6eee3f928fb08";
+import { MobileShell } from "./mobile-shell.js?v=e5c6eee3f928fb08";
+import { installControlPositions } from "./mobile-position.js?v=e5c6eee3f928fb08";
 
 
 const params = new URLSearchParams(location.search);
@@ -633,6 +633,10 @@ const MIND_KEYS                         = { q: 101296, w: 101297, e: 101300, r: 
   a: 101291, s: 101290, d: 101294, f: 101295, g: 101288, h: 101303, j: 101304 };
 
 addEventListener("keydown", (e) => {
+  // A cancelled physical direction is not reactivated by hardware repetition.
+  // Do this before keyPressed too, so it cannot navigate a newly opened panel.
+  if (isMobile() && screen instanceof FieldScreen && document.activeElement?.tagName !== "INPUT"
+    && e.key.startsWith("Arrow") && e.repeat && !keys.has(e.key)) { e.preventDefault(); return; }
   keyPressed.add(e.ctrlKey ? `Ctrl+${e.key.toLowerCase()}` : e.key);
   if (e.altKey && !e.ctrlKey && screen instanceof FieldScreen && document.activeElement?.tagName !== "INPUT" && MIND_KEYS[e.key.toLowerCase()]) {
     e.preventDefault();
@@ -796,7 +800,8 @@ class FieldScreen                   {
   }
 
   /** 开着的窗口数（开窗口 SE 202、关窗口 203 用） */
-  openCount() { return this.menus.openCount() + (this.panel.etcOpen ? 1 : 0) + (this.chatWnd ? 1 : 0); }
+  openCount() { return this.menus.openCount() + (this.panel.etcOpen ? 1 : 0) + (this.chatWnd ? 1 : 0)
+    + (isMobile() && this.menus.hasBattleResult() ? 1 : 0); }
 
           chatWnd = false;         chatWndScroll = 0; // 完整聊天记录窗口：往前翻了几行
   /** 完整的聊天记录：(60, 40)..(740, 530) 的半透明窗口，最近 200 行，滚轮或右边的 ▲▼ 翻，Esc 或 ✕ 关 */
@@ -1130,6 +1135,12 @@ let mobileDirection = -1;
 let pendingMobileAction                                                                                                                                = null;
 let mobileSelection                                                                                          = null;
 let mobilePointer                                  = null;
+let mobileCamera                              = "follow";
+let mobileFocusHold                                                                       = null;
+function focusMobileTarget(hit                                                                ) {
+  if (isImmersive() && battle && !battle.quick && /^(?:t|mt|pt)-\d+$/.test(hit.id))
+    mobileFocusHold = { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2, until: performance.now() + 1800, battle };
+}
 function mobileOptions() {
   const options = ui.getMobileActions().filter(h => !/(?:^|-)(?:block|blocker|wnd|bg|win)$/.test(h.id)
     && !(h.x2 - h.x1 >= 600 && h.y2 - h.y1 >= 450));
@@ -1148,6 +1159,7 @@ function selectedMobileHit() {
 function queueMobileClick(button       , id         ) {
   if (!isMobile()) return;
   const hit = id ? mobileOptions().find(h => h.id === id) : selectedMobileHit();
+  if (hit) focusMobileTarget(hit);
   const point = hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
   if (!point && button === 0) {
     const first = mobileOptions()[0]; if (first) { mobileSelection = { id: first.id, screen, modal, battle }; queueMobileClick(button, first.id); }
@@ -1173,6 +1185,7 @@ const mobile = new MobileShell(ui, {
     const options = mobileOptions(); if (!options.length) return;
     const selected = selectedMobileHit(), index = selected ? options.findIndex(h => h.id === selected.id) : dir > 0 ? -1 : 0;
     const hit = options[(index + dir + options.length) % options.length];
+    focusMobileTarget(hit);
     mobileSelection = { id: hit.id, screen, modal, battle };
     mobileDirection = -1; mouse.cancel(); keys.clear();
     if (screen instanceof FieldScreen) screen.cancelMobileMotion();
@@ -1180,6 +1193,12 @@ const mobile = new MobileShell(ui, {
   click(button) { queueMobileClick(button); },
   command(name) {
     if (!isMobile()) return;
+    if (name === "camera-self" || name === "camera-enemy" || name === "camera-follow") {
+      if (!battle || battle.quick || !isImmersive()) return;
+      mobileCamera = name === "camera-self" ? "self" : name === "camera-enemy" ? "enemy" : "follow";
+      mobileFocusHold = null; resetSceneView();
+      return;
+    }
     if (name === "auto-encounter") {
       if (screen instanceof FieldScreen && !modal && !battle && !screen.openCount() && serverAutoPlay.canEncounter) {
         autoEncounterWanted = !autoEncounterWanted; syncAutoPlay(true);
@@ -1189,6 +1208,9 @@ const mobile = new MobileShell(ui, {
     if (name === "back" && modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); return; }
     if (name === "back" && modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); return; }
     if (name === "back" && battle) { queueMobileClick(2); return; }
+    if (name === "back" && !modal && screen instanceof FieldScreen && screen.menus.hasBattleResult()) {
+      queueMobileClick(0, "result-close"); return; // Same reachable native close as a direct click.
+    }
     if (screen instanceof FieldScreen) screen.mobileCommand(name);
     else if (name === "back") {
       const options = mobileOptions();
@@ -1203,29 +1225,39 @@ const mobile = new MobileShell(ui, {
   cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });
 installControlPositions(() => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
-const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mouse.cancel(); };
+const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mobilePointer = null; keys.clear(); mouse.cancel(); };
 document.addEventListener("sa-device-change", releaseMobileInput);
 document.addEventListener("sa-mobile-gesture", () => { releaseMobileInput(); if (isMobile() && screen instanceof FieldScreen) screen.cancelMobileMotion(); });
 addEventListener("blur", releaseMobileInput);
 document.addEventListener("visibilitychange", () => { if (document.hidden) releaseMobileInput(); });
 
-function mobileFrame() {
+function mobileFrame(now        ) {
   if (!isMobile()) { mobile.frame({ phase: "desktop", panel: false }); return; }
   const f = screen instanceof FieldScreen ? screen : null;
-  const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0);
-  setMobileScene(!!f && !panel && !battle);
+  const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0) || !!battle?.mobilePanelOpen();
+  const visualBattle = !!battle && !battle.quick;
+  const context = panel ? "panel" : visualBattle ? "battle" : f ? "field" : "lobby";
+  setMobileContext(context);
+  if (isImmersive() && !panel) {
+    const held = mobileFocusHold && mobileFocusHold.battle === battle && now < mobileFocusHold.until ? mobileFocusHold : null;
+    const focus = visualBattle ? held ?? battle .mobileFocus(mobileCamera) : { x: 400, y: 324 };
+    setSceneFocus(focus.x, focus.y, now);
+  }
   setMobileLoginArtwork(screen instanceof LoginScreen && !app.loginArt && !modal);
   const phase = battle ? "battle" : f ? "field" : screen instanceof LoginScreen ? "login"
     : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
-  const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "StoneAge";
+  const status = battle ? battle.mobileStatus() : selfStatus && f
+    ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "StoneAge";
   const selected = selectedMobileHit();
-  mobile.frame({ phase, panel, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
-    title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
+  const battleLabels = battle?.mobileActionLabels() ?? {};
+  mobile.frame({ phase, panel, context, cameraAvailable: visualBattle, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter,
+    selectedLabel: selected ? battleLabels[selected.id] || selected.label || selected.id : undefined, selectedId: selected?.id,
+    title: modal ? "对话" : f?.menus.hasBattleResult() ? "战斗结果" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
-    actionLabels: Object.fromEntries([
+    actionLabels: { ...battleLabels, ...Object.fromEntries([
       ...inventory.items.map(it => [`inv-${it.slot}`, `${it.slot < 9 ? "装备" : "物品"}${it.slot + 1} · ${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}`]),
       ...(pets?.pets ?? []).map(p => [`pet-name${p.slot}`, `${p.freeName || p.name} Lv.${p.level}`]),
-    ]),
+    ]) },
   });
 }
 
@@ -1260,7 +1292,7 @@ function frame(now        ) {
   drawModal();
   const selected = isMobile() ? selectedMobileHit() : undefined;
   if (selected) ui.boxes.push({ x1: selected.x1 - 2, y1: selected.y1 - 2, x2: selected.x2 + 2, y2: selected.y2 + 2, color: "#f0ce87", fill: false });
-  mobileFrame();
+  mobileFrame(now);
   // 开关窗口的声音（202 / 203），这一帧没有别的界面音效时，点到按钮放 217
   const open = (modal ? 1 : 0) + (screen instanceof FieldScreen ? screen.openCount() : 0);
   // 关窗口的声音（203）延后一点再放：回上一页、NPC 换页是"关一个、马上开一个"，那种只放开窗口的 202，不要两声一起响

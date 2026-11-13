@@ -240,6 +240,11 @@ export class Menus {
       this.trade.open, this.ai.open, this.mail.open, this.family.open, this.gm.open, this.quests.open, this.vendor.open].filter(Boolean).length;
   }
 
+  /** Mobile presentation treats the transient victory result as a real sheet;
+   * desktop window counts and its existing five-second timer stay unchanged.
+   */
+  hasBattleResult(): boolean { return this.result !== null; }
+
   // 原版 menu.cpp：打开道具窗口时关掉地图（MenuToggleFlag &= ~JOY_CTRL_M），打开地图时关掉道具窗口（&= ~JOY_CTRL_I）
   toggleItems() { this.items.toggle(); if (this.items.open) this.mapOpen = false; }
 

@@ -43,9 +43,10 @@ const doc = Object.assign(new EventTarget(), { body, head, documentElement: new 
   getElementById: id => ({ "mobile-root": root, "mobile-viewport": viewport, "mobile-chrome": chrome })[id] ?? [...body.querySelectorAll("*"), ...head.querySelectorAll("*")].find(e => e.id === id),
 });
 const win = new EventTarget();
+const layoutCallbacks = [];
 Object.assign(globalThis, { document: doc, HTMLElement: Element, window: win, location: { search: "" }, innerWidth: 390, innerHeight: 844,
   localStorage: { getItem: () => null, setItem() {} }, matchMedia: () => ({ matches: false, addEventListener() {} }),
-  requestAnimationFrame: () => 1, addEventListener: win.addEventListener.bind(win), ResizeObserver: class { observe() {} },
+  requestAnimationFrame: callback => { layoutCallbacks.push(callback); return layoutCallbacks.length; }, addEventListener: win.addEventListener.bind(win), ResizeObserver: class { observe() {} },
 });
 Object.defineProperty(globalThis, "navigator", { configurable: true, value: { maxTouchPoints: 0 } });
 const { MobileShell } = await import("../src/mobile-shell.ts");
@@ -222,4 +223,125 @@ test("movement precedes long option panels and encounter uses server capability 
   assert.equal(left.children[0].className,"mobile-shell-field","stick is first in DOM, before options");
   shell.frame({phase:"battle",panel:false,canEncounter:true});
   assert.equal(left.children[0].hidden,true,"battle cannot expose the movement shortcut");
+});
+
+test("native column registration is presented in visual row order and keeps action identity", () => {
+  setDeviceMode("mobile");
+  // Native renderers may register one whole column before the next. On a phone,
+  // the increase button must remain next to its own statistic, not the next row.
+  hits = [
+    {id:"earth",label:"地属性",x1:100,y1:100,x2:150,y2:120},
+    {id:"water",label:"水属性",x1:100,y1:150,x2:150,y2:170},
+    {id:"earth-plus",label:"增加地属性",x1:250,y1:102,x2:290,y2:122},
+    {id:"water-plus",label:"增加水属性",x1:250,y1:152,x2:290,y2:172},
+  ];
+  frame("make");
+  const rendered = allButtons().filter(b => b.dataset.action);
+  assert.deepEqual(rendered.map(b => b.dataset.action), ["earth","earth-plus","water","water-plus"]);
+  const plus = rendered[1]; plus.focus();
+  hits[2] = {...hits[2],label:"增加地属性（剩余 3）"}; frame("make");
+  assert.equal(allButtons().find(b => b.dataset.action === "earth-plus"), plus);
+  assert.equal(document.activeElement, plus);
+  assert.equal(plus.textContent, "增加地属性（剩余 3）");
+  fire(plus,"click"); assert.deepEqual(fired.at(-1), ["action","earth-plus"]);
+  hits = []; frame("field");
+});
+
+test("immersive scene exposes a cancellable menu tray and restores classic panels", async () => {
+  const view = await import("../src/mobile-view.ts");
+  setDeviceMode("mobile"); view.setMobileDisplayMode("immersive"); view.setMobileContext("field");
+  hits=[]; frame("field");
+  const toggle=allButtons().find(b=>b.dataset.mobileControl==="menu-tray");
+  assert.ok(toggle,"fullscreen play needs a discoverable menu");
+  assert.equal(toggle.hidden,false); assert.equal(toggle.getAttribute("aria-expanded"),"false");
+  const toolbar=body.querySelectorAll("*").find(e=>e.className==="mobile-shell-toolbar");
+  assert.equal(toolbar.hidden,true,"scene remains clear until the player opens its menu");
+  const before=fired.length;fire(toggle,"click");
+  assert.equal(toggle.getAttribute("aria-expanded"),"true");assert.equal(toolbar.hidden,false);
+  assert.ok(fired.slice(before).some(e=>e[0]==="cancel"),"opening a tray must release movement");
+  fire(allButtons().find(b=>b.dataset.mobileControl==="menu-status"),"click");frame("field");
+  assert.deepEqual(fired.at(-1),["command","status"]);
+  assert.equal(toggle.getAttribute("aria-expanded"),"false");
+  view.setMobileContext("panel");frame("field",true);
+  assert.equal(toggle.hidden,true);assert.equal(shell.sheet.hidden,false);
+  view.setMobileDisplayMode("classic");view.setMobileContext("field");frame("field");
+  assert.equal(toggle.hidden,true);assert.equal(toolbar.hidden,false);
+});
+
+test("immersive battle camera stays a view command and native targets keep their real IDs", async () => {
+  const view=await import("../src/mobile-view.ts");
+  setDeviceMode("mobile");view.setMobileDisplayMode("immersive");view.setMobileContext("battle");
+  hits=[{id:"pt-12",x1:200,y1:150,x2:250,y2:200}];
+  shell.frame({phase:"battle",panel:false,actionLabels:{"pt-12":"目标 · 乌力 Lv.5 · HP 120/160"}});
+  const camera=allButtons().find(b=>b.dataset.mobileControl==="camera-enemy");
+  assert.ok(camera);fire(camera,"click");assert.deepEqual(fired.at(-1),["command","camera-enemy"]);
+  const target=allButtons().find(b=>b.dataset.action==="pt-12");
+  assert.match(target.textContent,/乌力/);fire(target,"click");assert.deepEqual(fired.at(-1),["action","pt-12"]);
+  hits=[];frame("battle");const count=fired.length;fire(target,"click");assert.equal(fired.length,count);
+  view.setMobileDisplayMode("classic");view.setMobileContext("field");frame("field");
+});
+
+test("switching to desktop during browser fullscreen retains the explicit exit control", () => {
+  // The platform may retain fullscreen after the player switches presentation.
+  // Touchscreen users must still be able to exit without a physical Escape key.
+  document.fullscreenElement = stage;
+  setDeviceMode("desktop"); frame("desktop");
+  const exit = allButtons().find(b=>b.dataset.mobileControl==="fullscreen");
+  assert.equal(exit.hidden,false);assert.equal(exit.textContent,"退出全屏");
+  document.fullscreenElement = null;setDeviceMode("mobile");frame("field");
+});
+
+test("quick battle preserves its field context and native battle panels restore the complete layout", async () => {
+  const view=await import("../src/mobile-view.ts");
+  const layout=()=>{for(let i=0;layoutCallbacks.length&&i<20;i++)layoutCallbacks.shift()(0);};
+  setDeviceMode("mobile");view.setMobileDisplayMode("immersive");view.setMobileContext("field");layout();
+  hits=[{id:"battle-quick-toggle",label:"快速战斗 开",x1:20,y1:20,x2:120,y2:40}];
+  shell.frame({phase:"battle",panel:false,context:"field",cameraAvailable:false});layout();
+  assert.equal(root.dataset.context,"field","quick combat displays the map at full size");
+  const camera=body.querySelectorAll("*").find(e=>e.className==="mobile-shell-camera");
+  assert.equal(camera.hidden,true,"quick battle has no visible battle actors to focus");
+  shell.frame({phase:"battle",panel:true,context:"panel",cameraAvailable:true});layout();
+  assert.equal(chrome.firstChild.dataset.layout,"full");assert.equal(camera.hidden,true);
+  assert.equal(root.dataset.context,"panel");
+  hits=[];view.setMobileDisplayMode("classic");frame("field");layout();
+});
+
+test("immersive battle starts with clear actors and native toggles, then exposes and closes commands", async () => {
+  const view=await import("../src/mobile-view.ts");
+  setDeviceMode("mobile");view.setMobileDisplayMode("classic");frame("field");
+  hits=[{id:"battle-auto-toggle",label:"自动：关",x1:20,y1:20,x2:100,y2:40},
+    {id:"battle-quick-toggle",label:"快速：关",x1:150,y1:20,x2:230,y2:40},
+    {id:"b-guard",x1:600,y1:200,x2:650,y2:240},
+    {id:"t-15",x1:120,y1:100,x2:150,y2:150}];
+  shell.frame({phase:"battle",panel:false,context:"battle"});
+  const originalAuto=allButtons().find(b=>b.dataset.action==="battle-auto-toggle");
+  view.setMobileDisplayMode("immersive");shell.frame({phase:"battle",panel:false,context:"battle"});
+  assert.equal(shell.sheet.hidden,true,"legacy remembered attack targets cannot cover the default actor view");
+  const auto=allButtons().filter(b=>b.dataset.action==="battle-auto-toggle");
+  assert.equal(auto.length,1);assert.equal(auto[0],originalAuto);assert.equal(auto[0].closest("[hidden]"),null);
+  const toggle=allButtons().find(b=>b.dataset.mobileControl==="battle-commands");assert.ok(toggle);assert.equal(toggle.hidden,false);
+  fire(toggle,"click");assert.equal(shell.sheet.hidden,false);assert.equal(toggle.getAttribute("aria-expanded"),"true");
+  fire(allButtons().find(b=>b.dataset.action==="t-15"),"click");assert.deepEqual(fired.at(-1),["action","t-15"]);
+  hits=hits.slice(0,2);shell.frame({phase:"battle",panel:false,context:"battle"});assert.equal(shell.sheet.hidden,true);
+  hits=[{id:"bitem-9",label:"回复药",x1:520,y1:120,x2:650,y2:160}];
+  shell.frame({phase:"battle",panel:true,context:"panel"});
+  hits=[{id:"mt-0",x1:600,y1:450,x2:650,y2:500}];
+  shell.frame({phase:"battle",panel:false,context:"battle"});assert.equal(shell.sheet.hidden,false,"returning from a native item menu must expose its required target");
+  hits=[];view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("immersive field tray exposes reachable native social controls without duplicating toolbar menus", async () => {
+  const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  hits=[{id:"tb-status",x1:20,y1:550,x2:50,y2:585},
+    {id:"tb-mail",x1:60,y1:550,x2:90,y2:585},
+    {id:"fp-party",x1:10,y1:20,x2:40,y2:50},
+    {id:"fp-trade",x1:50,y1:20,x2:80,y2:50}];
+  shell.frame({phase:"field",panel:false,context:"field"});
+  const extra=allButtons().find(b=>b.dataset.action==="fp-party");assert.ok(extra);
+  assert.equal(allButtons().some(b=>b.dataset.action==="tb-status"),false);
+  assert.equal(allButtons().some(b=>b.dataset.action==="tb-mail"),true);
+  fire(allButtons().find(b=>b.dataset.mobileControl==="menu-tray"),"click");assert.equal(extra.closest("[hidden]"),null);
+  fire(extra,"click");assert.deepEqual(fired.at(-1),["action","fp-party"]);
+  hits=[];frame("field");const before=fired.length;fire(extra,"click");assert.equal(fired.length,before);
+  view.setMobileDisplayMode("classic");frame("field");
 });

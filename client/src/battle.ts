@@ -296,6 +296,47 @@ export class BattleScreen {
   private quickNow = 0;
   private backgroundUrl = "";
   private backgroundLoad: Promise<void> | null = null;
+  private cameraSlot = -1; // Presentation focus only; never an action/target decision.
+
+  /** Keep the native formation while the phone camera can show full-size units.
+   * Follow uses playback, not the authoritative future event state. A knocked
+   * out unit remains visible; a gone/hidden unit falls back to a visible ally.
+   */
+  mobileFocus(preference: "self" | "enemy" | "follow") {
+    const available = (a: Fighter | undefined): a is Fighter => !!a && !a.gone && !a.hidden;
+    const sameSide = (a: Fighter) => (a.f.slot < 10) === (this.me < 10);
+    const list = [...this.fighters.values()].filter(available);
+    const preferred = preference === "enemy" ? list.find(a => !sameSide(a) && !a.dead && a.hp > 0) ?? list.find(a => !sameSide(a))
+      : this.fighters.get(preference === "follow" && this.cameraSlot >= 0 ? this.cameraSlot : this.me);
+    const a = available(preferred) ? preferred : list.find(sameSide) ?? list[0];
+    return a ? { x: a.x, y: a.y - 48, label: a.f.name } : { x: 400, y: 300, label: "战场" };
+  }
+
+  /** Native submenus keep their complete preview while readable DOM controls
+   * handle selection. Target selection itself keeps the full-size scene.
+   */
+  mobilePanelOpen(): boolean { return this.itemMenu || this.magicMenu || this.petChange || this.petWnd; }
+
+  /** Battle playback may lag the authoritative next turn. Match visible bars,
+   * not the field's old selfStatus or the fighter's immutable entry snapshot.
+   */
+  mobileStatus(): string {
+    const a = this.fighters.get(this.me);
+    if (!a) return this.watch ? "观战中" : "战斗中";
+    return `${a.f.name} Lv.${a.f.level}　HP ${Math.max(0, a.hp)}/${a.f.maxHp}　MP ${Math.max(0, a.mp)}/${a.f.maxMp}`;
+  }
+
+  mobileActionLabels(): Record<string, string> {
+    const labels: Record<string, string> = {};
+    for (const a of this.fighters.values()) {
+      if (a.gone || a.hidden) continue;
+      const side = (a.f.slot < 10) === (this.me < 10) ? "我方" : "敌方";
+      const label = `${side} ${a.f.name} Lv.${a.f.level} · HP ${a.hp}/${a.f.maxHp}`;
+      for (const prefix of ["t", "mt", "pt"]) labels[`${prefix}-${a.f.slot}`] = label;
+      labels[`pet-tab-${a.f.slot}`] = `${a.f.name} · HP ${a.hp}/${a.f.maxHp}`;
+    }
+    return labels;
+  }
 
   /** Change presentation without rebuilding fighters or resetting this turn. */
   setQuick(on: boolean) {
@@ -430,7 +471,13 @@ export class BattleScreen {
       // 同一个人的连击合成一组：只在第一下前走过去、最后一下后走回来
       let j = i;
       while (j < ev.length - 1 && ev[j].combo && ev[j + 1].actor === ev[i].actor) j++;
-      this.queue.push(...this.eventSteps(ev.slice(i, j + 1)));
+      const steps = this.eventSteps(ev.slice(i, j + 1));
+      if (steps.length) {
+        const first = steps[0], slot = ev[i].actor;
+        // Decorate the existing first step: no extra animation delay or command.
+        steps[0] = now => { this.cameraSlot = slot; return first(now); };
+      }
+      this.queue.push(...steps);
       i = j;
     }
   }
@@ -500,6 +547,7 @@ export class BattleScreen {
    * 再往下加速 12 帧落回原处，停 60 帧后消失，共 84 帧。stay 为真时是图示型的（Guard 等）原地不动。
    */
   private popup(a: Fighter, now: number, p: { text?: string; icon?: number; color?: string; dy?: number; stay?: boolean }) {
+    this.cameraSlot = a.f.slot; // Ranged attacks also reveal the actual recipient.
     const x = a.x, y = (p.text ? (a.rect?.[1] ?? a.y - 84) - 12 : a.y - 64) + (p.dy ?? 0), ui = this.host.ui;
     this.fx.push({ at: now, ms: 84 * FRAME, draw: (_t, age) => {
       const f = age / FRAME;

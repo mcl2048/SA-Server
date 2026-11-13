@@ -1,0 +1,20 @@
+--- FAIL: TestEnemyAIExcludesUnavailableSkills (0.00s)
+    --- FAIL: TestEnemyAIExcludesUnavailableSkills/map-only (0.00s)
+        ai_legality_test.go:25: unavailable skill must fall back to a legal attack: {Kind:attack Target:0 Skill:0x3903efe2e1e0 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget (0.00s)
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/self (0.00s)
+        ai_legality_test.go:49: skill target=0 want=15, command {Kind:attack Target:0 Skill:0x3903efe2e300 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/own-side (0.00s)
+        ai_legality_test.go:49: skill target=2 want=21, command {Kind:attack Target:0 Skill:0x3903efe2e3c0 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/other-side (0.00s)
+        ai_legality_test.go:49: skill target=3 want=20, command {Kind:attack Target:0 Skill:0x3903efe2e480 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    --- FAIL: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all (0.00s)
+        ai_legality_test.go:49: skill target=4 want=22, command {Kind:attack Target:0 Skill:0x3903efe2e540 ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+FAIL
+FAIL	sa/server/internal/battle	0.013s
+--- FAIL: TestPartyFollowerWatchingDoesNotEnterAnotherBattleOrMove (1.84s)
+    party_watch_regression_test.go:32: watching follower was moved from 48,82 to 47,82
+    party_watch_regression_test.go:37: watch/fight overlap: follower fight=true watch=true new members=2
+FAIL
+FAIL	sa/server/internal/world	1.917s
+FAIL

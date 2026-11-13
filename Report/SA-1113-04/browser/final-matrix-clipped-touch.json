@@ -1,0 +1,1338 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "screen": {
+        "width": 1280,
+        "height": 900
+      },
+      "mobile": false,
+      "stage": {
+        "x": 40,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "stageInBody": true,
+      "backing": {
+        "width": 1200,
+        "height": 900
+      }
+    },
+    {
+      "case": "classic 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": -0.0000152587890625,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "viewport": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 72.00001525878906,
+        "y": 1,
+        "width": 424,
+        "height": 317.9999694824219
+      },
+      "viewport": {
+        "x": 72,
+        "y": 1,
+        "width": 424,
+        "height": 318
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic native items",
+      "context": "panel",
+      "buttons": 35,
+      "closed": true
+    },
+    {
+      "case": "classic native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "classic native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "classic native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "classic native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "classic native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -240,
+        "y": -32,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 568
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -367.6666259765625,
+        "y": 0,
+        "width": 1125.333251953125,
+        "height": 844
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -406.33331298828125,
+        "y": 0,
+        "width": 1242.6666259765625,
+        "height": 932
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 932
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": 0.000030517578125,
+        "y": -146.8125,
+        "width": 844,
+        "height": 632.9999389648438
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 568,
+        "height": 320
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive native items",
+      "context": "panel",
+      "buttons": 35,
+      "closed": true
+    },
+    {
+      "case": "immersive native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "immersive native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "immersive native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "immersive native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "immersive native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "real joystick move and release",
+      "before": {
+        "id": 1,
+        "floor": 300,
+        "x": 371,
+        "y": 183
+      },
+      "moved": {
+        "id": 1,
+        "floor": 300,
+        "x": 368,
+        "y": 180
+      },
+      "stopped": {
+        "id": 1,
+        "floor": 300,
+        "x": 368,
+        "y": 180
+      },
+      "stable": {
+        "id": 1,
+        "floor": 300,
+        "x": 368,
+        "y": 180
+      }
+    }
+  ],
+  "binary_sha256": "70e0c34321fa5a72d9d1b4f0835db63fad1bcc329b72fae11438dc32731533dd",
+  "binary_version": "v0.2.11-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-13T19:16:50.832Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-13T19:17:04.723Z"
+    },
+    {
+      "stage": "real-matrix",
+      "time": "2026-11-13T19:17:04.724Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "passed": true
+    },
+    {
+      "case": "classic 320x568",
+      "passed": true
+    },
+    {
+      "case": "classic 390x844",
+      "passed": true
+    },
+    {
+      "case": "classic 430x932",
+      "passed": true
+    },
+    {
+      "case": "classic 844x390",
+      "passed": true
+    },
+    {
+      "case": "classic 568x320",
+      "passed": true
+    },
+    {
+      "case": "classic native items",
+      "passed": true
+    },
+    {
+      "case": "classic native pets",
+      "passed": true
+    },
+    {
+      "case": "classic native status",
+      "passed": true
+    },
+    {
+      "case": "classic native quests",
+      "passed": true
+    },
+    {
+      "case": "classic native map",
+      "passed": true
+    },
+    {
+      "case": "classic native system",
+      "passed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "passed": true
+    },
+    {
+      "case": "immersive 390x844",
+      "passed": true
+    },
+    {
+      "case": "immersive 430x932",
+      "passed": true
+    },
+    {
+      "case": "immersive 844x390",
+      "passed": true
+    },
+    {
+      "case": "immersive 568x320",
+      "passed": true
+    },
+    {
+      "case": "immersive native items",
+      "passed": true
+    },
+    {
+      "case": "immersive native pets",
+      "passed": true
+    },
+    {
+      "case": "immersive native status",
+      "passed": true
+    },
+    {
+      "case": "immersive native quests",
+      "passed": true
+    },
+    {
+      "case": "immersive native map",
+      "passed": true
+    },
+    {
+      "case": "immersive native system",
+      "passed": true
+    },
+    {
+      "case": "real joystick move and release",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "client_version": "e6750df3d6b8c217",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "desktopEvents": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "failure": "production drawer button swipe did not scroll safely",
+  "failure_stack": "Error: production drawer button swipe did not scroll safely\n    at assert (file:///home/coder/saserver/Report/SA-1113-04/browser/matrix-cases.mjs:4:50)\n    at Module.runMatrix (file:///home/coder/saserver/Report/SA-1113-04/browser/matrix-cases.mjs:123:3)\n    at async work (file:///home/coder/saserver/Report/SA-1113-04/browser/real-game.mjs:277:45)\n    at async file:///home/coder/saserver/Report/SA-1113-04/browser/real-game.mjs:296:5"
+}

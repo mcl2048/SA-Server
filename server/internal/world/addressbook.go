@@ -324,18 +324,24 @@ func (w *World) deliverStoredMails(e *entity) {
 		if err != nil || len(list) == 0 {
 			return
 		}
-		go w.Do(func() {
+		// Publish before the saver advances to its next job. Shutdown can then
+		// fence/drain the inbox and restore any dequeued but undelivered mail.
+		w.post(func() {
 			e := w.players[id]
-			if e == nil || !e.attached() {
+			stopping := false
+			select {
+			case <-w.stopping:
+				stopping = true
+			default:
+			}
+			if e == nil || !e.attached() || stopping {
 				// Taking from SQLite and delivering on the world goroutine are
 				// asynchronous. A disconnect between them must not lose mail.
 				w.saves <- func() {
 					ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 					defer cancel()
-					for _, body := range list {
-						if err := w.db.PutMail(ctx, charID, body); err != nil {
-							w.log.Error("恢复离线邮件失败", "char", charID, "err", err)
-						}
+					if err := w.db.RestoreMails(ctx, charID, list); err != nil {
+						w.log.Error("恢复离线邮件失败", "char", charID, "err", err)
 					}
 				}
 				return

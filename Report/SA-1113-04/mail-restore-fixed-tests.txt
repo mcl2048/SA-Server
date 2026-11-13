@@ -1,0 +1,8 @@
+=== RUN   TestRestoreMailsPreservesFullMailbox
+--- PASS: TestRestoreMailsPreservesFullMailbox (0.03s)
+=== RUN   TestRestoreMailsRollsBackPartialFailure
+--- PASS: TestRestoreMailsRollsBackPartialFailure (0.02s)
+=== RUN   TestRestoreMailsHonorsCanceledContext
+--- PASS: TestRestoreMailsHonorsCanceledContext (0.02s)
+PASS
+ok  	sa/server/internal/store	0.078s

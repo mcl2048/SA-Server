@@ -1,0 +1,5 @@
+--- FAIL: TestSnapshotGzipCacheIsBounded (3.41s)
+    gzip_test.go:123: compressed cache must be useful and bounded: bytes=0 files=0
+FAIL
+FAIL	sa/server/webclient	3.563s
+FAIL

@@ -1,0 +1,6 @@
+=== RUN   TestPrecompressedClientAvoidsDoubleGzip
+    client_http_test.go:44: one gzip decode must yield the program, got "\x1f\x8b\b\x00\x00\x00\x00\x00\x00\xff\x00!\x00\xde\xffexport const battle = 'stoneage';\x03\x00\x17\x924\xe9!\x00\x00\x00": <nil>
+--- FAIL: TestPrecompressedClientAvoidsDoubleGzip (0.00s)
+FAIL
+FAIL	sa/server/cmd/saserver	0.062s
+FAIL

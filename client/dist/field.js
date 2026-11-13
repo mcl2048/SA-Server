@@ -3,13 +3,13 @@
 //   屏幕 x = (gx + gy) × 32，屏幕 y = (gy − gx) × 24
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
-import { album } from "./album.js?v=8215e83e5e3ed1aa";
-import { gridPath } from "./pathfinding.js?v=8215e83e5e3ed1aa";
-import { ANIM, findAction,                              } from "./assets.js?v=8215e83e5e3ed1aa";
-import { sfx } from "./audio.js?v=8215e83e5e3ed1aa";
+import { album } from "./album.js?v=e5c6eee3f928fb08";
+import { gridPath } from "./pathfinding.js?v=e5c6eee3f928fb08";
+import { ANIM, findAction,                              } from "./assets.js?v=e5c6eee3f928fb08";
+import { sfx } from "./audio.js?v=e5c6eee3f928fb08";
 
 
-import { loadFloor, saveFloor,                } from "./mapcache.js?v=8215e83e5e3ed1aa";
+import { loadFloor, saveFloor,                } from "./mapcache.js?v=e5c6eee3f928fb08";
 
 
 export const MOVE                     = [[-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1]];

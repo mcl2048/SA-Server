@@ -1,0 +1,6 @@
+{
+  "version": "v0.2.11-LYNX",
+  "same_inputs_same_binary": true,
+  "binary_sha256": "f92041f5775ac45ff5272534fe04a66e5a751ea50e82f40840d6120a3750aba9",
+  "buildvcs": false
+}

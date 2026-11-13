@@ -2,11 +2,13 @@ package main
 
 import (
 	"compress/gzip"
+	"io"
 	"net/http"
 	"path"
-	"strconv"
 	"strings"
 	"sync"
+
+	"sa/server/webclient"
 )
 
 // gzipTypes 是值得压缩的静态文件（文字类）。图集 WebP、音频 Opus、index.bin.gz 本来就是压缩过的，不再压。
@@ -17,35 +19,7 @@ var gzipPool = sync.Pool{New: func() any { w, _ := gzip.NewWriterLevel(nil, gzip
 // acceptsGzip honors an explicit gzip exclusion over a wildcard. Coding names
 // and q parameter names are case-insensitive; malformed qualities are rejected.
 func acceptsGzip(value string) bool {
-	gzipQ, wildcardQ := -1.0, -1.0
-	for _, item := range strings.Split(value, ",") {
-		parts := strings.Split(item, ";")
-		coding := strings.ToLower(strings.TrimSpace(parts[0]))
-		if coding != "gzip" && coding != "*" {
-			continue
-		}
-		q := 1.0
-		for _, param := range parts[1:] {
-			name, value, ok := strings.Cut(strings.TrimSpace(param), "=")
-			if strings.EqualFold(name, "q") {
-				parsed, err := strconv.ParseFloat(strings.TrimSpace(value), 64)
-				if !ok || err != nil || !(parsed >= 0 && parsed <= 1) {
-					q = 0
-				} else {
-					q = parsed
-				}
-			}
-		}
-		if coding == "gzip" {
-			gzipQ = q
-		} else {
-			wildcardQ = q
-		}
-	}
-	if gzipQ >= 0 {
-		return gzipQ > 0
-	}
-	return wildcardQ > 0
+	return webclient.AcceptsGzip(value)
 }
 
 // gzipped 把文字类的静态文件按请求的 Accept-Encoding 用 gzip 送出（客户端脚本与 tiles.json 等约 1 MB → 290 KB）。
@@ -65,19 +39,32 @@ func gzipped(next http.Handler) http.Handler {
 		}
 		r.Header.Del("Range")
 		z := &gzipWriter{ResponseWriter: w, head: r.Method == http.MethodHead}
-		// HEAD advertises the GET representation but never emits a gzip trailer.
-		if !z.head {
-			gw := gzipPool.Get().(*gzip.Writer)
-			gw.Reset(w)
-			z.gz = gw
-			defer func() {
-				if z.on {
-					gw.Close()
+		completed := false
+		// Allocate the pooled compressor on the first unencoded body write.
+		// Embedded programs are precompressed; HEAD/304/404 need no writer.
+		defer func() {
+			if z.on && !z.head && z.gz == nil {
+				// A successful empty body still advertised gzip. Complete a
+				// valid empty stream instead of returning a decoding-error EOF.
+				z.gz = gzipPool.Get().(*gzip.Writer)
+				z.gz.Reset(z.ResponseWriter)
+			}
+			if z.gz != nil {
+				closeErr := z.gz.Close()
+				z.gz.Reset(io.Discard) // Do not retain a completed HTTP connection.
+				gzipPool.Put(z.gz)
+				if closeErr != nil && completed {
+					// The status/body may already be on the wire. net/http's
+					// documented abort sentinel closes the incomplete response
+					// without logging a panic stack or pretending a valid EOF.
+					panic(http.ErrAbortHandler)
 				}
-				gzipPool.Put(gw)
-			}()
-		}
+				// If next already panicked, its original failure must propagate;
+				// a late transport error must not replace it during cleanup.
+			}
+		}()
 		next.ServeHTTP(z, r)
+		completed = true
 	})
 }
 
@@ -94,7 +81,7 @@ func (z *gzipWriter) WriteHeader(code int) {
 	if !z.started {
 		z.started = true
 		h := z.Header()
-		if code == http.StatusOK {
+		if code == http.StatusOK && h.Get("Content-Encoding") == "" {
 			z.on = true
 			h.Set("Content-Encoding", "gzip")
 			h.Del("Content-Length")
@@ -111,6 +98,10 @@ func (z *gzipWriter) Write(b []byte) (int, error) {
 		return len(b), nil
 	}
 	if z.on {
+		if z.gz == nil {
+			z.gz = gzipPool.Get().(*gzip.Writer)
+			z.gz.Reset(z.ResponseWriter)
+		}
 		return z.gz.Write(b)
 	}
 	return z.ResponseWriter.Write(b)

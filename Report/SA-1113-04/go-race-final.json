@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/home/coder/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/bin/go",
+    "test",
+    "-race",
+    "-count=1",
+    "-buildvcs=false",
+    "./..."
+  ],
+  "source_sha256": "c577d92a6edea551e179bee986ceb9ab09d2396f85be67ee916785d04d582ea4",
+  "started": 1794587894.1636457,
+  "exit_code": 0,
+  "elapsed_seconds": 313.146,
+  "inputs_unchanged": true
+}

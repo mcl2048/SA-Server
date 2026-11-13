@@ -27,7 +27,7 @@ const (
 	fsParty     = 1 << 0
 	fsDuel      = 1 << 1
 	fsPartyChat = 1 << 2
-	fsTell      = 1 << 5 // CHAR_ISTELL：密语频道（PC_ETCFLAG_CHAT_TELL）
+	fsTell      = 1 << 5  // CHAR_ISTELL：密语频道（PC_ETCFLAG_CHAT_TELL）
 	fsAllServ   = 1 << 11 // 星球频道（PC_ETCFLAG_ALL_SERV，客户端 ETC.ALL_SERV）：关掉就收不到
 	fsCard      = 1 << 3
 	fsTrade     = 1 << 4
@@ -330,7 +330,7 @@ func (w *World) partyFollow(e *entity, ox, oy int) {
 	}
 	ex, ey := ox, oy
 	for _, m := range e.party.slots[1:] {
-		if m == nil || m.fight != nil || m.floor != e.floor {
+		if m == nil || m.fight != nil || m.watch != nil || m.floor != e.floor {
 			continue
 		}
 		sx, sy := m.x, m.y
@@ -358,14 +358,16 @@ func moveDir(dx, dy int) int {
 	return 0
 }
 
-// battleMembers 是一起开打的玩家（BATTLE_PartyNewEntry）：队长与在同一楼层、没在战斗的队员，按位置排；没有组队时只有自己。
+// battleMembers 是一起开打的玩家（BATTLE_PartyNewEntry）：队长与在同一楼层、没在战斗/观战的队员，按位置排；没有组队时只有自己。
 func (w *World) battleMembers(e *entity) []*entity {
 	if !e.isLeader() {
 		return []*entity{e}
 	}
 	var out []*entity
 	for _, m := range e.party.slots {
-		if m != nil && (m == e || m.fight == nil && m.floor == e.floor) {
+		// A leader can leave a shared watch before a follower. That follower
+		// remains bound to the watched room and cannot consume another stream.
+		if m != nil && (m == e || m.fight == nil && m.watch == nil && m.floor == e.floor) {
 			out = append(out, m)
 		}
 	}

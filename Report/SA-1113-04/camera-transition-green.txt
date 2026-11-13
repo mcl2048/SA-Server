@@ -1,0 +1,19 @@
+✔ portrait immersive scene fills the viewport at native scale or larger without stretching (3.445879ms)
+✔ landscape immersive scene keeps native character pixels and crops vertically (0.504629ms)
+✔ focusing edge targets never reveals empty space outside the original scene (0.899734ms)
+✔ invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale (0.850613ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (6.583079ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (2.359799ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (6.923711ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (1.883464ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (2.071775ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (2.189995ms)
+✔ a new immersive scene immediately reveals its intended focus and recenters the field (1.809545ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 457.647721

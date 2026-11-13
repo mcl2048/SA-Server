@@ -1,0 +1,28 @@
+=== RUN   TestSnapshotGzipRepresentations
+=== RUN   TestSnapshotGzipRepresentations/gzip
+    gzip_test.go:45: GET representation: code=200 headers=map[Accept-Ranges:[bytes] Cache-Control:[no-cache] Content-Length:[39600] Content-Type:[text/javascript; charset=utf-8] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]]
+=== RUN   TestSnapshotGzipRepresentations/GZip;q=0.5
+    gzip_test.go:45: GET representation: code=200 headers=map[Accept-Ranges:[bytes] Cache-Control:[no-cache] Content-Length:[39600] Content-Type:[text/javascript; charset=utf-8] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]]
+=== RUN   TestSnapshotGzipRepresentations/*;q=0.5
+    gzip_test.go:45: GET representation: code=200 headers=map[Accept-Ranges:[bytes] Cache-Control:[no-cache] Content-Length:[39600] Content-Type:[text/javascript; charset=utf-8] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]]
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=0
+    gzip_test.go:66: GET conditional: code=304 headers=map[Cache-Control:[no-cache] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]] bytes=0
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=0,*;q=1
+    gzip_test.go:66: GET conditional: code=304 headers=map[Cache-Control:[no-cache] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]] bytes=0
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=NaN
+    gzip_test.go:66: GET conditional: code=304 headers=map[Cache-Control:[no-cache] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]] bytes=0
+=== RUN   TestSnapshotGzipRepresentations/identity
+    gzip_test.go:66: GET conditional: code=304 headers=map[Cache-Control:[no-cache] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]] bytes=0
+=== NAME  TestSnapshotGzipRepresentations
+    gzip_test.go:77: gzip range was partially encoded: 206 map[Accept-Ranges:[bytes] Cache-Control:[no-cache] Content-Length:[6] Content-Range:[bytes 0-5/39600] Content-Type:[text/javascript; charset=utf-8] Etag:[W/"047775789686109ef20e305a5ed61d9d32b0566e42af1f438873c4c55b577c1c"] X-Content-Type-Options:[nosniff]]
+--- FAIL: TestSnapshotGzipRepresentations (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/gzip (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/GZip;q=0.5 (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/*;q=0.5 (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/gzip;q=0 (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/gzip;q=0,*;q=1 (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/gzip;q=NaN (0.00s)
+    --- FAIL: TestSnapshotGzipRepresentations/identity (0.00s)
+FAIL
+FAIL	sa/server/webclient	0.016s
+FAIL

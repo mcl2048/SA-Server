@@ -402,7 +402,7 @@ func (w *World) BattleCommand(charID int, kind string, target, item int) {
 
 // battleCommand shares the original command validation between manual input and
 // server-owned automation. Call only from the world goroutine.
-func (w *World) battleCommand(e *entity, kind string, target, item int) {
+func (w *World) battleCommand(e *entity, kind string, target, item int, automatic ...bool) {
 	if e != nil && e.watch != nil { // 观战者只有"离开"
 		if kind == "leave" {
 			w.stopWatch(e, true)
@@ -486,6 +486,9 @@ func (w *World) battleCommand(e *entity, kind string, target, item int) {
 	default:
 		c = battle.Command{Kind: battle.None}
 	}
+	// Only this internal call can mark strategy-generated intent. The public
+	// packet handler cannot supply Automatic or weaken native validation.
+	c.Automatic = len(automatic) > 0 && automatic[0]
 	e.fight.cmd = &c
 	w.tryResolve(e.fight.room)
 }
@@ -503,6 +506,10 @@ func (w *World) BattlePetCommand(charID, skill, target int, petSlot ...int) {
 }
 
 func (w *World) battlePetCommand(e *entity, skill, target int, petSlot ...int) {
+	w.submitBattlePetCommand(e, skill, target, false, petSlot...)
+}
+
+func (w *World) submitBattlePetCommand(e *entity, skill, target int, automatic bool, petSlot ...int) {
 	if e == nil || e.fight == nil {
 		return
 	}
@@ -518,10 +525,10 @@ func (w *World) battlePetCommand(e *entity, skill, target int, petSlot ...int) {
 	if !pf.Alive() {
 		return
 	}
-	c := battle.Command{Kind: battle.None}
+	c := battle.Command{Kind: battle.None, Automatic: automatic}
 	if skill >= 0 && skill < len(pf.Skills) {
 		if s := pf.Skills[skill]; s != nil && (s.Field == 0 || s.Field == 1) {
-			c = battle.Command{Kind: battle.Attack, Target: target, Skill: s}
+			c = battle.Command{Kind: battle.Attack, Target: target, Skill: s, Automatic: automatic}
 		}
 	}
 	if ft.petCmds == nil {

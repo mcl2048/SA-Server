@@ -1,0 +1,37 @@
+(node:464119) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (11.15911ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (2.564541ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.249149ms)
+✖ enemy camera prefers a live opponent and falls back to corpses after the last defeat (3.3354ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 700.587815
+
+✖ failing tests:
+
+test at client/test/battle-camera.test.ts:47:1
+✖ enemy camera prefers a live opponent and falls back to corpses after the last defeat (3.3354ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'unit15' !== 'unit16'
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-camera.test.ts:51:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'unit15',
+    expected: 'unit16',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

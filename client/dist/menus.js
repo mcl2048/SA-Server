@@ -7,22 +7,22 @@
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
 
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=8215e83e5e3ed1aa";
-import { ItemWindow } from "./items.js?v=8215e83e5e3ed1aa";
-import { TradeWindow } from "./trade.js?v=8215e83e5e3ed1aa";
-import { ActionWindow } from "./actions.js?v=8215e83e5e3ed1aa";
-import { MailWindow } from "./mail.js?v=8215e83e5e3ed1aa";
-import { FamilyWindow } from "./family.js?v=8215e83e5e3ed1aa";
-import { PetWindow } from "./pets.js?v=8215e83e5e3ed1aa";
-import { MapWindow } from "./worldmap.js?v=8215e83e5e3ed1aa";
-import { md5 } from "./md5.js?v=8215e83e5e3ed1aa";
-import { VendorWindow } from "./vendor.js?v=8215e83e5e3ed1aa";
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=e5c6eee3f928fb08";
+import { ItemWindow } from "./items.js?v=e5c6eee3f928fb08";
+import { TradeWindow } from "./trade.js?v=e5c6eee3f928fb08";
+import { ActionWindow } from "./actions.js?v=e5c6eee3f928fb08";
+import { MailWindow } from "./mail.js?v=e5c6eee3f928fb08";
+import { FamilyWindow } from "./family.js?v=e5c6eee3f928fb08";
+import { PetWindow } from "./pets.js?v=e5c6eee3f928fb08";
+import { MapWindow } from "./worldmap.js?v=e5c6eee3f928fb08";
+import { md5 } from "./md5.js?v=e5c6eee3f928fb08";
+import { VendorWindow } from "./vendor.js?v=e5c6eee3f928fb08";
 
 
-import { AiWindow } from "./aisetting.js?v=8215e83e5e3ed1aa";
-import { GmWindow } from "./gm.js?v=8215e83e5e3ed1aa";
-import { QuestWindow } from "./quests.js?v=8215e83e5e3ed1aa";
-import { album } from "./album.js?v=8215e83e5e3ed1aa";
+import { AiWindow } from "./aisetting.js?v=e5c6eee3f928fb08";
+import { GmWindow } from "./gm.js?v=e5c6eee3f928fb08";
+import { QuestWindow } from "./quests.js?v=e5c6eee3f928fb08";
+import { album } from "./album.js?v=e5c6eee3f928fb08";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {
@@ -239,6 +239,11 @@ export class Menus {
     return [this.statusOpen, this.mapOpen, this.systemOpen, this.petWnd.open, this.items.open, album.open, this.actions.open,
       this.trade.open, this.ai.open, this.mail.open, this.family.open, this.gm.open, this.quests.open, this.vendor.open].filter(Boolean).length;
   }
+
+  /** Mobile presentation treats the transient victory result as a real sheet;
+   * desktop window counts and its existing five-second timer stay unchanged.
+   */
+  hasBattleResult()          { return this.result !== null; }
 
   // 原版 menu.cpp：打开道具窗口时关掉地图（MenuToggleFlag &= ~JOY_CTRL_M），打开地图时关掉道具窗口（&= ~JOY_CTRL_I）
   toggleItems() { this.items.toggle(); if (this.items.open) this.mapOpen = false; }

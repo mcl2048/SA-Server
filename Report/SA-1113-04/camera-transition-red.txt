@@ -1,0 +1,38 @@
+✔ narrow desktop remains desktop; modes move and restore the original stage (7.010787ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (2.322732ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (6.294964ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (1.944445ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (1.676628ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (2.113445ms)
+✖ a new immersive scene immediately reveals its intended focus and recenters the field (15.099022ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 473.50145
+
+✖ failing tests:
+
+test at client/test/mobile-view.test.ts:161:1
+✖ a new immersive scene immediately reveals its intended focus and recenters the field (15.099022ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(Math.abs(parseFloat(stage.style["--mobile-left"]) - 562.6666666666666) < 1e-9)
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-view.test.ts:167:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

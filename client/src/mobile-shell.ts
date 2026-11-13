@@ -1,6 +1,9 @@
 import { InputBox, type Ui, type MobileHit, type Text } from "./ui.ts";
-import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView, type DeviceMode } from "./mobile-view.ts";
+import { getDeviceMode, setDeviceMode, isMobile, setMobileContext, setSceneZoom, getSceneZoom, resetSceneView,
+  isImmersive, getMobileDisplayMode, setMobileDisplayMode, requestMobileFullscreen, exitMobileFullscreen,
+  type DeviceMode, type MobileDisplayMode, type MobileContext } from "./mobile-view.ts";
 import { createMobileJoystick } from "./mobile-controls.ts";
+import { BATTLE_AUTO_ACTIONS } from "./autoplay-sync.ts";
 
 export interface MobileShellHooks {
   action(id: string): void;
@@ -13,6 +16,10 @@ export interface MobileShellHooks {
 export interface MobileShellState {
   phase: string;
   panel: boolean;
+  /** Quick combat can present the field while normal combat presents actors. */
+  context?: MobileContext;
+  /** False when quick combat has no visible battle actors for camera controls. */
+  cameraAvailable?: boolean;
   canEncounter?: boolean;
   encounter?: boolean;
   status?: string;
@@ -40,8 +47,13 @@ const LABELS: Record<string, string> = {
   "map-lu": "上一批已探索区域", "map-ld": "下一批已探索区域", "pb-waza": "使用宠物技能", "pb-cancel": "取消宠物指令", "bpet-return": "收回出战宠物", "watch-leave": "离开观战",
   "voice-more": "增大发言音量", "voice-less": "减小发言音量", "se-more": "增大音效音量", "se-less": "减小音效音量", "se-stereo": "切换立体声 / 单声道", "bgm-more": "增大音乐音量", "bgm-less": "减小音乐音量", "bgm-fast": "加快音乐", "bgm-slow": "放慢音乐", "mouse-mode": "切换鼠标样式", "acct-pw": "修改密码", "acct-secret": "修改安全码",
   "map-out": "缩小地图", "map-in": "放大地图", "map-fit": "显示全图", "map-me": "地图回到自己", "map-mini": "切换小地图", "map-art": "切换实景地图", "map-area": "点击地图目的地", "map-close": "关闭地图",
+  "fp-menu": "游戏设定", "fp-card": "面对玩家交换名片", "fp-party": "面对玩家组队 / 离队", "fp-trade": "面对玩家交易", "fp-family": "家族功能", "fp-vendor": "摆摊 / 查看摊位", "fp-join": "加入战斗 / 观战", "fp-duel": "面对玩家决斗", "fp-act": "动作 / 表情", "fp-help": "任务查询",
   "eye-": "上一种眼睛 / 鼻子", "eye+": "下一种眼睛 / 鼻子", "mouth-": "上一种嘴巴", "mouth+": "下一种嘴巴", "chr-prev": "上一页角色", "chr-next": "下一页角色",
 };
+const AUTO_ACTIONS = new Set<string>(BATTLE_AUTO_ACTIONS);
+// These native menus already have a large toolbar command. Other native HUD
+// controls retain their exact hit ID in the immersive field's interaction list.
+const MIRRORED_FIELD_ACTIONS = new Set(["tb-map", "tb-status", "tb-pet", "tb-item", "tb-system", "fp-help"]);
 function node<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const el = document.createElement(tag);
   if (cls) el.className = cls;
@@ -57,6 +69,22 @@ function isControl(hit: MobileHit): boolean {
   return !/(?:^|-)(?:block|blocker|wnd|bg|win)$/.test(hit.id)
     && !["colorwin", "login-dlg", "pet-ext", "quest-detail", "status-party"].includes(hit.id)
     && !(hit.x2 - hit.x1 >= 600 && hit.y2 - hit.y1 >= 450);
+}
+
+/** Native drawing order may be column-major. Preserve visual rows in the DOM,
+ * so labels and their neighboring operations remain together on a narrow screen.
+ * Compare vertical centers: native image/text buttons can have different padding.
+ */
+function actionRows(hits: MobileHit[]): MobileHit[][] {
+  const rows: MobileHit[][] = [];
+  const unique = [...new Map(hits.map(hit => [hit.id, hit])).values()];
+  for (const hit of unique.sort((a, b) => (a.y1 + a.y2) / 2 - (b.y1 + b.y2) / 2 || a.x1 - b.x1)) {
+    const row = rows[rows.length - 1];
+    if (row && Math.abs((row[0].y1 + row[0].y2 - hit.y1 - hit.y2) / 2) <= 8) row.push(hit);
+    else rows.push([hit]);
+  }
+  for (const row of rows) row.sort((a, b) => a.x1 - b.x1);
+  return rows;
 }
 
 /** DOM presentation only. Action IDs are queued by the host and validated against its next native frame. */
@@ -81,8 +109,21 @@ export class MobileShell {
   private readonly toolbar = node("nav", "mobile-shell-toolbar");
   private readonly mode = node("details");
   private readonly modeSelect = node("select");
+  private readonly displayLabel = node("label", undefined, "游戏画面 ");
+  private readonly displaySelect = node("select");
+  private readonly fullscreen = button("进入全屏", () => { void this.toggleFullscreen(); });
+  private readonly displayHelp = node("p", "mobile-shell-display-help", "沉浸画面等比放大，菜单仍可操作。");
+  private readonly tray = node("section", "mobile-shell-drawer");
+  private readonly trayToggle = button("菜单", () => this.toggleTray());
+  private readonly camera = node("div", "mobile-shell-camera");
+  private readonly fieldExtras = node("section", "mobile-shell-field-extras");
+  private readonly extraActions = node("div", "mobile-shell-actions");
+  private readonly battleFooter = node("div", "mobile-shell-battle-footer");
+  private readonly battleAutos = node("div", "mobile-shell-battle-autos");
+  private readonly battleCommands = button("指令", () => this.toggleBattleCommands());
   private readonly adopted = new Map<HTMLInputElement, Adopted>();
   private readonly actionNodes = new Map<string, HTMLButtonElement>();
+  private readonly actionRowNodes = new Map<string, HTMLElement>();
   private readonly textNodes = new Map<string, HTMLElement>();
   private readonly chatNodes = new Map<string, HTMLElement>();
   private state: MobileShellState = { phase: "login", panel: false };
@@ -93,6 +134,9 @@ export class MobileShell {
   private presentation = "";
   private inputSnapshot: InputBox[] = [];
   private orientation = "";
+  private sceneImmersive = false;
+  private trayOpen = false;
+  private battleCommandsOpen = false;
 
   private readonly ui: Ui;
   private readonly hooks: MobileShellHooks;
@@ -109,7 +153,7 @@ export class MobileShell {
     this.sheet.tabIndex = -1;
     this.sheetBack.className = "mobile-shell-back";
     this.sheet.append(this.sheetBack, this.info, this.inputs, this.actions, this.dismiss);
-    this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" });
+    this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" && !this.trayOpen });
     this.chat.setAttribute("role", "log"); this.chat.setAttribute("aria-label", "最近聊天");
     // Deliberately not live: the native scene can change text every animation frame.
     this.field.append(this.makeFieldControls(), this.chat);
@@ -134,7 +178,19 @@ export class MobileShell {
       b.append(node("span", "mobile-shell-click-title", title), node("small", undefined, hint)); clicks.append(b);
     }
     this.right.append(selection, navigation, clicks, this.makeZoomControls());
-    this.root.append(this.left, this.right);
+    this.tray.id = "mobile-shell-drawer"; this.tray.setAttribute("aria-label", "游戏菜单与操作"); this.tray.hidden = true;
+    this.trayToggle.className = "mobile-shell-tray-toggle"; this.trayToggle.dataset.mobileControl = "menu-tray";
+    this.trayToggle.setAttribute("aria-controls", this.tray.id); this.trayToggle.hidden = true;
+    this.camera.setAttribute("role", "group"); this.camera.setAttribute("aria-label", "战斗镜头"); this.camera.hidden = true;
+    for (const [name, label] of [["camera-self", "我方"], ["camera-enemy", "敌方"], ["camera-follow", "跟随"]]) {
+      const b = button(label, () => this.command(name)); b.dataset.mobileControl = name; this.camera.append(b);
+    }
+    this.fieldExtras.append(node("strong", undefined, "附近互动与社交"), this.extraActions); this.fieldExtras.hidden = true;
+    this.battleCommands.dataset.mobileControl = "battle-commands"; this.battleCommands.setAttribute("aria-controls", "mobile-shell-command-sheet");
+    this.battleCommands.className = "mobile-shell-battle-command-toggle";
+    this.sheet.id = "mobile-shell-command-sheet";
+    this.battleFooter.append(this.battleAutos, this.battleCommands); this.battleFooter.hidden = true;
+    this.root.append(this.left, this.right, this.tray, this.trayToggle, this.battleFooter);
     const chrome = document.getElementById("mobile-chrome");
     (chrome ?? document.body).append(this.root);
     this.mode.id = "mobile-mode-switch";
@@ -146,7 +202,20 @@ export class MobileShell {
     }
     this.modeSelect.value = getDeviceMode();
     this.modeSelect.addEventListener("change", () => { this.hooks.cancel(); setDeviceMode(this.modeSelect.value as DeviceMode); this.frame(this.state); });
-    label.append(this.modeSelect); this.mode.append(toggle, label); document.body.append(this.mode);
+    this.displaySelect.setAttribute("aria-label", "游戏画面");
+    for (const [value, text] of [["classic", "经典完整画面"], ["immersive", "沉浸放大画面"]]) {
+      const option = node("option", undefined, text); option.value = value; this.displaySelect.append(option);
+    }
+    this.displaySelect.addEventListener("change", () => {
+      this.hooks.cancel(); setMobileDisplayMode(this.displaySelect.value as MobileDisplayMode);
+      put(this.displayHelp, getMobileDisplayMode() === "immersive" ? "人物等比放大，双指可平移画面。" : "完整显示场景，控制器位于画面外。");
+      this.frame(this.state);
+    });
+    this.fullscreen.dataset.mobileControl = "fullscreen";
+    this.displayHelp.setAttribute("role", "status");
+    this.displayLabel.append(this.displaySelect);
+    label.append(this.modeSelect); this.mode.append(toggle, label, this.displayLabel, this.fullscreen, this.displayHelp); document.body.append(this.mode);
+    this.syncSettings();
     // Chrome must never turn an input/button gesture into a canvas click or global hotkey.
     for (const el of [this.root, this.mode]) {
       for (const event of ["pointerdown", "pointerup", "pointermove", "click", "dblclick", "contextmenu"]) el.addEventListener(event, e => e.stopPropagation());
@@ -159,21 +228,29 @@ export class MobileShell {
       // moved into chrome after a canvas keydown. Keyup never dispatches actions.
     }
     document.addEventListener("sa-device-change", () => { this.modeSelect.value = getDeviceMode(); this.hooks.cancel(); this.frame(this.state); });
+    document.addEventListener("sa-mobile-display-change", () => {
+      this.trayOpen = false; this.joystick.release(); this.hooks.cancel(); this.presentation = ""; this.frame(this.state);
+    });
+    document.addEventListener("fullscreenchange", () => this.syncSettings());
     addEventListener("blur", () => this.hooks.cancel());
     document.addEventListener("visibilitychange", () => { if (document.hidden) this.hooks.cancel(); });
   }
 
   frame(state: MobileShellState): void {
     const previousPhase = this.state.phase;
+    const previousLayout = this.layout;
+    const wasImmersive = this.sceneImmersive;
     this.state = state;
     const mobile = isMobile();
+    this.syncSettings();
     if (this.modeSelect.value !== getDeviceMode()) this.modeSelect.value = getDeviceMode();
     if (!mobile) {
       if (this.mobile) { this.joystick.release(); this.hooks.cancel(); this.restoreInputs(); }
       this.mobile = false;
       if (!this.root.hidden) this.root.hidden = true;
       this.layout = ""; this.presentation = ""; this.inputSnapshot = [];
-      setMobileScene(false); return;
+      this.syncSceneMode(false);
+      setMobileContext("lobby"); return;
     }
     const wasMobile = this.mobile;
     const visibilityBefore = [this.sheet.hidden, this.field.hidden, this.toolbar.hidden];
@@ -187,7 +264,8 @@ export class MobileShell {
     const signature = JSON.stringify([state, all, this.ui.texts, this.ui.bottomLine,
       boxes.map(b => [b.el.style.display, b.el.type]),
       document.getElementById("mobile-root")?.dataset.orientation,
-      visual?.offsetLeft ?? 0, visual?.offsetTop ?? 0, visual?.width ?? innerWidth, visual?.height ?? innerHeight]);
+      visual?.offsetLeft ?? 0, visual?.offsetTop ?? 0, visual?.width ?? innerWidth, visual?.height ?? innerHeight,
+      getMobileDisplayMode(), this.trayOpen, this.battleCommandsOpen]);
     if (this.mobile && signature === this.presentation && boxes.length === this.inputSnapshot.length
       && boxes.every((box, i) => box === this.inputSnapshot[i])) return;
     this.presentation = signature; this.inputSnapshot = boxes;
@@ -200,8 +278,10 @@ export class MobileShell {
     const modal = all.some(h => /^modal-/.test(h.id));
     if (this.dismiss.hidden !== !npc) this.dismiss.hidden = !npc;
     this.sheetBack.hidden = npc || (state.phase === "login" && !modal && !all.some(h => h.id === "dlg-cancel"));
-    const fieldNormal = state.phase === "field" && !state.panel && !npc && !modal;
-    const layout = fieldNormal ? "field" : state.phase === "battle" && !npc && !modal ? "battle" : "full";
+    const context: MobileContext = state.panel || npc || modal ? "panel" : state.context
+      ?? (state.phase === "field" ? "field" : state.phase === "battle" ? "battle" : "lobby");
+    const fieldNormal = state.phase === "field" && context !== "panel" && !state.panel && !npc && !modal;
+    const layout = fieldNormal ? "field" : state.phase === "battle" && context !== "panel" && !state.panel && !npc && !modal ? "battle" : "full";
     const changed = layout !== this.layout;
     if (changed) {
       this.joystick.release();
@@ -209,17 +289,36 @@ export class MobileShell {
       if (layout === "full") this.focusBeforeSheet = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       this.layout = layout; this.root.dataset.layout = layout;
     }
+    this.syncSceneMode(isImmersive() && (context === "field" || context === "battle") && (layout === "field" || layout === "battle"));
+    const immersiveBattle = this.sceneImmersive && layout === "battle";
+    // Remembered attacks can expose native t-* immediately on a fresh battle.
+    // They must not reopen an opaque sheet over the actor without a user action.
+    // Returning from a native item/magic/pet pane is a deliberate target choice.
+    if (immersiveBattle && changed && previousPhase === "battle" && previousLayout === "full"
+      && all.some(h => /^(?:t|mt|pt)-\d+$/.test(h.id))) this.battleCommandsOpen = true;
     // The game viewport owns its size. Chrome stays in the remaining portrait
     // space or in the landscape rails; opening a native panel never covers it.
-    setMobileScene(fieldNormal);
-    this.sheet.hidden = fieldNormal && ![...InputBox.live].some(b => b.el.style.display !== "none");
+    setMobileContext(context);
+    this.sheet.hidden = (fieldNormal && ![...InputBox.live].some(b => b.el.style.display !== "none"))
+      || (immersiveBattle && !this.battleCommandsOpen);
     // Keep movement above native long lists; disabled stick never consumes menu movement.
     this.field.hidden = state.phase !== "field" || npc || modal;
     this.encounter.hidden = !state.canEncounter;
     this.encounter.disabled = !fieldNormal;
     this.encounter.setAttribute("aria-pressed", String(!!state.encounter));
     put(this.encounter, `自动遇敌：${state.encounter ? "开" : "关"}`);
-    this.toolbar.hidden = state.phase !== "field" || !fieldNormal;
+    this.toolbar.hidden = state.phase !== "field" || !fieldNormal || (this.sceneImmersive && !this.trayOpen);
+    this.tray.hidden = !this.sceneImmersive || !this.trayOpen;
+    this.trayToggle.hidden = !this.sceneImmersive;
+    this.trayToggle.setAttribute("aria-expanded", String(this.trayOpen));
+    put(this.trayToggle, this.trayOpen ? "收起" : layout === "battle" ? "操作" : "菜单");
+    this.root.dataset.tray = this.trayOpen ? "open" : "closed";
+    this.camera.hidden = !this.sceneImmersive || layout !== "battle" || state.cameraAvailable === false;
+    this.battleFooter.hidden = !immersiveBattle;
+    this.battleCommands.setAttribute("aria-expanded", String(this.battleCommandsOpen));
+    put(this.battleCommands, this.battleCommandsOpen ? "收起指令" : "指令");
+    this.fieldExtras.hidden = !this.sceneImmersive || layout !== "field";
+    this.joystick.element.setAttribute("aria-disabled", String(layout !== "field" || this.trayOpen));
     this.sheet.setAttribute("role", "region");
     const selectedHit = all.find(hit => hit.id === state.selectedId);
     const selectedLabel = selectedHit && (!state.selectedLabel || state.selectedLabel === selectedHit.id)
@@ -233,10 +332,14 @@ export class MobileShell {
     this.diffLines(this.chat, this.chatNodes, (state.chat ?? []).slice(-3));
     this.syncInputs(state, npc, modal, fieldNormal);
     // Input focus hits remain represented by the actual input rather than duplicate buttons.
-    const hits = fieldNormal ? [] : all.filter(h => !this.isInputHit(h)
-      && !(state.phase === "field" && (/^tb-/.test(h.id) || /^chat-(?:all|up|down|reset)$/.test(h.id))));
+    const hits = fieldNormal ? this.sceneImmersive ? all.filter(h => !this.isInputHit(h) && !MIRRORED_FIELD_ACTIONS.has(h.id)
+      && !/^chat-(?:up|down|reset)$/.test(h.id)) : [] : all.filter(h => !this.isInputHit(h)
+      && !(state.phase === "field" && (/^tb-/.test(h.id) || /^chat-(?:all|up|down|reset)$/.test(h.id)))
+      && !(state.phase === "battle" && state.cameraAvailable === false && context === "field" && !AUTO_ACTIONS.has(h.id)));
     this.syncActions(hits, state);
-    if (!wasMobile || changed || previousPhase !== state.phase
+    if (this.sceneImmersive && layout === "field") this.fieldExtras.hidden = hits.length === 0;
+    this.battleCommands.disabled = immersiveBattle && !hits.some(h => !AUTO_ACTIONS.has(h.id));
+    if (!wasMobile || changed || wasImmersive !== this.sceneImmersive || previousPhase !== state.phase
       || visibilityBefore.some((hidden, i) => hidden !== [this.sheet.hidden, this.field.hidden, this.toolbar.hidden][i])) {
       document.dispatchEvent(new Event("sa-controls-layout"));
     }
@@ -249,7 +352,61 @@ export class MobileShell {
     }
   }
 
-  private command(name: string): void { this.hooks.cancel(); this.hooks.command(name); }
+  private command(name: string): void {
+    // Opening a native menu closes the local tray. It still goes through the
+    // host's original command path; the shell never invents game state.
+    this.trayOpen = false;
+    if (name === "back") this.battleCommandsOpen = false;
+    this.hooks.cancel(); this.hooks.command(name);
+  }
+
+  private syncSettings(): void {
+    const mobile = isMobile(), display = getMobileDisplayMode();
+    if (this.displaySelect.value !== display) this.displaySelect.value = display;
+    for (const el of [this.displayLabel, this.displayHelp]) if (el.hidden !== !mobile) el.hidden = !mobile;
+    // Switching presentation does not necessarily make the platform leave
+    // fullscreen. Keep its explicit exit reachable on touchscreens in any mode.
+    const hideFullscreen = !mobile && !document.fullscreenElement;
+    if (this.fullscreen.hidden !== hideFullscreen) this.fullscreen.hidden = hideFullscreen;
+    put(this.fullscreen, document.fullscreenElement ? "退出全屏" : "进入全屏");
+  }
+
+  private async toggleFullscreen(): Promise<void> {
+    this.joystick.release(); this.hooks.cancel();
+    if (document.fullscreenElement) {
+      await exitMobileFullscreen(); put(this.displayHelp, "已退出全屏，可继续使用沉浸画面。");
+    } else {
+      const entered = await requestMobileFullscreen();
+      put(this.displayHelp, entered ? "已进入浏览器全屏。" : "已使用沉浸画面，此浏览器暂未提供页面全屏。");
+    }
+    this.syncSettings(); this.frame(this.state);
+  }
+
+  private toggleTray(): void {
+    if (!this.sceneImmersive) return;
+    this.trayOpen = !this.trayOpen; this.joystick.release(); this.hooks.cancel(); this.frame(this.state);
+  }
+
+  private toggleBattleCommands(): void {
+    if (!this.sceneImmersive || this.layout !== "battle") return;
+    this.trayOpen = false; this.battleCommandsOpen = !this.battleCommandsOpen;
+    this.hooks.cancel(); this.frame(this.state);
+  }
+
+  private syncSceneMode(active: boolean): void {
+    if (active === this.sceneImmersive) return;
+    this.sceneImmersive = active; this.trayOpen = false; this.battleCommandsOpen = false;
+    this.joystick.release(); this.hooks.cancel();
+    this.root.dataset.immersive = String(active);
+    // Only control groups move; native InputBox nodes stay in the original
+    // adopted-input sheet. Returning to classic restores the exact parent order.
+    if (active) this.tray.append(this.toolbar, this.fieldExtras, this.camera, this.right);
+    else {
+      this.left.insertBefore(this.toolbar, this.sheet); this.root.insertBefore(this.right, this.tray);
+      this.tray.hidden = true; this.trayToggle.hidden = true; this.camera.hidden = true;
+      this.fieldExtras.hidden = true; this.battleFooter.hidden = true;
+    }
+  }
 
   private makeFieldControls(): HTMLElement {
     const controls = node("div", "mobile-shell-controls");
@@ -410,22 +567,58 @@ export class MobileShell {
   }
 
   private syncActions(hits: MobileHit[], state: MobileShellState): void {
-    const keep = new Set<string>(); let previous: ChildNode | null = null;
-    for (const hit of hits) {
-      if (keep.has(hit.id)) continue; keep.add(hit.id);
-      let b = this.actionNodes.get(hit.id);
-      if (!b) {
-        const id = hit.id;
-        b = button("", () => { if (isMobile() && this.activeActions.has(id)) { this.hooks.cancel(); this.hooks.action(id); } });
-        b.dataset.action = id; this.actionNodes.set(id, b);
+    const compact = this.sceneImmersive && this.layout === "battle";
+    const autoHits = compact ? hits.filter(h => AUTO_ACTIONS.has(h.id)) : [];
+    const rows = compact ? hits.filter(h => !AUTO_ACTIONS.has(h.id)) : hits;
+    const container = this.sceneImmersive && this.layout === "field" ? this.extraActions : this.actions;
+    const keep = new Set(hits.map(h => h.id)), rowKeep = new Set<string>();
+    const focused = document.activeElement;
+    let previous: ChildNode | null = null;
+    for (const hitsInRow of actionRows(rows)) {
+      const key = hitsInRow.map(hit => hit.id).join("\0"); rowKeep.add(key);
+      let row = this.actionRowNodes.get(key);
+      if (!row) { row = node("div", "mobile-shell-action-row"); this.actionRowNodes.set(key, row); }
+      let priorButton: ChildNode | null = null;
+      for (const hit of hitsInRow) {
+        const b = this.actionButton(hit, state);
+        const nextButton: ChildNode | null = priorButton ? priorButton.nextSibling : row.firstChild;
+        if (nextButton !== b) row.insertBefore(b, nextButton); priorButton = b;
       }
-      put(b, this.actionLabel(hit, state));
-      const selected = state.selectedId === hit.id;
-      if (b.getAttribute("aria-current") !== String(selected)) b.setAttribute("aria-current", String(selected));
-      const next: ChildNode | null = previous ? previous.nextSibling : this.actions.firstChild;
-      if (next !== b) this.actions.insertBefore(b, next); previous = b;
+      const next: ChildNode | null = previous ? previous.nextSibling : container.firstChild;
+      if (next !== row) container.insertBefore(row, next); previous = row;
     }
+    let lastAuto: ChildNode | null = null;
+    for (const hit of autoHits) {
+      const b = this.actionButton(hit, state), next: ChildNode | null = lastAuto ? lastAuto.nextSibling : this.battleAutos.firstChild;
+      if (next !== b) this.battleAutos.insertBefore(b, next); lastAuto = b;
+    }
+    this.battleAutos.hidden = autoHits.length === 0;
     for (const [id, b] of this.actionNodes) if (!keep.has(id)) { b.remove(); this.actionNodes.delete(id); }
+    for (const [key, row] of this.actionRowNodes) if (!rowKeep.has(key)) { row.remove(); this.actionRowNodes.delete(key); }
+    // A native row regroup may reparent a surviving focused button. Do not lose
+    // keyboard selection or scroll the list when its neighboring actions change.
+    if (focused instanceof HTMLElement && this.root.contains(focused) && [...this.actionNodes.values()].includes(focused as HTMLButtonElement)
+      && document.activeElement !== focused) focused.focus({ preventScroll: true });
+  }
+
+  private actionButton(hit: MobileHit, state: MobileShellState): HTMLButtonElement {
+    let b = this.actionNodes.get(hit.id);
+    if (!b) {
+      const id = hit.id;
+      const created: HTMLButtonElement = button("", () => {
+        if (!isMobile() || !this.activeActions.has(id) || this.actionNodes.get(id) !== created) return;
+        if (this.sceneImmersive) {
+          if (this.layout === "field") this.trayOpen = false;
+          else if (/^(?:t|mt|pt)-\d+$/.test(id) || ["b-guard", "b-escape", "watch-leave"].includes(id) || AUTO_ACTIONS.has(id)) this.battleCommandsOpen = false;
+        }
+        this.hooks.cancel(); this.hooks.action(id);
+      });
+      b = created; b.dataset.action = id; this.actionNodes.set(id, b);
+    }
+    put(b, this.actionLabel(hit, state));
+    const selected = state.selectedId === hit.id;
+    if (b.getAttribute("aria-current") !== String(selected)) b.setAttribute("aria-current", String(selected));
+    return b;
   }
 
   private actionLabel(h: MobileHit, state: MobileShellState): string {
@@ -444,7 +637,7 @@ export class MobileShell {
     if ((m = id.match(/^st-kick(\d+)$/))) return `移出队伍成员 ${Number(m[1]) + 1}`;
     if ((m = id.match(/^pet-(name|st|ride|skill)(\d+)$/))) return `${({ name: "宠物", st: "切换宠物状态", ride: "骑乘 / 下骑", skill: "宠物技能" } as Record<string, string>)[m[1]]} ${Number(m[2]) + 1}`;
     if ((m = id.match(/^([sa])(\d)([+-])$/))) return `${m[3] === "+" ? "增加" : "减少"}${(m[1] === "s" ? ["体力", "腕力", "耐力", "敏捷"] : ["地属性", "水属性", "火属性", "风属性"])[Number(m[2])]}`;
-    if (/^(t-|.*target)/.test(id)) {
+    if (/^(?:[bmp]?t-|.*target)/.test(id)) {
       const cx = (h.x1 + h.x2) / 2;
       const names = this.ui.texts.filter(t => /[\u3400-\u9fffA-Za-z]/.test(t.text) && !/请选择|您的目标/.test(t.text));
       const nearest = names.sort((a, b) => Math.hypot(a.x - cx, a.y - h.y1) - Math.hypot(b.x - cx, b.y - h.y1))[0];
@@ -476,30 +669,26 @@ export class MobileShell {
     if (document.getElementById("mobile-shell-style")) return;
     const style = node("style"); style.id = "mobile-shell-style";
     style.textContent = `
-.mobile-shell{--jade:#153c3a;--gold:#e7c686;--ink:#eaf1e8;color:var(--ink);background:linear-gradient(165deg,#193d3c,#0a2528);font:15px/1.5 system-ui,sans-serif;box-sizing:border-box;display:flex;flex-direction:column;min-height:0;padding-bottom:env(safe-area-inset-bottom);isolation:isolate}
+.mobile-shell{--jade:#214c4b;--gold:#e2cca0;--ink:#f4eee0;--leaf:#b7d3c7;color:var(--ink);background:linear-gradient(165deg,#204a4b,#13343c);font:15px/1.5 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;box-sizing:border-box;display:flex;flex-direction:column;min-height:0;max-width:100%;padding-bottom:env(safe-area-inset-bottom);isolation:isolate}
 .mobile-shell [hidden],.mobile-shell[hidden]{display:none!important}.mobile-shell *{box-sizing:border-box}
-.mobile-shell-left{display:contents}.mobile-shell button,.mobile-shell select{font:inherit;min-height:44px;min-width:44px;color:#f4eedc;border:1px solid #567b70;border-radius:12px;background:linear-gradient(#294e45,#1b3b37);box-shadow:inset 0 1px #ffffff12,0 2px 4px #0003;padding:8px 12px;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mobile-shell-left{display:contents}.mobile-shell button,.mobile-shell select{font:inherit;min-height:44px;min-width:44px;color:var(--ink);border:1px solid #71918a;border-radius:9px;background:linear-gradient(#2f5a53,#21443f);box-shadow:inset 0 1px #ffffff20,0 2px 4px #0003;padding:9px 12px;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mobile-shell button:disabled{opacity:.5;cursor:default}.mobile-shell-actions button:is([data-action='ok'],[data-action='modal-ok'],[data-action='modal-yes'],[data-action='dlg-ok'],[data-action='npc-btn0']){background:linear-gradient(#ead8ae,#c4a571);border-color:#f1dcb0;color:#253b37;font-weight:600}
 .mobile-shell button:active{background:#42685b;box-shadow:inset 0 2px 5px #0005}.mobile-shell button[aria-current='true']{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold),0 0 12px #e7c68622}.mobile-shell :focus-visible,#mobile-mode-switch :focus-visible{outline:3px solid #f7d48a;outline-offset:2px}
-.mobile-shell-status{order:0;padding:12px 16px 10px;border-bottom:1px solid #e7c68626;flex:none}.mobile-shell-status strong{font-size:18px;letter-spacing:.06em;color:var(--gold)}.mobile-shell-status div{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:#b9d2c5;margin-top:3px}
+.mobile-shell-status{order:0;padding:12px 16px 10px;border-bottom:1px solid #e7c68638;flex:none}.mobile-shell-status strong{font-size:18px;color:var(--gold)}.mobile-shell-status div{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:var(--leaf);margin-top:3px}
 .mobile-shell-sheet{order:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px 14px;scroll-padding:12px;flex:1}.mobile-shell-back{width:100%;margin-bottom:10px;color:var(--gold)!important}.mobile-shell-info p,.mobile-shell-chat p{margin:0 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}.mobile-shell-info{margin-bottom:10px;max-height:24dvh;overflow:auto;overscroll-behavior:contain;font-size:14px;color:#c6dacf;scrollbar-gutter:stable}
-.mobile-shell-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mobile-shell-actions button{white-space:normal;overflow-wrap:anywhere;text-align:left}.mobile-shell-input{display:block;margin-bottom:12px}.mobile-shell-input span{display:block;margin-bottom:5px;font-size:13px;letter-spacing:.06em;color:var(--gold)}.mobile-shell-input input{font-family:inherit!important;min-height:46px;max-width:100%;box-shadow:inset 0 2px 4px #0003}.mobile-shell-inputs>button{margin-bottom:8px;width:100%}
+.mobile-shell-actions{display:flex;flex-direction:column;gap:8px}.mobile-shell-action-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:stretch;min-width:0}.mobile-shell-action-row>button:last-child:nth-child(odd){grid-column:1/-1}.mobile-shell-actions button{min-width:0;min-height:44px;white-space:normal;overflow-wrap:anywhere;text-align:left;line-height:1.4}.mobile-shell-input{display:block;margin-bottom:12px}.mobile-shell-input span{display:block;margin-bottom:5px;font-size:13px;color:var(--gold)}.mobile-shell-input input{font-family:inherit!important;min-height:46px;max-width:100%;box-shadow:inset 0 2px 4px #0003}.mobile-shell-inputs>button{margin-bottom:8px;width:100%}
 .mobile-shell-toolbar{order:3;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:10px 12px;border-top:1px solid #e7c68626;flex:none}.mobile-shell-toolbar button{padding:6px 2px;font-size:13px}.mobile-shell-field{order:2;padding:8px 14px;flex:none}.mobile-shell-chat{max-height:60px;overflow:auto;font-size:13px;color:#adcbbe}.mobile-shell-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-shell-dpad{display:grid;grid-template-areas:'. up .' 'left down right';grid-template-columns:44px 44px 44px;gap:4px}.mobile-shell-dpad button{padding:4px;font-size:23px}.mobile-shell-tools{display:grid;gap:6px}
 .mobile-shell-right{order:4;padding:12px;display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:8px;border-top:1px solid #e7c68626;flex:none}.mobile-shell-selection{min-width:0;padding:0 2px}.mobile-shell-eyebrow{font-size:10px;color:#95b5a8;letter-spacing:.16em}.mobile-shell-selected{font-size:13px;color:var(--gold);min-height:22px;overflow-wrap:anywhere}.mobile-shell-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.mobile-shell-navigation button{font-size:26px;padding:0;line-height:1}
 .mobile-shell-clicks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-column:1/-1}.mobile-shell-click{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px!important}.mobile-shell-click-title{font-size:16px;font-weight:650;letter-spacing:.1em}.mobile-shell-click small{font-size:10px;color:#c3d5c9}.mobile-shell-click-0{background:linear-gradient(#e6c78b,#bc955a)!important;color:#24352b!important;border-color:#e5c994!important}.mobile-shell-click-0 small{color:#344c3e}.mobile-shell-click-2{border-color:#809b86!important}
 .mobile-shell-zoom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;grid-column:1/-1}.mobile-shell-zoom button{padding:5px;font-size:14px}.mobile-shell-joystick{display:block;position:relative;width:112px;height:112px;max-width:100%;aspect-ratio:1;flex:none;border-radius:50%;border:1px solid #c8b88066;background:radial-gradient(circle at 45% 40%,#294d47 0 28%,#173632 65%,#092024 100%);box-shadow:inset 0 3px 12px #0008,0 0 0 5px #081e22,0 0 0 6px #87a18444,0 6px 15px #0006;touch-action:none;user-select:none;-webkit-user-select:none}
 .mobile-shell-joystick::before,.mobile-shell-joystick::after{content:'';position:absolute;background:#c4b68025;pointer-events:none}.mobile-shell-joystick::before{width:1px;top:13%;bottom:13%;left:50%}.mobile-shell-joystick::after{height:1px;left:13%;right:13%;top:50%}.mobile-shell-joystick-knob{position:absolute;left:50%;top:50%;width:46%;height:46%;border:1px solid #a6b894;border-radius:50%;background:radial-gradient(circle at 35% 25%,#729780,#2b5145 70%);box-shadow:0 4px 8px #0007,inset 0 1px #e9e8be55;transform:translate(calc(-50% + var(--stick-x,0px)),calc(-50% + var(--stick-y,0px)));pointer-events:none;z-index:1}.mobile-shell-joystick-guide{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:10px;color:#acc2b2;pointer-events:none}.mobile-shell-joystick[data-active='true']{border-color:var(--gold)}
-#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#e6e9df;background:#143632ed;border:1px solid #91a68a;border-radius:10px;box-shadow:0 3px 12px #0004;font:12px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center;justify-content:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24483d;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:calc(env(safe-area-inset-top) + 6px);right:calc(env(safe-area-inset-right) + 6px);bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:36px;min-width:44px}
-html.sa-mobile:has(#mobile-root[data-orientation='portrait']) #mobile-mode-switch{top:calc(75vw + env(safe-area-inset-top) + 6px)}
+#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#e6e9df;background:#143632ed;border:1px solid #91a68a;border-radius:10px;box-shadow:0 3px 12px #0004;font:12px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center;justify-content:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24483d;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:calc(env(safe-area-inset-top) + 6px);right:calc(env(safe-area-inset-right) + 6px);bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:44px;min-width:44px}
+#mobile-mode-switch [hidden]{display:none!important}#mobile-mode-switch button{width:100%;min-height:44px;font:14px system-ui,sans-serif;color:#253b37;border:1px solid #e2cca0;border-radius:8px;background:linear-gradient(#ead8ae,#c4a571);padding:8px;cursor:pointer;touch-action:manipulation}#mobile-mode-switch .mobile-shell-display-help{max-width:240px;margin:8px 0 3px;color:#cbded3;font-size:12px;line-height:1.5;white-space:normal}#mobile-mode-switch label select{max-width:calc(100vw - 42px)}
 #mobile-root[data-orientation='portrait'] .mobile-shell-status{padding-right:84px;min-height:58px}
 #mobile-root[data-orientation='portrait'] .mobile-shell-status strong{font-size:16px;overflow-wrap:anywhere}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field']{display:grid;grid-template-columns:136px minmax(0,1fr);align-items:start}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-status,#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-sheet,#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-toolbar{grid-column:1/-1}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-toolbar{order:2}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-field{grid-column:1;order:3;padding:18px 12px 12px;align-self:stretch}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-controls{flex-direction:column;gap:14px}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-right{grid-column:2;order:3;display:flex;flex-direction:column;padding:12px 12px 12px 4px;border-top:0}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-right .mobile-shell-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
-#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-chat{display:none}
+/* The portrait list has its own bounded scroll surface. An unbounded overflow
+   element with overscroll containment can swallow a drag before chrome scrolls. */
+#mobile-root:not([data-orientation='landscape']) .mobile-shell-sheet{flex:none;max-height:max(160px,calc(var(--viewport-height,100dvh) - var(--game-height,75vw) - 260px))}
 #mobile-root[data-orientation='landscape'] .mobile-shell{display:contents;background:none;padding:0}
 #mobile-root[data-orientation='landscape'] .mobile-shell-left,#mobile-root[data-orientation='landscape'] .mobile-shell-right{position:absolute;top:0;bottom:0;width:var(--rail-width,120px);pointer-events:auto;display:flex;flex-direction:column;min-width:0;overflow:auto;overscroll-behavior:contain;background:linear-gradient(175deg,#193d37f5,#0a2529fa);container-type:inline-size;scrollbar-width:thin}
 #mobile-root[data-orientation='landscape'] .mobile-shell-left{left:0;border-right:1px solid #c6b68340;padding-left:env(safe-area-inset-left)}
@@ -511,7 +700,8 @@ html.sa-mobile:has(#mobile-root[data-orientation='portrait']) #mobile-mode-switc
 #mobile-root[data-orientation='landscape'] .mobile-shell-toolbar button{font-size:12px;padding:4px 1px;min-width:44px;border-radius:10px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-sheet{order:2;padding:7px;min-height:0;flex:1}
 #mobile-root[data-orientation='landscape'] .mobile-shell-info{font-size:12px;max-height:none;overflow:visible}
-#mobile-root[data-orientation='landscape'] .mobile-shell-actions{grid-template-columns:minmax(0,1fr);gap:6px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-actions{gap:6px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-action-row{grid-template-columns:minmax(0,1fr);gap:6px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-actions button{font-size:12px;padding:7px;min-width:44px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-input span{font-size:12px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-input input{padding:5px!important}
@@ -546,8 +736,53 @@ html.sa-mobile:has(#mobile-root[data-orientation='portrait']) #mobile-mode-switc
 #mobile-root[data-orientation='landscape'] .mobile-shell-field{order:-1;margin-top:0;justify-content:start;padding:8px;min-height:0}
 #mobile-root[data-orientation='landscape'] .mobile-shell-controls{flex-direction:column;gap:8px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-tools{display:grid;width:100%}
-#mobile-root[data-orientation='landscape'] .mobile-shell-tools button{font-size:12px;padding:4px;min-height:36px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-tools button{font-size:12px;padding:4px;min-height:44px}
 #mobile-root[data-orientation='landscape'] .mobile-shell-tools button:not([data-mobile-control='auto-encounter']){display:none}
+
+/* Opt-in scene presentation: the full-sized game owns the viewport. Native
+   panels/lobby keep the classic complete canvas and readable sheet above. */
+html.sa-mobile #mobile-root[data-display='immersive']:is([data-context='field'],[data-context='battle']) #mobile-viewport{position:absolute;inset:0;width:100%;height:100%}
+html.sa-mobile #mobile-root[data-display='immersive']:is([data-context='field'],[data-context='battle']) #mobile-chrome{position:absolute;inset:0;overflow:visible;pointer-events:none;touch-action:auto}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true']{display:contents;background:none;padding:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-left{display:contents;position:static;width:auto;padding:0;background:none;border:0;overflow:visible}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-status{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(78px + env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top));min-height:0;max-height:78px;overflow:hidden;padding:7px 10px;border:1px solid #d8c39755;border-radius:10px;background:#13343ce8;pointer-events:none;z-index:3}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-status strong{display:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-status div{display:block;margin:0;font-size:12px;line-height:1.5;color:#f4eee0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-field{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(80px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:auto;max-width:none;margin:0;padding:0;min-height:0;background:none;pointer-events:auto;z-index:4}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-controls{display:flex;flex-direction:row;align-items:end;justify-content:space-between;gap:12px;width:100%}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-joystick{width:96px;height:96px;flex:none;background:radial-gradient(circle at 45% 40%,#3b615ae8 0 28%,#173632e8 65%,#092024e8 100%)}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tools{display:grid;grid-template-columns:minmax(0,1fr);width:min(140px,100%);gap:8px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tools button{display:block;min-height:44px;padding:7px 8px;font-size:13px;line-height:1.3;background:#214c4bec}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tools button[data-mobile-control='field-back']{display:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-chat{display:none}
+.mobile-shell-joystick[aria-disabled='true']{opacity:.5}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tray-toggle{position:absolute;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));width:56px;height:56px;min-height:44px;padding:7px;border:1px solid #efd9aa;background:linear-gradient(#e6d1a7,#b48b54);color:#253b37;font-size:14px;font-weight:600;box-shadow:inset 0 1px #fff6,0 4px 10px #0004;pointer-events:auto;z-index:6}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(12px + env(safe-area-inset-right));bottom:calc(126px + env(safe-area-inset-bottom));max-height:min(55dvh,calc(var(--viewport-height,100dvh) - 190px));min-height:0;display:flex;flex-direction:column;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:8px;border:1px solid #d8c397aa;border-radius:12px;background:#173f40fa;box-shadow:0 8px 24px #0006;pointer-events:auto;z-index:5;scrollbar-width:thin}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-toolbar{order:0;display:grid;position:static;width:auto;grid-template-columns:repeat(4,minmax(0,1fr));padding:4px;gap:6px;border:0;max-height:none;overflow:visible;flex:none;min-height:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-toolbar button{min-width:44px;min-height:44px;font-size:13px;padding:7px 2px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-right{order:3;position:static;inset:auto;width:auto;display:grid;grid-template-columns:minmax(0,1fr) 88px;min-height:0;overflow:visible;padding:8px 4px 4px;background:none;border:0;gap:8px;flex:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-selected{min-height:22px;max-height:none;white-space:normal;font-size:13px;overflow:visible}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-clicks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-click{min-height:48px!important;padding:7px 4px;width:100%}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-zoom{grid-template-columns:repeat(3,minmax(0,1fr));margin:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-field-extras{order:1;margin:8px 4px 4px;flex:none;min-width:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-field-extras>strong{display:block;margin-bottom:8px;color:var(--gold);font-size:13px;font-weight:600}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-field-extras .mobile-shell-action-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-field-extras button{min-height:44px;font-size:13px;padding:8px;touch-action:pan-y}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-camera{order:2;position:static;inset:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:4px;flex:none;padding:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-battle-footer{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(80px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));display:grid;grid-template-columns:minmax(0,1fr) 66px;gap:6px;align-items:end;pointer-events:auto;z-index:4;min-width:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-battle-autos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;min-width:0}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-battle-footer button{min-width:44px;min-height:44px;padding:7px 4px;font-size:13px;white-space:normal;overflow-wrap:anywhere;background:#214c4bed}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-battle-footer .mobile-shell-battle-command-toggle{border-color:#e2cca0;color:#253b37;background:linear-gradient(#e6d1a7,#b48b54);font-weight:600}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-camera{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(78px + env(safe-area-inset-right));top:calc(68px + env(safe-area-inset-top));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;pointer-events:auto;z-index:4}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-camera button{min-height:44px;min-width:44px;padding:6px 4px;background:#214c4bec;font-size:13px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='battle'] .mobile-shell-sheet{position:absolute;left:calc(12px + env(safe-area-inset-left));right:calc(12px + env(safe-area-inset-right));bottom:calc(80px + env(safe-area-inset-bottom));max-height:min(35dvh,calc(var(--viewport-height,100dvh) - 160px));min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:10px;border:1px solid #d8c39788;border-radius:12px;background:#153b3de8;pointer-events:auto;z-index:4}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='battle'] .mobile-shell-info{max-height:64px;margin-bottom:8px;font-size:13px;overflow:auto}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='battle'] .mobile-shell-action-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='battle'] .mobile-shell-drawer{bottom:calc(80px + env(safe-area-inset-bottom))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-tray='open'] .mobile-shell-sheet{visibility:hidden;pointer-events:none}
+html.sa-mobile:has(#mobile-root[data-display='immersive']:is([data-context='field'],[data-context='battle'])) #mobile-mode-switch{top:calc(8px + env(safe-area-inset-top));right:calc(8px + env(safe-area-inset-right));bottom:auto}
 `;
     document.head.append(style);
   }

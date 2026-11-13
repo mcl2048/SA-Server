@@ -1,4 +1,7 @@
 // Presentation only: the game, UI and network always use 800 × 600 coordinates.
+import { immersiveScene } from "./mobile-camera.js?v=e5c6eee3f928fb08";
+
+
 
 const validMode = (value               )                      => value === "auto" || value === "desktop" || value === "mobile";
 const storageKey = "sa-device-mode";
@@ -8,6 +11,12 @@ try { if (browser) { const saved = localStorage.getItem(storageKey); if (validMo
 const query = new URLSearchParams(typeof location === "undefined" ? "" : location.search).get("device");
 if (validMode(query)) mode = query;
 let mobile = false, scene = false, loginArtwork = false, zoom = 1, panX = 0, panY = 0, fit = 1, frame = 0;
+let display                    = "classic", context                = "lobby";
+let focusX = 400, focusY = 300, focusAt = 0;
+const validDisplay = (value               )                             => value === "classic" || value === "immersive";
+try { if (browser) { const saved = localStorage.getItem("sa-mobile-display"); if (validDisplay(saved)) display = saved; } } catch { /* In-memory mode remains available. */ }
+const displayQuery = new URLSearchParams(typeof location === "undefined" ? "" : location.search).get("view");
+if (validDisplay(displayQuery)) display = displayQuery;
 let orientation = "";
 let originalParent              = null, originalNext                   = null;
 
@@ -20,6 +29,60 @@ export function mobileGeometry(width        , height        ) {
     top: landscape ? (height - gameHeight) / 2 : 0, rail: landscape ? (width - gameWidth) / 2 : 0 };
 }
 export function isMobile()          { return mobile; }
+export function isImmersive()          { return mobile && display === "immersive"; }
+export function getMobileDisplayMode()                    { return display; }
+export function setMobileDisplayMode(value                   )       {
+  if (!validDisplay(value) || display === value) return;
+  display = value;
+  try { localStorage.setItem("sa-mobile-display", value); } catch { /* Apply without persistence. */ }
+  resetSceneView();
+  if (browser) {
+    document.dispatchEvent(new Event("sa-mobile-gesture"));
+    document.dispatchEvent(new CustomEvent("sa-mobile-display-change", { detail: { display } }));
+  }
+}
+/** Browser fullscreen requires a user gesture and is unavailable on some phones.
+ * The independent immersive viewport remains usable when the platform declines.
+ */
+export async function requestMobileFullscreen()                   {
+  if (!browser || !mobile) return false;
+  setMobileDisplayMode("immersive");
+  try {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen)
+      await document.documentElement.requestFullscreen({ navigationUI: "hide" });
+    return !!document.fullscreenElement;
+  } catch { return false; }
+  finally { scheduleLayout(); }
+}
+export async function exitMobileFullscreen()                {
+  if (!browser) return;
+  try { if (document.fullscreenElement) await document.exitFullscreen(); }
+  catch { /* The browser may already have exited fullscreen. */ }
+  finally { scheduleLayout(); }
+}
+export function setMobileContext(value               )       {
+  if (context === value) return;
+  context = value; scene = value === "field";
+  // A native dialog must always return to its complete logical bounds. Its
+  // readable controls live in the mobile sheet and continue to use native hits.
+  zoom = 1; panX = panY = 0; focusAt = 0;
+  if (browser) document.dispatchEvent(new Event("sa-mobile-gesture"));
+  scheduleLayout();
+}
+/** Smooth camera movement is elapsed-time based, bounded after a suspended tab,
+ * and disabled for reduced motion. Manual pan remains independent of the focus.
+ */
+export function setSceneFocus(x        , y        , now = typeof performance === "undefined" ? 0 : performance.now())       {
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+  const snap = focusAt === 0; // A newly visible scene must reveal its player/target immediately.
+  const dt = focusAt ? Math.max(0, Math.min(80, now - focusAt)) : 80;
+  focusAt = now;
+  const k = snap || browser && matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 1 - Math.exp(-dt / 140);
+  const nx = focusX + (x - focusX) * k, ny = focusY + (y - focusY) * k;
+  if (Math.abs(nx - focusX) < .1 && Math.abs(ny - focusY) < .1) return;
+  focusX = nx; focusY = ny;
+  if (isImmersive() && (context === "field" || context === "battle")) scheduleLayout();
+}
 export function getDeviceMode()             { return mode; }
 export function setDeviceMode(value            )       {
   if (!validMode(value)) return;
@@ -32,11 +95,11 @@ export function setMobileLoginArtwork(active         )       {
   if (loginArtwork !== active) { loginArtwork = active; scheduleLayout(); }
 }
 export function setMobileScene(active         )       {
-  if (scene !== active) { scene = active; scheduleLayout(); }
+  if (scene !== active) { scene = active; context = active ? "field" : "lobby"; scheduleLayout(); }
 }
 /** Zoom is relative to fit: 1 always means full width/height for this orientation. */
 export function setSceneZoom(value        )       {
-  if (Number.isFinite(value)) { zoom = Math.max(.5, Math.min(4, value)); scheduleLayout(); }
+  if (Number.isFinite(value)) { zoom = Math.max(isImmersive() ? 1 : .5, Math.min(4, value)); scheduleLayout(); }
 }
 export function getSceneZoom()         { return zoom; }
 export function resetSceneView()       { zoom = 1; panX = panY = 0; scheduleLayout(); }
@@ -75,15 +138,32 @@ function layout()       {
   const width = visual?.width ?? innerWidth, height = visual?.height ?? innerHeight;
   root.style.width = `${width}px`; root.style.height = `${height}px`;
   root.style.left = `${visual?.offsetLeft ?? 0}px`; root.style.top = `${visual?.offsetTop ?? 0}px`;
-  const g = mobileGeometry(width, height), nextOrientation = g.landscape ? "landscape" : "portrait";
+  const cropped = isImmersive() && (context === "field" || context === "battle");
+  const g = cropped ? { landscape: width > height, width, height, left: 0, top: 0, rail: 0 } : mobileGeometry(width, height);
+  const nextOrientation = g.landscape ? "landscape" : "portrait";
   if (orientation !== nextOrientation) {
     orientation = nextOrientation;
     document.dispatchEvent(new Event("sa-mobile-gesture"));
   }
-  root.dataset.orientation = orientation;
+  // Camera movement changes only the transform. Rewriting an identical mode
+  // attribute would wake the position editor and cancel its long-press timer.
+  if (root.dataset.orientation !== orientation) root.dataset.orientation = orientation;
+  if (root.dataset.display !== display) root.dataset.display = display;
+  if (root.dataset.context !== context) root.dataset.context = context;
   for (const [key, value] of Object.entries({ "game-left": g.left, "game-top": g.top, "game-width": g.width,
     "game-height": g.height, "rail-width": g.rail, "viewport-width": width, "viewport-height": height })) root.style.setProperty(`--${key}`, `${value}px`);
-  fit = g.width / (loginArtwork ? 640 : 800);
+  fit = cropped ? Math.max(1, width / 800, height / 600) : g.width / (loginArtwork ? 640 : 800);
+  if (cropped) {
+    const c = immersiveScene(width, height, focusX - panX / (fit * zoom), focusY - panY / (fit * zoom), zoom);
+    // The CSS stage is center-origin in x; geometry.left is its actual corner.
+    // Do not feed edge clamping back into pan: an automatic target at an edge
+    // must not leave a manual-pan offset when the next target is in the center.
+    stage.style.setProperty("--mobile-scale", String(c.scale));
+    stage.style.setProperty("--mobile-left", `${c.left + 400 * c.scale}px`);
+    stage.style.setProperty("--mobile-top", `${c.top}px`);
+    if (root.dataset.scene !== String(scene)) root.dataset.scene = String(scene);
+    return;
+  }
   const scale = fit * zoom, w = (loginArtwork ? 640 : 800) * scale, h = (loginArtwork ? 480 : 600) * scale;
   // Keep the image within its own clipping surface. Zoom never changes rail or
   // chrome geometry; fitting back to 1 restores all 800 × 600 logical pixels.
@@ -92,12 +172,13 @@ function layout()       {
   stage.style.setProperty("--mobile-scale", String(scale));
   stage.style.setProperty("--mobile-left", `${g.width / 2 + panX}px`);
   stage.style.setProperty("--mobile-top", `${g.height / 2 - 300 * scale + panY}px`);
-  root.dataset.scene = String(scene);
+  if (root.dataset.scene !== String(scene)) root.dataset.scene = String(scene);
 }
 if (browser) {
   addEventListener("resize", () => refresh());
   window.visualViewport?.addEventListener("resize", scheduleLayout);
   window.visualViewport?.addEventListener("scroll", scheduleLayout);
+  document.addEventListener("fullscreenchange", () => { document.dispatchEvent(new Event("sa-mobile-gesture")); scheduleLayout(); });
   for (const feature of ["(pointer: coarse)", "(hover: none)"]) matchMedia(feature).addEventListener("change", () => refresh());
   const viewport = document.getElementById("mobile-viewport");
   if (viewport) {
@@ -130,10 +211,13 @@ if (browser) {
       e.preventDefault(); e.stopPropagation();
       if (touches.size < 2) return;
       const [a, b] = pair();
-      zoom = Math.max(.5, Math.min(4, initialZoom * Math.hypot(a.x - b.x, a.y - b.y) / initialDistance));
+      zoom = Math.max(isImmersive() ? 1 : .5, Math.min(4, initialZoom * Math.hypot(a.x - b.x, a.y - b.y) / initialDistance));
       const r = viewport.getBoundingClientRect(), scale = fit * zoom;
       panX = (a.x + b.x) / 2 - r.left - r.width / 2 - (anchorX - 400) * scale;
       panY = (a.y + b.y) / 2 - r.top - r.height / 2 - (anchorY - 300) * scale;
+      if (isImmersive() && (context === "field" || context === "battle")) {
+        panX += (focusX - 400) * scale; panY += (focusY - 300) * scale;
+      }
       scheduleLayout();
     }, { capture: true });
     const finish = (e              ) => {

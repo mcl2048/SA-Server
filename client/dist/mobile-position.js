@@ -1,4 +1,4 @@
-import { isMobile } from "./mobile-view.js?v=8215e83e5e3ed1aa";
+import { isMobile, getMobileDisplayMode } from "./mobile-view.js?v=e5c6eee3f928fb08";
 
 const STORAGE = "sa-control-positions-v1";
 
@@ -19,7 +19,10 @@ export function installControlPositions(cancelGameInput            )       {
     }
   } catch { /* Storage is optional. */ }
   const write = () => { try { localStorage.setItem(STORAGE, JSON.stringify(saved)); } catch { /* Keep session positions. */ } };
-  const key = (el             ) => `${root.dataset.orientation || "portrait"}:${el.dataset.mobileControl}`;
+  // Preserve every legacy classic key. The immersive layout has independent
+  // preferences, so temporary clamping or a new drag cannot overwrite classic.
+  const key = (el             ) => `${root.dataset.orientation || "portrait"}${getMobileDisplayMode() === "immersive" ? ":immersive" : ""}:${el.dataset.mobileControl}`;
+  const inCurrentMode = (value        ) => value.includes(":immersive:") === (getMobileDisplayMode() === "immersive");
   const controls = [...root.querySelectorAll             ("[data-mobile-control]")];
   // A portal avoids clipping by scrolling control rails and their container-query
   // containing blocks. Placeholders keep every original grid/flex slot unchanged.
@@ -30,6 +33,11 @@ export function installControlPositions(cancelGameInput            )       {
   const style = document.createElement("style");
   style.textContent = `#mobile-root .mobile-floating-controls{display:block!important;position:fixed;inset:0;z-index:1100;overflow:visible;pointer-events:none;background:none;padding:0;margin:0;border:0;contain:none;isolation:auto}#mobile-root .mobile-floating-controls>[data-mobile-control]{position:fixed!important;pointer-events:auto;margin:0!important;max-width:none!important}.mobile-position-reset{position:fixed;z-index:1200;left:50%;bottom:calc(env(safe-area-inset-bottom) + 12px);transform:translateX(-50%);padding:12px 20px;border:1px solid #f3d48d;border-radius:999px;background:#143630;color:#ffe6a8;box-shadow:0 8px 30px #0008;font:600 14px system-ui;min-height:44px;touch-action:none;pointer-events:auto}.mobile-position-reset[hidden]{display:none!important}[data-mobile-control]{touch-action:none!important}[data-mobile-control].is-positioning{outline:2px dashed #f0ce87;outline-offset:5px;cursor:grabbing;transition:none!important}html:not(.sa-mobile) .mobile-position-reset,html:not(.sa-mobile) .mobile-floating-controls{display:none!important}`;
   document.head.append(style);
+  // Drawer controls belong to a scrolling menu. Keep their native pan gesture;
+  // external floating controls (stick/camera/menu) retain long-press editing.
+  const drawerStyle = document.createElement("style");
+  drawerStyle.textContent = "#mobile-root .mobile-shell-drawer [data-mobile-control]{touch-action:pan-y!important}";
+  document.head.append(drawerStyle);
 
   const moved = new Map                       ();
   function detach(el             ) {
@@ -42,7 +50,7 @@ export function installControlPositions(cancelGameInput            )       {
     for (const prop of preserved) el.style.setProperty(prop, computed.getPropertyValue(prop));
     floating.append(el);
     Object.assign(el.style, { left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px`, minWidth: "0", minHeight: "0" });
-    const record = { placeholder, originalStyle, base: { left: rect.left, top: rect.top, width: rect.width, height: rect.height } };
+    const record = { placeholder, originalStyle, base: { left: rect.left, top: rect.top, width: rect.width, height: rect.height }, offset: { x: 0, y: 0 } };
     moved.set(el, record); return record;
   }
   function reattach() {
@@ -53,14 +61,16 @@ export function installControlPositions(cancelGameInput            )       {
     moved.clear();
   }
   function restore() {
-    reattach(); if (!isMobile()) return;
+    reattach(); if (!isMobile()) { reset.hidden = true; return; }
     for (const el of controls) {
+      if (el.closest(".mobile-shell-drawer")) continue;
       const p = saved[key(el)];
       if (!p || (!p.x && !p.y) || !el.getClientRects().length) continue;
       const record = detach(el), clamped = clampControlOffset(record.base, p, innerWidth, innerHeight);
-      saved[key(el)] = clamped; el.style.translate = `${clamped.x}px ${clamped.y}px`;
+      // Clamp the live rendering only. Viewport/panel changes are not a user edit.
+      record.offset = clamped; el.style.translate = `${clamped.x}px ${clamped.y}px`;
     }
-    reset.hidden = !Object.values(saved).some(p => p.x || p.y);
+    reset.hidden = !Object.entries(saved).some(([key, p]) => inCurrentMode(key) && (p.x || p.y));
   }
 
   let gesture                 = null, suppressClick                     = null;
@@ -84,16 +94,21 @@ export function installControlPositions(cancelGameInput            )       {
     queueMicrotask(() => { if (gesture?.id === e.pointerId) finish(); });
   };
   document.addEventListener("pointerup", globalUp, { capture: true }); document.addEventListener("pointercancel", globalUp, { capture: true });
-  reset.addEventListener("click", () => { finish(); saved = {}; write(); restore(); reset.hidden = true; cancelGameInput(); });
+  reset.addEventListener("click", () => {
+    finish();
+    for (const k of Object.keys(saved)) if (inCurrentMode(k)) delete saved[k];
+    write(); restore(); reset.hidden = true; cancelGameInput();
+  });
   for (const el of controls) {
     el.addEventListener("pointerdown", e => {
       if (!isMobile() || !e.isPrimary || e.button !== 0 || pointers.size > 1) return;
       finish(); suppressClick = null;
+      if (el.closest(".mobile-shell-drawer")) return; // Scroll, without starting a position timer.
       const r = el.getBoundingClientRect();
       // Exactly the joystick's neutral dead zone: sustained directional holds
       // remain movement, however long the user holds the stick.
       if (el.dataset.mobileControl === "joystick" && Math.hypot(e.clientX - r.left - r.width / 2, e.clientY - r.top - r.height / 2) > Math.max(1, Math.min(r.width, r.height) * .32) * .24) return;
-      const current          = { el, id: e.pointerId, x: e.clientX, y: e.clientY, offset: saved[key(el)] ?? { x: 0, y: 0 }, dragging: false, timer: null };
+      const current          = { el, id: e.pointerId, x: e.clientX, y: e.clientY, offset: moved.get(el)?.offset ?? saved[key(el)] ?? { x: 0, y: 0 }, dragging: false, timer: null };
       gesture = current;
       current.timer = setTimeout(() => {
         if (gesture !== current || pointers.size !== 1) return;
@@ -111,7 +126,7 @@ export function installControlPositions(cancelGameInput            )       {
       e.preventDefault(); e.stopImmediatePropagation();
       const base = moved.get(el) .base;
       const p = clampControlOffset(base, { x: g.offset.x + e.clientX - g.x, y: g.offset.y + e.clientY - g.y }, innerWidth, innerHeight);
-      saved[key(el)] = p; el.style.translate = `${p.x}px ${p.y}px`;
+      saved[key(el)] = p; moved.get(el) .offset = p; el.style.translate = `${p.x}px ${p.y}px`;
     }, { capture: true });
     const up = (e              ) => {
       if (gesture?.el !== el || gesture.id !== e.pointerId) return;
@@ -128,6 +143,7 @@ export function installControlPositions(cancelGameInput            )       {
   addEventListener("resize", resize); addEventListener("blur", blur);
   document.addEventListener("visibilitychange", () => { if (document.hidden) blur(); });
   document.addEventListener("sa-device-change", resize); document.addEventListener("sa-controls-layout", resize);
-  new MutationObserver(resize).observe(root, { attributes: true, attributeFilter: ["data-orientation"] });
+  document.addEventListener("sa-mobile-display-change", resize);
+  new MutationObserver(resize).observe(root, { attributes: true, attributeFilter: ["data-orientation", "data-display"] });
   restore();
 }

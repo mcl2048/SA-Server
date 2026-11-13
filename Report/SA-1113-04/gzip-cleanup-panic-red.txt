@@ -1,0 +1,6 @@
+=== RUN   TestGzipCleanupPreservesHandlerPanic
+    client_http_test.go:51: cleanup must retain the handler's original failure, got net/http: abort Handler
+--- FAIL: TestGzipCleanupPreservesHandlerPanic (0.00s)
+FAIL
+FAIL	sa/server/cmd/saserver	0.028s
+FAIL

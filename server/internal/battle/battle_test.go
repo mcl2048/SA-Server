@@ -241,7 +241,7 @@ func TestEnemyGuardScale(t *testing.T) {
 	count := func(scale float64, none bool) int {
 		b := New(rnd(9))
 		b.GuardScale, b.NoEnemyGuard = scale, none
-		f := &Fighter{Slot: EnemySlot(0), Tactics: "at:10;1;1,gu:10"}
+		f := &Fighter{Slot: EnemySlot(0), Tactics: "at:10;1;1|gu:10"}
 		b.Add(player(0))
 		n := 0
 		for i := 0; i < 2000; i++ {
@@ -252,7 +252,7 @@ func TestEnemyGuardScale(t *testing.T) {
 		return n
 	}
 	full, half, none := count(1, false), count(0.5, false), count(0, true)
-	if none != 0 || half*10 > full*8 || half*10 < full*4 {
+	if full == 0 || half == 0 || none != 0 || half*10 > full*8 || half*10 < full*4 {
 		t.Fatalf("防御次数：原版 %d、0.5 倍 %d、不防御 %d", full, half, none)
 	}
 }
