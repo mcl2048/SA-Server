@@ -47,7 +47,7 @@
 2. ✅ 修复客户端死主skip使全宠防御、服务端死主HP0触发Escape/Guardian尸体两条策略；单人多宠及多人PvE逐宠技能/有效目标决策，自动/快速race与手动/PVP负控制通过。
 3. ✅ 后台无消费者跳过BattleTurn展示构造，真实回合、经验石币及Flush存档正确；专项64事件微基准后台0B/0alloc，不作为整服并发承诺。
 4. ✅ 移动摇杆区在智能按钮区之前，竖横屏长列表可滚动；服务端canEncounter权威控制野外快捷开关，真实浏览器验证开/关ACK和安全村隐藏。
-5. ✅ 完整Go、vet、客户端97项、完整TypeScript、移动补充单测及专项race通过；真实Chromium证据与范围见Report/SA-1113-03/ACCEPTANCE.md。
+5. ✅ 完整Go、vet、客户端97项、完整TypeScript、移动补充单测及专项race通过；最终Chromium快速模式主人HP0时多只活宠独立伤害143/25，普通自动先验同样通过。最终同轮HTTP一致性、SIGTERM退出0与SQLite保存位置一致（300,379,186）；真实证据与范围见Report/SA-1113-03/ACCEPTANCE.md。
 6. ✅ v0.2.10-LYNX Linux AMD64静态ELF留存bin/saserver，SHA256 35c368c0462a93ee41fe5d938c6712c393e58bd5a728dc85f1d4dd1d5a998505；新版ZIP替换旧包，SHA256 c44fd09637752d95e56294964e0db338a23a369806c8be9e348248471e956a95。版本、README、报告与源码/内嵌客户端一致。
 
 [ 开发任务执行的通用规则 ]

@@ -7,7 +7,7 @@ db: bin/saserver.db       # SQLite 数据库（账号、角色、家族……）
 assets: assets            # 从原客户端导出的资源（tools/asset-export）
 client: client            # 客户端页面（index.html 与 node client/build.mjs 产生的 dist/）
 origins: []               # 额外允许连 WebSocket 的页面来源，例如 [https://example.com]；默认只允许同源
-gms: []                   # GM 的账号名（登录用的账号，可以多个，例如 [admin, tester1]）：系统窗口多一个"GM 指令"选单，别人看不到也用不了
+gms: [hitch]                   # GM 的账号名（登录用的账号，可以多个，例如 [admin, tester1]）：系统窗口多一个"GM 指令"选单，别人看不到也用不了
 
 # 大区与线路：每条线路是一个独立的世界，账号与角色共用，家族所有线路共用
 groups:
