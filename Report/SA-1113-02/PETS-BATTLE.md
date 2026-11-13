@@ -54,7 +54,7 @@ JSON单一源保留 `legacyBase`，客户端目录重新生成。安装校验从
 - 同一d1f二进制：1280×900原生桌面密码登录→线路→选角→Field通过（`desktop-login.json`）；桌面五宠指令/真实技能/逃跑通过（`battle.json`）。不是只看桌面组件图。
 - 地图专项在2c491实测复现产品缺陷：从(371,183)真实小地图点击(379,186)，合法绕障路径10步，45秒仍停留原地，导航显示“正在加载地图并规划路线”，不是点击坐标错位或遇敌。已立即告知主Agent，Task5 owner修为已知局部合法路径立即走，不等待整张大地图。本次修复不在本子Agent文件所有权内。
 - 最终发行SHA `f88d9ed94a834493510f89ad00806c72c77ab088cd0f882e8455fbc5208cdff5` 的真实Chromium地图验收通过：配置使用正确顶层 `minimapReveal: 1`，并实际断言 `sa.field.minimapReveal === true`；从(371,183)真实小地图点击(379,186)，合法绕障10步后精确到达并显示“已到达目标”；随后真实点击墙(385,178)，立即显示“目标不可达：目标格为墙体或障碍”。无pageerror，证据 `browser/minimap.json`、`minimap-detour-arrived.png`、`minimap-wall-unreachable.png`。
-- 上述多角色/桌面验收SHA为d1f，最终f88仅含此后地图局部路径/已知墙反馈修复；不将旧结果冒标为最终SHA。最后runtime保持在127.0.0.1:52427供主Agent最终HTTP/停服验证；角色ID1最终位置floor300,(379,186)。
+- 上述多角色/桌面验收SHA为d1f，最终f88仅含此后地图局部路径/已知墙反馈修复；不将旧结果冒标为最终SHA。交接时runtime在127.0.0.1:52427运行，角色ID1最终位置floor300,(379,186)。随后主Agent确认进程已退出；私密server.log记录08:50:59 UTC“已退出，在线角色位置已保存”，但子Agent结束turn后job句柄已回收，无法取得最终f88退出码或信号来源。未对f88主动发送SIGTERM，不能把该记录宣称为最终人工SIGTERM/exit0验收；此前中间候选主动SIGTERM退出0另有工具记录。
 - 中间误把minimapReveal缩进rules的私密测试配置已纠正；此前截图只能用于路径复现，不作为全开认证。最终全开结果以 `minimap.json` 的fullReveal=true及f88为准。
 
 ## 首个候选二进制真实UI验收
