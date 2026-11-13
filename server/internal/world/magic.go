@@ -58,7 +58,7 @@ func magicTargetValid(m *data.Magic, to int) bool {
 	case to >= 0 && to <= 19:
 		return true
 	case to == 20 || to == 21:
-		return m.Target == data.MagicTargetWholeOtherSide || m.Target == data.MagicTargetAllRows
+		return m.Target == data.MagicTargetAllMySide || m.Target == data.MagicTargetAllOtherSide || m.Target == data.MagicTargetWholeOtherSide || m.Target == data.MagicTargetAllRows
 	case to == 22:
 		return m.Target == data.MagicTargetAll
 	case to >= 23 && to <= 26:

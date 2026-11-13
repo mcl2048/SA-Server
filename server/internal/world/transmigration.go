@@ -35,7 +35,7 @@ const (
 )
 
 const (
-	transMax      = 6     // _TRANS_6
+	transMax      = 6     // Original _TRANS_6 milestone; configurable limits are separate.
 	transMinLevel = 80    // NPC_TransmigrationCheck / NPC_PetTransManCheck
 	transPetRebel = 718   // 玛蕾菲雅（一转用）
 	transPetRebl2 = 401   // 玛蕾菲雅（_PET_2TRANS：二转用）
@@ -63,14 +63,22 @@ var (
 
 // transSegment 是第 n 转的那一段（"TENSEI:n"，段与段之间是 END）；找不到时用最后一个 TENSEI 段（见文件开头）。
 func transSegment(arg string, n int) string {
-	key, last := fmt.Sprintf("TENSEI:%d", n), ""
+	last := ""
 	for _, seg := range strings.Split(arg, "END") {
-		if strings.Contains(seg, key) {
+		// Loaded NPC arguments have their newlines removed. Read the whole
+		// numeric token, so TENSEI:1 cannot accidentally select TENSEI:10.
+		_, tail, ok := strings.Cut(seg, "TENSEI:")
+		if !ok {
+			continue
+		}
+		i := 0
+		for i < len(tail) && tail[i] >= '0' && tail[i] <= '9' {
+			i++
+		}
+		if i > 0 && data.Atoi(tail[:i]) == n {
 			return seg
 		}
-		if strings.Contains(seg, "TENSEI:") {
-			last = seg
-		}
+		last = seg
 	}
 	return last
 }
@@ -157,11 +165,18 @@ func (w *World) transTalk(p, n *entity) {
 func (w *World) transOpen(p, n *entity) {
 	next := p.char.Trans + 1
 	seg := transSegment(n.npc.Arg, next)
+	limit := w.Rules.charMaxTrans()
 	switch ten := w.transCheck(p); {
-	case ten >= 0 && ten < transMax:
+	case limit == 0:
+		w.sendWindow(p, n, "message", BtnOK, seqTransNone, "本服务器暂未开放人物转生。")
+	case ten >= 0 && ten < limit:
 		w.sendWindow(p, n, "message", BtnNext, seqTransStart, transMsg(seg, "startmsg"))
-	case ten == transMax:
-		w.sendWindow(p, n, "message", BtnOK, seqTransStart, transMsg(n.npc.Arg, "maxmsg"))
+	case ten == limit:
+		text := transMsg(n.npc.Arg, "maxmsg")
+		if limit != transMax {
+			text = fmt.Sprintf("你已达到本服务器人物转生上限（%d次）。", limit)
+		}
+		w.sendWindow(p, n, "message", BtnOK, seqTransNone, text)
 	default:
 		w.sendWindow(p, n, "message", BtnOK, seqTransStart, transMsg(seg, "nonemsg"))
 	}
@@ -171,8 +186,12 @@ func (w *World) transOpen(p, n *entity) {
 // transCheck 是 NPC_TransmigrationCheck：回传现在的转生次数（条件都达成），已经 6 转回 6，条件不足回 -1。
 func (w *World) transCheck(p *entity) int {
 	num := p.char.Trans
-	if num >= transMax {
-		return transMax
+	limit := w.Rules.charMaxTrans()
+	if num >= limit {
+		return limit
+	}
+	if num < 0 {
+		return -1
 	}
 	if p.char.Level < transMinLevel {
 		return -1
@@ -212,7 +231,7 @@ func (w *World) transCheck(p *entity) int {
 }
 
 func transSixPetOK(pet *Pet) bool {
-	if pet.Trans != 2 {
+	if pet.Trans < 2 {
 		return false
 	}
 	for _, t := range transElderPets {
@@ -301,6 +320,9 @@ func (w *World) transYesMsg(p, n *entity, tensei, k int) {
 // 原版先改数值再收宠物，收不到时已经改了一半；这里先收（条件刚检查过），收不到就整个不做。
 func (w *World) transmigrate(p *entity, arg string, village int) bool {
 	c := &p.char
+	if c.Trans < 0 || c.Trans >= w.Rules.charMaxTrans() {
+		return false
+	}
 	next := c.Trans + 1
 	present := 0
 	if list := strings.Split(transVillageArg(arg, village, "Present"), "."); next-1 < len(list) {
@@ -312,7 +334,9 @@ func (w *World) transmigrate(p *entity, arg string, village int) bool {
 	if !w.transDelPets(p, c.Trans) {
 		return false
 	}
-	if next == transMax {
+	if next >= transMax {
+		// Keep the original sixth-turn sacrifice for later turns as well.
+		// The original consumes every shard held, after checking at least 15.
 		w.takeItems(p, []itemNeed{{ID: transShard, All: true}}, false)
 	}
 	c.Trans = next
@@ -333,6 +357,9 @@ func (w *World) transmigrate(p *entity, arg string, village int) bool {
 
 // transDelPets 是 NPC_TransmigrationDelPet（trans 是转生前的次数）。
 func (w *World) transDelPets(p *entity, trans int) bool {
+	if trans < 0 {
+		return false
+	}
 	var slots []int
 	switch {
 	case trans < 4:
@@ -387,15 +414,33 @@ func (w *World) transStatus(p *entity) {
 			quest++
 		}
 	}
-	tQuest := (c.TransEq>>16)&0xFFFF + quest
-	tLevel := c.TransEq&0xFFFF + min(c.Level, 130)
-	c.TransEq = tQuest<<16 + tLevel
 	total := c.Vital + c.Str + c.Tgh + c.Dex
-	old := float64(total)
-	if c.Trans == transMax {
-		old = 620
+	var ans float64
+	if c.Trans <= transMax {
+		// Preserve every original rounding step and the original 130-level
+		// contribution cap for the first six turns, even on high-level servers.
+		tQuest := (c.TransEq>>16)&0xFFFF + quest
+		tLevel := c.TransEq&0xFFFF + min(c.Level, 130)
+		c.TransEq = tQuest<<16 + tLevel
+		old := float64(total)
+		if c.Trans == transMax {
+			old = 620
+		}
+		ans = float64(int(old/12 + float64(tQuest)/4 + float64(tLevel-c.Trans*85)/4))
+	} else {
+		// Beyond the original six turns, freeze the packed legacy history.
+		// It can represent at most 6*20 quests and 6*130 levels; continuing
+		// to add high server levels would eventually carry into its upper half.
+		tQuest := min(120, (c.TransEq>>16)&0xFFFF)
+		tLevel := min(780, c.TransEq&0xFFFF)
+		c.TransEq = tQuest<<16 + tLevel
+		base := int(620.0/12 + float64(tQuest)/4 + float64(tLevel-transMax*85)/4)
+		// Saturating bonus: +9 at turn 7, +40 at 12, always below +120.
+		// Recompute from the legacy baseline, never multiply last turn's gain.
+		extra := c.Trans - transMax
+		bonus := 120 * extra / (extra + 12)
+		ans = float64(max(0, base+bonus))
 	}
-	ans := float64(int(old/12 + float64(tQuest)/4 + float64(tLevel-c.Trans*85)/4))
 	if total <= 0 {
 		return
 	}
@@ -438,7 +483,7 @@ func (w *World) transFlags(p *entity) {
 		p.setEventDone(transSetEnd[i])
 		w.addFMAdv(p, transSetEnd[i])
 	}
-	if c.Trans == transMax {
+	if c.Trans >= transMax {
 		for _, ev := range transSixEvents {
 			p.setEventDone(ev)
 		}
@@ -522,18 +567,23 @@ func (w *World) marefia(p *entity, tran int) *Pet {
 
 // petTransmigrate 是 NPC_PetTransMan_selectWindow(4) + NPC_PetTransManStatus + GetNewPet，回传要显示的话。
 func (w *World) petTransmigrate(p *entity, slot int, seg string) string {
+	if slot < 0 || slot >= len(p.pets.Pets) {
+		return transMsg(seg, "failmsg")
+	}
 	pet := p.pets.Pets[slot]
 	switch {
-	case pet == nil || pet.Away:
+	case pet == nil || pet.Away || pet.Trans < 0:
 		return transMsg(seg, "failmsg")
+	case w.Rules.petMaxTrans() == 0:
+		return "\n\n本服务器暂未开放宠物转生。"
 	case p.pets.Ride == slot:
 		return "\n\n骑乘中的宠物不能转生喔！"
 	case pet.Level < 80:
 		return "\n\n接受转生祝福的宠物必需要等级80以上喔！"
 	case pet.TempNo == transPetRebel || pet.TempNo == transPetRebl2:
 		return "\n\n这只宠物不能转生喔！"
-	case pet.Trans > 1:
-		return "\n\n这只宠物已经接受过祝福了喔！"
+	case pet.Trans >= w.Rules.petMaxTrans():
+		return fmt.Sprintf("\n\n这只宠物已达到本服务器宠物转生上限（%d次）！", w.Rules.petMaxTrans())
 	}
 	m := w.marefia(p, pet.Trans)
 	temp := w.game.Battle.Temps[pet.TempNo]
@@ -585,6 +635,11 @@ func (w *World) petTransmigrate(p *entity, slot int, seg string) string {
 // + (宠物等级（最多 130，_ATTESTAION_ID 1）− 100) / Fx，Fx = int((5 − 档次) × 1.2) + 5；一转最多 150、二转最多 200
 // （_PET_TRANS_ABILITY 的 PETTRANSABILITY1 / 2 的预设值；那台服务端的 setup.cf 把一转调成 155，没照抄）。
 func petTransAns(total1, total2, lv, rank, tran int) int {
+	if tran >= 2 {
+		// Later blessings are additive and diminish, never reapply the fifth
+		// power bonus. 255 is a balance ceiling, not a JSON storage limit.
+		return min(255, max(0, total2)+petTransExtra(tran))
+	}
 	lv = min(lv, 130)
 	t := float64(total1) / 100
 	t = t * t * t * t * t
@@ -601,11 +656,50 @@ func petTransAns(total1, total2, lv, rank, tran int) int {
 	return min(ans, 200)
 }
 
+// petTransExtra is the maximum total growth gained after the original two turns.
+// The third/fourth/fifth turns add at most 3/2/2, then at most 1 per turn.
+func petTransExtra(tran int) int { return max(1, 10/(tran+1)) }
+
+func boundedPetTransWork(work [4]int, low, high int) [4]int {
+	sum := 0
+	for _, v := range work {
+		sum += v
+	}
+	target := max(low, min(high, sum))
+	if target == sum {
+		return work
+	}
+	var out [4]int
+	if sum == 0 {
+		for i := 0; i < target; i++ {
+			out[i%4]++
+		}
+		return out
+	}
+	left := target
+	for i, v := range work {
+		out[i] = v * target / sum
+		left -= out[i]
+	}
+	for i := 0; i < left; i++ {
+		out[i%4]++
+	}
+	return out
+}
+
 // petReborn 是 GetNewPet：成长率各加 −2..+2 当作新的 ALLOCPOINT，按总和定档次，再随机加 10 点，
 // 体腕耐敏 = 模板的初始成长次数 × 成长；变回 1 级、经验 0、技能栏 7 格、HP 补满、主人是自己、转生次数 +1。名字、技能照旧。
 func (w *World) petReborn(p *entity, pet *Pet, temp *data.EnemyTemp, work [4]int) {
 	for i := range work {
 		work[i] = max(0, work[i]+w.rnd.IntN(5)-2)
+	}
+	if pet.Trans >= 2 {
+		before := 0
+		for _, v := range pet.Alloc {
+			before += max(0, v)
+		}
+		low := min(255, before)
+		work = boundedPetTransWork(work, low, min(255, low+petTransExtra(pet.Trans)))
 	}
 	pet.Alloc = work
 	sum := work[0] + work[1] + work[2] + work[3]

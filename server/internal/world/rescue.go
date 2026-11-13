@@ -121,9 +121,9 @@ func (w *World) rescueEntry(e, target *entity) {
 	w.joinRoom(room, e, slot)
 	w.sendBattleStart(e, room.field, 0)
 	e.client.Send(&proto.HelpFlag{On: room.help})
-	join := &proto.BattleJoin{}
-	for _, s := range []int{slot, slot + 5} {
-		if f := room.b.F[s]; f != nil {
+	join := &proto.BattleJoin{ResetPets: true}
+	for _, f := range room.b.F {
+		if f != nil && (f.Player || f.Pet) {
 			join.Fighters = append(join.Fighters, w.fighterInfo(room, f))
 		}
 	}

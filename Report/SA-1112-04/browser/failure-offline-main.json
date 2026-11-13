@@ -1,0 +1,28 @@
+{
+  "screen": "LoginScreen",
+  "hits": [
+    {
+      "id": "modal-ok",
+      "x1": 384,
+      "y1": 312,
+      "x2": 416,
+      "y2": 330,
+      "label": "ＯＫ"
+    }
+  ],
+  "body": "提示\n返回\n\nYOUR NEXT ADVENTURE\n\n欢迎归来\n\n与服务器的连接中断：会话已失效，请重\n\n新的冒险，正在等你\n\n新登录\n\n确定\n当前选项\n轻点画面或切换选项\n‹\n›\n左键\n选择 / 确认\n右键\n原生右键操作\n−\n复位\n＋\n界面",
+  "battle": null,
+  "recentSent": [],
+  "recentReceived": [
+    {
+      "t": "Hello",
+      "version": "h5-m1",
+      "serverTime": 1794542632
+    },
+    {
+      "t": "Error",
+      "code": "resume_failed",
+      "message": "会话已失效，请重新登录"
+    }
+  ]
+}

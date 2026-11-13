@@ -1,24 +1,26 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=bea179de9cc48742";
-import { Sound, setSfx } from "./audio.js?v=bea179de9cc48742";
-import { MAP_BGM } from "./soundtable.js?v=bea179de9cc48742";
-import { Connection, trafficRates } from "./net.js?v=bea179de9cc48742";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=bea179de9cc48742";
-import { Renderer } from "./renderer.js?v=bea179de9cc48742";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=bea179de9cc48742";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=bea179de9cc48742";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=bea179de9cc48742";
-import { ACTION_KEYS } from "./actions.js?v=bea179de9cc48742";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=bea179de9cc48742";
-import { BattleScreen } from "./battle.js?v=bea179de9cc48742";
-import { Shop } from "./shop.js?v=bea179de9cc48742";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=bea179de9cc48742";
-import { loadAi } from "./ai.js?v=bea179de9cc48742";
-import { AiMemory } from "./aismart.js?v=bea179de9cc48742";
-import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.js?v=bea179de9cc48742";
-import { MobileShell } from "./mobile-shell.js?v=bea179de9cc48742";
-import { installControlPositions } from "./mobile-position.js?v=bea179de9cc48742";
+import { Assets } from "./assets.js?v=df0f1436dbbcc8a6";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=df0f1436dbbcc8a6";
+import { Sound, setSfx } from "./audio.js?v=df0f1436dbbcc8a6";
+import { MAP_BGM } from "./soundtable.js?v=df0f1436dbbcc8a6";
+import { Connection, trafficRates } from "./net.js?v=df0f1436dbbcc8a6";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=df0f1436dbbcc8a6";
+import { Renderer,              } from "./renderer.js?v=df0f1436dbbcc8a6";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=df0f1436dbbcc8a6";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=df0f1436dbbcc8a6";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=df0f1436dbbcc8a6";
+import { ACTION_KEYS } from "./actions.js?v=df0f1436dbbcc8a6";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=df0f1436dbbcc8a6";
+import { BattleScreen } from "./battle.js?v=df0f1436dbbcc8a6";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=df0f1436dbbcc8a6";
+import { Shop } from "./shop.js?v=df0f1436dbbcc8a6";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=df0f1436dbbcc8a6";
+import { loadAi } from "./ai.js?v=df0f1436dbbcc8a6";
+import { AiMemory } from "./aismart.js?v=df0f1436dbbcc8a6";
+import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.js?v=df0f1436dbbcc8a6";
+import { MobileShell } from "./mobile-shell.js?v=df0f1436dbbcc8a6";
+import { installControlPositions } from "./mobile-position.js?v=df0f1436dbbcc8a6";
 
 
 const params = new URLSearchParams(location.search);
@@ -248,23 +250,61 @@ function drawNpcWindow(win              , lines          ) {
 
 // ---------------------------------------------------------------------------
 
+let connectingPromise                             = null;
 const app      = {
-  ui, canvas, net: null,
+  ui, canvas, net: null, loginArt: undefined                       ,
   groups: []                 , lineName: "", chars: []                 , maxChars: 2,
-  async connect() {
-    if (app.net) return app.net;
+  connect() {
+    if (connectingPromise) return connectingPromise;
+    if (app.net) return app.net.ready().then(() => app.net );
+    connectingPromise = (async () => {
     const c = new Connection(WS_URL);
+    app.net = c;
     if (params.has("debug")) c.log = (d, m) => console.debug(d, m);
+    c.onReconnect = (state, reason) => {
+      chat(reason, state === "restored" ? FONT.GREEN : FONT.YELLOW);
+      if (state === "connecting") { mouse.cancel(); keys.clear(); mobileDirection = -1; }
+    };
+    c.on("Session", m => {
+      if (app.net !== c) return;
+      if (!m.token) {
+        resetAutoPlay();
+        field = null; battle = null; clearParty(); modal = null;
+        app.go(new LoginScreen(app)); return;
+      }
+      if (m.inWorld && m.resumed) {
+        autoPlayReady = false; autoPlaySignature = ""; autoPlayIntent.reset();
+        modal = null; battle = null; clearParty();
+        // Install Field's message handlers synchronously before the snapshot's
+        // Self/EnterFloor arrive, including a reload with no prior Field.
+        if (!field) field = new Field(assets, c);
+        field.hideOthers = settings.hideOthers; field.showNames = settings.names;
+        app.go(new FieldScreen());
+      }
+    });
+    c.on("ServerList", m => { if (app.net !== c) return; app.groups = m.groups; if (screen instanceof LoginScreen) app.go(new LineScreen(app)); });
+    c.on("AutoPlayState", m => {
+      if (app.net !== c) return;
+      // Capture even an unsent edit before processing an older lease ACK.
+      if (autoPlayReady) autoPlayIntent.local(autoPlayWanted());
+      const desired = autoPlayIntent.receive(m);
+      autoPlayReady = true;
+      serverAutoPlay = { ...m };
+      autoEncounterWanted = desired.encounter;
+      settings.autoBattle = desired.autoBattle; settings.quickBattle = desired.quick;
+      if (m.reason) chat(m.reason, FONT.YELLOW);
+    });
     c.onClose = (reason) => {
       if (app.net !== c) return;
       app.net = null;
+      resetAutoPlay();
       field = null;
       battle = null;
       app.go(new LoginScreen(app));
       app.message(`与服务器的连接中断：${reason}`);
       reloadIfStale();
     };
-    c.on("Error", (m) => { if (m.code !== "rate") app.message(m.message); });
+    c.on("Error", (m) => { if (m.code !== "rate" && m.code !== "resume_failed") app.message(m.message); });
     c.on("CharListResult", (m) => { app.chars = m.chars; app.maxChars = m.maxChars; });
     c.on("EnterFloor", (m) => {
       // 換樓層時若戰鬥仍在進行（例如被打飛傳送回記錄點），不強行中斷戰鬥演出。
@@ -333,9 +373,10 @@ const app      = {
     c.on("BattleStart", (m) => {
       if (!(screen instanceof FieldScreen) || !field) return;
       const back = screen;
+      battleAllowsAuto = !m.watch && !m.pvp;
       field.target = null;
       // 快速战斗：留在地图画面、音乐不换，BattleScreen 只在背后跑（quickFrame）
-      const quick = settings.quickBattle && !m.watch && !m.pvp; // 观战一定看画面；玩家决斗（PK）也一定看画面，不走快速战斗
+      let quick = settings.quickBattle && !m.watch && !m.pvp; // 观战一定看画面；玩家决斗（PK）也一定看画面，不走快速战斗
       // 遇敌：SE 215，地图音乐马上停（不淡出），记下来打完再从头播；环境音停掉
       const fieldBgm = audio.currentBgm, bgm = battleBgm(m.pvp || m.event, field.floor, fieldBgm);
       if (!quick) {
@@ -349,11 +390,12 @@ const app      = {
         sendHelp: (on) => app.net?.send({ t: "BattleHelp", on }),
         // 抓到宠物：放一次 BGM 0，255 帧后战斗音乐从头再播（oft.cpp 8675 / 8732）
         captured: () => { audio.playBgm(0); setTimeout(() => { if (battle) audio.playBgm(bgm); }, 255 * 1000 / 60); },
-        sendPet: (skill, target) => app.net?.send({ t: "BattlePetCommand", skill, target }),
+        sendPet: (skill, target, petSlot = 0) => app.net?.send({ t: "BattlePetCommand", skill, target, petSlot }),
         pets: () => pets,
         inventory: () => inventory,
         chat,
-        auto: () => settings.autoBattle || quick,
+        auto: () => !m.pvp && !m.watch && (settings.autoBattle || settings.quickBattle),
+        serverAuto: () => !m.pvp && !m.watch && serverOwnsAutoTurn(autoPlayWanted(), serverAutoPlay),
         quick: () => quick,
     names: () => settings.names,
         aiSettings: () => loadAi(selfStatus?.name ?? ""),
@@ -361,25 +403,32 @@ const app      = {
         myAtk: () => selfStatus?.atk ?? 10,
         place: () => [field?.floor ?? -1, field?.self?.x ?? 0, field?.self?.y ?? 0],
         finish: (end) => {
-          battle = null;
+          battle = null; changeBattleQuick = null; battleAllowsAuto = false;
           // 战斗结束淡出，回到地图后原来的地图音乐从头播（之后照地图记号）
           if (!quick) audio.fadeOutBgm(() => audio.playBgm(fieldBgm));
           if (end && (end.levelUp > 0 || end.pets?.some((p) => p.levelUp > 0))) audio.se(211); // 升级（结果窗口）
-          // 自动丢肉（AI_OtherSetting[0]）：战斗结束时把道具栏里的肉（图 24000..24044）都丢掉
-          if ((settings.autoBattle || quick) && loadAi(selfStatus?.name ?? "").meat) {
-            for (const it of inventory.items) if (it.slot >= 9 && it.image >= 24000 && it.image <= 24044) app.net?.send({ t: "ItemDrop", slot: it.slot });
-          }
           if (!quick) app.go(back);
           if (pendingDuel) { back.showDuelResult(pendingDuel.delta, pendingDuel.dp); pendingDuel = null; }
           else if (end?.result === "win" && !quick) back.showResult(end); // 原版：回到地图后显示战斗结果窗口（快速战斗只写在聊天栏）
         },
       }, m);
       const b = battle;
-      // 戰鬥畫面物件註冊 leave 鉤子，保證在任何情境下切換離開戰鬥畫面皆會重置戰鬥狀態。
-      if (!quick) app.go({
-        frame: (now) => { if (field) updatePalette(now, field.palette); b.frame(now); },
-        leave: () => { if (battle === b) battle = null; },
-      });
+      const battleView         = {
+        frame: (now) => {
+          if (keyPressed.has("PageUp") || keyPressed.has("PageDown")) { back.menus.toggleAuto(false); }
+          if (field) updatePalette(now, field.palette); b.frame(now);
+          drawBattleAutoToggles();
+        },
+        leave: () => { if (battle === b && !quick) battle = null; },
+      };
+      changeBattleQuick = (on) => {
+        on = on && !m.watch && !m.pvp;
+        if (battle !== b || quick === on) return;
+        quick = on; b.setQuick(on);
+        if (on) { audio.playBgm(fieldBgm); app.go(back); }
+        else { audio.ambientFrame([], 0); audio.playBgm(bgm); app.go(battleView); }
+      };
+      if (!quick) app.go(battleView);
     });
     c.on("BattleTurn", (m) => battle?.onTurn(m));
     c.on("BattleEnd", (m) => {
@@ -389,6 +438,7 @@ const app      = {
       if (m.result === "win" && !pvp && settings.showExp) {
         let s = `得到经验：[自己：${m.exp}${m.levelUp > 0 ? " LvUp!" : ""}] `;
         for (const p of m.pets ?? []) s += `[${p.name}：${p.exp}${p.levelUp > 0 ? " LvUp!" : ""}] `;
+        if (m.gold > 0) s += `得到石币：${m.gold} `;
         if (m.items?.length) s += `得到物品：[${m.items.map((n) => ` ${n} `).join("")}]`;
         chat(s.trim(), FONT.YELLOW);
       }
@@ -410,10 +460,11 @@ const app      = {
       const a = field?.actors.get(m.id);
       if (a) { a.speech = m.text; a.speechUntil = performance.now() + 6000; }
     });
-    const hello = await c.once("Hello");
-    serverTimeAt = { server: hello.serverTime, local: performance.now() };
-    app.net = c;
-    return c;
+    c.on("Hello", hello => { serverTimeAt = { server: hello.serverTime, local: performance.now() }; });
+    try { await c.ready(); return c; }
+    catch (error) { if (app.net === c) { app.net = null; field = null; } c.close(); throw error; }
+    })().finally(() => { connectingPromise = null; });
+    return connectingPromise;
   },
   disconnect() { const c = app.net; app.net = null; c?.close(); },
   go(s        ) {
@@ -428,6 +479,7 @@ const app      = {
   confirm(text, then) { modal = { kind: "yesno", text, then }; },
   enterGame(id) {
     if (!app.net) return;
+    resetAutoPlay();
     field = new Field(assets, app.net);
     field.hideOthers = settings.hideOthers;
     field.showNames = settings.names;
@@ -443,8 +495,42 @@ const app      = {
 // ---------------------------------------------------------------------------
 // 游戏画面
 
+let serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+let autoPlaySignature = "", autoPlaySentAt = 0, autoPlayReady = false;
+let autoEncounterWanted = false;
+const autoPlayIntent = new AutoPlayIntent();
+function autoPlayWanted() {
+  return { encounter: autoEncounterWanted, autoBattle: settings.autoBattle, quick: settings.quickBattle };
+}
+function resetAutoPlay() {
+  changeBattleQuick = null; battleAllowsAuto = false;
+  autoPlayReady = false; autoPlaySignature = ""; autoPlaySentAt = 0;
+  autoEncounterWanted = false; autoPlayIntent.reset();
+  serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+}
+function syncAutoPlay(force = false) {
+  if (!app.net || !field?.self || !autoPlayReady) return;
+  const paused = !document.hidden && (modal !== null || (screen instanceof FieldScreen && (screen.openCount() > 0 || screen.hasChatInput())));
+  const state = { t: "AutoPlay"         , ...autoPlayWanted(), paused, settings: JSON.stringify(loadAi(selfStatus?.name ?? "")) };
+  autoPlayIntent.local(state);
+  const signature = JSON.stringify(state), now = performance.now();
+  if (force || signature !== autoPlaySignature || (paused && now - autoPlaySentAt >= 900)) {
+    autoPlaySignature = signature; autoPlaySentAt = now; autoPlayIntent.sent(state); app.net.send(state);
+  }
+}
+document.addEventListener("visibilitychange", () => { if (document.hidden) syncAutoPlay(true); });
+
+function drawBattleAutoToggles() {
+  if (!battle || !battleAllowsAuto || modal) return;
+  drawAutoPlayToggles(ui, settings.autoBattle, settings.quickBattle,
+    () => { settings.autoBattle = !settings.autoBattle; saveSettings(); syncAutoPlay(true); },
+    () => { settings.quickBattle = !settings.quickBattle; saveSettings(); syncAutoPlay(true); });
+}
+
 let field               = null;
 let battle                      = null;
+let battleAllowsAuto = false;
+let changeBattleQuick                                 = null;
 let selfStatus                   = null;
 let inventory               = { t: "Inventory", gold: 0, items: [] };
 let pets                 = null; // 宠物栏（原版 pet[5] 与 pc.battlePetNo）
@@ -596,7 +682,7 @@ class FieldScreen                   {
       battle = null;
       app.go(new CharSelectScreen(app));
     },
-    settingsChanged: () => { if (field) { field.hideOthers = settings.hideOthers; field.showNames = settings.names; } applyCursor(); audio.apply(); },
+    settingsChanged: () => { syncAutoPlay(); if (field) { field.hideOthers = settings.hideOthers; field.showNames = settings.names; } applyCursor(); audio.apply(); },
     field: () => field,
     assets, root: ASSETS,
     family: (text) => app.net?.send({ t: "Family", text }),
@@ -605,12 +691,8 @@ class FieldScreen                   {
     esc: () => keyPressed.has("Escape"),
     currentBgm: () => audio.currentBgm,
     uiSe,
-    autoEncount: () => this.enc !== null,
-    setAutoEncount: (on) => {
-      const s = field?.self;
-      this.enc = on && s && field ? { floor: field.floor, x: s.x, y: s.y, dir: (s.dir + 4) & 7, target: null } : null;
-      chat(this.enc ? "开始自动遇敌！" : "停止自动遇敌！", FONT.RED);
-    },
+    autoEncount: () => autoEncounterWanted,
+    setAutoEncount: (on) => { autoEncounterWanted = on; syncAutoPlay(true); },
     gmSend: (text) => app.net?.send({ t: "GmCommand", text }),
     gmList: (kind) => app.net?.send({ t: "GmListReq", kind }),
     gmDetail: (kind, id) => app.net?.send({ t: "GmDetailReq", kind, id }),
@@ -618,26 +700,8 @@ class FieldScreen                   {
     place: () => [field?.floor ?? -1, field?.self?.x ?? 0, field?.self?.y ?? 0],
   });
           seenSavedAt = 0;
-  // 自动遇敌（额外新功能，像外挂的"原地遇敌"）：开启时站的格子与旁边一格之间来回走；target 是这次自己设的目的地
-          enc                                                                                               = null;
-
-  /** 自动遇敌的一帧：站定、没有战斗与窗口时，下一步走到另一格；被手动移动、换地图、耐久力太低就停 */
-          encountFrame(f       , now        ) {
-    const e = this.enc, s = f.self;
-    if (!e || !s) return;
-    const stop = (why        ) => { this.enc = null; chat(`自动遇敌停止：${why}`, FONT.RED); };
-    if (f.floor !== e.floor) return stop("换了地图");
-    if (f.wantDir >= 0 || (f.target !== null && f.target !== e.target)) return stop("手动移动");
-    if (battle || modal || this.input || (isMobile() && this.openCount() > 0) || f.follower || s.moving(now) || f.target !== null) return;
-    if (selfStatus && selfStatus.maxHp > 0 && selfStatus.hp * 5 < selfStatus.maxHp) return stop("耐久力太低");
-    if (s.x !== e.x || s.y !== e.y) { e.target = [e.x, e.y]; f.target = e.target; return; }
-    // 先试上次的方向，再按顺序找旁边一格能走、不是传送点的
-    for (let k = 0; k < 8; k++) {
-      const d = (e.dir + k) & 7, nx = e.x + MOVE[d][0], ny = e.y + MOVE[d][1];
-      if (f.plainWalkable(nx, ny)) { e.dir = d; e.target = [nx, ny]; f.target = e.target; return; }
-    }
-    stop("旁边没有可以走的格子");
-  }
+  // Movement and battles continue on the server when animation frames stop.
+  hasChatInput() { return this.input !== null; }
 
   leave() { this.input?.remove(); this.input = null; this.menus.leave(); }
 
@@ -689,7 +753,7 @@ class FieldScreen                   {
       const r = m.pets?.find((x) => x.slot === p.slot);
       return { name: p.freeName || p.name, exp: r?.exp ?? 0, lvUp: (r?.levelUp ?? 0) > 0 };
     });
-    this.menus.showResult(selfStatus?.name ?? "", m.exp, m.levelUp > 0, m.items ?? [], list);
+    this.menus.showResult(selfStatus?.name ?? "", m.exp, m.levelUp > 0, m.items ?? [], list, m.gold);
   }
 
   setInventory(m              ) { this.menus.items.inv = m; }
@@ -759,7 +823,7 @@ class FieldScreen                   {
     audio.ambientFrame(mk.env, timeZone(saHour(now)));
     if (now - this.seenSavedAt > 5000) { this.seenSavedAt = now; f.saveSeen(); } // 看过的格子每 5 秒存一次
     // Esc 开关系统窗口、Ctrl+S 开关状态窗口（原版 MenuToggleFlag ^= JOY_ESC / JOY_CTRL_S）
-    if (!modal && !this.input) {
+    if (!battle && !modal && !this.input) {
       if (keyPressed.has("Escape")) { if (this.chatWnd) this.chatWnd = false; else if (this.menus.ai.open) this.menus.ai.close(); else if (this.menus.mapOpen) this.menus.toggleMap(); else if (!this.menus.gm.open) this.menus.toggleSystem(); }
 
       // PageUp / PageDown：切换自动战斗（gamemain.cpp，不说话）
@@ -777,14 +841,13 @@ class FieldScreen                   {
       if (keyPressed.has("Ctrl+t") && !partyActive() && !this.menus.trade.open) app.net?.send({ t: "Trade", cmd: "request", slot: 0, amount: 0 });
     }
     // 回车开关聊天输入（原版：聊天输入行在画面下方）
-    if (keyPressed.has("Enter") && !modal && !this.input) this.openChatInput();
+    if (keyPressed.has("Enter") && !battle && !modal && !this.input) this.openChatInput();
     // Ctrl+R：把上次密语的对象填进输入行（原版 chat.cpp 的 JOY_CTRL_R）
-    if (keyPressed.has("Ctrl+r") && !modal && !this.input && lastTell) this.openChatInput(`/tell ${lastTell} `);
+    if (keyPressed.has("Ctrl+r") && !battle && !modal && !this.input && lastTell) this.openChatInput(`/tell ${lastTell} `);
     f.locked = this.menus.vendor.open || !!f.self?.vendor; // 摆着摊 / 看着摊位不能走（iOnStreetVendor）
     // Mobile directions share the existing prediction/protocol, and never move behind a sheet.
     f.wantDir = this.input || battle || (isMobile() && (modal || this.openCount() > 0)) ? -1
       : isMobile() && mobileDirection >= 0 ? mobileDirection : keyDir();
-    this.encountFrame(f, now);
 
     // 鼠标操作（原版 map.cpp moveProc / drawGrid / turnAround）
     const onField = mouse.x >= 0 && !modal && !ui.overUi() && f.self !== null && !battle;
@@ -825,7 +888,7 @@ class FieldScreen                   {
         this.turnAt = now;
       }
     }
-    if (this.talkTarget !== null) {
+    if (this.talkTarget !== null && !battle) {
       const npc = f.actors.get(this.talkTarget), s = f.self;
       if (!npc || !s) this.talkTarget = null;
       else {
@@ -892,11 +955,18 @@ class FieldScreen                   {
       if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 8 : 88); // 追踪中的任务
     }
     ui.bottomLineY = 558; // 任务栏常驻在 576..600
-    this.menus.frame();
-    this.panel.frame(this.menus.rects);
+    if (battle?.quick) {
+      // Keep a real, reachable control in the quick field view; do not expose
+      // inventory/trade/world actions while the character is in battle.
+      if (keyPressed.has("PageUp") || keyPressed.has("PageDown")) { this.menus.toggleAuto(false); }
+      drawBattleAutoToggles();
+    } else {
+      this.menus.frame();
+      this.panel.frame(this.menus.rects);
+    }
     if (this.chatWnd) this.chatWindow();
     wheel = 0;
-    if (keyPressed.has("Ctrl+q") && !modal && !this.input) this.panel.toggleEtc(); // JOY_CTRL_Q：游戏设定
+    if (keyPressed.has("Ctrl+q") && !battle && !modal && !this.input) this.panel.toggleEtc(); // JOY_CTRL_Q：游戏设定
   }
 
   // 画面上方的按钮（fieldpanel.ts）
@@ -995,7 +1065,11 @@ class FieldScreen                   {
   mobileSummary()           {
     const m = this.menus;
     if (m.items.open) return [`石币 ${inventory.gold}`, ...inventory.items.map(it => `${it.slot < 9 ? "装备" : "背包"}${it.slot + 1}：${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}　${it.memo || it.magicMemo || ""}`)];
-    if (m.petWnd.open) return (pets?.pets ?? []).map(p => `${p.freeName || p.name}　Lv.${p.level}　HP ${p.hp}/${p.maxHp}　${p.state}　忠诚 ${p.loyalty}　${p.skills.map(sk => sk.name).join("、")}`);
+    if (m.petWnd.open) return (pets?.pets ?? []).flatMap(p => {
+      const brief = aiPetForSprite(p.sprite)?.brief;
+      const status = `${p.freeName || p.name}　Lv.${p.level}　HP ${p.hp}/${p.maxHp}　${p.state}　忠诚 ${p.loyalty}　${p.skills.map(sk => sk.name).join("、")}`;
+      return brief ? [status, brief] : [status];
+    });
     // QuestWindow already draws its current filtered page; never dump the full catalogue above controls.
     if (m.quests.open) return [];
     if (m.statusOpen && selfStatus) {
@@ -1039,6 +1113,7 @@ function mobileOptions() {
     && !(h.x2 - h.x1 >= 600 && h.y2 - h.y1 >= 450));
   // Native windows retain some background HUD hits. Option navigation follows
   // the current window rather than walking through unrelated chat/toolbar hits.
+  if (screen instanceof FieldScreen && battle && !modal) return options.filter(h => BATTLE_AUTO_ACTIONS.some(id => id === h.id));
   return screen instanceof FieldScreen && (modal || battle || screen.openCount() > 0)
     ? options.filter(h => !/^(?:tb-|chat-)/.test(h.id) && h.id !== "chan") : options;
 }
@@ -1111,10 +1186,10 @@ function mobileFrame() {
   const f = screen instanceof FieldScreen ? screen : null;
   const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0);
   setMobileScene(!!f && !panel && !battle);
-  setMobileLoginArtwork(screen instanceof LoginScreen && !modal);
-  const phase = battle && !battle.quick ? "battle" : f ? "field" : screen instanceof LoginScreen ? "login"
+  setMobileLoginArtwork(screen instanceof LoginScreen && !app.loginArt && !modal);
+  const phase = battle ? "battle" : f ? "field" : screen instanceof LoginScreen ? "login"
     : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
-  const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "石器时代";
+  const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "StoneAge";
   const selected = selectedMobileHit();
   mobile.frame({ phase, panel, status, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
     title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
@@ -1127,6 +1202,8 @@ function mobileFrame() {
 }
 
 function frame(now        ) {
+  if (battle) changeBattleQuick?.(settings.quickBattle);
+  syncAutoPlay();
   const workAt = performance.now();
   const queued = pendingMobileAction;
   pendingMobileAction = null;
@@ -1218,6 +1295,7 @@ let gameCursor = "auto";
     await assets.init((p) => drawLoading("正在读取资源索引……", p * 0.15));
     const n = assets.coreCount;
     await assets.preloadCore((p) => drawLoading(`正在加载界面资源（${Math.round(p * n)} / ${n}）……`, 0.15 + p * 0.85));
+    app.loginArt = await renderer.loadTexture("/art/login.png", false, [800, 600]);
   } catch (e) {
     ctx2d.fillStyle = "#fff";
     ctx2d.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
@@ -1226,6 +1304,9 @@ let gameCursor = "auto";
   }
   app.go(new LoginScreen(app));
   requestAnimationFrame(frame);
+  if (Connection.hasSession(WS_URL)) {
+    try { await app.connect(); } catch { /* Login remains available after an unavailable server. */ }
+  }
   // 原版鼠标光标（CG_MOUSE_CURSOR，原版画在鼠标点 +16,+16 处）。做成 CSS 光标由系统绘制，不随帧率卡顿
   const cur = await assets.imageCanvas(CG.MOUSE_CURSOR);
   if (cur) {

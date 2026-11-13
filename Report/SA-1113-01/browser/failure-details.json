@@ -1,0 +1,86 @@
+{
+  "screen": "FieldScreen",
+  "actions": [
+    {
+      "id": "chat-all",
+      "label": "◆"
+    },
+    {
+      "id": "chat-up",
+      "label": "▲"
+    },
+    {
+      "id": "chat-down",
+      "label": "▼"
+    },
+    {
+      "id": "tb-map",
+      "label": null
+    },
+    {
+      "id": "tb-status",
+      "label": null
+    },
+    {
+      "id": "tb-pet",
+      "label": null
+    },
+    {
+      "id": "tb-item",
+      "label": null
+    },
+    {
+      "id": "tb-mail",
+      "label": null
+    },
+    {
+      "id": "tb-album",
+      "label": null
+    },
+    {
+      "id": "tb-system",
+      "label": null
+    },
+    {
+      "id": "fp-menu",
+      "label": null
+    },
+    {
+      "id": "fp-card",
+      "label": null
+    },
+    {
+      "id": "fp-party",
+      "label": null
+    },
+    {
+      "id": "fp-trade",
+      "label": null
+    },
+    {
+      "id": "fp-family",
+      "label": null
+    },
+    {
+      "id": "fp-vendor",
+      "label": null
+    },
+    {
+      "id": "fp-join",
+      "label": null
+    },
+    {
+      "id": "fp-duel",
+      "label": null
+    },
+    {
+      "id": "fp-help",
+      "label": null
+    },
+    {
+      "id": "fp-act",
+      "label": null
+    }
+  ],
+  "errors": []
+}

@@ -130,10 +130,11 @@ export class Renderer {
     return { p, vao, uView: u("uView"), uPage: u("uPage"), uPal: u("uPal"), uRowA: u("uRowA"), uRowB: u("uRowB"), uMix: u("uMix") };
   }
 
-  async loadTexture(url        , indexed         )                   {
+  async loadTexture(url        , indexed         , logicalSize                   )                   {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`${url}: ${res.status}`);
-    const bmp = await createImageBitmap(await res.blob(), { colorSpaceConversion: "none", premultiplyAlpha: "none" });
+    const bmp = await createImageBitmap(await res.blob(), { colorSpaceConversion: "none", premultiplyAlpha: "none",
+      ...(logicalSize ? { resizeWidth: logicalSize[0], resizeHeight: logicalSize[1], resizeQuality: "high"          } : {}) });
     const gl = this.gl, tex = gl.createTexture() ;
     gl.bindTexture(gl.TEXTURE_2D, tex);
     if (indexed) gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8UI, gl.RED_INTEGER, gl.UNSIGNED_BYTE, bmp);

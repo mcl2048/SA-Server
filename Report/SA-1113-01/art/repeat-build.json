@@ -1,0 +1,51 @@
+{
+  "identical_repeat_build": true,
+  "files": [
+    {
+      "file": "anim/199100.json",
+      "bytes": 5699,
+      "sha256": "3b2f481ff6883d659312d30420b81fce805df3eaf1a64104df67924746274ce7"
+    },
+    {
+      "file": "anim/199101.json",
+      "bytes": 5699,
+      "sha256": "f595db82000ef079b08af074869a2d3e8e9d16827858d3d92277931e968d0755"
+    },
+    {
+      "file": "anim/199102.json",
+      "bytes": 5699,
+      "sha256": "6c6a57d8cf1a77eaafed405657ee64d14e87a62a76b12ffcbf13b708153f8eab"
+    },
+    {
+      "file": "anim/199103.json",
+      "bytes": 5699,
+      "sha256": "5e5b4b142ab0730895e2f3c9eb2b9049091cc2facd672628bd8d41911c652fc9"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 29387,
+      "sha256": "0328cbe83aea72875db3a7fe401a768296b3393ce244b28c93117b8e2047826b"
+    },
+    {
+      "file": "pages/00000.png",
+      "bytes": 1886733,
+      "sha256": "530c606c1e5e7ac099b395d35e24d0a30e8b4f4a9558ba1efbe5d615bc37ea54"
+    },
+    {
+      "file": "pages/00001.png",
+      "bytes": 1703365,
+      "sha256": "90caafb82acd7263f791ae1cd45136845090004294b7bb643722e0a331322b9a"
+    },
+    {
+      "file": "pages/00002.png",
+      "bytes": 1670492,
+      "sha256": "bb69be20368b0294f0e575f74fb08436170eb4966d881ebe0e8460a059fe6f27"
+    },
+    {
+      "file": "pages/00003.png",
+      "bytes": 1839904,
+      "sha256": "8c0499b87cb284030cb43868f148c5a4796483ed107fa76ecfc3e678fbe62a85"
+    }
+  ],
+  "total_bytes": 7152677
+}

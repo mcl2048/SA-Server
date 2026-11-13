@@ -50,17 +50,17 @@ func (w *World) battleCrush(e *entity, ft *fight, a, d *battle.Fighter, dmg int)
 	if a.Slot == ft.slot && e.inv[data.SlotArm] != nil {
 		w.wearItem(e, ft, e.inv[:], data.SlotArm, dmg, true, false)
 	}
-	if ft.pet < 0 || e.pets.Pets[ft.pet] == nil {
-		return
-	}
-	p := e.pets.Pets[ft.pet]
-	if d.Slot == ft.slot+5 {
-		if s := w.crushSlot(p.Items, true); s >= 0 {
-			w.wearItem(e, ft, p.Items, s, dmg, false, true)
+	if bag, ok := ft.petBagSlot(d.Slot); ok {
+		if p := e.pets.Pets[bag]; p != nil {
+			if s := w.crushSlot(p.Items, true); s >= 0 {
+				w.wearItem(e, ft, p.Items, s, dmg, false, true)
+			}
 		}
 	}
-	if a.Slot == ft.slot+5 && p.item(data.PetSlotClaw) != nil {
-		w.wearItem(e, ft, p.Items, data.PetSlotClaw, dmg, true, true)
+	if bag, ok := ft.petBagSlot(a.Slot); ok {
+		if p := e.pets.Pets[bag]; p != nil && p.item(data.PetSlotClaw) != nil {
+			w.wearItem(e, ft, p.Items, data.PetSlotClaw, dmg, true, true)
+		}
 	}
 }
 

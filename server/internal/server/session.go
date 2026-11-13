@@ -11,6 +11,7 @@ import (
 	"regexp"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 	"unicode"
 	"unicode/utf8"
@@ -57,9 +58,11 @@ type Server struct {
 	// GMs 是 config.yaml 的 gms（小写）：这些账号名保留给管理员，还没注册的不让别人注册走
 	GMs map[string]bool
 
-	mu     sync.Mutex
-	online map[int64]*session // 角色 ID → 当前在线的会话（跨线路唯一）
-	limit  *authLimiter       // 登录 / 注册的限速（懒建）
+	mu       sync.Mutex
+	online   map[int64]*accountSession // 角色 ID → 保留的逻辑会话（跨线路唯一）
+	accounts map[int64]*accountSession
+	tokens   map[[32]byte]*accountSession
+	limit    *authLimiter // 登录 / 注册的限速（懒建）
 }
 
 func (s *Server) limiter() *authLimiter {
@@ -119,7 +122,9 @@ type session struct {
 	closeMu sync.Once
 	cancel  context.CancelFunc
 	ip      string
-	done    chan struct{} // run 结束（已经 leaveWorld）时关闭；顶号的新连线等它
+	done    chan struct{} // transport 结束；角色可仍然留在世界运行
+	state   *accountSession
+	closed  atomic.Bool
 }
 
 // Account 是登录的账号名（世界按它判断是不是 GM，World.GMs）。
@@ -127,6 +132,9 @@ func (s *session) Account() string { return s.account.Name }
 
 // Send 实现 world.Client。队列满说明客户端太慢，直接断开，避免拖慢世界协程。
 func (s *session) Send(m proto.Message) {
+	if s.closed.Load() {
+		return
+	} // detached characters must not retain an unbounded event backlog
 	b, err := proto.Encode(m)
 	if err != nil {
 		s.log.Error("编码失败", "err", err)
@@ -140,12 +148,21 @@ func (s *session) Send(m proto.Message) {
 }
 
 func (s *session) Kick(reason string) {
+	s.closed.Store(true)
 	s.closeMu.Do(func() {
 		s.log.Info("断开", "reason", reason)
-		if s.cancel != nil {
+		if s.conn != nil {
+			// Write the close reason before cancelling the reader; otherwise its
+			// CloseNow can win the race and hide a terminal session replacement.
+			go func() {
+				s.conn.Close(websocket.StatusPolicyViolation, reason)
+				if s.cancel != nil {
+					s.cancel()
+				}
+			}()
+		} else if s.cancel != nil {
 			s.cancel()
 		}
-		go s.conn.Close(websocket.StatusPolicyViolation, reason)
 	})
 }
 
@@ -189,9 +206,20 @@ func (s *session) run(parent context.Context) {
 		}
 		s.handle(ctx, m)
 	}
-	s.leaveWorld()
+	s.closed.Store(true)
+	cancel()
+	s.detachWorld()
 	s.conn.CloseNow()
-	close(s.done)
+	// The retained actor keeps this transport as an identity fence. Release
+	// encoded messages that will never be written while it is detached.
+	for {
+		select {
+		case <-s.out:
+		default:
+			close(s.done)
+			return
+		}
+	}
 }
 
 func (s *session) writeLoop(ctx context.Context) {
@@ -215,11 +243,25 @@ func (s *session) fail(code, msg string) { s.Send(&proto.Error{Code: code, Messa
 
 // handle 按会话阶段分派：未登录 → 已登录未选线路 → 选好线路（角色管理）→ 在世界中。
 func (s *session) handle(ctx context.Context, m proto.Message) {
+	if s.closed.Load() {
+		return
+	}
 	if p, ok := m.(*proto.Ping); ok {
 		s.Send(&proto.Pong{Seq: p.Seq, ServerTime: int(time.Now().Unix())})
 		return
 	}
+	if s.state != nil {
+		s.state.mu.Lock()
+		defer s.state.mu.Unlock()
+		if s.state.controller != s {
+			return
+		} // fence every stale socket command, not only Leave
+	}
 	if s.account.ID != 0 && s.handleAccount(ctx, m) {
+		return
+	}
+	if _, ok := m.(*proto.Logout); ok && s.account.ID != 0 {
+		s.logout()
 		return
 	}
 	switch {
@@ -285,6 +327,9 @@ func (s *session) changeAccount(ctx context.Context, current, what string, apply
 	}
 	s.log.Info("玩家改了"+what, "account", s.account.Name, "ip", s.ip)
 	s.Send(&proto.AccountResult{OK: true, Message: what + "已修改"})
+	if what == "密码" {
+		s.rotateToken()
+	}
 }
 
 func (s *session) handleAuth(ctx context.Context, m proto.Message) {
@@ -318,9 +363,9 @@ func (s *session) handleAuth(ctx context.Context, m proto.Message) {
 			s.Send(&proto.AuthResult{OK: false, Message: "服务器错误"})
 			return
 		}
-		s.account = a
-		s.Send(&proto.AuthResult{OK: true, Message: "注册成功"})
-		s.sendServerList()
+		if err := s.authenticate(a, "注册成功"); err != nil {
+			s.Send(&proto.AuthResult{OK: false, Message: "服务器会话已满，请稍后重试"})
+		}
 	case *proto.ResetPassword:
 		// 找回密码：账号 + 安全码 → 新密码。安全码连错 AuthFailLimit 次锁住（来源 IP 与账号名各算，和登录一样每次加倍）
 		if !accountRe.MatchString(m.Account) || !passwordRe.MatchString(m.Secret) || !passwordRe.MatchString(m.Password) {
@@ -351,6 +396,7 @@ func (s *session) handleAuth(ctx context.Context, m proto.Message) {
 			lim.ok(ipKey)
 			lim.ok(accKey)
 			s.log.Info("用安全码重设了密码", "account", m.Account, "ip", s.ip)
+			s.srv.invalidateAccount(m.Account)
 			s.Send(&proto.AuthResult{OK: false, Message: "密码已重设，请用新密码登录"}) // OK 为 false：没有登录，客户端留在登录页
 		}
 	case *proto.Login:
@@ -380,9 +426,11 @@ func (s *session) handleAuth(ctx context.Context, m proto.Message) {
 		}
 		lim.ok(ipKey)
 		lim.ok(accKey)
-		s.account = a
-		s.Send(&proto.AuthResult{OK: true, Message: "登录成功"})
-		s.sendServerList()
+		if err := s.authenticate(a, "登录成功"); err != nil {
+			s.Send(&proto.AuthResult{OK: false, Message: "服务器会话已满，请稍后重试"})
+		}
+	case *proto.Resume:
+		s.resume(m.Token)
 	default:
 		s.fail("not_logged_in", "请先登录")
 	}
@@ -440,41 +488,26 @@ func (s *session) handleLobby(ctx context.Context, m proto.Message) {
 			s.fail("not_found", "角色不存在")
 			return
 		}
-		// 顶号的顺序：先把旧连线踢掉、等它在自己的协程里下线、等旧线路把存档写完，然后才（再）读角色，
-		// 否则读到的是旧存档（刚交易 / 丢掉的道具又回来）
+		// Authentication has already transferred any live character. A fresh
+		// entry is serialized by accountSession.mu; never reuse stale DB state
+		// to replace a character that is still running in another world.
 		s.srv.mu.Lock()
 		if s.srv.online == nil {
-			s.srv.online = map[int64]*session{}
+			s.srv.online = map[int64]*accountSession{}
 		}
-		old := s.srv.online[int64(m.ID)]
-		if old == nil || old == s {
-			s.srv.online[int64(m.ID)] = s
+		occupied := s.srv.online[int64(m.ID)]
+		if occupied == nil || occupied == s.state {
+			s.srv.online[int64(m.ID)] = s.state
 		}
 		s.srv.mu.Unlock()
-		if old != nil && old != s {
-			old.Kick("角色在别处登录") // 可能在另一条线路，各线路的世界互不知道
-			select {
-			case <-old.done:
-			case <-time.After(5 * time.Second):
-				s.log.Warn("旧连线迟迟不下线", "char", m.ID)
-			}
-			if oldLine := old.line; oldLine != nil {
-				oldLine.World.Flush(5 * time.Second)
-			}
-			s.srv.mu.Lock()
-			if cur := s.srv.online[int64(m.ID)]; cur != nil && cur != old {
-				// 等的时候又有别的连线抢先进了
-				s.srv.mu.Unlock()
-				s.fail("in_use", "角色在别处登录")
-				return
-			}
-			s.srv.online[int64(m.ID)] = s
-			s.srv.mu.Unlock()
+		if occupied != nil && occupied != s.state {
+			s.fail("in_use", "角色仍在其他会话中")
+			return
 		}
 		c, err := st.GetCharacter(ctx, s.account.ID, int64(m.ID))
 		if err != nil {
 			s.srv.mu.Lock()
-			if s.srv.online[int64(m.ID)] == s {
+			if s.srv.online[int64(m.ID)] == s.state {
 				delete(s.srv.online, int64(m.ID))
 			}
 			s.srv.mu.Unlock()
@@ -483,6 +516,7 @@ func (s *session) handleLobby(ctx context.Context, m proto.Message) {
 		}
 		st.AddLogin(ctx, c.ID)
 		s.char = &c
+		s.state.char, s.state.line, s.state.transport = &c, s.line, s
 		s.line.World.Enter(c, s)
 	default:
 		s.fail("no_character", "请先选择角色")
@@ -492,6 +526,8 @@ func (s *session) handleLobby(ctx context.Context, m proto.Message) {
 func (s *session) handleWorld(m proto.Message) {
 	w, id := s.line.World, int(s.char.ID)
 	switch m := m.(type) {
+	case *proto.AutoPlay:
+		w.SetAutoPlay(id, m.Encounter, m.AutoBattle, m.Quick, m.Paused, m.Settings)
 	case *proto.Move:
 		w.Move(id, m.X, m.Y, m.Dir)
 	case *proto.Turn:
@@ -517,7 +553,7 @@ func (s *session) handleWorld(m proto.Message) {
 	case *proto.BattleCommand:
 		w.BattleCommand(id, m.Kind, m.Target, m.Item)
 	case *proto.BattlePetCommand:
-		w.BattlePetCommand(id, m.Skill, m.Target)
+		w.BattlePetCommand(id, m.Skill, m.Target, m.PetSlot)
 	case *proto.PetState:
 		w.PetState(id, m.Slot, m.State)
 	case *proto.PetRename:
@@ -576,27 +612,25 @@ func (s *session) handleWorld(m proto.Message) {
 		w.StatUp(id, m.Stat)
 	case *proto.NpcWindowReply:
 		w.NpcWindowReply(id, m.ID, m.Seq, m.Button, m.Data)
-	case *proto.Logout:
-		s.leaveWorld()
-		s.sendCharList(context.Background())
 	default:
 		s.fail("in_world", "游戏中不能这样做")
 	}
 }
 
-// leaveWorld 让当前角色下线（可重复调用）。
+// leaveWorld is reserved for explicit logout; transport teardown uses Detach.
+// The accountSession mutex is held by the caller.
 func (s *session) leaveWorld() {
-	if s.char == nil {
+	if s.char == nil || s.state == nil || s.state.controller != s {
 		return
 	}
 	c := s.char
-	s.char = nil
 	s.line.World.Leave(int(c.ID), s)
 	s.srv.mu.Lock()
-	if s.srv.online[c.ID] == s {
+	if s.srv.online[c.ID] == s.state {
 		delete(s.srv.online, c.ID)
 	}
 	s.srv.mu.Unlock()
+	s.char, s.state.char, s.state.line, s.state.transport = nil, nil, nil, nil
 }
 
 // validCharName：名字只能是字母（含中文）与数字。排除空白、控制字符、零宽字符（Cf）、标点，

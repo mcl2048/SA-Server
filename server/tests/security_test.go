@@ -34,7 +34,7 @@ func TestReservedGMAndLockout(t *testing.T) {
 	}
 }
 
-// 同账号的另一条连线正用着的角色不能删。
+// 接管后角色仍在世界，原始 CharDelete 也不能绕过阶段限制删除在线角色。
 func TestCannotDeleteOnlineChar(t *testing.T) {
 	url := startServer(t)
 	a := dial(t, url)
@@ -51,18 +51,51 @@ func TestCannotDeleteOnlineChar(t *testing.T) {
 
 	b := dial(t, url)
 	b.send(&proto.Login{Account: "twice", Password: testPw})
-	b.expect("AuthResult")
+	if auth := b.expect("AuthResult"); auth["ok"] != true {
+		t.Fatalf("takeover login failed: %v", auth)
+	}
+	if marker := b.expect("Session"); marker["inWorld"] != true {
+		t.Fatalf("login did not take over live character: %v", marker)
+	}
+	if self := b.expect("Self"); num(self, "id") != id {
+		t.Fatalf("takeover changed identity: %v", self)
+	}
+	b.expect("EnterFloor")
+	if !a.closed() {
+		t.Fatal("new account controller did not replace old connection")
+	}
+	b.send(&proto.CharDelete{ID: id})
+	if e := b.expect("Error"); e["code"] != "in_world" {
+		t.Fatalf("在线的角色不应能删：%v", e)
+	}
+	b.send(&proto.QuestReq{})
+	b.expect("QuestLog") // The rejected deletion left the live character usable.
+	b.send(&proto.Logout{})
+	b.expect("Session")
+	b.send(&proto.Login{Account: "twice", Password: testPw})
+	if auth := b.expect("AuthResult"); auth["ok"] != true {
+		t.Fatalf("relogin failed: %v", auth)
+	}
+	b.expect("Session")
 	b.expect("ServerList")
 	b.send(&proto.SelectLine{ID: 2})
 	b.expect("LineSelected")
-	b.send(&proto.CharDelete{ID: id})
-	if e := b.expect("Error"); e["code"] != "in_use" {
-		t.Fatalf("在线的角色不应能删：%v", e)
+	b.send(&proto.CharList{})
+	list := b.expect("CharListResult")
+	chars, ok := list["chars"].([]any)
+	if !ok || len(chars) != 1 {
+		t.Fatalf("online deletion removed persisted character: %v", list)
+	}
+	character := chars[0].(map[string]any)
+	if num(character, "id") != id || character["name"] != "在线的" {
+		t.Fatalf("online deletion changed persisted identity: %v", character)
 	}
 	// 名字里不能有 # 或零宽字符
-	b.send(validCreate("名#1"))
-	if r := b.expect("CharCreateResult"); r["ok"] != false {
-		t.Fatalf("带 # 的名字不应建成：%v", r)
+	for _, name := range []string{"名#1", "名\u200b1"} {
+		b.send(validCreate(name))
+		if r := b.expect("CharCreateResult"); r["ok"] != false {
+			t.Fatalf("包含 # 或零宽字符的名字不应建成 %q: %v", name, r)
+		}
 	}
 }
 

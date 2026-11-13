@@ -417,8 +417,16 @@ func TestBattleFlow(t *testing.T) {
 		if e.fight != nil {
 			t.Error("战斗结束后应清掉战斗状态")
 		}
-		if end.Result == "win" && e.char.Exp != end.Exp {
-			t.Errorf("经验应为 %d，实际 %d", end.Exp, e.char.Exp)
+		if end.Result == "win" {
+			// A low-level encounter can also level up. Check total awarded XP,
+			// including the XP spent on every new level, rather than only its remainder.
+			spent := 0
+			for level := c.Level; level < e.char.Level; level++ {
+				spent += g.Battle.NextLevelExp(level)
+			}
+			if e.char.Exp+spent != c.Exp+end.Exp {
+				t.Errorf("经验总量应为 %d，实际余量 %d + 升级消耗 %d", c.Exp+end.Exp, e.char.Exp, spent)
+			}
 		}
 	})
 }

@@ -1,0 +1,163 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "encounters": [
+    {
+      "attempt": 1,
+      "enemies": [
+        {
+          "slot": 15,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 1,
+          "hp": 54,
+          "maxHp": 54,
+          "mp": 0,
+          "maxMp": 0,
+          "rideName": "",
+          "rideLevel": 0,
+          "rideHp": 0,
+          "rideMaxHp": 0,
+          "fallSprite": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "kind": "capture",
+      "target": 15,
+      "hp": 61,
+      "ok": true,
+      "guardian": -1,
+      "actorHp": 7000,
+      "actor": 0,
+      "result": "",
+      "damage": 0,
+      "dead": false,
+      "skill": "",
+      "status": 0,
+      "combo": false,
+      "mpDamage": 0,
+      "guarded": false,
+      "petDamage": 0,
+      "rideHp": 0,
+      "fall": false,
+      "effect": 0,
+      "actorMp": 0,
+      "shoot": 0,
+      "fly": 0,
+      "name": "",
+      "sprite": 0,
+      "level": 0,
+      "maxHp": 0,
+      "att": "",
+      "ownerSlot": 0,
+      "bagSlot": 0
+    }
+  ],
+  "capturedPet": {
+    "slot": 4,
+    "name": "奥普埃",
+    "sprite": 199100,
+    "level": 1,
+    "nextExp": 2,
+    "hp": 61,
+    "maxHp": 61,
+    "atk": 9,
+    "def": 11,
+    "agi": 8,
+    "loyalty": 60,
+    "attrs": [
+      50,
+      0,
+      0,
+      50
+    ],
+    "maxSkill": 6,
+    "skills": [
+      {
+        "id": 1,
+        "name": "攻击",
+        "memo": "通常攻击",
+        "field": 1,
+        "target": 6,
+        "func": "PETSKILL_NormalAttack",
+        "slot": 0,
+        "option": ""
+      },
+      {
+        "slot": 1,
+        "id": 2,
+        "name": "防御",
+        "memo": "通常防御",
+        "field": 1,
+        "target": 5,
+        "func": "PETSKILL_NormalGuard",
+        "option": ""
+      },
+      {
+        "slot": 2,
+        "id": 29101,
+        "name": "观测风标",
+        "memo": "我方全体在命中/闪避计算中的敏捷增加各自基础防御的10%，持续3回合；不改变出手顺序，不叠加已有同类效果。",
+        "field": 1,
+        "target": 2,
+        "func": "PETSKILL_SetMagicPet",
+        "option": "3|10|DEX"
+      }
+    ],
+    "state": "rest",
+    "canRename": true,
+    "ext": {
+      "getLevel": 1,
+      "enemyId": 29001,
+      "alloc": [
+        30,
+        24,
+        32,
+        26
+      ],
+      "std": [
+        28,
+        22,
+        30,
+        24
+      ],
+      "grow": [
+        164,
+        199,
+        135,
+        1043
+      ],
+      "init": [
+        9,
+        11,
+        8,
+        61
+      ],
+      "resist": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "critical": 5,
+      "counter": 5,
+      "rare": 2,
+      "vai": -40
+    },
+    "rideInfo": "no",
+    "freeName": "",
+    "exp": 0,
+    "trans": 0,
+    "rideable": false,
+    "items": [],
+    "guard": false
+  },
+  "errors": []
+}

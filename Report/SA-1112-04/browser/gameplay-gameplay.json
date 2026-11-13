@@ -1,0 +1,290 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "client_mode": "embedded",
+  "phase": "gameplay",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "live-quick-to-manual-five-distinct-pet-commands-to-quick-same-fighters",
+      "pass": true,
+      "details": {
+        "sameFormation": {
+          "field": 100,
+          "pets": [
+            {
+              "bag": 0,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 1,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 2,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 3,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 4,
+              "owner": 0,
+              "name": "乌力"
+            }
+          ]
+        },
+        "quickToggleNativeCanvasFallback": false,
+        "manualPetCommands": [
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 5,
+            "petSlot": 5
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 6,
+            "petSlot": 6
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 7,
+            "petSlot": 7
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 8,
+            "petSlot": 8
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 9,
+            "petSlot": 9
+          }
+        ],
+        "battleEnds": 1,
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 52,
+          "exp": 1859,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1859,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "two-player-pet-quota-three-two-and-independent-results",
+      "pass": true,
+      "details": {
+        "owners": {
+          "0": 3,
+          "1": 2
+        },
+        "leaderPets": [
+          {
+            "name": "乌力",
+            "level": 180,
+            "slot": 0,
+            "exp": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "level": 31,
+            "exp": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "level": 31,
+            "exp": 0,
+            "levelUp": 0
+          }
+        ],
+        "partnerPets": [
+          {
+            "name": "乌力",
+            "exp": 1813,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1813,
+            "level": 30,
+            "levelUp": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "rescue-rebalances-five-to-three-two-with-existing-hp-status-preserved",
+      "pass": true,
+      "details": {
+        "before": [
+          {
+            "bagSlot": 0,
+            "ownerSlot": 0,
+            "hp": 1403,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 1,
+            "ownerSlot": 0,
+            "hp": 153,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 2,
+            "ownerSlot": 0,
+            "hp": 183,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 3,
+            "ownerSlot": 0,
+            "hp": 164,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 4,
+            "ownerSlot": 0,
+            "hp": 104,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          }
+        ],
+        "after": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 180,
+            "hp": 1403,
+            "maxHp": 1403,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "bagSlot": 0,
+            "status": 0
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 31,
+            "hp": 153,
+            "maxHp": 192,
+            "bagSlot": 1,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "status": 0
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 31,
+            "hp": 183,
+            "maxHp": 191,
+            "bagSlot": 2,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "status": 0
+          }
+        ],
+        "resetPets": true
+      }
+    },
+    {
+      "case": "rescue-battle-finishes-on-both-real-clients",
+      "pass": true,
+      "details": {
+        "leaderResult": "win",
+        "partnerResult": "win"
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

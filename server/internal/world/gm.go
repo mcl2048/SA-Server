@@ -39,7 +39,7 @@ var gmMenu = []proto.GmItem{
 		Hint: "传送到四个出身村落的村长家"},
 	{Group: "移动", Cmd: "/town2", Name: "传送 2", Args: []string{"村庄"}, Kinds: []string{"opt:"}, Defaults: []string{""}, // 选项在 gmMenuItems 里按记录点填
 		Hint: "传送到任一村庄的复活点（记录点 / 长老的位置，清单由记录点 NPC 的资料列出）"},
-	{Group: "角色", Cmd: "/lv", Name: "设定等级", Args: []string{"等级"}, Kinds: []string{""}, Defaults: []string{"$level"}, Hint: "经验也改成那一级的起点（1..140）"},
+	{Group: "角色", Cmd: "/lv", Name: "设定等级", Args: []string{"等级"}, Kinds: []string{""}, Defaults: []string{"$level"}, Hint: "经验也改成那一级的起点（不超过人物等级上限）"},
 	{Group: "角色", Cmd: "/exp", Name: "增加经验", Args: []string{"经验"}, Kinds: []string{""}, Defaults: []string{"10000"}, Hint: "照常升级、加点、加魅力"},
 	{Group: "角色", Cmd: "/points", Name: "可分配点数", Args: []string{"点数"}, Kinds: []string{""}, Defaults: []string{"10"}, Hint: "升级加点用的点数（状态窗口里分配）"},
 	{Group: "角色", Cmd: "/stat", Name: "设定状态", Args: []string{"体力", "腕力", "耐力", "敏捷"}, Kinds: []string{"", "", "", ""},
@@ -48,8 +48,8 @@ var gmMenu = []proto.GmItem{
 		Defaults: []string{"$earth", "$water", "$fire", "$wind"}, Hint: "每项 0..10，加起来不超过 10"},
 	{Group: "角色", Cmd: "/charm", Name: "设定魅力", Args: []string{"魅力"}, Kinds: []string{""}, Defaults: []string{"100"}, Hint: "0..100"},
 	{Group: "角色", Cmd: "/dp", Name: "设定 DP", Args: []string{"DP"}, Kinds: []string{""}, Defaults: []string{"1000"}},
-	{Group: "角色", Cmd: "/trans", Name: "设定转生", Args: []string{"转生次数"}, Kinds: []string{"opt:0|1|2|3|4|5"}, Defaults: []string{"0"}, Hint: "只改转生次数（影响石币上限、骑乘等），不重算数值"},
-	{Group: "角色", Cmd: "/tensei", Name: "转生", Hint: "照精灵王的算法转生一次（要 80 级、不到 6 转）：重算基本状态、清任务旗标、变回 1 级；不收宠物、不送宠物、不传送"},
+	{Group: "角色", Cmd: "/trans", Name: "设定转生", Args: []string{"转生次数"}, Kinds: []string{""}, Defaults: []string{"0"}, Hint: "只改转生次数（不超过人物转生上限），不重算数值"},
+	{Group: "角色", Cmd: "/tensei", Name: "转生", Hint: "照精灵王的算法转生一次（要80级、未到人物转生上限）：重算基本状态、清任务旗标、变回1级；不收宠物、不送宠物、不传送"},
 	{Group: "角色", Cmd: "/luck", Name: "设定运气", Args: []string{"运气"}, Kinds: []string{"opt:1|2|3|4|5"}, Defaults: []string{"5"}, Hint: "影响会心、捕获等（原版每个游戏日重抽）"},
 	{Group: "角色", Cmd: "/hp", Name: "设定耐久力", Args: []string{"HP"}, Kinds: []string{""}, Defaults: []string{"1"}, Hint: "现在的 HP（不超过最大值），测补血用"},
 	{Group: "角色", Cmd: "/mp", Name: "设定气力", Args: []string{"MP"}, Kinds: []string{""}, Defaults: []string{"0"}, Hint: "现在的 MP（不超过最大值）"},
@@ -295,7 +295,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 			id := num(1, 0, math.MaxInt32)
 			lv := 0
 			if len(f) > 2 {
-				lv = num(2, 1, MaxLevel)
+				lv = num(2, 1, max(200, w.Rules.charMaxLevel(), w.Rules.petMaxLevel()))
 			}
 			en := w.game.Battle.Enemies[id]
 			if bad || en == nil {
@@ -355,6 +355,12 @@ func (w *World) gmCommand(e *entity, text string) bool {
 			reply("改%s失败：%v", what, err)
 			return true
 		}
+		if f[0] == "/setpw" {
+			// Session invalidation must not synchronously re-enter the world loop.
+			if session, ok := t.client.(interface{ InvalidateSession() }); ok {
+				session.InvalidateSession()
+			}
+		}
 		w.log.Info("GM 改了玩家账号的"+what, "gm", e.name, "char", t.name, "account", t.account)
 		gmReply(t, "GM 替你改了"+what)
 		reply("%s（账号 %s）的%s已改", t.name, t.account, what)
@@ -376,7 +382,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 		reply("%s 已下线", t.name)
 
 	case "/lv":
-		n := num(1, 1, MaxLevel)
+		n := num(1, 1, w.Rules.charMaxLevel())
 		if bad {
 			return usage()
 		}
@@ -444,7 +450,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 		changed()
 		reply("DP 设为 %d", n)
 	case "/trans":
-		n := num(1, 0, 5)
+		n := num(1, 0, w.Rules.charMaxTrans())
 		if bad {
 			return usage()
 		}
@@ -453,8 +459,8 @@ func (w *World) gmCommand(e *entity, text string) bool {
 		reply("转生次数设为 %d（只改次数，要照原版重算请用 /tensei）", n)
 	case "/tensei":
 		// CHAR_CHAT_DEBUG_Trans：不看任务与宠物条件，只要 80 级以上（原版的 GM 指令先算数值才加转生次数，这里照精灵王的顺序）
-		if c.Level < transMinLevel || c.Trans >= transMax {
-			reply("要 80 级以上、不到 %d 转才能转生（现在 %d 级、%d 转）", transMax, c.Level, c.Trans)
+		if c.Level < transMinLevel || c.Trans >= w.Rules.charMaxTrans() {
+			reply("要 80 级以上、不到 %d 转才能转生（现在 %d 级、%d 转）", w.Rules.charMaxTrans(), c.Level, c.Trans)
 			return true
 		}
 		before := [4]int{c.Vital, c.Str, c.Tgh, c.Dex}
@@ -522,7 +528,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 		id := num(1, 0, math.MaxInt32)
 		lv := 0
 		if len(f) > 2 {
-			lv = num(2, 1, MaxLevel)
+			lv = num(2, 1, w.Rules.petMaxLevel())
 		}
 		if bad {
 			return usage()
@@ -535,7 +541,13 @@ func (w *World) gmCommand(e *entity, text string) bool {
 		if lv <= 0 {
 			lv = en.LvMin
 		}
-		s := battle.EnemySpec{Enemy: en, Temp: w.game.Battle.Temps[en.TempNo], Level: lv}
+		temp := w.game.Battle.Temps[en.TempNo]
+		if temp == nil {
+			reply("敌人 %d 没有宠物模板", id)
+			return true
+		}
+		lv = min(lv, w.petMaxLevel(&Pet{LimitLevel: temp.LimitLevel}))
+		s := battle.EnemySpec{Enemy: en, Temp: temp, Level: lv}
 		p := petFromFighter(battle.NewEnemy(s, battle.EnemySlot(0), w.game.Battle.Skills, w.rnd), e.char.ID)
 		if slot := w.addPet(e, p); slot < 0 {
 			reply("宠物栏满了")
@@ -544,7 +556,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 			reply("得到 %s（%d 级，第 %d 格）", p.Name, p.Level, slot+1)
 		}
 	case "/petlv": // /petlv 格位 等级：照升级的方式长到那一级
-		slot, lv := num(1, 0, PetSlots-1), num(2, 1, MaxLevel)
+		slot, lv := num(1, 0, PetSlots-1), num(2, 1, w.Rules.petMaxLevel())
 		if bad {
 			return usage()
 		}
@@ -556,8 +568,16 @@ func (w *World) gmCommand(e *entity, text string) bool {
 			reply("%s 已经 %d 级了（只能往上升）", p.displayName(), p.Level)
 		default:
 			ups := 0
-			for p.Level < lv && w.game.Battle.NextLevelExp(p.Level) > 0 {
-				ups += w.petGainExp(e, p, max(0, w.game.Battle.NextLevelExp(p.Level)-p.Exp))
+			for p.Level < min(lv, w.petMaxLevel(p)) {
+				next := w.game.Battle.NextLevelExp(p.Level)
+				if next <= 0 {
+					break
+				}
+				gained := w.petGainExp(e, p, max(0, next-p.Exp))
+				ups += gained
+				if gained == 0 {
+					break // 模板限制或无有效经验时，不能让世界协程卡在GM循环。
+				}
 			}
 			w.petsChanged(e)
 			reply("%s 升了 %d 级，现在 %d 级", p.displayName(), ups, p.Level)
@@ -875,7 +895,7 @@ func (w *World) gmCommand(e *entity, text string) bool {
 			reply("删除了 %s", p.displayName())
 		}
 	case "/learnride":
-		n := num(1, 1, MaxLevel+60)
+		n := num(1, 1, max(200, w.Rules.petMaxLevel()))
 		if bad {
 			return usage()
 		}
@@ -1088,6 +1108,17 @@ func townAnchorNPC(npcs []data.NPC) *data.NPC {
 func (w *World) gmMenuItems() []proto.GmItem {
 	items := slices.Clone(gmMenu)
 	for i := range items {
+		switch items[i].Cmd {
+		case "/lv":
+			items[i].Hint = fmt.Sprintf("经验也改成那一级的起点（1..%d）", w.Rules.charMaxLevel())
+		case "/trans":
+			items[i].Hint = fmt.Sprintf("只改转生次数（0..%d），不重算数值", w.Rules.charMaxTrans())
+			items[i].Kinds = []string{""}
+		case "/tensei":
+			items[i].Hint = fmt.Sprintf("照精灵王的算法转生一次（要80级、不到%d转）；重算基本状态、清任务旗标、变回1级", w.Rules.charMaxTrans())
+		case "/pet", "/petlv":
+			items[i].Hint = fmt.Sprintf("宠物等级上限%d；特殊低等级模板仍受模板限制（宠物升级只能往上）", w.Rules.petMaxLevel())
+		}
 		if items[i].Cmd == "/town2" {
 			names := make([]string, len(w.towns))
 			for k, t := range w.towns {

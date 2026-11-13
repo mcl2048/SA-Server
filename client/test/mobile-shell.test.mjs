@@ -153,6 +153,30 @@ test("battle commands and targets remain human readable in a bounded sheet", () 
   ui.texts = []; hits = [];
 });
 
+test("quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden", async () => {
+  const { drawAutoPlayToggles } = await import("../src/autoplay-sync.ts");
+  setDeviceMode("mobile");
+  // These are the exact hits emitted by the shared quick/normal battle renderer.
+  const controls = [];
+  drawAutoPlayToggles({ textButton(x, y, text, _color, id) {
+    controls.push({ id, label: text, x1: x, y1: y, x2: x + 90, y2: y + 18 });return false;
+  } }, true, true, () => {}, () => {});
+  hits = controls;
+  frame("field"); // Reproduce the previous consumer: valid hits, hidden sheet.
+  assert.equal(shell.sheet.hidden, true);
+  assert.equal(allButtons().some(b => b.dataset.action === "battle-quick-toggle"), false);
+  frame("battle"); // Quick mode keeps the actual map but reports battle phase.
+  assert.equal(chrome.firstChild.dataset.layout, "battle");
+  assert.equal(shell.sheet.hidden, false);assert.equal(shell.field.hidden, true);assert.equal(shell.toolbar.hidden, true);
+  for (const id of ["battle-auto-toggle", "battle-quick-toggle"]) {
+    const matches = allButtons().filter(b => b.dataset.action === id);
+    assert.equal(matches.length, 1);assert.equal(matches[0].closest("[hidden]"), null);
+    const before = fired.length;fire(matches[0], "click");
+    assert.deepEqual(fired.slice(before), [["cancel"], ["action", id]]);
+  }
+  hits = [];frame("field");
+});
+
 test("native panels hide background controls and actor names, and accept contextual labels", () => {
   setDeviceMode("mobile");
   ui.texts = [{ x: 400, y: 200, text: "无关 NPC", align: "center" }, { x: 100, y: 100, text: "道具说明" }];

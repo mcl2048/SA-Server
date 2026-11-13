@@ -1,0 +1,215 @@
+{
+  "version": "v0.2.7-LYNX",
+  "sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a",
+  "bytes": 16281760,
+  "mode": "0755",
+  "format": "static ELF64 Linux AMD64",
+  "served_files_identical": [
+    "index.html",
+    "dist/actions.js",
+    "dist/ai.js",
+    "dist/aisetting.js",
+    "dist/aismart.js",
+    "dist/album.js",
+    "dist/albumdata.js",
+    "dist/assets.js",
+    "dist/audio.js",
+    "dist/battle.js",
+    "dist/family.js",
+    "dist/field.js",
+    "dist/fieldpanel.js",
+    "dist/gm.js",
+    "dist/items.js",
+    "dist/mail.js",
+    "dist/main.js",
+    "dist/mapcache.js",
+    "dist/md5.js",
+    "dist/menus.js",
+    "dist/mobile-controls.js",
+    "dist/mobile-position.js",
+    "dist/mobile-shell.js",
+    "dist/mobile-view.js",
+    "dist/net.js",
+    "dist/pets.js",
+    "dist/petshop.js",
+    "dist/proto.gen.js",
+    "dist/quests.js",
+    "dist/renderer.js",
+    "dist/screens.js",
+    "dist/shop.js",
+    "dist/soundtable.js",
+    "dist/trade.js",
+    "dist/ui.js",
+    "dist/vendor.js",
+    "dist/worldmap.js",
+    "art/login.png"
+  ],
+  "cache": {
+    "index.html": {
+      "etag": "W/\"3b284034c4375c4b2f8f3c5be56a5d5a8a21ca55a6940a689c091a506c9c459d\"",
+      "sha256": "3b284034c4375c4b2f8f3c5be56a5d5a8a21ca55a6940a689c091a506c9c459d"
+    },
+    "dist/actions.js": {
+      "etag": "W/\"90d01d66f389f78220a37af2a1a07908db69ebe769546f2ff22438a058a9ad12\"",
+      "sha256": "90d01d66f389f78220a37af2a1a07908db69ebe769546f2ff22438a058a9ad12"
+    },
+    "dist/ai.js": {
+      "etag": "W/\"d6baa2aae1da358b7571bcd8c1d1875c873666cee5c7fc2b33a99aa15f931554\"",
+      "sha256": "d6baa2aae1da358b7571bcd8c1d1875c873666cee5c7fc2b33a99aa15f931554"
+    },
+    "dist/aisetting.js": {
+      "etag": "W/\"89f0719b21fc2bba6bc686e1f922269aa9d01083fea8a224f6d3ead4702e7867\"",
+      "sha256": "89f0719b21fc2bba6bc686e1f922269aa9d01083fea8a224f6d3ead4702e7867"
+    },
+    "dist/aismart.js": {
+      "etag": "W/\"91a405683b58e6a7b20707700d0d5a5d6e8f8afcdb3f1f88ebbcc89629cf9079\"",
+      "sha256": "91a405683b58e6a7b20707700d0d5a5d6e8f8afcdb3f1f88ebbcc89629cf9079"
+    },
+    "dist/album.js": {
+      "etag": "W/\"a54e894c632499c22331ff9362fc2edebaff20b07ea534b1de2457a8b25727fb\"",
+      "sha256": "a54e894c632499c22331ff9362fc2edebaff20b07ea534b1de2457a8b25727fb"
+    },
+    "dist/albumdata.js": {
+      "etag": "W/\"df8aec399fd2ba060f5b5a6131934af921fc1ab72551ebf40af1df7b31c72be2\"",
+      "sha256": "df8aec399fd2ba060f5b5a6131934af921fc1ab72551ebf40af1df7b31c72be2"
+    },
+    "dist/assets.js": {
+      "etag": "W/\"46472074bd1d520d51731897ca2594cfe45b211a779a943ee5065c5acba3fdb1\"",
+      "sha256": "46472074bd1d520d51731897ca2594cfe45b211a779a943ee5065c5acba3fdb1"
+    },
+    "dist/audio.js": {
+      "etag": "W/\"a5e10411b4c4f6457e5a7a00d38bf5be865622ef13cedf0e22f6abed5b8d9651\"",
+      "sha256": "a5e10411b4c4f6457e5a7a00d38bf5be865622ef13cedf0e22f6abed5b8d9651"
+    },
+    "dist/battle.js": {
+      "etag": "W/\"09d6f72f2a31b77be03f5502b5e29aa7b40591c8b0b20c0d31b7afb6bd11454e\"",
+      "sha256": "09d6f72f2a31b77be03f5502b5e29aa7b40591c8b0b20c0d31b7afb6bd11454e"
+    },
+    "dist/family.js": {
+      "etag": "W/\"30c813bef7019ce9c9ba57d00fc62f304abdcd02409b10b59185a37b7f10e662\"",
+      "sha256": "30c813bef7019ce9c9ba57d00fc62f304abdcd02409b10b59185a37b7f10e662"
+    },
+    "dist/field.js": {
+      "etag": "W/\"693535a4c65b8bf9d445c3288a7b8201109bc28781d235bc32c813e4c9ce5fb4\"",
+      "sha256": "693535a4c65b8bf9d445c3288a7b8201109bc28781d235bc32c813e4c9ce5fb4"
+    },
+    "dist/fieldpanel.js": {
+      "etag": "W/\"94e65da421328a9de39eebfa8f62a98bbcb7b85be2347f6f657afcbffe196a82\"",
+      "sha256": "94e65da421328a9de39eebfa8f62a98bbcb7b85be2347f6f657afcbffe196a82"
+    },
+    "dist/gm.js": {
+      "etag": "W/\"be54b3e0718c81e5c796e369b0b4dfbead7c4733d815fb8ba2ce1607291a6bc0\"",
+      "sha256": "be54b3e0718c81e5c796e369b0b4dfbead7c4733d815fb8ba2ce1607291a6bc0"
+    },
+    "dist/items.js": {
+      "etag": "W/\"8c278510581e08a77b50f8fec053c081ff070397856c23e791b238b5a0cb502c\"",
+      "sha256": "8c278510581e08a77b50f8fec053c081ff070397856c23e791b238b5a0cb502c"
+    },
+    "dist/mail.js": {
+      "etag": "W/\"590d6b11a762e20175c302c9582b94dfebbb9cdfa58c952373d54cf6456d95c5\"",
+      "sha256": "590d6b11a762e20175c302c9582b94dfebbb9cdfa58c952373d54cf6456d95c5"
+    },
+    "dist/main.js": {
+      "etag": "W/\"ab52ca848224688d210cbd53fbd8ad767cfe731d6226505f17babe39cec94e83\"",
+      "sha256": "ab52ca848224688d210cbd53fbd8ad767cfe731d6226505f17babe39cec94e83"
+    },
+    "dist/mapcache.js": {
+      "etag": "W/\"87c47815fa07b718c13bbf49ab66352de4e8a823ff8b6108536b7f9498380164\"",
+      "sha256": "87c47815fa07b718c13bbf49ab66352de4e8a823ff8b6108536b7f9498380164"
+    },
+    "dist/md5.js": {
+      "etag": "W/\"1b9a252303f8940ffc1f6568b68852d4747da676d150cc914385d70a390d0905\"",
+      "sha256": "1b9a252303f8940ffc1f6568b68852d4747da676d150cc914385d70a390d0905"
+    },
+    "dist/menus.js": {
+      "etag": "W/\"128e1d770f02d0880a17511c79e9a221f824335236c21ce7f6bb72cbb4eb7aa8\"",
+      "sha256": "128e1d770f02d0880a17511c79e9a221f824335236c21ce7f6bb72cbb4eb7aa8"
+    },
+    "dist/mobile-controls.js": {
+      "etag": "W/\"23e484237a300ba12101d417395f6c580e5a6398391587837d96712f7f9f4e65\"",
+      "sha256": "23e484237a300ba12101d417395f6c580e5a6398391587837d96712f7f9f4e65"
+    },
+    "dist/mobile-position.js": {
+      "etag": "W/\"96b378a775c55b36a9062c8ff8ef0e7557262fc21acefa69e1b0038443a4ba8a\"",
+      "sha256": "96b378a775c55b36a9062c8ff8ef0e7557262fc21acefa69e1b0038443a4ba8a"
+    },
+    "dist/mobile-shell.js": {
+      "etag": "W/\"2a3801511a93b31afcd79a1380e924ef2b2322e8abeea65587d1f7b5162b6b71\"",
+      "sha256": "2a3801511a93b31afcd79a1380e924ef2b2322e8abeea65587d1f7b5162b6b71"
+    },
+    "dist/mobile-view.js": {
+      "etag": "W/\"da5804233729d21eb73e7373d75611b8713a50148efb8c98e7bcbe6c8804b22f\"",
+      "sha256": "da5804233729d21eb73e7373d75611b8713a50148efb8c98e7bcbe6c8804b22f"
+    },
+    "dist/net.js": {
+      "etag": "W/\"933539406827505e8eb807ba536df065947514cb4d91d46424909e3fa2c0d782\"",
+      "sha256": "933539406827505e8eb807ba536df065947514cb4d91d46424909e3fa2c0d782"
+    },
+    "dist/pets.js": {
+      "etag": "W/\"3fdcd1d31c739f8a23408b9a036345259e526f54f382f69bdbb3f16d598471be\"",
+      "sha256": "3fdcd1d31c739f8a23408b9a036345259e526f54f382f69bdbb3f16d598471be"
+    },
+    "dist/petshop.js": {
+      "etag": "W/\"78ff73febfb970f96e265c0e9c7bbf67d9ad67650e761e0a2fc6e640e0223815\"",
+      "sha256": "78ff73febfb970f96e265c0e9c7bbf67d9ad67650e761e0a2fc6e640e0223815"
+    },
+    "dist/proto.gen.js": {
+      "etag": "W/\"ee76ffa904d38530647b9b215ad8ed6b08544dd6f6bf1c049afee486f2a5b7e5\"",
+      "sha256": "ee76ffa904d38530647b9b215ad8ed6b08544dd6f6bf1c049afee486f2a5b7e5"
+    },
+    "dist/quests.js": {
+      "etag": "W/\"f39ea751ceef21e618655f6cf83fa14ba1f9dcc5f3cb1a36af557f11bf3ac755\"",
+      "sha256": "f39ea751ceef21e618655f6cf83fa14ba1f9dcc5f3cb1a36af557f11bf3ac755"
+    },
+    "dist/renderer.js": {
+      "etag": "W/\"9a660815d1f928251d1c97bb8f854b28aa6797d10a2c00c8a72af4ff86e3eab4\"",
+      "sha256": "9a660815d1f928251d1c97bb8f854b28aa6797d10a2c00c8a72af4ff86e3eab4"
+    },
+    "dist/screens.js": {
+      "etag": "W/\"f194bde5a73354f114e623b139565eade90b2fe24def572cab26e107e3a949ba\"",
+      "sha256": "f194bde5a73354f114e623b139565eade90b2fe24def572cab26e107e3a949ba"
+    },
+    "dist/shop.js": {
+      "etag": "W/\"10f4e97295036d713434d8e730350b0ad567a593106ad44dae21876123335a41\"",
+      "sha256": "10f4e97295036d713434d8e730350b0ad567a593106ad44dae21876123335a41"
+    },
+    "dist/soundtable.js": {
+      "etag": "W/\"74600c279b84a978813170689cc1d6c4b5a5c81444e956dd81dc30c8f08d5df5\"",
+      "sha256": "74600c279b84a978813170689cc1d6c4b5a5c81444e956dd81dc30c8f08d5df5"
+    },
+    "dist/trade.js": {
+      "etag": "W/\"4d5e97a5f31fede1c04f32b50640051fdd992f88977088cd63c82be873bae709\"",
+      "sha256": "4d5e97a5f31fede1c04f32b50640051fdd992f88977088cd63c82be873bae709"
+    },
+    "dist/ui.js": {
+      "etag": "W/\"c50c006c1a03768e21679b9358389c8bbfdf34f18600c73f285004a0cf76c2d1\"",
+      "sha256": "c50c006c1a03768e21679b9358389c8bbfdf34f18600c73f285004a0cf76c2d1"
+    },
+    "dist/vendor.js": {
+      "etag": "W/\"5e6abacce2443a8f656e5ece21c6bad7ff818b9737d0e8e4d2fde726613db032\"",
+      "sha256": "5e6abacce2443a8f656e5ece21c6bad7ff818b9737d0e8e4d2fde726613db032"
+    },
+    "dist/worldmap.js": {
+      "etag": "W/\"77ba2566cef4cbcf5a271b70d0813403d6314cf4683a47bee3d19e83732678d2\"",
+      "sha256": "77ba2566cef4cbcf5a271b70d0813403d6314cf4683a47bee3d19e83732678d2"
+    },
+    "art/login.png": {
+      "etag": "W/\"876ea341c66fc850d5f710db06e06ad5e29fe86630acb21bbc6a1316ffb6b04c\"",
+      "sha256": "876ea341c66fc850d5f710db06e06ad5e29fe86630acb21bbc6a1316ffb6b04c"
+    }
+  },
+  "private_urls": {
+    "/src/main.ts": 404,
+    "/config.yaml": 404,
+    "/config.local.yaml": 404,
+    "/.git/config": 404,
+    "/dist/main.js.map": 404,
+    "/art/login.svg": 404,
+    "/art/FONT-LICENSE.txt": 404,
+    "/Report/SA-1112-04/SESSION-REVIEW.md": 404,
+    "/art/../config.yaml": 404
+  },
+  "conditional_GET_304": true,
+  "HEAD_empty": true,
+  "PNG_not_gzipped": true
+}

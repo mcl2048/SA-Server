@@ -104,7 +104,10 @@ func (b *Battle) setup(f *Fighter, c Command) Command {
 			f.ctrMod, _ = optNum(s.Option, "击%")
 		case "PETSKILL_Guardian":
 			applyMods(f, s.Option)
-			owner := f.Slot - 5
+			owner := f.Slot - 5 // Enemy guardians retain their formation pairing.
+			if f.Pet {
+				owner = b.PetOwner(f)
+			}
 			if owner >= f.Side()*SideOffset && owner < f.Side()*SideOffset+SideOffset {
 				b.guardian[owner] = f.Slot
 			}

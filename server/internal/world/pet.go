@@ -15,10 +15,10 @@ import (
 //   升级        CHAR_LevelUpCheck + CHAR_PetLevelUp（按 ALLOCPOINT 与 PETRANK 成长）
 
 const (
-	PetSlots    = 5  // CHAR_MAXPETHAVE
-	maxStandby  = 4  // 原客户端 BattlePetStMenCnt < 4：待命的最多 4 只
-	petNameMax  = 16 // lssproto_KN_recv：名字最多 16 个字节
-	petSkillMax = 7  // CHAR_MAXPETSKILLHAVE
+	PetSlots    = 5            // CHAR_MAXPETHAVE
+	maxStandby  = PetSlots - 1 // 四只待命加一只主宠，单人最多五宠出战
+	petNameMax  = 16           // lssproto_KN_recv：名字最多 16 个字节
+	petSkillMax = 7            // CHAR_MAXPETSKILLHAVE
 )
 
 // Pet 是宠物栏里的一只宠物。Vital/Str/Tgh/Dex 是原版内部值（不像角色的点数，宠物的是成长次数 × 成长率，不一定是 100 的倍数）。
@@ -176,17 +176,19 @@ func (w *World) petLoyalty(e *entity, p *Pet) int {
 	ai = min(ai, 100)
 	ai = int(float64(ai) + float64(p.VariableAI)*0.01)
 	if e.char.Trans > 0 {
-		ai += (MaxLevel - e.char.Level) / 2
+		ai += max(0, w.Rules.charMaxLevel()-e.char.Level) / 2
 	}
 	return max(0, min(100, ai))
 }
 
-// petMaxLevel：宠物的等级上限（CHAR_LevelUpCheck：有 LIMITLEVEL 的到那一级为止）。
-func petMaxLevel(p *Pet) int {
-	if p.LimitLevel > 0 {
-		return min(MaxLevel, p.LimitLevel)
+// petMaxLevel 保留低于原140级的特殊模板硬限制；原140级及以上的
+// LIMITLEVEL 是旧全局上限，跟随独立宠物规则，允许服务器提高上限。
+func (w *World) petMaxLevel(p *Pet) int {
+	limit := w.Rules.petMaxLevel()
+	if p.LimitLevel > 0 && p.LimitLevel < MaxLevel {
+		limit = min(limit, p.LimitLevel)
 	}
-	return MaxLevel
+	return limit
 }
 
 // petGainExp 加经验并升级，返回升了几级（CHAR_LevelUpCheck + CHAR_HandleExp：经验按级累计、升级扣掉；每级 CHAR_PetLevelUp 与 AI_FIX_PETLEVELUP）。
@@ -194,9 +196,9 @@ func petMaxLevel(p *Pet) int {
 func (w *World) petGainExp(e *entity, p *Pet, exp int) int {
 	p.Exp += exp
 	ups, feed := 0, 0
-	for p.Level < petMaxLevel(p) {
+	for p.Level < w.petMaxLevel(p) {
 		next := w.game.Battle.NextLevelExp(p.Level)
-		if next < 0 || p.Exp < next {
+		if next <= 0 || p.Exp < next {
 			break
 		}
 		p.Exp -= next
@@ -248,7 +250,10 @@ func (w *World) petFighter(e *entity, idx, slot int) *battle.Fighter {
 	f := &battle.Fighter{Slot: slot, Name: p.displayName(), Sprite: p.Sprite, Level: p.Level,
 		HP: max(0, min(p.HP, d.HP)), MaxHP: d.HP, Atk: d.Atk, Def: d.Def, Quick: d.Quick, Attr: attr,
 		Base: [4]float64{float64(p.Vital), float64(p.Str), float64(p.Tgh), float64(p.Dex)},
-		Pet:  true, CharID: int(e.char.ID), Loyalty: w.petLoyalty(e, p), Rare: p.Rare, Weapon: -1}
+		Pet:  true, CharID: int(e.char.ID), OwnerSlot: slot - 5, OwnerSet: true, Loyalty: w.petLoyalty(e, p), Rare: p.Rare, Weapon: -1}
+	if e.fight != nil {
+		f.OwnerSlot = e.fight.slot
+	}
 	if p.Mag == nil {
 		p.Mag = &battle.MagicSkill{}
 	}
@@ -285,7 +290,7 @@ func (w *World) petInfo(e *entity, i int) proto.PetInfo {
 	p := e.pets.Pets[i]
 	d, _ := w.petDerive(p)
 	next := 0
-	if w.game.Battle != nil {
+	if w.game.Battle != nil && p.Level < w.petMaxLevel(p) {
 		next = max(0, w.game.Battle.NextLevelExp(p.Level))
 	}
 	info := proto.PetInfo{Slot: i, Name: p.Name, FreeName: p.FreeName, Sprite: p.Sprite, Level: p.Level, Exp: p.Exp,

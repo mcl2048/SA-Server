@@ -1,0 +1,37 @@
+Final validation, working directory /home/coder/saserver
+
+Command:
+node --test client/test/autoplay-sync.test.ts client/test/battle-multipet.test.ts && npm exec --yes --package typescript@5.9.3 -- tsc --noEmit --allowImportingTsExtensions --module esnext --moduleResolution bundler --target es2023 --lib es2023,dom,dom.iterable client/src/*.ts && git diff --check -- client/src/main.ts client/src/autoplay-sync.ts client/test/autoplay-sync.test.ts
+
+Background execution id: bash-c0f07d08de5243a3
+Collected terminal result: completed, exit code 0
+
+✔ actual AI quick and auto clicks send immediately and survive an older paused lease ACK (14.381703ms)
+✔ an old ACK between actual menu click and next frame cannot overwrite unsent intent (2.473759ms)
+✔ two real quick clicks before either ACK retain the newest intent, including a return to the original value (5.755261ms)
+✔ authoritative encounter-only and safety stops preserve actual flags and stale ACKs cannot re-enable stopped modes (1.489217ms)
+✔ pending auto enable never hands the turn to legacy client AI, and disable waits for its server ACK (3.210471ms)
+✔ the shared quick-field control is a reachable real Ui action and sends quick off without opening world menus (2.739205ms)
+✔ each owned live pet uses its bag skills and sends one independent action (11.424167ms)
+✔ pet tabs select another pending pet without borrowing another owner's pet (4.326836ms)
+✔ server automation prevents normal, quick and reconnect duplicate client commands (3.483018ms)
+✔ resume restores turn, submitted pets, status and positions without an intro or first-turn AI (1.105101ms)
+✔ turn resolution clears previous pending menus and opens fresh per-pet submissions (1.647554ms)
+✔ resetPets atomically removes old pets and updates full layout without a new intro (1.558942ms)
+✔ pet layout movement preserves submissions and selected skills by bag identity (1.009603ms)
+✔ PetOut uses event bag and owner while the Pets snapshot still names another primary (3.388884ms)
+✔ quick display never restarts client automation after both live auto switches are off (2.263627ms)
+✔ quick display switches preserve the same fighters, queued work, turn and submissions and load the background once (9.87936ms)
+✔ leaving fast playback preserves the remaining real command time on its advanced animation clock (1.894901ms)
+✔ watch mode and dead pets never expose a command slot (2.034994ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 558.650093
+
+TypeScript and git diff --check produced no diagnostics.
+This is local source validation; real DOM/browser acceptance remains a separate check coordinated by the parent on a build containing the same final source.

@@ -1,0 +1,837 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "probes": [
+    {
+      "id": "ai-auto-val",
+      "beforeBox": {
+        "x": 7,
+        "y": 477,
+        "width": 147,
+        "height": 44
+      },
+      "afterBox": {
+        "x": 7,
+        "y": 193,
+        "width": 147,
+        "height": 44
+      },
+      "serverBefore": {
+        "t": "AutoPlayState",
+        "paused": true,
+        "encounter": false,
+        "autoBattle": false,
+        "quick": false,
+        "reason": ""
+      },
+      "serverAfter": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "paused": true,
+        "encounter": false,
+        "quick": false,
+        "reason": ""
+      },
+      "sent": [
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": false,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        }
+      ],
+      "events": [
+        {
+          "event": "scroll",
+          "t": 36766,
+          "target": null,
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-tab-基本",
+          "mouse": {
+            "x": 186,
+            "y": 109,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerdown",
+          "t": 36844.5,
+          "target": "ai-auto-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-tab-基本",
+          "mouse": {
+            "x": 186,
+            "y": 109,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerup",
+          "t": 36844.89999997616,
+          "target": "ai-auto-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-tab-基本",
+          "mouse": {
+            "x": 186,
+            "y": 109,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "focusin",
+          "t": 36852.89999997616,
+          "target": "ai-auto-val",
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-tab-基本",
+          "mouse": {
+            "x": 186,
+            "y": 109,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "click",
+          "t": 36853.299999952316,
+          "target": "ai-auto-val",
+          "x": 81,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-tab-基本",
+          "mouse": {
+            "x": 186,
+            "y": 109,
+            "clicked": false,
+            "down": false
+          }
+        }
+      ],
+      "ui": {
+        "hot": "ai-auto-val",
+        "mouse": {
+          "x": 328,
+          "y": 141
+        },
+        "actions": [
+          {
+            "id": "ai-quick-row",
+            "x1": 168,
+            "y1": 189,
+            "x2": 632,
+            "y2": 246,
+            "label": "快速战斗 ◀ 关闭 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。"
+          },
+          {
+            "id": "ai-quick-prev",
+            "x1": 292,
+            "y1": 191,
+            "x2": 304.421875,
+            "y2": 209,
+            "label": "◀"
+          },
+          {
+            "id": "ai-quick-val",
+            "x1": 312,
+            "y1": 191,
+            "x2": 344,
+            "y2": 209,
+            "label": "关闭"
+          },
+          {
+            "id": "ai-quick-next",
+            "x1": 348,
+            "y1": 191,
+            "x2": 360.421875,
+            "y2": 209,
+            "label": "▶"
+          }
+        ],
+        "view": {
+          "x": 162,
+          "y": 0,
+          "width": 520,
+          "height": 390,
+          "top": 0,
+          "right": 682,
+          "bottom": 390,
+          "left": 162
+        }
+      }
+    },
+    {
+      "id": "ai-quick-val",
+      "beforeBox": {
+        "x": 7,
+        "y": 455,
+        "width": 147,
+        "height": 44
+      },
+      "afterBox": {
+        "x": 7,
+        "y": 193,
+        "width": 147,
+        "height": 44
+      },
+      "serverBefore": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "paused": true,
+        "encounter": false,
+        "quick": false,
+        "reason": ""
+      },
+      "serverAfter": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "quick": true,
+        "paused": true,
+        "encounter": false,
+        "reason": ""
+      },
+      "sent": [
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": false,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        },
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        }
+      ],
+      "events": [
+        {
+          "event": "scroll",
+          "t": 38302.299999952316,
+          "target": null,
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-auto-val",
+          "mouse": {
+            "x": 328,
+            "y": 141,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerdown",
+          "t": 38414,
+          "target": "ai-quick-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-auto-val",
+          "mouse": {
+            "x": 328,
+            "y": 141,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerup",
+          "t": 38414.5,
+          "target": "ai-quick-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-auto-val",
+          "mouse": {
+            "x": 328,
+            "y": 141,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "focusin",
+          "t": 38426.699999928474,
+          "target": "ai-quick-val",
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-auto-val",
+          "mouse": {
+            "x": 328,
+            "y": 141,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "click",
+          "t": 38427.799999952316,
+          "target": "ai-quick-val",
+          "x": 81,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-auto-val",
+          "mouse": {
+            "x": 328,
+            "y": 141,
+            "clicked": false,
+            "down": false
+          }
+        }
+      ],
+      "ui": {
+        "hot": "ai-quick-val",
+        "mouse": {
+          "x": 328,
+          "y": 200
+        },
+        "actions": [
+          {
+            "id": "ai-quick-row",
+            "x1": 168,
+            "y1": 189,
+            "x2": 632,
+            "y2": 246,
+            "label": "快速战斗 ◀ 开启 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。"
+          },
+          {
+            "id": "ai-quick-prev",
+            "x1": 292,
+            "y1": 191,
+            "x2": 304.421875,
+            "y2": 209,
+            "label": "◀"
+          },
+          {
+            "id": "ai-quick-val",
+            "x1": 312,
+            "y1": 191,
+            "x2": 344,
+            "y2": 209,
+            "label": "开启"
+          },
+          {
+            "id": "ai-quick-next",
+            "x1": 348,
+            "y1": 191,
+            "x2": 360.421875,
+            "y2": 209,
+            "label": "▶"
+          }
+        ],
+        "view": {
+          "x": 162,
+          "y": 0,
+          "width": 520,
+          "height": 390,
+          "top": 0,
+          "right": 682,
+          "bottom": 390,
+          "left": 162
+        }
+      }
+    },
+    {
+      "id": "ai-quick-val",
+      "beforeBox": {
+        "x": 7,
+        "y": 193,
+        "width": 147,
+        "height": 44
+      },
+      "afterBox": {
+        "x": 7,
+        "y": 193,
+        "width": 147,
+        "height": 44
+      },
+      "serverBefore": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "quick": true,
+        "paused": true,
+        "encounter": false,
+        "reason": ""
+      },
+      "serverAfter": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "paused": true,
+        "encounter": false,
+        "quick": false,
+        "reason": ""
+      },
+      "sent": [
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        },
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": false,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        }
+      ],
+      "events": [
+        {
+          "event": "pointerdown",
+          "t": 39797.59999990463,
+          "target": "ai-quick-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerup",
+          "t": 39798.09999990463,
+          "target": "ai-quick-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "click",
+          "t": 39805.59999990463,
+          "target": "ai-quick-val",
+          "x": 81,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        }
+      ],
+      "ui": {
+        "hot": "ai-quick-val",
+        "mouse": {
+          "x": 328,
+          "y": 200
+        },
+        "actions": [
+          {
+            "id": "ai-quick-row",
+            "x1": 168,
+            "y1": 189,
+            "x2": 632,
+            "y2": 246,
+            "label": "快速战斗 ◀ 关闭 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。"
+          },
+          {
+            "id": "ai-quick-prev",
+            "x1": 292,
+            "y1": 191,
+            "x2": 304.421875,
+            "y2": 209,
+            "label": "◀"
+          },
+          {
+            "id": "ai-quick-val",
+            "x1": 312,
+            "y1": 191,
+            "x2": 344,
+            "y2": 209,
+            "label": "关闭"
+          },
+          {
+            "id": "ai-quick-next",
+            "x1": 348,
+            "y1": 191,
+            "x2": 360.421875,
+            "y2": 209,
+            "label": "▶"
+          }
+        ],
+        "view": {
+          "x": 162,
+          "y": 0,
+          "width": 520,
+          "height": 390,
+          "top": 0,
+          "right": 682,
+          "bottom": 390,
+          "left": 162
+        }
+      }
+    },
+    {
+      "id": "ai-auto-val",
+      "beforeBox": {
+        "x": 7,
+        "y": -69,
+        "width": 147,
+        "height": 44
+      },
+      "afterBox": {
+        "x": 7,
+        "y": 193,
+        "width": 147,
+        "height": 44
+      },
+      "serverBefore": {
+        "t": "AutoPlayState",
+        "autoBattle": true,
+        "paused": true,
+        "encounter": false,
+        "quick": false,
+        "reason": ""
+      },
+      "serverAfter": {
+        "t": "AutoPlayState",
+        "paused": true,
+        "encounter": false,
+        "autoBattle": false,
+        "quick": false,
+        "reason": ""
+      },
+      "sent": [
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": true,
+          "quick": false,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        },
+        {
+          "t": "AutoPlay",
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "paused": true,
+          "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+        }
+      ],
+      "events": [
+        {
+          "event": "scroll",
+          "t": 41308.89999997616,
+          "target": null,
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerdown",
+          "t": 41515.89999997616,
+          "target": "ai-auto-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "pointerup",
+          "t": 41516.5,
+          "target": "ai-auto-val",
+          "x": 80.5,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "focusin",
+          "t": 41526.89999997616,
+          "target": "ai-auto-val",
+          "x": null,
+          "y": null,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        },
+        {
+          "event": "click",
+          "t": 41527.199999928474,
+          "target": "ai-auto-val",
+          "x": 81,
+          "y": 215,
+          "w": 844,
+          "h": 390,
+          "sx": 0,
+          "sy": 0,
+          "vv": {
+            "w": 844,
+            "h": 390,
+            "x": 0,
+            "y": 0
+          },
+          "hot": "ai-quick-val",
+          "mouse": {
+            "x": 328,
+            "y": 200,
+            "clicked": false,
+            "down": false
+          }
+        }
+      ],
+      "ui": {
+        "hot": "ai-auto-val",
+        "mouse": {
+          "x": 328,
+          "y": 141
+        },
+        "actions": [
+          {
+            "id": "ai-quick-row",
+            "x1": 168,
+            "y1": 189,
+            "x2": 632,
+            "y2": 246,
+            "label": "快速战斗 ◀ 关闭 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。"
+          },
+          {
+            "id": "ai-quick-prev",
+            "x1": 292,
+            "y1": 191,
+            "x2": 304.421875,
+            "y2": 209,
+            "label": "◀"
+          },
+          {
+            "id": "ai-quick-val",
+            "x1": 312,
+            "y1": 191,
+            "x2": 344,
+            "y2": 209,
+            "label": "关闭"
+          },
+          {
+            "id": "ai-quick-next",
+            "x1": 348,
+            "y1": 191,
+            "x2": 360.421875,
+            "y2": 209,
+            "label": "▶"
+          }
+        ],
+        "view": {
+          "x": 162,
+          "y": 0,
+          "width": 520,
+          "height": 390,
+          "top": 0,
+          "right": 682,
+          "bottom": 390,
+          "left": 162
+        }
+      }
+    }
+  ]
+}

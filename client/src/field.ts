@@ -517,8 +517,8 @@ export class Field {
       if (this.wantDir >= 0 && s.dir !== this.wantDir) { s.dir = this.wantDir; this.net.send({ t: "Turn", dir: this.wantDir }); }
       this.requestView(); return;
     }
-    if (this.follower) {
-      // 队员（partyMoveProc）：自己不能走，只按服务端的步子走；方向键只转身
+    if (this.follower || this.followSteps.length > 0) {
+      // Party following and server automation share authoritative step animation.
       // 跟不上时（分页在背景、或队长是巴士）直接跳到最新的那一步，不让队伍越拉越长
       if (this.followSteps.length > 4) { const last = this.followSteps[this.followSteps.length - 1]; this.followSteps = []; s.warpTo(last[0], last[1], last[2]); this.requestView(); return; }
       const step = this.followSteps.shift();

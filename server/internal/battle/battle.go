@@ -83,9 +83,13 @@ type Fighter struct {
 	Attr   [4]int // 地水火风 0..100
 	Luck   int    // 玩家的运气 1..5（敌人为 0）
 	Player bool
-	Pet    bool // 玩家带出场的宠物（CHAR_TYPEPET），站在主人位置 +5；Player 与 Pet 都不是的就是敌人
-	CharID int  // 玩家的角色 ID
-	Charm  int  // 玩家的魅力（CHAR_WORKFIXCHARM，捕获机率用）
+	Pet    bool // 玩家带出场的宠物（CHAR_TYPEPET）；Player 与 Pet 都不是的就是敌人
+	// OwnerSet distinguishes explicit ownership (including owner slot 0) from
+	// old single-pet fighters, whose owner is still their slot minus five.
+	OwnerSlot int
+	OwnerSet  bool
+	CharID    int // 玩家的角色 ID
+	Charm     int // 玩家的魅力（CHAR_WORKFIXCHARM，捕获机率用）
 	// Loyalty 是宠物的忠诚度 0..100（CHAR_WORKFIXAI），决定会不会听指令（BATTLE_PetLoyalCheck）
 	Loyalty int
 	// AIDelta 累计这场战斗里宠物忠诚度变动值（CHAR_PetAddVariableAi 的点数，×100 为 1 点），战斗结束时由世界层加到宠物上
@@ -162,6 +166,40 @@ type Fighter struct {
 }
 
 func (f *Fighter) Side() int { return f.Slot / SideOffset }
+
+// PetOwner returns the actual player's battle slot, or -1 for invalid ownership.
+// Legacy fighters without OwnerSet keep the original one-pet-per-column layout.
+func (b *Battle) PetOwner(f *Fighter) int {
+	if f == nil || !f.Pet || f.Slot < 0 || f.Slot >= Slots || f.Slot%SideOffset < 5 {
+		return -1
+	}
+	owner := f.Slot - 5
+	if f.OwnerSet {
+		owner = f.OwnerSlot
+	}
+	start := f.Side() * SideOffset
+	if owner < start || owner >= start+5 || b.F[owner] == nil || !b.F[owner].Player {
+		return -1
+	}
+	return owner
+}
+
+// PrimaryPet is the conventional pet column if it belongs to this player,
+// otherwise the first owned pet. Dead/recalled candidates remain selectable.
+func (b *Battle) PrimaryPet(owner int) *Fighter {
+	if owner < 0 || owner >= Slots || owner%SideOffset >= 5 {
+		return nil
+	}
+	if f := b.F[owner+5]; b.PetOwner(f) == owner {
+		return f
+	}
+	for _, f := range b.F {
+		if b.PetOwner(f) == owner {
+			return f
+		}
+	}
+	return nil
+}
 
 // Enemy：敌人（CHAR_TYPEENEMY），既不是玩家也不是宠物。
 func (f *Fighter) Enemy() bool { return !f.Player && !f.Pet }
@@ -348,6 +386,41 @@ type Battle struct {
 }
 
 func New(rnd *rand.Rand) *Battle { return &Battle{Rnd: rnd, Surprised: -1, guardian: map[int]int{}} }
+
+// RemapSlots updates private references before the world layer relocates pets.
+// Mapping is simultaneous: old slot -> new slot, with -1 (or an invalid new
+// slot) retiring a reference. Missing keys keep their original slot. Call this
+// between Resolve calls, before replacing F; the caller owns F, Fighter.Slot,
+// OwnerSlot, kill attribution, recalled records and already submitted commands.
+func (b *Battle) RemapSlots(mapping map[int]int) {
+	if len(mapping) == 0 {
+		return
+	}
+	remap := func(slot int) int {
+		if next, ok := mapping[slot]; ok {
+			if next < 0 || next >= Slots {
+				return -1
+			}
+			return next
+		}
+		return slot
+	}
+	guardians := make(map[int]int, len(b.guardian))
+	for target, protector := range b.guardian {
+		target, protector = remap(target), remap(protector)
+		if target >= 0 && target < Slots && protector >= 0 && protector < Slots {
+			guardians[target] = protector
+		}
+	}
+	b.guardian = guardians
+	for _, f := range b.F {
+		if f != nil && f.hidden {
+			// Earth Round stores a target until the next action. If it retires,
+			// pickTarget(-1) will safely choose another opposing live fighter.
+			f.earthT = remap(f.earthT)
+		}
+	}
+}
 
 func (b *Battle) Add(f *Fighter) {
 	if !f.fixed {
@@ -633,8 +706,12 @@ func (b *Battle) act(f *Fighter, c Command, ev *[]Event) {
 		if ok {
 			f.Escaped = true
 			// BATTLE_Exit：玩家逃走时出场的宠物跟着离开
-			if f.Player && f.Slot%SideOffset < 5 && b.F[f.Slot+5].Alive() {
-				b.F[f.Slot+5].Escaped = true
+			if f.Player {
+				for _, pet := range b.F {
+					if pet.Alive() && b.PetOwner(pet) == f.Slot {
+						pet.Escaped = true
+					}
+				}
 			}
 		} else {
 			f.escapes++
@@ -799,7 +876,7 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 		e.Icon = o.icon()
 	}
 	cont := true
-	if d.Pet && d.Slot-5 == a.Slot {
+	if d.Pet && b.PetOwner(d) == a.Slot {
 		d.AIDelta += aiFixSekkan // 主人打自己的宠物
 	}
 	if b.duck(a, d, o.duckMod) {

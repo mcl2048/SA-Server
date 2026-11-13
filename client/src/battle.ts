@@ -142,6 +142,7 @@ class Fighter {
     this.x = this.homeX; this.y = this.homeY;
     this.dir = this.homeDir();
     this.hp = f.hp; this.mp = f.mp; this.rideHp = f.rideMaxHp > 0 ? f.rideHp : 0;
+    this.status = f.status ?? 0; this.dead = f.hp <= 0;
   }
 
   homeDir() { return this.f.slot < 10 ? 3 : 7; } // 己方朝左上，敌方朝右下
@@ -205,11 +206,12 @@ export interface BattleHost {
   sendHelp(on: boolean): void; // lssproto_HL_send
   captured(): void;            // 自己抓到宠物（放抓宠的音乐）
   send(kind: string, target: number, item?: number): void;
-  sendPet(skill: number, target: number): void; // 宠物的指令（lssproto_B "W|技能|目标"，-1 为什么也不做）
+  sendPet(skill: number, target: number, petSlot?: number): void; // 宠物的指令（lssproto_B "W|技能|目标"，-1 为什么也不做）
   pets(): S2CPets | null;
   inventory(): S2CInventory;
   chat(text: string, color: string): void;
   auto(): boolean; // 是否开着自动战斗
+  serverAuto?(): boolean; // 服务端掌握自动指令时，客户端只播放战斗
   aiSettings(): AiSettings; // 战斗设定（ai.ts）
   aiMemory(): AiMemory;     // 智能战斗学到的伤害（aismart.ts）
   myAtk(): number;          // 自己的攻击力（状态窗口的数字）
@@ -241,8 +243,8 @@ export class BattleScreen {
   private memKey = "";
   private get lastButton() { return this.mem.lastButton; }
   private set lastButton(v: string) { this.mem.lastButton = v; this.saveMem(); }
-  private get petSkill() { return this.mem.petSkill; }
-  private set petSkill(v: number) { this.mem.petSkill = v; this.saveMem(); }
+  private get petSkill() { return this.petSkills.get(this.activePet) ?? this.mem.petSkill; }
+  private set petSkill(v: number) { this.petSkills.set(this.activePet, v); this.mem.petSkill = v; this.saveMem(); }
   private saveMem() {
     try { if (this.memKey) localStorage.setItem(this.memKey, JSON.stringify(this.mem)); } catch { /* 无痕模式等存不了就算了 */ }
   }
@@ -255,7 +257,11 @@ export class BattleScreen {
   private sent = false;
   // 宠物的指令面板（BattleMenuProc 的 BATTLE_MENU_PET）：人下完指令后滑入
   private petMenuAt = 0;
-  private petSent = true;
+  private petSentSlots = new Set<number>();
+  private activePet = -1;
+  private petSkills = new Map<number, number>();
+  private restore: S2CBattleStart | null = null;
+  private get petSent() { return this.watch || this.ownedPets().every(({ a }) => this.petSentSlots.has(a.f.slot)); }
   private petWnd = false;        // 技能窗口（BattleButtonWaza）
   private petSelecting = false;
   private turns = 0;
@@ -271,8 +277,43 @@ export class BattleScreen {
   private endIdleAt = 0;
   // 快速战斗（额外新功能）：不切到战斗画面，排队的动画用快进的时钟一口气播完（只为了照样更新 HP、倒下、捕获等状态），
   // 马上照战斗设定下指令；服务端收齐指令就结算，所以整场几乎是一瞬间打完
-  readonly quick: boolean;
+  quick: boolean;
   private clock = 0;
+  private quickNow = 0;
+  private backgroundUrl = "";
+  private backgroundLoad: Promise<void> | null = null;
+
+  /** Change presentation without rebuilding fighters or resetting this turn. */
+  setQuick(on: boolean) {
+    if (this.watch || this.pvp) on = false;
+    if (on === this.quick) return;
+    this.quick = on;
+    if (on) {
+      this.clock = Math.max(this.clock, this.vnow);
+      this.quickNow = 0; this.quickAt = 0;
+    } else {
+      // Fast playback may have advanced past wall time. Resume that animation
+      // clock while preserving the actual remaining command deadline.
+      if (this.quickNow > 0) {
+        const next = Math.max(this.clock, this.quickNow), shift = next - this.quickNow;
+        this.vnow = next; this.lastNow = 0;
+        if (this.menuAt > 0) this.menuAt += shift;
+        if (this.deadline > 0) this.deadline += shift;
+        if (this.petMenuAt > 0) this.petMenuAt = next;
+      }
+      void this.loadBackground();
+    }
+  }
+
+  private loadBackground(): Promise<void> {
+    if (this.backgroundLoad) return this.backgroundLoad;
+    this.backgroundLoad = fetch(this.backgroundUrl).then((r) => r.ok ? r.arrayBuffer() : Promise.reject(r.status)).then((b) => {
+      const v = new DataView(b), t = new Uint16Array(400);
+      for (let i = 0; i < 400 && 4 + i * 2 + 1 < b.byteLength; i++) t[i] = v.getUint16(4 + i * 2);
+      this.tiles = t;
+    }).catch(() => { this.tiles = new Uint16Array(0); });
+    return this.backgroundLoad;
+  }
 
   /** lssproto_HL_recv：服务端的求救旗标 */
   setHelp(on: boolean) { this.helpFlag = on; }
@@ -280,12 +321,33 @@ export class BattleScreen {
   /** 有人中途加入（BATTLE_RescueEntry 的 BP|…|JOIN）：从画面外滑进来 */
   join(m: S2CBattleJoin) {
     const added: Fighter[] = [];
+    const submittedBags = new Set(this.ownedPets().filter(({ a }) => this.petSentSlots.has(a.f.slot)).map(({ info }) => info.slot));
+    const rememberedSkills = new Map(this.ownedPets().map(({ a, info }) => [info.slot, this.petSkills.get(a.f.slot)]));
+    if (m.resetPets) {
+      const sides = new Set(m.fighters.map((f) => Math.floor(f.slot / 10)));
+      // Rescue snapshots contain players and pets, not opposing monsters.
+      for (const [slot] of this.fighters) if (slot % 10 >= 5 && sides.has(Math.floor(slot / 10))) this.fighters.delete(slot);
+      this.activePet = -1;
+    }
     for (const f of m.fighters) {
       const a = new Fighter(f);
       const off = f.slot < 10 ? 300 : -300;
       a.x += off; a.y += off;
       this.fighters.set(f.slot, a);
       added.push(a);
+    }
+    if (m.resetPets) {
+      // Pet slots may be reassigned when another player joins. Carry command
+      // and skill memory by bag identity, then rebuild the new battle slot map.
+      this.petSentSlots.clear(); this.petSkills.clear();
+      for (const { a, info } of this.ownedPets()) {
+        if (submittedBags.has(info.slot)) this.petSentSlots.add(a.f.slot);
+        const skill = rememberedSkills.get(info.slot);
+        if (skill !== undefined) this.petSkills.set(a.f.slot, skill);
+      }
+      for (const a of added) { a.x = a.homeX; a.y = a.homeY; }
+      if (this.menuAt > 0 && this.sent) this.afterPlayer("join");
+      return;
     }
     let at = -1;
     this.queue.push((now) => {
@@ -304,28 +366,29 @@ export class BattleScreen {
     this.quick = host.quick();
     this.me = m.mySlot;
     this.watch = !!m.watch;
-    if (this.watch) { this.sent = true; this.petSent = true; }
+    if (this.watch) this.sent = true;
     this.pvp = m.pvp;
     this.event = m.event;
     this.turnMs = m.turnTime;
     speedMul = m.speed > 0 ? Math.max(0.25, Math.min(4, m.speed / 100)) : 1;
-    this.surprise = m.surprise;
+    this.surprise = m.resume ? 0 : m.surprise;
+    if (m.resume) {
+      this.restore = m; this.turns = Math.max(0, m.turn); this.aiFirst = false;
+      this.startAt = -Infinity;
+    }
     for (const f of m.fighters) {
       album.seen(f.sprite); // CheckBattleNewPet
       const a = new Fighter(f);
       // 入场：从画面外滑进来（oft.cpp：起点在定位点 ±300）
-      const off = f.slot < 10 ? 300 : -300;
+      const off = m.resume || this.quick ? 0 : f.slot < 10 ? 300 : -300;
       a.x += off; a.y += off;
       this.fighters.set(f.slot, a);
     }
     const no = String(Math.max(0, m.field)).padStart(2, "0");
-    if (this.quick) this.tiles = new Uint16Array(0); // 不画背景
-    else fetch(`${host.root}battlemap/battle${no}.sab`).then((r) => r.ok ? r.arrayBuffer() : Promise.reject(r.status)).then((b) => {
-      const v = new DataView(b), t = new Uint16Array(400);
-      for (let i = 0; i < 400 && 4 + i * 2 + 1 < b.byteLength; i++) t[i] = v.getUint16(4 + i * 2);
-      this.tiles = t;
-    }).catch(() => { this.tiles = new Uint16Array(0); });
-    if (!this.quick) this.queue.push(this.enterStep());
+    this.backgroundUrl = `${host.root}battlemap/battle${no}.sab`;
+    if (this.quick) this.tiles = new Uint16Array(0); // 首次切回普通显示时才加载背景
+    else void this.loadBackground();
+    if (!this.quick && !m.resume) this.queue.push(this.enterStep());
     const self = m.fighters.find((f) => f.slot === m.mySlot);
     this.memKey = self ? `sa.battle.${self.name}` : "";
     try {
@@ -335,7 +398,7 @@ export class BattleScreen {
   }
 
   onTurn(m: S2CBattleTurn) {
-    this.menuAt = 0; this.selecting = false; this.turns++;
+    this.menuAt = 0; this.petMenuAt = 0; this.selecting = false; this.turns++;
     const ev = m.events;
     // 智能战斗：看这回合的结果学习（敌人一次打我方多少、自己与宠物这回合的行动打掉多少）；观战不学
     if (!this.watch) {
@@ -471,8 +534,8 @@ export class BattleScreen {
       case "escape":
         if (e.ok) {
           // BATTLE_Exit：玩家逃走时出场的宠物一起离开
-          const pet = a.f.slot % 10 < 5 ? this.fighters.get(a.f.slot + 5) : undefined;
-          const runners = [a, ...(pet && !pet.dead && !pet.gone ? [pet] : [])];
+          const pets = a.f.slot % 10 < 5 ? [...this.fighters.values()].filter((p) => this.petOwner(p) === a.f.slot && !p.dead && !p.gone) : [];
+          const runners = [a, ...pets];
           steps.push(this.waitStep(1, (now) => { for (const r of runners) r.dir = (r.dir + 4) & 7; this.popup(a, now, { icon: CG.ICON_ESCAPE }); }));
           const off = a.f.slot < 10 ? 400 : -400;
           const moves = runners.map((r) => this.moveStep(r, () => [r.homeX + off, r.homeY + off], 900, false));
@@ -553,7 +616,7 @@ export class BattleScreen {
       case "petout": {
         // BATTLE_PetOut（BS f1）：主人头上冒"Go!"（oft.cpp case 62），新的宠物从画面外跑进来
         const f: BattleFighter = { slot: e.target, name: e.name, sprite: e.sprite, level: e.level, hp: e.hp, maxHp: e.maxHp, mp: 0, maxMp: 0,
-          rideName: "", rideLevel: 0, rideHp: 0, rideMaxHp: 0, fallSprite: 0 };
+          rideName: "", rideLevel: 0, rideHp: 0, rideMaxHp: 0, fallSprite: 0, ownerSlot: e.ownerSlot, bagSlot: e.bagSlot, status: e.status };
         const n = new Fighter(f);
         const off = f.slot < 10 ? 400 : -400;
         steps.push(this.waitStep(400, (now) => { this.popup(a, now, { icon: CG.ICON_GO }); }));
@@ -1160,8 +1223,13 @@ export class BattleScreen {
       ui.window(304, 252, 3, 2);
       ui.text(304 + 38, 252 + 40, this.surprise === 2 ? " 遭敌偷袭 " : "出其不意的攻击", FONT.WHITE);
     }
-    if (this.menuAt > 0 && !this.end) this.menu(now);
-    if (this.petMenuAt > 0 && !this.petSent && !this.end) this.petMenu(now);
+    if (this.menuAt > 0 && !this.end) {
+      if (this.host.serverAuto?.()) ui.text(540, 42, "服务端自动战斗", FONT.YELLOW);
+      else {
+        this.menu(now);
+        if (this.petMenuAt > 0 && !this.petSent) this.petMenu(now);
+      }
+    }
     if (idle && this.end) {
       if (!this.endIdleAt) this.endIdleAt = now;
       if (now - this.endIdleAt > 600) this.host.finish(this.end);
@@ -1172,6 +1240,7 @@ export class BattleScreen {
 
   /** 快速战斗的一帧：播完排队的动画（静音、快进），轮到下指令就马上照战斗设定下；打完回到地图。只在画面上方写一行字 */
   quickFrame(now: number) {
+    this.quickNow = now;
     if (this.queue.length > 0) {
       const mute = sfx;
       setSfx(() => {});
@@ -1185,12 +1254,12 @@ export class BattleScreen {
     }
     if (this.end) { this.host.finish(this.end); return; }
     if (this.menuAt === 0 && !(this.surprise === 2 && this.turns === 0)) this.openMenu(now);
-    if (this.menuAt > 0 && !this.sent) this.autoCommand();
+    if (this.menuAt > 0 && !this.sent && this.host.auto() && !this.host.serverAuto?.()) this.autoCommand();
     // "快速战斗中"的提示只在打得久的时候显示（等队友下指令、服务端慢）：一般一场几百毫秒就打完，
     // 一出现就消失看起来像弹窗闪了一下
     if (this.quickAt === 0) this.quickAt = now;
     if (now - this.quickAt < 1500) return;
-    const label = `快速战斗中…　第 ${this.turns + 1} 回合`, ui = this.host.ui;
+    const label = `${this.host.serverAuto?.() ? "服务端自动战斗" : "快速战斗中…"}　第 ${this.turns + 1} 回合`, ui = this.host.ui;
     ui.box(400 - 90, 40, 400 + 90, 62, "rgba(0,0,0,0.6)", true);
     ui.texts.push({ x: 400, y: 44, text: label, color: FONT.YELLOW, align: "center" });
   }
@@ -1203,11 +1272,19 @@ export class BattleScreen {
     if (!me || me.gone) return;
     this.menuAt = now; this.deadline = now + this.turnMs;
     if (!this.quick) sfx(202, 400); // BattleMenuProc：面板出现（快速战斗没有面板，不放）
-    this.petMenuAt = 0; this.petSent = this.myPet() === null;
+    this.petMenuAt = 0; this.petSentSlots.clear(); this.activePet = -1;
+    if (this.restore) {
+      const saved = this.restore; this.restore = null;
+      this.sent = saved.submitted;
+      for (const slot of saved.submittedPets ?? []) this.petSentSlots.add(slot);
+      const primary = this.ownedPets().find(({ info }) => info.slot === this.host.pets()?.battle);
+      if (saved.petSubmitted && primary) this.petSentSlots.add(primary.a.f.slot);
+      if (this.sent) { this.afterPlayer("resume"); return; }
+    }
     if (me.dead) {
       // 自己倒下：没有人的指令，宠物也不下指令（BattleMenuProc 送 "W|FF|FF"）
       this.sent = true;
-      if (!this.petSent) this.sendPet(-1, -1);
+      if (!this.petSent && !this.host.serverAuto?.()) this.sendAllPets(-1, -1);
       return;
     }
     this.sent = false;
@@ -1218,13 +1295,32 @@ export class BattleScreen {
     this.magicMenu = this.lastButton === "magic" && me.status !== ST_NOCAST;
   }
 
-  /** 出场中还站着的自己的宠物（p_party[BattleMyNo + 5]）与它在宠物栏的资料 */
+  private petOwner(a: Fighter): number {
+    if (a.f.slot % 10 < 5) return -1;
+    const owner = a.f.ownerSlot ?? a.f.slot - 5;
+    return Math.floor(owner / 10) === Math.floor(a.f.slot / 10) && owner % 10 < 5 ? owner : -1;
+  }
+
+  /** Every live pet is paired with its own bag slot, independent of formation. */
+  private ownedPets(): { a: Fighter; info: PetInfo }[] {
+    const pets = this.host.pets();
+    if (!pets) return [];
+    const result: { a: Fighter; info: PetInfo }[] = [];
+    for (const a of this.fighters.values()) {
+      if (this.petOwner(a) !== this.me || a.dead || a.gone) continue;
+      const bag = a.f.bagSlot ?? pets.battle;
+      const info = pets.pets.find((p) => p.slot === bag);
+      if (info) result.push({ a, info });
+    }
+    return result.sort((a, b) => a.a.f.slot - b.a.f.slot);
+  }
+
   private myPet(): { a: Fighter; info: PetInfo } | null {
-    const a = this.fighters.get(this.me + 5);
-    const p = this.host.pets();
-    const info = p?.pets.find((x) => x.slot === p.battle);
-    if (!a || a.dead || a.gone || !info) return null;
-    return { a, info };
+    const list = this.ownedPets();
+    const current = list.find(({ a }) => a.f.slot === this.activePet && !this.petSentSlots.has(a.f.slot));
+    const pet = current ?? list.find(({ a }) => !this.petSentSlots.has(a.f.slot));
+    this.activePet = pet?.a.f.slot ?? -1;
+    return pet ?? null;
   }
 
   private petCount(): number { return this.host.pets()?.pets.length ?? 0; }
@@ -1270,7 +1366,7 @@ export class BattleScreen {
     }
     for (const a of list) {
       // 头顶名字（BattleNameDisp：F11 开关，全部 20 人 "名字 LVn"，自己与自己的宠物黄字）；敌人的常显（原版要滑鼠移上去才显示）
-      if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - 96), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || a.f.slot === this.me + 5 ? FONT.YELLOW : FONT.WHITE, align: "center" });
+      if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - 96), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || this.petOwner(a) === this.me ? FONT.YELLOW : FONT.WHITE, align: "center" });
       // 异常状态动画（katino）
       if (a.status > 0 && !a.dead) this.animAt(STATUS_SPR[a.status], a.x, a.y - 64, now);
       // 己方头顶的血条（HpMeterDisp）
@@ -1379,9 +1475,9 @@ export class BattleScreen {
     const x = wx + 17;
     let y = wy + 10;
     for (const pet of list) {
-      const a = pet.slot === cur ? this.fighters.get(this.me + 5) : undefined;
+      const a = this.ownedPets().find((p) => p.info.slot === pet.slot)?.a;
       const hp = a && !a.gone ? a.hp : pet.hp;
-      const color = pet.slot === cur ? FONT.YELLOW : hp <= 0 ? FONT.RED : FONT.AQUA;
+      const color = a ? FONT.YELLOW : hp <= 0 ? FONT.RED : FONT.AQUA;
       const name = pet.freeName || pet.name, id = `bpet-${pet.slot}`;
       const clicked = ui.text(x + Math.max(0, (16 * 7 - measure(name)) / 2), y, name, color, id);
       const icons: number[] = [];
@@ -1394,7 +1490,7 @@ export class BattleScreen {
       y += 25;
       ui.text(x + 60, y, String(pet.loyalty).padStart(3, " "), color);
       y += 36;
-      if (clicked && hp > 0 && pet.slot !== cur) { this.submitPet(pet.slot); return; }
+      if (clicked && hp > 0 && !a) { this.submitPet(pet.slot); return; }
     }
     if (list.length === 0) ui.text(x + 11, y, "没有参战的宠物", FONT.WHITE);
     if (list.length > 0 && cur >= 0) {
@@ -1553,6 +1649,7 @@ export class BattleScreen {
 
   /** 自动战斗（aismart.ts smartChoose）：按"战斗设定"决定人和宠物这回合的指令；决定的事显示在右下角（原版 AI_Choosen 的位置） */
   private autoCommand() {
+    if (this.watch || !this.host.auto() || this.host.serverAuto?.() || this.sent) return;
     const pet = this.myPet();
     const [floor, gx, gy] = this.host.place();
     const s = this.host.aiSettings(), capturePlace = floor !== 500 || (gx >= 250 && gy >= 360);
@@ -1574,7 +1671,7 @@ export class BattleScreen {
     switch (cmd.kind) {
       case "magic": this.submitMagic({ slot: cmd.item } as InvItem, cmd.target); break;
       case "item": this.submitItem(cmd.item, cmd.target); break;
-      case "skip": this.sent = true; if (!this.petSent) this.sendPet(...cmd.pet); break;
+      case "skip": this.sent = true; if (!this.petSent) this.sendAllPets(...cmd.pet); break;
       default: this.submit(cmd.kind, cmd.target);
     }
   }
@@ -1609,7 +1706,7 @@ export class BattleScreen {
   }
 
   private submit(kind: string, target: number) {
-    if (this.sent) return;
+    if (this.sent || this.host.serverAuto?.()) return;
     this.sent = true; this.offButtons();
     if (!this.quick) sfx(203, 400); // 指令送出（快速战斗不放，否则打完像有个看不见的框被关掉）
     this.host.send(kind, target);
@@ -1623,10 +1720,11 @@ export class BattleScreen {
    * 否则面板滑入，上回合选过技能就直接选目标，没有就打开技能窗口。
    */
   private afterPlayer(kind: string) {
+    if (this.watch || this.host.serverAuto?.()) return;
     const pet = this.myPet();
     if (!pet || this.petSent) return;
-    if (kind === "escape") { this.sendPet(-1, -1); return; }
-    if (this.host.auto()) { this.sendPet(...this.aiPet); return; }
+    if (kind === "escape") { this.sendAllPets(-1, -1); return; }
+    if (this.host.auto()) { this.sendAllPets(...this.aiPet); return; }
     this.petMenuAt = this.vnow;
     const s = pet.info.skills.find((x) => x.slot === this.petSkill);
     this.petSelecting = !!s && s.field !== FIELD_MAP;
@@ -1634,23 +1732,49 @@ export class BattleScreen {
     this.petWnd = !this.petSelecting;
   }
 
+  private sendAllPets(skill: number, target: number) {
+    if (this.watch || this.host.serverAuto?.()) return;
+    for (const { a, info } of this.ownedPets()) {
+      if (this.petSentSlots.has(a.f.slot)) continue;
+      const usable = info.skills.some((s) => s.slot === skill && s.field !== FIELD_MAP);
+      this.petSentSlots.add(a.f.slot);
+      this.host.sendPet(skill < 0 || usable ? skill : -1, target, a.f.slot);
+    }
+    this.petWnd = false; this.petSelecting = false;
+  }
+
   private sendPet(skill: number, target: number) {
-    if (this.petSent) return;
-    this.petSent = true; this.petWnd = false; this.petSelecting = false;
-    this.host.sendPet(skill, target);
+    if (this.watch || this.host.serverAuto?.()) return;
+    const pet = this.myPet();
+    if (!pet || this.petSentSlots.has(pet.a.f.slot)) return;
+    this.petSentSlots.add(pet.a.f.slot);
+    this.petWnd = false; this.petSelecting = false;
+    this.host.sendPet(skill, target, pet.a.f.slot);
+    this.afterPlayer("next");
   }
 
   // 宠物的自动指令由 autoCommand 一起决定（aiPet）
   /** 宠物的指令面板：CG_PET_BTL_BUTTON_BASE 从 (815+160, 48) 滑入；选了技能时显示技能名与"取消"按钮 */
   private petMenu(now: number) {
     const ui = this.host.ui, pet = this.myPet();
-    if (!pet) { this.sendPet(-1, -1); return; }
+    if (!pet) return;
     const rest = Math.max(0, this.deadline - now);
     this.countdown(rest);
-    if (rest <= 0) { this.sendPet(-1, -1); return; }
+    if (rest <= 0) { this.sendAllPets(-1, -1); return; }
     const f = Math.min(25, Math.floor((now - this.petMenuAt) / FRAME));
     const px = 675 + (300 - (25 * f - f * (f + 1) / 2)), py = 48;
     ui.image(CG.PET_BTN_BASE, px, py);
+    if (this.ownedPets().length > 1) {
+      this.ownedPets().forEach(({ a, info }, i) => {
+        const id = `pet-tab-${a.f.slot}`, y = 104 + i * 44, done = this.petSentSlots.has(a.f.slot), selected = a.f.slot === this.activePet;
+        ui.box(310, y, 438, y + 40, selected ? "rgba(60,100,120,0.9)" : "rgba(0,0,0,0.7)", true);
+        ui.text(318, y + 4, (info.freeName || info.name).slice(0, 6), done ? FONT.GRAY : FONT.WHITE);
+        ui.text(318, y + 22, done ? "已提交" : selected ? "选择指令" : "待选择", selected ? FONT.YELLOW : FONT.AQUA);
+        ui.hitBox(310, y, 438, y + 40, id);
+        if (!done && ui.clicked(id)) { this.activePet = a.f.slot; this.petSelecting = false; this.petWnd = true; }
+      });
+    }
+    if (pet.a.f.slot !== this.activePet) return; // A tab click redraws the new pet next frame.
     const skill = pet.info.skills.find((x) => x.slot === this.petSkill);
     if (this.petSelecting && skill) {
       ui.texts.push({ x: px - 100, y: py - 7, text: skill.name, color: FONT.WHITE });
@@ -1690,13 +1814,13 @@ export class BattleScreen {
   /** BattleSetWazaHitBox：没有目标的技能直接送出（目标是宠物自己），其余进入选目标 */
   private chooseSkill(slot: number, target: number) {
     this.petWnd = false;
-    if (target === T_NONE) { this.petSkill = -1; this.sendPet(slot, this.me + 5); return; }
+    if (target === T_NONE) { this.petSkill = -1; this.sendPet(slot, this.myPet()?.a.f.slot ?? -1); return; }
     this.petSkill = slot; this.petSelecting = true;
   }
 
   /** 宠物技能的选目标：按技能的目标种类决定哪些人可以点（全体类的点任何一个都行）；右键取消在 petMenu 处理 */
   private petTarget(type: number) {
-    const ui = this.host.ui, me = this.me, pet = me + 5;
+    const ui = this.host.ui, me = this.me, pet = this.myPet()?.a.f.slot ?? -1;
     let wy = 416;
     if (ui.mouse.y > 400) wy = 4;
     ui.window(290, wy, 3, 2);
@@ -1705,13 +1829,13 @@ export class BattleScreen {
     const ok = (slot: number) => {
       switch (type) {
         case T_MYSELF: return slot === pet;
-        case T_ALLMYSIDE: return slot < 10;
-        case T_ALLOTHERSIDE: return slot >= 10;
+        case T_ALLMYSIDE: return (slot < 10) === (me < 10);
+        case T_ALLOTHERSIDE: return (slot < 10) !== (me < 10);
         case T_OTHER: case T_ALL: return true;
         case T_WITHOUTME: return slot !== pet;
         case T_WITHOUTMEANDPET: return slot !== pet && slot !== me;
       }
-      return slot >= 10;
+      return (slot < 10) !== (me < 10);
     };
     for (const a of this.fighters.values()) {
       if (!ok(a.f.slot) || a.dead || a.gone || a.hidden || !a.rect) continue;

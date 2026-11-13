@@ -10,6 +10,21 @@ export interface AnimDef { id: number; actions: AnimAction[]; pages: string[]; }
 export const ANIM = { ATTACK: 0, DAMAGE: 1, DEAD: 2, STAND: 3, WALK: 4, HAND: 6, GUARD: 10, THROW: 12 }; // loadsprbin.h ANIM_LIST
 const SETS = ["i8", "rgba"];
 
+// Extensions never enter the legacy SAIX index: its page/set fields are compact
+// integers and assetindex intentionally only understands the original two sets.
+const AI_PETS = { id: "ai-pets-v1", set: 2, imageBase: 9000000, imageLimit: 9100000, sprites: [199100, 199101, 199102, 199103] };
+interface ExtensionPage { file: string; width: number; height: number; }
+interface ExtensionManifest {
+  format: 1; id: string;
+  pages: ExtensionPage[];
+  // [image ID, local page, x, y, width, height, anchor x, anchor y]
+  images: number[][];
+  animations: { id: number; file: string }[];
+}
+const integer = (n: unknown, low: number, high: number): n is number => Number.isInteger(n) && Number(n) >= low && Number(n) <= high;
+// Existing mechanical sprites keep pets visible with the unmodified asset pack.
+const AI_PET_FALLBACK = new Map(AI_PETS.sprites.map(id => [id, 100374]));
+
 // 显存里的图集页：没用了很久、总量超过 gpuBudget 时先释放（core 是登录前预加载的界面页，不释放）
 interface PageSlot { tex: Texture | null; used: number; core: boolean; }
 
@@ -18,6 +33,9 @@ export class Assets {
   private chunks = new Map<number, (number[] | 0)[] | null>();
   private pages = new Map<string, PageSlot>();
   private anims = new Map<number, AnimDef | null>();
+  private extensionImages = new Map<number, ImageEntry>();
+  private extensionPageUrls = new Map<string, string>();
+  private extensionAnims = new Set<number>();
   private tileIndex = new Map<number, number>(); // 地图图号 → 图像索引
   private tileSize = new Map<number, [number, number]>(); // 地图图号 → 占地格数 [x, y]（adrn atari）
   private tileFlat = new Set<number>(); // 地图图号：贴地的可走物件（adrn hit 的百位 = 3，map.cpp checkPrioPartsVsChar：永远画在角色下面，如桥、地毯）
@@ -50,6 +68,113 @@ export class Assets {
     }
     this.renderer.setPalette(await this.renderer.loadTexture(this.root + "palettes.png", false));
     try { await this.loadIndex(progress); } catch (e) { console.warn("没有二进制索引，改用逐个 JSON", e); this.index = null; }
+    await this.loadOptionalExtension();
+  }
+
+  /** Missing/invalid add-ons leave the original resource set fully usable. */
+  private async loadOptionalExtension() {
+    const controller = new AbortController();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await Promise.race([
+        this.loadExtension(controller.signal),
+        new Promise<never>((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(new Error("扩展资源读取超时")); }, 5000); }),
+      ]);
+    } catch (error) {
+      controller.abort();
+      console.warn("机械宠扩展不可用，保留原资源", error);
+    } finally { if (timer !== undefined) clearTimeout(timer); }
+  }
+
+  private async loadExtension(signal: AbortSignal) {
+    const base = `${this.root}extensions/${AI_PETS.id}/`;
+    const response = await fetch(base + "manifest.json", { signal });
+    if (response.status === 404) return;
+    if (!response.ok) throw new Error(`扩展清单: ${response.status}`);
+    const manifest = await response.json() as ExtensionManifest;
+    if (manifest.format !== 1 || manifest.id !== AI_PETS.id || !Array.isArray(manifest.pages) || manifest.pages.length < 1 || manifest.pages.length > 16
+      || !Array.isArray(manifest.images) || manifest.images.length < 1 || manifest.images.length > 10000
+      || !Array.isArray(manifest.animations) || manifest.animations.length !== AI_PETS.sprites.length) throw new Error("扩展清单格式无效");
+    let pixels = 0;
+    const pageFiles = new Set<string>();
+    for (const page of manifest.pages) {
+      if (!page || typeof page.file !== "string" || !/^pages\/[A-Za-z0-9_-]+\.png$/.test(page.file)
+        || pageFiles.has(page.file) || !integer(page.width, 1, 4096) || !integer(page.height, 1, 4096)) throw new Error("扩展纹理页无效");
+      pixels += page.width * page.height; pageFiles.add(page.file);
+    }
+    if (pixels > 32 * 1024 * 1024) throw new Error("扩展纹理页过大");
+    const images = new Map<number, ImageEntry>();
+    for (const row of manifest.images) {
+      if (!Array.isArray(row) || row.length !== 8 || !integer(row[0], AI_PETS.imageBase, AI_PETS.imageLimit - 1)
+        || images.has(row[0]) || !integer(row[1], 0, manifest.pages.length - 1)
+        || !row.slice(2, 6).every(n => integer(n, 0, 4096)) || row[4] < 1 || row[5] < 1
+        || !row.slice(6).every(n => integer(n, -32768, 32767))) throw new Error("扩展图像无效");
+      const [id, page, x, y, w, h, ox, oy] = row, size = manifest.pages[page];
+      if (x + w > size.width || y + h > size.height || this.hasBaseImage(id)) throw new Error("扩展图像越界或编号冲突");
+      images.set(id, { set: AI_PETS.set, page, x, y, w, h, ox, oy });
+    }
+    const spriteIds = new Set<number>();
+    for (const entry of manifest.animations) {
+      if (!entry || !AI_PETS.sprites.includes(entry.id) || spriteIds.has(entry.id)
+        || entry.file !== `anim/${entry.id}.json` || this.animAt.has(entry.id)) throw new Error("扩展动画编号无效或冲突");
+      spriteIds.add(entry.id);
+    }
+    const animations = await Promise.all(manifest.animations.map(async entry => {
+      const response = await fetch(base + entry.file, { signal });
+      if (!response.ok) throw new Error(`扩展动画: ${response.status}`);
+      const anim = await response.json() as AnimDef;
+      if (anim.id !== entry.id || !Array.isArray(anim.actions) || !anim.actions.length || anim.actions.length > 256) throw new Error("扩展动画格式无效");
+      const pages = new Set<number>(), actions = new Set<string>();
+      for (const action of anim.actions) {
+        if (!action || !integer(action.dir, 0, 7) || !integer(action.type, 0, 255) || !integer(action.ticks, 1, 600)
+          || (action.freeze !== undefined && !integer(action.freeze, 0, 255))
+          || !Array.isArray(action.frames) || !action.frames.length || action.frames.length > 1000
+          || actions.has(`${action.dir}/${action.type}`)) throw new Error("扩展动作无效");
+        actions.add(`${action.dir}/${action.type}`);
+        for (const frame of action.frames) {
+          if (!Array.isArray(frame) || frame.length !== 4 || !images.has(frame[0])
+            || !frame.slice(1, 3).every(n => integer(n, -32768, 32767)) || !integer(frame[3], 0, 65535)) throw new Error("扩展动画帧无效");
+          pages.add(images.get(frame[0])!.page);
+        }
+      }
+      // Derive this list rather than trusting paths supplied by the add-on.
+      anim.pages = [...pages].sort((a, b) => a - b).map(page => `${AI_PETS.id}/${page}`);
+      return anim;
+    }));
+    // Register the complete pack only once its atlas pages have decoded. A late
+    // texture completion after timeout is disposed instead of leaking GPU memory.
+    const loaded: Texture[] = [];
+    const releaseLoaded = () => { for (const texture of loaded) this.renderer.deleteTexture(texture); loaded.length = 0; };
+    signal.addEventListener("abort", releaseLoaded, { once: true });
+    const textures = await Promise.allSettled(manifest.pages.map(async page => {
+      const texture = await this.renderer.loadTexture(base + page.file, false);
+      if (signal.aborted) { this.renderer.deleteTexture(texture); throw new Error("扩展读取已取消"); }
+      if (texture.w !== page.width || texture.h !== page.height || texture.indexed) {
+        this.renderer.deleteTexture(texture); throw new Error("扩展纹理尺寸不符");
+      }
+      loaded.push(texture);
+      return texture;
+    }));
+    signal.removeEventListener("abort", releaseLoaded);
+    if (signal.aborted || textures.some(result => result.status === "rejected")) {
+      releaseLoaded();
+      throw new Error("扩展纹理加载失败");
+    }
+    for (const [id, image] of images) this.extensionImages.set(id, image);
+    for (let page = 0; page < manifest.pages.length; page++) {
+      const key = `${AI_PETS.set}/${page}`, slot: PageSlot = { tex: null, used: this.frameNo, core: false };
+      this.extensionPageUrls.set(key, base + manifest.pages[page].file);
+      this.pages.set(key, slot);
+      this.setTexture(slot, (textures[page] as PromiseFulfilledResult<Texture>).value);
+    }
+    for (const anim of animations) { this.anims.set(anim.id, anim); this.extensionAnims.add(anim.id); }
+  }
+
+  private hasBaseImage(id: number): boolean {
+    const shift = this.manifest.chunkShift, chunk = id >>> shift;
+    if (!this.index) return this.manifest.imageChunks?.includes(chunk) ?? false;
+    const entry = this.imgChunks.get(chunk), offset = id - (chunk << shift);
+    return !!entry && offset >= 0 && offset < entry[1] && this.index.getUint8(entry[0] + offset * 16) !== 255;
   }
 
   private async loadIndex(progress: (p: number) => void) {
@@ -113,6 +238,8 @@ export class Assets {
   flat(mapNumber: number): boolean { return this.tileFlat.has(mapNumber); }
 
   image(id: number): ImageEntry | null {
+    const extension = this.extensionImages.get(id);
+    if (extension) return extension;
     const shift = this.manifest.chunkShift, c = id >>> shift;
     if (this.index) {
       const ch = this.imgChunks.get(c), i = id - (c << shift);
@@ -134,6 +261,8 @@ export class Assets {
   }
 
   private pageUrl(set: number, page: number) {
+    const extension = this.extensionPageUrls.get(`${set}/${page}`);
+    if (extension) return extension;
     return `${this.root}pages/${SETS[set]}/${String(page).padStart(5, "0")}.${this.manifest.pageFormat ?? "png"}`;
   }
 
@@ -144,6 +273,7 @@ export class Assets {
 
   page(set: number, page: number): Texture | null {
     const key = `${set}/${page}`;
+    if (set >= SETS.length && !this.extensionPageUrls.has(key)) return null;
     const s = this.pages.get(key);
     if (s) { s.used = this.frameNo; return s.tex; }
     const slot: PageSlot = { tex: null, used: this.frameNo, core: false };
@@ -176,10 +306,10 @@ export class Assets {
 
   /**
    * 把一张图解码成 RGBA（不经 WebGL，供 CSS 光标等 DOM 用途）：8 位图用 0 号调色板查色，下标 0 透明。
-   * 返回 [画布, 锚点偏移 ox, oy]。
+   * 返回 [画布, 锚点偏移 ox, oy]；rawIndex 用于动画帧等原始图像索引，跳过地图图号转换。
    */
-  async imageCanvas(mapNumber: number): Promise<[HTMLCanvasElement, number, number] | null> {
-    const idx = mapNumber >= 1000000 ? mapNumber : this.tile(mapNumber);
+  async imageCanvas(mapNumber: number, rawIndex = false): Promise<[HTMLCanvasElement, number, number] | null> {
+    const idx = rawIndex || mapNumber >= 1000000 ? mapNumber : this.tile(mapNumber);
     if (idx === undefined) return null;
     let e = this.image(idx);
     for (let i = 0; !e && i < 50; i++) { await new Promise((r) => setTimeout(r, 50)); e = this.image(idx); }
@@ -187,8 +317,8 @@ export class Assets {
     const load = async (url: string) => {
       const bmp = await createImageBitmap(await (await fetch(url)).blob(), { colorSpaceConversion: "none", premultiplyAlpha: "none" });
       const c = new OffscreenCanvas(bmp.width, bmp.height), g = c.getContext("2d")!;
-      g.drawImage(bmp, 0, 0);
-      return g.getImageData(0, 0, bmp.width, bmp.height);
+      try { g.drawImage(bmp, 0, 0); } finally { bmp.close(); }
+      return g.getImageData(0, 0, c.width, c.height);
     };
     const page = await load(this.pageUrl(e.set, e.page));
     const pal = e.set === 0 ? await load(`${this.root}palettes.png`) : null;
@@ -210,7 +340,12 @@ export class Assets {
 
   anim(id: number): AnimDef | null {
     const a = this.anims.get(id);
-    if (a !== undefined) return a;
+    if (a !== undefined) {
+      if (a && this.extensionAnims.has(id)) for (const p of a.pages) this.page(AI_PETS.set, Number(p.slice(p.lastIndexOf("/") + 1)));
+      return a;
+    }
+    const fallback = AI_PET_FALLBACK.get(id);
+    if (fallback !== undefined && !this.animAt.has(id)) return this.anim(fallback);
     if (this.index) {
       const o = this.animAt.get(id);
       const def = o === undefined ? null : this.decodeAnim(o);

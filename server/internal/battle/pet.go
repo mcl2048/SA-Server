@@ -173,7 +173,11 @@ func (b *Battle) loyalCheck(f *Fighter, c Command, ev *[]Event) (Command, bool) 
 			n = b.petRandomSkill(f)
 		}
 	case petOwnerAttack:
-		n = Command{Kind: Attack, Target: f.Slot - 5}
+		if owner := b.PetOwner(f); owner >= 0 {
+			n = Command{Kind: Attack, Target: owner}
+		} else {
+			n = Command{Kind: None, Target: -1}
+		}
 	case petEnemyAttack:
 		n = Command{Kind: Attack, Target: b.defaultAttacker(1 - f.Side())}
 	case petEscape:
@@ -212,10 +216,16 @@ func (b *Battle) petRandomSkill(f *Fighter) Command {
 // 再叫出指定的宠物（BATTLE_PetDefaultEntry：倒下、HP 0 的叫不出来）。没有宠物可收回又不叫出时是"什么也不做"。
 // 收回的宠物留在 Recalled，世界层按 BATTLE_Exit 结算它。
 func (b *Battle) petSwap(f *Fighter, c Command, ev *[]Event) {
-	slot := f.Slot + 5
+	slot := -1
+	var old *Fighter
+	if f.Player && f.Slot >= 0 && f.Slot < Slots && f.Slot%SideOffset < 5 {
+		// PetSwap controls only the primary column. Falling back to an owned
+		// secondary would disagree with world-layer bag/HP/experience mapping.
+		slot = f.Slot + 5
+		old = b.F[slot]
+	}
 	base := Event{Actor: f.Slot, Target: slot, Guardian: -1, HP: f.HP, Status: f.Status()}
-	old := b.F[slot]
-	if old == nil && c.Swap == nil {
+	if slot < 0 || (old != nil && b.PetOwner(old) != f.Slot) || (old == nil && c.Swap == nil) {
 		e := base
 		e.Kind, e.Target = None, -1
 		*ev = append(*ev, e)
@@ -229,7 +239,7 @@ func (b *Battle) petSwap(f *Fighter, c Command, ev *[]Event) {
 		*ev = append(*ev, e)
 	}
 	if p := c.Swap; p != nil && p.HP > 0 {
-		p.Slot = slot
+		p.Slot, p.OwnerSlot, p.OwnerSet = slot, f.Slot, true
 		b.Add(p)
 		e := base
 		e.Kind, e.Name, e.Sprite, e.Level, e.HP, e.MaxHP, e.Status = PetOut, p.Name, p.Sprite, p.Level, p.HP, p.MaxHP, StNone

@@ -23,7 +23,7 @@ export interface MobileShellState {
   actionLabels?: Readonly<Record<string, string>>;
 }
 type Adopted = { box: InputBox; parent: Node; next: ChildNode | null; style: string | null; aria: string | null; row: HTMLLabelElement; caption: HTMLSpanElement };
-const TITLES: Record<string, string> = { login: "欢迎来到石器时代", line: "选择线路", char: "选择角色", make: "创建角色", field: "冒险", battle: "战斗" };
+const TITLES: Record<string, string> = { login: "欢迎来到 StoneAge", line: "选择线路", char: "选择角色", make: "创建角色", field: "冒险", battle: "战斗" };
 const LABELS: Record<string, string> = {
   ok: "确定", quit: "清空账号与密码", id: "账号", pass: "密码", register: "注册新账号", reset: "找回密码", back: "返回上一页",
   "dlg-ok": "提交", "dlg-cancel": "取消", "modal-ok": "确定", "modal-yes": "确定", "modal-no": "取消",
@@ -217,7 +217,7 @@ export class MobileShell {
     const selectedLabel = selectedHit && (!state.selectedLabel || state.selectedLabel === selectedHit.id)
       ? this.actionLabel(selectedHit, state) : state.selectedLabel;
     put(this.selected, selectedLabel || "轻点画面或切换选项");
-    put(this.heading, npc ? "对话" : modal ? "提示" : state.title || (state.panel ? "游戏菜单" : TITLES[state.phase]) || "石器时代");
+    put(this.heading, npc ? "对话" : modal ? "提示" : state.title || (state.panel ? "游戏菜单" : TITLES[state.phase]) || "StoneAge");
     put(this.statusText, state.status || "");
     this.activeActions = new Set(all.map(h => h.id));
     const texts = this.readableTexts(state, all, npc, modal, fieldNormal);

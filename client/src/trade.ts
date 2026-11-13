@@ -71,7 +71,7 @@ export class TradeWindow {
     if (i >= 0) this.theirs[i] = row; else this.theirs.push(row);
   }
   partnerPet(p: PetInfo) {
-    this.theirs.push({ kind: "pet", name: p.name, col2: `[${p.freeName}]`, col3: "", col4: `Lv:${p.level}${p.trans ? ["", "一转", "二转"][Math.min(2, p.trans)] : ""}`, color: FONT.RED });
+    this.theirs.push({ kind: "pet", name: p.name, col2: `[${p.freeName}]`, col3: "", col4: `Lv:${p.level}${p.trans ? (["", "一转", "二转"][p.trans] ?? `${p.trans}转`) : ""}`, color: FONT.RED });
   }
   partnerGold(n: number) {
     this.theirs = this.theirs.filter((r) => r.kind !== "gold");

@@ -1,7 +1,7 @@
 # saserver 的设定。相对路径以本文件所在的目录为准。
 # 同目录的 config.local.yaml 里写的项目会盖掉这里的。
 
-addr: 127.0.0.1:8800      # 监听地址；要让别的机器连进来就改成 0.0.0.0:8800
+addr: 0.0.0.0:8800      # 监听地址；要让别的机器连进来就改成 0.0.0.0:8800
 data: gamedata            # 原版服务端数据（map/、npc/、item/、battle/……）
 db: bin/saserver.db       # SQLite 数据库（账号、角色、家族……），第一次启动时建立
 assets: assets            # 从原客户端导出的资源（tools/asset-export）
@@ -11,20 +11,25 @@ gms: []                   # GM 的账号名（登录用的账号，可以多个�
 
 # 大区与线路：每条线路是一个独立的世界，账号与角色共用，家族所有线路共用
 groups:
-  - name: 石器时代
-    lines: [一线, 二线, 三线]
-log: info                 # 日志等级：debug / info / warn / error
+  - name: StoneAge
+    lines: [满天星, 勿忘我, 薰衣草, 玫瑰花, 太阳花, 风信子, 向日葵, 百合花, 紫罗兰, 牵牛花, 茉莉花, 鸢尾花, 风铃草, 木槿花, 金银花]
+log: error                 # 日志等级：debug / info / warn / error
 tlsCert: ""              # 给了证书与私钥（PEM）就用 HTTPS / WSS；对外开放时一定要有，不然账号密码是明文
 tlsKey: ""
 maxChars: 2               # 每个账号的角色位（原版 2，最多 8）
 
 # 游戏规则（没写的项目用原版的值；时间以秒为单位）
 rules:
+  charMaxLevel: 160        # 人物最高等级（1..1000）；降低上限不会降级已有角色
+  petMaxLevel: 150         # 宠物最高等级（1..1000）；原特殊低等级模板限制仍保留
+  charMaxTrans: 8          # 人物最多转生几次（0..100，0禁止新转生）
+  petMaxTrans: 6           # 宠物最多转生几次（0..100，0禁止新转生）
+  battleGoldRate: 1        # 击败敌人石币倍率（0关闭；1原基数，2双倍，支持0.5/1.5等小数）
   expRate: 1              # 战斗经验倍率
   shareExp: true          # 经验共享：战斗结束时还在场的人物、出战宠物、骑宠都拿一样多的经验；false 是原版的谁打倒谁拿
   dropRate: 1             # 战利品机率倍率
-  walkSpeed: 1            # 走路速度倍数（0.25..4，1 是原版）
-  battleSpeed: 1          # 战斗演出的速度倍数（0.25..4，1 是原版）：走过去、走回来与攻击等动作动画一起加速
+  walkSpeed: 1.7            # 走路速度倍数（0.25..4，1 是原版）
+  battleSpeed: 1.5          # 战斗演出的速度倍数（0.25..4，1 是原版）：走过去、走回来与攻击等动作动画一起加速
   enemyGuardRate: 0.5     # 敌人选防御的机会倍率（0..1；1 原版，0 敌人不防御）
   petDeathLoss: 0         # 宠物在对敌人的战斗里倒下时扣掉几级的成长（0..10；0 不扣，原版只扣忠诚度）
   encounterRate: 1        # 遇敌机率倍率（0 不会遇敌）

@@ -7,22 +7,22 @@
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
 
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=bea179de9cc48742";
-import { ItemWindow } from "./items.js?v=bea179de9cc48742";
-import { TradeWindow } from "./trade.js?v=bea179de9cc48742";
-import { ActionWindow } from "./actions.js?v=bea179de9cc48742";
-import { MailWindow } from "./mail.js?v=bea179de9cc48742";
-import { FamilyWindow } from "./family.js?v=bea179de9cc48742";
-import { PetWindow } from "./pets.js?v=bea179de9cc48742";
-import { MapWindow } from "./worldmap.js?v=bea179de9cc48742";
-import { md5 } from "./md5.js?v=bea179de9cc48742";
-import { VendorWindow } from "./vendor.js?v=bea179de9cc48742";
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=df0f1436dbbcc8a6";
+import { ItemWindow } from "./items.js?v=df0f1436dbbcc8a6";
+import { TradeWindow } from "./trade.js?v=df0f1436dbbcc8a6";
+import { ActionWindow } from "./actions.js?v=df0f1436dbbcc8a6";
+import { MailWindow } from "./mail.js?v=df0f1436dbbcc8a6";
+import { FamilyWindow } from "./family.js?v=df0f1436dbbcc8a6";
+import { PetWindow } from "./pets.js?v=df0f1436dbbcc8a6";
+import { MapWindow } from "./worldmap.js?v=df0f1436dbbcc8a6";
+import { md5 } from "./md5.js?v=df0f1436dbbcc8a6";
+import { VendorWindow } from "./vendor.js?v=df0f1436dbbcc8a6";
 
 
-import { AiWindow } from "./aisetting.js?v=bea179de9cc48742";
-import { GmWindow } from "./gm.js?v=bea179de9cc48742";
-import { QuestWindow } from "./quests.js?v=bea179de9cc48742";
-import { album } from "./album.js?v=bea179de9cc48742";
+import { AiWindow } from "./aisetting.js?v=df0f1436dbbcc8a6";
+import { GmWindow } from "./gm.js?v=df0f1436dbbcc8a6";
+import { QuestWindow } from "./quests.js?v=df0f1436dbbcc8a6";
+import { album } from "./album.js?v=df0f1436dbbcc8a6";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {
@@ -150,7 +150,7 @@ export class Menus {
           page             = "main";
           upHold = { id: "", at: 0, last: 0, sent: 0, max: 0 }; // 状态窗口的加点钮按住不放
 
-          result                                                                                                      = null;
+          result                                                                                                                    = null;
   pets                 = null; // 宠物栏（宠物窗口用）
   /** 本帧画出的窗口范围。头顶名字画在 2D 覆盖层上，会盖住窗口图，main.ts 用它把窗口下的名字略去 */
   rects                                     = [];
@@ -259,8 +259,8 @@ export class Menus {
   leave() { this.petWnd.leave(); this.gm.leave(); this.vendor.close(false); this.removeAccountBoxes(); }
 
   /** 战斗胜利后的结果窗口（menu.cpp BattleResultWndFlag），RESULT_WND_CLOSE_TIME 300 帧后自动关闭 */
-  showResult(name        , exp        , lvUp         , items          , pets              = []) {
-    this.result = { name, exp, lvUp, items, pets, at: performance.now() };
+  showResult(name        , exp        , lvUp         , items          , pets              = [], gold = 0) {
+    this.result = { name, exp, lvUp, items, pets, gold, at: performance.now() };
   }
 
   setPets(m         ) { this.pets = m; }
@@ -372,7 +372,7 @@ export class Menus {
     ui.text(x - 6 + Math.max(0, (16 * 7 - measure(st.name)) / 2), y - 2, st.name, FONT.WHITE);
     ui.text(x + 170, y - 2, num(st.dp, 8), FONT.WHITE);
     y += 21;
-    if (st.trans >= 1 && st.trans <= 5) ui.text(x + 190, y + 2, `转生${TRANS_STR[st.trans]}`, FONT.AQUA);
+    if (st.trans >= 1) ui.text(x + 190, y + 2, `转生${TRANS_STR[st.trans] ?? st.trans}`, FONT.AQUA);
     y += 19; // _CHARTITLE_STR_：称号栏占 19
     ui.text(x + 50, y, num(st.level, 3), FONT.WHITE); y += 21;
     ui.text(x + 48, y, num(st.exp, 8), FONT.WHITE); y += 21;
@@ -496,10 +496,10 @@ export class Menus {
           resultWindow() {
     const ui = this.ui, r = this.result ;
     if (performance.now() - r.at > 300 * 1000 / 60) { this.result = null; return; }
-    const wx = 240, wy = 180, mx = wx + 160;
-    ui.window(wx, wy, 5, 6, "result-wnd");
+    const wx = 240, wy = r.gold > 0 ? 156 : 180, mx = wx + 160, rows = r.gold > 0 ? 7 : 6;
+    ui.window(wx, wy, 5, rows, "result-wnd");
     ui.image(CG.WND_TITLE_RESULT, wx + 5 * 32, wy + 27);
-    this.rects.push([wx, wy, wx + 320, wy + 288]);
+    this.rects.push([wx, wy, wx + 320, wy + rows * 48]);
     const x = wx + 12, y = wy + 44;
     ui.text(x + Math.max(0, (16 * 7 - measure(r.name)) / 2), y, r.name, FONT.WHITE);
     if (r.lvUp) ui.text(x + 152, y, "LvUp!", FONT.YELLOW);
@@ -514,7 +514,8 @@ export class Menus {
     ui.text(x, wy + 134 + 30, "  道具 ：", FONT.WHITE);
     if (r.items.length === 0) ui.text(x + 85, wy + 134 + 30, "没有得到任何道具。", FONT.WHITE);
     r.items.slice(0, 3).forEach((n, i) => ui.text(x + 85, wy + 134 + 30 + i * 22, n, FONT.WHITE));
-    if (ui.image(CG.CLOSE_BTN, mx, wy + 216 + 30, "result-close") && ui.clicked("result-close")) this.result = null;
+    if (r.gold > 0) ui.text(x, wy + 232, `获得石币：${r.gold}`, FONT.YELLOW);
+    if (ui.image(CG.CLOSE_BTN, mx, wy + (r.gold > 0 ? 294 : 246), "result-close") && ui.clicked("result-close")) this.result = null;
   }
 
   // ---------------- 系统窗口 ----------------

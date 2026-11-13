@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "pack": "ai-pets-v1",
+  "art_origin": "original procedural cel illustration; no image-generation API",
+  "page_count": 4,
+  "image_count": 768,
+  "frames_per_pet": 192,
+  "total_frames": 768,
+  "frame_cells": [
+    160,
+    160
+  ],
+  "anchor": [
+    -80,
+    -140
+  ],
+  "animations": {
+    "199100": {
+      "actions": 64,
+      "frames": 192,
+      "unique_pixel_frames": 192,
+      "minimum_unique_frames_per_action": 2,
+      "opaque_bounds": [
+        30,
+        21,
+        130,
+        149
+      ],
+      "clipped_opaque_frames": 0
+    },
+    "199101": {
+      "actions": 64,
+      "frames": 192,
+      "unique_pixel_frames": 192,
+      "minimum_unique_frames_per_action": 2,
+      "opaque_bounds": [
+        1,
+        25,
+        159,
+        144
+      ],
+      "clipped_opaque_frames": 0
+    },
+    "199102": {
+      "actions": 64,
+      "frames": 192,
+      "unique_pixel_frames": 192,
+      "minimum_unique_frames_per_action": 2,
+      "opaque_bounds": [
+        12,
+        17,
+        148,
+        152
+      ],
+      "clipped_opaque_frames": 0
+    },
+    "199103": {
+      "actions": 64,
+      "frames": 192,
+      "unique_pixel_frames": 192,
+      "minimum_unique_frames_per_action": 2,
+      "opaque_bounds": [
+        4,
+        10,
+        156,
+        152
+      ],
+      "clipped_opaque_frames": 0
+    }
+  },
+  "hashes": {
+    "pages/00000.png": "530c606c1e5e7ac099b395d35e24d0a30e8b4f4a9558ba1efbe5d615bc37ea54",
+    "pages/00001.png": "90caafb82acd7263f791ae1cd45136845090004294b7bb643722e0a331322b9a",
+    "pages/00002.png": "bb69be20368b0294f0e575f74fb08436170eb4966d881ebe0e8460a059fe6f27",
+    "pages/00003.png": "8c0499b87cb284030cb43868f148c5a4796483ed107fa76ecfc3e678fbe62a85",
+    "anim/199100.json": "3b2f481ff6883d659312d30420b81fce805df3eaf1a64104df67924746274ce7",
+    "anim/199101.json": "f595db82000ef079b08af074869a2d3e8e9d16827858d3d92277931e968d0755",
+    "anim/199102.json": "6c6a57d8cf1a77eaafed405657ee64d14e87a62a76b12ffcbf13b708153f8eab",
+    "anim/199103.json": "5e5b4b142ab0730895e2f3c9eb2b9049091cc2facd672628bd8d41911c652fc9",
+    "manifest.json": "0328cbe83aea72875db3a7fe401a768296b3393ce244b28c93117b8e2047826b"
+  }
+}

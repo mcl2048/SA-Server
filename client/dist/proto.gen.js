@@ -141,6 +141,10 @@
 
 
 
+
+
+
+
 // 栏位的预设值表（fillDefaults 用）：i 数字、s 字串、b 布林、a 阵列、T:型别、A:型别阵列
 const SCHEMA                                     = {
   CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"]],
@@ -149,9 +153,9 @@ const SCHEMA                                     = {
   ObjInfo: [["id","i"],["kind","s"],["name","s"],["sprite","i"],["x","i"],["y","i"],["dir","i"],["level","i"],["leader","b"],["battle","i"],["help","b"],["action","i"],["family","s"],["trade","b"],["vendor","s"],["mind","i"]],
   NpcPos: [["name","s"],["x","i"],["y","i"]],
   VendorEntry: [["index","i"],["kind","i"],["slot","i"],["price","i"],["name","s"],["pile","i"],["image","i"],["level","i"],["sprite","i"]],
-  BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"]],
+  BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"],["ownerSlot","i"],["bagSlot","i"],["status","i"]],
   InvItem: [["slot","i"],["id","i"],["name","s"],["image","i"],["memo","s"],["level","i"],["pile","i"],["type","i"],["field","i"],["target","i"],["usable","b"],["equip","i"],["params","s"],["damage","s"],["magic","s"],["magicMemo","s"],["magicMp","i"],["magicField","i"],["magicTarget","i"],["magicDead","b"],["magicFunc","s"],["magicOption","s"],["flags","i"],["alch","s"],["merged","b"],["jigsaw","s"]],
-  BattleEvent: [["actor","i"],["kind","s"],["target","i"],["result","s"],["damage","i"],["hp","i"],["dead","b"],["ok","b"],["skill","s"],["status","i"],["guardian","i"],["combo","b"],["actorHp","i"],["mpDamage","i"],["guarded","b"],["petDamage","i"],["rideHp","i"],["fall","b"],["effect","i"],["actorMp","i"],["shoot","i"],["fly","i"],["name","s"],["sprite","i"],["level","i"],["maxHp","i"],["att","s"]],
+  BattleEvent: [["actor","i"],["kind","s"],["target","i"],["result","s"],["damage","i"],["hp","i"],["dead","b"],["ok","b"],["skill","s"],["status","i"],["guardian","i"],["combo","b"],["actorHp","i"],["mpDamage","i"],["guarded","b"],["petDamage","i"],["rideHp","i"],["fall","b"],["effect","i"],["actorMp","i"],["shoot","i"],["fly","i"],["name","s"],["sprite","i"],["level","i"],["maxHp","i"],["att","s"],["ownerSlot","i"],["bagSlot","i"]],
   ShopItem: [["name","s"],["level","i"],["price","i"],["image","i"],["info","s"],["sealed","b"],["slot","i"],["pile","i"],["fame","i"]],
   PetSkill: [["slot","i"],["id","i"],["name","s"],["memo","s"],["field","i"],["target","i"],["func","s"],["option","s"]],
   PetInfo: [["slot","i"],["name","s"],["freeName","s"],["sprite","i"],["level","i"],["exp","i"],["nextExp","i"],["hp","i"],["maxHp","i"],["atk","i"],["def","i"],["agi","i"],["loyalty","i"],["attrs","a"],["trans","i"],["maxSkill","i"],["skills","A:PetSkill"],["state","s"],["canRename","b"],["rideable","b"],["items","A:InvItem"],["guard","b"],["ext","T:PetExt"],["rideInfo","s"]],
@@ -190,11 +194,13 @@ const SCHEMA                                     = {
   VendorDetail: [["index","i"],["kind","i"],["item","T:InvItem"],["pet","T:PetInfo"]],
   Sound: [["x","i"],["y","i"],["se","i"]],
   HelpFlag: [["on","b"]],
-  BattleJoin: [["fighters","A:BattleFighter"]],
+  BattleJoin: [["fighters","A:BattleFighter"],["resetPets","b"]],
   Hello: [["version","s"],["serverTime","i"]],
   PetSkillResult: [["ok","b"],["pet","i"],["skill","i"]],
   Error: [["code","s"],["message","s"]],
   AuthResult: [["ok","b"],["message","s"]],
+  Session: [["token","s"],["resumed","b"],["inWorld","b"]],
+  AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],
   AccountResult: [["ok","b"],["message","s"]],
   ServerList: [["groups","A:ServerGroup"]],
@@ -217,9 +223,9 @@ const SCHEMA                                     = {
   ShopWindow: [["id","i"],["seq","i"],["mode","s"],["title","s"],["msg","s"],["main","s"],["what","s"],["level","s"],["realy","s"],["full","s"],["stone","s"],["sellOnly","b"],["maxGold","i"],["fame","i"],["rest","i"],["items","A:ShopItem"]],
   ChatMsg: [["channel","s"],["fromId","i"],["from","s"],["text","s"],["color","i"]],
   Pong: [["seq","i"],["serverTime","i"]],
-  BattleStart: [["field","i"],["mySlot","i"],["turnTime","i"],["surprise","i"],["fighters","A:BattleFighter"],["pvp","b"],["event","b"],["watch","b"],["speed","i"]],
+  BattleStart: [["field","i"],["mySlot","i"],["turnTime","i"],["surprise","i"],["fighters","A:BattleFighter"],["pvp","b"],["event","b"],["watch","b"],["speed","i"],["resume","b"],["turn","i"],["submitted","b"],["petSubmitted","b"],["submittedPets","a"]],
   BattleTurn: [["turn","i"],["events","A:BattleEvent"]],
-  BattleEnd: [["result","s"],["exp","i"],["levelUp","i"],["level","i"],["items","a"],["pets","A:PetResult"]],
+  BattleEnd: [["result","s"],["gold","i"],["exp","i"],["levelUp","i"],["level","i"],["items","a"],["pets","A:PetResult"]],
   Pets: [["battle","i"],["ride","i"],["pets","A:PetInfo"]],
   Inventory: [["gold","i"],["items","A:InvItem"]],
 };

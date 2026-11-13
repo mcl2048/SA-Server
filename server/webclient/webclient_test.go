@@ -12,10 +12,14 @@ import (
 
 func TestBuiltRoutes(t *testing.T) {
 	h := handler(fstest.MapFS{
-		"index.html":       {Data: []byte("<!doctype html>release")},
-		"dist/main.js":     {Data: []byte("console.log('release');")},
-		"src/private.ts":   {Data: []byte("secret")},
-		"dist/private.map": {Data: []byte("secret")},
+		"index.html":           {Data: []byte("<!doctype html>release")},
+		"dist/main.js":         {Data: []byte("console.log('release');")},
+		"src/private.ts":       {Data: []byte("secret")},
+		"dist/private.map":     {Data: []byte("secret")},
+		"art/login.png":        {Data: []byte("PNG release")},
+		"art/login.svg":        {Data: []byte("editable source")},
+		"art/other.png":        {Data: []byte("private artwork")},
+		"art/FONT-LICENSE.txt": {Data: []byte("development source license")},
 	}, false)
 	for _, tc := range []struct {
 		method, path string
@@ -26,6 +30,13 @@ func TestBuiltRoutes(t *testing.T) {
 		{"GET", "/index.html", 200, "text/html", "no-store"},
 		{"GET", "/dist/main.js?v=release", 200, "text/javascript", "no-cache"},
 		{"HEAD", "/dist/main.js", 200, "text/javascript", "no-cache"},
+		{"GET", "/art/login.png?v=release", 200, "image/png", "no-cache"},
+		{"HEAD", "/art/login.png", 200, "image/png", "no-cache"},
+		{"GET", "/art/login.svg", 404, "", ""},
+		{"GET", "/art/other.png", 404, "", ""},
+		{"GET", "/art/FONT-LICENSE.txt", 404, "", ""},
+		{"GET", "/art/../art/login.png", 404, "", ""},
+		{"GET", "/art/", 404, "", ""},
 		{"GET", "/src/private.ts", 404, "", ""},
 		{"GET", "/dist/private.map", 404, "", ""},
 		{"GET", "/dist/../index.html", 404, "", ""},
@@ -97,6 +108,44 @@ func TestContentValidatorAndExternalUpdates(t *testing.T) {
 	delete(files, "dist/main.js")
 	if w := get(live, "GET", currentTag); w.Code != http.StatusNotFound {
 		t.Fatalf("removed external file is cached: %d", w.Code)
+	}
+}
+
+func TestLoginArtworkCacheAndExternalUpdate(t *testing.T) {
+	files := fstest.MapFS{"art/login.png": {Data: []byte("PNG1")}}
+	get := func(h http.Handler, method, tag string) *httptest.ResponseRecorder {
+		r := httptest.NewRequest(method, "/art/login.png?v=unchanged", nil)
+		if tag != "" {
+			r.Header.Set("If-None-Match", tag)
+		}
+		w := httptest.NewRecorder()
+		h.ServeHTTP(w, r)
+		return w
+	}
+	frozen := handler(files, true)
+	live := handler(files, false)
+	first := get(frozen, "GET", "")
+	tag := first.Header().Get("ETag")
+	if first.Code != 200 || first.Body.String() != "PNG1" || first.Header().Get("Content-Type") != "image/png" || tag == "" {
+		t.Fatalf("PNG initial response %d %v %s", first.Code, first.Header(), first.Body)
+	}
+	for _, method := range []string{"GET", "HEAD"} {
+		w := get(frozen, method, tag)
+		if w.Code != 304 || w.Body.Len() != 0 || w.Header().Get("Cache-Control") != "no-cache" {
+			t.Fatalf("PNG conditional %s %d %v", method, w.Code, w.Header())
+		}
+	}
+	files["art/login.png"].Data = []byte("PNG2")
+	if w := get(frozen, "GET", tag); w.Code != 304 {
+		t.Fatal("embedded artwork snapshot changed")
+	}
+	updated := get(live, "GET", tag)
+	if updated.Code != 200 || updated.Body.String() != "PNG2" || updated.Header().Get("ETag") == tag || updated.Header().Get("Content-Type") != "image/png" {
+		t.Fatalf("stale external PNG response %d %v %s", updated.Code, updated.Header(), updated.Body)
+	}
+	delete(files, "art/login.png")
+	if w := get(live, "GET", updated.Header().Get("ETag")); w.Code != 404 {
+		t.Fatal("removed PNG remained cached")
 	}
 }
 

@@ -1,0 +1,32 @@
+{
+  "method": "original local SVG drawing, Chromium rasterization",
+  "external_image_generation": false,
+  "official_assets_used": false,
+  "title": "StoneAge",
+  "subtitle": "Return of the Heroes",
+  "size": [
+    1280,
+    960
+  ],
+  "logical_viewbox": [
+    0,
+    0,
+    800,
+    600
+  ],
+  "original_and_form_preview_visually_inspected": true,
+  "files": {
+    "login.svg": {
+      "bytes": 974509,
+      "sha256": "f1b0498271ac8bde52d1ad843cfa13bad28133831c005de0c00a648d74789977"
+    },
+    "login.png": {
+      "bytes": 999977,
+      "sha256": "876ea341c66fc850d5f710db06e06ad5e29fe86630acb21bbc6a1316ffb6b04c"
+    },
+    "FONT-LICENSE.txt": {
+      "bytes": 2436,
+      "sha256": "89f54a8759cdc4f57110e7d406efd1c64d21a63c991a25085104525010451977"
+    }
+  }
+}

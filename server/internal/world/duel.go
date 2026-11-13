@@ -35,7 +35,7 @@ const (
 func (w *World) Duel(charID int) {
 	w.Do(func() {
 		e := w.players[charID]
-		if e == nil || e.fight != nil || e.isFollower() || e.trade != nil {
+		if e == nil || !e.attached() || e.fight != nil || e.isFollower() || e.trade != nil {
 			return
 		}
 		fx, fy := e.x+MOVE[e.dir][0], e.y+MOVE[e.dir][1]
@@ -108,6 +108,16 @@ func (w *World) duelSelectReply(e *entity, win *npcWindow, button int, arg strin
 
 // startDuel 是 BATTLE_CreateVsPlayer：c0 的队伍在 0 边、c1 的队伍在 1 边。
 func (w *World) startDuel(c0, c1 *entity) bool {
+	if !c0.attached() || !c1.attached() {
+		return false
+	}
+	for _, head := range []*entity{c0, c1} {
+		for _, member := range w.battleMembers(head) {
+			if !member.attached() {
+				return false
+			}
+		}
+	}
 	if c0.fight != nil || c1.fight != nil {
 		w.sysMsg(c0, "二重遭遇。", colorYellow)
 		w.sysMsg(c1, "二重遭遇。", colorYellow)
@@ -132,11 +142,13 @@ func (w *World) startDuel(c0, c1 *entity) bool {
 	w.battleSeq++
 	room := &battleRoom{b: b, started: now, no: w.battleSeq, pvp: true}
 	for i, m := range w.battleMembers(c0) {
-		w.joinRoom(room, m, i)
+		w.joinRoom(room, m, i, true)
 	}
 	for i, m := range w.battleMembers(c1) {
-		w.joinRoom(room, m, battle.SideOffset+i)
+		w.joinRoom(room, m, battle.SideOffset+i, true)
 	}
+	w.balanceBattlePets(room, 0)
+	w.balanceBattlePets(room, 1)
 	b.CanCapture = func(a, d *battle.Fighter) bool { return false }
 	b.OnHit = func(a, d *battle.Fighter, dmg int) {
 		for _, m := range room.members {

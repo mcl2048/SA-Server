@@ -1,27 +1,16 @@
-// 与服务端的 WebSocket 连接。消息类型由 proto.gen.ts 提供（由 proto/messages.json 生成）。
-
+// WebSocket transport and opaque browser-session recovery. Passwords are never stored.
 import { fillDefaults, type C2S, type S2C, type S2CType } from "./proto.gen.ts";
-
 type Of<T extends S2CType> = Extract<S2C, { t: T }>;
-
-/**
- * 流量统计（?debug 的 HUD 用）：每秒一格，留最近 TRAFFIC_WINDOW 秒的收 / 送消息数与位元组数。
- * 位元组是 JSON 文字的 UTF-8 长度，也就是 permessage-deflate 压缩之前的大小（浏览器拿不到线上实际压缩后的长度）。
- */
+function redactCredentials(message: object): object {
+  const safe = { ...message } as Record<string, unknown>;
+  for (const key of ["token", "password", "secret", "old"]) if (Object.hasOwn(safe, key)) safe[key] = "[redacted]";
+  return safe;
+}
 export const TRAFFIC_WINDOW = 120;
 const slots = Array.from({ length: TRAFFIC_WINDOW }, () => ({ sec: -1, inMsg: 0, inBytes: 0, outMsg: 0, outBytes: 0 }));
 const trafficStart = performance.now();
-function slot() {
-  const sec = Math.floor(performance.now() / 1000), s = slots[sec % TRAFFIC_WINDOW];
-  if (s.sec !== sec) { s.sec = sec; s.inMsg = s.inBytes = s.outMsg = s.outBytes = 0; }
-  return s;
-}
-function utf8Len(s: string): number {
-  let n = s.length;
-  for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); if (c >= 0x80) n += c >= 0x800 && (c < 0xd800 || c > 0xdfff) ? 2 : 1; }
-  return n;
-}
-/** 最近 TRAFFIC_WINDOW 秒（刚开始不满时按实际经过的秒数）的平均：每秒消息数与 KB */
+function slot() { const sec = Math.floor(performance.now() / 1000), s = slots[sec % TRAFFIC_WINDOW]; if (s.sec !== sec) { s.sec = sec; s.inMsg = s.inBytes = s.outMsg = s.outBytes = 0; } return s; }
+function utf8Len(s: string): number { let n = s.length; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); if (c >= 0x80) n += c >= 0x800 && (c < 0xd800 || c > 0xdfff) ? 2 : 1; } return n; }
 export function trafficRates() {
   const now = Math.floor(performance.now() / 1000), span = Math.max(1, Math.min(TRAFFIC_WINDOW, (performance.now() - trafficStart) / 1000));
   let inMsg = 0, inBytes = 0, outMsg = 0, outBytes = 0;
@@ -30,49 +19,225 @@ export function trafficRates() {
 }
 
 export class Connection {
-  private ws: WebSocket;
+  private readonly url: string;
+  private ws!: WebSocket;
   private handlers = new Map<string, ((m: any) => void)[]>();
+  private stopped = false;
+  private retry = 0;
+  private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+  private handshakeTimer: ReturnType<typeof setTimeout> | null = null;
+  private readyTimer: ReturnType<typeof setTimeout> | null = null;
+  private pongTimer: ReturnType<typeof setTimeout> | null = null;
+  private pendingPong: number | null = null;
+  private seq = 0;
+  private handshakePending = true;
+  private awaitingResume = false;
+  private authenticatedByResume = false;
+  private wasHidden = document.hidden;
+  private token = "";
+  private readonly storageKey: string;
+  private ping: ReturnType<typeof setInterval>;
+  private readonly readyPromise: Promise<void>;
+  private resolveReady!: () => void;
+  private rejectReady!: (error: Error) => void;
+  private readySettled = false;
   onClose: (reason: string) => void = () => {};
+  onReconnect: (state: "connecting" | "restored", reason: string) => void = () => {};
   log: (dir: "→" | "←", m: object) => void = () => {};
-
   constructor(url: string) {
-    this.ws = new WebSocket(url);
-    this.ws.onmessage = (ev) => {
-      const data = String(ev.data), s = slot();
-      s.inMsg++; s.inBytes += utf8Len(data);
-      const m = fillDefaults(JSON.parse(data) as S2C); // 服务端省略的零值补回来（proto.gen.ts）
-      this.log("←", m);
+    this.url = url;
+    this.storageKey = `sa-session:${url}`;
+    try { this.token = localStorage.getItem(this.storageKey) || ""; } catch { /* Session-only recovery. */ }
+    this.readyPromise = new Promise<void>((resolve, reject) => { this.resolveReady = resolve; this.rejectReady = reject; });
+    // A caller can install handlers before awaiting ready, without an early
+    // socket failure producing an unhandled rejection.
+    void this.readyPromise.catch(() => {});
+    this.readyTimer = setTimeout(() => this.terminate("连接恢复超时，请重试登录"), 30000);
+    this.ping = setInterval(() => this.checkLiveness(), 30000);
+    addEventListener("online", this.wake);
+    addEventListener("pageshow", this.wake);
+    document.addEventListener("visibilitychange", this.wake);
+    document.addEventListener("freeze", this.freeze);
+    document.addEventListener("resume", this.wake);
+    this.open();
+  }
+  /** Initial Hello and, when present, the browser token's Session acknowledgement. */
+  ready(): Promise<void> { return this.readyPromise; }
+  /** Includes reconnect handshakes after the first ready() has already resolved. */
+  get recovering(): boolean { return !this.stopped && this.handshakePending; }
+  /** This transport authenticated with Resume, including a recovered lobby. */
+  get recoveredSession(): boolean { return this.authenticatedByResume; }
+  static hasSession(url: string): boolean { try { return !!localStorage.getItem(`sa-session:${url}`); } catch { return false; } }
+  private remember(token: string) {
+    // An obsolete tab must never delete a newer token stored by another tab.
+    const previous = this.token;
+    this.token = token;
+    try {
+      if (token) localStorage.setItem(this.storageKey, token);
+      else if (localStorage.getItem(this.storageKey) === previous) localStorage.removeItem(this.storageKey);
+    } catch { /* Keep memory token. */ }
+  }
+  private open() {
+    if (this.stopped) return;
+    this.clearSocketTimers();
+    this.handshakePending = true;
+    this.awaitingResume = false;
+    this.authenticatedByResume = false;
+    let ws: WebSocket;
+    try { ws = this.ws = new WebSocket(this.url); }
+    catch { this.retryTransport("无法建立连接"); return; }
+    this.handshakeTimer = setTimeout(() => { if (this.ws === ws) this.retryTransport("等待服务器握手超时"); }, 8000);
+    ws.onmessage = ev => {
+      if (this.ws !== ws || this.stopped) return;
+      let m: S2C;
+      try { const data = String(ev.data), s = slot(); s.inMsg++; s.inBytes += utf8Len(data); m = fillDefaults(JSON.parse(data) as S2C); } catch { return; }
+      // Never expose the bearer token to debug logging.
+      this.log("←", redactCredentials(m));
+      if (m.t === "Pong" && m.seq === this.pendingPong) this.clearPongTimer();
+      if (m.t === "Session") {
+        if (this.awaitingResume && !m.token) { this.remember(""); this.terminate("会话已失效，请重新登录"); return; }
+        if (!m.token) this.authenticatedByResume = false;
+        else if (this.awaitingResume) this.authenticatedByResume = true;
+        this.remember(m.token); this.retry = 0;
+        this.finishHandshake();
+        if (m.resumed) this.onReconnect("restored", "已恢复原会话");
+      }
+      if (m.t === "Error" && m.code === "resume_failed") {
+        this.remember("");
+        for (const h of this.handlers.get(m.t) ?? []) h(m);
+        this.terminate("会话已失效，请重新登录");
+        return;
+      }
+      if (document.hidden) this.wasHidden = true;
+      // Frozen tabs can receive many old world/battle frames before the
+      // visibility event is delivered. Hold them even if document.hidden has
+      // already flipped back; wake will replace this transport for a snapshot.
+      const control = m.t === "Hello" || m.t === "Session" || m.t === "Error" || m.t === "Pong" || m.t === "AuthResult";
+      if ((document.hidden || this.wasHidden) && !control) return;
       for (const h of this.handlers.get(m.t) ?? []) h(m);
+      if (m.t === "Hello") {
+        if (this.handshakeTimer) clearTimeout(this.handshakeTimer);
+        this.handshakeTimer = null;
+        if (this.token) {
+          this.awaitingResume = true;
+          this.handshakeTimer = setTimeout(() => { if (this.ws === ws) this.retryTransport("等待会话恢复超时"); }, 8000);
+          this.send({ t: "Resume", token: this.token });
+        } else this.finishHandshake();
+      }
     };
-    // 心跳：服务端 90 秒收不到任何消息就断开（session.go idleTimeout），站着不动时也要定时发 Ping
-    let seq = 0;
-    const ping = setInterval(() => this.send({ t: "Ping", seq: ++seq }), 30000);
-    this.ws.onclose = (ev) => { clearInterval(ping); this.onClose(ev.reason || "连接已断开"); };
+    ws.onclose = ev => {
+      if (this.ws !== ws || this.stopped) return;
+      if (ev.reason === "session_replaced" || ev.reason === "session_revoked") {
+        // Same-token tab replacement must not erase the new tab's credential.
+        if (ev.reason === "session_revoked") this.remember(""); else this.token = "";
+        this.terminate(ev.reason === "session_replaced" ? "账号已在其他设备或窗口登录" : "会话已撤销，请重新登录");
+        return;
+      }
+      this.retryTransport(ev.reason || "连接中断");
+    };
+    // WebSocket errors are followed by close; the handshake deadline also covers
+    // browsers that leave a failed connection in CONNECTING for too long.
   }
-
-  on<T extends S2CType>(t: T, h: (m: Of<T>) => void) {
-    this.handlers.set(t, [...(this.handlers.get(t) ?? []), h]);
+  private finishHandshake() {
+    if (this.handshakeTimer) clearTimeout(this.handshakeTimer);
+    this.handshakeTimer = null;
+    this.handshakePending = this.awaitingResume = false;
+    if (!this.readySettled) {
+      this.readySettled = true;
+      if (this.readyTimer) clearTimeout(this.readyTimer);
+      this.readyTimer = null;
+      this.resolveReady();
+    }
   }
-
+  private retryTransport(reason: string) {
+    if (this.stopped) return;
+    this.clearSocketTimers();
+    this.discardSocket();
+    if (!this.token) { this.terminate(reason); return; }
+    this.handshakePending = true;
+    this.awaitingResume = false;
+    this.onReconnect("connecting", `${reason}，角色仍在服务端；正在恢复连接……`);
+    this.scheduleRetry();
+  }
+  private scheduleRetry() {
+    if (this.stopped || this.reconnectTimer) return;
+    const delay = Math.min(15000, 500 * 2 ** Math.min(5, this.retry++));
+    this.reconnectTimer = setTimeout(() => { this.reconnectTimer = null; this.open(); }, delay);
+  }
+  private checkLiveness() {
+    if (this.stopped || this.handshakePending || this.ws?.readyState !== WebSocket.OPEN || this.pongTimer) return;
+    const ws = this.ws, seq = this.seq = this.seq >= 0x7ffffffe ? 1 : this.seq + 1;
+    this.pendingPong = seq;
+    this.pongTimer = setTimeout(() => { if (this.ws === ws && this.pendingPong === seq) this.retryTransport("网络响应超时"); }, 5000);
+    this.send({ t: "Ping", seq });
+  }
+  private freeze = () => { this.wasHidden = true; };
+  private wake = (event?: Event) => {
+    if (this.stopped) return;
+    if (document.hidden) { this.wasHidden = true; return; }
+    const needsSnapshot = this.wasHidden || (event?.type === "pageshow" && (event as PageTransitionEvent).persisted === true);
+    this.wasHidden = false;
+    if (needsSnapshot && this.token) {
+      // An OPEN socket can still contain an entire obsolete battle history.
+      // Resume immediately instead of replaying frames or waiting for Pong.
+      this.clearSocketTimers();
+      this.discardSocket();
+      if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+      this.handshakePending = true;
+      this.awaitingResume = false;
+      this.onReconnect("connecting", "正在同步后台期间的角色进度……");
+      this.open();
+      return;
+    }
+    if (this.ws?.readyState === WebSocket.CLOSED || this.ws?.readyState === WebSocket.CLOSING) {
+      if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+      this.open();
+    } else this.checkLiveness();
+  };
+  on<T extends S2CType>(t: T, h: (m: Of<T>) => void) { this.handlers.set(t, [...(this.handlers.get(t) ?? []), h]); }
   once<T extends S2CType>(t: T, timeoutMs = 8000): Promise<Of<T>> {
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error(`等待 ${t} 超时`)), timeoutMs);
-      const h = (m: Of<T>) => {
-        clearTimeout(timer);
-        this.handlers.set(t, (this.handlers.get(t) ?? []).filter((x) => x !== h));
-        resolve(m);
-      };
+      const h = (m: Of<T>) => { clearTimeout(timer); remove(); resolve(m); };
+      const remove = () => this.handlers.set(t, (this.handlers.get(t) ?? []).filter(x => x !== h));
+      const timer = setTimeout(() => { remove(); reject(new Error(`等待 ${t} 超时`)); }, timeoutMs);
       this.on(t, h);
     });
   }
-
   send(m: C2S) {
-    if (this.ws.readyState !== WebSocket.OPEN) return;
-    this.log("→", m);
-    const data = JSON.stringify(m), s = slot();
-    s.outMsg++; s.outBytes += utf8Len(data);
-    this.ws.send(data);
+    if (this.stopped || this.ws?.readyState !== WebSocket.OPEN) return;
+    if (this.handshakePending && m.t !== "Resume" && m.t !== "Ping") return;
+    this.log("→", redactCredentials(m));
+    const data = JSON.stringify(m), s = slot(); s.outMsg++; s.outBytes += utf8Len(data);
+    try { this.ws.send(data); } catch { this.retryTransport("发送失败"); }
   }
-
-  close() { this.ws.close(); }
+  private clearPongTimer() { if (this.pongTimer) clearTimeout(this.pongTimer); this.pongTimer = null; this.pendingPong = null; }
+  private clearSocketTimers() {
+    if (this.handshakeTimer) clearTimeout(this.handshakeTimer);
+    this.handshakeTimer = null;
+    this.clearPongTimer();
+  }
+  private discardSocket() {
+    if (!this.ws) return;
+    // A late message/close from the abandoned socket cannot mutate session state.
+    this.ws.onmessage = this.ws.onclose = null;
+    try { this.ws.close(); } catch { /* Already unavailable. */ }
+  }
+  private stop(reason: string) {
+    this.stopped = true; clearInterval(this.ping);
+    this.clearSocketTimers();
+    if (this.readyTimer) clearTimeout(this.readyTimer);
+    if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+    this.readyTimer = this.reconnectTimer = null;
+    removeEventListener("online", this.wake); removeEventListener("pageshow", this.wake); document.removeEventListener("visibilitychange", this.wake);
+    document.removeEventListener("freeze", this.freeze); document.removeEventListener("resume", this.wake);
+    if (!this.readySettled) { this.readySettled = true; this.rejectReady(new Error(reason)); }
+  }
+  private terminate(reason: string) {
+    if (this.stopped) return;
+    this.stop(reason); this.discardSocket(); this.onClose(reason);
+  }
+  /** Closing transport preserves the resumable world character; Logout is explicit. */
+  close() { if (!this.stopped) this.stop("连接已关闭"); this.discardSocket(); }
 }

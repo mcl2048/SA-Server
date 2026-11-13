@@ -1,19 +1,23 @@
 // 宠物相簿 / 图鉴（原版 __ALBUM_47，menu.cpp）：完全在客户端，原版存在 data\album_47.dat，这里存 localStorage（sa.album.<账号>）。
 //   看到：画面上出现过（地图上的角色、战斗中的每一个人，CheckNewPet / CheckBattleNewPet）→ 灰色的名字
 //   照相：宠物详细资料的"照相"钮 → 记下那时的能力值，名字前出现 NEW；点开看过后去掉 NEW
-//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（共 570 种、72 页）
+//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（原 570 格后追加 4 格，共 574 格、72 页）
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 import type { PetInfo } from "./proto.gen.ts";
 import { PET_ALBUM_TBL } from "./albumdata.ts";
 import { FONT, SYS, measure, type Ui } from "./ui.ts";
+import { ANIM, findAction } from "./assets.ts";
+import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.ts";
 
-const MAX_PET_KIND = 570, PAGE = 8;
+const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + AI_PET_CATALOG.length, PAGE = 8;
+// Append-only identities: never change the original SEEN/SNAP table or slots.
+const EXTRA_ALBUM_SPRITES = [199100, 199101, 199102, 199103] as const;
 const CG = { WND: 26230, NEW_ICON: 26231, PREV: 26180, NEXT: 26182, CLOSE: 26042 };
 // 照相钮不能用的宠物形象（menu.cpp 照相的检查）
 const NO_SNAP = new Set([100451, 100432, 101280, 101281, 100015, 100018, 101279, 100401, 101414, 101167, 101172, 102011, 102012]);
 
-interface Entry { flag: number; name: string; freeName?: string; face?: number; level?: number; maxHp?: number; str?: number; quick?: number; def?: number; attr?: number[] }
+interface Entry { flag: number; name: string; freeName?: string; face?: number; sprite?: number; level?: number; maxHp?: number; str?: number; quick?: number; def?: number; attr?: number[] }
 
 type Step = [string, number, number]; // ["gt" / "eq", 比较值, 减去的量（eq 时是结果）]
 // 形象图号 − 100250 → 表的下标（CheckNewPet 的分段对照；照相的版本多一段、改一段）
@@ -39,6 +43,7 @@ export class Album {
   open = false;
   private page = 0;
   private sel = -1;
+  private portraits = new Map<number, { canvas: HTMLCanvasElement | null; pending: boolean; retryAt: number }>();
 
   /** 上线时读这个账号的相簿（LoadAlbum） */
   load(account: string) {
@@ -46,7 +51,10 @@ export class Album {
     this.list = Array.from({ length: MAX_PET_KIND }, () => ({ flag: 0, name: "" }));
     try {
       const saved = JSON.parse(localStorage.getItem(this.key) ?? "null");
-      if (saved && typeof saved === "object") for (const k in saved) if (Number(k) < MAX_PET_KIND) this.list[Number(k)] = saved[k];
+      if (saved && typeof saved === "object") for (const k in saved) {
+        const no = Number(k), entry = saved[k];
+        if (Number.isInteger(no) && no >= 0 && no < MAX_PET_KIND && entry && typeof entry === "object" && Number.isInteger(entry.flag) && entry.flag >= 0 && entry.flag <= 3 && typeof entry.name === "string") this.list[no] = entry;
+      }
     } catch { /* 坏掉就重来 */ }
   }
 
@@ -58,6 +66,8 @@ export class Album {
   }
 
   private albumNo(gra: number, steps: Step[]): number {
+    const extra = EXTRA_ALBUM_SPRITES.indexOf(gra as typeof EXTRA_ALBUM_SPRITES[number]);
+    if (extra >= 0) return LEGACY_PET_KINDS + extra;
     const t = tblNo(gra, steps);
     return t >= 0 && t < PET_ALBUM_TBL.length ? PET_ALBUM_TBL[t][0] : -1;
   }
@@ -67,19 +77,20 @@ export class Album {
     if (!this.key || gra < 100250) return;
     const no = this.albumNo(gra, SEEN);
     if (no < 0 || no >= MAX_PET_KIND || this.list[no].flag !== 0) return;
-    this.list[no] = { flag: 1, name: PET_ALBUM_TBL[tblNo(gra, SEEN)][1] };
+    const extra = aiPetForSprite(gra);
+    this.list[no] = extra ? { flag: 1, name: extra.name, sprite: gra } : { flag: 1, name: PET_ALBUM_TBL[tblNo(gra, SEEN)][1] };
     this.save();
   }
 
   /** 照相：回传要显示的讯息（"%s 照相完成！"），不能照时回 null */
   snap(p: PetInfo): string | null {
     if (NO_SNAP.has(p.sprite)) return null;
-    const t = tblNo(p.sprite, SNAP);
-    const no = t >= 0 && t < PET_ALBUM_TBL.length ? PET_ALBUM_TBL[t][0] : -1;
+    const extra = aiPetForSprite(p.sprite), t = tblNo(p.sprite, SNAP);
+    const no = this.albumNo(p.sprite, SNAP);
     if (no < 0 || no >= MAX_PET_KIND) return null;
-    const [, name, face] = PET_ALBUM_TBL[t];
+    const name = extra?.name ?? PET_ALBUM_TBL[t][1], face = extra ? undefined : PET_ALBUM_TBL[t][2];
     const freeName = p.freeName || name;
-    this.list[no] = { flag: 2, name, freeName, face, level: p.level, maxHp: p.maxHp, str: p.atk, quick: p.agi, def: p.def, attr: p.attrs.slice(0, 4) };
+    this.list[no] = { flag: 2, name, freeName, face, ...(extra ? { sprite: p.sprite } : {}), level: p.level, maxHp: p.maxHp, str: p.atk, quick: p.agi, def: p.def, attr: p.attrs.slice(0, 4) };
     this.save();
     return `${freeName} 照相完成！`;
   }
@@ -110,7 +121,11 @@ export class Album {
         ui.box(x + 35, by + 1, x + 35 + w + 1, by + 10, bars[i][1], false);
         ui.box(x + 34, by, x + 34 + w, by + 8, bars[i][0], true);
       });
-      if (e.face) ui.image(e.face, wx + 199, wy + 117);
+      if (e.sprite && aiPetForSprite(e.sprite)) {
+        const definition = ui.assets.anim(e.sprite), action = definition && findAction(definition, 1, ANIM.STAND);
+        const frame = action?.frames[0];
+        if (frame && frame[0] >= 0) this.spritePortrait(ui, frame[0], wx + 199, wy + 117);
+      } else if (e.face) ui.image(e.face, wx + 199, wy + 117);
     }
     let y = wy + 215;
     for (let i = 0; i < PAGE; i++, y += 22) {
@@ -129,6 +144,50 @@ export class Album {
     if (ui.button(CG.PREV, wx + 107, wy + 400, "album-prev", CG.PREV + 1)) this.page = (this.page + pages - 1) % pages;
     if (ui.button(CG.NEXT, wx + 166, wy + 400, "album-next", CG.NEXT + 1)) this.page = (this.page + 1) % pages;
     if (ui.image(CG.CLOSE, mx, wy + 429, "album-close") && ui.clicked("album-close")) this.open = false;
+    const selected = this.sel >= 0 ? this.list[this.sel] : undefined;
+    if (selected?.sprite) this.storyPanel(ui, rects, selected.sprite);
+  }
+
+  private spritePortrait(ui: Ui, image: number, x: number, y: number) {
+    let entry = this.portraits.get(image);
+    if (!entry) { entry = { canvas: null, pending: false, retryAt: 0 }; this.portraits.set(image, entry); }
+    if (entry.canvas) { ui.pic(entry.canvas, Math.round(x - entry.canvas.width / 2), Math.round(y - entry.canvas.height / 2)); return; }
+    if (entry.pending || performance.now() < entry.retryAt) return;
+    const portrait = entry;
+    portrait.pending = true;
+    // Raw frame indices also work with the original mechanical fallback art.
+    // Decode once and scale a canvas: the renderer's normal quads use the same
+    // dimensions for destination and UVs, so reducing w/h would crop the image.
+    void ui.assets.imageCanvas(image, true).then(decoded => {
+      if (!decoded) return;
+      const source = decoded[0], canvas = document.createElement("canvas");
+      const scale = Math.min(1, 108 / source.width, 152 / source.height);
+      canvas.width = Math.max(1, Math.round(source.width * scale)); canvas.height = Math.max(1, Math.round(source.height * scale));
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      context.imageSmoothingEnabled = true;
+      context.drawImage(source, 0, 0, canvas.width, canvas.height);
+      portrait.canvas = canvas;
+    }).catch(() => { /* Missing art can retry without interrupting the album. */ }).finally(() => {
+      portrait.pending = false; portrait.retryAt = performance.now() + 1000;
+    });
+  }
+
+  private storyPanel(ui: Ui, rects: [number, number, number, number][], sprite: number) {
+    const pet = aiPetForSprite(sprite);
+    if (!pet) return;
+    const x = 280, y = 4, lines: string[] = [];
+    let line = "";
+    for (const character of pet.story) {
+      if (line && measure(line + character) > 220) { lines.push(line); line = ""; }
+      line += character;
+    }
+    if (line) lines.push(line);
+    const height = Math.ceil((lines.length * 21 + 62) / 48);
+    ui.window(x, y, 4, height, "album-story");
+    rects.push([x, y, x + 256, y + height * 48]);
+    ui.text(x + 18, y + 16, `${pet.name} · 简介`, FONT.YELLOW);
+    lines.forEach((text, i) => ui.text(x + 18, y + 42 + i * 21, text, FONT.WHITE));
   }
 }
 

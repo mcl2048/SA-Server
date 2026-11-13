@@ -6,6 +6,9 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, lstatSync, rmSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { syncAiPetCatalog } from "../scripts/sync-ai-pet-catalog.mjs";
+
+syncAiPetCatalog();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "src");
 const out = join(dirname(fileURLToPath(import.meta.url)), "dist");
@@ -25,6 +28,9 @@ const htmlPath = join(dirname(fileURLToPath(import.meta.url)), "index.html");
 const template = readFileSync(htmlPath, "utf8").replace(/src="dist\/main\.js[^"]*"/, 'src="dist/main.js"');
 const hash = createHash("sha256").update(template).update(readFileSync(fileURLToPath(import.meta.url)));
 for (const [rel, src] of [...sources].sort(([a], [b]) => a.localeCompare(b, "en"))) hash.update(rel).update("\0").update(src).update("\0");
+const artwork = join(dirname(htmlPath), "art", "login.png");
+if (lstatSync(dirname(artwork)).isSymbolicLink() || lstatSync(artwork).isSymbolicLink() || !lstatSync(artwork).isFile()) throw Error("invalid login artwork path");
+hash.update("art/login.png\0").update(readFileSync(artwork)).update("\0");
 const version = hash.digest("hex").slice(0, 16); // 相同源码产生相同缓存版本，代码或样式变化自动失效
 
 function build(rel) {

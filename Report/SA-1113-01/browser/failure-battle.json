@@ -1,0 +1,46 @@
+{
+  "screen": "Object",
+  "actions": [
+    {
+      "id": "pet-tab-5",
+      "label": "奥普埃 已提交"
+    },
+    {
+      "id": "pet-tab-6",
+      "label": "克劳德 已提交"
+    },
+    {
+      "id": "pet-tab-7",
+      "label": "格鲁克 已提交"
+    },
+    {
+      "id": "pet-tab-8",
+      "label": "吉米奈 已提交"
+    },
+    {
+      "id": "pet-tab-9",
+      "label": "乌力 选择指令"
+    },
+    {
+      "id": "pb-waza",
+      "label": null
+    },
+    {
+      "id": "pw-0",
+      "label": "攻击"
+    },
+    {
+      "id": "pw-close",
+      "label": null
+    },
+    {
+      "id": "battle-auto-toggle",
+      "label": "自动：关"
+    },
+    {
+      "id": "battle-quick-toggle",
+      "label": "快速：关"
+    }
+  ],
+  "errors": []
+}

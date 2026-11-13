@@ -150,7 +150,7 @@ export class Menus {
   private page: SystemPage = "main";
   private upHold = { id: "", at: 0, last: 0, sent: 0, max: 0 }; // 状态窗口的加点钮按住不放
 
-  private result: { name: string; exp: number; lvUp: boolean; items: string[]; pets: ResultPet[]; at: number } | null = null;
+  private result: { name: string; exp: number; lvUp: boolean; items: string[]; pets: ResultPet[]; gold: number; at: number } | null = null;
   pets: S2CPets | null = null; // 宠物栏（宠物窗口用）
   /** 本帧画出的窗口范围。头顶名字画在 2D 覆盖层上，会盖住窗口图，main.ts 用它把窗口下的名字略去 */
   rects: [number, number, number, number][] = [];
@@ -259,8 +259,8 @@ export class Menus {
   leave() { this.petWnd.leave(); this.gm.leave(); this.vendor.close(false); this.removeAccountBoxes(); }
 
   /** 战斗胜利后的结果窗口（menu.cpp BattleResultWndFlag），RESULT_WND_CLOSE_TIME 300 帧后自动关闭 */
-  showResult(name: string, exp: number, lvUp: boolean, items: string[], pets: ResultPet[] = []) {
-    this.result = { name, exp, lvUp, items, pets, at: performance.now() };
+  showResult(name: string, exp: number, lvUp: boolean, items: string[], pets: ResultPet[] = [], gold = 0) {
+    this.result = { name, exp, lvUp, items, pets, gold, at: performance.now() };
   }
 
   setPets(m: S2CPets) { this.pets = m; }
@@ -372,7 +372,7 @@ export class Menus {
     ui.text(x - 6 + Math.max(0, (16 * 7 - measure(st.name)) / 2), y - 2, st.name, FONT.WHITE);
     ui.text(x + 170, y - 2, num(st.dp, 8), FONT.WHITE);
     y += 21;
-    if (st.trans >= 1 && st.trans <= 5) ui.text(x + 190, y + 2, `转生${TRANS_STR[st.trans]}`, FONT.AQUA);
+    if (st.trans >= 1) ui.text(x + 190, y + 2, `转生${TRANS_STR[st.trans] ?? st.trans}`, FONT.AQUA);
     y += 19; // _CHARTITLE_STR_：称号栏占 19
     ui.text(x + 50, y, num(st.level, 3), FONT.WHITE); y += 21;
     ui.text(x + 48, y, num(st.exp, 8), FONT.WHITE); y += 21;
@@ -496,10 +496,10 @@ export class Menus {
   private resultWindow() {
     const ui = this.ui, r = this.result!;
     if (performance.now() - r.at > 300 * 1000 / 60) { this.result = null; return; }
-    const wx = 240, wy = 180, mx = wx + 160;
-    ui.window(wx, wy, 5, 6, "result-wnd");
+    const wx = 240, wy = r.gold > 0 ? 156 : 180, mx = wx + 160, rows = r.gold > 0 ? 7 : 6;
+    ui.window(wx, wy, 5, rows, "result-wnd");
     ui.image(CG.WND_TITLE_RESULT, wx + 5 * 32, wy + 27);
-    this.rects.push([wx, wy, wx + 320, wy + 288]);
+    this.rects.push([wx, wy, wx + 320, wy + rows * 48]);
     const x = wx + 12, y = wy + 44;
     ui.text(x + Math.max(0, (16 * 7 - measure(r.name)) / 2), y, r.name, FONT.WHITE);
     if (r.lvUp) ui.text(x + 152, y, "LvUp!", FONT.YELLOW);
@@ -514,7 +514,8 @@ export class Menus {
     ui.text(x, wy + 134 + 30, "  道具 ：", FONT.WHITE);
     if (r.items.length === 0) ui.text(x + 85, wy + 134 + 30, "没有得到任何道具。", FONT.WHITE);
     r.items.slice(0, 3).forEach((n, i) => ui.text(x + 85, wy + 134 + 30 + i * 22, n, FONT.WHITE));
-    if (ui.image(CG.CLOSE_BTN, mx, wy + 216 + 30, "result-close") && ui.clicked("result-close")) this.result = null;
+    if (r.gold > 0) ui.text(x, wy + 232, `获得石币：${r.gold}`, FONT.YELLOW);
+    if (ui.image(CG.CLOSE_BTN, mx, wy + (r.gold > 0 ? 294 : 246), "result-close") && ui.clicked("result-close")) this.result = null;
   }
 
   // ---------------- 系统窗口 ----------------

@@ -6,9 +6,9 @@ export interface ServerGroup { name: string; lines: LineInfo[]; }
 export interface ObjInfo { id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; level: number; leader: boolean; battle: number; help: boolean; action: number; family: string; trade: boolean; vendor: string; mind: number; }
 export interface NpcPos { name: string; x: number; y: number; }
 export interface VendorEntry { index: number; kind: number; slot: number; price: number; name: string; pile: number; image: number; level: number; sprite: number; }
-export interface BattleFighter { slot: number; name: string; sprite: number; level: number; hp: number; maxHp: number; mp: number; maxMp: number; rideName: string; rideLevel: number; rideHp: number; rideMaxHp: number; fallSprite: number; }
+export interface BattleFighter { slot: number; name: string; sprite: number; level: number; hp: number; maxHp: number; mp: number; maxMp: number; rideName: string; rideLevel: number; rideHp: number; rideMaxHp: number; fallSprite: number; ownerSlot: number; bagSlot: number; status: number; }
 export interface InvItem { slot: number; id: number; name: string; image: number; memo: string; level: number; pile: number; type: number; field: number; target: number; usable: boolean; equip: number; params: string; damage: string; magic: string; magicMemo: string; magicMp: number; magicField: number; magicTarget: number; magicDead: boolean; magicFunc: string; magicOption: string; flags: number; alch: string; merged: boolean; jigsaw: string; }
-export interface BattleEvent { actor: number; kind: string; target: number; result: string; damage: number; hp: number; dead: boolean; ok: boolean; skill: string; status: number; guardian: number; combo: boolean; actorHp: number; mpDamage: number; guarded: boolean; petDamage: number; rideHp: number; fall: boolean; effect: number; actorMp: number; shoot: number; fly: number; name: string; sprite: number; level: number; maxHp: number; att: string; }
+export interface BattleEvent { actor: number; kind: string; target: number; result: string; damage: number; hp: number; dead: boolean; ok: boolean; skill: string; status: number; guardian: number; combo: boolean; actorHp: number; mpDamage: number; guarded: boolean; petDamage: number; rideHp: number; fall: boolean; effect: number; actorMp: number; shoot: number; fly: number; name: string; sprite: number; level: number; maxHp: number; att: string; ownerSlot: number; bagSlot: number; }
 export interface ShopItem { name: string; level: number; price: number; image: number; info: string; sealed: boolean; slot: number; pile: number; fame: number; }
 export interface PetSkill { slot: number; id: number; name: string; memo: string; field: number; target: number; func: string; option: string; }
 export interface PetInfo { slot: number; name: string; freeName: string; sprite: number; level: number; exp: number; nextExp: number; hp: number; maxHp: number; atk: number; def: number; agi: number; loyalty: number; attrs: number[]; trans: number; maxSkill: number; skills: PetSkill[]; state: string; canRename: boolean; rideable: boolean; items: InvItem[]; guard: boolean; ext: PetExt; rideInfo: string; }
@@ -40,6 +40,8 @@ export interface C2SAccountInfoReq { t: "AccountInfoReq"; }
 export interface C2SChangePassword { t: "ChangePassword"; old: string; password: string; }
 export interface C2SChangeSecret { t: "ChangeSecret"; password: string; secret: string; }
 export interface C2SLogin { t: "Login"; account: string; password: string; }
+export interface C2SResume { t: "Resume"; token: string; }
+export interface C2SAutoPlay { t: "AutoPlay"; encounter: boolean; autoBattle: boolean; quick: boolean; paused: boolean; settings: string; }
 export interface C2SSelectLine { t: "SelectLine"; id: number; }
 export interface C2SCharList { t: "CharList"; }
 export interface C2SCharCreate { t: "CharCreate"; name: string; sprite: number; face: number; vital: number; str: number; tgh: number; dex: number; earth: number; water: number; fire: number; wind: number; hometown: number; }
@@ -53,7 +55,7 @@ export interface C2STalk { t: "Talk"; id: number; }
 export interface C2SChat { t: "Chat"; channel: string; text: string; color: number; area: number; }
 export interface C2SReturnHome { t: "ReturnHome"; }
 export interface C2SBattleCommand { t: "BattleCommand"; kind: string; target: number; item: number; }
-export interface C2SBattlePetCommand { t: "BattlePetCommand"; skill: number; target: number; }
+export interface C2SBattlePetCommand { t: "BattlePetCommand"; skill: number; target: number; petSlot: number; }
 export interface C2SPetState { t: "PetState"; slot: number; state: string; }
 export interface C2SPetRename { t: "PetRename"; slot: number; name: string; }
 export interface C2SPetDrop { t: "PetDrop"; slot: number; }
@@ -74,7 +76,7 @@ export interface C2SGmListReq { t: "GmListReq"; kind: string; }
 export interface C2SQuestReq { t: "QuestReq"; }
 export interface C2SGmDetailReq { t: "GmDetailReq"; kind: string; id: number; }
 export interface C2SLogout { t: "Logout"; }
-export type C2S = C2SSetFlags | C2SCardExchange | C2SCardDelete | C2SMailSend | C2SPetMail | C2SFamily | C2SAction | C2SMind | C2STrade | C2SParty | C2SPartyKick | C2SVendor | C2SBattleHelp | C2SJoinBattle | C2SDuel | C2SRegister | C2SResetPassword | C2SAccountInfoReq | C2SChangePassword | C2SChangeSecret | C2SLogin | C2SSelectLine | C2SCharList | C2SCharCreate | C2SCharDelete | C2SCharEnter | C2SMapReq | C2SNpcListReq | C2SMove | C2STurn | C2STalk | C2SChat | C2SReturnHome | C2SBattleCommand | C2SBattlePetCommand | C2SPetState | C2SPetRename | C2SPetDrop | C2SPetRide | C2SItemMove | C2SPetItemEquip | C2SPetSkillUse | C2SItemUse | C2SMagicUse | C2SItemDrop | C2SGoldDrop | C2SPickUp | C2SStatUp | C2SNpcWindowReply | C2SPing | C2SGmCommand | C2SGmListReq | C2SQuestReq | C2SGmDetailReq | C2SLogout;
+export type C2S = C2SSetFlags | C2SCardExchange | C2SCardDelete | C2SMailSend | C2SPetMail | C2SFamily | C2SAction | C2SMind | C2STrade | C2SParty | C2SPartyKick | C2SVendor | C2SBattleHelp | C2SJoinBattle | C2SDuel | C2SRegister | C2SResetPassword | C2SAccountInfoReq | C2SChangePassword | C2SChangeSecret | C2SLogin | C2SResume | C2SAutoPlay | C2SSelectLine | C2SCharList | C2SCharCreate | C2SCharDelete | C2SCharEnter | C2SMapReq | C2SNpcListReq | C2SMove | C2STurn | C2STalk | C2SChat | C2SReturnHome | C2SBattleCommand | C2SBattlePetCommand | C2SPetState | C2SPetRename | C2SPetDrop | C2SPetRide | C2SItemMove | C2SPetItemEquip | C2SPetSkillUse | C2SItemUse | C2SMagicUse | C2SItemDrop | C2SGoldDrop | C2SPickUp | C2SStatUp | C2SNpcWindowReply | C2SPing | C2SGmCommand | C2SGmListReq | C2SQuestReq | C2SGmDetailReq | C2SLogout;
 export type C2SType = C2S["t"];
 
 export interface S2CFlags { t: "Flags"; flags: number; }
@@ -106,11 +108,13 @@ export interface S2CVendorClose { t: "VendorClose"; }
 export interface S2CVendorDetail { t: "VendorDetail"; index: number; kind: number; item: InvItem; pet: PetInfo; }
 export interface S2CSound { t: "Sound"; x: number; y: number; se: number; }
 export interface S2CHelpFlag { t: "HelpFlag"; on: boolean; }
-export interface S2CBattleJoin { t: "BattleJoin"; fighters: BattleFighter[]; }
+export interface S2CBattleJoin { t: "BattleJoin"; fighters: BattleFighter[]; resetPets: boolean; }
 export interface S2CHello { t: "Hello"; version: string; serverTime: number; }
 export interface S2CPetSkillResult { t: "PetSkillResult"; ok: boolean; pet: number; skill: number; }
 export interface S2CError { t: "Error"; code: string; message: string; }
 export interface S2CAuthResult { t: "AuthResult"; ok: boolean; message: string; }
+export interface S2CSession { t: "Session"; token: string; resumed: boolean; inWorld: boolean; }
+export interface S2CAutoPlayState { t: "AutoPlayState"; encounter: boolean; autoBattle: boolean; quick: boolean; paused: boolean; reason: string; }
 export interface S2CAccountInfo { t: "AccountInfo"; account: string; created: string; chars: number; hasSecret: boolean; }
 export interface S2CAccountResult { t: "AccountResult"; ok: boolean; message: string; }
 export interface S2CServerList { t: "ServerList"; groups: ServerGroup[]; }
@@ -133,12 +137,12 @@ export interface S2CNpcWindow { t: "NpcWindow"; id: number; kind: string; button
 export interface S2CShopWindow { t: "ShopWindow"; id: number; seq: number; mode: string; title: string; msg: string; main: string; what: string; level: string; realy: string; full: string; stone: string; sellOnly: boolean; maxGold: number; fame: number; rest: number; items: ShopItem[]; }
 export interface S2CChatMsg { t: "ChatMsg"; channel: string; fromId: number; from: string; text: string; color: number; }
 export interface S2CPong { t: "Pong"; seq: number; serverTime: number; }
-export interface S2CBattleStart { t: "BattleStart"; field: number; mySlot: number; turnTime: number; surprise: number; fighters: BattleFighter[]; pvp: boolean; event: boolean; watch: boolean; speed: number; }
+export interface S2CBattleStart { t: "BattleStart"; field: number; mySlot: number; turnTime: number; surprise: number; fighters: BattleFighter[]; pvp: boolean; event: boolean; watch: boolean; speed: number; resume: boolean; turn: number; submitted: boolean; petSubmitted: boolean; submittedPets: number[]; }
 export interface S2CBattleTurn { t: "BattleTurn"; turn: number; events: BattleEvent[]; }
-export interface S2CBattleEnd { t: "BattleEnd"; result: string; exp: number; levelUp: number; level: number; items: string[]; pets: PetResult[]; }
+export interface S2CBattleEnd { t: "BattleEnd"; result: string; gold: number; exp: number; levelUp: number; level: number; items: string[]; pets: PetResult[]; }
 export interface S2CPets { t: "Pets"; battle: number; ride: number; pets: PetInfo[]; }
 export interface S2CInventory { t: "Inventory"; gold: number; items: InvItem[]; }
-export type S2C = S2CFlags | S2CGmMenu | S2CGmList | S2CQuestLog | S2CGmDetail | S2CDuelResult | S2CFamilyMsg | S2CFamilyStatus | S2CObjFamily | S2CAddressBook | S2CAddressUpdate | S2CMailRecv | S2CObjAction | S2CObjMind | S2CTradeOpen | S2CTradeItem | S2CTradeGold | S2CTradePet | S2CTradeState | S2CTradeClose | S2CPartyResult | S2CPartyMember | S2CObjMark | S2CVendorSetup | S2CVendorList | S2CVendorClose | S2CVendorDetail | S2CSound | S2CHelpFlag | S2CBattleJoin | S2CHello | S2CPetSkillResult | S2CError | S2CAuthResult | S2CAccountInfo | S2CAccountResult | S2CServerList | S2CLineSelected | S2CCharListResult | S2CCharCreateResult | S2CSelf | S2CStatus | S2CEnterFloor | S2CMapData | S2CNpcList | S2CPosCorrect | S2CObjAppear | S2CObjDisappear | S2CObjMove | S2CObjTurn | S2CObjSprite | S2CNpcTalk | S2CNpcWindow | S2CShopWindow | S2CChatMsg | S2CPong | S2CBattleStart | S2CBattleTurn | S2CBattleEnd | S2CPets | S2CInventory;
+export type S2C = S2CFlags | S2CGmMenu | S2CGmList | S2CQuestLog | S2CGmDetail | S2CDuelResult | S2CFamilyMsg | S2CFamilyStatus | S2CObjFamily | S2CAddressBook | S2CAddressUpdate | S2CMailRecv | S2CObjAction | S2CObjMind | S2CTradeOpen | S2CTradeItem | S2CTradeGold | S2CTradePet | S2CTradeState | S2CTradeClose | S2CPartyResult | S2CPartyMember | S2CObjMark | S2CVendorSetup | S2CVendorList | S2CVendorClose | S2CVendorDetail | S2CSound | S2CHelpFlag | S2CBattleJoin | S2CHello | S2CPetSkillResult | S2CError | S2CAuthResult | S2CSession | S2CAutoPlayState | S2CAccountInfo | S2CAccountResult | S2CServerList | S2CLineSelected | S2CCharListResult | S2CCharCreateResult | S2CSelf | S2CStatus | S2CEnterFloor | S2CMapData | S2CNpcList | S2CPosCorrect | S2CObjAppear | S2CObjDisappear | S2CObjMove | S2CObjTurn | S2CObjSprite | S2CNpcTalk | S2CNpcWindow | S2CShopWindow | S2CChatMsg | S2CPong | S2CBattleStart | S2CBattleTurn | S2CBattleEnd | S2CPets | S2CInventory;
 export type S2CType = S2C["t"];
 
 // 栏位的预设值表（fillDefaults 用）：i 数字、s 字串、b 布林、a 阵列、T:型别、A:型别阵列
@@ -149,9 +153,9 @@ const SCHEMA: Record<string, [string, string][]> = {
   ObjInfo: [["id","i"],["kind","s"],["name","s"],["sprite","i"],["x","i"],["y","i"],["dir","i"],["level","i"],["leader","b"],["battle","i"],["help","b"],["action","i"],["family","s"],["trade","b"],["vendor","s"],["mind","i"]],
   NpcPos: [["name","s"],["x","i"],["y","i"]],
   VendorEntry: [["index","i"],["kind","i"],["slot","i"],["price","i"],["name","s"],["pile","i"],["image","i"],["level","i"],["sprite","i"]],
-  BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"]],
+  BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"],["ownerSlot","i"],["bagSlot","i"],["status","i"]],
   InvItem: [["slot","i"],["id","i"],["name","s"],["image","i"],["memo","s"],["level","i"],["pile","i"],["type","i"],["field","i"],["target","i"],["usable","b"],["equip","i"],["params","s"],["damage","s"],["magic","s"],["magicMemo","s"],["magicMp","i"],["magicField","i"],["magicTarget","i"],["magicDead","b"],["magicFunc","s"],["magicOption","s"],["flags","i"],["alch","s"],["merged","b"],["jigsaw","s"]],
-  BattleEvent: [["actor","i"],["kind","s"],["target","i"],["result","s"],["damage","i"],["hp","i"],["dead","b"],["ok","b"],["skill","s"],["status","i"],["guardian","i"],["combo","b"],["actorHp","i"],["mpDamage","i"],["guarded","b"],["petDamage","i"],["rideHp","i"],["fall","b"],["effect","i"],["actorMp","i"],["shoot","i"],["fly","i"],["name","s"],["sprite","i"],["level","i"],["maxHp","i"],["att","s"]],
+  BattleEvent: [["actor","i"],["kind","s"],["target","i"],["result","s"],["damage","i"],["hp","i"],["dead","b"],["ok","b"],["skill","s"],["status","i"],["guardian","i"],["combo","b"],["actorHp","i"],["mpDamage","i"],["guarded","b"],["petDamage","i"],["rideHp","i"],["fall","b"],["effect","i"],["actorMp","i"],["shoot","i"],["fly","i"],["name","s"],["sprite","i"],["level","i"],["maxHp","i"],["att","s"],["ownerSlot","i"],["bagSlot","i"]],
   ShopItem: [["name","s"],["level","i"],["price","i"],["image","i"],["info","s"],["sealed","b"],["slot","i"],["pile","i"],["fame","i"]],
   PetSkill: [["slot","i"],["id","i"],["name","s"],["memo","s"],["field","i"],["target","i"],["func","s"],["option","s"]],
   PetInfo: [["slot","i"],["name","s"],["freeName","s"],["sprite","i"],["level","i"],["exp","i"],["nextExp","i"],["hp","i"],["maxHp","i"],["atk","i"],["def","i"],["agi","i"],["loyalty","i"],["attrs","a"],["trans","i"],["maxSkill","i"],["skills","A:PetSkill"],["state","s"],["canRename","b"],["rideable","b"],["items","A:InvItem"],["guard","b"],["ext","T:PetExt"],["rideInfo","s"]],
@@ -190,11 +194,13 @@ const SCHEMA: Record<string, [string, string][]> = {
   VendorDetail: [["index","i"],["kind","i"],["item","T:InvItem"],["pet","T:PetInfo"]],
   Sound: [["x","i"],["y","i"],["se","i"]],
   HelpFlag: [["on","b"]],
-  BattleJoin: [["fighters","A:BattleFighter"]],
+  BattleJoin: [["fighters","A:BattleFighter"],["resetPets","b"]],
   Hello: [["version","s"],["serverTime","i"]],
   PetSkillResult: [["ok","b"],["pet","i"],["skill","i"]],
   Error: [["code","s"],["message","s"]],
   AuthResult: [["ok","b"],["message","s"]],
+  Session: [["token","s"],["resumed","b"],["inWorld","b"]],
+  AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],
   AccountResult: [["ok","b"],["message","s"]],
   ServerList: [["groups","A:ServerGroup"]],
@@ -217,9 +223,9 @@ const SCHEMA: Record<string, [string, string][]> = {
   ShopWindow: [["id","i"],["seq","i"],["mode","s"],["title","s"],["msg","s"],["main","s"],["what","s"],["level","s"],["realy","s"],["full","s"],["stone","s"],["sellOnly","b"],["maxGold","i"],["fame","i"],["rest","i"],["items","A:ShopItem"]],
   ChatMsg: [["channel","s"],["fromId","i"],["from","s"],["text","s"],["color","i"]],
   Pong: [["seq","i"],["serverTime","i"]],
-  BattleStart: [["field","i"],["mySlot","i"],["turnTime","i"],["surprise","i"],["fighters","A:BattleFighter"],["pvp","b"],["event","b"],["watch","b"],["speed","i"]],
+  BattleStart: [["field","i"],["mySlot","i"],["turnTime","i"],["surprise","i"],["fighters","A:BattleFighter"],["pvp","b"],["event","b"],["watch","b"],["speed","i"],["resume","b"],["turn","i"],["submitted","b"],["petSubmitted","b"],["submittedPets","a"]],
   BattleTurn: [["turn","i"],["events","A:BattleEvent"]],
-  BattleEnd: [["result","s"],["exp","i"],["levelUp","i"],["level","i"],["items","a"],["pets","A:PetResult"]],
+  BattleEnd: [["result","s"],["gold","i"],["exp","i"],["levelUp","i"],["level","i"],["items","a"],["pets","A:PetResult"]],
   Pets: [["battle","i"],["ride","i"],["pets","A:PetInfo"]],
   Inventory: [["gold","i"],["items","A:InvItem"]],
 };

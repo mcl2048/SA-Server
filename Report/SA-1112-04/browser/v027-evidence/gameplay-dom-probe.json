@@ -1,0 +1,11 @@
+{
+  "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a",
+  "client_mode": "embedded",
+  "phase": "dom-probe",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

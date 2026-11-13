@@ -186,7 +186,7 @@ func (b *Battle) battleMetamo(f *Fighter, c Command, ev *[]Event, secs int, item
 	if c.Target >= 0 && c.Target < Slots {
 		t = b.F[c.Target]
 	}
-	if t == nil || (t != f && t.Slot != f.Slot+5) {
+	if t == nil || (t != f && b.PetOwner(t) != f.Slot) {
 		fail("无法变身，只能变成自己的宠物！")
 		return
 	}

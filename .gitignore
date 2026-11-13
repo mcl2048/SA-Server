@@ -20,8 +20,16 @@ CLAUDE.md
 # Official large artwork/audio are supplied as a separately verified upstream archive.
 # Keep the release instructions tracked; do not upload runtime databases/resources.
 assets/**
+# Also exclude differently cased runtime resource directories and original bundles.
+**/[Aa][Ss][Ss][Ee][Tt][Ss]/**
 !assets/README.txt
+assets-v*.zip
+Assets-v*.zip
 *.db
 *.db-shm
 *.db-wal
 *.sqlite
+
+# Local Python preview/test caches are not source deliverables.
+__pycache__/
+*.py[cod]

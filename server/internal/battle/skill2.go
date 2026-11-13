@@ -335,10 +335,12 @@ func (b *Battle) flee(t *Fighter, ev *[]Event) {
 	}
 	t.Escaped = true
 	*ev = append(*ev, Event{Actor: t.Slot, Kind: Flee, Target: -1, Guardian: -1, HP: t.HP, Status: t.Status()})
-	if t.Player && t.Slot%SideOffset < 5 {
-		if p := b.F[t.Slot+5]; p.Alive() {
-			p.Escaped = true
-			*ev = append(*ev, Event{Actor: p.Slot, Kind: Flee, Target: -1, Guardian: -1, HP: p.HP, Status: p.Status()})
+	if t.Player {
+		for _, p := range b.F {
+			if p.Alive() && b.PetOwner(p) == t.Slot {
+				p.Escaped = true
+				*ev = append(*ev, Event{Actor: p.Slot, Kind: Flee, Target: -1, Guardian: -1, HP: p.HP, Status: p.Status()})
+			}
 		}
 	}
 }
@@ -406,10 +408,16 @@ func (b *Battle) regret(f *Fighter, c Command, o attackOpts, ev *[]Event) {
 	}
 	hit(t, o)
 	if t.Slot%SideOffset >= 5 && f.Alive() {
-		if owner := b.F[t.Slot-5]; owner.Alive() {
-			(*ev)[len(*ev)-1].Combo = true
-			o.dmgMod = 0.8
-			hit(owner, o)
+		ownerSlot := t.Slot - 5 // Enemy formations keep the original front/back pairing.
+		if t.Pet {
+			ownerSlot = b.PetOwner(t)
+		}
+		if ownerSlot >= 0 && ownerSlot < Slots {
+			if owner := b.F[ownerSlot]; owner.Alive() {
+				(*ev)[len(*ev)-1].Combo = true
+				o.dmgMod = 0.8
+				hit(owner, o)
+			}
 		}
 	}
 }

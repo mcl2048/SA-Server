@@ -1,0 +1,72 @@
+{
+  "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a",
+  "client_mode": "embedded",
+  "phase": "toggle",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "live-ui-auto-toggle-0",
+      "pass": true,
+      "details": {
+        "auto": true,
+        "server": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "encounter": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-1",
+      "pass": true,
+      "details": {
+        "auto": false,
+        "server": {
+          "t": "AutoPlayState",
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-2",
+      "pass": true,
+      "details": {
+        "auto": true,
+        "server": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "encounter": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-3",
+      "pass": true,
+      "details": {
+        "auto": false,
+        "server": {
+          "t": "AutoPlayState",
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

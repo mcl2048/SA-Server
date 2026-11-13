@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -36,33 +37,38 @@ type Config struct {
 
 // RulesConfig 是 config.yaml 的 rules，对应 world.Rules（时间都以秒为单位）。没写的项目用原版的值。
 type RulesConfig struct {
-	ExpRate       float64 `yaml:"expRate"`        // 战斗经验倍率
-	ShareExp      bool    `yaml:"shareExp"`       // 人物、出战宠物、骑宠都拿一样多的经验（false：原版的谁打倒谁拿）
-	DropRate      float64 `yaml:"dropRate"`       // 战利品机率倍率
-	EncounterRate float64 `yaml:"encounterRate"`  // 遇敌机率倍率（0 不会遇敌）
-	TurnTime      int     `yaml:"turnTime"`       // 每回合选指令的秒数
-	LevelUpPoints int     `yaml:"levelUpPoints"`  // 每升一级的加点
-	GroundItem    int     `yaml:"groundItem"`     // 地上的道具几秒后消失
-	GroundPet     int     `yaml:"groundPet"`      // 地上的宠物几秒后消失
-	GroundGold    int     `yaml:"groundGold"`     // 地上的石币几秒后消失
-	FamilyFee     int     `yaml:"familyFee"`      // 成立家族的手续费
-	NoEscape      []int   `yaml:"noEscapeFloors"` // 逃不掉的楼层（按逃跑改成防御）
-	WorldTrans    int     `yaml:"worldTrans"`     // 世界频道要几转
-	WorldLevel    int     `yaml:"worldLevel"`     // 世界频道要几级
-	WorldFame     int     `yaml:"worldFame"`      // 世界频道每句扣的声望（内部值，100 = 1 点）
-	AllServTrans  int     `yaml:"allServTrans"`   // 星球频道（跨线路）要几转
-	AllServLevel  int     `yaml:"allServLevel"`   // 星球频道要几级
-	AllServFame   int     `yaml:"allServFame"`    // 星球频道每句扣的声望
-	BusStep       int     `yaml:"busStep"`        // 长毛象巴士 / 加美航空每走一步的毫秒数（越小越快，100..2000）
-	VendorTax     int     `yaml:"vendorTax"`      // 摆摊卖出时抽的税（百分比，0..100；原版 0）
-	WalkSpeed     float64 `yaml:"walkSpeed"`      // 走路速度倍数（0.25..4，1 是原版）
-	BattleSpeed   float64 `yaml:"battleSpeed"`    // 战斗演出的速度倍数（0.25..4，1 是原版）
-	PetDeathLoss  float64 `yaml:"petDeathLoss"`   // 宠物倒下扣掉几级的成长（0..10；0 不扣，照原版）
-	EnemyGuard    float64 `yaml:"enemyGuardRate"` // 敌人选防御的机会倍率（0..1；1 原版，0 不防御）
+	CharMaxLevel   int     `yaml:"charMaxLevel"`   // 人物最高等级（1..1000，默认140）
+	PetMaxLevel    int     `yaml:"petMaxLevel"`    // 宠物最高等级（1..1000，默认140）
+	CharMaxTrans   int     `yaml:"charMaxTrans"`   // 人物最高转生次数（0..100，默认6）
+	PetMaxTrans    int     `yaml:"petMaxTrans"`    // 宠物最高转生次数（0..100，默认2）
+	BattleGoldRate float64 `yaml:"battleGoldRate"` // 击败敌人石币倍率（0关闭，0..1000支持小数）
+	ExpRate        float64 `yaml:"expRate"`        // 战斗经验倍率
+	ShareExp       bool    `yaml:"shareExp"`       // 人物、出战宠物、骑宠都拿一样多的经验（false：原版的谁打倒谁拿）
+	DropRate       float64 `yaml:"dropRate"`       // 战利品机率倍率
+	EncounterRate  float64 `yaml:"encounterRate"`  // 遇敌机率倍率（0 不会遇敌）
+	TurnTime       int     `yaml:"turnTime"`       // 每回合选指令的秒数
+	LevelUpPoints  int     `yaml:"levelUpPoints"`  // 每升一级的加点
+	GroundItem     int     `yaml:"groundItem"`     // 地上的道具几秒后消失
+	GroundPet      int     `yaml:"groundPet"`      // 地上的宠物几秒后消失
+	GroundGold     int     `yaml:"groundGold"`     // 地上的石币几秒后消失
+	FamilyFee      int     `yaml:"familyFee"`      // 成立家族的手续费
+	NoEscape       []int   `yaml:"noEscapeFloors"` // 逃不掉的楼层（按逃跑改成防御）
+	WorldTrans     int     `yaml:"worldTrans"`     // 世界频道要几转
+	WorldLevel     int     `yaml:"worldLevel"`     // 世界频道要几级
+	WorldFame      int     `yaml:"worldFame"`      // 世界频道每句扣的声望（内部值，100 = 1 点）
+	AllServTrans   int     `yaml:"allServTrans"`   // 星球频道（跨线路）要几转
+	AllServLevel   int     `yaml:"allServLevel"`   // 星球频道要几级
+	AllServFame    int     `yaml:"allServFame"`    // 星球频道每句扣的声望
+	BusStep        int     `yaml:"busStep"`        // 长毛象巴士 / 加美航空每走一步的毫秒数（越小越快，100..2000）
+	VendorTax      int     `yaml:"vendorTax"`      // 摆摊卖出时抽的税（百分比，0..100；原版 0）
+	WalkSpeed      float64 `yaml:"walkSpeed"`      // 走路速度倍数（0.25..4，1 是原版）
+	BattleSpeed    float64 `yaml:"battleSpeed"`    // 战斗演出的速度倍数（0.25..4，1 是原版）
+	PetDeathLoss   float64 `yaml:"petDeathLoss"`   // 宠物倒下扣掉几级的成长（0..10；0 不扣，照原版）
+	EnemyGuard     float64 `yaml:"enemyGuardRate"` // 敌人选防御的机会倍率（0..1；1 原版，0 不防御）
 }
 
 func rulesConfig(r world.Rules) RulesConfig {
-	return RulesConfig{ExpRate: r.ExpRate, ShareExp: r.ShareExp, DropRate: r.DropRate, EncounterRate: r.EncounterRate,
+	return RulesConfig{CharMaxLevel: r.CharMaxLevel, PetMaxLevel: r.PetMaxLevel, CharMaxTrans: r.CharMaxTrans, PetMaxTrans: r.PetMaxTrans, BattleGoldRate: r.BattleGoldRate, ExpRate: r.ExpRate, ShareExp: r.ShareExp, DropRate: r.DropRate, EncounterRate: r.EncounterRate,
 		TurnTime: int(r.TurnTime / time.Second), LevelUpPoints: r.LevelUpPoints, GroundItem: int(r.GroundItem / time.Second),
 		GroundPet: int(r.GroundPet / time.Second), GroundGold: int(r.GroundGold / time.Second), FamilyFee: r.FamilyFee,
 		NoEscape: r.NoEscapeFloors, WorldTrans: r.WorldTrans, WorldLevel: r.WorldLevel, WorldFame: r.WorldFame, AllServTrans: r.AllServTrans, AllServLevel: r.AllServLevel, AllServFame: r.AllServFame, BusStep: int(r.BusStep / time.Millisecond), VendorTax: r.VendorTax, WalkSpeed: r.WalkSpeed, BattleSpeed: r.BattleSpeed, PetDeathLoss: r.PetDeathLoss, EnemyGuard: r.EnemyGuardRate}
@@ -72,6 +78,12 @@ func rulesConfig(r world.Rules) RulesConfig {
 func (c RulesConfig) world() (world.Rules, error) {
 	sec := func(n int) time.Duration { return time.Duration(n) * time.Second }
 	switch {
+	case c.CharMaxLevel < 1 || c.CharMaxLevel > 1000 || c.PetMaxLevel < 1 || c.PetMaxLevel > 1000:
+		return world.Rules{}, errors.New("rules.charMaxLevel / petMaxLevel 要在 1..1000")
+	case c.CharMaxTrans < 0 || c.CharMaxTrans > 100 || c.PetMaxTrans < 0 || c.PetMaxTrans > 100:
+		return world.Rules{}, errors.New("rules.charMaxTrans / petMaxTrans 要在 0..100（0禁止新转生）")
+	case math.IsNaN(c.BattleGoldRate) || math.IsInf(c.BattleGoldRate, 0) || c.BattleGoldRate < 0 || c.BattleGoldRate > 1000:
+		return world.Rules{}, errors.New("rules.battleGoldRate 要在 0..1000 的有限数值（0关闭）")
 	case c.ExpRate < 0 || c.DropRate < 0 || c.EncounterRate < 0:
 		return world.Rules{}, errors.New("rules：倍率不能是负数")
 	case c.TurnTime < 5 || c.TurnTime > 300:
@@ -95,7 +107,7 @@ func (c RulesConfig) world() (world.Rules, error) {
 	case c.WorldTrans < 0 || c.WorldLevel < 0 || c.WorldFame < 0 || c.AllServTrans < 0 || c.AllServLevel < 0 || c.AllServFame < 0:
 		return world.Rules{}, errors.New("rules.worldTrans / worldLevel / worldFame / allServ* 不能是负数")
 	}
-	return world.Rules{ExpRate: c.ExpRate, ShareExp: c.ShareExp, DropRate: c.DropRate, EncounterRate: c.EncounterRate,
+	return world.Rules{CharMaxLevel: c.CharMaxLevel, PetMaxLevel: c.PetMaxLevel, CharMaxTrans: c.CharMaxTrans, PetMaxTrans: c.PetMaxTrans, BattleGoldRate: c.BattleGoldRate, ExpRate: c.ExpRate, ShareExp: c.ShareExp, DropRate: c.DropRate, EncounterRate: c.EncounterRate,
 		TurnTime: sec(c.TurnTime), LevelUpPoints: c.LevelUpPoints, GroundItem: sec(c.GroundItem), GroundPet: sec(c.GroundPet),
 		GroundGold: sec(c.GroundGold), FamilyFee: c.FamilyFee,
 		NoEscapeFloors: c.NoEscape, WorldTrans: c.WorldTrans, WorldLevel: c.WorldLevel, WorldFame: c.WorldFame, AllServTrans: c.AllServTrans, AllServLevel: c.AllServLevel, AllServFame: c.AllServFame, BusStep: time.Duration(c.BusStep) * time.Millisecond, VendorTax: c.VendorTax, WalkSpeed: c.WalkSpeed, BattleSpeed: c.BattleSpeed, PetDeathLoss: c.PetDeathLoss, EnemyGuardRate: c.EnemyGuard}, nil

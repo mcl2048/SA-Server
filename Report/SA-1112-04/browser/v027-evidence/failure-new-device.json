@@ -1,0 +1,1209 @@
+{
+  "screen": "FieldScreen",
+  "hits": [
+    {
+      "id": "chat-all",
+      "x1": 776,
+      "y1": 471,
+      "x2": 788.421875,
+      "y2": 489,
+      "label": "◆"
+    },
+    {
+      "id": "chat-up",
+      "x1": 776,
+      "y1": 496,
+      "x2": 788.421875,
+      "y2": 514,
+      "label": "▲"
+    },
+    {
+      "id": "chat-down",
+      "x1": 776,
+      "y1": 521,
+      "x2": 788.421875,
+      "y2": 539,
+      "label": "▼"
+    },
+    {
+      "id": "tb-map",
+      "x1": 0,
+      "y1": 576,
+      "x2": 92,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-status",
+      "x1": 116,
+      "y1": 576,
+      "x2": 208,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-pet",
+      "x1": 232,
+      "y1": 576,
+      "x2": 324,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-item",
+      "x1": 348,
+      "y1": 576,
+      "x2": 440,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-mail",
+      "x1": 463,
+      "y1": 576,
+      "x2": 555,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-album",
+      "x1": 578,
+      "y1": 576,
+      "x2": 670,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "tb-system",
+      "x1": 692,
+      "y1": 576,
+      "x2": 780,
+      "y2": 600,
+      "label": null
+    },
+    {
+      "id": "ai-tab-基本",
+      "x1": 170,
+      "y1": 100,
+      "x2": 202,
+      "y2": 118,
+      "label": "基本"
+    },
+    {
+      "id": "ai-tab-人物",
+      "x1": 226,
+      "y1": 100,
+      "x2": 258,
+      "y2": 118,
+      "label": "人物"
+    },
+    {
+      "id": "ai-tab-宠物",
+      "x1": 282,
+      "y1": 100,
+      "x2": 314,
+      "y2": 118,
+      "label": "宠物"
+    },
+    {
+      "id": "ai-tab-其他",
+      "x1": 338,
+      "y1": 100,
+      "x2": 370,
+      "y2": 118,
+      "label": "其他"
+    },
+    {
+      "id": "ai-auto-row",
+      "x1": 168,
+      "y1": 130,
+      "x2": 632,
+      "y2": 187,
+      "label": "自动战斗 ◀ 关闭 ▶ 战斗时照这里的设定自动下指令；地图上按 PageUp / PageDown 也能切 换。"
+    },
+    {
+      "id": "ai-auto-prev",
+      "x1": 292,
+      "y1": 132,
+      "x2": 304.421875,
+      "y2": 150,
+      "label": "◀"
+    },
+    {
+      "id": "ai-auto-val",
+      "x1": 312,
+      "y1": 132,
+      "x2": 344,
+      "y2": 150,
+      "label": "关闭"
+    },
+    {
+      "id": "ai-auto-next",
+      "x1": 348,
+      "y1": 132,
+      "x2": 360.421875,
+      "y2": 150,
+      "label": "▶"
+    },
+    {
+      "id": "ai-quick-row",
+      "x1": 168,
+      "y1": 189,
+      "x2": 632,
+      "y2": 246,
+      "label": "快速战斗 ◀ 开启 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。"
+    },
+    {
+      "id": "ai-quick-prev",
+      "x1": 292,
+      "y1": 191,
+      "x2": 304.421875,
+      "y2": 209,
+      "label": "◀"
+    },
+    {
+      "id": "ai-quick-val",
+      "x1": 312,
+      "y1": 191,
+      "x2": 344,
+      "y2": 209,
+      "label": "开启"
+    },
+    {
+      "id": "ai-quick-next",
+      "x1": 348,
+      "y1": 191,
+      "x2": 360.421875,
+      "y2": 209,
+      "label": "▶"
+    },
+    {
+      "id": "ai-enc-row",
+      "x1": 168,
+      "y1": 248,
+      "x2": 632,
+      "y2": 305,
+      "label": "自动遇敌 ◀ 开启 ▶ 在站的格子与旁边一格之间来回走引来敌人；手动移动、换地图或耐久力 太低就停。"
+    },
+    {
+      "id": "ai-enc-prev",
+      "x1": 292,
+      "y1": 250,
+      "x2": 304.421875,
+      "y2": 268,
+      "label": "◀"
+    },
+    {
+      "id": "ai-enc-val",
+      "x1": 312,
+      "y1": 250,
+      "x2": 344,
+      "y2": 268,
+      "label": "开启"
+    },
+    {
+      "id": "ai-enc-next",
+      "x1": 348,
+      "y1": 250,
+      "x2": 360.421875,
+      "y2": 268,
+      "label": "▶"
+    },
+    {
+      "id": "ai-heal-row",
+      "x1": 168,
+      "y1": 307,
+      "x2": 632,
+      "y2": 364,
+      "label": "补血时机 ◀ 耐久力低于 30％ ▶ 自己、宠物或队友的 HP 低于这个比例、或预计会被打死，就先补血（肉 优先，再挑够补满的精灵或道具）。"
+    },
+    {
+      "id": "ai-heal-prev",
+      "x1": 292,
+      "y1": 309,
+      "x2": 304.421875,
+      "y2": 327,
+      "label": "◀"
+    },
+    {
+      "id": "ai-heal-val",
+      "x1": 312,
+      "y1": 309,
+      "x2": 419.05859375,
+      "y2": 327,
+      "label": "耐久力低于 30％"
+    },
+    {
+      "id": "ai-heal-next",
+      "x1": 423.05859375,
+      "y1": 309,
+      "x2": 435.48046875,
+      "y2": 327,
+      "label": "▶"
+    },
+    {
+      "id": "ai-esc-row",
+      "x1": 168,
+      "y1": 366,
+      "x2": 632,
+      "y2": 423,
+      "label": "打不过就逃跑 ◀ 开启 ▶ 自己会被打死又补不了血、或两回合内打不完对方时逃跑（头目、任务战 斗、决斗不逃）。"
+    },
+    {
+      "id": "ai-esc-prev",
+      "x1": 292,
+      "y1": 368,
+      "x2": 304.421875,
+      "y2": 386,
+      "label": "◀"
+    },
+    {
+      "id": "ai-esc-val",
+      "x1": 312,
+      "y1": 368,
+      "x2": 344,
+      "y2": 386,
+      "label": "开启"
+    },
+    {
+      "id": "ai-esc-next",
+      "x1": 348,
+      "y1": 368,
+      "x2": 360.421875,
+      "y2": 386,
+      "label": "▶"
+    },
+    {
+      "id": "ai-close",
+      "x1": 370,
+      "y1": 454,
+      "x2": 416,
+      "y2": 472,
+      "label": "关　闭"
+    }
+  ],
+  "body": "游戏菜单\n返回\n\n战斗设定 · 自动战斗：关闭\n\n自动战斗\n\n战斗时照这里的设定自动下指令；地图上按 PageUp / PageDown 也能切\n\n换。\n\n快速战斗\n\n遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验\n\n写在聊天栏）。\n\n自动遇敌\n\n在站的格子与旁边一格之间来回走引来敌人；手动移动、换地图或耐久力\n\n太低就停。\n\n补血时机\n\n自己、宠物或队友的 HP 低于这个比例、或预计会被打死，就先补血（肉\n\n优先，再挑够补满的精灵或道具）。\n\n打不过就逃跑\n\n自己会被打死又补不了血、或两回合内打不完对方时逃跑（头目、任务战\n\n斗、决斗不逃）。\n\n基本\n人物\n宠物\n其他\n自动战斗 ◀ 关闭 ▶ 战斗时照这里的设定自动下指令；地图上按 PageUp / PageDown 也能切 换。\n◀\n关闭\n▶\n快速战斗 ◀ 开启 ▶ 遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验 写在聊天栏）。\n◀\n开启\n▶\n自动遇敌 ◀ 开启 ▶ 在站的格子与旁边一格之间来回走引来敌人；手动移动、换地图或耐久力 太低就停。\n◀\n开启\n▶\n补血时机 ◀ 耐久力低于 30％ ▶ 自己、宠物或队友的 HP 低于这个比例、或预计会被打死，就先补血（肉 优先，再挑够补满的精灵或道具）。\n◀\n耐久力低于 30％\n▶\n打不过就逃跑 ◀ 开启 ▶ 自己会被打死又补不了血、或两回合内打不完对方时逃跑（头目、任务战 斗、决斗不逃）。\n◀\n开启\n▶\n关 闭\n当前选项\n轻点画面或切换选项\n‹\n›\n左键\n选择 / 确认\n右键\n原生右键操作\n−\n复位\n＋\n界面",
+  "battle": null,
+  "recentSent": [
+    {
+      "t": "MapReq",
+      "floor": 100,
+      "x1": 633,
+      "y1": 436,
+      "x2": 634,
+      "y2": 467
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    },
+    {
+      "t": "AutoPlay",
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "settings": "{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}"
+    }
+  ],
+  "recentReceived": [
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "kind": "attack",
+          "target": 16,
+          "result": "critical",
+          "damage": 1213,
+          "dead": true,
+          "guardian": -1,
+          "actorHp": 7000,
+          "fly": 2,
+          "actor": 0,
+          "hp": 0,
+          "ok": false,
+          "skill": "",
+          "status": 0,
+          "combo": false,
+          "mpDamage": 0,
+          "guarded": false,
+          "petDamage": 0,
+          "rideHp": 0,
+          "fall": false,
+          "effect": 0,
+          "actorMp": 0,
+          "shoot": 0,
+          "name": "",
+          "sprite": 0,
+          "level": 0,
+          "maxHp": 0,
+          "att": "",
+          "ownerSlot": 0,
+          "bagSlot": 0
+        },
+        {
+          "actor": 5,
+          "kind": "attack",
+          "target": 15,
+          "result": "critical",
+          "damage": 423,
+          "dead": true,
+          "guardian": -1,
+          "actorHp": 1403,
+          "fly": 2,
+          "hp": 0,
+          "ok": false,
+          "skill": "",
+          "status": 0,
+          "combo": false,
+          "mpDamage": 0,
+          "guarded": false,
+          "petDamage": 0,
+          "rideHp": 0,
+          "fall": false,
+          "effect": 0,
+          "actorMp": 0,
+          "shoot": 0,
+          "name": "",
+          "sprite": 0,
+          "level": 0,
+          "maxHp": 0,
+          "att": "",
+          "ownerSlot": 0,
+          "bagSlot": 0
+        }
+      ]
+    },
+    {
+      "t": "Inventory",
+      "gold": 23,
+      "items": []
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "gold": 4,
+      "exp": 2,
+      "level": 150,
+      "pets": [
+        {
+          "name": "乌力",
+          "exp": 2,
+          "level": 180,
+          "slot": 0,
+          "levelUp": 0
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "exp": 2,
+          "level": 30,
+          "levelUp": 0
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "exp": 2,
+          "level": 30,
+          "levelUp": 0
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "exp": 2,
+          "level": 30,
+          "levelUp": 0
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "exp": 2,
+          "level": 30,
+          "levelUp": 0
+        }
+      ],
+      "levelUp": 0,
+      "items": []
+    },
+    {
+      "t": "Status",
+      "name": "UpgAb419",
+      "face": 30000,
+      "level": 150,
+      "exp": 21,
+      "nextExp": 73655601,
+      "hp": 7000,
+      "maxHp": 7000,
+      "mp": 100,
+      "maxMp": 100,
+      "atk": 1250,
+      "def": 1250,
+      "agi": 1000,
+      "charm": 66,
+      "dp": 6000,
+      "vital": 1000,
+      "str": 1000,
+      "tgh": 1000,
+      "dex": 1000,
+      "attrs": [
+        100,
+        0,
+        0,
+        0
+      ],
+      "points": 120,
+      "detail": [
+        "攻击 1250（本身 1250　装备 +0）",
+        "防御 1250（本身 1250　装备 +0）",
+        "敏捷 1000（本身 1000　装备 +0）",
+        "耐久力 7000（本身 7000　装备 +0）",
+        "气力上限 100　会心 +0　回避 +0",
+        "魅力 66　运气 1　转生 0",
+        "属性 地100 水0 火0 风0",
+        "声望 2301　DP 6000",
+        "本级经验 21 / 73655601（还差 73655580）",
+        "骑乘等级 140",
+        "魔法 地0 水0 火0 风0",
+        "抗魔 地0 水0 火0 风0"
+      ],
+      "hometown": 0,
+      "trans": 0
+    },
+    {
+      "t": "ObjMark",
+      "id": 1,
+      "leader": false,
+      "battle": 0,
+      "help": false,
+      "trade": false,
+      "vendor": ""
+    },
+    {
+      "t": "Pets",
+      "ride": -1,
+      "pets": [
+        {
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 180,
+          "exp": 5462,
+          "hp": 1403,
+          "maxHp": 1403,
+          "atk": 207,
+          "def": 230,
+          "agi": 259,
+          "loyalty": 100,
+          "attrs": [
+            80,
+            20,
+            0,
+            0
+          ],
+          "maxSkill": 6,
+          "skills": [
+            {
+              "id": 1,
+              "name": "攻击",
+              "memo": "通常攻击",
+              "field": 1,
+              "target": 6,
+              "func": "PETSKILL_NormalAttack",
+              "slot": 0,
+              "option": ""
+            },
+            {
+              "slot": 1,
+              "id": 2,
+              "name": "防御",
+              "memo": "通常防御",
+              "field": 1,
+              "target": 5,
+              "func": "PETSKILL_NormalGuard",
+              "option": ""
+            }
+          ],
+          "state": "battle",
+          "canRename": true,
+          "ext": {
+            "rank": 5,
+            "getLevel": 30,
+            "enemyId": 9,
+            "alloc": [
+              18,
+              13,
+              16,
+              24
+            ],
+            "std": [
+              20,
+              12,
+              15,
+              25
+            ],
+            "grow": [
+              119,
+              135,
+              152,
+              819
+            ],
+            "real": [
+              119,
+              135,
+              151,
+              817
+            ],
+            "init": [
+              2,
+              2,
+              2,
+              14
+            ],
+            "resist": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "critical": 1,
+            "counter": 1,
+            "vai": 100,
+            "magic": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "rideInfo": "no",
+          "slot": 0,
+          "freeName": "",
+          "nextExp": 0,
+          "trans": 0,
+          "rideable": false,
+          "items": [],
+          "guard": false
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 30,
+          "exp": 5462,
+          "nextExp": 11352,
+          "hp": 183,
+          "maxHp": 183,
+          "atk": 29,
+          "def": 26,
+          "agi": 35,
+          "loyalty": 100,
+          "attrs": [
+            80,
+            20,
+            0,
+            0
+          ],
+          "maxSkill": 6,
+          "skills": [
+            {
+              "id": 1,
+              "name": "攻击",
+              "memo": "通常攻击",
+              "field": 1,
+              "target": 6,
+              "func": "PETSKILL_NormalAttack",
+              "slot": 0,
+              "option": ""
+            },
+            {
+              "slot": 1,
+              "id": 2,
+              "name": "防御",
+              "memo": "通常防御",
+              "field": 1,
+              "target": 5,
+              "func": "PETSKILL_NormalGuard",
+              "option": ""
+            }
+          ],
+          "state": "standby",
+          "canRename": true,
+          "ext": {
+            "rank": 5,
+            "getLevel": 30,
+            "enemyId": 9,
+            "alloc": [
+              19,
+              13,
+              16,
+              25
+            ],
+            "std": [
+              20,
+              12,
+              15,
+              25
+            ],
+            "grow": [
+              120,
+              136,
+              158,
+              848
+            ],
+            "init": [
+              2,
+              2,
+              2,
+              14
+            ],
+            "resist": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "critical": 1,
+            "counter": 1,
+            "magic": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "rideInfo": "no",
+          "freeName": "",
+          "trans": 0,
+          "rideable": false,
+          "items": [],
+          "guard": false
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 30,
+          "exp": 5462,
+          "nextExp": 11352,
+          "hp": 183,
+          "maxHp": 183,
+          "atk": 24,
+          "def": 31,
+          "agi": 35,
+          "loyalty": 100,
+          "attrs": [
+            80,
+            20,
+            0,
+            0
+          ],
+          "maxSkill": 6,
+          "skills": [
+            {
+              "id": 1,
+              "name": "攻击",
+              "memo": "通常攻击",
+              "field": 1,
+              "target": 6,
+              "func": "PETSKILL_NormalAttack",
+              "slot": 0,
+              "option": ""
+            },
+            {
+              "slot": 1,
+              "id": 2,
+              "name": "防御",
+              "memo": "通常防御",
+              "field": 1,
+              "target": 5,
+              "func": "PETSKILL_NormalGuard",
+              "option": ""
+            }
+          ],
+          "state": "standby",
+          "canRename": true,
+          "ext": {
+            "rank": 5,
+            "getLevel": 30,
+            "enemyId": 9,
+            "alloc": [
+              18,
+              14,
+              17,
+              24
+            ],
+            "std": [
+              20,
+              12,
+              15,
+              25
+            ],
+            "grow": [
+              125,
+              141,
+              152,
+              831
+            ],
+            "init": [
+              1,
+              2,
+              2,
+              14
+            ],
+            "resist": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "critical": 1,
+            "counter": 1,
+            "magic": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "rideInfo": "no",
+          "freeName": "",
+          "trans": 0,
+          "rideable": false,
+          "items": [],
+          "guard": false
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 30,
+          "exp": 5462,
+          "nextExp": 11352,
+          "hp": 178,
+          "maxHp": 178,
+          "atk": 25,
+          "def": 26,
+          "agi": 34,
+          "loyalty": 100,
+          "attrs": [
+            80,
+            20,
+            0,
+            0
+          ],
+          "maxSkill": 6,
+          "skills": [
+            {
+              "id": 1,
+              "name": "攻击",
+              "memo": "通常攻击",
+              "field": 1,
+              "target": 6,
+              "func": "PETSKILL_NormalAttack",
+              "slot": 0,
+              "option": ""
+            },
+            {
+              "slot": 1,
+              "id": 2,
+              "name": "防御",
+              "memo": "通常防御",
+              "field": 1,
+              "target": 5,
+              "func": "PETSKILL_NormalGuard",
+              "option": ""
+            }
+          ],
+          "state": "standby",
+          "canRename": true,
+          "ext": {
+            "rank": 5,
+            "getLevel": 30,
+            "enemyId": 9,
+            "alloc": [
+              19,
+              13,
+              14,
+              23
+            ],
+            "std": [
+              20,
+              12,
+              15,
+              25
+            ],
+            "grow": [
+              118,
+              123,
+              147,
+              825
+            ],
+            "init": [
+              2,
+              2,
+              2,
+              14
+            ],
+            "resist": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "critical": 1,
+            "counter": 1,
+            "magic": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "rideInfo": "no",
+          "freeName": "",
+          "trans": 0,
+          "rideable": false,
+          "items": [],
+          "guard": false
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 30,
+          "exp": 5462,
+          "nextExp": 11352,
+          "hp": 176,
+          "maxHp": 176,
+          "atk": 25,
+          "def": 27,
+          "agi": 30,
+          "loyalty": 100,
+          "attrs": [
+            80,
+            20,
+            0,
+            0
+          ],
+          "maxSkill": 6,
+          "skills": [
+            {
+              "id": 1,
+              "name": "攻击",
+              "memo": "通常攻击",
+              "field": 1,
+              "target": 6,
+              "func": "PETSKILL_NormalAttack",
+              "slot": 0,
+              "option": ""
+            },
+            {
+              "slot": 1,
+              "id": 2,
+              "name": "防御",
+              "memo": "通常防御",
+              "field": 1,
+              "target": 5,
+              "func": "PETSKILL_NormalGuard",
+              "option": ""
+            }
+          ],
+          "state": "standby",
+          "canRename": true,
+          "ext": {
+            "rank": 5,
+            "getLevel": 30,
+            "enemyId": 9,
+            "alloc": [
+              18,
+              11,
+              14,
+              24
+            ],
+            "std": [
+              20,
+              12,
+              15,
+              25
+            ],
+            "grow": [
+              107,
+              122,
+              152,
+              796
+            ],
+            "init": [
+              2,
+              2,
+              2,
+              14
+            ],
+            "resist": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "critical": 1,
+            "counter": 1,
+            "magic": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "rideInfo": "no",
+          "freeName": "",
+          "trans": 0,
+          "rideable": false,
+          "items": [],
+          "guard": false
+        }
+      ],
+      "battle": 0
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "encounter": true,
+      "quick": true,
+      "paused": true,
+      "autoBattle": false,
+      "reason": ""
+    }
+  ]
+}

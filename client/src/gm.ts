@@ -278,7 +278,7 @@ export class GmWindow {
     if (!d) { ui.text(dx + 18, dy + 24, "读取中…", FONT.GRAY); return; }
     let ty = dy + 22;
     if (d.image > 0) {
-      if (d.image >= 100000 && d.image < 140000) {
+      if ((d.image >= 100000 && d.image < 140000) || (d.image >= 199100 && d.image <= 199103)) {
         // 动画（宠物、玩家）：站立动作循环播放，脚底对齐
         const id = d.image;
         ui.actor({ frameOf: (assets: Assets, now: number) => {

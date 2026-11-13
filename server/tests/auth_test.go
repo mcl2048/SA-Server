@@ -15,13 +15,19 @@ import (
 // 注册时要有安全码；客户端送的密码与安全码都是 32 位十六进制的 MD5，不是的一律拒绝。
 const testSecret = "0cc175b9c0f1b6a831c399e269772661" // md5("a")
 
-func register(t *testing.T, c *client, account string) {
+func register(t *testing.T, c *client, account string) string {
 	t.Helper()
 	c.send(&proto.Register{Account: account, Password: testPw, Secret: testSecret})
 	if r := c.expect("AuthResult"); r["ok"] != true {
 		t.Fatalf("注册应成功：%v", r)
 	}
+	marker := c.expect("Session")
+	token, ok := marker["token"].(string)
+	if !ok || len(token) != 43 || marker["inWorld"] == true {
+		t.Fatalf("registration session is invalid: %v", marker)
+	}
 	c.expect("ServerList")
+	return token
 }
 
 func TestRegisterNeedsSecret(t *testing.T) {
@@ -125,7 +131,7 @@ func TestResetPasswordWithoutSecret(t *testing.T) {
 func TestAccountInfoAndChange(t *testing.T) {
 	url := startServer(t)
 	c := dial(t, url)
-	register(t, c, "selfcare")
+	initialToken := register(t, c, "selfcare")
 	c.send(&proto.AccountInfoReq{})
 	if m := c.expect("AccountInfo"); m["account"] != "selfcare" || m["hasSecret"] != true || num(m, "chars") != 0 {
 		t.Fatalf("账号资料不对：%v", m)
@@ -139,6 +145,10 @@ func TestAccountInfoAndChange(t *testing.T) {
 	if m := c.expect("AccountResult"); m["ok"] != true {
 		t.Fatalf("应改成功：%v", m)
 	}
+	rotated := c.expect("Session")
+	if token, ok := rotated["token"].(string); !ok || len(token) != 43 || token == initialToken {
+		t.Fatalf("password change did not rotate browser token: %v", rotated)
+	}
 	const newSecret = "81dc9bdb52d04dc20036dbd8313ed055" // md5("1234")
 	c.send(&proto.ChangeSecret{Password: newPw, Secret: newSecret})
 	if m := c.expect("AccountResult"); m["ok"] != true {
@@ -149,19 +159,35 @@ func TestAccountInfoAndChange(t *testing.T) {
 	if m := d.expect("AuthResult"); m["ok"] != true {
 		t.Fatalf("新密码应能登录：%v", m)
 	}
+	d.expect("Session")
 	d.expect("ServerList")
+	if !c.closed() {
+		t.Fatal("new device login did not replace old account controller")
+	}
 	r := dial(t, url) // 找回密码是没登录的连线做的
 	r.send(&proto.ResetPassword{Account: "selfcare", Secret: newSecret, Password: testPw})
 	if m := r.expect("AuthResult"); !strings.Contains(m["message"].(string), "已重设") {
 		t.Fatalf("新安全码应能找回密码：%v", m)
 	}
-	// 连错 AuthFailLimit 次就锁住
-	for i := 0; i < server.AuthFailLimit; i++ {
-		c.send(&proto.ChangePassword{Old: "00000000000000000000000000000000", Password: newPw})
-		c.expect("AccountResult")
+	if !d.closed() {
+		t.Fatal("password reset did not revoke the active controller")
 	}
-	c.send(&proto.ChangePassword{Old: newPw, Password: newPw})
-	if m := c.expect("AccountResult"); !strings.Contains(m["message"].(string), "次数太多") {
+	// Reset revoked both earlier controllers. Reauthenticate using the reset
+	// password before verifying failed-change lockout on a live connection.
+	r.send(&proto.Login{Account: "selfcare", Password: testPw})
+	if auth := r.expect("AuthResult"); auth["ok"] != true {
+		t.Fatalf("reset password could not reauthenticate: %v", auth)
+	}
+	r.expect("Session")
+	r.expect("ServerList")
+	for i := 0; i < server.AuthFailLimit; i++ {
+		r.send(&proto.ChangePassword{Old: "00000000000000000000000000000000", Password: newPw})
+		if result := r.expect("AccountResult"); result["ok"] != false {
+			t.Fatalf("wrong old password bypassed verification: %v", result)
+		}
+	}
+	r.send(&proto.ChangePassword{Old: testPw, Password: newPw})
+	if m := r.expect("AccountResult"); m["ok"] != false || !strings.Contains(m["message"].(string), "次数太多") {
 		t.Fatalf("连错后应锁住：%v", m)
 	}
 }

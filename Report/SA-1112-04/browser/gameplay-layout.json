@@ -1,0 +1,56 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "client_mode": "embedded",
+  "phase": "layout",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "new-cover-real-desktop",
+      "pass": true,
+      "details": {
+        "size": [
+          1280,
+          900
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "new-cover-real-portrait",
+      "pass": true,
+      "details": {
+        "size": [
+          390,
+          844
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "mobile-password-visual-viewport-and-composition-safe",
+      "pass": true,
+      "details": {
+        "visiblePassword": true,
+        "height": 500
+      }
+    },
+    {
+      "case": "new-cover-real-landscape",
+      "pass": true,
+      "details": {
+        "size": [
+          844,
+          390
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

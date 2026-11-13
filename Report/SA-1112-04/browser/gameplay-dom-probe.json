@@ -1,0 +1,124 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "client_mode": "embedded",
+  "phase": "dom-probe",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "real-dom-ai-auto-val-0",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "paused": true,
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-quick-val-1",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "encounter": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-quick-val-2",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "encounter": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-auto-val-3",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "paused": true,
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

@@ -1,0 +1,25 @@
+{
+  "case": "invalid-json",
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "enteredWorld": true,
+  "fallback": [
+    {
+      "requested": 199100,
+      "actual": 100374
+    },
+    {
+      "requested": 199101,
+      "actual": 100374
+    },
+    {
+      "requested": 199102,
+      "actual": 100374
+    },
+    {
+      "requested": 199103,
+      "actual": 100374
+    }
+  ],
+  "errors": [],
+  "serverAlive": true
+}

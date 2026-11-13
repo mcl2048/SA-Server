@@ -86,6 +86,8 @@ type AtomFix struct {
 
 // BattleData 汇总战斗用的原版数据。
 type BattleData struct {
+	aiPetsInstalled, aiHabitatsInstalled bool
+
 	Areas     []EncountArea
 	Groups    map[int]*Group
 	Enemies   map[int]*Enemy
@@ -277,6 +279,9 @@ func LoadBattle(dataDir string) (*BattleData, error) {
 	if err := d.loadBattleMap(filepath.Join(dataDir, "map", "battlemap.txt")); err != nil {
 		return nil, err
 	}
+	if err := d.installAIPets(); err != nil {
+		return nil, fmt.Errorf("读取机械伙伴：%w", err)
+	}
 	return d, nil
 }
 
@@ -340,12 +345,35 @@ func (d *BattleData) AreaAt(floor, x, y int) *EncountArea {
 }
 
 // NextLevelExp 返回 level 级升下一级所需的经验（CHAR_GetLevelExp(level+1) = NeedLevelUpTbls[level+1]，即 exp.txt 第 level+1 行），
-// 这是本级从 0 累计的量（升级时扣掉，CHAR_HandleExp _NEWOPEN_MAXEXP）；满级返回 -1。
+// 这是本级从 0 累计的量（升级时扣掉，CHAR_HandleExp _NEWOPEN_MAXEXP）。
+// 原经验表有效项不变；尾部终止哨兵及表外按最后两个正值的增量延伸，
+// 让可配置的高等级连续成长。等级上限由世界规则检查，不再由表尾决定。
 func (d *BattleData) NextLevelExp(level int) int {
-	if level >= len(d.LevelExp) || level < 0 {
+	if level < 0 || len(d.LevelExp) == 0 {
 		return -1
 	}
-	return d.LevelExp[level]
+	if level < len(d.LevelExp) && d.LevelExp[level] >= 0 {
+		return d.LevelExp[level]
+	}
+	base := len(d.LevelExp) - 1
+	for base >= 0 && d.LevelExp[base] <= 0 {
+		base--
+	}
+	if base < 0 || level <= base {
+		return -1 // 不填补原表中间的无效项，也不从空表创造经验曲线。
+	}
+	last, delta := d.LevelExp[base], 1
+	for previous := base - 1; previous >= 0; previous-- {
+		if d.LevelExp[previous] > 0 {
+			delta = max(1, (last-d.LevelExp[previous])/(base-previous))
+			break
+		}
+	}
+	steps, maxInt := level-base, int(^uint(0)>>1)
+	if steps > (maxInt-last)/delta {
+		return maxInt
+	}
+	return last + steps*delta
 }
 
 // enemyBaseExp 是 gmsv/include/enemyexptbl.h 的 enemybaseexptbl（按等级 1 起）。

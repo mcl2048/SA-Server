@@ -14,6 +14,7 @@
 
 import type { PetInfo, PetSkill, S2CPets } from "./proto.gen.ts";
 import { ANIM, findAction } from "./assets.ts";
+import { aiPetForSprite } from "./ai-pet-catalog.ts";
 import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure, type Ui } from "./ui.ts";
 
 const CG = {
@@ -26,7 +27,7 @@ const CG = {
 };
 const PET_SLOTS = 5;
 const PET_NAME_LEN = 16;       // pc.h PET_NAME_LEN（半角宽）
-const MAX_STANDBY = 4;         // BattlePetStMenCnt < 4（出战的那只也算在内）
+const MAX_DEPLOYED_PETS = PET_SLOTS; // 一只主宠加四只待命；待命数由服务端单独限制为四只
 const PETSKILL_FIELD_BATTLE = 1; // pc.h：PETSKILL_FIELD_ALL / BATTLE / MAP
 const PET_WND_ATTR_X = 159, PET_WND_ATTR_Y = 5;
 // _LIZARDPOSITION：龙蜥的图偏低，画高一点
@@ -148,6 +149,14 @@ export class PetWindow {
           this.host.ride(p.slot);
         }
       }
+      // 邮件宠物仍是休息状态，独立选择才能和五宠出战共存。
+      if (p.state === "rest") {
+        const mailId = `pet-mail${p.slot}`, selectedForMail = p.slot === this.host.mailPet(), label = selectedForMail ? "取消邮件" : "邮件";
+        if (ui.text(x + 20 - measure(label) / 2, y + 11 - FONT_SIZE / 2, label, FONT.GREEN, mailId) && !this.waiting) {
+          this.host.setMailPet(selectedForMail ? -1 : p.slot);
+        }
+        if (ui.hovered(mailId)) ui.bottomLine = "选择休息的宠物寄送邮件；出战与待命宠物不能寄送。";
+      }
       ui.text(x + 26 + 27, y, `${String(p.level).padStart(3)}     ${String(p.hp).padStart(4)}   ${String(p.maxHp).padStart(4)}`, color);
       y += 27;
     }
@@ -165,20 +174,24 @@ export class PetWindow {
    * 点状态钮（原版的判断顺序，去掉邮件与骑乘）：
    *   出战 → 休息（lssproto_KS −1）
    *   待命 → 没有出战的宠物时出战（HP 为 0 的不行，原版播错误音、不变）；已经有出战的 → 休息
-   *   休息 → 待命（BattlePetStMenCnt < 4，出战的也算；满了原版是改成邮件宠物，这里不变）
+   *   休息 → 待命（一只主宠加四只待命，共五只；邮件用独立按钮选择）
    */
   private cycle(p: PetInfo, selected: number) {
     if (this.waiting || p.state === "mail") return; // BattlePetReceiveFlag：上一次还没回来；飞出去的邮件宠物不能改
-    // 邮件宠物（pc.mailPetNo，只在客户端）：邮件 → 休息；休息而待命满了 → 邮件（只能一只）
+    // 邮件宠物（pc.mailPetNo，只在客户端）：状态钮清除邮件选择，仍保持休息。
     if (p.slot === this.host.mailPet()) { this.host.setMailPet(-1); return; }
-    if (p.state === "rest" && selected >= MAX_STANDBY) { this.host.setMailPet(p.slot); return; }
     const hasBattle = this.list().some((q) => q.state === "battle");
     let next = "";
     if (p.state === "battle" || p.state === "ride") next = "rest"; // 骑着的：先下来（"R|P|-1"）再休息，服务端一起做
     else if (p.state === "standby") {
       if (!hasBattle) { if (p.hp > 0) next = "battle"; /* else play_se(220) 错误音 */ }
       else next = "rest";
-    } else if (selected < MAX_STANDBY) next = "standby";
+    } else if (selected < MAX_DEPLOYED_PETS) {
+      // 四只待命已经占满服务端待命位时，第五只直接成为主宠。
+      const standby = this.list().filter((q) => q.state === "standby").length;
+      if (!hasBattle && standby >= MAX_DEPLOYED_PETS - 1) { if (p.hp > 0) next = "battle"; }
+      else next = "standby";
+    }
     if (!next) return;
     this.waiting = this.host.pets();
     this.waitAt = performance.now();
@@ -298,6 +311,16 @@ export class PetWindow {
       const el = ["地", "水", "火", "风"];
       lines.push([`魔法 ${el.map((n, i) => `${n}${ex.magic[i]}`).join(" ")}`, FONT.YELLOW]);
       lines.push([`抗魔 ${el.map((n, i) => `${n}${ex.magic[4 + i]}`).join(" ")}`, FONT.YELLOW]);
+    }
+    const catalog = aiPetForSprite(p.sprite);
+    if (catalog) {
+      lines.push(["简介（完整故事见图鉴）", FONT.YELLOW]);
+      let line = "";
+      for (const character of catalog.brief) {
+        if (line && measure(line + character) > 220) { lines.push([line, FONT.GRAY]); line = ""; }
+        line += character;
+      }
+      if (line) lines.push([line, FONT.GRAY]);
     }
     const th = Math.ceil((lines.length * 21 + 50) / 48);
     ui.window(x, y, 4, th, "pet-ext");

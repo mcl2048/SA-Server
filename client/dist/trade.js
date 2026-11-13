@@ -6,8 +6,8 @@
 // 没做的：查看对方的窗口（CG_TRADE_VIEWWND，这里对方放的直接列在上面）、交易对话气泡（_TRADETALKWND）。交易中头上有〔交易中〕（ObjMark.trade）。
 
 
-import { FONT, InputBox, boxColor,         } from "./ui.js?v=bea179de9cc48742";
-import { ANIM, findAction } from "./assets.js?v=bea179de9cc48742";
+import { FONT, InputBox, boxColor,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { ANIM, findAction } from "./assets.js?v=df0f1436dbbcc8a6";
 
 const CG = {
   WND: 26328, LOCK_BTN: 26300, OK_BTN: 26093, CANCEL_BTN: 26050, LEFT: 26180, RIGHT: 26182,
@@ -71,7 +71,7 @@ export class TradeWindow {
     if (i >= 0) this.theirs[i] = row; else this.theirs.push(row);
   }
   partnerPet(p         ) {
-    this.theirs.push({ kind: "pet", name: p.name, col2: `[${p.freeName}]`, col3: "", col4: `Lv:${p.level}${p.trans ? ["", "一转", "二转"][Math.min(2, p.trans)] : ""}`, color: FONT.RED });
+    this.theirs.push({ kind: "pet", name: p.name, col2: `[${p.freeName}]`, col3: "", col4: `Lv:${p.level}${p.trans ? (["", "一转", "二转"][p.trans] ?? `${p.trans}转`) : ""}`, color: FONT.RED });
   }
   partnerGold(n        ) {
     this.theirs = this.theirs.filter((r) => r.kind !== "gold");

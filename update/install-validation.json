@@ -1,0 +1,81 @@
+{
+  "archive": {
+    "name": "ai-pets-v1-assets.tar.gz",
+    "size": 6941740,
+    "sha256": "7700e6921d57cc59140de25c4cee16e2963190c9a84fb38a6412453e9de437e5"
+  },
+  "source_art_manifest_sha256": "0328cbe83aea72875db3a7fe401a768296b3393ce244b28c93117b8e2047826b",
+  "installed_target": "/home/coder/saserver/assets/extensions/ai-pets-v1",
+  "verified_files": 9,
+  "base_files_before_after_identical": {
+    "README.txt": {
+      "size": 85,
+      "sha256": "d8353be47f50ae24e162bd4121038ec0a38f07e6146c67095887e4bbc68aee92"
+    },
+    "index.bin.gz": {
+      "size": 5623405,
+      "sha256": "fc46b250a92e69aa466a2e9c215cab16e69cd2253ba7e7e8d62d2dbb0d8e5664"
+    },
+    "manifest.json": {
+      "size": 566,
+      "sha256": "cc2772d66aa11cab4da0c81387fc11418d231755b677d74aaa950846dcff2f7a"
+    },
+    "palettes.png": {
+      "size": 9033,
+      "sha256": "bf61479629fa3dac7dcf6dd66231dcb1a876114b80719e1360b72703d5f9eaa8"
+    },
+    "tiles.json": {
+      "size": 603228,
+      "sha256": "45537fecda351facee482a4caf90520b2529dfec4d30e71cc925f0efb62669e2"
+    }
+  },
+  "repeat_install_mtime_unchanged": true,
+  "repack_archive_and_manifest_identical": true,
+  "installed_files": {
+    "extensions/ai-pets-v1/anim/199100.json": {
+      "size": 5699,
+      "sha256": "3b2f481ff6883d659312d30420b81fce805df3eaf1a64104df67924746274ce7",
+      "mtime_ns": 1794540049870411358
+    },
+    "extensions/ai-pets-v1/anim/199101.json": {
+      "size": 5699,
+      "sha256": "f595db82000ef079b08af074869a2d3e8e9d16827858d3d92277931e968d0755",
+      "mtime_ns": 1794540049872421374
+    },
+    "extensions/ai-pets-v1/anim/199102.json": {
+      "size": 5699,
+      "sha256": "6c6a57d8cf1a77eaafed405657ee64d14e87a62a76b12ffcbf13b708153f8eab",
+      "mtime_ns": 1794540049873885547
+    },
+    "extensions/ai-pets-v1/anim/199103.json": {
+      "size": 5699,
+      "sha256": "5e5b4b142ab0730895e2f3c9eb2b9049091cc2facd672628bd8d41911c652fc9",
+      "mtime_ns": 1794540049875218732
+    },
+    "extensions/ai-pets-v1/manifest.json": {
+      "size": 29387,
+      "sha256": "0328cbe83aea72875db3a7fe401a768296b3393ce244b28c93117b8e2047826b",
+      "mtime_ns": 1794540049876590661
+    },
+    "extensions/ai-pets-v1/pages/00000.png": {
+      "size": 1886733,
+      "sha256": "530c606c1e5e7ac099b395d35e24d0a30e8b4f4a9558ba1efbe5d615bc37ea54",
+      "mtime_ns": 1794540049878038454
+    },
+    "extensions/ai-pets-v1/pages/00001.png": {
+      "size": 1703365,
+      "sha256": "90caafb82acd7263f791ae1cd45136845090004294b7bb643722e0a331322b9a",
+      "mtime_ns": 1794540049887001002
+    },
+    "extensions/ai-pets-v1/pages/00002.png": {
+      "size": 1670492,
+      "sha256": "bb69be20368b0294f0e575f74fb08436170eb4966d881ebe0e8460a059fe6f27",
+      "mtime_ns": 1794540049898055125
+    },
+    "extensions/ai-pets-v1/pages/00003.png": {
+      "size": 1839904,
+      "sha256": "8c0499b87cb284030cb43868f148c5a4796483ed107fa76ecfc3e678fbe62a85",
+      "mtime_ns": 1794540049907619336
+    }
+  }
+}

@@ -5,8 +5,8 @@
 // 清单向服务端要一次就记着，玩家每次重要）、选自己的宠物、几个固定的选项。服务端的回应（ChatMsg，from "GM"）列在下方。
 
 
-import { ANIM, findAction,             } from "./assets.js?v=bea179de9cc48742";
-import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=bea179de9cc48742";
+import { ANIM, findAction,             } from "./assets.js?v=df0f1436dbbcc8a6";
+import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=df0f1436dbbcc8a6";
 
 
 
@@ -278,7 +278,7 @@ export class GmWindow {
     if (!d) { ui.text(dx + 18, dy + 24, "读取中…", FONT.GRAY); return; }
     let ty = dy + 22;
     if (d.image > 0) {
-      if (d.image >= 100000 && d.image < 140000) {
+      if ((d.image >= 100000 && d.image < 140000) || (d.image >= 199100 && d.image <= 199103)) {
         // 动画（宠物、玩家）：站立动作循环播放，脚底对齐
         const id = d.image;
         ui.actor({ frameOf: (assets        , now        ) => {

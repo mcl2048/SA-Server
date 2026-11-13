@@ -1,0 +1,152 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "client_mode": "embedded",
+  "phase": "gameplay",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "solo-five-pet-fighters-each-exp-and-level100-stone50to80",
+      "pass": true,
+      "details": {
+        "fighters": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 0
+          },
+          {
+            "slot": 6,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 1
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 2
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 3
+          },
+          {
+            "slot": 9,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 4
+          }
+        ],
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 67,
+          "exp": 1813,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1813,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "below-five-enemy-level-pays-exact-level-stone",
+      "pass": true,
+      "details": {
+        "t": "BattleEnd",
+        "result": "win",
+        "gold": 4,
+        "exp": 1,
+        "level": 150,
+        "pets": [
+          {
+            "name": "乌力",
+            "exp": 1,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 3,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 4,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          }
+        ],
+        "levelUp": 0,
+        "items": []
+      }
+    },
+    {
+      "case": "execution-failure",
+      "pass": false,
+      "error": "Page.wait_for_function: Timeout 30000ms exceeded.",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 361, in <module>\n    if args.phase in ('all','gameplay'):gameplay_cases(pw)\n                                        ~~~~~~~~~~~~~~^^^^\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 286, in gameplay_cases\n    leader.set_auto(auto=False,quick=False);leader.page.wait_for_function('sa.battle && !sa.battle.quick',timeout=15000);manual_start=len(leader.sent);leader.guard_turn();manual=[m for m in leader.sent[manual_start:] if m.get('t')=='BattlePetCommand'];assert len(manual)==5 and len({m['petSlot'] for m in manual})==5,manual;assert sum(m.get('t')=='BattleCommand' for m in leader.sent[manual_start:])==1;leader.snap('quick-disabled-five-manual-pet-commands');after_mode=leader.page.evaluate('({field:sa.field.floor,pets:Array.from(sa.battle.fighters.values()).filter(a=>a.f.slot>=5&&a.f.slot<10).map(a=>({bag:a.f.bagSlot,owner:a.f.ownerSlot,name:a.f.name}))})');assert before_mode==after_mode,(before_mode,after_mode)\n                                                                                                                                                       ~~~~~~~~~~~~~~~~~^^\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 204, in guard_turn\n    if not attack:self.page.wait_for_function('sa.battle && sa.battle.turns>'+str(turn)+' && sa.battle.queue.length===0 && sa.ui.getMobileActions().some(h=>h.id===\"b-help\")',timeout=30000)\n                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/sync_api/_generated.py\", line 21235, in wait_for_function\n    self._sync(\n    ~~~~~~~~~~^\n        self._impl_obj.wait_for_function(\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n        )\n        ^\n    )\n    ^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_sync_base.py\", line 111, in _sync\n    return task.result()\n           ~~~~~~~~~~~^^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_page.py\", line 1158, in wait_for_function\n    return await self._main_frame.wait_for_function(**locals_to_params(locals()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_frame.py\", line 945, in wait_for_function\n    await self._channel.send(\"waitForFunction\", self._timeout, params)\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 78, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 636, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 30000ms exceeded.\n"
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

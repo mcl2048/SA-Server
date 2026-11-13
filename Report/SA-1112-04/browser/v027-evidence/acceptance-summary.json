@@ -1,0 +1,2430 @@
+{
+  "completed_case_count": 21,
+  "all_acceptance_passed": false,
+  "completed_cases": [
+    {
+      "case": "new-cover-real-desktop",
+      "pass": true,
+      "details": {
+        "size": [
+          1280,
+          900
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "new-cover-real-portrait",
+      "pass": true,
+      "details": {
+        "size": [
+          390,
+          844
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "mobile-password-visual-viewport-and-composition-safe",
+      "pass": true,
+      "details": {
+        "visiblePassword": true,
+        "height": 500
+      }
+    },
+    {
+      "case": "new-cover-real-landscape",
+      "pass": true,
+      "details": {
+        "size": [
+          844,
+          390
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "leader-character-cap-200-above-native-140",
+      "pass": true,
+      "details": {
+        "level": 200,
+        "nextExp": 0
+      }
+    },
+    {
+      "case": "leader-character-rebirth-cap-twelve",
+      "pass": true,
+      "details": {
+        "trans": 12,
+        "independentConfiguredPetCap": 8
+      }
+    },
+    {
+      "case": "leader-pet-cap-180-and-five-selected",
+      "pass": true,
+      "details": {
+        "levels": [
+          180,
+          30,
+          30,
+          30,
+          30
+        ]
+      }
+    },
+    {
+      "case": "partner-character-cap-200-above-native-140",
+      "pass": true,
+      "details": {
+        "level": 200,
+        "nextExp": 0
+      }
+    },
+    {
+      "case": "partner-character-rebirth-cap-twelve",
+      "pass": true,
+      "details": {
+        "trans": 12,
+        "independentConfiguredPetCap": 8
+      }
+    },
+    {
+      "case": "partner-pet-cap-180-and-five-selected",
+      "pass": true,
+      "details": {
+        "levels": [
+          180,
+          30,
+          30,
+          30,
+          30
+        ]
+      }
+    },
+    {
+      "case": "solo-five-pet-fighters-each-exp-and-level100-stone50to80",
+      "pass": true,
+      "details": {
+        "fighters": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 0
+          },
+          {
+            "slot": 6,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 1
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 2
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 3
+          },
+          {
+            "slot": 9,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 4
+          }
+        ],
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 60,
+          "exp": 1813,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1813,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "below-five-enemy-level-pays-exact-level-stone",
+      "pass": true,
+      "details": {
+        "t": "BattleEnd",
+        "result": "win",
+        "gold": 4,
+        "exp": 1,
+        "level": 150,
+        "pets": [
+          {
+            "name": "乌力",
+            "exp": 1,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 3,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 4,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          }
+        ],
+        "levelUp": 0,
+        "items": []
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-0",
+      "pass": true,
+      "details": {
+        "auto": true,
+        "server": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "encounter": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-1",
+      "pass": true,
+      "details": {
+        "auto": false,
+        "server": {
+          "t": "AutoPlayState",
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-2",
+      "pass": true,
+      "details": {
+        "auto": true,
+        "server": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "encounter": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "live-ui-auto-toggle-3",
+      "pass": true,
+      "details": {
+        "auto": false,
+        "server": {
+          "t": "AutoPlayState",
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "paused": false,
+          "reason": ""
+        }
+      }
+    },
+    {
+      "case": "closed-browser-server-continues-auto-encounter-quick-battle",
+      "pass": true,
+      "details": {
+        "before": {
+          "id": 1,
+          "name": "UpgAb419",
+          "level": 150,
+          "exp": 3,
+          "gold": 3,
+          "floor": 100,
+          "x": 650,
+          "y": 450,
+          "hp": 7000,
+          "trans": 0,
+          "pet_state": {
+            "pets": [
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 180,
+                "exp": 5444,
+                "hp": 1403,
+                "vit": 20154,
+                "str": 15582,
+                "tgh": 18140,
+                "dex": 25984,
+                "alloc": [
+                  18,
+                  13,
+                  16,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 10000,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2520,
+                  2268,
+                  2142,
+                  3276
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5444,
+                "hp": 183,
+                "vit": 2646,
+                "str": 2268,
+                "tgh": 2016,
+                "dex": 3528,
+                "alloc": [
+                  19,
+                  13,
+                  16,
+                  25
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  2268,
+                  2016,
+                  3528
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5444,
+                "hp": 183,
+                "vit": 2646,
+                "str": 1764,
+                "tgh": 2520,
+                "dex": 3528,
+                "alloc": [
+                  18,
+                  14,
+                  17,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1764,
+                  2520,
+                  3528
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5444,
+                "hp": 178,
+                "vit": 2646,
+                "str": 1890,
+                "tgh": 2016,
+                "dex": 3402,
+                "alloc": [
+                  19,
+                  13,
+                  14,
+                  23
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1890,
+                  2016,
+                  3402
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5444,
+                "hp": 176,
+                "vit": 2646,
+                "str": 1890,
+                "tgh": 2142,
+                "dex": 3024,
+                "alloc": [
+                  18,
+                  11,
+                  14,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1890,
+                  2142,
+                  3024
+                ]
+              }
+            ],
+            "battle": 0,
+            "standby": 30,
+            "ride": -1,
+            "licence": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "after": {
+          "id": 1,
+          "name": "UpgAb419",
+          "level": 150,
+          "exp": 5,
+          "gold": 5,
+          "floor": 100,
+          "x": 650,
+          "y": 450,
+          "hp": 7000,
+          "trans": 0,
+          "pet_state": {
+            "pets": [
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 180,
+                "exp": 5446,
+                "hp": 1403,
+                "vit": 20154,
+                "str": 15582,
+                "tgh": 18140,
+                "dex": 25984,
+                "alloc": [
+                  18,
+                  13,
+                  16,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 10000,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2520,
+                  2268,
+                  2142,
+                  3276
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5446,
+                "hp": 183,
+                "vit": 2646,
+                "str": 2268,
+                "tgh": 2016,
+                "dex": 3528,
+                "alloc": [
+                  19,
+                  13,
+                  16,
+                  25
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  2268,
+                  2016,
+                  3528
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5446,
+                "hp": 183,
+                "vit": 2646,
+                "str": 1764,
+                "tgh": 2520,
+                "dex": 3528,
+                "alloc": [
+                  18,
+                  14,
+                  17,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1764,
+                  2520,
+                  3528
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5446,
+                "hp": 178,
+                "vit": 2646,
+                "str": 1890,
+                "tgh": 2016,
+                "dex": 3402,
+                "alloc": [
+                  19,
+                  13,
+                  14,
+                  23
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1890,
+                  2016,
+                  3402
+                ]
+              },
+              {
+                "temp": 1,
+                "enemy": 9,
+                "name": "乌力",
+                "owner": 1,
+                "sprite": 100250,
+                "lv": 30,
+                "exp": 5446,
+                "hp": 176,
+                "vit": 2646,
+                "str": 1890,
+                "tgh": 2142,
+                "dex": 3024,
+                "alloc": [
+                  18,
+                  11,
+                  14,
+                  24
+                ],
+                "rank": 5,
+                "attr": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "resist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "skills": [
+                  1,
+                  2,
+                  -1,
+                  -1,
+                  -1,
+                  -1,
+                  -1
+                ],
+                "slot": 6,
+                "modai": 150,
+                "vai": 0,
+                "rare": 0,
+                "cri": 1,
+                "ctr": 1,
+                "getlv": 30,
+                "mag": {
+                  "Lv": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "Res": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "AtkExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "DefExp": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "born": [
+                  2646,
+                  1890,
+                  2142,
+                  3024
+                ]
+              }
+            ],
+            "battle": 0,
+            "standby": 30,
+            "ride": -1,
+            "licence": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "noBrowserPage": true
+      }
+    },
+    {
+      "case": "same-browser-token-resumes-same-live-character-and-auto-state",
+      "pass": true,
+      "details": {
+        "sessions": [
+          {
+            "resumed": true,
+            "inWorld": true,
+            "hasToken": true
+          }
+        ],
+        "state": {
+          "self": {
+            "id": 1,
+            "name": "UpgAb419",
+            "x": 648,
+            "y": 451,
+            "floor": 100
+          },
+          "status": {
+            "t": "Status",
+            "name": "UpgAb419",
+            "face": 30000,
+            "level": 150,
+            "exp": 9,
+            "nextExp": 73655601,
+            "hp": 7000,
+            "maxHp": 7000,
+            "mp": 100,
+            "maxMp": 100,
+            "atk": 1250,
+            "def": 1250,
+            "agi": 1000,
+            "charm": 66,
+            "dp": 6000,
+            "vital": 1000,
+            "str": 1000,
+            "tgh": 1000,
+            "dex": 1000,
+            "attrs": [
+              100,
+              0,
+              0,
+              0
+            ],
+            "points": 120,
+            "detail": [
+              "攻击 1250（本身 1250　装备 +0）",
+              "防御 1250（本身 1250　装备 +0）",
+              "敏捷 1000（本身 1000　装备 +0）",
+              "耐久力 7000（本身 7000　装备 +0）",
+              "气力上限 100　会心 +0　回避 +0",
+              "魅力 66　运气 1　转生 0",
+              "属性 地100 水0 火0 风0",
+              "声望 2301　DP 6000",
+              "本级经验 9 / 73655601（还差 73655592）",
+              "骑乘等级 140",
+              "魔法 地0 水0 火0 风0",
+              "抗魔 地0 水0 火0 风0"
+            ],
+            "hometown": 0,
+            "trans": 0
+          },
+          "inventory": {
+            "t": "Inventory",
+            "gold": 9,
+            "items": []
+          },
+          "pets": {
+            "t": "Pets",
+            "ride": -1,
+            "pets": [
+              {
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 180,
+                "exp": 5450,
+                "hp": 1403,
+                "maxHp": 1403,
+                "atk": 207,
+                "def": 230,
+                "agi": 259,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "battle",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    13,
+                    16,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    119,
+                    135,
+                    152,
+                    819
+                  ],
+                  "real": [
+                    119,
+                    135,
+                    151,
+                    817
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 100,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "slot": 0,
+                "freeName": "",
+                "nextExp": 0,
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 1,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5450,
+                "nextExp": 11352,
+                "hp": 183,
+                "maxHp": 183,
+                "atk": 29,
+                "def": 26,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    16,
+                    25
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    120,
+                    136,
+                    158,
+                    848
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 2,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5450,
+                "nextExp": 11352,
+                "hp": 183,
+                "maxHp": 183,
+                "atk": 24,
+                "def": 31,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    14,
+                    17,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    125,
+                    141,
+                    152,
+                    831
+                  ],
+                  "init": [
+                    1,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 3,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5450,
+                "nextExp": 11352,
+                "hp": 178,
+                "maxHp": 178,
+                "atk": 25,
+                "def": 26,
+                "agi": 34,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    14,
+                    23
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    118,
+                    123,
+                    147,
+                    825
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 4,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5450,
+                "nextExp": 11352,
+                "hp": 176,
+                "maxHp": 176,
+                "atk": 25,
+                "def": 27,
+                "agi": 30,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    11,
+                    14,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    107,
+                    122,
+                    152,
+                    796
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              }
+            ],
+            "battle": 0
+          },
+          "auto": {
+            "t": "AutoPlayState",
+            "encounter": true,
+            "autoBattle": true,
+            "quick": true,
+            "paused": false,
+            "reason": ""
+          }
+        }
+      }
+    },
+    {
+      "case": "frozen-tab-server-growth-and-unfreeze-current-state",
+      "pass": true,
+      "details": {
+        "beforeGold": 9,
+        "afterGold": 10,
+        "clientGoldAfterResume": 10,
+        "browserBattleCommandsWhileFrozen": 0
+      }
+    },
+    {
+      "case": "new-device-password-login-replaces-old-controller-preserving-live-state",
+      "pass": true,
+      "details": {
+        "newSessions": [
+          {
+            "resumed": true,
+            "inWorld": true,
+            "hasToken": true
+          }
+        ],
+        "oldScreen": "LoginScreen",
+        "newState": {
+          "self": {
+            "id": 1,
+            "name": "UpgAb419",
+            "x": 649,
+            "y": 451,
+            "floor": 100
+          },
+          "status": {
+            "t": "Status",
+            "name": "UpgAb419",
+            "face": 30000,
+            "level": 150,
+            "exp": 19,
+            "nextExp": 73655601,
+            "hp": 7000,
+            "maxHp": 7000,
+            "mp": 100,
+            "maxMp": 100,
+            "atk": 1250,
+            "def": 1250,
+            "agi": 1000,
+            "charm": 66,
+            "dp": 6000,
+            "vital": 1000,
+            "str": 1000,
+            "tgh": 1000,
+            "dex": 1000,
+            "attrs": [
+              100,
+              0,
+              0,
+              0
+            ],
+            "points": 120,
+            "detail": [
+              "攻击 1250（本身 1250　装备 +0）",
+              "防御 1250（本身 1250　装备 +0）",
+              "敏捷 1000（本身 1000　装备 +0）",
+              "耐久力 7000（本身 7000　装备 +0）",
+              "气力上限 100　会心 +0　回避 +0",
+              "魅力 66　运气 1　转生 0",
+              "属性 地100 水0 火0 风0",
+              "声望 2301　DP 6000",
+              "本级经验 19 / 73655601（还差 73655582）",
+              "骑乘等级 140",
+              "魔法 地0 水0 火0 风0",
+              "抗魔 地0 水0 火0 风0"
+            ],
+            "hometown": 0,
+            "trans": 0
+          },
+          "inventory": {
+            "t": "Inventory",
+            "gold": 19,
+            "items": []
+          },
+          "pets": {
+            "t": "Pets",
+            "ride": -1,
+            "pets": [
+              {
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 180,
+                "exp": 5460,
+                "hp": 1403,
+                "maxHp": 1403,
+                "atk": 207,
+                "def": 230,
+                "agi": 259,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "battle",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    13,
+                    16,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    119,
+                    135,
+                    152,
+                    819
+                  ],
+                  "real": [
+                    119,
+                    135,
+                    151,
+                    817
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 100,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "slot": 0,
+                "freeName": "",
+                "nextExp": 0,
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 1,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5460,
+                "nextExp": 11352,
+                "hp": 183,
+                "maxHp": 183,
+                "atk": 29,
+                "def": 26,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    16,
+                    25
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    120,
+                    136,
+                    158,
+                    848
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 2,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5460,
+                "nextExp": 11352,
+                "hp": 183,
+                "maxHp": 183,
+                "atk": 24,
+                "def": 31,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    14,
+                    17,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    125,
+                    141,
+                    152,
+                    831
+                  ],
+                  "init": [
+                    1,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 3,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5460,
+                "nextExp": 11352,
+                "hp": 178,
+                "maxHp": 178,
+                "atk": 25,
+                "def": 26,
+                "agi": 34,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    14,
+                    23
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    118,
+                    123,
+                    147,
+                    825
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 4,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 30,
+                "exp": 5460,
+                "nextExp": 11352,
+                "hp": 176,
+                "maxHp": 176,
+                "atk": 25,
+                "def": 27,
+                "agi": 30,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    11,
+                    14,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    107,
+                    122,
+                    152,
+                    796
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              }
+            ],
+            "battle": 0
+          },
+          "auto": {
+            "t": "AutoPlayState",
+            "encounter": true,
+            "autoBattle": true,
+            "quick": true,
+            "paused": false,
+            "reason": ""
+          }
+        }
+      }
+    },
+    {
+      "case": "replaced-device-old-token-rejected",
+      "pass": true,
+      "details": {
+        "code": "resume_failed"
+      }
+    }
+  ],
+  "failed_attempts": [
+    {
+      "file": "gameplay-all.json",
+      "case": "execution-failure",
+      "error": "Locator.wait_for: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-action=\\\"ai-auto-val\\\"]\") to be visible\n"
+    },
+    {
+      "file": "gameplay-gameplay.json",
+      "case": "execution-failure",
+      "error": "{'toggle': 'quick', 'wanted': False, 'latest': {'t': 'AutoPlayState', 'autoBattle': True, 'quick': True, 'paused': True, 'encounter': False, 'reason': ''}, 'recentSent': [{'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': False, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}]}"
+    },
+    {
+      "file": "gameplay-offline.json",
+      "case": "execution-failure",
+      "error": "{'toggle': 'quick', 'wanted': False, 'latest': {'t': 'AutoPlayState', 'encounter': True, 'quick': True, 'paused': True, 'autoBattle': False, 'reason': ''}, 'recentSent': [{'t': 'AutoPlay', 'encounter': True, 'autoBattle': True, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}, {'t': 'AutoPlay', 'encounter': True, 'autoBattle': False, 'quick': True, 'paused': True, 'settings': '{\"v\":2,\"healAt\":30,\"escape\":true,\"magic\":true,\"capture\":false,\"meat\":false,\"first\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"then\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petFirst\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"},\"petThen\":{\"kind\":\"auto\",\"name\":\"\",\"target\":\"auto\"}}'}]}"
+    }
+  ],
+  "source_reports": [
+    {
+      "file": "gameplay-all.json",
+      "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a"
+    },
+    {
+      "file": "gameplay-gameplay.json",
+      "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a"
+    },
+    {
+      "file": "gameplay-toggle.json",
+      "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a"
+    },
+    {
+      "file": "gameplay-offline.json",
+      "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a"
+    }
+  ],
+  "limitations": [
+    "Chromium touch emulation, not physical device testing",
+    "Pet rebirth NPC progression is covered by world tests; configured cap8 here is not a claimed browser pass"
+  ]
+}

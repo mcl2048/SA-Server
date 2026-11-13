@@ -1,0 +1,177 @@
+{
+  "phase": "details",
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "details": [
+    {
+      "slot": 0,
+      "name": "奥普埃",
+      "sprite": 199100,
+      "skills": [
+        {
+          "id": 1,
+          "name": "攻击",
+          "memo": "通常攻击",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_NormalAttack",
+          "slot": 0,
+          "option": ""
+        },
+        {
+          "slot": 1,
+          "id": 2,
+          "name": "防御",
+          "memo": "通常防御",
+          "field": 1,
+          "target": 5,
+          "func": "PETSKILL_NormalGuard",
+          "option": ""
+        },
+        {
+          "slot": 2,
+          "id": 29101,
+          "name": "观测风标",
+          "memo": "我方全体在命中/闪避计算中的敏捷增加各自基础防御的10%，持续3回合；不改变出手顺序，不叠加已有同类效果。",
+          "field": 1,
+          "target": 2,
+          "func": "PETSKILL_SetMagicPet",
+          "option": "3|10|DEX"
+        }
+      ]
+    },
+    {
+      "slot": 1,
+      "name": "克劳德",
+      "sprite": 199101,
+      "skills": [
+        {
+          "id": 1,
+          "name": "攻击",
+          "memo": "通常攻击",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_NormalAttack",
+          "slot": 0,
+          "option": ""
+        },
+        {
+          "slot": 1,
+          "id": 2,
+          "name": "防御",
+          "memo": "通常防御",
+          "field": 1,
+          "target": 5,
+          "func": "PETSKILL_NormalGuard",
+          "option": ""
+        },
+        {
+          "slot": 2,
+          "id": 29102,
+          "name": "铜壳修补",
+          "memo": "为一个存活的友方回复最多120点体力，占用本次行动。",
+          "field": 1,
+          "target": 1,
+          "func": "PETSKILL_SetMagicPet",
+          "option": "1|120|HP"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "name": "格鲁克",
+      "sprite": 199102,
+      "skills": [
+        {
+          "id": 1,
+          "name": "攻击",
+          "memo": "通常攻击",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_NormalAttack",
+          "slot": 0,
+          "option": ""
+        },
+        {
+          "slot": 1,
+          "id": 2,
+          "name": "防御",
+          "memo": "通常防御",
+          "field": 1,
+          "target": 5,
+          "func": "PETSKILL_NormalGuard",
+          "option": ""
+        },
+        {
+          "slot": 2,
+          "id": 29103,
+          "name": "狐龙疾行",
+          "memo": "本回合出手顺序值乘1.3、防御下降30%后攻击；基础敏捷不变，不附加额外攻击倍率。",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_SpeedyAttack",
+          "option": "防%-30 敏%+30"
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "name": "吉米奈",
+      "sprite": 199103,
+      "skills": [
+        {
+          "id": 1,
+          "name": "攻击",
+          "memo": "通常攻击",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_NormalAttack",
+          "slot": 0,
+          "option": ""
+        },
+        {
+          "slot": 1,
+          "id": 2,
+          "name": "防御",
+          "memo": "通常防御",
+          "field": 1,
+          "target": 5,
+          "func": "PETSKILL_NormalGuard",
+          "option": ""
+        },
+        {
+          "slot": 2,
+          "id": 29104,
+          "name": "Gemini Overdrive",
+          "memo": "对同一目标连续攻击两次，每击按原连续攻击规则分摊为二分之一伤害；无额外破防或必定暴击。",
+          "field": 1,
+          "target": 6,
+          "func": "PETSKILL_ContinuationAttack",
+          "option": "2"
+        }
+      ]
+    }
+  ],
+  "album": [
+    {
+      "no": 571,
+      "visibleStory": true
+    },
+    {
+      "no": 572,
+      "visibleStory": true
+    },
+    {
+      "no": 573,
+      "visibleStory": true
+    },
+    {
+      "no": 574,
+      "visibleStory": true
+    }
+  ],
+  "errors": []
+}

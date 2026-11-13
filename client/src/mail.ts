@@ -143,7 +143,7 @@ export class MailWindow {
       if (ui.text(nx, by + 30, e.name, FONT.WHITE, `mail-name${i}`)) { this.target = i; this.openHistory(); }
       ui.text(x + 104, by + 60, String(e.level).padStart(3, " "), FONT.WHITE);
       if (e.online) ui.text(x + 198, by + 30, this.host.planet(), FONT.GREEN);
-      ui.text(x + 152, by + 59, TRANS[Math.min(5, e.trans)] ?? "", FONT.AQUA);
+      ui.text(x + 152, by + 59, TRANS[e.trans] ?? String(e.trans), FONT.AQUA);
       ui.text(x + 103, by + 88, String(e.dp).padStart(8, " "), FONT.WHITE);
       ui.image(e.online ? CG.ON_LINE : CG.OFF_LINE, x + 225, by + 60);
       if (ui.image(CG.MAIL_BTN, x + 225, by + 80, `mail-write${i}`) && ui.clicked(`mail-write${i}`)) {

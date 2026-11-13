@@ -287,7 +287,7 @@ func (w *World) MailSend(charID, index int, text string) {
 		}
 		text = cutBytes(text, 140) // MAIL_STR_LEN（原版只有客户端限制）
 		x := e.book[index]
-		if o := w.players[int(x.ID)]; o != nil {
+		if o := w.players[int(x.ID)]; o != nil && o.attached() {
 			i := o.book.find(e.char.ID)
 			if i < 0 {
 				w.sysMsg(e, fmt.Sprintf("寄信件给%s，但由於%s 没有名片，所以信件又被退回来了。", x.Name, x.Name), colorYellow)
@@ -312,17 +312,32 @@ func (w *World) MailSend(charID, index int, text string) {
 
 // deliverStoredMails 是上线时的 MessageFlush：送出存着的邮件（对方已经不在名片匣里的就不送）。
 func (w *World) deliverStoredMails(e *entity) {
+	if !e.attached() {
+		return
+	}
 	id := e.id
+	charID := e.char.ID
 	w.saves <- func() {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		list, err := w.db.TakeMails(ctx, e.char.ID)
+		list, err := w.db.TakeMails(ctx, charID)
 		if err != nil || len(list) == 0 {
 			return
 		}
 		go w.Do(func() {
 			e := w.players[id]
-			if e == nil {
+			if e == nil || !e.attached() {
+				// Taking from SQLite and delivering on the world goroutine are
+				// asynchronous. A disconnect between them must not lose mail.
+				w.saves <- func() {
+					ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+					defer cancel()
+					for _, body := range list {
+						if err := w.db.PutMail(ctx, charID, body); err != nil {
+							w.log.Error("恢复离线邮件失败", "char", charID, "err", err)
+						}
+					}
+				}
 				return
 			}
 			for _, s := range list {
@@ -393,6 +408,8 @@ func (w *World) PetMail(charID, index, petSlot, itemSlot int, text string) {
 			say("绑定物品无法传递", colorYellow)
 		case w.players[int(x.ID)] == nil:
 			say("该玩家不在线上！", colorYellow)
+		case !w.players[int(x.ID)].attached():
+			say("对方正在离线挂机，暂时无法收取宠物邮件。", colorYellow)
 		case e.floor >= 30017 && e.floor <= 30021:
 			say("此地区不得寄送道具！", colorWhite)
 		case w.players[int(x.ID)].floor >= 30017 && w.players[int(x.ID)].floor <= 30021:
@@ -449,7 +466,7 @@ func (w *World) sendPetMail(e *entity, petSlot, itemSlot int, to *addressEntry, 
 // deliverPetMail 是 PETMAIL_sendPetmail：对方没有我的名片就退回；道具给对方（道具栏满了放在脚边）。
 func (w *World) deliverPetMail(owner int64, p *Pet, to int64, date, text string) bool {
 	o := w.players[int(to)]
-	if o == nil || o.fight != nil || o.trade != nil {
+	if o == nil || !o.attached() || o.fight != nil || o.trade != nil {
 		return false
 	}
 	i := o.book.find(owner)

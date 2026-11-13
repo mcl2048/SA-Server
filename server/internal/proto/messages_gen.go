@@ -86,6 +86,9 @@ type BattleFighter struct {
 	RideHp     int    `json:"rideHp,omitempty"`
 	RideMaxHp  int    `json:"rideMaxHp,omitempty"`
 	FallSprite int    `json:"fallSprite,omitempty"`
+	OwnerSlot  int    `json:"ownerSlot,omitempty"`
+	BagSlot    int    `json:"bagSlot,omitempty"`
+	Status     int    `json:"status,omitempty"`
 }
 
 type InvItem struct {
@@ -145,6 +148,8 @@ type BattleEvent struct {
 	Level     int    `json:"level,omitempty"`
 	MaxHp     int    `json:"maxHp,omitempty"`
 	Att       string `json:"att,omitempty"`
+	OwnerSlot int    `json:"ownerSlot,omitempty"`
+	BagSlot   int    `json:"bagSlot,omitempty"`
 }
 
 type ShopItem struct {
@@ -398,6 +403,22 @@ type Login struct {
 
 func (*Login) MsgType() string { return "Login" }
 
+type Resume struct {
+	Token string `json:"token,omitempty"`
+}
+
+func (*Resume) MsgType() string { return "Resume" }
+
+type AutoPlay struct {
+	Encounter  bool   `json:"encounter,omitempty"`
+	AutoBattle bool   `json:"autoBattle,omitempty"`
+	Quick      bool   `json:"quick,omitempty"`
+	Paused     bool   `json:"paused,omitempty"`
+	Settings   string `json:"settings,omitempty"`
+}
+
+func (*AutoPlay) MsgType() string { return "AutoPlay" }
+
 type SelectLine struct {
 	ID int `json:"id,omitempty"`
 }
@@ -497,8 +518,9 @@ type BattleCommand struct {
 func (*BattleCommand) MsgType() string { return "BattleCommand" }
 
 type BattlePetCommand struct {
-	Skill  int `json:"skill,omitempty"`
-	Target int `json:"target,omitempty"`
+	Skill   int `json:"skill,omitempty"`
+	Target  int `json:"target,omitempty"`
+	PetSlot int `json:"petSlot,omitempty"`
 }
 
 func (*BattlePetCommand) MsgType() string { return "BattlePetCommand" }
@@ -849,7 +871,8 @@ type HelpFlag struct {
 func (*HelpFlag) MsgType() string { return "HelpFlag" }
 
 type BattleJoin struct {
-	Fighters []BattleFighter `json:"fighters,omitempty"`
+	Fighters  []BattleFighter `json:"fighters,omitempty"`
+	ResetPets bool            `json:"resetPets,omitempty"`
 }
 
 func (*BattleJoin) MsgType() string { return "BattleJoin" }
@@ -882,6 +905,24 @@ type AuthResult struct {
 }
 
 func (*AuthResult) MsgType() string { return "AuthResult" }
+
+type Session struct {
+	Token   string `json:"token,omitempty"`
+	Resumed bool   `json:"resumed,omitempty"`
+	InWorld bool   `json:"inWorld,omitempty"`
+}
+
+func (*Session) MsgType() string { return "Session" }
+
+type AutoPlayState struct {
+	Encounter  bool   `json:"encounter,omitempty"`
+	AutoBattle bool   `json:"autoBattle,omitempty"`
+	Quick      bool   `json:"quick,omitempty"`
+	Paused     bool   `json:"paused,omitempty"`
+	Reason     string `json:"reason,omitempty"`
+}
+
+func (*AutoPlayState) MsgType() string { return "AutoPlayState" }
 
 type AccountInfo struct {
 	Account   string `json:"account,omitempty"`
@@ -1100,15 +1141,20 @@ type Pong struct {
 func (*Pong) MsgType() string { return "Pong" }
 
 type BattleStart struct {
-	Field    int             `json:"field,omitempty"`
-	MySlot   int             `json:"mySlot,omitempty"`
-	TurnTime int             `json:"turnTime,omitempty"`
-	Surprise int             `json:"surprise,omitempty"`
-	Fighters []BattleFighter `json:"fighters,omitempty"`
-	Pvp      bool            `json:"pvp,omitempty"`
-	Event    bool            `json:"event,omitempty"`
-	Watch    bool            `json:"watch,omitempty"`
-	Speed    int             `json:"speed,omitempty"`
+	Field         int             `json:"field,omitempty"`
+	MySlot        int             `json:"mySlot,omitempty"`
+	TurnTime      int             `json:"turnTime,omitempty"`
+	Surprise      int             `json:"surprise,omitempty"`
+	Fighters      []BattleFighter `json:"fighters,omitempty"`
+	Pvp           bool            `json:"pvp,omitempty"`
+	Event         bool            `json:"event,omitempty"`
+	Watch         bool            `json:"watch,omitempty"`
+	Speed         int             `json:"speed,omitempty"`
+	Resume        bool            `json:"resume,omitempty"`
+	Turn          int             `json:"turn,omitempty"`
+	Submitted     bool            `json:"submitted,omitempty"`
+	PetSubmitted  bool            `json:"petSubmitted,omitempty"`
+	SubmittedPets []int           `json:"submittedPets,omitempty"`
 }
 
 func (*BattleStart) MsgType() string { return "BattleStart" }
@@ -1122,6 +1168,7 @@ func (*BattleTurn) MsgType() string { return "BattleTurn" }
 
 type BattleEnd struct {
 	Result  string      `json:"result,omitempty"`
+	Gold    int         `json:"gold,omitempty"`
 	Exp     int         `json:"exp,omitempty"`
 	LevelUp int         `json:"levelUp,omitempty"`
 	Level   int         `json:"level,omitempty"`
@@ -1201,6 +1248,10 @@ func DecodeClient(data []byte) (Message, error) {
 		m = &ChangeSecret{}
 	case "Login":
 		m = &Login{}
+	case "Resume":
+		m = &Resume{}
+	case "AutoPlay":
+		m = &AutoPlay{}
 	case "SelectLine":
 		m = &SelectLine{}
 	case "CharList":

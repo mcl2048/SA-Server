@@ -1,0 +1,2376 @@
+{
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "completed_case_count": 19,
+  "all_acceptance_passed": true,
+  "missing_final_candidate_phases": [],
+  "completed_cases": [
+    {
+      "case": "new-cover-real-desktop",
+      "pass": true,
+      "details": {
+        "size": [
+          1280,
+          900
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "new-cover-real-portrait",
+      "pass": true,
+      "details": {
+        "size": [
+          390,
+          844
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "mobile-password-visual-viewport-and-composition-safe",
+      "pass": true,
+      "details": {
+        "visiblePassword": true,
+        "height": 500
+      }
+    },
+    {
+      "case": "new-cover-real-landscape",
+      "pass": true,
+      "details": {
+        "size": [
+          844,
+          390
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "real-dom-ai-auto-val-0",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "paused": true,
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-quick-val-1",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "encounter": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-quick-val-2",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "quick": true,
+          "paused": true,
+          "encounter": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "real-dom-ai-auto-val-3",
+      "pass": true,
+      "details": {
+        "before": {
+          "t": "AutoPlayState",
+          "autoBattle": true,
+          "paused": true,
+          "encounter": false,
+          "quick": false,
+          "reason": ""
+        },
+        "after": {
+          "t": "AutoPlayState",
+          "paused": true,
+          "encounter": false,
+          "autoBattle": false,
+          "quick": false,
+          "reason": ""
+        },
+        "box": {
+          "x": 7,
+          "y": 193,
+          "width": 147,
+          "height": 44
+        }
+      }
+    },
+    {
+      "case": "live-quick-to-manual-five-distinct-pet-commands-to-quick-same-fighters",
+      "pass": true,
+      "details": {
+        "sameFormation": {
+          "field": 100,
+          "pets": [
+            {
+              "bag": 0,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 1,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 2,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 3,
+              "owner": 0,
+              "name": "乌力"
+            },
+            {
+              "bag": 4,
+              "owner": 0,
+              "name": "乌力"
+            }
+          ]
+        },
+        "quickToggleNativeCanvasFallback": false,
+        "manualPetCommands": [
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 5,
+            "petSlot": 5
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 6,
+            "petSlot": 6
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 7,
+            "petSlot": 7
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 8,
+            "petSlot": 8
+          },
+          {
+            "t": "BattlePetCommand",
+            "skill": 1,
+            "target": 9,
+            "petSlot": 9
+          }
+        ],
+        "battleEnds": 1,
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 52,
+          "exp": 1859,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1859,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1859,
+              "levelUp": 1,
+              "level": 31
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "two-player-pet-quota-three-two-and-independent-results",
+      "pass": true,
+      "details": {
+        "owners": {
+          "0": 3,
+          "1": 2
+        },
+        "leaderPets": [
+          {
+            "name": "乌力",
+            "level": 180,
+            "slot": 0,
+            "exp": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "level": 31,
+            "exp": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "level": 31,
+            "exp": 0,
+            "levelUp": 0
+          }
+        ],
+        "partnerPets": [
+          {
+            "name": "乌力",
+            "exp": 1813,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1813,
+            "level": 30,
+            "levelUp": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "rescue-rebalances-five-to-three-two-with-existing-hp-status-preserved",
+      "pass": true,
+      "details": {
+        "before": [
+          {
+            "bagSlot": 0,
+            "ownerSlot": 0,
+            "hp": 1403,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 1,
+            "ownerSlot": 0,
+            "hp": 153,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 2,
+            "ownerSlot": 0,
+            "hp": 183,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 3,
+            "ownerSlot": 0,
+            "hp": 164,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          },
+          {
+            "bagSlot": 4,
+            "ownerSlot": 0,
+            "hp": 104,
+            "dead": false,
+            "gone": false,
+            "status": 0
+          }
+        ],
+        "after": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 180,
+            "hp": 1403,
+            "maxHp": 1403,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "bagSlot": 0,
+            "status": 0
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 31,
+            "hp": 153,
+            "maxHp": 192,
+            "bagSlot": 1,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "status": 0
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "sprite": 100250,
+            "level": 31,
+            "hp": 183,
+            "maxHp": 191,
+            "bagSlot": 2,
+            "mp": 0,
+            "maxMp": 0,
+            "rideName": "",
+            "rideLevel": 0,
+            "rideHp": 0,
+            "rideMaxHp": 0,
+            "fallSprite": 0,
+            "ownerSlot": 0,
+            "status": 0
+          }
+        ],
+        "resetPets": true
+      }
+    },
+    {
+      "case": "rescue-battle-finishes-on-both-real-clients",
+      "pass": true,
+      "details": {
+        "leaderResult": "win",
+        "partnerResult": "win"
+      }
+    },
+    {
+      "case": "closed-browser-server-continues-auto-encounter-quick-battle",
+      "pass": true,
+      "details": {
+        "before": {
+          "id": 1,
+          "name": "UpgAb419",
+          "level": 150,
+          "exp": 4,
+          "gold": 4,
+          "floor": 100,
+          "x": 650,
+          "y": 450,
+          "hp": 7000,
+          "trans": 0,
+          "pet_state": {
+            "battle": 0,
+            "standby": 30,
+            "pets": [
+              {
+                "bagSlot": 0,
+                "name": "乌力",
+                "level": 180,
+                "exp": 13141,
+                "hp": 1403
+              },
+              {
+                "bagSlot": 1,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1789,
+                "hp": 192
+              },
+              {
+                "bagSlot": 2,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1789,
+                "hp": 191
+              },
+              {
+                "bagSlot": 3,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1789,
+                "hp": 187
+              },
+              {
+                "bagSlot": 4,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1789,
+                "hp": 184
+              }
+            ]
+          }
+        },
+        "after": {
+          "id": 1,
+          "name": "UpgAb419",
+          "level": 150,
+          "exp": 8,
+          "gold": 8,
+          "floor": 100,
+          "x": 650,
+          "y": 450,
+          "hp": 7000,
+          "trans": 0,
+          "pet_state": {
+            "battle": 0,
+            "standby": 30,
+            "pets": [
+              {
+                "bagSlot": 0,
+                "name": "乌力",
+                "level": 180,
+                "exp": 13145,
+                "hp": 1403
+              },
+              {
+                "bagSlot": 1,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1793,
+                "hp": 192
+              },
+              {
+                "bagSlot": 2,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1793,
+                "hp": 191
+              },
+              {
+                "bagSlot": 3,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1793,
+                "hp": 187
+              },
+              {
+                "bagSlot": 4,
+                "name": "乌力",
+                "level": 31,
+                "exp": 1793,
+                "hp": 184
+              }
+            ]
+          }
+        },
+        "noBrowserPage": true
+      }
+    },
+    {
+      "case": "same-browser-token-resumes-same-live-character-and-auto-state",
+      "pass": true,
+      "details": {
+        "sessions": [
+          {
+            "resumed": true,
+            "inWorld": true,
+            "hasToken": true
+          }
+        ],
+        "state": {
+          "self": {
+            "id": 1,
+            "name": "UpgAb419",
+            "x": 648,
+            "y": 451,
+            "floor": 100
+          },
+          "status": {
+            "t": "Status",
+            "name": "UpgAb419",
+            "face": 30000,
+            "level": 150,
+            "exp": 23,
+            "nextExp": 73655601,
+            "hp": 7000,
+            "maxHp": 7000,
+            "mp": 100,
+            "maxMp": 100,
+            "atk": 1250,
+            "def": 1250,
+            "agi": 1000,
+            "charm": 66,
+            "dp": 6000,
+            "vital": 1000,
+            "str": 1000,
+            "tgh": 1000,
+            "dex": 1000,
+            "attrs": [
+              100,
+              0,
+              0,
+              0
+            ],
+            "points": 120,
+            "detail": [
+              "攻击 1250（本身 1250　装备 +0）",
+              "防御 1250（本身 1250　装备 +0）",
+              "敏捷 1000（本身 1000　装备 +0）",
+              "耐久力 7000（本身 7000　装备 +0）",
+              "气力上限 100　会心 +0　回避 +0",
+              "魅力 66　运气 2　转生 0",
+              "属性 地100 水0 火0 风0",
+              "声望 2301　DP 6000",
+              "本级经验 23 / 73655601（还差 73655578）",
+              "骑乘等级 140",
+              "魔法 地0 水0 火0 风0",
+              "抗魔 地0 水0 火0 风0"
+            ],
+            "hometown": 0,
+            "trans": 0
+          },
+          "inventory": {
+            "t": "Inventory",
+            "gold": 26,
+            "items": [
+              {
+                "slot": 9,
+                "id": 1234,
+                "name": "小块肉",
+                "image": 24008,
+                "memo": "耐久力20前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 10,
+                "id": 1234,
+                "name": "小块肉",
+                "image": 24008,
+                "memo": "耐久力20前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 11,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 12,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 13,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 14,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 15,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              }
+            ]
+          },
+          "pets": {
+            "t": "Pets",
+            "ride": -1,
+            "pets": [
+              {
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 180,
+                "exp": 13160,
+                "hp": 1403,
+                "maxHp": 1403,
+                "atk": 207,
+                "def": 230,
+                "agi": 259,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "battle",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    13,
+                    16,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    119,
+                    135,
+                    152,
+                    819
+                  ],
+                  "real": [
+                    119,
+                    135,
+                    151,
+                    817
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 100,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "slot": 0,
+                "freeName": "",
+                "nextExp": 0,
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 1,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1808,
+                "nextExp": 12506,
+                "hp": 192,
+                "maxHp": 192,
+                "atk": 30,
+                "def": 28,
+                "agi": 36,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    16,
+                    25
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    120,
+                    136,
+                    158,
+                    848
+                  ],
+                  "real": [
+                    131,
+                    121,
+                    154,
+                    847
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 2,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1808,
+                "nextExp": 12506,
+                "hp": 191,
+                "maxHp": 191,
+                "atk": 25,
+                "def": 32,
+                "agi": 36,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    14,
+                    17,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    125,
+                    141,
+                    152,
+                    831
+                  ],
+                  "real": [
+                    122,
+                    137,
+                    148,
+                    767
+                  ],
+                  "init": [
+                    1,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 3,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1808,
+                "nextExp": 12506,
+                "hp": 187,
+                "maxHp": 187,
+                "atk": 26,
+                "def": 27,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    14,
+                    23
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    118,
+                    123,
+                    147,
+                    825
+                  ],
+                  "real": [
+                    112,
+                    121,
+                    170,
+                    813
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 4,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1808,
+                "nextExp": 12506,
+                "hp": 184,
+                "maxHp": 184,
+                "atk": 26,
+                "def": 28,
+                "agi": 31,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    11,
+                    14,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    107,
+                    122,
+                    152,
+                    796
+                  ],
+                  "real": [
+                    114,
+                    105,
+                    143,
+                    772
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              }
+            ],
+            "battle": 0
+          },
+          "auto": {
+            "t": "AutoPlayState",
+            "encounter": true,
+            "autoBattle": true,
+            "quick": true,
+            "paused": false,
+            "reason": ""
+          }
+        }
+      }
+    },
+    {
+      "case": "frozen-tab-server-growth-and-unfreeze-current-state",
+      "pass": true,
+      "details": {
+        "beforeGold": 26,
+        "afterGold": 31,
+        "clientGoldAfterResume": 31,
+        "browserBattleCommandsWhileFrozen": 0
+      }
+    },
+    {
+      "case": "new-device-password-login-replaces-old-controller-preserving-live-state",
+      "pass": true,
+      "details": {
+        "newSessions": [
+          {
+            "resumed": true,
+            "inWorld": true,
+            "hasToken": true
+          }
+        ],
+        "oldScreen": "LoginScreen",
+        "newState": {
+          "self": {
+            "id": 1,
+            "name": "UpgAb419",
+            "x": 649,
+            "y": 451,
+            "floor": 100
+          },
+          "status": {
+            "t": "Status",
+            "name": "UpgAb419",
+            "face": 30000,
+            "level": 150,
+            "exp": 37,
+            "nextExp": 73655601,
+            "hp": 7000,
+            "maxHp": 7000,
+            "mp": 100,
+            "maxMp": 100,
+            "atk": 1250,
+            "def": 1250,
+            "agi": 1000,
+            "charm": 66,
+            "dp": 6000,
+            "vital": 1000,
+            "str": 1000,
+            "tgh": 1000,
+            "dex": 1000,
+            "attrs": [
+              100,
+              0,
+              0,
+              0
+            ],
+            "points": 120,
+            "detail": [
+              "攻击 1250（本身 1250　装备 +0）",
+              "防御 1250（本身 1250　装备 +0）",
+              "敏捷 1000（本身 1000　装备 +0）",
+              "耐久力 7000（本身 7000　装备 +0）",
+              "气力上限 100　会心 +0　回避 +0",
+              "魅力 66　运气 2　转生 0",
+              "属性 地100 水0 火0 风0",
+              "声望 2301　DP 6000",
+              "本级经验 37 / 73655601（还差 73655564）",
+              "骑乘等级 140",
+              "魔法 地0 水0 火0 风0",
+              "抗魔 地0 水0 火0 风0"
+            ],
+            "hometown": 0,
+            "trans": 0
+          },
+          "inventory": {
+            "t": "Inventory",
+            "gold": 49,
+            "items": [
+              {
+                "slot": 9,
+                "id": 1234,
+                "name": "小块肉",
+                "image": 24008,
+                "memo": "耐久力20前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 10,
+                "id": 1234,
+                "name": "小块肉",
+                "image": 24008,
+                "memo": "耐久力20前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 11,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 12,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 13,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 14,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              },
+              {
+                "slot": 15,
+                "id": 1930,
+                "name": "凯比特的肉",
+                "image": 24005,
+                "memo": "耐久力10前后回复",
+                "pile": 1,
+                "type": 20,
+                "target": 1,
+                "usable": true,
+                "equip": -1,
+                "damage": "不会损坏",
+                "flags": 7,
+                "alch": "肉",
+                "level": 0,
+                "field": 0,
+                "params": "",
+                "magic": "",
+                "magicMemo": "",
+                "magicMp": 0,
+                "magicField": 0,
+                "magicTarget": 0,
+                "magicDead": false,
+                "magicFunc": "",
+                "magicOption": "",
+                "merged": false,
+                "jigsaw": ""
+              }
+            ]
+          },
+          "pets": {
+            "t": "Pets",
+            "ride": -1,
+            "pets": [
+              {
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 180,
+                "exp": 13174,
+                "hp": 1403,
+                "maxHp": 1403,
+                "atk": 207,
+                "def": 230,
+                "agi": 259,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "battle",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    13,
+                    16,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    119,
+                    135,
+                    152,
+                    819
+                  ],
+                  "real": [
+                    119,
+                    135,
+                    151,
+                    817
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 100,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "slot": 0,
+                "freeName": "",
+                "nextExp": 0,
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 1,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1822,
+                "nextExp": 12506,
+                "hp": 192,
+                "maxHp": 192,
+                "atk": 30,
+                "def": 28,
+                "agi": 36,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    16,
+                    25
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    120,
+                    136,
+                    158,
+                    848
+                  ],
+                  "real": [
+                    131,
+                    121,
+                    154,
+                    847
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 2,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1822,
+                "nextExp": 12506,
+                "hp": 191,
+                "maxHp": 191,
+                "atk": 25,
+                "def": 32,
+                "agi": 36,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    14,
+                    17,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    125,
+                    141,
+                    152,
+                    831
+                  ],
+                  "real": [
+                    122,
+                    137,
+                    148,
+                    767
+                  ],
+                  "init": [
+                    1,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 3,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1822,
+                "nextExp": 12506,
+                "hp": 187,
+                "maxHp": 187,
+                "atk": 26,
+                "def": 27,
+                "agi": 35,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    19,
+                    13,
+                    14,
+                    23
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    118,
+                    123,
+                    147,
+                    825
+                  ],
+                  "real": [
+                    112,
+                    121,
+                    170,
+                    813
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              },
+              {
+                "slot": 4,
+                "name": "乌力",
+                "sprite": 100250,
+                "level": 31,
+                "exp": 1822,
+                "nextExp": 12506,
+                "hp": 184,
+                "maxHp": 184,
+                "atk": 26,
+                "def": 28,
+                "agi": 31,
+                "loyalty": 100,
+                "attrs": [
+                  80,
+                  20,
+                  0,
+                  0
+                ],
+                "maxSkill": 6,
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "攻击",
+                    "memo": "通常攻击",
+                    "field": 1,
+                    "target": 6,
+                    "func": "PETSKILL_NormalAttack",
+                    "slot": 0,
+                    "option": ""
+                  },
+                  {
+                    "slot": 1,
+                    "id": 2,
+                    "name": "防御",
+                    "memo": "通常防御",
+                    "field": 1,
+                    "target": 5,
+                    "func": "PETSKILL_NormalGuard",
+                    "option": ""
+                  }
+                ],
+                "state": "standby",
+                "canRename": true,
+                "ext": {
+                  "rank": 5,
+                  "getLevel": 30,
+                  "enemyId": 9,
+                  "alloc": [
+                    18,
+                    11,
+                    14,
+                    24
+                  ],
+                  "std": [
+                    20,
+                    12,
+                    15,
+                    25
+                  ],
+                  "grow": [
+                    107,
+                    122,
+                    152,
+                    796
+                  ],
+                  "real": [
+                    114,
+                    105,
+                    143,
+                    772
+                  ],
+                  "init": [
+                    2,
+                    2,
+                    2,
+                    14
+                  ],
+                  "resist": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "critical": 1,
+                  "counter": 1,
+                  "vai": 5,
+                  "magic": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rideInfo": "no",
+                "freeName": "",
+                "trans": 0,
+                "rideable": false,
+                "items": [],
+                "guard": false
+              }
+            ],
+            "battle": 0
+          },
+          "auto": {
+            "t": "AutoPlayState",
+            "encounter": true,
+            "autoBattle": true,
+            "quick": true,
+            "paused": false,
+            "reason": ""
+          }
+        }
+      }
+    },
+    {
+      "case": "replaced-device-old-token-rejected",
+      "pass": true,
+      "details": {
+        "code": "resume_failed"
+      }
+    },
+    {
+      "case": "solo-five-pet-fighters-each-exp-and-level100-stone50to80",
+      "pass": true,
+      "details": {
+        "fighters": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 0
+          },
+          {
+            "slot": 6,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 1
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 2
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 3
+          },
+          {
+            "slot": 9,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 4
+          }
+        ],
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 67,
+          "exp": 1813,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1813,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "below-five-enemy-level-pays-exact-level-stone",
+      "pass": true,
+      "details": {
+        "t": "BattleEnd",
+        "result": "win",
+        "gold": 4,
+        "exp": 1,
+        "level": 150,
+        "pets": [
+          {
+            "name": "乌力",
+            "exp": 1,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 3,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 4,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          }
+        ],
+        "levelUp": 0,
+        "items": []
+      }
+    }
+  ],
+  "failed_attempts": [],
+  "source_reports": [
+    {
+      "file": "gameplay-layout.json",
+      "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+      "page_errors": []
+    },
+    {
+      "file": "gameplay-dom-probe.json",
+      "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+      "page_errors": []
+    },
+    {
+      "file": "gameplay-gameplay.json",
+      "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+      "page_errors": []
+    },
+    {
+      "file": "gameplay-offline.json",
+      "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+      "page_errors": []
+    },
+    {
+      "file": "gameplay-baseline-final.json",
+      "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+      "page_errors": []
+    }
+  ],
+  "prior_candidate_evidence": "v027-evidence/gameplay-all.json: caps were verified on63ada6; they are not counted as final-candidate passes",
+  "limitations": [
+    "Chromium touch emulation, not physical device testing",
+    "Pet rebirth NPC progression is covered by world tests; configured cap8 here is not a claimed browser pass"
+  ]
+}

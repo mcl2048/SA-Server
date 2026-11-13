@@ -1,6 +1,6 @@
-import { InputBox,                                    } from "./ui.js?v=bea179de9cc48742";
-import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=bea179de9cc48742";
-import { createMobileJoystick } from "./mobile-controls.js?v=bea179de9cc48742";
+import { InputBox,                                    } from "./ui.js?v=df0f1436dbbcc8a6";
+import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=df0f1436dbbcc8a6";
+import { createMobileJoystick } from "./mobile-controls.js?v=df0f1436dbbcc8a6";
 
 
 
@@ -23,7 +23,7 @@ import { createMobileJoystick } from "./mobile-controls.js?v=bea179de9cc48742";
 
 
 
-const TITLES                         = { login: "欢迎来到石器时代", line: "选择线路", char: "选择角色", make: "创建角色", field: "冒险", battle: "战斗" };
+const TITLES                         = { login: "欢迎来到 StoneAge", line: "选择线路", char: "选择角色", make: "创建角色", field: "冒险", battle: "战斗" };
 const LABELS                         = {
   ok: "确定", quit: "清空账号与密码", id: "账号", pass: "密码", register: "注册新账号", reset: "找回密码", back: "返回上一页",
   "dlg-ok": "提交", "dlg-cancel": "取消", "modal-ok": "确定", "modal-yes": "确定", "modal-no": "取消",
@@ -217,7 +217,7 @@ export class MobileShell {
     const selectedLabel = selectedHit && (!state.selectedLabel || state.selectedLabel === selectedHit.id)
       ? this.actionLabel(selectedHit, state) : state.selectedLabel;
     put(this.selected, selectedLabel || "轻点画面或切换选项");
-    put(this.heading, npc ? "对话" : modal ? "提示" : state.title || (state.panel ? "游戏菜单" : TITLES[state.phase]) || "石器时代");
+    put(this.heading, npc ? "对话" : modal ? "提示" : state.title || (state.panel ? "游戏菜单" : TITLES[state.phase]) || "StoneAge");
     put(this.statusText, state.status || "");
     this.activeActions = new Set(all.map(h => h.id));
     const texts = this.readableTexts(state, all, npc, modal, fieldNormal);

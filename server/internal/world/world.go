@@ -54,7 +54,9 @@ type entity struct {
 	name             string
 	sprite           int
 	floor, x, y, dir int
-	client           Client       // 玩家才有
+	client           Client // 玩家才有；断线时保留安全的丢弃出口，不能置 nil
+	connected        bool   // 角色仍在世界与浏览器连接在线是两个独立状态
+	automation       *autoPlayState
 	party            *party       // 组队（party.go）
 	fs               int          // FS 开关（fsParty 等）
 	trade            *trade       // 交易中（trade.go）
@@ -229,6 +231,8 @@ func (w *World) Run(ctx context.Context) {
 	}
 	busTick := time.NewTicker(busStep)
 	defer busTick.Stop()
+	automation := time.NewTicker(250 * time.Millisecond)
+	defer automation.Stop()
 	for {
 		select {
 		case <-ctx.Done():
@@ -252,6 +256,8 @@ func (w *World) Run(ctx context.Context) {
 			w.safe(w.saveAll)
 		case <-busTick.C:
 			w.safe(w.tickBuses)
+		case <-automation.C:
+			w.safe(func() { w.automationTick(w.now()) })
 		case <-clock.C:
 			w.safe(w.updateTimeMen)
 			w.safe(w.sweepGround)
@@ -337,7 +343,7 @@ func (w *World) Enter(c store.Character, cl Client) {
 			c.Floor, c.X, c.Y = h.Floor, h.X, h.Y
 		}
 		e := &entity{id: int(c.ID), kind: "player", name: c.Name, sprite: c.Sprite, floor: c.Floor, x: c.X, y: c.Y,
-			dir: c.Dir, client: cl, char: c, visible: map[int]bool{}, stepTokens: StepBurst}
+			dir: c.Dir, client: cl, connected: true, char: c, visible: map[int]bool{}, stepTokens: StepBurst}
 		w.players[e.id] = e
 		w.setLuck(e)
 		if a, ok := cl.(interface{ Account() string }); ok {
@@ -369,6 +375,7 @@ func (w *World) Enter(c store.Character, cl Client) {
 		if e.gm {
 			cl.Send(&proto.GmMenu{Items: w.gmMenuItems()})
 		}
+		w.sendAutoPlay(e)
 		w.log.Info("上线", "char", e.name, "floor", e.floor, "x", e.x, "y", e.y, "gm", e.gm)
 	})
 }
@@ -436,6 +443,7 @@ func (w *World) Leave(charID int, cl Client) {
 }
 
 func (w *World) leave(e *entity) {
+	w.stopAutomation(e)
 	w.abandonBattle(e)
 	w.cancelTrade(e)
 	w.vendorClear(e)
@@ -461,39 +469,46 @@ func (w *World) Move(charID, x, y, dir int) {
 		if e == nil {
 			return
 		}
-		if e.fight != nil || e.watch != nil || e.isFollower() || e.trade != nil || e.stall != nil || e.buying != nil {
-			// 战斗中（含观战）不能走；队员不能自己走（CHAR_walk_init 只收转身）；交易中不能走；摆摊中、看别人的摊位时也不能走（iOnStreetVendor）
-			e.client.Send(&proto.PosCorrect{X: e.x, Y: e.y, Dir: e.dir})
-			return
-		}
-		f := w.game.Floors[e.floor]
-		ok := dir >= 0 && dir < 8 && x == e.x && y == e.y && w.takeStepToken(e)
-		nx, ny := e.x, e.y
-		if ok {
-			nx, ny = e.x+MOVE[dir][0], e.y+MOVE[dir][1]
-			ok = w.game.Tiles.Walkable(f, nx, ny)
-		}
-		if !ok {
-			e.client.Send(&proto.PosCorrect{X: e.x, Y: e.y, Dir: e.dir})
-			return
-		}
-		ox, oy := e.x, e.y
-		e.x, e.y, e.dir = nx, ny, dir
-		e.clearAction()
-		if warp, found := w.game.WarpAt(e.floor, nx, ny); found {
-			fl, x, y := warp.ToFloor, warp.ToX, warp.ToY
-			if warp.Free != "" {
-				fl, x, y = w.freeWarpDest(e, warp)
-			}
-			w.placeOnFloor(e, fl, x, y, e.dir)
-			return
-		}
-		w.broadcastMove(e)
-		w.partyFollow(e, ox, oy)
-		w.petFollowStep(e) // 溜着的宠物跟上来
-		e.stay = false // 走一步就不再原地遇敌（clearStayEncount）
-		w.rollEncounter(e)
+		w.manualAutomationMove(e)
+		w.move(e, x, y, dir)
 	})
+}
+
+// move is shared by manual movement and the authoritative automation ticker.
+// It must run on the world goroutine; callers cannot nest World.Do.
+func (w *World) move(e *entity, x, y, dir int) {
+	if e.fight != nil || e.watch != nil || e.isFollower() || e.trade != nil || e.stall != nil || e.buying != nil {
+		// 战斗中（含观战）不能走；队员不能自己走（CHAR_walk_init 只收转身）；交易中不能走；摆摊中、看别人的摊位时也不能走（iOnStreetVendor）
+		e.client.Send(&proto.PosCorrect{X: e.x, Y: e.y, Dir: e.dir})
+		return
+	}
+	f := w.game.Floors[e.floor]
+	ok := dir >= 0 && dir < 8 && x == e.x && y == e.y && w.takeStepToken(e)
+	nx, ny := e.x, e.y
+	if ok {
+		nx, ny = e.x+MOVE[dir][0], e.y+MOVE[dir][1]
+		ok = w.game.Tiles.Walkable(f, nx, ny)
+	}
+	if !ok {
+		e.client.Send(&proto.PosCorrect{X: e.x, Y: e.y, Dir: e.dir})
+		return
+	}
+	ox, oy := e.x, e.y
+	e.x, e.y, e.dir = nx, ny, dir
+	e.clearAction()
+	if warp, found := w.game.WarpAt(e.floor, nx, ny); found {
+		fl, x, y := warp.ToFloor, warp.ToX, warp.ToY
+		if warp.Free != "" {
+			fl, x, y = w.freeWarpDest(e, warp)
+		}
+		w.placeOnFloor(e, fl, x, y, e.dir)
+		return
+	}
+	w.broadcastMove(e)
+	w.partyFollow(e, ox, oy)
+	w.petFollowStep(e) // 溜着的宠物跟上来
+	e.stay = false     // 走一步就不再原地遇敌（clearStayEncount）
+	w.rollEncounter(e)
 }
 
 // walkSpeed 是 rules.walkSpeed（没设或不合理就 1）。

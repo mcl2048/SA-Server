@@ -1,0 +1,42 @@
+{
+  "release": "v0.2.8-LYNX",
+  "binary_sha256": "615a4fc6e354b8fac0dcdc026c8b72fe9d005deaa00b0453b30c985d834f521c",
+  "checks": [
+    {
+      "command": "GOMAXPROCS=2 GOMEMLIMIT=400MiB go test -C server -p=1 ./... -count=1",
+      "exit_code": 0,
+      "packages": {"cmd/saserver": "2.922s", "internal/battle": "0.231s", "internal/data": "6.738s", "internal/server": "3.338s", "internal/store": "0.190s", "internal/world": "66.511s", "tests": "37.652s", "webclient": "0.017s"},
+      "scope_note": "All Go production files are identical to final release. The subsequent production change was one client mobileFrame phase expression, tested below."
+    },
+    {
+      "command": "npm exec --yes --package typescript@5.9.3 -- tsc --noEmit --allowImportingTsExtensions --module esnext --moduleResolution bundler --target es2023 --lib es2023,dom,dom.iterable client/src/*.ts",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test client/test/*.test.ts client/test/*.test.mjs scripts/build-client.test.mjs",
+      "exit_code": 0,
+      "tests": 89,
+      "passed": 89,
+      "failed": 0,
+      "skipped": 0,
+      "duration_ms": 10670.412049
+    },
+    {
+      "command": "bash scripts/update-assets.test.sh",
+      "exit_code": 0,
+      "cases": 29,
+      "detail": "Report/SA-1113-01/UPDATE-REVIEW.md; actual install and reproducibility hashes in update/install-validation.json"
+    },
+    {
+      "command": "python3 Report/SA-1113-01/verify-delivery.py --base http://127.0.0.1:38543",
+      "exit_code": 0,
+      "embedded_files_byte_identical": 40,
+      "incremental_files_byte_identical": 9,
+      "detail": "binary-http-verification.json"
+    },
+    {
+      "command": "sha256sum -c bin/saserver.sha256",
+      "exit_code": 0
+    }
+  ]
+}

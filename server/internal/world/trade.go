@@ -115,7 +115,7 @@ func (w *World) Trade(charID int, cmd string, slot, amount int) {
 
 // tradeRequest 是 TRADE_Search。
 func (w *World) tradeRequest(e *entity) {
-	if e.busy() || e.party != nil {
+	if !e.attached() || e.busy() || e.party != nil {
 		return
 	}
 	fx, fy := e.x+MOVE[e.dir][0], e.y+MOVE[e.dir][1]
@@ -130,7 +130,7 @@ func (w *World) tradeRequest(e *entity) {
 			continue
 		}
 		found = true
-		if !o.busy() && o.party == nil && o.fs&fsTrade != 0 {
+		if o.attached() && !o.busy() && o.party == nil && o.fs&fsTrade != 0 {
 			cands = append(cands, o)
 		}
 	}

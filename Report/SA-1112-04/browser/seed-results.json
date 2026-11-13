@@ -1,0 +1,26 @@
+{
+  "binary_sha256": "50288181f3826225340066a759f8f9a773519a9b29efc2a9ba20706cacb7aae8",
+  "client_mode": "embedded",
+  "phase": "seed",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "normal-ui-created-isolated-character-0",
+      "pass": true,
+      "details": {
+        "name": "UpgAb419"
+      }
+    },
+    {
+      "case": "normal-ui-created-isolated-character-1",
+      "pass": true,
+      "details": {
+        "name": "UpgBb419"
+      }
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

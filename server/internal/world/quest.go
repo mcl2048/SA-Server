@@ -22,7 +22,24 @@ func (w *World) questLog(e *entity) []proto.QuestEntry {
 	out := []proto.QuestEntry{}
 	hints := w.questHints()
 	for _, j := range w.game.Quests {
-		if !w.passCheck(e, j.Rule) {
+		rule := j.Rule
+		// 这两条H5转生引导沿用旧的6转门槛；只替换其精确条件，
+		// 不改普通任务里 TRANS<6 的游戏含义。
+		if j.ID == 9101 || j.ID == 9102 {
+			cap := fmt.Sprintf("TRANS<%d", w.Rules.charMaxTrans())
+			parts := strings.Split(rule, ",")
+			for i := range parts {
+				terms := strings.Split(parts[i], "&")
+				for k := range terms {
+					if terms[k] == "TRANS<6" {
+						terms[k] = cap
+					}
+				}
+				parts[i] = strings.Join(terms, "&")
+			}
+			rule = strings.Join(parts, ",")
+		}
+		if !w.passCheck(e, rule) {
 			continue
 		}
 		hint := hints[j.ID]
@@ -209,7 +226,7 @@ func (w *World) questNeed(e *entity, c, petName string) string {
 		return "先接：" + w.questTitle(n)
 	case "LV":
 		switch {
-		case op == ">" && e.char.Level <= n && n+1 <= MaxLevel:
+		case op == ">" && e.char.Level <= n && n < w.Rules.charMaxLevel():
 			return fmt.Sprintf("等级 %d 以上", n+1)
 		case op == "!=" && e.char.Level < n: // 原版 LV!=n 实际是等级正好 n
 			return fmt.Sprintf("等级正好 %d", n)

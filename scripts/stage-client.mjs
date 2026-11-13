@@ -13,9 +13,14 @@ if (lstatSync(source).isSymbolicLink()) throw Error("symlink at client dist");
 // entries instead of silently deleting local data or leaking it in the binary.
 for (const entry of readdirSync(stage, { withFileTypes: true })) {
   if (entry.isSymbolicLink()) throw Error("symlink in embed staging: " + entry.name);
-  if (!(entry.name === "dist" && entry.isDirectory())
+  if (!(["dist", "art"].includes(entry.name) && entry.isDirectory())
     && !(["README.txt", "index.html"].includes(entry.name) && entry.isFile())) {
     throw Error("unexpected file in embed staging (not building): " + entry.name);
+  }
+  if (entry.name === "art") {
+    for (const artwork of readdirSync(join(stage, "art"), { withFileTypes: true })) {
+      if (artwork.name !== "login.png" || !artwork.isFile() || artwork.isSymbolicLink()) throw Error("unexpected file in embed artwork: " + artwork.name);
+    }
   }
 }
 const files = new Map();
@@ -32,6 +37,11 @@ collect();
 if (!files.has("main.js")) throw Error("client build produced no main.js");
 const html = readFileSync(join(root, "client/index.html"));
 if (!html.includes(Buffer.from("dist/main.js"))) throw Error("missing client entry point");
+// Publish one raster file only. Editable SVG and font/license sources stay out
+// of the embedded FS, even though the source art directory may contain them.
+const artwork = join(root, "client/art/login.png");
+if (lstatSync(dirname(artwork)).isSymbolicLink() || lstatSync(artwork).isSymbolicLink() || !lstatSync(artwork).isFile()) throw Error("invalid login artwork path");
+const loginPng = readFileSync(artwork);
 const dist = join(stage, "dist");
 // Only this verified generated child is removed, never the containing tree.
 if (dist !== root + "/server/webclient/static/dist") throw Error("unexpected embed dist path");
@@ -41,5 +51,7 @@ for (const [rel, content] of files) {
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, content);
 }
+mkdirSync(join(stage, "art"), { recursive: true });
+writeFileSync(join(stage, "art/login.png"), loginPng);
 writeFileSync(join(stage, "index.html"), html);
-console.log(`Staged index.html and ${files.size} JavaScript files for embedding`);
+console.log(`Staged index.html, art/login.png and ${files.size} JavaScript files for embedding`);

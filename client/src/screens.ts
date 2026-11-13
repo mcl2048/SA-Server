@@ -8,6 +8,8 @@
 import { md5 } from "./md5.ts";
 import { Actor } from "./field.ts";
 import type { Connection } from "./net.ts";
+import type { Texture } from "./renderer.ts";
+import { isMobile } from "./mobile-view.ts";
 import type { CharSummary, ServerGroup } from "./proto.gen.ts";
 import { FONT, InputBox, OFFSET_640, SYS, measure, type Ui } from "./ui.ts";
 
@@ -30,6 +32,7 @@ export const HOMETOWNS = ["萨姆吉尔村", "玛丽娜丝村", "加加村", "�
 export interface App {
   ui: Ui;
   canvas: HTMLCanvasElement;
+  loginArt?: Texture;
   net: Connection | null;
   connect(): Promise<Connection>;
   disconnect(): void;
@@ -63,8 +66,13 @@ export class LoginScreen implements Screen {
   constructor(app: App) { this.app = app; }
 
   enter() {
-    this.id = new InputBox(this.app.canvas, 456, 154, 92, 16, { maxLength: 16 });
-    this.pass = new InputBox(this.app.canvas, 456, 194, 92, 16, { password: true, maxLength: 64 });
+    this.id = new InputBox(this.app.canvas, 500, 278, 220, 38, { maxLength: 16 });
+    this.pass = new InputBox(this.app.canvas, 500, 350, 220, 38, { password: true, maxLength: 64 });
+    this.id.el.placeholder = "账号"; this.id.el.setAttribute("aria-label", "账号");
+    this.pass.el.placeholder = "密码"; this.pass.el.setAttribute("aria-label", "密码");
+    for (const input of [this.id.el, this.pass.el]) {
+      Object.assign(input.style, { background: "#0a302de8", border: "1px solid #77927d", borderRadius: "8px", padding: "7px 12px", color: "#f4edce", fontSize: "16px", boxSizing: "border-box" });
+    }
     for (const box of [this.id, this.pass]) box.el.addEventListener("keydown", (e) => {
       if (e.key === "Enter") { e.preventDefault(); if (box === this.id) this.pass.focus(); else this.submit("Login"); }
       if (e.key === "Tab") { e.preventDefault(); (box === this.id ? this.pass : this.id).focus(); }
@@ -77,24 +85,24 @@ export class LoginScreen implements Screen {
 
   frame() {
     const ui = this.app.ui;
-    ui.image(CG.ID_PASS, 400, 300);
+    if (this.app.loginArt) ui.quads.push({ tex: this.app.loginArt, x: 0, y: 0, u: 0, v: 0, w: 800, h: 600 });
+    else ui.image(CG.ID_PASS, 400, 300);
     if (this.dialog) { this.dialogFrame(); return; }
-    // 输入框所在的木框，点击时把焦点给对应输入框
-    if (ui.hitBox(452, 150, 552, 172, "id", false) && ui.clicked("id")) this.id.focus();
-    if (ui.hitBox(452, 190, 552, 212, "pass", false) && ui.clicked("pass")) this.pass.focus();
-    // OK / Quit：悬停时显示原版的高亮图（两张图共用同一个锚点）
-    const ok = ui.hitBox(400, 296, 480, 395, "ok", false), quit = ui.hitBox(495, 310, 575, 390, "quit", false);
-    if (ok) { ui.image(CG.ID_PASS_OK, 401, 306); ui.bottomLine = "进入游戏。"; }
-    if (quit) { ui.image(CG.ID_PASS_QUIT, 401, 306); ui.bottomLine = "结束游戏。"; }
-    if (ui.clicked("ok")) this.submit("Login");
-    if (ui.clicked("quit")) { this.id.value = ""; this.pass.value = ""; this.id.focus(); }
-    // H5 新增：原版账号由官网注册，这里提供注册与找回密码的入口
-    // 两个连结在账号 / 密码木框（x 452..552，中心 502）正下方居中，各占一行
-    const cx = 502;
-    if (ui.textButton(cx - measure("注册新账号") / 2, 224, "注册新账号", FONT.YELLOW, "register")) this.openDialog("register");
-    if (ui.hovered("register")) ui.bottomLine = "填写账号、密码与安全码注册新账号。";
-    if (ui.textButton(cx - measure("找回密码") / 2, 246, "找回密码", FONT.AQUA, "reset")) this.openDialog("reset");
-    if (ui.hovered("reset")) ui.bottomLine = "用注册时填的安全码重设密码。";
+    ui.box(478, 198, 744, 511, "#0b302bdd", true);
+    ui.box(478, 198, 744, 511, "#78937c", false);
+    ui.text(500, 214, "YOUR NEXT ADVENTURE", "#a9bc9a", undefined, 10);
+    ui.text(500, 233, "欢迎归来", "#fff0bf", undefined, 24);
+    ui.text(500, 263, "新的冒险，正在等你", "#b4c9b0", undefined, 13);
+    if (!isMobile()) ui.text(500, 330, "密码", "#d4dfc2", undefined, 13);
+    if (ui.hitBox(500, 278, 720, 316, "id", false) && ui.clicked("id")) this.id.focus();
+    if (ui.hitBox(500, 350, 720, 388, "pass", false) && ui.clicked("pass")) this.pass.focus();
+    const ok = ui.hitBox(500, 410, 720, 454, "ok", false);
+    ui.box(500, 410, 720, 454, ok ? "#f5d38b" : "#dfbc73", true);
+    ui.text(610 - measure(this.busy ? "正在连接……" : "进入游戏", 18) / 2, 423, this.busy ? "正在连接……" : "进入游戏", "#173c32", undefined, 18);
+    if (ui.clicked("ok") && !this.busy) this.submit("Login");
+    if (ui.textButton(500, 478, "注册账号", "#e8d498", "register")) this.openDialog("register");
+    if (ui.textButton(593, 478, "清空", "#abc4ad", "quit")) { this.id.value = ""; this.pass.value = ""; this.id.focus(); }
+    if (ui.textButton(664, 478, "找回密码", "#b8d9c7", "reset")) this.openDialog("reset");
   }
 
   // ---------------- 注册 / 找回密码对话框 ----------------
@@ -174,6 +182,7 @@ export class LoginScreen implements Screen {
     this.busy = true;
     try {
       const net = await this.app.connect();
+      if (net.recoveredSession) return;
       if (kind === "register") {
         net.send({ t: "Register", account, password: md5(v[1]), secret: md5(v[3]) }); // 密码与安全码都只送 MD5
         const r = await net.once("AuthResult");
@@ -181,9 +190,7 @@ export class LoginScreen implements Screen {
         this.closeDialog();
         this.id.value = account; this.pass.value = "";
         try { localStorage.setItem("sa-account", account); } catch {}
-        const list = await net.once("ServerList");
-        this.app.groups = list.groups;
-        this.app.go(new LineScreen(this.app));
+        // Session/ServerList handlers own navigation, including live takeover.
       } else {
         net.send({ t: "ResetPassword", account, secret: md5(v[1]), password: md5(v[2]) });
         const r = await net.once("AuthResult");
@@ -207,13 +214,13 @@ export class LoginScreen implements Screen {
     this.busy = true;
     try {
       const net = await this.app.connect();
+      // A saved browser session may have resumed while connect was pending.
+      if (net.recoveredSession) return;
       net.send({ t: kind, account, password: md5(password) }); // 只送 MD5，服务端只存、只比对这个值
       const r = await net.once("AuthResult");
       if (!r.ok) { this.app.message(r.message); return; }
       try { localStorage.setItem("sa-account", account); } catch {}
-      const list = await net.once("ServerList");
-      this.app.groups = list.groups;
-      this.app.go(new LineScreen(this.app));
+      // ServerList or a live-character Session snapshot performs navigation.
     } catch (e) {
       this.app.message((e as Error).message);
     } finally {

@@ -1,0 +1,254 @@
+{
+  "binary_sha256": "63ada6b5c8434ae09f9622f014916a7e930b8bf26b369b3f84c01c36440a6f5a",
+  "client_mode": "embedded",
+  "phase": "all",
+  "engine": "real Chromium / SwiftShader; Playwright + CDP touch",
+  "physical_device": false,
+  "cases": [
+    {
+      "case": "new-cover-real-desktop",
+      "pass": true,
+      "details": {
+        "size": [
+          1280,
+          900
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "new-cover-real-portrait",
+      "pass": true,
+      "details": {
+        "size": [
+          390,
+          844
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "mobile-password-visual-viewport-and-composition-safe",
+      "pass": true,
+      "details": {
+        "visiblePassword": true,
+        "height": 500
+      }
+    },
+    {
+      "case": "new-cover-real-landscape",
+      "pass": true,
+      "details": {
+        "size": [
+          844,
+          390
+        ],
+        "coverLoaded": true,
+        "inputCount": 2
+      }
+    },
+    {
+      "case": "leader-character-cap-200-above-native-140",
+      "pass": true,
+      "details": {
+        "level": 200,
+        "nextExp": 0
+      }
+    },
+    {
+      "case": "leader-character-rebirth-cap-twelve",
+      "pass": true,
+      "details": {
+        "trans": 12,
+        "independentConfiguredPetCap": 8
+      }
+    },
+    {
+      "case": "leader-pet-cap-180-and-five-selected",
+      "pass": true,
+      "details": {
+        "levels": [
+          180,
+          30,
+          30,
+          30,
+          30
+        ]
+      }
+    },
+    {
+      "case": "partner-character-cap-200-above-native-140",
+      "pass": true,
+      "details": {
+        "level": 200,
+        "nextExp": 0
+      }
+    },
+    {
+      "case": "partner-character-rebirth-cap-twelve",
+      "pass": true,
+      "details": {
+        "trans": 12,
+        "independentConfiguredPetCap": 8
+      }
+    },
+    {
+      "case": "partner-pet-cap-180-and-five-selected",
+      "pass": true,
+      "details": {
+        "levels": [
+          180,
+          30,
+          30,
+          30,
+          30
+        ]
+      }
+    },
+    {
+      "case": "solo-five-pet-fighters-each-exp-and-level100-stone50to80",
+      "pass": true,
+      "details": {
+        "fighters": [
+          {
+            "slot": 5,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 0
+          },
+          {
+            "slot": 6,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 1
+          },
+          {
+            "slot": 7,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 2
+          },
+          {
+            "slot": 8,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 3
+          },
+          {
+            "slot": 9,
+            "name": "乌力",
+            "ownerSlot": 0,
+            "bagSlot": 4
+          }
+        ],
+        "result": {
+          "t": "BattleEnd",
+          "result": "win",
+          "gold": 60,
+          "exp": 1813,
+          "level": 150,
+          "pets": [
+            {
+              "name": "乌力",
+              "exp": 1813,
+              "level": 180,
+              "slot": 0,
+              "levelUp": 0
+            },
+            {
+              "slot": 1,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 2,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 3,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            },
+            {
+              "slot": 4,
+              "name": "乌力",
+              "exp": 1813,
+              "level": 30,
+              "levelUp": 0
+            }
+          ],
+          "levelUp": 0,
+          "items": []
+        }
+      }
+    },
+    {
+      "case": "below-five-enemy-level-pays-exact-level-stone",
+      "pass": true,
+      "details": {
+        "t": "BattleEnd",
+        "result": "win",
+        "gold": 4,
+        "exp": 1,
+        "level": 150,
+        "pets": [
+          {
+            "name": "乌力",
+            "exp": 1,
+            "level": 180,
+            "slot": 0,
+            "levelUp": 0
+          },
+          {
+            "slot": 1,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 2,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 3,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          },
+          {
+            "slot": 4,
+            "name": "乌力",
+            "exp": 1,
+            "level": 30,
+            "levelUp": 0
+          }
+        ],
+        "levelUp": 0,
+        "items": []
+      }
+    },
+    {
+      "case": "execution-failure",
+      "pass": false,
+      "error": "Locator.wait_for: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-action=\\\"ai-auto-val\\\"]\") to be visible\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 299, in <module>\n    else:\n    \n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 232, in gameplay_cases\n    # Hold a real quick battle in a defensive plan while toggling modes live.\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 139, in set_auto\n    if current!=want:self.action(id+'-val',200)\n                     ~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"/home/coder/saserver/Report/SA-1112-04/browser/gameplay_acceptance.py\", line 88, in action\n    button.wait_for(state='visible',timeout=15000)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/sync_api/_generated.py\", line 13635, in wait_for\n    self._sync(\n    ~~~~~~~~~~^\n        self._impl_obj.wait_for(state=state, timeout=to_milliseconds(timeout))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_sync_base.py\", line 111, in _sync\n    return task.result()\n           ~~~~~~~~~~~^^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_locator.py\", line 767, in wait_for\n    await self._frame.wait_for_selector(\n        self._selector, strict=True, timeout=timeout, state=state\n    )\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_frame.py\", line 395, in wait_for_selector\n    await self._channel.send(\n        \"waitForSelector\", self._timeout, locals_to_params(locals())\n    )\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 78, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/tmp/loft-hyraken-paas-venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 636, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.wait_for: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-action=\\\"ai-auto-val\\\"]\") to be visible\n\n"
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "credentials_stored_outside_repository": true
+}

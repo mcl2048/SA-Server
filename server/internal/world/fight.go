@@ -32,11 +32,13 @@ const (
 
 // battleRoom 是一场战斗（BattleArray）：一起打的玩家（组队时最多 5 人，站 0..4，各自的宠物站 +5）共用一个 battle.Battle。
 type battleRoom struct {
-	b       *battle.Battle
-	members []*entity // 还在这场战斗里的玩家（第一个是队长）
-	turn    int
-	timer   *time.Timer
-	started time.Time
+	b             *battle.Battle
+	members       []*entity // 还在这场战斗里的玩家（第一个是队长）
+	turn          int
+	timer         *time.Timer
+	started       time.Time
+	deadline      time.Time // Current server turn deadline, preserved across reconnects.
+	retirementSeq int       // Unique negative kill attribution tokens survive pet-slot reuse.
 	// npc 是开这场战斗的 NPC（BattleArray.createindex，遇敌为 nil）；onEnd 在结果送出之后以队长的 "win" / "lose" / "escape" 调用
 	// （原版 BattleArray.WinFunc 只在打赢时由 BATTLE_Finish 调用，见 startBattleWith）。
 	npc   *entity
@@ -52,7 +54,7 @@ type battleRoom struct {
 // member 是站在 slot（或它的宠物位置 slot+5）的玩家。
 func (r *battleRoom) member(slot int) *entity {
 	for _, m := range r.members {
-		if m.fight != nil && (m.fight.slot == slot || m.fight.slot+5 == slot) {
+		if m.fight != nil && (m.fight.slot == slot || m.fight.ownsPetSlot(slot)) {
 			return m
 		}
 	}
@@ -66,9 +68,13 @@ type fight struct {
 	slot int            // 玩家在战斗中的位置
 	cmd  *battle.Command
 	// pet 是出战的宠物在宠物栏的格位（-1 没带），站在 slot+5；petCmd 是它这回合的指令
-	pet    int
-	petCmd *battle.Command
-	swapTo int // 这回合要叫出的宠物格位（换宠物的指令）
+	pet          int
+	petCmd       *battle.Command
+	pets         map[int]int // battle slot -> owner's bag slot; primary stays at slot+5
+	petCmds      map[int]*battle.Command
+	retiredPets  []retiredBattlePet // quota shrink retains state/contribution for one final settlement
+	deployedPets map[int]bool       // never respawn a pet removed earlier in this battle
+	swapTo       int                // 这回合要叫出的宠物格位（换宠物的指令）
 	// itemsDirty：装备在战斗中坏掉或损坏等级变了，回合结束时重发道具栏
 	itemsDirty bool
 	petsDirty  bool // 宠物身上的道具磨损了（_TAKE_ITEMDAMAGE_FOR_PET）
@@ -128,8 +134,9 @@ func (w *World) startBattleWith(e *entity, enemies []*battle.Fighter, npc *entit
 	w.battleSeq++
 	room := &battleRoom{b: b, started: w.now(), npc: npc, onEnd: onEnd, no: w.battleSeq}
 	for i, m := range w.battleMembers(e) { // 队长在 0，队员依序 1..4（BATTLE_CreateVsEnemy 的 BATTLE_PartyNewEntry）
-		w.joinRoom(room, m, i)
+		w.joinRoom(room, m, i, true)
 	}
+	w.balanceBattlePets(room, 0)
 	for _, f := range enemies {
 		b.Add(f)
 	}
@@ -172,19 +179,17 @@ func (w *World) startBattleWith(e *entity, enemies []*battle.Fighter, npc *entit
 }
 
 // joinRoom 让 m 站到位置 slot（宠物在 slot+5）。
-func (w *World) joinRoom(room *battleRoom, m *entity, slot int) {
+func (w *World) joinRoom(room *battleRoom, m *entity, slot int, deferPets ...bool) {
 	w.cancelTrade(m)
 	m.clearAction()
 	b := room.b
 	p := w.playerFighter(m, slot)
 	b.Add(p)
-	pet := -1
-	if i := m.pets.Battle; i >= 0 && m.pets.Pets[i] != nil && m.pets.Pets[i].HP > 0 {
-		pet = i
-		b.Add(w.petFighter(m, i, slot+5))
-	}
-	m.fight = &fight{room: room, b: b, slot: slot, pet: pet}
+	m.fight = &fight{room: room, b: b, slot: slot, pet: -1, pets: map[int]int{}, petCmds: map[int]*battle.Command{}, deployedPets: map[int]bool{}}
 	room.members = append(room.members, m)
+	if len(deferPets) == 0 || !deferPets[0] {
+		w.balanceBattlePets(room, slot/battle.SideOffset)
+	}
 }
 
 // sendBattleStart 送 m 这场战斗的全部人（BATTLE_CharSendOne 的 B| 字串开头）。
@@ -201,10 +206,43 @@ func (w *World) sendBattleStart(m *entity, field, surprise int) {
 	m.client.Send(msg)
 }
 
+// Reconnect sends current fighters, never historical turns or another reward.
+func (w *World) sendResumedBattleStart(m *entity) {
+	ft := m.fight
+	if ft == nil {
+		return
+	}
+	remaining := w.Rules.TurnTime
+	if !ft.room.deadline.IsZero() {
+		remaining = max(time.Millisecond, ft.room.deadline.Sub(w.now()))
+	}
+	msg := &proto.BattleStart{Field: ft.room.field, MySlot: ft.slot, TurnTime: int(remaining / time.Millisecond),
+		Pvp: ft.room.pvp, Event: ft.room.npc != nil, Speed: w.battleSpeedPct(), Resume: true, Turn: ft.room.turn,
+		Submitted: ft.cmd != nil, PetSubmitted: ft.petCmd != nil}
+	for slot, cmd := range ft.petCmds {
+		if cmd != nil {
+			msg.SubmittedPets = append(msg.SubmittedPets, slot)
+		}
+	}
+	slices.Sort(msg.SubmittedPets)
+	for _, f := range ft.b.F {
+		if f != nil {
+			msg.Fighters = append(msg.Fighters, w.fighterInfo(ft.room, f))
+		}
+	}
+	m.client.Send(msg)
+}
+
 // fighterInfo 是一个战斗者在 B| 字串里的资料。
 func (w *World) fighterInfo(room *battleRoom, f *battle.Fighter) proto.BattleFighter {
 	bf := proto.BattleFighter{Slot: f.Slot, Name: f.Name, Sprite: f.Sprite,
-		Level: f.Level, HP: f.HP, MaxHp: f.MaxHP, Mp: f.MP, MaxMp: f.MaxMP}
+		Level: f.Level, HP: f.HP, MaxHp: f.MaxHP, Mp: f.MP, MaxMp: f.MaxMP, Status: int(f.Status())}
+	if f.Pet {
+		if owner := room.member(f.Slot); owner != nil {
+			bf.OwnerSlot = owner.fight.slot
+			bf.BagSlot, _ = owner.fight.petBagSlot(f.Slot)
+		}
+	}
 	if r := f.Ride; r != nil {
 		// 落马后换回拿武器的形象（BATTLE_changeRideImage）
 		bf.RideName, bf.RideLevel, bf.RideHp, bf.RideMaxHp = r.Name, r.Level, r.HP, r.MaxHP
@@ -295,6 +333,7 @@ func (w *World) armTurnTimer(room *battleRoom, events int) {
 	}
 	turn := room.turn
 	d := w.Rules.TurnTime + time.Duration(events)*1500*time.Millisecond + 5*time.Second
+	room.deadline = w.now().Add(d)
 	room.timer = time.AfterFunc(d, func() {
 		w.Do(func() {
 			if room.turn != turn || len(room.members) == 0 {
@@ -324,8 +363,10 @@ func (w *World) battleTimeout(room *battleRoom) {
 		w.sysMsg(m, "时间到，结束战斗。", colorYellow)
 		room.removeMember(m)
 		ft.b.F[ft.slot].Escaped = true
-		if pf := ft.b.F[ft.slot+5]; pf != nil {
-			pf.Escaped = true
+		for _, slot := range ft.petSlots() {
+			if pf := ft.b.F[slot]; pf != nil {
+				pf.Escaped = true
+			}
 		}
 		w.endMember(m, -1)
 	}
@@ -352,99 +393,145 @@ func (w *World) flownHome(e *entity) {
 func (w *World) BattleCommand(charID int, kind string, target, item int) {
 	w.Do(func() {
 		e := w.players[charID]
-		if e != nil && e.watch != nil { // 观战者只有"离开"
-			if kind == "leave" {
-				w.stopWatch(e, true)
-			}
+		if e != nil && e.fight != nil && !e.fight.room.pvp && e.automation != nil && (e.automation.autoBattle || e.automation.quick) {
 			return
 		}
-		if e == nil || e.fight == nil || e.fight.cmd != nil || !e.fight.b.F[e.fight.slot].Alive() {
-			return
-		}
-		c := battle.Command{Kind: battle.Kind(kind), Target: target}
-		switch c.Kind {
-		case battle.Escape:
-			// battle_command.c _NOT_ESCAPE：NOTESCAPE 的楼层逃不掉，改成防御
-			if slices.Contains(w.Rules.NoEscapeFloors, e.floor) {
-				w.sysMsg(e, "大魔王使出定身法，定定定定定定把你定在战斗里。", colorYellow)
-				c.Kind = battle.Guard
-			}
-		case battle.Attack, battle.Guard, battle.None, battle.Capture:
-
-		case battle.UseItem:
-			// lssproto_B 的 "I|格位|目标"：目标要合道具的种类（ITEM_isTargetValid）；地图专用的道具由客户端挡（原版服务端不查）
-			var def *data.ItemDef
-			if item >= data.EquipSlots && item < data.ItemSlots && e.inv[item] != nil {
-				def = w.game.Items[e.inv[item].ID]
-			}
-			if def == nil || def.UseFunc == "" || def.Field == 2 || !itemTargetValid(def, target, e.fight.slot) {
-				c = battle.Command{Kind: battle.None}
-				break
-			}
-			c.ItemFunc, c.ItemArg, c.ItemName, c.ItemSlot = def.UseFunc, def.Argument, def.Name, item
-			if def.MagicID >= 0 {
-				c.ItemMagic = w.game.Battle.Magics[def.MagicID]
-			}
-			if def.UseFunc == "ITEM_useMagic" {
-				// ITEM_useMagic_Battle → MAGIC_DirectUse(…, 0)：咒术是参数的编号，MP 照头上装备的 magicusemp（没戴东西就施不出来）
-				c.ItemMagic, c.MP = w.game.Battle.Magics[data.Atoi(def.Argument)], 0
-				if head := e.inv[data.SlotHead]; head == nil || w.game.Items[head.ID] == nil {
-					c.ItemMagic = nil
-				} else {
-					c.MP = w.magicMP(e, c.ItemMagic, w.game.Items[head.ID].MagicMP)
-				}
-			}
-		case battle.PetSwap:
-			// lssproto_B 的 "S|n"：-1 收回，其余叫出第 n 格（骑着的不行，原版改为收回）；倒下的叫不出来（BATTLE_PetDefaultEntry）
-			c.Target = -1
-			e.fight.swapTo = -1
-			if item >= 0 && item < PetSlots && item != e.pets.Ride && e.pets.Pets[item] != nil {
-				e.fight.swapTo = item
-				if e.pets.Pets[item].HP > 0 {
-					c.Swap = w.petFighter(e, item, e.fight.slot+5)
-				}
-			}
-		case battle.Magic:
-			// lssproto_B 的 "J|装备位|目标"：装备着的道具上的咒术（MAGIC_GetArrayNo），目标要合咒术的种类（MAGIC_isTargetValid）
-			m, mp := w.equipMagic(e, item)
-			if m == nil || m.Field == 2 || !magicTargetValid(m, target) {
-				c = battle.Command{Kind: battle.None}
-				break
-			}
-			c.Magic, c.MP = m, mp
-			if strings.Contains(m.Option, "SKILL") {
-				c = w.attSkill(e, m, mp, target) // _ITEM_ATTSKILLMAGIC：装备的咒术其实是宠物技能
-			}
-		default:
-			c = battle.Command{Kind: battle.None}
-		}
-		e.fight.cmd = &c
-		w.tryResolve(e.fight.room)
+		w.battleCommand(e, kind, target, item)
 	})
+}
+
+// battleCommand shares the original command validation between manual input and
+// server-owned automation. Call only from the world goroutine.
+func (w *World) battleCommand(e *entity, kind string, target, item int) {
+	if e != nil && e.watch != nil { // 观战者只有"离开"
+		if kind == "leave" {
+			w.stopWatch(e, true)
+		}
+		return
+	}
+	if e == nil || e.fight == nil || e.fight.cmd != nil || !e.fight.b.F[e.fight.slot].Alive() {
+		return
+	}
+	c := battle.Command{Kind: battle.Kind(kind), Target: target}
+	switch c.Kind {
+	case battle.Escape:
+		// battle_command.c _NOT_ESCAPE：NOTESCAPE 的楼层逃不掉，改成防御
+		if slices.Contains(w.Rules.NoEscapeFloors, e.floor) {
+			w.sysMsg(e, "大魔王使出定身法，定定定定定定把你定在战斗里。", colorYellow)
+			c.Kind = battle.Guard
+		}
+	case battle.Attack, battle.Guard, battle.None, battle.Capture:
+
+	case battle.UseItem:
+		// lssproto_B 的 "I|格位|目标"：目标要合道具的种类（ITEM_isTargetValid）；地图专用的道具由客户端挡（原版服务端不查）
+		var def *data.ItemDef
+		if item >= data.EquipSlots && item < data.ItemSlots && e.inv[item] != nil {
+			def = w.game.Items[e.inv[item].ID]
+		}
+		if def == nil || def.UseFunc == "" || def.Field == 2 || !itemTargetValid(def, target, e.fight.slot) {
+			c = battle.Command{Kind: battle.None}
+			break
+		}
+		c.ItemFunc, c.ItemArg, c.ItemName, c.ItemSlot = def.UseFunc, def.Argument, def.Name, item
+		if def.MagicID >= 0 {
+			c.ItemMagic = w.game.Battle.Magics[def.MagicID]
+		}
+		if def.UseFunc == "ITEM_useMagic" {
+			// ITEM_useMagic_Battle → MAGIC_DirectUse(…, 0)：咒术是参数的编号，MP 照头上装备的 magicusemp（没戴东西就施不出来）
+			c.ItemMagic, c.MP = w.game.Battle.Magics[data.Atoi(def.Argument)], 0
+			if head := e.inv[data.SlotHead]; head == nil || w.game.Items[head.ID] == nil {
+				c.ItemMagic = nil
+			} else {
+				c.MP = w.magicMP(e, c.ItemMagic, w.game.Items[head.ID].MagicMP)
+			}
+		}
+	case battle.PetSwap:
+		// lssproto_B 的 "S|n"：-1 收回，其余叫出第 n 格（骑着的不行，原版改为收回）；倒下的叫不出来（BATTLE_PetDefaultEntry）
+		c.Target = -1
+		e.fight.swapTo = -1
+		alreadyOut := false
+		for _, bag := range e.fight.pets {
+			if bag == item {
+				alreadyOut = true
+			}
+		}
+		for _, retired := range e.fight.retiredPets {
+			if retired.bag == item {
+				alreadyOut = true
+			}
+		}
+		if alreadyOut {
+			c.Kind = battle.None
+			break
+		}
+		if item >= 0 && item < PetSlots && item != e.pets.Ride && e.pets.Pets[item] != nil && !alreadyOut && !e.pets.Pets[item].Away {
+			e.fight.swapTo = item
+			if e.pets.Pets[item].HP > 0 {
+				c.Swap = w.petFighter(e, item, e.fight.slot+5)
+			}
+		}
+	case battle.Magic:
+		// lssproto_B 的 "J|装备位|目标"：装备着的道具上的咒术（MAGIC_GetArrayNo），目标要合咒术的种类（MAGIC_isTargetValid）
+		m, mp := w.equipMagic(e, item)
+		if m == nil || m.Field == 2 || !magicTargetValid(m, target) ||
+			(m.Target == data.MagicTargetAllMySide && target != 20+e.fight.slot/battle.SideOffset) ||
+			(m.Target == data.MagicTargetAllOtherSide && target != 21-e.fight.slot/battle.SideOffset) {
+			c = battle.Command{Kind: battle.None}
+			break
+		}
+		c.Magic, c.MP = m, mp
+		if strings.Contains(m.Option, "SKILL") {
+			c = w.attSkill(e, m, mp, target) // _ITEM_ATTSKILLMAGIC：装备的咒术其实是宠物技能
+		}
+	default:
+		c = battle.Command{Kind: battle.None}
+	}
+	e.fight.cmd = &c
+	w.tryResolve(e.fight.room)
 }
 
 // BattlePetCommand 收下宠物这回合的指令：用第 skill 格的技能（lssproto_B 的 "W|技能|目标"），-1 为什么也不做。
 // 只能用战斗中可用的技能（PETSKILL_FIELD_ALL / BATTLE）。
-func (w *World) BattlePetCommand(charID, skill, target int) {
+func (w *World) BattlePetCommand(charID, skill, target int, petSlot ...int) {
 	w.Do(func() {
 		e := w.players[charID]
-		if e == nil || e.fight == nil || e.fight.petCmd != nil {
+		if e != nil && e.fight != nil && !e.fight.room.pvp && e.automation != nil && (e.automation.autoBattle || e.automation.quick) {
 			return
 		}
-		ft := e.fight
-		pf := ft.b.F[ft.slot+5]
-		if ft.pet < 0 || !pf.Alive() {
-			return
-		}
-		c := battle.Command{Kind: battle.None}
-		if skill >= 0 && skill < len(pf.Skills) {
-			if s := pf.Skills[skill]; s != nil && (s.Field == 0 || s.Field == 1) {
-				c = battle.Command{Kind: battle.Attack, Target: target, Skill: s}
-			}
-		}
-		ft.petCmd = &c
-		w.tryResolve(ft.room)
+		w.battlePetCommand(e, skill, target, petSlot...)
 	})
+}
+
+func (w *World) battlePetCommand(e *entity, skill, target int, petSlot ...int) {
+	if e == nil || e.fight == nil {
+		return
+	}
+	ft := e.fight
+	slot := ft.slot + 5
+	if len(petSlot) > 0 && petSlot[0] != 0 {
+		slot = petSlot[0]
+	}
+	if !ft.ownsPetSlot(slot) || ft.petCommand(slot) != nil {
+		return
+	}
+	pf := ft.b.F[slot]
+	if !pf.Alive() {
+		return
+	}
+	c := battle.Command{Kind: battle.None}
+	if skill >= 0 && skill < len(pf.Skills) {
+		if s := pf.Skills[skill]; s != nil && (s.Field == 0 || s.Field == 1) {
+			c = battle.Command{Kind: battle.Attack, Target: target, Skill: s}
+		}
+	}
+	if ft.petCmds == nil {
+		ft.petCmds = map[int]*battle.Command{}
+	}
+	ft.petCmds[slot] = &c
+	if slot == ft.slot+5 {
+		ft.petCmd = &c
+	}
+	w.tryResolve(ft.room)
 }
 
 // tryResolve：这场战斗里每个玩家还在场上的人与宠物都下了指令就结算（BATTLE_ActionSelectCheck）。
@@ -454,8 +541,10 @@ func (w *World) tryResolve(room *battleRoom) {
 		if ft.b.F[ft.slot].Alive() && ft.cmd == nil {
 			return
 		}
-		if pf := ft.b.F[ft.slot+5]; ft.pet >= 0 && pf.Alive() && ft.petCmd == nil {
-			return
+		for _, slot := range ft.petSlots() {
+			if ft.b.F[slot].Alive() && ft.petCommand(slot) == nil {
+				return
+			}
 		}
 	}
 	w.resolveTurn(room)
@@ -468,8 +557,10 @@ func (w *World) resolveTurn(room *battleRoom) {
 		if ft.cmd != nil {
 			cmds[ft.slot] = *ft.cmd
 		}
-		if ft.petCmd != nil {
-			cmds[ft.slot+5] = *ft.petCmd
+		for _, slot := range ft.petSlots() {
+			if c := ft.petCommand(slot); c != nil {
+				cmds[slot] = *c
+			}
 		}
 	}
 	ev := room.b.Resolve(cmds)
@@ -484,6 +575,13 @@ func (w *World) resolveTurn(room *battleRoom) {
 			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
 			PetDamage: x.PetDamage, RideHp: x.RideHP, Fall: x.Fall, Effect: x.Effect, ActorMp: x.ActorMP, Shoot: x.Shoot, Fly: x.Fly,
 			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att})
+		if x.Kind == battle.PetOut {
+			if owner := room.member(x.Target); owner != nil {
+				last := &msg.Events[len(msg.Events)-1]
+				last.OwnerSlot = owner.fight.slot
+				last.BagSlot, _ = owner.fight.petBagSlot(x.Target)
+			}
+		}
 	}
 	for _, m := range room.members {
 		m.client.Send(msg)
@@ -563,6 +661,7 @@ func (w *World) afterMemberTurn(e *entity, ev []battle.Event) {
 		}
 	}
 	ft.cmd, ft.petCmd = nil, nil
+	ft.petCmds = map[int]*battle.Command{}
 }
 
 // endBattle 结算这场战斗的每个玩家，最后以队长的结果调用 onEnd。
@@ -616,6 +715,7 @@ func (w *World) endMember(e *entity, win int) string {
 			res.Exp = charExp
 			res.LevelUp = w.gainExp(e, res.Exp)
 			res.Items = w.giveDrops(e, ft.b)
+			res.Gold = w.giveBattleGold(e, ft.b)
 		}
 		res.Pets = w.petResult(e, ft, petExp)
 		if p.HP > 0 {
@@ -650,7 +750,7 @@ func (w *World) endMember(e *entity, win int) string {
 	if p.Escaped {
 		w.leaveParty(e, false) // 逃走：CHAR_DischargePartyNoMsg（队长逃走就解散）
 	}
-	if ft.pet >= 0 || p.Ride != nil {
+	if len(ft.petSlots()) > 0 || len(ft.retiredPets) > 0 || p.Ride != nil {
 		e.char.Pets = e.pets.String()
 		w.sendPets(e)
 	}
@@ -673,17 +773,22 @@ func (w *World) battleExp(e *entity, ft *fight) (char, pet, ride int) {
 	}
 	if w.Rules.ShareExp {
 		level := e.char.Level
-		if pf := ft.b.F[ft.slot+5]; ft.pet >= 0 && pf != nil && pf.Alive() {
-			level = min(level, pf.Level)
+		for _, slot := range ft.petSlots() {
+			if pf := ft.b.F[slot]; pf.Alive() {
+				level = min(level, pf.Level)
+			}
 		}
 		if rp != nil {
 			level = min(level, rp.Level)
 		}
 		total := 0
 		for _, x := range ft.b.F {
-			if x != nil && x.Enemy() && x.HP <= 0 && (x.KilledBy == ft.slot || x.KilledBy == ft.slot+5) {
+			if x != nil && x.Enemy() && x.HP <= 0 && (x.KilledBy == ft.slot || ft.ownsPetSlot(x.KilledBy)) {
 				total += battle.KillExp(x.Exp, level, x.Level)
 			}
+		}
+		for _, x := range ft.retiredKills() {
+			total += battle.KillExp(x.Exp, level, x.Level)
 		}
 		n := e.addExp.boost(w.Rules.scaleExp(total))
 		return n, n, n
@@ -708,9 +813,9 @@ func (w *World) gainExp(e *entity, exp int) int {
 	c := &e.char
 	c.Exp += exp
 	ups, fame := 0, 0
-	for c.Level < MaxLevel {
+	for c.Level < w.Rules.charMaxLevel() {
 		next := w.game.Battle.NextLevelExp(c.Level)
-		if next < 0 || c.Exp < next {
+		if next <= 0 || c.Exp < next {
 			break
 		}
 		c.Exp -= next
@@ -795,7 +900,7 @@ func (w *World) statusOf(e *entity) *proto.Status {
 		hp = s.MaxHP
 	}
 	next := 0
-	if w.game.Battle != nil {
+	if w.game.Battle != nil && c.Level < w.Rules.charMaxLevel() {
 		next = max(0, w.game.Battle.NextLevelExp(c.Level))
 	}
 	return &proto.Status{Name: c.Name, Face: c.Face, Level: c.Level, Exp: c.Exp, NextExp: next,
@@ -830,7 +935,7 @@ func (w *World) charDetail(e *entity, s workStats) []string {
 	if w.game.Battle != nil {
 		next = w.game.Battle.NextLevelExp(c.Level)
 	}
-	if next > 0 && c.Level < MaxLevel {
+	if next > 0 && c.Level < w.Rules.charMaxLevel() {
 		out = append(out, fmt.Sprintf("本级经验 %d / %d（还差 %d）", c.Exp, next, max(0, next-c.Exp)))
 	}
 	if e.addExp.power > 0 && e.addExp.secs > 0 {
@@ -876,16 +981,24 @@ func (w *World) abandonBattle(e *entity) {
 	p := ft.b.F[ft.slot]
 	p.Escaped = true
 
-	if pf := ft.b.F[ft.slot+5]; pf != nil {
-		pf.Escaped = true
+	for _, slot := range ft.petSlots() {
+		if pf := ft.b.F[slot]; pf != nil {
+			pf.Escaped = true
+			bag, _ := ft.petBagSlot(slot)
+			if pet := e.pets.Pets[bag]; pet != nil {
+				pet.HP = max(1, pf.HP)
+			}
+		}
+	}
+	for _, retired := range ft.retiredPets {
+		if pet := e.pets.Pets[retired.bag]; pet != nil {
+			pet.HP = max(1, retired.fighter.HP)
+		}
 	}
 	e.char.HP, e.char.MP = max(1, p.HP), p.MP
 	e.char.Magic = magicString(e.magic)
 	w.settleRide(e, ft)
-	if pf := ft.b.F[ft.slot+5]; ft.pet >= 0 && pf != nil && e.pets.Pets[ft.pet] != nil {
-		e.pets.Pets[ft.pet].HP = max(1, pf.HP)
-		e.char.Pets = e.pets.String()
-	}
+	e.char.Pets = e.pets.String()
 	e.fight = nil
 	w.saveProgress(e)
 	switch {

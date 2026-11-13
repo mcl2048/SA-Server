@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -52,11 +53,13 @@ func startServerWith(t *testing.T, configure func(*server.Server)) string {
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	ctx, cancel := context.WithCancel(context.Background())
 	var lines []*server.Line
+	var worlds sync.WaitGroup
 	for i, name := range []string{"一线", "二线"} {
 		w := world.New(game, db, log, int64(i+1))
 		// 世界频道的门槛（5 转 140 级、扣声望）在 world 的测试里测，这里只测转送
 		w.Rules.WorldTrans, w.Rules.WorldLevel, w.Rules.WorldFame = 0, 0, 0
-		go w.Run(ctx)
+		worlds.Add(1)
+		go func() { defer worlds.Done(); w.Run(ctx) }()
 		lines = append(lines, &server.Line{ID: i + 1, Group: "测试区", Name: name, World: w})
 	}
 	sv := &server.Server{Lines: lines, Store: db, Log: log, Origins: []string{"*"}}
@@ -64,7 +67,7 @@ func startServerWith(t *testing.T, configure func(*server.Server)) string {
 		configure(sv)
 	}
 	srv := httptest.NewServer(sv)
-	t.Cleanup(func() { srv.Close(); cancel(); db.Close() })
+	t.Cleanup(func() { srv.Close(); cancel(); worlds.Wait(); db.Close() })
 	return "ws" + strings.TrimPrefix(srv.URL, "http")
 }
 
@@ -74,6 +77,7 @@ func dial(t *testing.T, url string) *client {
 	if err != nil {
 		t.Fatal(err)
 	}
+	t.Cleanup(func() { conn.CloseNow() })
 	c := &client{t: t, conn: conn, in: make(chan map[string]any, 1024)}
 	go func() {
 		for {
@@ -208,21 +212,50 @@ func TestTwoPlayers(t *testing.T) {
 		t.Fatalf("世界聊天：%v", cm)
 	}
 
-	// 同一角色从另一条线路登录：旧连接被踢（跨线路），新连接接管；一线的 a 看到鲍勃离开
+	// New-device password login takes over the live character on its current
+	// line, without re-entering from the database or selecting another line.
 	b2 := dial(t, url)
 	b2.send(&proto.Login{Account: "bob01", Password: testPw})
-	b2.expect("AuthResult")
-	b2.send(&proto.SelectLine{ID: 2})
-	b2.expect("LineSelected")
-	b2.send(&proto.CharEnter{ID: idB})
+	if auth := b2.expect("AuthResult"); auth["ok"] != true {
+		t.Fatalf("takeover authentication failed: %v", auth)
+	}
+	marker := b2.expect("Session")
+	if marker["inWorld"] != true || marker["resumed"] != true {
+		t.Fatalf("live takeover must return a world Session: %v", marker)
+	}
+	if self := b2.expect("Self"); num(self, "id") != idB {
+		t.Fatalf("takeover changed character: %v", self)
+	}
 	b2.expect("EnterFloor")
 	if !b.closed() {
 		t.Fatal("旧连接应被断开")
 	}
+	b2.send(&proto.Chat{Channel: "near", Text: "接管后仍在一线"})
+	if cm := a.expect("ChatMsg", func(m map[string]any) bool { return m["text"] == "接管后仍在一线" }); num(cm, "fromId") != idB {
+		t.Fatalf("takeover did not preserve nearby identity: %v", cm)
+	}
 
-	// 鲍勃已在二线：一线的 a 收到消失，且听不到二线的附近聊天
-	gone := a.expect("ObjDisappear", func(m map[string]any) bool { return strings.Contains(toJSON(m), itoa(idB)) })
-	_ = gone
+	// Changing lines requires explicit logout. Keep the original isolation
+	// assertion by leaving line one, authenticating again and entering line two.
+	b2.send(&proto.Logout{})
+	if loggedOut := b2.expect("Session"); loggedOut["token"] != nil && loggedOut["token"] != "" {
+		t.Fatalf("logout did not revoke recovery: %v", loggedOut)
+	}
+	a.expect("ObjDisappear", func(m map[string]any) bool { return strings.Contains(toJSON(m), itoa(idB)) })
+	b2.send(&proto.Login{Account: "bob01", Password: testPw})
+	if auth := b2.expect("AuthResult"); auth["ok"] != true {
+		t.Fatalf("relogin failed: %v", auth)
+	}
+	if marker := b2.expect("Session"); marker["inWorld"] == true {
+		t.Fatalf("explicit logout retained world session: %v", marker)
+	}
+	b2.expect("ServerList")
+	b2.send(&proto.SelectLine{ID: 2})
+	b2.expect("LineSelected")
+	b2.send(&proto.CharEnter{ID: idB})
+	b2.expect("EnterFloor")
+
+	// 鲍勃已在二线：一线的 a 听不到二线的附近聊天。
 	b2.send(&proto.Chat{Channel: "near", Text: "二线的人听得到"})
 	b2.expect("ChatMsg") // 自己的回显
 	a.send(&proto.Chat{Channel: "near", Text: "一线"})
