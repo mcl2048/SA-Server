@@ -159,8 +159,10 @@ func TestAutomationDetachedBattlePacingAndStaleManualCommands(t *testing.T) {
 			turns++
 		}
 	}
-	if turns != 1 {
-		t.Fatalf("expected exactly one server turn, got %d", turns)
+	// The authoritative room advanced exactly once above. A detached consumer
+	// needs no per-event presentation packet; reattach rebuilds its snapshot.
+	if turns != 0 {
+		t.Fatalf("detached consumer received %d unnecessary turn packets", turns)
 	}
 }
 func TestAutomationExistingHumanCommandDoesNotLeakIntoNextTurn(t *testing.T) {

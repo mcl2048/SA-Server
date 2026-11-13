@@ -568,25 +568,7 @@ func (w *World) resolveTurn(room *battleRoom) {
 		w.afterMemberTurn(m, ev)
 	}
 	room.turn++
-	msg := &proto.BattleTurn{Turn: room.turn, Events: make([]proto.BattleEvent, 0, len(ev))}
-	for _, x := range ev {
-		msg.Events = append(msg.Events, proto.BattleEvent{Actor: x.Actor, Kind: string(x.Kind), Target: x.Target,
-			Result: string(x.Result), Damage: x.Damage, HP: x.HP, Dead: x.Dead, OK: x.OK, Skill: x.Skill,
-			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
-			PetDamage: x.PetDamage, RideHp: x.RideHP, Fall: x.Fall, Effect: x.Effect, ActorMp: x.ActorMP, Shoot: x.Shoot, Fly: x.Fly,
-			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att})
-		if x.Kind == battle.PetOut {
-			if owner := room.member(x.Target); owner != nil {
-				last := &msg.Events[len(msg.Events)-1]
-				last.OwnerSlot = owner.fight.slot
-				last.BagSlot, _ = owner.fight.petBagSlot(x.Target)
-			}
-		}
-	}
-	for _, m := range room.members {
-		m.client.Send(msg)
-	}
-	w.sendWatchers(room, msg)
+	w.sendBattleTurn(room, ev)
 	if room.pvp {
 		w.duelDeaths(room) // BATTLE_AddDuelPoint
 	}
@@ -617,6 +599,55 @@ func (w *World) resolveTurn(room *battleRoom) {
 		return
 	}
 	w.armTurnTimer(room, len(ev))
+}
+
+// sendBattleTurn builds a presentation snapshot only when somebody can consume
+// it. Battle.Resolve, equipment/pet effects, rewards and timer pacing remain in
+// resolveTurn; reconnect uses sendResumedBattleStart instead of replaying turns.
+func (w *World) sendBattleTurn(room *battleRoom, ev []battle.Event) {
+	watching := false
+	for _, m := range room.members {
+		if m.attached() {
+			watching = true
+			break
+		}
+	}
+	if !watching {
+		for _, m := range room.watchers {
+			if m.attached() {
+				watching = true
+				break
+			}
+		}
+	}
+	if !watching {
+		return
+	}
+	msg := &proto.BattleTurn{Turn: room.turn, Events: make([]proto.BattleEvent, 0, len(ev))}
+	for _, x := range ev {
+		msg.Events = append(msg.Events, proto.BattleEvent{Actor: x.Actor, Kind: string(x.Kind), Target: x.Target,
+			Result: string(x.Result), Damage: x.Damage, HP: x.HP, Dead: x.Dead, OK: x.OK, Skill: x.Skill,
+			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
+			PetDamage: x.PetDamage, RideHp: x.RideHP, Fall: x.Fall, Effect: x.Effect, ActorMp: x.ActorMP, Shoot: x.Shoot, Fly: x.Fly,
+			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att})
+		if x.Kind == battle.PetOut {
+			if owner := room.member(x.Target); owner != nil {
+				last := &msg.Events[len(msg.Events)-1]
+				last.OwnerSlot = owner.fight.slot
+				last.BagSlot, _ = owner.fight.petBagSlot(x.Target)
+			}
+		}
+	}
+	for _, m := range room.members {
+		if m.attached() {
+			m.client.Send(msg)
+		}
+	}
+	for _, m := range room.watchers {
+		if m.attached() {
+			m.client.Send(msg)
+		}
+	}
 }
 
 // removeMember 把 m 从这场战斗的玩家里拿掉（它的 fight 不动）。

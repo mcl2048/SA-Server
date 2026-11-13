@@ -12,13 +12,13 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "v0.2.9-LYNX"
+VERSION = "v0.2.10-LYNX"
 DEST = ROOT / "bin" / f"saserver-{VERSION}-linux-amd64.zip"
 
 def main():
     paths = [ROOT / p for p in (
         "bin/saserver", "bin/saserver.sha256", "config.yaml", "README.md",
-        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.9-LYNX.md", "update/README.md",
+        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.10-LYNX.md", "update/README.md",
         "update/ai-pets-v1-assets.tar.gz", "update/ai-pets-v1-assets.manifest.json",
         "update/install-ai-pets.py", "update/install-ai-pets.sh",
     )]

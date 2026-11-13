@@ -1,0 +1,74 @@
+{
+  "browser": "156.0.8078.4",
+  "scope": "real Chromium synthetic long-list component, not server toggle acceptance",
+  "results": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bounds": {
+        "stick": {
+          "x": 16,
+          "y": 304.5,
+          "w": 112,
+          "h": 112
+        },
+        "sheet": {
+          "x": 0,
+          "y": 486.5,
+          "w": 390,
+          "h": 1640
+        },
+        "field": {
+          "x": 0,
+          "y": 292.5,
+          "w": 390,
+          "h": 136
+        }
+      },
+      "scroll": {
+        "top": 0,
+        "height": 1640,
+        "all": 1640,
+        "touch": "pan-y"
+      },
+      "chromeScroll": 194,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "bounds": {
+        "stick": {
+          "x": 24.5,
+          "y": 8,
+          "w": 112,
+          "h": 112
+        },
+        "sheet": {
+          "x": 0,
+          "y": 176,
+          "w": 161,
+          "h": 214
+        },
+        "field": {
+          "x": 0,
+          "y": 0,
+          "w": 161,
+          "h": 136
+        }
+      },
+      "scroll": {
+        "top": 900,
+        "height": 214,
+        "all": 3072,
+        "touch": "pan-y"
+      },
+      "chromeScroll": 0,
+      "errors": []
+    }
+  ]
+}

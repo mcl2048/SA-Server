@@ -205,3 +205,21 @@ test("chat panel keeps real chat input visible and dispatches send-chat", () => 
   assert.deepEqual(fired.at(-1), ["command", "back"]);
   box.remove(); hits = []; frame("field"); assert.equal(dismiss.hidden, true);
 });
+
+
+test("movement precedes long option panels and encounter uses server capability and ack", () => {
+  setDeviceMode("mobile"); hits = Array.from({length:40}, (_,i)=>({id:`option${i}`,label:`长选项 ${i}`,x1:1,y1:i*10,x2:60,y2:i*10+9}));
+  shell.frame({phase:"field",panel:false,canEncounter:false,encounter:false});
+  const control = allButtons().find(b=>b.dataset.mobileControl==="auto-encounter");
+  assert.equal(control.hidden,true);
+  shell.frame({phase:"field",panel:false,canEncounter:true,encounter:false});
+  assert.equal(control.hidden,false); assert.equal(control.getAttribute("aria-pressed"),"false");
+  fire(control,"click"); assert.deepEqual(fired.at(-1),["command","auto-encounter"]);
+  assert.equal(control.getAttribute("aria-pressed"),"false","tap cannot invent a server acknowledgement");
+  shell.frame({phase:"field",panel:true,canEncounter:true,encounter:true});
+  assert.equal(control.getAttribute("aria-pressed"),"true"); assert.equal(control.disabled,true);
+  const left=chrome.firstChild.children[0];
+  assert.equal(left.children[0].className,"mobile-shell-field","stick is first in DOM, before options");
+  shell.frame({phase:"battle",panel:false,canEncounter:true});
+  assert.equal(left.children[0].hidden,true,"battle cannot expose the movement shortcut");
+});

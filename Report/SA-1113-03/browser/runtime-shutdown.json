@@ -1,0 +1,18 @@
+{
+  "binary_sha256": "35c368c0462a93ee41fe5d938c6712c393e58bd5a728dc85f1d4dd1d5a998505",
+  "sigterm_sent": true,
+  "exit_code": 0,
+  "expected_position": {
+    "id": 1,
+    "floor": 300,
+    "x": 371,
+    "y": 183
+  },
+  "stored_position": {
+    "floor": 300,
+    "x": 371,
+    "y": 183
+  },
+  "position_matches": true,
+  "fixture": "private SQLite backup of prior test fixture; GM-controlled scenarios"
+}

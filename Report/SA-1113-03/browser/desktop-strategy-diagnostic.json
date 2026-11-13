@@ -1,0 +1,16 @@
+{
+  "state": {
+    "turn": null,
+    "fighters": []
+  },
+  "autoplay": {
+    "t": "AutoPlayState",
+    "quick": true,
+    "canEncounter": false,
+    "encounter": false,
+    "autoBattle": false,
+    "paused": false,
+    "reason": ""
+  },
+  "turns": []
+}

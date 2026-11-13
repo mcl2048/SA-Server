@@ -935,11 +935,12 @@ type Session struct {
 func (*Session) MsgType() string { return "Session" }
 
 type AutoPlayState struct {
-	Encounter  bool   `json:"encounter,omitempty"`
-	AutoBattle bool   `json:"autoBattle,omitempty"`
-	Quick      bool   `json:"quick,omitempty"`
-	Paused     bool   `json:"paused,omitempty"`
-	Reason     string `json:"reason,omitempty"`
+	CanEncounter bool   `json:"canEncounter,omitempty"`
+	Encounter    bool   `json:"encounter,omitempty"`
+	AutoBattle   bool   `json:"autoBattle,omitempty"`
+	Quick        bool   `json:"quick,omitempty"`
+	Paused       bool   `json:"paused,omitempty"`
+	Reason       string `json:"reason,omitempty"`
 }
 
 func (*AutoPlayState) MsgType() string { return "AutoPlayState" }

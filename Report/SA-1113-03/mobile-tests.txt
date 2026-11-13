@@ -1,0 +1,19 @@
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (8.576967ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (2.46512ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (4.701456ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (4.967163ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (2.391751ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (5.595877ms)
+✔ battle commands and targets remain human readable in a bounded sheet (2.503654ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (5.734974ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (3.358951ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (2.331701ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (3.40512ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 368.247595

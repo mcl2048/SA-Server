@@ -117,7 +117,7 @@ export interface S2CAuthResult { t: "AuthResult"; ok: boolean; message: string; 
 export interface S2CWorldReady { t: "WorldReady"; resumed: boolean; }
 export interface S2CLobbyReady { t: "LobbyReady"; }
 export interface S2CSession { t: "Session"; token: string; resumed: boolean; inWorld: boolean; }
-export interface S2CAutoPlayState { t: "AutoPlayState"; encounter: boolean; autoBattle: boolean; quick: boolean; paused: boolean; reason: string; }
+export interface S2CAutoPlayState { t: "AutoPlayState"; canEncounter: boolean; encounter: boolean; autoBattle: boolean; quick: boolean; paused: boolean; reason: string; }
 export interface S2CAccountInfo { t: "AccountInfo"; account: string; created: string; chars: number; hasSecret: boolean; }
 export interface S2CAccountResult { t: "AccountResult"; ok: boolean; message: string; }
 export interface S2CServerList { t: "ServerList"; groups: ServerGroup[]; }
@@ -205,7 +205,7 @@ const SCHEMA: Record<string, [string, string][]> = {
   WorldReady: [["resumed","b"]],
   LobbyReady: [],
   Session: [["token","s"],["resumed","b"],["inWorld","b"]],
-  AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
+  AutoPlayState: [["canEncounter","b"],["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],
   AccountResult: [["ok","b"],["message","s"]],
   ServerList: [["groups","A:ServerGroup"]],

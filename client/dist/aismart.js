@@ -37,6 +37,7 @@
 
 
 
+
 const DISABLED = new Set([2, 3, 4, 9]); // 麻、眠、石、障：不能行动
 const STATUS_CHAR                         = { 1: "毒", 2: "麻", 3: "眠", 4: "石", 5: "醉", 6: "乱", 8: "毒" };
 const ME_WEIGHT = 1.3, PLAYER_WEIGHT = 1.15, PET_WEIGHT = 1.0;
@@ -120,7 +121,10 @@ export function smartChoose(s            , c              )                     
   const side = me < 10 ? 20 : 21, otherSide = me < 10 ? 21 : 20;
   const f = (i        ) => { const x = c.fighters.get(i); return x && !x.gone ? x : undefined; };
   const meF = f(me);
-  if (!meF || meF.hp <= 0) { out.kind = "skip"; return out; }
+  if (!meF || meF.hp <= 0) {
+    if (meF && c.pet) return smartChooseSoloPet(s, c, pet);
+    out.kind = "skip"; return out;
+  }
   const allies = [...c.fighters.values()].filter((x) => !x.gone && mine(x.slot));
   const aliveAllies = allies.filter((x) => x.hp > 0);
   const enemies = [...c.fighters.values()].filter((x) => !x.gone && !mine(x.slot) && x.hp > 0);
@@ -317,6 +321,42 @@ export function smartChoose(s            , c              )                     
     if (best) { out.pet = [best.slot, best.target]; out.petKey = best.key; }
   }
   return out;
+}
+
+/** Independent surviving-pet decision when its owner cannot act.
+ * The historical name is kept for the battle UI adapter; party PvE uses the
+ * same rule. The caller supplies this pet's own info/skill slots, never another
+ * pet's chosen slot. Native pet skills have no MP cost in the wire catalogue.
+ */
+export function smartChooseSoloPet(s            , c              , petSlot        )                                              {
+  const out                                              = { kind: "skip", target: -1, item: -1, label: "", chat: [], pet: [-1, -1], key: "", petKey: "" };
+  const owner = c.fighters.get(c.me), pet = c.fighters.get(petSlot);
+  if (c.pvp || !owner || owner.gone || owner.hp > 0 || !pet || pet.gone || pet.hp <= 0 || !c.pet) return out;
+  const mine = (slot        ) => (slot < 10) === (c.me < 10);
+  const enemies = [...c.fighters.values()].filter(f => !mine(f.slot) && !f.gone && f.hp > 0);
+  if (!enemies.length) return out;
+  const skills = c.pet.skills.filter(sk => sk.field !== 2 && !PET_GUARD.has(sk.func));
+  const side = c.me < 10 ? 20 : 21, other = c.me < 10 ? 21 : 20;
+  const enemy = () => [...enemies].sort((a,b) => a.hp-b.hp || a.slot-b.slot)[0].slot;
+  const select = (sk          , target        ) => { out.pet = [sk.slot, target]; out.petKey = PET_DEFEND.has(sk.func) ? "" : `pet:${c.pet .name}:${sk.id}`; return out; };
+  const action = c.first ? s.petFirst : s.petThen;
+  const explicit = skills.find(sk => action.kind === "attack" ? sk.id === 1 : action.kind === "guard" ? sk.id === 2 : action.kind === "skill" && sk.name === action.name);
+  if (explicit && action.target !== "owner") {
+    const target = petTargetSlot(explicit.target, action.target, c.me, petSlot, side, other, enemy);
+    if (target >= 0 && target !== c.me) return select(explicit, target);
+  }
+  const guard = skills.find(sk => sk.id === 2 || PET_DEFEND.has(sk.func));
+  if (guard && pet.hp * 100 < pet.maxHp * 15) return select(guard, petSlot);
+  // Choose only supported offensive skills; no sacrifice, capture or guarding
+  // a corpse. Healthy pets with no usable skill fall back to protocol guard.
+  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack"]);
+  const ranked = skills.filter(sk => offensive.has(sk.func) && [1,3,4,6,7].includes(sk.target)).map(sk => ({ sk, score: petSkillPrior(sk) * (sk.target === 3 || sk.target === 4 ? enemies.length : 1) }));
+  ranked.sort((a,b) => b.score-a.score || a.sk.slot-b.sk.slot);
+  if (ranked.length) {
+    const sk = ranked[0].sk;
+    return select(sk, petTargetSlot(sk.target, "enemy", c.me, petSlot, side, other, enemy));
+  }
+  return guard ? select(guard, petSlot) : out;
 }
 
 // ---------------- 固定行动的对象 ----------------

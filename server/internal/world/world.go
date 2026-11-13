@@ -49,48 +49,50 @@ type Client interface {
 var MOVE = [8][2]int{{-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}}
 
 type entity struct {
-	id               int
-	kind             string // "player" / "npc"
-	name             string
-	sprite           int
-	floor, x, y, dir int
-	client           Client // 玩家才有；断线时保留安全的丢弃出口，不能置 nil
-	connected        bool   // 角色仍在世界与浏览器连接在线是两个独立状态
-	automation       *autoPlayState
-	party            *party       // 组队（party.go）
-	fs               int          // FS 开关（fsParty 等）
-	trade            *trade       // 交易中（trade.go）
-	act              int          // 身上的动作（action.go）：0 没有，否则动作编号 + 1
-	book             *addressBook // 名片匣（addressbook.go）
-	petMails         int          // 在外面的邮件宠物（CHAR_PETMAILNUMS）
-	petMailAt        time.Time    // 下次可以寄宠物邮件的时间
-	duelCool         time.Time    // 这之前不能 PK（_BATTLE_OVER_STAR_TIME）
-	rankStart        int          // 强者表现在的第一行（CHAR_WORKSHOPRELEVANT）
-	fm               famView      // 家族的快照（family.go）
-	fmc              fmChar       // 存在角色上的家族资料（个人气势、家族银行个人帐户）
-	char             store.Character
-	visible          map[int]bool // 玩家当前能看到的实体
-	stepTokens       float64
-	lastStep         time.Time
-	npc              *data.NPC    // NPC 才有：对话行为与内容
-	follow           *entity      // 溜着的宠物（地上的 "pet" 物件，petfollow.go；CHAR_WORKPETFOLLOW）
-	evWarp           int          // 任务交换 NPC 的 NpcWarp 下一个位置的序号（CHAR_WORK_EVENTWARP，0 当 1）
-	cep              int          // 遇敌值（原版 CONNECT_get_CEP）
-	watch            *battleRoom  // 正在观战的那场（watch.go），不能走动
-	bus              *bus         // 会走动的 NPC（bus.go）：巴士 / 飞机的路线与状态
-	stall            *vendorStall // 摆着的摊位（vendor.go，CHAR_WORKSTREETVENDOR 1 / 2）
-	buying           *entity      // 正在看谁的摊位（CHAR_WORKSTREETVENDOR 3）
-	warOut           bool         // 家族对战里倒下 / 逃跑过，等着被送出场（fmwar.go）
-	gm               bool         // 账号在 World.GMs 里（上线时定）
-	account          string       // 登录账号名（GM 的 /setpw、/setsecret 用）
-	questDirty       bool         // 任务旗标改过、任务日志还没重送（quest.go）
-	questSig         string       // 上次送出的任务日志签名（道具栏变动后比对，quest.go refreshQuests）
-	muteUntil        time.Time    // GM 的 /mute：这之前不能说话（不存档）
-	mind             int          // 留在头上的心情图示（CHAR_MIND_NUM：睡觉 / 咖啡 / 强调）
-	worldSentAt      time.Time    // 上次在世界频道说话（CHAR_WORKWORLDSENDTIME）
-	chatTokens       float64      // 说话的令牌桶（chatBurst 满、每秒回 chatPerSecond），刷屏的句子直接丢掉
-	chatAt           time.Time
-	dbAt             time.Time // 上次在世界协程里替它同步查库（传言板、强者表）的时间：刷太快就不理，免得卡住所有人
+	id                       int
+	kind                     string // "player" / "npc"
+	name                     string
+	sprite                   int
+	floor, x, y, dir         int
+	client                   Client // 玩家才有；断线时保留安全的丢弃出口，不能置 nil
+	connected                bool   // 角色仍在世界与浏览器连接在线是两个独立状态
+	automation               *autoPlayState
+	encounterCapabilityKnown bool
+	encounterCapability      bool
+	party                    *party       // 组队（party.go）
+	fs                       int          // FS 开关（fsParty 等）
+	trade                    *trade       // 交易中（trade.go）
+	act                      int          // 身上的动作（action.go）：0 没有，否则动作编号 + 1
+	book                     *addressBook // 名片匣（addressbook.go）
+	petMails                 int          // 在外面的邮件宠物（CHAR_PETMAILNUMS）
+	petMailAt                time.Time    // 下次可以寄宠物邮件的时间
+	duelCool                 time.Time    // 这之前不能 PK（_BATTLE_OVER_STAR_TIME）
+	rankStart                int          // 强者表现在的第一行（CHAR_WORKSHOPRELEVANT）
+	fm                       famView      // 家族的快照（family.go）
+	fmc                      fmChar       // 存在角色上的家族资料（个人气势、家族银行个人帐户）
+	char                     store.Character
+	visible                  map[int]bool // 玩家当前能看到的实体
+	stepTokens               float64
+	lastStep                 time.Time
+	npc                      *data.NPC    // NPC 才有：对话行为与内容
+	follow                   *entity      // 溜着的宠物（地上的 "pet" 物件，petfollow.go；CHAR_WORKPETFOLLOW）
+	evWarp                   int          // 任务交换 NPC 的 NpcWarp 下一个位置的序号（CHAR_WORK_EVENTWARP，0 当 1）
+	cep                      int          // 遇敌值（原版 CONNECT_get_CEP）
+	watch                    *battleRoom  // 正在观战的那场（watch.go），不能走动
+	bus                      *bus         // 会走动的 NPC（bus.go）：巴士 / 飞机的路线与状态
+	stall                    *vendorStall // 摆着的摊位（vendor.go，CHAR_WORKSTREETVENDOR 1 / 2）
+	buying                   *entity      // 正在看谁的摊位（CHAR_WORKSTREETVENDOR 3）
+	warOut                   bool         // 家族对战里倒下 / 逃跑过，等着被送出场（fmwar.go）
+	gm                       bool         // 账号在 World.GMs 里（上线时定）
+	account                  string       // 登录账号名（GM 的 /setpw、/setsecret 用）
+	questDirty               bool         // 任务旗标改过、任务日志还没重送（quest.go）
+	questSig                 string       // 上次送出的任务日志签名（道具栏变动后比对，quest.go refreshQuests）
+	muteUntil                time.Time    // GM 的 /mute：这之前不能说话（不存档）
+	mind                     int          // 留在头上的心情图示（CHAR_MIND_NUM：睡觉 / 咖啡 / 强调）
+	worldSentAt              time.Time    // 上次在世界频道说话（CHAR_WORKWORLDSENDTIME）
+	chatTokens               float64      // 说话的令牌桶（chatBurst 满、每秒回 chatPerSecond），刷屏的句子直接丢掉
+	chatAt                   time.Time
+	dbAt                     time.Time // 上次在世界协程里替它同步查库（传言板、强者表）的时间：刷太快就不理，免得卡住所有人
 
 	fight     *fight             // 战斗中
 	window    *npcWindow         // 打开中的 NPC 窗口
@@ -262,6 +264,7 @@ func (w *World) Run(ctx context.Context) {
 			w.safe(w.updateTimeMen)
 			w.safe(w.sweepGround)
 			w.safe(w.tickPlayers)
+			w.safe(w.refreshEncounterConsumers)
 			w.safe(w.tickWars)
 		}
 	}
@@ -512,6 +515,7 @@ func (w *World) move(e *entity, x, y, dir int) {
 	w.petFollowStep(e) // 溜着的宠物跟上来
 	e.stay = false     // 走一步就不再原地遇敌（clearStayEncount）
 	w.rollEncounter(e)
+	w.refreshEncounterAvailability(e)
 }
 
 // walkSpeed 是 rules.walkSpeed（没设或不合理就 1）。
@@ -1108,6 +1112,7 @@ func (w *World) placeOnFloor(e *entity, floor, x, y, dir int) {
 	e.visible = map[int]bool{}
 	w.refreshView(e)
 	w.announce(e)
+	w.refreshEncounterAvailability(e)
 	w.petFollowWarp(e) // 溜着的宠物传到同一格
 	switch {
 	case e.isLeader() && !w.partyWarping:

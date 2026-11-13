@@ -1,6 +1,8 @@
-import { InputBox,                                    } from "./ui.js?v=9fd0e82e0b4d0a7d";
-import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=9fd0e82e0b4d0a7d";
-import { createMobileJoystick } from "./mobile-controls.js?v=9fd0e82e0b4d0a7d";
+import { InputBox,                                    } from "./ui.js?v=8215e83e5e3ed1aa";
+import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView,                 } from "./mobile-view.js?v=8215e83e5e3ed1aa";
+import { createMobileJoystick } from "./mobile-controls.js?v=8215e83e5e3ed1aa";
+
+
 
 
 
@@ -74,6 +76,7 @@ export class MobileShell {
                    dismiss = button("返回 / 取消对话", () => this.command("back"));
                    sheetBack = button("返回", () => this.command("back"));
                    field = node("div", "mobile-shell-field");
+                   encounter = button("自动遇敌：关", () => this.command("auto-encounter"));
                    chat = node("div", "mobile-shell-chat");
                    toolbar = node("nav", "mobile-shell-toolbar");
                    mode = node("details");
@@ -109,13 +112,13 @@ export class MobileShell {
     this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" });
     this.chat.setAttribute("role", "log"); this.chat.setAttribute("aria-label", "最近聊天");
     // Deliberately not live: the native scene can change text every animation frame.
-    this.field.append(this.chat, this.makeFieldControls());
+    this.field.append(this.makeFieldControls(), this.chat);
     this.toolbar.setAttribute("aria-label", "游戏菜单");
     for (const [command, label] of [["status", "状态"], ["items", "道具"], ["pets", "宠物"], ["quests", "任务"], ["map", "地图"], ["chat", "聊天"], ["system", "系统"], ["back", "返回"]]) {
       const b = button(label, () => this.command(command)); b.dataset.mobileControl = `menu-${command}`;
       this.toolbar.append(b);
     }
-    this.left.append(this.status, this.toolbar, this.sheet, this.field);
+    this.left.append(this.field, this.status, this.toolbar, this.sheet);
     this.right.setAttribute("aria-label", "选项与鼠标控制");
     const selectionTitle = node("span", "mobile-shell-eyebrow", "当前选项");
     this.selected.setAttribute("role", "status"); this.selected.setAttribute("aria-live", "polite");
@@ -210,7 +213,12 @@ export class MobileShell {
     // space or in the landscape rails; opening a native panel never covers it.
     setMobileScene(fieldNormal);
     this.sheet.hidden = fieldNormal && ![...InputBox.live].some(b => b.el.style.display !== "none");
-    this.field.hidden = !fieldNormal;
+    // Keep movement above native long lists; disabled stick never consumes menu movement.
+    this.field.hidden = state.phase !== "field" || npc || modal;
+    this.encounter.hidden = !state.canEncounter;
+    this.encounter.disabled = !fieldNormal;
+    this.encounter.setAttribute("aria-pressed", String(!!state.encounter));
+    put(this.encounter, `自动遇敌：${state.encounter ? "开" : "关"}`);
     this.toolbar.hidden = state.phase !== "field" || !fieldNormal;
     this.sheet.setAttribute("role", "region");
     const selectedHit = all.find(hit => hit.id === state.selectedId);
@@ -249,6 +257,8 @@ export class MobileShell {
     for (const [command, label] of [["interact", "交互"], ["back", "返回 / 取消"]]) {
       const b = button(label, () => this.command(command)); b.dataset.mobileControl = `field-${command}`; tools.append(b);
     }
+    this.encounter.dataset.mobileControl = "auto-encounter";
+    tools.append(this.encounter);
     controls.append(this.joystick.element, tools); return controls;
   }
 
@@ -526,6 +536,18 @@ html.sa-mobile:has(#mobile-root[data-orientation='portrait']) #mobile-mode-switc
 .mobile-shell-zoom{grid-template-columns:minmax(0,1fr)}.mobile-shell-joystick-guide{font-size:9px}
 }
 
+
+/* Stick and lists occupy separate rows; only the stick owns touch drags. */
+.mobile-shell-field{order:-1}.mobile-shell-sheet{touch-action:pan-y}.mobile-shell-actions button{touch-action:pan-y}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-phase='field']{display:flex;flex-direction:column}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-phase='field'] .mobile-shell-field{order:-1;width:100%;padding:12px 16px}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-phase='field'] .mobile-shell-controls{flex-direction:row}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-phase='field'] .mobile-shell-right{order:4;width:100%;padding:12px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-field{order:-1;margin-top:0;justify-content:start;padding:8px;min-height:0}
+#mobile-root[data-orientation='landscape'] .mobile-shell-controls{flex-direction:column;gap:8px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-tools{display:grid;width:100%}
+#mobile-root[data-orientation='landscape'] .mobile-shell-tools button{font-size:12px;padding:4px;min-height:36px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-tools button:not([data-mobile-control='auto-encounter']){display:none}
 `;
     document.head.append(style);
   }

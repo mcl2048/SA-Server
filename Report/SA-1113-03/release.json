@@ -1,0 +1,13 @@
+{
+  "version": "v0.2.10-LYNX",
+  "binary_sha256": "35c368c0462a93ee41fe5d938c6712c393e58bd5a728dc85f1d4dd1d5a998505",
+  "binary_bytes": 16404640,
+  "binary_mode": "0o755",
+  "archive": "saserver-v0.2.10-LYNX-linux-amd64.zip",
+  "archive_sha256": "c44fd09637752d95e56294964e0db338a23a369806c8be9e348248471e956a95",
+  "archive_bytes": 23653673,
+  "archive_files": 4358,
+  "archive_integrity": true,
+  "binary_identical": true,
+  "private_files_excluded": true
+}

@@ -1,26 +1,26 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=9fd0e82e0b4d0a7d";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=9fd0e82e0b4d0a7d";
-import { Sound, setSfx } from "./audio.js?v=9fd0e82e0b4d0a7d";
-import { MAP_BGM } from "./soundtable.js?v=9fd0e82e0b4d0a7d";
-import { Connection, trafficRates } from "./net.js?v=9fd0e82e0b4d0a7d";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=9fd0e82e0b4d0a7d";
-import { Renderer,              } from "./renderer.js?v=9fd0e82e0b4d0a7d";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=9fd0e82e0b4d0a7d";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=9fd0e82e0b4d0a7d";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=9fd0e82e0b4d0a7d";
-import { ACTION_KEYS } from "./actions.js?v=9fd0e82e0b4d0a7d";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=9fd0e82e0b4d0a7d";
-import { BattleScreen } from "./battle.js?v=9fd0e82e0b4d0a7d";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=9fd0e82e0b4d0a7d";
-import { Shop } from "./shop.js?v=9fd0e82e0b4d0a7d";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=9fd0e82e0b4d0a7d";
-import { loadAi } from "./ai.js?v=9fd0e82e0b4d0a7d";
-import { AiMemory } from "./aismart.js?v=9fd0e82e0b4d0a7d";
-import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.js?v=9fd0e82e0b4d0a7d";
-import { MobileShell } from "./mobile-shell.js?v=9fd0e82e0b4d0a7d";
-import { installControlPositions } from "./mobile-position.js?v=9fd0e82e0b4d0a7d";
+import { Assets } from "./assets.js?v=8215e83e5e3ed1aa";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=8215e83e5e3ed1aa";
+import { Sound, setSfx } from "./audio.js?v=8215e83e5e3ed1aa";
+import { MAP_BGM } from "./soundtable.js?v=8215e83e5e3ed1aa";
+import { Connection, trafficRates } from "./net.js?v=8215e83e5e3ed1aa";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=8215e83e5e3ed1aa";
+import { Renderer,              } from "./renderer.js?v=8215e83e5e3ed1aa";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=8215e83e5e3ed1aa";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=8215e83e5e3ed1aa";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=8215e83e5e3ed1aa";
+import { ACTION_KEYS } from "./actions.js?v=8215e83e5e3ed1aa";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=8215e83e5e3ed1aa";
+import { BattleScreen } from "./battle.js?v=8215e83e5e3ed1aa";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=8215e83e5e3ed1aa";
+import { Shop } from "./shop.js?v=8215e83e5e3ed1aa";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=8215e83e5e3ed1aa";
+import { loadAi } from "./ai.js?v=8215e83e5e3ed1aa";
+import { AiMemory } from "./aismart.js?v=8215e83e5e3ed1aa";
+import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.js?v=8215e83e5e3ed1aa";
+import { MobileShell } from "./mobile-shell.js?v=8215e83e5e3ed1aa";
+import { installControlPositions } from "./mobile-position.js?v=8215e83e5e3ed1aa";
 
 
 const params = new URLSearchParams(location.search);
@@ -309,7 +309,7 @@ const app      = {
       if (autoPlayReady) autoPlayIntent.local(autoPlayWanted());
       const desired = autoPlayIntent.receive(m);
       autoPlayReady = true;
-      serverAutoPlay = { ...m };
+      serverAutoPlay = { ...m, canEncounter: !!m.canEncounter };
       autoEncounterWanted = desired.encounter;
       settings.autoBattle = desired.autoBattle; settings.quickBattle = desired.quick;
       if (m.reason) chat(m.reason, FONT.YELLOW);
@@ -517,7 +517,7 @@ const app      = {
 // ---------------------------------------------------------------------------
 // 游戏画面
 
-let serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+let serverAutoPlay = { canEncounter: false, encounter: false, autoBattle: false, quick: false, paused: false };
 let autoPlaySignature = "", autoPlaySentAt = 0, autoPlayReady = false;
 let autoEncounterWanted = false;
 const autoPlayIntent = new AutoPlayIntent();
@@ -528,7 +528,7 @@ function resetAutoPlay() {
   changeBattleQuick = null; battleAllowsAuto = false;
   autoPlayReady = false; autoPlaySignature = ""; autoPlaySentAt = 0;
   autoEncounterWanted = false; autoPlayIntent.reset();
-  serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+  serverAutoPlay = { canEncounter: false, encounter: false, autoBattle: false, quick: false, paused: false };
 }
 function syncAutoPlay(force = false) {
   if (!app.net || !field?.self || !autoPlayReady) return;
@@ -1180,6 +1180,12 @@ const mobile = new MobileShell(ui, {
   click(button) { queueMobileClick(button); },
   command(name) {
     if (!isMobile()) return;
+    if (name === "auto-encounter") {
+      if (screen instanceof FieldScreen && !modal && !battle && !screen.openCount() && serverAutoPlay.canEncounter) {
+        autoEncounterWanted = !autoEncounterWanted; syncAutoPlay(true);
+      }
+      return;
+    }
     if (name === "back" && modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); return; }
     if (name === "back" && modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); return; }
     if (name === "back" && battle) { queueMobileClick(2); return; }
@@ -1213,7 +1219,7 @@ function mobileFrame() {
     : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
   const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "StoneAge";
   const selected = selectedMobileHit();
-  mobile.frame({ phase, panel, status, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
+  mobile.frame({ phase, panel, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
     title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
     actionLabels: Object.fromEntries([

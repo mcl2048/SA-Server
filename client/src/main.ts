@@ -309,7 +309,7 @@ const app: App = {
       if (autoPlayReady) autoPlayIntent.local(autoPlayWanted());
       const desired = autoPlayIntent.receive(m);
       autoPlayReady = true;
-      serverAutoPlay = { ...m };
+      serverAutoPlay = { ...m, canEncounter: !!m.canEncounter };
       autoEncounterWanted = desired.encounter;
       settings.autoBattle = desired.autoBattle; settings.quickBattle = desired.quick;
       if (m.reason) chat(m.reason, FONT.YELLOW);
@@ -517,7 +517,7 @@ const app: App = {
 // ---------------------------------------------------------------------------
 // 游戏画面
 
-let serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+let serverAutoPlay = { canEncounter: false, encounter: false, autoBattle: false, quick: false, paused: false };
 let autoPlaySignature = "", autoPlaySentAt = 0, autoPlayReady = false;
 let autoEncounterWanted = false;
 const autoPlayIntent = new AutoPlayIntent();
@@ -528,7 +528,7 @@ function resetAutoPlay() {
   changeBattleQuick = null; battleAllowsAuto = false;
   autoPlayReady = false; autoPlaySignature = ""; autoPlaySentAt = 0;
   autoEncounterWanted = false; autoPlayIntent.reset();
-  serverAutoPlay = { encounter: false, autoBattle: false, quick: false, paused: false };
+  serverAutoPlay = { canEncounter: false, encounter: false, autoBattle: false, quick: false, paused: false };
 }
 function syncAutoPlay(force = false) {
   if (!app.net || !field?.self || !autoPlayReady) return;
@@ -1180,6 +1180,12 @@ const mobile = new MobileShell(ui, {
   click(button) { queueMobileClick(button); },
   command(name) {
     if (!isMobile()) return;
+    if (name === "auto-encounter") {
+      if (screen instanceof FieldScreen && !modal && !battle && !screen.openCount() && serverAutoPlay.canEncounter) {
+        autoEncounterWanted = !autoEncounterWanted; syncAutoPlay(true);
+      }
+      return;
+    }
     if (name === "back" && modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); return; }
     if (name === "back" && modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); return; }
     if (name === "back" && battle) { queueMobileClick(2); return; }
@@ -1213,7 +1219,7 @@ function mobileFrame() {
     : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
   const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "StoneAge";
   const selected = selectedMobileHit();
-  mobile.frame({ phase, panel, status, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
+  mobile.frame({ phase, panel, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
     title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
     actionLabels: Object.fromEntries([

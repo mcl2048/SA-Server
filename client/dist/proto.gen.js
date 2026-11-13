@@ -205,7 +205,7 @@ const SCHEMA                                     = {
   WorldReady: [["resumed","b"]],
   LobbyReady: [],
   Session: [["token","s"],["resumed","b"],["inWorld","b"]],
-  AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
+  AutoPlayState: [["canEncounter","b"],["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],
   AccountResult: [["ok","b"],["message","s"]],
   ServerList: [["groups","A:ServerGroup"]],

@@ -19,7 +19,7 @@ import type { BattleEvent as WireBattleEvent, BattleFighter, InvItem, PetInfo, S
 import { battleItems } from "./items.ts";
 import { album } from "./album.ts";
 import type { AiSettings } from "./ai.ts";
-import { smartChoose, type AiMemory, type SmartFighter } from "./aismart.ts";
+import { smartChoose, smartChooseSoloPet, type AiMemory, type SmartFighter } from "./aismart.ts";
 import { FONT, SYS, boxColor, measure, wrapBytes, type Ui } from "./ui.ts";
 
 // Legacy presentation metadata is optional: the current server computes these
@@ -144,6 +144,7 @@ class Fighter {
     this.dir = this.homeDir();
     this.hp = f.hp; this.mp = f.mp; this.rideHp = f.rideMaxHp > 0 ? f.rideHp : 0;
     this.status = f.status ?? 0; this.dead = f.hp <= 0;
+    if (this.dead) { this.action = ANIM.DEAD; this.loop = false; }
   }
 
   homeDir() { return this.f.slot < 10 ? 3 : 7; } // 己方朝左上，敌方朝右下
@@ -153,6 +154,13 @@ class Fighter {
   }
 
   frame(assets: Assets, now: number): [number, number, number] | null {
+    // Snapshots and later idle/walk completion must not resurrect a corpse.
+    // Keep the original knockback/return/fly choreography until it finishes.
+    if (this.dead && !this.dying && !this.motion && !this.fly && this.action !== ANIM.DEAD)
+      this.play(ANIM.DEAD, now);
+    if (!this.dead && this.action === ANIM.DEAD) {
+      this.stars = false; this.deadAt = 0; this.play(ANIM.STAND, now, true);
+    }
     if (this.pauseAt) {
       if (now < this.pauseAt + this.pauseMs) now = this.pauseAt;
       else { this.actAt += this.pauseMs; this.pauseAt = 0; }
@@ -166,7 +174,12 @@ class Fighter {
     }
     const def = assets.anim(this.f.sprite);
     if (!def) return null;
-    let act: AnimAction | undefined = findAction(def, this.dir, this.action);
+    // Some pet assets contain DEAD only for a subset of directions. The
+    // generic findAction falls back to STAND; prefer a real death pose first.
+    let act: AnimAction | undefined = this.action === ANIM.DEAD
+      ? def.actions.find(a => a.type === ANIM.DEAD && a.dir === this.dir)
+        ?? def.actions.find(a => a.type === ANIM.DEAD) ?? findAction(def, this.dir, this.action)
+      : findAction(def, this.dir, this.action);
     if (!act || act.frames.length === 0) return null;
     const ms = Math.max(1, act.ticks) * FRAME / (this.walkFast && this.action === ANIM.WALK ? 2 : 1)
       / (this.action === ANIM.STAND || this.action === ANIM.DEAD ? 1 : battleSpeed());
@@ -487,7 +500,7 @@ export class BattleScreen {
    * 再往下加速 12 帧落回原处，停 60 帧后消失，共 84 帧。stay 为真时是图示型的（Guard 等）原地不动。
    */
   private popup(a: Fighter, now: number, p: { text?: string; icon?: number; color?: string; dy?: number; stay?: boolean }) {
-    const x = a.x, y = a.y - (p.text ? (isMobile() ? 150 : 128) : 64) + (p.dy ?? 0), ui = this.host.ui;
+    const x = a.x, y = (p.text ? (a.rect?.[1] ?? a.y - 84) - 12 : a.y - 64) + (p.dy ?? 0), ui = this.host.ui;
     this.fx.push({ at: now, ms: 84 * FRAME, draw: (_t, age) => {
       const f = age / FRAME;
       // 上升：第 i 帧移动 (24 − 2i)/4；落下对称
@@ -495,10 +508,11 @@ export class BattleScreen {
       const yy = p.stay ? y : f < 12 ? y - up(f) : f < 24 ? y - 39 + (39 - up(24 - f)) : y;
       if (p.icon) ui.image(p.icon, x, yy);
       if (p.text) {
-        const size = isMobile() ? 30 : 20, width = Math.max(44, p.text.length * size * .7 + 16);
-        // Opaque backing keeps damage/healing readable over every battlefield.
-        ui.box(x - width / 2, yy - size / 2 - 10, x + width / 2, yy + size / 2 - 6, "#101b2a", true);
-        ui.texts.push({ x, y: yy - 8 - size / 2, text: p.text, size, color: p.color ?? "#ffb4ab", align: "center" });
+        // Clamp the complete outlined bitmap at every bounce frame, including
+        // the topmost enemy in a five-enemy formation. Never clip the glyphs.
+        const label = this.combatLabel(p.text, isMobile() ? 32 : 24, "#ffdf45");
+        ui.pic(label, Math.max(4, Math.min(796 - label.width, x - label.width / 2)),
+          Math.max(4, Math.min(596 - label.height, yy - label.height)));
       }
     } });
   }
@@ -689,7 +703,7 @@ export class BattleScreen {
         steps.push(this.waitStep(1, (now) => { this.showSkill(e.skill, now); a.play(ANIM.ATTACK, now); }));
         steps.push(this.waitStep(600, (now) => {
           t.hp = e.hp; t.status = e.status;
-          if (e.kind === "revive") { t.dead = false; t.play(ANIM.STAND, now, true); }
+          if (e.kind === "revive" && e.hp > 0) { t.dead = false; t.stars = false; t.deadAt = 0; t.dying = false; t.play(ANIM.STAND, now, true); }
           this.popup(t, now, { text: String(e.damage), color: FONT.GREEN });
           sfx(102, t.x);
         }));
@@ -764,7 +778,7 @@ export class BattleScreen {
     switch (e.result) {
       case "heal":
       case "revive":
-        if (e.result === "revive" && e.hp > 0) { t.dead = false; t.play(ANIM.STAND, now, true); }
+        if (e.result === "revive" && e.hp > 0) { t.dead = false; t.stars = false; t.deadAt = 0; t.dying = false; t.play(ANIM.STAND, now, true); }
         if (e.damage > 0 || e.result === "revive") this.popup(t, now, { text: String(e.damage), color: FONT.GREEN });
         if (e.damage > 0 || e.mpDamage > 0 || e.result === "revive") sfx(102, t.x); // master：HP / MP 回复时 SE 102
         if (e.mpDamage > 0) { if (t !== a) t.mp += e.mpDamage; this.popup(t, now, { text: String(e.mpDamage), color: FONT.YELLOW, dy: 14 }); } // 对自己用时 actorMp 已经是回复后的
@@ -1131,7 +1145,7 @@ export class BattleScreen {
       const dx = t.x - a.x, dy = t.y - a.y, len = Math.hypot(dx, dy) || 1;
       t.fly = [dx / len * 63 / FRAME, dy / len * 63 / FRAME];
       if (t.f.slot === this.me) this.host.chat("你被击飞了！", FONT.YELLOW);
-    } else if (e.dead) {
+    } else if (e.dead || e.hp <= 0) {
       t.dead = true; t.status = 0;
       if (!this.quick) this.slowUntil = Math.max(this.slowUntil, now + Math.max(0, t.shakeUntil - now)); // 打倒的瞬间到他抖完：慢动作
       // 走回原位后才倒下（VCT_NO_DIE）；没有击退动作（防御中、无效……）就直接倒
@@ -1292,9 +1306,12 @@ export class BattleScreen {
       if (this.sent) { this.afterPlayer("resume"); return; }
     }
     if (me.dead) {
-      // 自己倒下：没有人的指令，宠物也不下指令（BattleMenuProc 送 "W|FF|FF"）
+      // No player action while down. In automatic PvE each live pet still decides independently.
       this.sent = true;
       if (!this.petSent && !this.host.serverAuto?.()) this.sendAllPets(-1, -1);
+      // All pets in this turn see the same first-turn policy; only advance
+      // after submitting the complete batch, including a downed owner.
+      this.aiFirst = false;
       return;
     }
     this.sent = false;
@@ -1374,39 +1391,110 @@ export class BattleScreen {
       }
       if (a.reversed && !a.dead) this.animAt(FX.REVERSE, a.x, a.y - 64, now); // BR：属性反转中（SPR_zokusei 循环）
     }
+    const resources: [number, number, number, number][] = [];
     for (const a of list) {
       // 头顶名字（BattleNameDisp：F11 开关，全部 20 人 "名字 LVn"，自己与自己的宠物黄字）；敌人的常显（原版要滑鼠移上去才显示）
       if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - (isMobile() ? 126 : 112)), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || this.petOwner(a) === this.me ? FONT.YELLOW : FONT.WHITE, align: "center" });
       // 异常状态动画（katino）
       if (a.status > 0 && !a.dead) this.animAt(STATUS_SPR[a.status], a.x, a.y - 64, now);
-      // Resource cards stay in logical battle coordinates; larger mobile type
-      // compensates for the 800px stage fitting onto a phone. Ratios are clamped
-      // because damage snapshots and max-resource changes can cross in transit.
+      // Anchor below the actual drawn sprite (also works for large pets), not
+      // at a fixed head offset. Compact rows leave the model silhouette clear.
       if (a.f.slot >= 10) continue;
-      const mobile = isMobile(), mx = Math.max(70, Math.min(730, Math.round(a.x)));
-      const my = Math.max(28, Math.round(a.y - 78));
-      this.resourceCard(mx, my, a.hp, a.f.maxHp, mobile, a.dead ? "倒地" : "HP");
+      const mobile = isMobile(), width = 128;
+      const height = (mobile ? 20 : 14) + 19 + (a.f.rideMaxHp > 0 ? 6 : a.f.slot === this.me && a.f.maxMp > 0 ? 1 : 0);
+      const placement = this.resourcePlacement(a.x,
+        (a.rect ? a.rect[1] + a.rect[3] : a.y + 4) + 5, width, height,
+        [...list.flatMap(f => f.rect ? [f.rect] : []), ...resources]);
+      // Never fall back to an occupied/clipped rectangle. A fully covered stage
+      // can temporarily omit the card; the command/status panels retain HP.
+      if (!placement) continue;
+      const [mx, top] = placement; let row = top;
+      resources.push([mx - width / 2, row, width, height]);
+      row += this.resourceCard(mx, row, a.hp, a.f.maxHp, mobile, a.dead ? "倒地" : "HP");
       if (a.f.slot === this.me && a.f.maxMp > 0) {
         const ratio = Math.max(0, Math.min(1, a.mp / a.f.maxMp));
-        ui.box(mx - 52, my + 16, mx + 52, my + 21, "#101b2a", true);
-        ui.box(mx - 51, my + 17, mx - 51 + 102 * ratio, my + 20, "#9acaff", true);
+        ui.box(mx - 44, row - 2, mx + 44, row + 1, "#22384b", true);
+        ui.box(mx - 44, row - 2, mx - 44 + 88 * ratio, row + 1, "#7ccfff", true);
       }
-      if (a.f.rideMaxHp > 0) this.resourceCard(mx + 16, my + 40, a.rideHp, a.f.rideMaxHp, mobile, "骑");
+      if (a.f.rideMaxHp > 0) {
+        const ratio = Math.max(0, Math.min(1, a.rideHp / a.f.rideMaxHp));
+        ui.box(mx - 44, row + 3, mx + 44, row + 6, "#22384b", true);
+        ui.box(mx - 44, row + 3, mx - 44 + 88 * ratio, row + 6, "#e6baff", true);
+      }
     }
   }
 
-  private resourceCard(x: number, y: number, hp: number, maxHp: number, mobile: boolean, label: string) {
-    const ui = this.host.ui, value = Math.max(0, Math.min(maxHp, hp));
-    const ratio = Math.max(0, Math.min(1, value / Math.max(1, maxHp)));
-    const text = `${label} ${value}/${Math.max(0, maxHp)}`, size = mobile ? 24 : 16;
-    const width = Math.max(mobile ? 112 : 94, text.length * size * .57 + 12);
-    x = Math.max(width / 2 + 2, Math.min(798 - width / 2, x));
-    ui.box(x - width / 2, y - size / 2 - 3, x + width / 2, y + size / 2 + 7, "#101b2a", true);
-    ui.box(x - width / 2, y - size / 2 - 3, x + width / 2, y + size / 2 + 7, "#7496ad", false);
-    ui.box(x - width / 2 + 3, y + size / 2 + 1, x + width / 2 - 3, y + size / 2 + 5, "#33465c", true);
-    ui.box(x - width / 2 + 3, y + size / 2 + 1, x - width / 2 + 3 + (width - 6) * ratio, y + size / 2 + 5,
-      ratio <= .25 ? "#ffb4ab" : ratio <= .5 ? "#ffe08a" : "#70e0b5", true);
-    ui.texts.push({ x, y: y - size / 2, text, size, color: "#f4f8ff", align: "center" });
+  /** Joint 2D placement: keep whole cards clear of every sprite and prior card.
+   * Candidate edges include obstacle boundaries and bottom lanes, so crowded
+   * bottom formations can use a second row or a free side area without clamping
+   * a failed candidate back onto another card. ResourceCard never changes y.
+   */
+  private resourcePlacement(anchorX: number, preferredY: number, width: number, height: number,
+    occupied: [number, number, number, number][]): [number, number] | null {
+    const left = width / 2 + 4, right = 796 - width / 2, bottom = 596 - height;
+    const clampX = (x: number) => Math.max(left, Math.min(right, x));
+    const clampY = (y: number) => Math.max(4, Math.min(bottom, y));
+    const xs = new Set([clampX(anchorX), left, right]);
+    const ys = new Set([clampY(preferredY), bottom]);
+    for (let x = left; x <= right; x += width + 4) xs.add(x);
+    for (const [x, y, w, h] of occupied) {
+      xs.add(clampX(x - width / 2 - 4)); xs.add(clampX(x + w + width / 2 + 4));
+      ys.add(clampY(y + h + 5)); ys.add(clampY(y - height - 5));
+    }
+    let best: [number, number] | null = null, score = Infinity;
+    for (const x of xs) for (const y of ys) {
+      const x1 = x - width / 2;
+      if (occupied.some(o => x1 < o[0] + o[2] + 2 && x1 + width + 2 > o[0]
+        && y < o[1] + o[3] + 2 && y + height + 2 > o[1])) continue;
+      const cost = Math.abs(x - anchorX) + Math.abs(y - preferredY) * 2 + (y < preferredY ? 80 : 0);
+      if (cost < score) { score = cost; best = [x, y]; }
+    }
+    return best;
+  }
+
+  // Cache only a bounded set of labels. Reuse identical numbers across frames;
+  // no shared Ui font changes, and no per-frame Canvas allocation in steady state.
+  private combatLabels?: Map<string, HTMLCanvasElement>;
+  private combatLabel(text: string, size: number, color: string, backing = false): HTMLCanvasElement {
+    const key = `${text}|${size}|${color}|${backing}`;
+    const cache = this.combatLabels ??= new Map();
+    const cached = cache.get(key);
+    if (cached) return cached;
+    const canvas = document.createElement("canvas"), ctx = canvas.getContext("2d")!;
+    const font = `900 ${size}px "Arial Rounded MT Bold", "Trebuchet MS", sans-serif`;
+    ctx.font = font;
+    canvas.width = Math.min(backing ? 128 : 780, Math.ceil(ctx.measureText(text).width) + 12);
+    canvas.height = size + 12;
+    if (backing) { ctx.fillStyle = "rgba(13,23,35,0.88)"; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+    ctx.font = font; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.lineJoin = "round"; ctx.lineWidth = size >= 24 ? 5 : 3;
+    ctx.strokeStyle = "#30210b";
+    ctx.strokeText(text, canvas.width / 2, canvas.height / 2, canvas.width - 12);
+    ctx.fillStyle = color;
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2, canvas.width - 12);
+    if (cache.size >= 128) cache.delete(cache.keys().next().value!);
+    cache.set(key, canvas);
+    return canvas;
+  }
+
+  /** y is the top of the row, strictly below the sprite's bounding rectangle. */
+  private resourceCard(x: number, y: number, hp: number, maxHp: number, mobile: boolean, label: string): number {
+    const ui = this.host.ui, maximum = Math.max(0, maxHp), value = Math.max(0, Math.min(maximum, hp));
+    const ratio = Math.max(0, Math.min(1, value / Math.max(1, maximum)));
+    const text = `${label} ${value}/${maximum}`, size = mobile ? 20 : 14;
+    // Headless consumers may inspect battle state without a DOM rasterizer.
+    if (typeof document === "undefined" && !Object.hasOwn(this, "combatLabel")) {
+      ui.texts.push({ x, y, text, size, color: "#ffe778", align: "center" });
+      return size + 19;
+    }
+    const image = this.combatLabel(text, size, "#ffe778", true), width = image.width;
+    x = Math.max(width / 2 + 4, Math.min(796 - width / 2, x));
+    ui.pic(image, x - width / 2, y);
+    const bar = y + image.height;
+    ui.box(x - width / 2, bar, x + width / 2, bar + 4, "#22384b", true);
+    ui.box(x - width / 2, bar, x - width / 2 + width * ratio, bar + 4,
+      label === "MP" ? "#7ccfff" : ratio <= .25 ? "#ffb4ab" : ratio <= .5 ? "#ffe08a" : "#70e0b5", true);
+    return image.height + 7;
   }
 
   /** 画一个循环播放的动画（状态标记、飞行物） */
@@ -1682,7 +1770,7 @@ export class BattleScreen {
     const cmd = smartChoose(s, {
       me: this.me, first: this.aiFirst, fighters: sf, inv: this.host.inventory().items, myAtk: this.host.myAtk(),
       pet: pet ? { name: pet.info.freeName || pet.info.name, atk: pet.info.atk, skills: pet.info.skills } : null,
-      capturePlace, noEscape: this.pvp || this.event, mem: this.host.aiMemory(),
+      capturePlace, pvp: this.pvp, noEscape: this.pvp || this.event, mem: this.host.aiMemory(),
     });
     this.aiKey = cmd.key; this.aiPetKey = cmd.petKey;
     this.aiFirst = false;
@@ -1757,9 +1845,27 @@ export class BattleScreen {
     if (this.watch || this.host.serverAuto?.()) return;
     for (const { a, info } of this.ownedPets()) {
       if (this.petSentSlots.has(a.f.slot)) continue;
-      const usable = info.skills.some((s) => s.slot === skill && s.field !== FIELD_MAP);
+      let petSkill = skill, petTarget = target;
+      if (this.fighters.get(this.me)?.dead && !this.pvp && (this.host.auto() || this.quick)) {
+        const [floor, gx, gy] = this.host.place();
+        const fighters = new Map<number, SmartFighter>();
+        for (const [slot, f] of this.fighters) fighters.set(slot, {
+          slot, name: f.f.name, hp: f.dead ? 0 : f.hp, maxHp: f.f.maxHp, mp: f.mp,
+          level: f.f.level, status: f.status, gone: f.gone || f.hidden, rideHp: f.rideHp, rideMaxHp: f.f.rideMaxHp,
+        });
+        // Historical helper name; current policy also handles a downed PvE
+        // party member. Supply this pet's bag skills, never the first pet's.
+        const cmd = smartChooseSoloPet(this.host.aiSettings(), {
+          me: this.me, first: this.aiFirst, fighters, inv: this.host.inventory().items, myAtk: this.host.myAtk(),
+          pet: { name: info.freeName || info.name, atk: info.atk, skills: info.skills },
+          capturePlace: floor !== 500 || (gx >= 250 && gy >= 360), pvp: this.pvp,
+          noEscape: this.pvp || this.event, mem: this.host.aiMemory(),
+        }, a.f.slot);
+        [petSkill, petTarget] = cmd.pet;
+      }
+      const usable = info.skills.some((s) => s.slot === petSkill && s.field !== FIELD_MAP);
       this.petSentSlots.add(a.f.slot);
-      this.host.sendPet(skill < 0 || usable ? skill : -1, target, a.f.slot);
+      this.host.sendPet(petSkill < 0 || usable ? petSkill : -1, petTarget, a.f.slot);
     }
     this.petWnd = false; this.petSelecting = false;
   }

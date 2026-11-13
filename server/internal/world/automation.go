@@ -103,10 +103,10 @@ func (w *World) sendAutoPlay(e *entity) {
 	}
 	a := e.automation
 	if a == nil {
-		e.client.Send(&proto.AutoPlayState{})
+		e.client.Send(&proto.AutoPlayState{CanEncounter: w.canEncounter(e)})
 		return
 	}
-	e.client.Send(&proto.AutoPlayState{Encounter: a.encounter, AutoBattle: a.autoBattle, Quick: a.quick, Paused: a.paused && e.connected && w.now().Sub(a.lastUpdate) < 2*time.Second, Reason: a.reason})
+	e.client.Send(&proto.AutoPlayState{CanEncounter: w.canEncounter(e), Encounter: a.encounter, AutoBattle: a.autoBattle, Quick: a.quick, Paused: a.paused && e.connected && w.now().Sub(a.lastUpdate) < 2*time.Second, Reason: a.reason})
 }
 func (w *World) stopAutomation(e *entity, reasons ...string) {
 	if e == nil || e.automation == nil {
@@ -298,6 +298,13 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 	me := ft.b.F[ft.slot]
 	pet := ft.b.F[ft.slot+5]
 	s := a.settings
+	// A dead owner has no action this round. Do not manufacture an escape
+	// intent from HP=0: pets still own independent turns and must keep fighting.
+	if !me.Alive() && petCanActWithoutOwner(ft) {
+		cmd := battle.Command{Kind: battle.Guard, Target: -1}
+		skill, target := w.chooseAutomationPet(e, a, ft.slot+5, cmd)
+		return cmd, skill, target
+	}
 	enemies, allies := []*battle.Fighter{}, []*battle.Fighter{}
 	for _, f := range ft.b.F {
 		if f == nil || f.Escaped {
@@ -421,6 +428,13 @@ petChoice:
 	return cmd, skill, pt
 }
 
+// Only automatic PvE decisions may ignore an incapacitated owner's intent.
+// A surviving pet still owns its action, in solo play and in a party alike.
+// PvP and manually submitted commands keep their existing validation rules.
+func petCanActWithoutOwner(ft *fight) bool {
+	return ft != nil && ft.room != nil && !ft.room.pvp
+}
+
 func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd battle.Command) (int, int) {
 	ft := e.fight
 	me, pet := ft.b.F[ft.slot], ft.b.F[slot]
@@ -437,12 +451,16 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		}
 	}
 	skill, pt := -1, target
+	if target < 0 {
+		return -1, -1
+	}
 	if _, owned := ft.petBagSlot(slot); !owned || !pet.Alive() {
 		return skill, pt
 	}
 	// Emergency capture/escape plans override fixed pet actions too: otherwise
 	// an explicit attack plan could kill the enemy the owner is capturing.
-	if cmd.Kind == battle.Capture || cmd.Kind == battle.Escape {
+	ownerDown := !me.Alive() && petCanActWithoutOwner(ft)
+	if !ownerDown && (cmd.Kind == battle.Capture || cmd.Kind == battle.Escape) {
 		for slot, sk := range pet.Skills {
 			if sk != nil && sk.Field != 2 && sk.Func == "PETSKILL_ShowMercy" && cmd.Kind == battle.Capture {
 				return slot, cmd.Target
@@ -464,7 +482,7 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 			continue
 		}
 		match := action.Kind == "attack" && sk.ID == 1 || action.Kind == "guard" && sk.ID == 2 || action.Kind == "skill" && sk.Name == action.Name
-		if match {
+		if match && !(ownerDown && (sk.Func == "PETSKILL_Guardian" || action.Target == "owner")) {
 			return slot, automationPetTarget(sk.Target, action.Target, me.Slot, pet.Slot, target, side, other)
 		}
 	}
@@ -475,7 +493,7 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		if sk == nil || sk.Field == 2 {
 			continue
 		}
-		if sk.Func == "PETSKILL_Guardian" && me.HP*100 < me.MaxHP*s.HealAt {
+		if sk.Func == "PETSKILL_Guardian" && !ownerDown && me.HP*100 < me.MaxHP*s.HealAt {
 			return slot, me.Slot
 		}
 		if sk.ID == 2 && pet.HP*100 < pet.MaxHP*15 {

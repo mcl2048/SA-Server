@@ -142,7 +142,7 @@
     "WorldReady": [["resumed", "bool"]],
     "LobbyReady": [],
     "Session": [["token", "string"], ["resumed", "bool"], ["inWorld", "bool"]],
-    "AutoPlayState": [["encounter", "bool"], ["autoBattle", "bool"], ["quick", "bool"], ["paused", "bool"], ["reason", "string"]],
+    "AutoPlayState": [["canEncounter", "bool"], ["encounter", "bool"], ["autoBattle", "bool"], ["quick", "bool"], ["paused", "bool"], ["reason", "string"]],
     "AccountInfo": [["account", "string"], ["created", "string"], ["chars", "int"], ["hasSecret", "bool"]],
     "AccountResult": [["ok", "bool"], ["message", "string"]],
     "ServerList": [["groups", "ServerGroup[]"]],
