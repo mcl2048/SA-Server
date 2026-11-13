@@ -22,11 +22,19 @@
   html.sa-mobile #mobile-root {
     display: flex; flex-direction: column; position: fixed; inset: 0 auto auto 0;
     width: 100vw; height: 100dvh; box-sizing: border-box; overflow: hidden;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    background: #10171c;
+    background: radial-gradient(ellipse at 50% 0%, #29443e 0%, #102a29 50%, #081b1c 100%);
   }
-  html.sa-mobile #mobile-viewport { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; }
-  html.sa-mobile #mobile-chrome { position: relative; flex: none; min-width: 0; z-index: 2; }
+  html.sa-mobile #mobile-viewport {
+    position: relative; flex: none; width: var(--game-width, 100vw); height: var(--game-height, 75vw);
+    min-height: 0; overflow: hidden; touch-action: none; isolation: isolate; background: #000;
+  }
+  html.sa-mobile #mobile-chrome { position: relative; flex: 1; min-width: 0; min-height: 0; overflow: auto; z-index: 2; touch-action: pan-y; }
+  html.sa-mobile #mobile-root[data-orientation='landscape'] #mobile-viewport {
+    position: absolute; left: var(--game-left); top: var(--game-top);
+  }
+  html.sa-mobile #mobile-root[data-orientation='landscape'] #mobile-chrome {
+    position: absolute; inset: 0; overflow: visible; pointer-events: none;
+  }
   html.sa-mobile #mobile-viewport > .stage {
     position: absolute; width: 800px; height: 600px; left: var(--mobile-left, 50%); top: var(--mobile-top, 0px);
     transform: translateX(-50%) scale(var(--mobile-scale, .85)); transform-origin: center top;
@@ -42,6 +50,6 @@
 </div>
 <div id="mobile-root"><div id="mobile-viewport"></div><div id="mobile-chrome"></div></div>
 <div id="hud"></div>
-<script type="module" src="dist/main.js?v=472f28ee5f8169e2"></script>
+<script type="module" src="dist/main.js?v=bea179de9cc48742"></script>
 </body>
 </html>

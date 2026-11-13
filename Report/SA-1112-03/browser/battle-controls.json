@@ -1,0 +1,25 @@
+{
+  "binary_sha256": "9dc4408e6a1300e787010b25bc595c9a4cf41ab7686ced1cb179520a44abf25c",
+  "cases": [
+    {
+      "case": "right-mouse-cancels-native-battle-target-without-command",
+      "pass": true
+    },
+    {
+      "case": "option-navigation-and-left-mouse-submit-native-battle-target",
+      "pass": true,
+      "selected": "t-15",
+      "command": {
+        "t": "BattleCommand",
+        "kind": "attack",
+        "target": 15,
+        "item": -1
+      }
+    },
+    {
+      "case": "battle-completes-and-returns-to-field",
+      "pass": true
+    }
+  ],
+  "page_errors": []
+}

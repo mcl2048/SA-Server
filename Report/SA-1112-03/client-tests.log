@@ -1,0 +1,38 @@
+✔ portrait fills the full width and keeps 4:3 without borrowing control height (4.123818ms)
+✔ landscape fills height where possible, stays centered and preserves independent rails (1.303793ms)
+✔ dragged controls stay within the browser after large moves and rotation (2.662588ms)
+✔ preview caps high-DPR copies, composites overlay and throttles to 15fps (5.068103ms)
+✔ hidden sheets, CSS-hidden previews and desktop mode do not copy frames (0.939104ms)
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (8.816442ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (2.882265ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (5.263694ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (4.484065ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (4.02804ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (7.950635ms)
+✔ battle commands and targets remain human readable in a bounded sheet (3.303742ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (2.912817ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (3.389044ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (6.659322ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (2.484426ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (3.064712ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (3.600602ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (1.607945ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (2.132033ms)
+✓ dirTo 与 MOVE 表一致
+✓ 到达 (6,2)，路线 556565
+✓ 步数等于切比雪夫距离
+✓ 只用目标方向及其相邻方向
+✓ 斜步与直步交错分布（不是先斜走完再直走），路线 55556565655656556565
+✓ 一侧被挡仍能到达，路线 7566
+✓ 正前方是墙时原版路线为空
+✓ 停在目标前一格并朝向目标（lastDir=5）
+全部通过
+✔ client/test/route.test.ts (219.695006ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 570.5583

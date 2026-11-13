@@ -16,9 +16,9 @@ import { Shop } from "./shop.ts";
 import { PetSkillShop, drawPetSelect } from "./petshop.ts";
 import { loadAi } from "./ai.ts";
 import { AiMemory } from "./aismart.ts";
-import { isMobile, setMobileScene } from "./mobile-view.ts";
+import { isMobile, setMobileScene, setMobileLoginArtwork } from "./mobile-view.ts";
 import { MobileShell } from "./mobile-shell.ts";
-import { drawMobilePreview } from "./mobile-preview.ts";
+import { installControlPositions } from "./mobile-position.ts";
 import type { AddressEntry, CharSummary, GmEntry, GmItem, S2CPartyMember as PartyMember, QuestEntry, S2CBattleEnd, S2CFamilyStatus, S2CGmDetail, S2CInventory, S2CNpcWindow, S2CPets, S2CStatus, ServerGroup } from "./proto.gen.ts";
 
 const params = new URLSearchParams(location.search);
@@ -1031,16 +1031,66 @@ const CLOSE_SE_DELAY = 250;
 // A DOM action enters the ordinary previous-frame hit path. Its screen/modal context
 // must still match; a delayed tap cannot click through into a newly opened dialog.
 let mobileDirection = -1;
-let pendingMobileAction: { id: string; screen: Screen; modal: Modal | null } | null = null;
+let pendingMobileAction: { id?: string; x: number; y: number; button: 0 | 2; screen: Screen; modal: Modal | null; battle: typeof battle } | null = null;
+let mobileSelection: { id: string; screen: Screen; modal: Modal | null; battle: typeof battle } | null = null;
+let mobilePointer: { x: number; y: number } | null = null;
+function mobileOptions() {
+  const options = ui.getMobileActions().filter(h => !/(?:^|-)(?:block|blocker|wnd|bg|win)$/.test(h.id)
+    && !(h.x2 - h.x1 >= 600 && h.y2 - h.y1 >= 450));
+  // Native windows retain some background HUD hits. Option navigation follows
+  // the current window rather than walking through unrelated chat/toolbar hits.
+  return screen instanceof FieldScreen && (modal || battle || screen.openCount() > 0)
+    ? options.filter(h => !/^(?:tb-|chat-)/.test(h.id) && h.id !== "chan") : options;
+}
+function selectedMobileHit() {
+  if (!mobileSelection || mobileSelection.screen !== screen || mobileSelection.modal !== modal || mobileSelection.battle !== battle) { mobileSelection = null; return undefined; }
+  const hit = mobileOptions().find(h => h.id === mobileSelection!.id);
+  if (!hit) mobileSelection = null;
+  return hit;
+}
+function queueMobileClick(button: 0 | 2, id?: string) {
+  if (!isMobile()) return;
+  const hit = id ? mobileOptions().find(h => h.id === id) : selectedMobileHit();
+  const point = hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
+  if (!point && button === 0) {
+    const first = mobileOptions()[0]; if (first) { mobileSelection = { id: first.id, screen, modal, battle }; queueMobileClick(button, first.id); }
+    return;
+  }
+  if (!point && button === 2 && !battle) return; // No invented ground cursor or pickup/turn.
+  mobileDirection = -1; keys.clear(); mouse.cancel();
+  if (screen instanceof FieldScreen) screen.cancelMobileMotion();
+  pendingMobileAction = { id: hit?.id, x: point?.x ?? 400, y: point?.y ?? 300, button, screen, modal, battle };
+}
+// A direct game touch replaces virtual selection and supplies the cursor position
+// for subsequent rail mouse buttons. Never move the cursor because a rail was tapped.
+canvas.addEventListener("pointerdown", e => {
+  if (!isMobile()) return;
+  mobileSelection = null; pendingMobileAction = null;
+  const r = canvas.getBoundingClientRect();
+  mobilePointer = { x: (e.clientX - r.left) * 800 / r.width, y: (e.clientY - r.top) * 600 / r.height };
+});
 const mobile = new MobileShell(ui, {
-  action(id) { if (isMobile()) pendingMobileAction = { id, screen, modal }; },
+  action(id) { queueMobileClick(0, id); },
+  navigate(dir) {
+    if (!isMobile()) return;
+    const options = mobileOptions(); if (!options.length) return;
+    const selected = selectedMobileHit(), index = selected ? options.findIndex(h => h.id === selected.id) : dir > 0 ? -1 : 0;
+    const hit = options[(index + dir + options.length) % options.length];
+    mobileSelection = { id: hit.id, screen, modal, battle };
+    mobileDirection = -1; mouse.cancel(); keys.clear();
+    if (screen instanceof FieldScreen) screen.cancelMobileMotion();
+  },
+  click(button) { queueMobileClick(button); },
   command(name) {
     if (!isMobile()) return;
+    if (name === "back" && modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); return; }
+    if (name === "back" && modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); return; }
+    if (name === "back" && battle) { queueMobileClick(2); return; }
     if (screen instanceof FieldScreen) screen.mobileCommand(name);
     else if (name === "back") {
-      if (modal?.kind === "msg") { const then = modal.then; modal = null; then?.(); }
-      else if (modal?.kind === "yesno") { const then = modal.then; modal = null; then(false); }
-      else { mouse.rightClicked = true; keyPressed.add("Escape"); }
+      const options = mobileOptions();
+      const back = ["dlg-cancel", "menu3", "back"].map(id => options.find(h => h.id === id)).find(Boolean);
+      if (back) queueMobileClick(0, back.id);
     }
   },
   direction(dir) {
@@ -1049,8 +1099,10 @@ const mobile = new MobileShell(ui, {
   },
   cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });
-const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); };
+installControlPositions(() => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
+const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mouse.cancel(); };
 document.addEventListener("sa-device-change", releaseMobileInput);
+document.addEventListener("sa-mobile-gesture", () => { releaseMobileInput(); if (isMobile() && screen instanceof FieldScreen) screen.cancelMobileMotion(); });
 addEventListener("blur", releaseMobileInput);
 document.addEventListener("visibilitychange", () => { if (document.hidden) releaseMobileInput(); });
 
@@ -1059,10 +1111,12 @@ function mobileFrame() {
   const f = screen instanceof FieldScreen ? screen : null;
   const panel = !!modal || !!f && (f.openCount() > 0 || InputBox.live.size > 0);
   setMobileScene(!!f && !panel && !battle);
+  setMobileLoginArtwork(screen instanceof LoginScreen && !modal);
   const phase = battle && !battle.quick ? "battle" : f ? "field" : screen instanceof LoginScreen ? "login"
     : screen instanceof LineScreen ? "line" : screen instanceof CharSelectScreen ? "char" : "make";
   const status = selfStatus && f ? `${selfStatus.name} Lv.${selfStatus.level}　HP ${selfStatus.hp}/${selfStatus.maxHp}　MP ${selfStatus.mp}/${selfStatus.maxMp}` : "石器时代";
-  mobile.frame({ phase, panel, status,
+  const selected = selectedMobileHit();
+  mobile.frame({ phase, panel, status, selectedLabel: selected?.label || selected?.id, selectedId: selected?.id,
     title: modal ? "对话" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
     actionLabels: Object.fromEntries([
@@ -1076,9 +1130,18 @@ function frame(now: number) {
   const workAt = performance.now();
   const queued = pendingMobileAction;
   pendingMobileAction = null;
-  if (queued && isMobile() && queued.screen === screen && queued.modal === modal) {
-    const hit = ui.getMobileActions().find(h => h.id === queued.id);
-    if (hit) { mouse.x = (hit.x1 + hit.x2) / 2; mouse.y = (hit.y1 + hit.y2) / 2; mouse.clicked = true; }
+  if (isMobile()) {
+    const selected = selectedMobileHit();
+    if (selected && !mouse.down && !mouse.clicked) {
+      mouse.x = (selected.x1 + selected.x2) / 2; mouse.y = (selected.y1 + selected.y2) / 2;
+    }
+  }
+  if (queued && isMobile() && queued.screen === screen && queued.modal === modal && queued.battle === battle) {
+    const hit = queued.id ? mobileOptions().find(h => h.id === queued.id) : undefined;
+    if (!queued.id || hit) {
+      mouse.x = hit ? (hit.x1 + hit.x2) / 2 : queued.x; mouse.y = hit ? (hit.y1 + hit.y2) / 2 : queued.y;
+      if (queued.button === 0) mouse.clicked = true; else mouse.rightClicked = true;
+    }
   }
   ui.begin();
   if (!(screen instanceof FieldScreen) && !battle) updatePalette(now, 0); // 登录画面固定用 0 号调色板（PaletteChange(DEF_PAL)）
@@ -1090,6 +1153,8 @@ function frame(now: number) {
     console.error(e); // 一帧出错不能让整个渲染循环停掉
   }
   drawModal();
+  const selected = isMobile() ? selectedMobileHit() : undefined;
+  if (selected) ui.boxes.push({ x1: selected.x1 - 2, y1: selected.y1 - 2, x2: selected.x2 + 2, y2: selected.y2 + 2, color: "#f0ce87", fill: false });
   mobileFrame();
   // 开关窗口的声音（202 / 203），这一帧没有别的界面音效时，点到按钮放 217
   const open = (modal ? 1 : 0) + (screen instanceof FieldScreen ? screen.openCount() : 0);
@@ -1106,7 +1171,6 @@ function frame(now: number) {
   fitOverlay(overlay, ctx2d);
   ctx2d.clearRect(0, 0, 800, 600);
   drawOverlay(ctx2d, ui);
-  drawMobilePreview(canvas, overlay);
   InputBox.layoutAll();
   keyPressed.clear();
   assets.tick();

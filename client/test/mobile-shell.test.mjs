@@ -25,6 +25,8 @@ class Element extends EventTarget {
   setSelectionRange(a, b) { this.selectionStart = a; this.selectionEnd = b; }
   getBoundingClientRect() { return { left: 0, top: 0, width: 390, height: 500 }; }
   setPointerCapture(id) { this.captured.add(id); }
+  hasPointerCapture(id) { return this.captured.has(id); }
+  releasePointerCapture(id) { this.captured.delete(id); }
   closest(selector) { if (selector === "[hidden]" && this.hidden) return this; return this.parentNode?.closest(selector) ?? null; }
   querySelectorAll(selector) {
     const all = this.children.flatMap(c => [c, ...c.querySelectorAll("*")]);
@@ -52,7 +54,7 @@ const { setDeviceMode } = await import("../src/mobile-view.ts");
 const fired = [];
 let hits = [];
 const ui = { texts: [], bottomLine: "", getMobileActions: () => hits };
-const shell = new MobileShell(ui, { action: id => fired.push(["action", id]), command: name => fired.push(["command", name]), direction: dir => fired.push(["direction", dir]), cancel: () => fired.push(["cancel"]) });
+const shell = new MobileShell(ui, { action: id => fired.push(["action", id]), command: name => fired.push(["command", name]), direction: dir => fired.push(["direction", dir]), cancel: () => fired.push(["cancel"]), navigate: dir => fired.push(["navigate", dir]), click: button => fired.push(["click", button]) });
 const frame = (phase = "login", panel = false) => shell.frame({ phase, panel });
 const fire = (el, type, props = {}) => el.dispatchEvent(Object.assign(new Event(type, { cancelable: true }), props));
 const allButtons = () => body.querySelectorAll("button");
@@ -96,16 +98,46 @@ test("only reachable controls render; removed controls cannot dispatch stale que
   hits = []; frame(); const n = fired.length; fire(ok, "click"); assert.equal(fired.length, n);
 });
 
-test("field direction releases on up, cancellation, lost capture and mode change", () => {
-  frame("field"); const up = allButtons().find(b => b.getAttribute("aria-label") === "向上移动");
-  for (const end of ["pointerup", "pointercancel", "lostpointercapture"]) {
-    fire(up, "pointerdown", { pointerId: 1, isPrimary: true }); assert.deepEqual(fired.at(-1), ["direction", 4]);
-    fire(up, end); assert.deepEqual(fired.at(-2), ["direction", -1]); assert.deepEqual(fired.at(-1), ["cancel"]);
+test("joystick uses eight original directions, center dead zone and all cancellation paths", () => {
+  frame("field"); const joy = body.querySelectorAll("*").find(e => e.dataset.mobileControl === "joystick");
+  joy.getBoundingClientRect = () => ({ left: 0, top: 0, width: 112, height: 112 });
+  const point = (type, x, y, id = 1) => fire(joy, type, { clientX: x, clientY: y, pointerId: id, isPrimary: true });
+  point("pointerdown", 56, 56); assert.notDeepEqual(fired.at(-1), ["direction", 0]);
+  for (const [x, y, dir] of [[100,56,6],[100,100,7],[56,100,0],[12,100,1],[12,56,2],[12,12,3],[56,12,4],[100,12,5]]) {
+    point("pointermove", x, y); assert.deepEqual(fired.at(-1), ["direction", dir]);
   }
-  fire(up, "keydown", { key: "Enter", repeat: false }); assert.deepEqual(fired.at(-1), ["direction", 4]);
-  fire(up, "keyup", { key: "Enter" }); assert.deepEqual(fired.at(-2), ["direction", -1]);
-  fire(up, "pointerdown", { pointerId: 2, isPrimary: false }); assert.deepEqual(fired.at(-2), ["direction", -1]);
-  setDeviceMode("desktop"); assert.deepEqual(fired.at(-1), ["cancel"]);
+  point("pointermove",56,56); assert.deepEqual(fired.at(-1), ["direction", -1]);
+  for (const end of ["pointerup", "pointercancel", "lostpointercapture"]) {
+    point("pointermove",56,12); point(end,56,12); assert.deepEqual(fired.at(-2), ["direction",-1]); assert.deepEqual(fired.at(-1),["cancel"]);
+    point("pointerdown",56,12);
+  }
+  fire(doc,"sa-controls-drag"); assert.deepEqual(fired.at(-2), ["direction",-1]);
+  point("pointerdown",56,12); frame("field",true); assert.deepEqual(fired.at(-1),["cancel"]);
+  const count=fired.length; point("pointerdown",56,12); assert.equal(fired.length,count);
+  frame("field"); point("pointerdown",56,12); setDeviceMode("desktop"); assert.deepEqual(fired.at(-1),["cancel"]);
+});
+
+test("navigation and mouse controls dispatch semantic hooks without clearing cursor", () => {
+  setDeviceMode("mobile"); shell.frame({phase:"login",panel:false,selectedLabel:"进入游戏",selectedId:"ok"});
+  for (const [label,expected] of [["上一个选项",["navigate",-1]],["下一个选项",["navigate",1]],["鼠标左键",["click",0]],["鼠标右键",["click",2]]]) {
+    const before=fired.length;fire(allButtons().find(b=>b.getAttribute("aria-label")===label),"click");
+    assert.equal(fired.length,before+1);assert.deepEqual(fired.at(-1),expected);
+  }
+  assert.equal(body.querySelectorAll("*").find(e=>e.className==="mobile-shell-selected").textContent,"进入游戏");
+});
+
+test("selection labels resolve native IDs and layout events never interrupt unchanged holds", () => {
+  setDeviceMode("mobile"); hits = [{id:"ok",x1:400,y1:296,x2:480,y2:395}];
+  let events = 0; const listen = () => events++; doc.addEventListener("sa-controls-layout", listen);
+  shell.frame({phase:"login",panel:false,selectedId:"ok",selectedLabel:"ok"});
+  assert.equal(body.querySelectorAll("*").find(e=>e.className==="mobile-shell-selected").textContent,"进入游戏");
+  const unchanged = events;
+  for (let i=0;i<20;i++) shell.frame({phase:"login",panel:false,selectedId:"ok",selectedLabel:"ok"});
+  assert.equal(events,unchanged);
+  shell.frame({phase:"field",panel:false}); assert.equal(events,unchanged+1);
+  shell.frame({phase:"field",panel:false,status:"changed HP"}); assert.equal(events,unchanged+1);
+  shell.frame({phase:"field",panel:true}); assert.equal(events,unchanged+2);
+  doc.removeEventListener("sa-controls-layout",listen); hits=[];
 });
 
 test("battle commands and targets remain human readable in a bounded sheet", () => {
@@ -116,7 +148,8 @@ test("battle commands and targets remain human readable in a bounded sheet", () 
   assert.equal(chrome.firstChild.dataset.layout, "battle");
   assert.equal(allButtons().find(b => b.dataset.action === "b-attack").textContent, "攻击");
   assert.match(allButtons().find(b => b.dataset.action === "t-10").textContent, /乌力/);
-  assert.match(head.firstChild.textContent, /max-height:55dvh/);
+  assert.match(head.firstChild.textContent, /data-orientation='landscape'/);
+  assert.equal(chrome.querySelector("canvas"), null); // The real game viewport replaces previews.
   ui.texts = []; hits = [];
 });
 
@@ -130,8 +163,8 @@ test("native panels hide background controls and actor names, and accept context
   assert.equal(allButtons().find(b => b.dataset.action === "inv-9").textContent, "回复药 × 2");
   const paragraphs = chrome.querySelectorAll("p").map(p => p.textContent);
   assert.equal(paragraphs.includes("无关 NPC"), false); assert.equal(paragraphs.includes("道具说明"), true);
-  assert.equal(chrome.querySelector("canvas").hidden, true);
-  frame("make"); assert.equal(chrome.querySelector("canvas").hidden, false);
+  assert.equal(chrome.querySelector("canvas"), null);
+  frame("make"); assert.equal(chrome.querySelector("canvas"), null);
   ui.texts = []; hits = [];
 });
 

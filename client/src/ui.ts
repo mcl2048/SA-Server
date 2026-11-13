@@ -148,7 +148,7 @@ export class Ui {
 
   begin() {
     // 点击按按下那一刻的鼠标位置、对照上一帧的热区判定（鼠标移过去立刻按下，也不能漏掉）
-    if (this.mouse.clicked) this.hot = this.hitAt(this.mouse.x, this.mouse.y);
+    if (this.mouse.clicked || (isMobile() && this.mouse.rightClicked)) this.hot = this.hitAt(this.mouse.x, this.mouse.y);
     this.clickHot = this.mouse.clicked ? this.hot : "";
     this.quads = []; this.texts = []; this.boxes = []; this.hits = []; this.pics = [];
     this.bottomLine = "";

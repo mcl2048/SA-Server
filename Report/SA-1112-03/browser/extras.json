@@ -1,0 +1,23 @@
+{
+  "cases": [
+    {
+      "case": "320px-register-character-preview-and-field-controls",
+      "pass": true
+    },
+    {
+      "case": "npc-native-interact-readable-dialog",
+      "pass": true,
+      "npc": {
+        "name": "家族管理员",
+        "x": 18,
+        "y": 24
+      },
+      "text": "对话\n手机测试 Lv.30　HP 699/700　MP 100/100\n\n我是这个村子里的万事通啦！\n\n你想知道什么吗？\n\n关于操作的方法\n关于系统按钮\n关于宠物\n关于对战\n返回 / 取消对话\n当前选项\n轻点画面或切换选项\n‹\n›\n左键\n选择 / 确认\n右键\n原生右键操作\n−\n复位\n＋"
+    },
+    {
+      "case": "npc-visible-touch-cancel-route",
+      "pass": true
+    }
+  ],
+  "page_errors": []
+}

@@ -62,11 +62,11 @@ test("narrow desktop remains desktop; modes move and restore the original stage"
   assert.equal(stage.parentNode, viewport);
   assert.equal(stage.style["--mobile-scale"], String(390 / 800));
   view.setMobileScene(true); flush();
-  assert.equal(stage.style["--mobile-scale"], "0.85");
-  assert.equal(stage.style["--mobile-top"], "-10px"); // Clamp to avoid exposing empty space at bottom.
-  view.setSceneZoom(4); flush(); assert.equal(stage.style["--mobile-scale"], "1.4");
-  view.setSceneZoom(-1); flush(); assert.equal(stage.style["--mobile-scale"], "0.55");
-  view.resetSceneView(); flush(); assert.equal(stage.style["--mobile-scale"], "0.85");
+  assert.equal(stage.style["--mobile-scale"], String(390 / 800));
+  assert.equal(stage.style["--mobile-top"], "0px");
+  view.setSceneZoom(4); flush(); assert.equal(stage.style["--mobile-scale"], String(4 * 390 / 800));
+  view.setSceneZoom(-1); flush(); assert.equal(stage.style["--mobile-scale"], String(.5 * 390 / 800));
+  view.resetSceneView(); flush(); assert.equal(stage.style["--mobile-scale"], String(390 / 800));
   view.setDeviceMode("desktop"); flush();
   assert.deepEqual(body.children, [stage, after]);
   assert.equal(stage.style["--mobile-scale"], undefined);
@@ -122,11 +122,11 @@ test("two-finger scene pinch cancels game hold, clamps zoom and resets view", ()
   fire(viewport, "pointerdown", { pointerId: 2, clientX: 200, clientY: 200 });
   assert.equal(mouse.down, false);
   fire(viewport, "pointermove", { pointerId: 2, clientX: 700, clientY: 200 }); flush();
-  assert.equal(view.getSceneZoom(), 1.4);
+  assert.equal(view.getSceneZoom(), 4);
   fire(viewport, "pointerup", { pointerId: 2 });
   fire(viewport, "pointerup"); fire(canvas, "pointerup");
   assert.equal(mouse.clicked, false);
-  view.resetSceneView(); flush(); assert.equal(view.getSceneZoom(), .85);
+  view.resetSceneView(); flush(); assert.equal(view.getSceneZoom(), 1);
 });
 
 test("mobile action snapshots respect topmost modal blockers and retain non-highlight actions", () => {

@@ -1,6 +1,6 @@
 // 与服务端的 WebSocket 连接。消息类型由 proto.gen.ts 提供（由 proto/messages.json 生成）。
 
-import { fillDefaults,                                  } from "./proto.gen.js?v=472f28ee5f8169e2";
+import { fillDefaults,                                  } from "./proto.gen.js?v=bea179de9cc48742";
 
 
 

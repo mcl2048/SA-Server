@@ -1,0 +1,1 @@
+[{"case": "right-mouse-cancels-native-battle-target-without-command", "pass": true}, {"case": "option-navigation-and-left-mouse-submit-native-battle-target", "pass": true, "selected": "t-15", "command": {"t": "BattleCommand", "kind": "attack", "target": 15, "item": -1}}, {"case": "battle-completes-and-returns-to-field", "pass": true}]

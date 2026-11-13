@@ -11,8 +11,8 @@
 // 与原版不同：家族徽章的图不在资源里，没有做；主旨的输入框原版是 46 字一行的多行框，这里用一行。
 
 
-import { findAction } from "./assets.js?v=472f28ee5f8169e2";
-import { FONT, InputBox, measure,         } from "./ui.js?v=472f28ee5f8169e2";
+import { findAction } from "./assets.js?v=bea179de9cc48742";
+import { FONT, InputBox, measure,         } from "./ui.js?v=bea179de9cc48742";
 
 const CG = {
   DETAIL_WIN: 26239, BANK_WIN: 26240, OK: 26093, EXIT: 26096, EXIT2: 26241, JOIN: 26243, CLOSE: 26042, CANCEL: 26050,

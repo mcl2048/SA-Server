@@ -1,0 +1,79 @@
+{
+  "binary_sha256": "9dc4408e6a1300e787010b25bc595c9a4cf41ab7686ced1cb179520a44abf25c",
+  "client_mode": "embedded",
+  "cases": [
+    {
+      "case": "seven-viewport-fit-and-independent-rails",
+      "pass": true
+    },
+    {
+      "case": "login-artwork-fills-width-without-thumbnail",
+      "pass": true
+    },
+    {
+      "case": "direct-native-game-tap-register-and-cancel",
+      "pass": true
+    },
+    {
+      "case": "portrait-pinch-magnifies-only-game",
+      "pass": true
+    },
+    {
+      "case": "landscape-pinch-keeps-rails-fixed",
+      "pass": true
+    },
+    {
+      "case": "option-navigation-native-hover-and-human-label",
+      "pass": true
+    },
+    {
+      "case": "rail-left-mouse-native-login",
+      "pass": true
+    },
+    {
+      "case": "portrait-joystick-eight-directions-and-release",
+      "pass": true
+    },
+    {
+      "case": "landscape-joystick-eight-directions-and-release",
+      "pass": true
+    },
+    {
+      "case": "neutral-joystick-longpress-repositions-without-movement",
+      "pass": true
+    },
+    {
+      "case": "multitouch-aborts-pending-position-edit",
+      "pass": true
+    },
+    {
+      "case": "direct-scene-tap-moves-with-joystick-present",
+      "pass": true
+    },
+    {
+      "case": "small-landscape-core-controls-visible-without-covering-game",
+      "pass": true
+    },
+    {
+      "case": "right-mouse-reuses-real-scene-cursor",
+      "pass": true
+    },
+    {
+      "case": "longpress-drag-button-escapes-rail-and-never-clicks-through",
+      "pass": true
+    },
+    {
+      "case": "custom-position-persists-across-page-reload",
+      "pass": true
+    },
+    {
+      "case": "reset-restores-default-control-positions",
+      "pass": true
+    },
+    {
+      "case": "desktop-stage-and-input-path-restored",
+      "pass": true
+    }
+  ],
+  "page_errors": []
+}

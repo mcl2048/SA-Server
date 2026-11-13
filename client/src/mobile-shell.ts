@@ -1,11 +1,14 @@
 import { InputBox, type Ui, type MobileHit, type Text } from "./ui.ts";
 import { getDeviceMode, setDeviceMode, isMobile, setMobileScene, setSceneZoom, getSceneZoom, resetSceneView, type DeviceMode } from "./mobile-view.ts";
+import { createMobileJoystick } from "./mobile-controls.ts";
 
 export interface MobileShellHooks {
   action(id: string): void;
   command(name: string): void;
   direction(dir: number): void;
   cancel(): void;
+  navigate(direction: -1 | 1): void;
+  click(button: 0 | 2): void;
 }
 export interface MobileShellState {
   phase: string;
@@ -14,6 +17,8 @@ export interface MobileShellState {
   summary?: string[];
   chat?: string[];
   title?: string;
+  selectedLabel?: string;
+  selectedId?: string;
   /** Presentation labels supplied from already received native data; never new actions. */
   actionLabels?: Readonly<Record<string, string>>;
 }
@@ -59,11 +64,15 @@ export class MobileShell {
   private readonly heading = node("strong");
   private readonly statusText = node("div");
   private readonly sheet = node("section", "mobile-shell-sheet");
-  private readonly preview = node("canvas", "mobile-shell-preview");
+  private readonly left = node("div", "mobile-shell-left");
+  private readonly right = node("section", "mobile-shell-right");
+  private readonly selected = node("div", "mobile-shell-selected");
+  private readonly joystick: ReturnType<typeof createMobileJoystick>;
   private readonly info = node("div", "mobile-shell-info");
   private readonly inputs = node("div", "mobile-shell-inputs");
   private readonly actions = node("div", "mobile-shell-actions");
   private readonly dismiss = button("返回 / 取消对话", () => this.command("back"));
+  private readonly sheetBack = button("返回", () => this.command("back"));
   private readonly field = node("div", "mobile-shell-field");
   private readonly chat = node("div", "mobile-shell-chat");
   private readonly toolbar = node("nav", "mobile-shell-toolbar");
@@ -80,6 +89,7 @@ export class MobileShell {
   private mobile = false;
   private presentation = "";
   private inputSnapshot: InputBox[] = [];
+  private orientation = "";
 
   private readonly ui: Ui;
   private readonly hooks: MobileShellHooks;
@@ -94,18 +104,34 @@ export class MobileShell {
     this.status.append(this.heading, this.statusText);
     this.sheet.setAttribute("aria-labelledby", this.heading.id);
     this.sheet.tabIndex = -1;
-    this.preview.width = 800; this.preview.height = 600;
-    this.preview.dataset.mobilePreview = "true";
-    this.preview.setAttribute("role", "img"); this.preview.setAttribute("aria-label", "游戏画面预览");
-    this.sheet.append(this.preview, this.info, this.inputs, this.actions, this.dismiss);
+    this.sheetBack.className = "mobile-shell-back";
+    this.sheet.append(this.sheetBack, this.info, this.inputs, this.actions, this.dismiss);
+    this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" });
     this.chat.setAttribute("role", "log"); this.chat.setAttribute("aria-label", "最近聊天");
     // Deliberately not live: the native scene can change text every animation frame.
     this.field.append(this.chat, this.makeFieldControls());
     this.toolbar.setAttribute("aria-label", "游戏菜单");
     for (const [command, label] of [["status", "状态"], ["items", "道具"], ["pets", "宠物"], ["quests", "任务"], ["map", "地图"], ["chat", "聊天"], ["system", "系统"], ["back", "返回"]]) {
-      this.toolbar.append(button(label, () => this.command(command)));
+      const b = button(label, () => this.command(command)); b.dataset.mobileControl = `menu-${command}`;
+      this.toolbar.append(b);
     }
-    this.root.append(this.status, this.sheet, this.field, this.toolbar);
+    this.left.append(this.status, this.toolbar, this.sheet, this.field);
+    this.right.setAttribute("aria-label", "选项与鼠标控制");
+    const selectionTitle = node("span", "mobile-shell-eyebrow", "当前选项");
+    this.selected.setAttribute("role", "status"); this.selected.setAttribute("aria-live", "polite");
+    const selection = node("div", "mobile-shell-selection"); selection.append(selectionTitle, this.selected);
+    const navigation = node("div", "mobile-shell-navigation"); navigation.setAttribute("role", "group"); navigation.setAttribute("aria-label", "切换选项");
+    for (const [dir, glyph, label] of [[-1, "‹", "上一个选项"], [1, "›", "下一个选项"]] as const) {
+      const b = button(glyph, () => this.hooks.navigate(dir)); b.setAttribute("aria-label", label); b.dataset.mobileControl = dir === -1 ? "option-prev" : "option-next"; navigation.append(b);
+    }
+    const clicks = node("div", "mobile-shell-clicks");
+    for (const [key, title, hint] of [[0, "左键", "选择 / 确认"], [2, "右键", "原生右键操作"]] as const) {
+      const b = button("", () => this.hooks.click(key)); b.className = `mobile-shell-click mobile-shell-click-${key}`;
+      b.setAttribute("aria-label", key === 0 ? "鼠标左键" : "鼠标右键"); b.dataset.mobileControl = key === 0 ? "mouse-left" : "mouse-right";
+      b.append(node("span", "mobile-shell-click-title", title), node("small", undefined, hint)); clicks.append(b);
+    }
+    this.right.append(selection, navigation, clicks, this.makeZoomControls());
+    this.root.append(this.left, this.right);
     const chrome = document.getElementById("mobile-chrome");
     (chrome ?? document.body).append(this.root);
     this.mode.id = "mobile-mode-switch";
@@ -135,16 +161,19 @@ export class MobileShell {
   }
 
   frame(state: MobileShellState): void {
+    const previousPhase = this.state.phase;
     this.state = state;
     const mobile = isMobile();
     if (this.modeSelect.value !== getDeviceMode()) this.modeSelect.value = getDeviceMode();
     if (!mobile) {
-      if (this.mobile) { this.hooks.cancel(); this.restoreInputs(); }
+      if (this.mobile) { this.joystick.release(); this.hooks.cancel(); this.restoreInputs(); }
       this.mobile = false;
       if (!this.root.hidden) this.root.hidden = true;
       this.layout = ""; this.presentation = ""; this.inputSnapshot = [];
       setMobileScene(false); return;
     }
+    const wasMobile = this.mobile;
+    const visibilityBefore = [this.sheet.hidden, this.field.hidden, this.toolbar.hidden];
     const all = this.ui.getMobileActions().filter(isControl);
     const boxes = [...InputBox.live];
     const visual = window.visualViewport;
@@ -154,37 +183,40 @@ export class MobileShell {
     // logical coordinates are still adopted immediately.
     const signature = JSON.stringify([state, all, this.ui.texts, this.ui.bottomLine,
       boxes.map(b => [b.el.style.display, b.el.type]),
+      document.getElementById("mobile-root")?.dataset.orientation,
       visual?.offsetLeft ?? 0, visual?.offsetTop ?? 0, visual?.width ?? innerWidth, visual?.height ?? innerHeight]);
     if (this.mobile && signature === this.presentation && boxes.length === this.inputSnapshot.length
       && boxes.every((box, i) => box === this.inputSnapshot[i])) return;
     this.presentation = signature; this.inputSnapshot = boxes;
+    const orientation = document.getElementById("mobile-root")?.dataset.orientation ?? "portrait";
+    if (orientation !== this.orientation) { this.joystick.release(); this.hooks.cancel(); this.orientation = orientation; }
     this.mobile = true;
     if (this.root.hidden) this.root.hidden = false;
     if (this.root.dataset.phase !== state.phase) this.root.dataset.phase = state.phase;
     const npc = all.some(h => /^(?:npc-|psel-)/.test(h.id));
     const modal = all.some(h => /^modal-/.test(h.id));
     if (this.dismiss.hidden !== !npc) this.dismiss.hidden = !npc;
+    this.sheetBack.hidden = npc || (state.phase === "login" && !modal && !all.some(h => h.id === "dlg-cancel"));
     const fieldNormal = state.phase === "field" && !state.panel && !npc && !modal;
     const layout = fieldNormal ? "field" : state.phase === "battle" && !npc && !modal ? "battle" : "full";
     const changed = layout !== this.layout;
     if (changed) {
+      this.joystick.release();
       this.hooks.cancel();
       if (layout === "full") this.focusBeforeSheet = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       this.layout = layout; this.root.dataset.layout = layout;
     }
-    // Chrome has position:relative and may have zero height before a full sheet opens.
-    // Anchor full screens to the visual viewport, not that collapsed containing block.
-    for (const [key, value] of Object.entries({ left: `${visual?.offsetLeft ?? 0}px`, top: `${visual?.offsetTop ?? 0}px`, width: `${visual?.width ?? innerWidth}px`, height: `${visual?.height ?? innerHeight}px`, maxHeight: `${visual?.height ?? innerHeight}px` })) {
-      if (layout === "full") this.root.style.setProperty(key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`), value);
-      else this.root.style.removeProperty(key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`));
-    }
+    // The game viewport owns its size. Chrome stays in the remaining portrait
+    // space or in the landscape rails; opening a native panel never covers it.
     setMobileScene(fieldNormal);
     this.sheet.hidden = fieldNormal && ![...InputBox.live].some(b => b.el.style.display !== "none");
     this.field.hidden = !fieldNormal;
-    this.preview.hidden = !["login", "char", "make"].includes(state.phase) || npc || modal;
-    this.toolbar.hidden = state.phase !== "field" || npc || modal;
-    this.sheet.setAttribute("role", layout === "full" ? "dialog" : "region");
-    if (layout === "full") this.sheet.setAttribute("aria-modal", "true"); else this.sheet.removeAttribute("aria-modal");
+    this.toolbar.hidden = state.phase !== "field" || !fieldNormal;
+    this.sheet.setAttribute("role", "region");
+    const selectedHit = all.find(hit => hit.id === state.selectedId);
+    const selectedLabel = selectedHit && (!state.selectedLabel || state.selectedLabel === selectedHit.id)
+      ? this.actionLabel(selectedHit, state) : state.selectedLabel;
+    put(this.selected, selectedLabel || "轻点画面或切换选项");
     put(this.heading, npc ? "对话" : modal ? "提示" : state.title || (state.panel ? "游戏菜单" : TITLES[state.phase]) || "石器时代");
     put(this.statusText, state.status || "");
     this.activeActions = new Set(all.map(h => h.id));
@@ -196,9 +228,13 @@ export class MobileShell {
     const hits = fieldNormal ? [] : all.filter(h => !this.isInputHit(h)
       && !(state.phase === "field" && (/^tb-/.test(h.id) || /^chat-(?:all|up|down|reset)$/.test(h.id))));
     this.syncActions(hits, state);
+    if (!wasMobile || changed || previousPhase !== state.phase
+      || visibilityBefore.some((hidden, i) => hidden !== [this.sheet.hidden, this.field.hidden, this.toolbar.hidden][i])) {
+      document.dispatchEvent(new Event("sa-controls-layout"));
+    }
     if (changed && layout === "full" && !this.sheet.contains(document.activeElement)) {
       // Do not steal focus from an original input newly focused by a native screen.
-      const first = this.sheet.querySelector<HTMLElement>("input:not([disabled]),button");
+      const first = [...this.sheet.querySelectorAll<HTMLElement>("input,button")].find(el => !el.closest("[hidden]") && !el.hasAttribute("disabled"));
       (first ?? this.sheet).focus({ preventScroll: true });
     } else if (changed && layout === "field" && this.focusBeforeSheet?.isConnected && !this.sheet.contains(document.activeElement)) {
       this.focusBeforeSheet.focus({ preventScroll: true }); this.focusBeforeSheet = null;
@@ -209,30 +245,19 @@ export class MobileShell {
 
   private makeFieldControls(): HTMLElement {
     const controls = node("div", "mobile-shell-controls");
-    const pad = node("div", "mobile-shell-dpad"); pad.setAttribute("role", "group"); pad.setAttribute("aria-label", "移动方向");
-    for (const [dir, glyph, label, area] of [[4, "↑", "向上移动", "up"], [2, "←", "向左移动", "left"], [0, "↓", "向下移动", "down"], [6, "→", "向右移动", "right"]] as const) {
-      const b = button(glyph, () => {});
-      b.setAttribute("aria-label", label); b.style.gridArea = area;
-      const release = () => { this.hooks.direction(-1); this.hooks.cancel(); };
-      b.addEventListener("pointerdown", e => {
-        e.preventDefault();
-        if (this.layout !== "field" || !e.isPrimary) { release(); return; }
-        this.hooks.cancel(); b.setPointerCapture(e.pointerId); this.hooks.direction(dir);
-      });
-      for (const name of ["pointerup", "pointercancel", "lostpointercapture"]) b.addEventListener(name, release);
-      b.addEventListener("keydown", e => {
-        if ((e.key === " " || e.key === "Enter") && !e.repeat && this.layout === "field") { e.preventDefault(); this.hooks.direction(dir); }
-      });
-      b.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); release(); } });
-      b.addEventListener("blur", release);
-      pad.append(b);
-    }
     const tools = node("div", "mobile-shell-tools");
-    tools.append(button("交互", () => this.command("interact")), button("返回 / 取消", () => this.command("back")));
-    const zoom = node("div", "mobile-shell-zoom"); zoom.setAttribute("role", "group"); zoom.setAttribute("aria-label", "场景缩放");
-    zoom.append(button("−", () => setSceneZoom(Math.max(.55, getSceneZoom() - .1))), button("复位", () => resetSceneView()), button("＋", () => setSceneZoom(Math.min(1.4, getSceneZoom() + .1))));
+    for (const [command, label] of [["interact", "交互"], ["back", "返回 / 取消"]]) {
+      const b = button(label, () => this.command(command)); b.dataset.mobileControl = `field-${command}`; tools.append(b);
+    }
+    controls.append(this.joystick.element, tools); return controls;
+  }
+
+  private makeZoomControls(): HTMLElement {
+    const zoom = node("div", "mobile-shell-zoom"); zoom.dataset.mobileControl = "zoom";
+    zoom.setAttribute("role", "group"); zoom.setAttribute("aria-label", "场景缩放");
+    zoom.append(button("−", () => setSceneZoom(getSceneZoom() - .1)), button("复位", () => resetSceneView()), button("＋", () => setSceneZoom(getSceneZoom() + .1)));
     zoom.firstElementChild?.setAttribute("aria-label", "缩小场景"); zoom.lastElementChild?.setAttribute("aria-label", "放大场景");
-    tools.append(zoom); controls.append(pad, tools); return controls;
+    return zoom;
   }
 
   private diffLines(container: HTMLElement, nodes: Map<string, HTMLElement>, lines: string[]): void {
@@ -385,6 +410,8 @@ export class MobileShell {
         b.dataset.action = id; this.actionNodes.set(id, b);
       }
       put(b, this.actionLabel(hit, state));
+      const selected = state.selectedId === hit.id;
+      if (b.getAttribute("aria-current") !== String(selected)) b.setAttribute("aria-current", String(selected));
       const next: ChildNode | null = previous ? previous.nextSibling : this.actions.firstChild;
       if (next !== b) this.actions.insertBefore(b, next); previous = b;
     }
@@ -439,20 +466,66 @@ export class MobileShell {
     if (document.getElementById("mobile-shell-style")) return;
     const style = node("style"); style.id = "mobile-shell-style";
     style.textContent = `
-.mobile-shell{color:#eff7ed;background:#10292deF;font:16px/1.5 system-ui,sans-serif;box-sizing:border-box;display:flex;flex-direction:column;max-height:100%;min-height:0;padding-bottom:env(safe-area-inset-bottom);isolation:isolate}
-.mobile-shell [hidden]{display:none!important}.mobile-shell[hidden]{display:none!important}
-.mobile-shell *{box-sizing:border-box}.mobile-shell button,.mobile-shell select{font:inherit;min-height:44px;min-width:44px;color:#f7f2d7;border:1px solid #73938a;border-radius:9px;background:#24464a;padding:8px 12px;touch-action:manipulation;cursor:pointer}
-.mobile-shell button:active{background:#47675a}.mobile-shell :focus-visible,#mobile-mode-switch :focus-visible{outline:3px solid #ffd77d;outline-offset:2px}
-.mobile-shell-status{padding:8px 62px 8px 12px;border-bottom:1px solid #6b8b7e;flex:none}.mobile-shell-status strong{font-size:17px;color:#ffdf97}.mobile-shell-status div{white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px}
-.mobile-shell-sheet{min-height:0;overflow:auto;overscroll-behavior:contain;padding:10px 12px;scroll-padding:12px;flex:1}.mobile-shell-info p,.mobile-shell-chat p{margin:0 0 5px;white-space:pre-wrap;overflow-wrap:anywhere}.mobile-shell-info{margin-bottom:8px;max-height:32vh;max-height:32dvh;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}.mobile-shell-preview{display:block;width:100%;height:200px;max-height:25dvh;object-fit:contain;background:#071d21;border-radius:9px;margin-bottom:10px;pointer-events:none}.mobile-shell[data-phase='login'] .mobile-shell-preview{height:140px;max-height:18dvh}.mobile-shell[data-layout='battle'] .mobile-shell-info{max-height:18dvh}
-.mobile-shell-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mobile-shell-actions button{white-space:normal;overflow-wrap:anywhere;text-align:left}
-.mobile-shell-input{display:block;margin-bottom:12px}.mobile-shell-input span{display:block;margin-bottom:4px;color:#ffdf97}.mobile-shell-input input{font-family:inherit!important;min-height:46px;max-width:100%}.mobile-shell-inputs>button{margin-bottom:8px;width:100%}
-.mobile-shell-toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:6px 8px;border-top:1px solid #69877b;flex:none}.mobile-shell-toolbar button{padding:6px 2px}
-.mobile-shell-field{padding:6px 10px;flex:none}.mobile-shell-chat{max-height:76px;overflow:auto;font-size:16px;color:#cde2cf}.mobile-shell-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-shell-dpad{display:grid;grid-template-areas:'. up .' 'left down right';grid-template-columns:44px 44px 44px;gap:4px}.mobile-shell-dpad button{padding:4px;font-size:23px}.mobile-shell-tools{display:grid;gap:4px}.mobile-shell-zoom{display:flex;gap:4px}.mobile-shell-zoom button{padding:6px 8px;flex:1}
-.mobile-shell[data-layout='full']{position:fixed;inset:0;z-index:10;background:#10292d;padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}.mobile-shell[data-layout='full'] .mobile-shell-sheet{flex:1}.mobile-shell[data-layout='battle']{max-height:55vh;max-height:55dvh}.mobile-shell[data-layout='battle'] .mobile-shell-sheet{max-height:calc(55dvh - 65px)}
-.mobile-shell[data-layout='field'] .mobile-shell-sheet{max-height:150px;flex:none;padding:6px 10px}.mobile-shell[data-layout='field'] .mobile-shell-info{display:none}.mobile-shell[data-layout='field'] .mobile-shell-inputs{display:flex;align-items:end;gap:6px}.mobile-shell[data-layout='field'] .mobile-shell-input{flex:1;min-width:0;margin:0}.mobile-shell[data-layout='field'] .mobile-shell-input span{display:none}.mobile-shell[data-layout='field'] .mobile-shell-inputs>button{width:auto;margin:0}
-#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#eee;background:#163236eF;border:1px solid #84988d;border-radius:8px;font:13px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24464a;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:calc(env(safe-area-inset-top) + 6px);right:calc(env(safe-area-inset-right) + 6px);bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:44px;min-width:44px}
-@media(max-height:580px){.mobile-shell[data-layout='field'] .mobile-shell-chat{display:none}.mobile-shell-controls{gap:6px}.mobile-shell-toolbar{grid-template-columns:repeat(8,minmax(0,1fr))}.mobile-shell-toolbar button{font-size:13px;padding:4px 0}.mobile-shell-dpad{grid-template-areas:'left up down right';grid-template-columns:repeat(4,44px)}}
+.mobile-shell{--jade:#153c3a;--gold:#e7c686;--ink:#eaf1e8;color:var(--ink);background:linear-gradient(165deg,#193d3c,#0a2528);font:15px/1.5 system-ui,sans-serif;box-sizing:border-box;display:flex;flex-direction:column;min-height:0;padding-bottom:env(safe-area-inset-bottom);isolation:isolate}
+.mobile-shell [hidden],.mobile-shell[hidden]{display:none!important}.mobile-shell *{box-sizing:border-box}
+.mobile-shell-left{display:contents}.mobile-shell button,.mobile-shell select{font:inherit;min-height:44px;min-width:44px;color:#f4eedc;border:1px solid #567b70;border-radius:12px;background:linear-gradient(#294e45,#1b3b37);box-shadow:inset 0 1px #ffffff12,0 2px 4px #0003;padding:8px 12px;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mobile-shell button:active{background:#42685b;box-shadow:inset 0 2px 5px #0005}.mobile-shell button[aria-current='true']{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold),0 0 12px #e7c68622}.mobile-shell :focus-visible,#mobile-mode-switch :focus-visible{outline:3px solid #f7d48a;outline-offset:2px}
+.mobile-shell-status{order:0;padding:12px 16px 10px;border-bottom:1px solid #e7c68626;flex:none}.mobile-shell-status strong{font-size:18px;letter-spacing:.06em;color:var(--gold)}.mobile-shell-status div{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;color:#b9d2c5;margin-top:3px}
+.mobile-shell-sheet{order:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px 14px;scroll-padding:12px;flex:1}.mobile-shell-back{width:100%;margin-bottom:10px;color:var(--gold)!important}.mobile-shell-info p,.mobile-shell-chat p{margin:0 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}.mobile-shell-info{margin-bottom:10px;max-height:24dvh;overflow:auto;overscroll-behavior:contain;font-size:14px;color:#c6dacf;scrollbar-gutter:stable}
+.mobile-shell-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mobile-shell-actions button{white-space:normal;overflow-wrap:anywhere;text-align:left}.mobile-shell-input{display:block;margin-bottom:12px}.mobile-shell-input span{display:block;margin-bottom:5px;font-size:13px;letter-spacing:.06em;color:var(--gold)}.mobile-shell-input input{font-family:inherit!important;min-height:46px;max-width:100%;box-shadow:inset 0 2px 4px #0003}.mobile-shell-inputs>button{margin-bottom:8px;width:100%}
+.mobile-shell-toolbar{order:3;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:10px 12px;border-top:1px solid #e7c68626;flex:none}.mobile-shell-toolbar button{padding:6px 2px;font-size:13px}.mobile-shell-field{order:2;padding:8px 14px;flex:none}.mobile-shell-chat{max-height:60px;overflow:auto;font-size:13px;color:#adcbbe}.mobile-shell-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-shell-dpad{display:grid;grid-template-areas:'. up .' 'left down right';grid-template-columns:44px 44px 44px;gap:4px}.mobile-shell-dpad button{padding:4px;font-size:23px}.mobile-shell-tools{display:grid;gap:6px}
+.mobile-shell-right{order:4;padding:12px;display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:8px;border-top:1px solid #e7c68626;flex:none}.mobile-shell-selection{min-width:0;padding:0 2px}.mobile-shell-eyebrow{font-size:10px;color:#95b5a8;letter-spacing:.16em}.mobile-shell-selected{font-size:13px;color:var(--gold);min-height:22px;overflow-wrap:anywhere}.mobile-shell-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.mobile-shell-navigation button{font-size:26px;padding:0;line-height:1}
+.mobile-shell-clicks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-column:1/-1}.mobile-shell-click{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px!important}.mobile-shell-click-title{font-size:16px;font-weight:650;letter-spacing:.1em}.mobile-shell-click small{font-size:10px;color:#c3d5c9}.mobile-shell-click-0{background:linear-gradient(#e6c78b,#bc955a)!important;color:#24352b!important;border-color:#e5c994!important}.mobile-shell-click-0 small{color:#344c3e}.mobile-shell-click-2{border-color:#809b86!important}
+.mobile-shell-zoom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;grid-column:1/-1}.mobile-shell-zoom button{padding:5px;font-size:14px}.mobile-shell-joystick{display:block;position:relative;width:112px;height:112px;max-width:100%;aspect-ratio:1;flex:none;border-radius:50%;border:1px solid #c8b88066;background:radial-gradient(circle at 45% 40%,#294d47 0 28%,#173632 65%,#092024 100%);box-shadow:inset 0 3px 12px #0008,0 0 0 5px #081e22,0 0 0 6px #87a18444,0 6px 15px #0006;touch-action:none;user-select:none;-webkit-user-select:none}
+.mobile-shell-joystick::before,.mobile-shell-joystick::after{content:'';position:absolute;background:#c4b68025;pointer-events:none}.mobile-shell-joystick::before{width:1px;top:13%;bottom:13%;left:50%}.mobile-shell-joystick::after{height:1px;left:13%;right:13%;top:50%}.mobile-shell-joystick-knob{position:absolute;left:50%;top:50%;width:46%;height:46%;border:1px solid #a6b894;border-radius:50%;background:radial-gradient(circle at 35% 25%,#729780,#2b5145 70%);box-shadow:0 4px 8px #0007,inset 0 1px #e9e8be55;transform:translate(calc(-50% + var(--stick-x,0px)),calc(-50% + var(--stick-y,0px)));pointer-events:none;z-index:1}.mobile-shell-joystick-guide{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:10px;color:#acc2b2;pointer-events:none}.mobile-shell-joystick[data-active='true']{border-color:var(--gold)}
+#mobile-mode-switch{position:fixed;right:6px;bottom:6px;z-index:1000;color:#e6e9df;background:#143632ed;border:1px solid #91a68a;border-radius:10px;box-shadow:0 3px 12px #0004;font:12px/1.4 system-ui,sans-serif;padding:3px 6px}#mobile-mode-switch summary{cursor:pointer;min-height:26px;display:flex;align-items:center;justify-content:center}#mobile-mode-switch label{display:block;padding:8px 0}#mobile-mode-switch select{font:16px system-ui,sans-serif;min-height:44px;color:#fff;background:#24483d;border:1px solid #91a597;border-radius:6px}html.sa-mobile #mobile-mode-switch{top:calc(env(safe-area-inset-top) + 6px);right:calc(env(safe-area-inset-right) + 6px);bottom:auto}html.sa-mobile #mobile-mode-switch summary{min-height:36px;min-width:44px}
+html.sa-mobile:has(#mobile-root[data-orientation='portrait']) #mobile-mode-switch{top:calc(75vw + env(safe-area-inset-top) + 6px)}
+#mobile-root[data-orientation='portrait'] .mobile-shell-status{padding-right:84px;min-height:58px}
+#mobile-root[data-orientation='portrait'] .mobile-shell-status strong{font-size:16px;overflow-wrap:anywhere}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field']{display:grid;grid-template-columns:136px minmax(0,1fr);align-items:start}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-status,#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-sheet,#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-toolbar{grid-column:1/-1}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-toolbar{order:2}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-field{grid-column:1;order:3;padding:18px 12px 12px;align-self:stretch}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-controls{flex-direction:column;gap:14px}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-right{grid-column:2;order:3;display:flex;flex-direction:column;padding:12px 12px 12px 4px;border-top:0}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-right .mobile-shell-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root:not([data-orientation='landscape']) .mobile-shell[data-layout='field'] .mobile-shell-chat{display:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell{display:contents;background:none;padding:0}
+#mobile-root[data-orientation='landscape'] .mobile-shell-left,#mobile-root[data-orientation='landscape'] .mobile-shell-right{position:absolute;top:0;bottom:0;width:var(--rail-width,120px);pointer-events:auto;display:flex;flex-direction:column;min-width:0;overflow:auto;overscroll-behavior:contain;background:linear-gradient(175deg,#193d37f5,#0a2529fa);container-type:inline-size;scrollbar-width:thin}
+#mobile-root[data-orientation='landscape'] .mobile-shell-left{left:0;border-right:1px solid #c6b68340;padding-left:env(safe-area-inset-left)}
+#mobile-root[data-orientation='landscape'] .mobile-shell-right{right:0;border-left:1px solid #c6b68340;border-top:0;padding:54px 8px max(8px,env(safe-area-inset-bottom));gap:8px;padding-right:max(8px,env(safe-area-inset-right))}
+#mobile-root[data-orientation='landscape'] .mobile-shell-status{padding:8px 8px 7px;min-height:40px;flex:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell-status strong{font-size:12px;letter-spacing:.03em}
+#mobile-root[data-orientation='landscape'] .mobile-shell-status div{display:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell-toolbar{order:1;padding:7px;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;border:0;flex:0 1 auto;min-height:44px;max-height:calc(var(--viewport-height,100dvh) - 180px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+#mobile-root[data-orientation='landscape'] .mobile-shell-toolbar button{font-size:12px;padding:4px 1px;min-width:44px;border-radius:10px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-sheet{order:2;padding:7px;min-height:0;flex:1}
+#mobile-root[data-orientation='landscape'] .mobile-shell-info{font-size:12px;max-height:none;overflow:visible}
+#mobile-root[data-orientation='landscape'] .mobile-shell-actions{grid-template-columns:minmax(0,1fr);gap:6px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-actions button{font-size:12px;padding:7px;min-width:44px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-input span{font-size:12px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-input input{padding:5px!important}
+#mobile-root[data-orientation='landscape'] .mobile-shell-field{order:3;margin-top:auto;display:flex;flex-direction:column;justify-content:end;align-items:center;flex:none;padding:12px 10px 14px;min-height:132px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-controls{display:flex;justify-content:center;width:100%}
+#mobile-root[data-orientation='landscape'] .mobile-shell-dpad,#mobile-root[data-orientation='landscape'] .mobile-shell-tools,#mobile-root[data-orientation='landscape'] .mobile-shell-chat{display:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell-joystick{display:block;width:min(112px,100%);height:auto}
+#mobile-root[data-orientation='landscape'] .mobile-shell-right>*{flex:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell-selected{font-size:12px;min-height:36px;max-height:64px;overflow:auto}
+#mobile-root[data-orientation='landscape'] .mobile-shell-clicks{display:flex;flex-direction:column;gap:8px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-click{min-height:64px!important;width:100%;padding:8px 3px}
+#mobile-root[data-orientation='landscape'] .mobile-shell-zoom{margin-top:auto}
+#mobile-root[data-orientation='landscape'] .mobile-shell-back{font-size:13px;padding:6px}
+@media(orientation:landscape) and (max-width:620px){#mobile-root[data-orientation='landscape'] .mobile-shell-right{padding-top:46px}}
+@container(max-width:108px){
+.mobile-shell-toolbar{grid-template-columns:minmax(0,1fr)!important}
+.mobile-shell-navigation{grid-template-columns:minmax(0,1fr)}
+.mobile-shell-selection .mobile-shell-eyebrow{display:none}
+#mobile-root[data-orientation='landscape'] .mobile-shell-selected{min-height:24px;max-height:24px;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#mobile-root[data-orientation='landscape'] .mobile-shell-click{min-height:48px!important;padding:6px 2px}
+.mobile-shell-click-title{font-size:14px}.mobile-shell-click small{display:none}
+.mobile-shell-zoom{grid-template-columns:minmax(0,1fr)}.mobile-shell-joystick-guide{font-size:9px}
+}
+
 `;
     document.head.append(style);
   }

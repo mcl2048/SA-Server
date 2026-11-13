@@ -5,8 +5,8 @@
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 
-import { PET_ALBUM_TBL } from "./albumdata.js?v=472f28ee5f8169e2";
-import { FONT, SYS, measure,         } from "./ui.js?v=472f28ee5f8169e2";
+import { PET_ALBUM_TBL } from "./albumdata.js?v=bea179de9cc48742";
+import { FONT, SYS, measure,         } from "./ui.js?v=bea179de9cc48742";
 
 const MAX_PET_KIND = 570, PAGE = 8;
 const CG = { WND: 26230, NEW_ICON: 26231, PREV: 26180, NEXT: 26182, CLOSE: 26042 };
