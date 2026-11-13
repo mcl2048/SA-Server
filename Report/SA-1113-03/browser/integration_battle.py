@@ -59,19 +59,28 @@ def guard_pets(ui):
    if target:ui.action(target)
 
 def corpse_case(ui,mode,quick):
- ui.chat('/stat 10 1 0 0');ui.chat('/hp 1');ui.chat('/encount 29011 40');ui.wait_menu()
+ # Keep maximum HP large enough that the controlled hit kills without the
+ # game's legal >=1.2*MaxHP+20 overkill/fly rule ending the battle immediately.
+ ui.chat('/stat 1000 1 0 0');ui.chat('/hp 1');ui.chat('/encount 29011 40');ui.wait_menu()
  start=ui.latest['BattleStart'];begin=len(ui.events)
- # One real round with owner and all pets defending allows enemy to hit HP1.
+ assert next(f for f in start['fighters'] if f['slot']==0)['maxHp']>=1000,start
  # Controlled friendly-fire fixture: ordinary legal pet attack commands hit
  # HP1 owner. Damage and death are resolved by the real server, never injected.
  ui.page.evaluate('''()=>{sa.battle.submit('guard',-1);for(const {a} of sa.battle.ownedPets())sa.app.net.send({t:'BattlePetCommand',petSlot:a.f.slot,skill:a.f.slot===5?0:a.f.slot===9?-1:1,target:a.f.slot===5?0:-1});}''')
  ui.page.wait_for_function('sa.battle && sa.battle.turns>=1 && sa.battle.queue.length===0',timeout=90000)
  dead=state(ui);assert any(f['slot']==0 and f['dead'] for f in dead['fighters']),dead
  assert any(f['slot']>=10 and f['hp']>0 for f in dead['fighters']),dead
+ initial_events=ui.events[begin:]
+ assert not any(m['t']=='BattleEnd' for m in initial_events),initial_events
+ assert all(e.get('fly',0)==0 for m in initial_events if m['t']=='BattleTurn' for e in m['events'] if e.get('target')==0),initial_events
  if mode=='desktop':presentation(ui,'desktop')
  ui.snap(f'{mode}-owner-dead-pets-alive')
  begin=len(ui.events)
- ui.action('battle-quick-toggle' if quick else 'battle-auto-toggle')
+ try:
+  ui.action('battle-quick-toggle' if quick else 'battle-auto-toggle')
+ except BaseException:
+  (OUT/f'{mode}-strategy-toggle-failure.json').write_text(json.dumps({'state':state(ui),'events':[m for m in ui.events if m['t'] in ('BattleStart','BattleTurn','BattleEnd','AutoPlayState','ChatMsg','Error')]},ensure_ascii=False,indent=2))
+  raise
  deadline=time.monotonic()+35;attacks=[]
  while time.monotonic()<deadline:
   ui.page.wait_for_timeout(200)

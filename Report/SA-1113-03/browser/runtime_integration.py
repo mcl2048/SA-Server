@@ -34,9 +34,9 @@ groups:
 rules:
  charMaxLevel: 200
  petMaxLevel: 180
- battleSpeed: 1
+ battleSpeed: 2
  enemyGuardRate: 0
- turnTime: 60
+ turnTime: 300
 ''');(r/'config.yaml').chmod(0o600)
  binary=ROOT/'bin/saserver'
  m={'dir':str(r),'port':port,'credentials':str(credentials),'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest()}

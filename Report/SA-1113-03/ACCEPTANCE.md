@@ -1,6 +1,6 @@
 # SA-1113-03 · v0.2.10-LYNX 验收
 
-当前仍在集成验证，任务标记和最终摘要待全部完成后更新。
+三项任务均已实现并完成验收，Task-Now任务已标记✅，源码、匹配客户端、Linux二进制与公开证据已交付。实现提交59e17bb，后续验收记录提交可由Git历史查询。
 
 | 任务 | 实现 | 证据 |
 |---|---|---|
@@ -17,7 +17,11 @@
 
 ## 已生成产物
 
-v0.2.10-LYNX静态Linux AMD64为16,404,640 bytes、0755，SHA256 `35c368c0462a93ee41fe5d938c6712c393e58bd5a728dc85f1d4dd1d5a998505`。发行ZIP为23,653,673 bytes、4358个文件，SHA256 `c44fd09637752d95e56294964e0db338a23a369806c8be9e348248471e956a95`；testzip、内嵌二进制一致及私密文件排除检查通过。对应 `release.json`。最终35c368c0候选已真实截图核验移动390×844及桌面1280×900五敌顶部黄色描边伤害完整可见，六友方资源卡分离且不遮挡模型。前一0bda候选受控击倒主人后普通auto产生至少两只活宠的真实伤害；该记录仅说明策略路径，未将旧候选冒标为最终SHA。最终HTTP、静态ELF、重复构建、完整嵌入客户端与服务文件一致、缓存ETag/HEAD/304、私密路径404检查全部通过，见 `binary-http-verification.json`。`browser/runtime-shutdown.json`记录SIGTERM主动发出、wait退出码0，浏览器位置floor300/x371/y183与SQLite保存位置完全一致。quick专项浏览器事件仍在独立诊断中。
+v0.2.10-LYNX静态Linux AMD64为16,404,640 bytes、0755，SHA256 `35c368c0462a93ee41fe5d938c6712c393e58bd5a728dc85f1d4dd1d5a998505`。发行ZIP为23,653,673 bytes、4358个文件，SHA256 `c44fd09637752d95e56294964e0db338a23a369806c8be9e348248471e956a95`；testzip、内嵌二进制一致及私密文件排除检查通过。对应 `release.json`。最终35c368c0候选已真实截图核验移动390×844及桌面1280×900五敌顶部黄色描边伤害完整可见，六友方资源卡分离且不遮挡模型。前一0bda候选受控击倒主人后普通auto产生至少两只活宠的真实伤害；该记录仅说明策略路径，未将旧候选冒标为最终SHA。最终HTTP、静态ELF、重复构建、完整嵌入客户端与服务文件一致、缓存ETag/HEAD/304、私密路径404检查全部通过，见 `binary-http-verification.json`。`browser/runtime-shutdown.json`记录最终quick同轮SIGTERM主动发出、wait退出码0，浏览器位置floor300/x379/y186与SQLite保存位置完全一致。
+
+最终35c候选的真实quick验收已通过：以高最大HP/当前HP1受控击倒主人，初始fly=0且无BattleEnd，正常UI开启quick。主人HP0、DEAD动作类型2保持至第3回合；宠7与宠8独立攻击敌人，分别造成143与25伤害，后续仍继续产生攻击事件。证据为 `browser/desktop-owner-dead-result.json`、`desktop-strategy-diagnostic.json`、`integration-results.json`、`desktop-surviving-pets-quick.png`。同一运行内完成HTTP检查和停服保存，退出0。
+
+前序脚本失败已由完整服务器事件定位为测试主人最大HP太低，准备轮触发fly=2并立即BattleEnd lose；这不是普通倒地场景。详见 `QUICK-DIAGNOSTIC.md`。修正隔离fixture后通过，生产代码无需改变。
 
 ## 边界
 
