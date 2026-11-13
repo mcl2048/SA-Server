@@ -7,7 +7,7 @@ import (
 )
 
 // mapVerAlgo：通行的算法（data/mapset.go Walkable 等）改了就把它加一，所有楼层的版本一起变
-const mapVerAlgo = "walk-v1"
+const mapVerAlgo = "walk-v2-no-corner-cut"
 
 // floorVer 是一层楼的地图资料版本：地块、物件、传送点与通行规则（mapset）的杂凑。客户端把收到的 MapData 存在浏览器
 // （IndexedDB，client/src/mapcache.ts），下次进这一层时版本一样就直接用，不再向服务端要（MapData 占流量的大半）；
@@ -22,6 +22,7 @@ func (w *World) floorVer(floor int) string {
 	}
 	h := fnv.New64a()
 	h.Write([]byte(mapVerAlgo))
+	fmt.Fprintf(h, "%dx%d;", f.W, f.H)
 	buf := make([]byte, 0, 2*len(f.Tiles)+2*len(f.Objs)+64)
 	for _, v := range f.Tiles {
 		buf = append(buf, byte(v), byte(v>>8))

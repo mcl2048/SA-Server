@@ -5,8 +5,8 @@
 // 清单向服务端要一次就记着，玩家每次重要）、选自己的宠物、几个固定的选项。服务端的回应（ChatMsg，from "GM"）列在下方。
 
 
-import { ANIM, findAction,             } from "./assets.js?v=df0f1436dbbcc8a6";
-import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { ANIM, findAction,             } from "./assets.js?v=9fd0e82e0b4d0a7d";
+import { FONT, InputBox, measure, wrapBytes,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
 
 
 

@@ -1,0 +1,18 @@
+{
+  "binary_sha256": "d1f2cdedcce07d0aec3b3fd8b69a9c1ec70328e4eb2211a0687fe236644e16bf",
+  "first": 1,
+  "second": 2,
+  "presence": [
+    {
+      "id": 1,
+      "online": true,
+      "background": true
+    },
+    {
+      "id": 2,
+      "online": true,
+      "background": false
+    }
+  ],
+  "errors": []
+}

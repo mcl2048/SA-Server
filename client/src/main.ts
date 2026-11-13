@@ -250,6 +250,7 @@ function drawNpcWindow(win: S2CNpcWindow, lines: string[]) {
 
 // ---------------------------------------------------------------------------
 
+let minimapReveal = false;
 let connectingPromise: Promise<Connection> | null = null;
 const app: App = {
   ui, canvas, net: null, loginArt: undefined as Texture | undefined,
@@ -269,8 +270,12 @@ const app: App = {
       if (app.net !== c) return;
       if (!m.token) {
         resetAutoPlay();
-        field = null; battle = null; clearParty(); modal = null;
+        field?.dispose(); field = null; battle = null; clearParty(); modal = null;
         app.go(new LoginScreen(app)); return;
+      }
+      if (!m.inWorld && screen instanceof FieldScreen) {
+        resetAutoPlay(); field?.dispose(); field = null; battle = null; clearParty(); modal = null;
+        app.go(new LineScreen(app));
       }
       if (m.inWorld && m.resumed) {
         autoPlayReady = false; autoPlaySignature = ""; autoPlayIntent.reset();
@@ -278,9 +283,24 @@ const app: App = {
         // Install Field's message handlers synchronously before the snapshot's
         // Self/EnterFloor arrive, including a reload with no prior Field.
         if (!field) field = new Field(assets, c);
+        field.setMinimapReveal(minimapReveal);
         field.hideOthers = settings.hideOthers; field.showNames = settings.names;
         app.go(new FieldScreen());
       }
+    });
+    c.on("WorldReady", () => {
+      if (app.net !== c) return;
+      autoPlayReady = false; autoPlaySignature = ""; autoPlayIntent.reset();
+      modal = null; battle = null; clearParty();
+      if (!field) field = new Field(assets,c);
+      field.setMinimapReveal(minimapReveal);
+        field.hideOthers = settings.hideOthers; field.showNames = settings.names;
+      app.go(new FieldScreen());
+    });
+    c.on("LobbyReady", () => {
+      if (app.net !== c) return;
+      resetAutoPlay(); field?.dispose(); field = null; battle = null; clearParty(); modal = null;
+      app.go(new LineScreen(app));
     });
     c.on("ServerList", m => { if (app.net !== c) return; app.groups = m.groups; if (screen instanceof LoginScreen) app.go(new LineScreen(app)); });
     c.on("AutoPlayState", m => {
@@ -298,7 +318,7 @@ const app: App = {
       if (app.net !== c) return;
       app.net = null;
       resetAutoPlay();
-      field = null;
+      field?.dispose(); field = null;
       battle = null;
       app.go(new LoginScreen(app));
       app.message(`与服务器的连接中断：${reason}`);
@@ -460,13 +480,13 @@ const app: App = {
       const a = field?.actors.get(m.id);
       if (a) { a.speech = m.text; a.speechUntil = performance.now() + 6000; }
     });
-    c.on("Hello", hello => { serverTimeAt = { server: hello.serverTime, local: performance.now() }; });
+    c.on("Hello", hello => { minimapReveal = hello.minimapReveal; field?.setMinimapReveal(minimapReveal); serverTimeAt = { server: hello.serverTime, local: performance.now() }; });
     try { await c.ready(); return c; }
-    catch (error) { if (app.net === c) { app.net = null; field = null; } c.close(); throw error; }
+    catch (error) { if (app.net === c) { app.net = null; field?.dispose(); field = null; } c.close(); throw error; }
     })().finally(() => { connectingPromise = null; });
     return connectingPromise;
   },
-  disconnect() { const c = app.net; app.net = null; c?.close(); },
+  disconnect() { field?.dispose(); field = null; const c = app.net; app.net = null; c?.close(); },
   go(s: Screen) {
     if (isMobile()) releaseMobileInput();
     screen.leave?.(); screen = s; s.enter?.();
@@ -480,8 +500,10 @@ const app: App = {
   enterGame(id) {
     if (!app.net) return;
     resetAutoPlay();
+    field?.dispose();
     field = new Field(assets, app.net);
-    field.hideOthers = settings.hideOthers;
+    field.setMinimapReveal(minimapReveal);
+        field.hideOthers = settings.hideOthers;
     field.showNames = settings.names;
     selfStatus = null;
     battle = null;
@@ -677,12 +699,12 @@ class FieldScreen implements Screen {
     petDrop: (slot) => app.confirm("确定要丢出你的宠物吗？", (yes) => { if (yes) app.net?.send({ t: "PetDrop", slot }); }),
     canvas,
     logout: () => {
-      app.net?.send({ t: "Logout" });
-      field = null;
-      battle = null;
-      app.go(new CharSelectScreen(app));
+      app.confirm("切换角色？当前角色将继续在服务端挂机。", yes => {
+        if (yes) app.net?.send({ t: "SwitchCharacter" });
+      });
     },
-    settingsChanged: () => { syncAutoPlay(); if (field) { field.hideOthers = settings.hideOthers; field.showNames = settings.names; } applyCursor(); audio.apply(); },
+    settingsChanged: () => { syncAutoPlay(); if (field) { field.setMinimapReveal(minimapReveal);
+        field.hideOthers = settings.hideOthers; field.showNames = settings.names; } applyCursor(); audio.apply(); },
     field: () => field,
     assets, root: ASSETS,
     family: (text) => app.net?.send({ t: "Family", text }),
@@ -952,7 +974,7 @@ class FieldScreen implements Screen {
     if (s && !this.menus.items.open && !this.menus.mapOpen && !this.menus.actions.open && !this.menus.vendor.open) {
       ui.text(792 - measure(`${f.floorName}  ${s.x},${s.y}`), 68, `${f.floorName}  ${s.x},${s.y}`, FONT.WHITE);
       if (settings.minimap && !this.menus.windowOpen() && !modal) this.menus.mapWnd.miniFrame(792 - 160, 88); // 右上角小地图（地图窗口里开关）
-      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 8 : 88); // 追踪中的任务
+      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 26 : 88); // 追踪中的任务
     }
     ui.bottomLineY = 558; // 任务栏常驻在 576..600
     if (battle?.quick) {
@@ -1105,8 +1127,8 @@ const CLOSE_SE_DELAY = 250;
 // A DOM action enters the ordinary previous-frame hit path. Its screen/modal context
 // must still match; a delayed tap cannot click through into a newly opened dialog.
 let mobileDirection = -1;
-let pendingMobileAction: { id?: string; x: number; y: number; button: 0 | 2; screen: Screen; modal: Modal | null; battle: typeof battle } | null = null;
-let mobileSelection: { id: string; screen: Screen; modal: Modal | null; battle: typeof battle } | null = null;
+let pendingMobileAction: { id?: string; x: number; y: number; button: 0 | 2; screen: Screen; modal: Modal | null; battle: BattleScreen | null } | null = null;
+let mobileSelection: { id: string; screen: Screen; modal: Modal | null; battle: BattleScreen | null } | null = null;
 let mobilePointer: { x: number; y: number } | null = null;
 function mobileOptions() {
   const options = ui.getMobileActions().filter(h => !/(?:^|-)(?:block|blocker|wnd|bg|win)$/.test(h.id)

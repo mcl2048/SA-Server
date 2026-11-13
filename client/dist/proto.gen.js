@@ -145,9 +145,12 @@
 
 
 
+
+
+
 // 栏位的预设值表（fillDefaults 用）：i 数字、s 字串、b 布林、a 阵列、T:型别、A:型别阵列
 const SCHEMA                                     = {
-  CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"]],
+  CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"],["online","b"],["background","b"],["lineId","i"]],
   LineInfo: [["id","i"],["name","s"],["online","i"]],
   ServerGroup: [["name","s"],["lines","A:LineInfo"]],
   ObjInfo: [["id","i"],["kind","s"],["name","s"],["sprite","i"],["x","i"],["y","i"],["dir","i"],["level","i"],["leader","b"],["battle","i"],["help","b"],["action","i"],["family","s"],["trade","b"],["vendor","s"],["mind","i"]],
@@ -195,10 +198,12 @@ const SCHEMA                                     = {
   Sound: [["x","i"],["y","i"],["se","i"]],
   HelpFlag: [["on","b"]],
   BattleJoin: [["fighters","A:BattleFighter"],["resetPets","b"]],
-  Hello: [["version","s"],["serverTime","i"]],
+  Hello: [["version","s"],["serverTime","i"],["minimapReveal","b"]],
   PetSkillResult: [["ok","b"],["pet","i"],["skill","i"]],
   Error: [["code","s"],["message","s"]],
   AuthResult: [["ok","b"],["message","s"]],
+  WorldReady: [["resumed","b"]],
+  LobbyReady: [],
   Session: [["token","s"],["resumed","b"],["inWorld","b"]],
   AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],

@@ -54,9 +54,19 @@ func TestCannotDeleteOnlineChar(t *testing.T) {
 	if auth := b.expect("AuthResult"); auth["ok"] != true {
 		t.Fatalf("takeover login failed: %v", auth)
 	}
-	if marker := b.expect("Session"); marker["inWorld"] != true {
-		t.Fatalf("login did not take over live character: %v", marker)
+	if marker := b.expect("Session"); marker["inWorld"] == true {
+		t.Fatalf("password login took over character: %v", marker)
 	}
+	b.expect("ServerList")
+	b.send(&proto.SelectLine{ID: 2})
+	b.expect("LineSelected")
+	b.send(&proto.CharDelete{ID: id})
+	if e := b.expect("Error"); e["code"] != "in_use" {
+		t.Fatalf("lobby deleted online actor: %v", e)
+	}
+	a.send(&proto.QuestReq{})
+	a.expect("QuestLog")
+	b.send(&proto.CharEnter{ID: id})
 	if self := b.expect("Self"); num(self, "id") != id {
 		t.Fatalf("takeover changed identity: %v", self)
 	}

@@ -27,7 +27,7 @@ import (
 )
 
 // version is stamped by scripts/build-linux.sh.
-var version = "v0.2.8-LYNX-dev"
+var version = "v0.2.9-LYNX-dev"
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "--version" {
@@ -117,7 +117,7 @@ func main() {
 			log.Warn("对外监听时请确认 GM 账号用的是强密码", "gms", cfg.GMs)
 		}
 	}
-	mux.Handle("/ws", &server.Server{Lines: lines, Store: db, Log: log, Origins: cfg.Origins, MaxChars: cfg.MaxChars, GMs: gms})
+	mux.Handle("/ws", &server.Server{Lines: lines, Store: db, Log: log, Origins: cfg.Origins, MaxChars: cfg.MaxChars, GMs: gms, MinimapReveal: cfg.MinimapReveal == 1})
 
 	mux.Handle("/assets/", gzipped(http.StripPrefix("/assets/", http.FileServer(noListing{http.Dir(cfg.Assets)}))))
 	// Empty Client selects the embedded release; an explicit external path is
@@ -125,11 +125,16 @@ func main() {
 	mux.Handle("/", gzipped(webclient.Handler(cfg.Client)))
 
 	srv := &http.Server{Addr: cfg.Addr, Handler: mux, ReadHeaderTimeout: 10 * time.Second, IdleTimeout: 2 * time.Minute}
+	httpDone := make(chan struct{})
 	go func() {
+		defer close(httpDone)
 		<-ctx.Done()
 		sctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		srv.Shutdown(sctx)
+		if err := srv.Shutdown(sctx); err != nil {
+			log.Warn("HTTP停服等待超时，关闭剩余连接", "err", err)
+			srv.Close()
+		}
 	}()
 	scheme := "http"
 	if cfg.TLSCert != "" {
@@ -147,6 +152,9 @@ func main() {
 		os.Exit(1)
 	}
 	<-worldDone
+	// Shutdown closes listeners before in-flight HTTP handlers finish. Join it
+	// before closing their shared database handle in the main defer.
+	<-httpDone
 	log.Info("已退出，在线角色位置已保存")
 }
 
@@ -160,10 +168,14 @@ func (n noListing) Open(name string) (http.File, error) {
 	}
 	if st, err := f.Stat(); err == nil && st.IsDir() {
 		idx := strings.TrimSuffix(name, "/") + "/index.html"
-		if _, err := n.fs.Open(idx); err != nil {
+		index, err := n.fs.Open(idx)
+		if err != nil {
 			f.Close()
 			return nil, os.ErrNotExist
 		}
+		// This is only an existence probe. FileServer opens the index itself;
+		// retaining this handle leaks one descriptor per directory request.
+		index.Close()
 	}
 	return f, nil
 }

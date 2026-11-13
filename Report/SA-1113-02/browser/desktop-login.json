@@ -1,0 +1,15 @@
+{
+  "binary_sha256": "d1f2cdedcce07d0aec3b3fd8b69a9c1ec70328e4eb2211a0687fe236644e16bf",
+  "mode": "native-desktop",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "field": {
+    "id": 1,
+    "floor": 300,
+    "x": 370,
+    "y": 184
+  },
+  "errors": []
+}

@@ -1,0 +1,30 @@
+{
+  "binary_sha256": "f88d9ed94a834493510f89ad00806c72c77ab088cd0f882e8455fbc5208cdff5",
+  "fullReveal": true,
+  "choice": {
+    "start": {
+      "x": 371,
+      "y": 183
+    },
+    "target": {
+      "x": 379,
+      "y": 186,
+      "length": 10
+    },
+    "wall": {
+      "x": 364,
+      "y": 174
+    }
+  },
+  "arrival": {
+    "x": 379,
+    "y": 186,
+    "status": "已到达目标"
+  },
+  "wall": {
+    "x": 385,
+    "y": 178
+  },
+  "feedback": "目标不可达：目标格为墙体或障碍",
+  "errors": []
+}

@@ -2,6 +2,7 @@ package world
 
 import (
 	"context"
+	"errors"
 	"log/slog"
 
 	"sa/server/internal/data"
@@ -14,7 +15,11 @@ import (
 // 不足 0 算 0，不会超过本级所需 − 1。人物与宠物栏里的每只宠物（含寄放的）都换。
 func MigrateExp(ctx context.Context, db store.Store, game *data.Game, log *slog.Logger) error {
 	const key, want = "expSemantics", "2"
-	if v, err := db.GetKV(ctx, key); err == nil && v == want {
+	v, err := db.GetKV(ctx, key)
+	if err != nil && !errors.Is(err, store.ErrNotFound) {
+		return err
+	}
+	if err == nil && v == want {
 		return nil
 	}
 	conv := func(level, exp int) int {
@@ -32,7 +37,9 @@ func MigrateExp(ctx context.Context, db store.Store, game *data.Game, log *slog.
 	if err != nil {
 		return err
 	}
-	n := 0
+	// Compute without persisting: any conversion/read failure leaves the old
+	// semantics intact. The store commits updates and the marker together.
+	var changed []store.Character
 	for _, c := range chars {
 		exp := conv(c.Level, c.Exp)
 		pets := c.Pets
@@ -47,11 +54,12 @@ func MigrateExp(ctx context.Context, db store.Store, game *data.Game, log *slog.
 		if exp == c.Exp && pets == c.Pets {
 			continue
 		}
-		if err := db.SaveExpPets(ctx, c.ID, exp, pets); err != nil {
-			return err
-		}
-		n++
+		c.Exp, c.Pets = exp, pets
+		changed = append(changed, c)
 	}
-	log.Info("经验存档已换成原版语义", "characters", len(chars), "changed", n)
-	return db.PutKV(ctx, key, want)
+	if err := db.MigrateExpPets(ctx, changed, key, want); err != nil {
+		return err
+	}
+	log.Info("经验存档已换成原版语义", "characters", len(chars), "changed", len(changed))
+	return nil
 }

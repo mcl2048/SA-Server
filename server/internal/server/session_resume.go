@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
@@ -17,20 +18,24 @@ import (
 const resumeLifetime = 30 * 24 * time.Hour
 const maxResumeAccounts = 10000
 
-// accountSession outlives any WebSocket. mu fences all authenticated commands,
-// controller replacement, detach and explicit logout. srv.mu only protects maps;
-// never wait for accountSession.mu while holding srv.mu.
+// All browser credentials and character actors of an account share one lock.
+// Server.mu only protects indexes; never wait for this lock while holding it.
 type accountSession struct {
-	mu         sync.Mutex
+	mu         *sync.Mutex
 	account    store.Account
 	controller *session
-	transport  *session // exact Client currently installed in the live world
-	line       *Line
-	flushing   *Line            // explicit logout writes must finish before a fresh DB entry
-	char       *store.Character // identity only: live mutable state belongs to world
+	actor      *characterActor
+	root       *accountSession
+	browsers   map[*accountSession]bool
 	hash       [32]byte
 	expires    time.Time
 	lastUsed   atomic.Int64
+}
+type characterActor struct {
+	char       *store.Character // identity only; mutable state belongs to World
+	line       *Line
+	transport  *session
+	controller *session
 }
 
 func newResumeToken() (string, [32]byte, error) {
@@ -50,37 +55,81 @@ func (srv *Server) lockAccount(a store.Account) (*accountSession, error) {
 			srv.accounts = map[int64]*accountSession{}
 			srv.tokens = map[[32]byte]*accountSession{}
 		}
-		state := srv.accounts[a.ID]
-		if state == nil {
+		root := srv.accounts[a.ID]
+		if root == nil {
 			if len(srv.accounts) >= maxResumeAccounts {
-				// Only idle lobby records may be evicted. Characters running offline
-				// are never discarded to make room for a new authentication.
-				for id, old := range srv.accounts {
-					if old.mu.TryLock() {
-						if old.controller == nil && old.char == nil && old.flushing == nil {
-							delete(srv.accounts, id)
-							delete(srv.tokens, old.hash)
-						}
-						old.mu.Unlock()
+				for id, candidate := range srv.accounts {
+					if !candidate.mu.TryLock() {
+						continue
 					}
+					busy := false
+					for browser := range candidate.browsers {
+						if browser.controller != nil {
+							busy = true
+							break
+						}
+					}
+					if !busy {
+						for _, actor := range srv.online {
+							if actor.char.AccountID == id {
+								busy = true
+								break
+							}
+						}
+					}
+					if !busy {
+						for browser := range candidate.browsers {
+							delete(srv.tokens, browser.hash)
+						}
+						delete(srv.accounts, id)
+					}
+					candidate.mu.Unlock()
 				}
 			}
 			if len(srv.accounts) >= maxResumeAccounts {
 				srv.mu.Unlock()
 				return nil, errors.New("session capacity")
 			}
-			state = &accountSession{account: a}
-			srv.accounts[a.ID] = state
+			root = &accountSession{mu: &sync.Mutex{}, account: a, browsers: map[*accountSession]bool{}}
+			root.root = root
+			srv.accounts[a.ID] = root
 		}
 		srv.mu.Unlock()
-		state.mu.Lock()
+		root.mu.Lock()
 		srv.mu.Lock()
-		current := srv.accounts[a.ID] == state
+		current := srv.accounts[a.ID] == root
 		srv.mu.Unlock()
-		if current {
-			return state, nil
+		if !current {
+			root.mu.Unlock()
+			continue
 		}
-		state.mu.Unlock()
+		for browser := range root.browsers {
+			if time.Now().After(browser.expires) && browser.controller == nil {
+				srv.mu.Lock()
+				delete(srv.tokens, browser.hash)
+				srv.mu.Unlock()
+				delete(root.browsers, browser)
+			}
+		}
+		if len(root.browsers) >= 64 {
+			var oldest *accountSession
+			for browser := range root.browsers {
+				if browser.controller == nil && (oldest == nil || browser.lastUsed.Load() < oldest.lastUsed.Load()) {
+					oldest = browser
+				}
+			}
+			if oldest == nil {
+				root.mu.Unlock()
+				return nil, errors.New("browser capacity")
+			}
+			srv.mu.Lock()
+			delete(srv.tokens, oldest.hash)
+			srv.mu.Unlock()
+			delete(root.browsers, oldest)
+		}
+		state := &accountSession{mu: root.mu, account: a, root: root}
+		root.browsers[state] = true
+		return state, nil
 	}
 }
 
@@ -93,7 +142,7 @@ func (s *session) installToken(state *accountSession, hash [32]byte) {
 	state.lastUsed.Store(time.Now().Unix())
 }
 
-func (s *session) authenticate(a store.Account, message string) error {
+func (s *session) authenticate(ctx context.Context, a store.Account, message, password string) error {
 	token, hash, err := newResumeToken()
 	if err != nil {
 		return err
@@ -103,19 +152,16 @@ func (s *session) authenticate(a store.Account, message string) error {
 		return err
 	}
 	defer state.mu.Unlock()
-	if state.flushing != nil {
-		if !state.flushing.World.Flush(5 * time.Second) {
-			return errors.New("previous logout is still saving")
-		}
-		state.flushing = nil
+	// The first expensive authentication occurs before taking the shared lock.
+	// A password change/reset can finish while that request waits for this lock;
+	// revalidate against storage here before installing any new credential.
+	if _, err := s.srv.Store.Authenticate(ctx, a.Name, password); err != nil {
+		delete(state.root.browsers, state)
+		return errors.New("credentials changed during authentication")
 	}
-	old := state.controller
 	state.controller = s
 	s.state, s.account = state, a
 	s.installToken(state, hash)
-	if old != nil && old != s {
-		old.Kick("session_replaced")
-	}
 	s.Send(&proto.AuthResult{OK: true, Message: message})
 	s.restore(state, token)
 	return nil
@@ -154,6 +200,9 @@ func (s *session) resume(token string) {
 	s.state, s.account = state, state.account
 	state.lastUsed.Store(time.Now().Unix())
 	if old != nil && old != s {
+		if state.actor != nil && state.actor.controller == old {
+			state.actor.controller = nil
+		}
 		old.Kick("session_replaced")
 	}
 	s.restore(state, token)
@@ -162,23 +211,23 @@ func (s *session) resume(token string) {
 // restore sends the marker before all world snapshots so a new browser can
 // install its Field handlers before Self/EnterFloor/BattleStart are delivered.
 func (s *session) restore(state *accountSession, token string) {
-	inWorld := state.char != nil && state.line != nil
-	s.line, s.char = state.line, state.char
+	actor := state.actor
+	inWorld := actor != nil && actor.controller == nil
+	if actor != nil && actor.controller == s {
+		inWorld = true
+	}
 	s.Send(&proto.Session{Token: token, Resumed: inWorld, InWorld: inWorld})
 	if inWorld {
-		if state.line.World.Attach(int(state.char.ID), state.transport, s) {
-			state.transport = s
+		s.char, s.line = actor.char, actor.line
+		if actor.line.World.Attach(int(actor.char.ID), actor.transport, s) {
+			actor.controller, actor.transport = s, s
 			return
 		}
-		// An administrator may have removed the entity since the transport went
-		// away. Do not recreate it from this identity-only snapshot.
-		s.srv.mu.Lock()
-		if s.srv.online[state.char.ID] == state {
-			delete(s.srv.online, state.char.ID)
-		}
-		s.srv.mu.Unlock()
-		state.char, state.line, state.transport, s.char, s.line = nil, nil, nil, nil, nil
-		s.Send(&proto.Session{Token: token, Resumed: false, InWorld: false})
+		// Preserve the stale actor index as a save fence. An explicit CharEnter
+		// will Flush before clearing it and loading a fresh persistence image.
+		actor.controller = nil
+		state.actor, s.char, s.line = nil, nil, nil
+		s.Send(&proto.Session{Token: token})
 	}
 	s.sendServerList()
 }
@@ -193,30 +242,36 @@ func (s *session) detachWorld() {
 	if state.controller != s {
 		return
 	}
-	if state.char != nil && state.line != nil {
-		state.line.World.Detach(int(state.char.ID), s)
-	}
+	s.background()
 	state.controller = nil
 	state.lastUsed.Store(time.Now().Unix())
 }
 
-// logout is an explicit account logout, not a network failure. The existing
-// Logout message now revokes browser restoration and actually leaves the world.
+// background relinquishes only this actor's browser control, never its simulation.
+func (s *session) background() {
+	actor := s.state.actor
+	if actor != nil && actor.controller == s {
+		// Keep an inert endpoint carrying account identity for background GM
+		// and mail operations, independent of the next actor this socket selects.
+		retained := &session{srv: s.srv, account: s.account, log: s.log}
+		retained.closed.Store(true)
+		actor.line.World.Detach(int(actor.char.ID), s, retained)
+		actor.transport = retained
+		actor.controller = nil
+	}
+	s.char = nil
+}
+
+// Logout revokes this browser credential; all characters keep running.
 func (s *session) logout() {
 	state := s.state
-	state.flushing = s.line
-	s.leaveWorld()
-	// A new login must see the latest gold/items/pets rather than the DB image
-	// from before this logout. If storage is busy retain a flush fence in the
-	// account record and retry it before accepting a fresh authentication.
-	if state.flushing != nil && state.flushing.World.Flush(5*time.Second) {
-		state.flushing = nil
-	}
+	s.background()
 	s.srv.mu.Lock()
 	delete(s.srv.tokens, state.hash)
 	s.srv.mu.Unlock()
+	delete(state.root.browsers, state)
 	state.controller = nil
-	s.Send(&proto.Session{Token: "", Resumed: false, InWorld: false})
+	s.Send(&proto.Session{})
 	s.state, s.account, s.line = nil, store.Account{}, nil
 }
 
@@ -230,6 +285,7 @@ func (s *session) rotateToken() {
 		s.srv.mu.Unlock()
 		return
 	}
+	s.revokeOthers(s.state)
 	s.installToken(s.state, hash)
 	s.Send(&proto.Session{Token: token, Resumed: false, InWorld: s.char != nil})
 }
@@ -249,15 +305,16 @@ func (srv *Server) invalidateAccount(name string) {
 	}
 	state.mu.Lock()
 	defer state.mu.Unlock()
-	srv.mu.Lock()
-	delete(srv.tokens, state.hash)
-	srv.mu.Unlock()
-	if old := state.controller; old != nil {
-		state.controller = nil
-		old.Kick("session_revoked")
-		if state.char != nil && state.line != nil {
-			state.line.World.Detach(int(state.char.ID), old)
+	for browser := range state.browsers {
+		srv.mu.Lock()
+		delete(srv.tokens, browser.hash)
+		srv.mu.Unlock()
+		if old := browser.controller; old != nil {
+			old.background()
+			browser.controller = nil
+			old.Kick("session_revoked")
 		}
+		delete(state.browsers, browser)
 	}
 }
 
@@ -267,3 +324,59 @@ func (srv *Server) invalidateAccount(name string) {
 func (s *session) InvalidateSession() { go s.srv.invalidateAccount(s.account.Name) }
 
 func (s *session) Connected() bool { return !s.closed.Load() }
+
+// liveActor retires an index only after confirming that its world entity is
+// absent and its asynchronous Leave has persisted. The account lock is held;
+// foreign actors are never retired under another account's lock.
+func (s *session) liveActor(id int64) *characterActor {
+	s.srv.mu.Lock()
+	actor := s.srv.online[id]
+	s.srv.mu.Unlock()
+	if actor == nil || actor.char.AccountID != s.account.ID {
+		return actor
+	}
+	if _, exists := actor.line.World.CharacterSummary(int(id)); exists {
+		return actor
+	}
+	if !actor.line.World.Flush(5 * time.Second) {
+		return actor
+	}
+	if _, exists := actor.line.World.CharacterSummary(int(id)); exists {
+		return actor
+	}
+	s.srv.mu.Lock()
+	if s.srv.online[id] == actor {
+		delete(s.srv.online, id)
+	}
+	s.srv.mu.Unlock()
+	actor.controller = nil
+	for browser := range s.state.root.browsers {
+		if browser.actor != actor {
+			continue
+		}
+		browser.actor = nil
+		if old := browser.controller; old != nil && old.char != nil && old.char.ID == id {
+			old.char = nil
+			old.Send(&proto.LobbyReady{})
+			old.sendServerList()
+		}
+	}
+	return nil
+}
+
+// Called with the shared account lock held.
+func (s *session) revokeOthers(keep *accountSession) {
+	for browser := range keep.root.browsers {
+		s.srv.mu.Lock()
+		delete(s.srv.tokens, browser.hash)
+		s.srv.mu.Unlock()
+		if browser != keep {
+			if old := browser.controller; old != nil {
+				old.background()
+				browser.controller = nil
+				old.Kick("session_revoked")
+			}
+			delete(keep.root.browsers, browser)
+		}
+	}
+}

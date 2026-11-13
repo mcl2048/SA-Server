@@ -215,6 +215,11 @@ func (w *World) automationStepAllowed(e *entity, dir int) bool {
 	if !w.game.Tiles.Walkable(w.game.Floors[e.floor], nx, ny) {
 		return false
 	}
+	// Match manual movement and minimap routes: a diagonal step cannot squeeze
+	// through blocked orthogonal neighbors, or automation would retry forever.
+	if nx != e.x && ny != e.y && (!w.game.Tiles.Walkable(w.game.Floors[e.floor], nx, e.y) || !w.game.Tiles.Walkable(w.game.Floors[e.floor], e.x, ny)) {
+		return false
+	}
 	if _, warp := w.game.WarpAt(e.floor, nx, ny); warp {
 		return false
 	}

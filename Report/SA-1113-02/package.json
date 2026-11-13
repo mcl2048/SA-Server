@@ -1,0 +1,9 @@
+{
+  "file": "bin/saserver-v0.2.9-LYNX-linux-amd64.zip",
+  "bytes": 23640521,
+  "sha256": "21e91774af012b03b3914efeffb64505c6b34c8f88cdab62acb0074d360b5e57",
+  "files": 4358,
+  "binary_identical": true,
+  "zip_integrity": true,
+  "runtime_assets_and_databases_excluded": true
+}

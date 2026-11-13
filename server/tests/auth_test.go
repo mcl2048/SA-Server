@@ -161,13 +161,17 @@ func TestAccountInfoAndChange(t *testing.T) {
 	}
 	d.expect("Session")
 	d.expect("ServerList")
-	if !c.closed() {
-		t.Fatal("new device login did not replace old account controller")
+	c.send(&proto.AccountInfoReq{})
+	if m := c.expect("AccountInfo"); m["account"] != "selfcare" {
+		t.Fatalf("password login disturbed existing lobby: %v", m)
 	}
 	r := dial(t, url) // 找回密码是没登录的连线做的
 	r.send(&proto.ResetPassword{Account: "selfcare", Secret: newSecret, Password: testPw})
 	if m := r.expect("AuthResult"); !strings.Contains(m["message"].(string), "已重设") {
 		t.Fatalf("新安全码应能找回密码：%v", m)
+	}
+	if !c.closed() {
+		t.Fatal("password reset did not revoke first browser")
 	}
 	if !d.closed() {
 		t.Fatal("password reset did not revoke the active controller")

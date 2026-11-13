@@ -1,0 +1,6 @@
+已构建 39 个文件 → client/dist/：main.ts, assets.ts, ai-pet-catalog.ts, audio.ts, soundtable.ts, net.ts, proto.gen.ts, field.ts, album.ts, albumdata.ts, ui.ts, mobile-view.ts, pathfinding.ts, mapcache.ts, renderer.ts, screens.ts, md5.ts, menus.ts, items.ts, trade.ts, actions.ts, mail.ts, family.ts, pets.ts, worldmap.ts, vendor.ts, aisetting.ts, ai.ts, gm.ts, quests.ts, fieldpanel.ts, battle.ts, aismart.ts, autoplay-sync.ts, shop.ts, petshop.ts, mobile-shell.ts, mobile-controls.ts, mobile-position.ts
+(node:138708) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Staged index.html, art/login.png and 39 JavaScript files for embedding
+v0.2.9-LYNX
+f88d9ed94a834493510f89ad00806c72c77ab088cd0f882e8455fbc5208cdff5  bin/saserver

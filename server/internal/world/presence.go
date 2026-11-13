@@ -4,13 +4,19 @@ import "sa/server/internal/proto"
 
 // Detach only removes browser control, not the character, its party or PvE
 // battle. Identity fencing prevents an obsolete socket detaching a replacement.
-func (w *World) Detach(charID int, cl Client) {
+func (w *World) Detach(charID int, cl Client, retained ...Client) {
 	w.Do(func() {
 		e := w.players[charID]
 		if e == nil || e.client != cl || !e.connected {
 			return
 		}
 		e.connected = false
+		e.visible = nil
+		// A lobby socket may immediately control a different actor. Swap its
+		// world endpoint atomically so background events cannot reach that UI.
+		if len(retained) > 0 && retained[0] != nil {
+			e.client = retained[0]
+		}
 		w.cancelTrade(e)
 		w.vendorClear(e)
 		e.window = nil
@@ -98,4 +104,18 @@ func (e *entity) attached() bool {
 		return transport.Connected()
 	}
 	return true
+}
+
+// CharacterSummary reads the actor on the world goroutine instead of a stale DB image.
+func (w *World) CharacterSummary(charID int) (summary proto.CharSummary, ok bool) {
+	w.Do(func() {
+		e := w.players[charID]
+		if e == nil {
+			return
+		}
+		st := w.statusOf(e)
+		summary = proto.CharSummary{Level: st.Level, HP: st.HP, Atk: st.Atk, Def: st.Def, Agi: st.Agi, DP: st.DP}
+		ok = true
+	})
+	return
 }

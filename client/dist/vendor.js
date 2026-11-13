@@ -6,7 +6,7 @@
 //   摆着摊、看着摊位时都不能走（服务端挡，这里 Field.locked 也不送 Move）。
 
 
-import { FONT, InputBox, measure,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { FONT, InputBox, measure,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
 
 
 

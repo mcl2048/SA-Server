@@ -1,5 +1,5 @@
 // WebSocket transport and opaque browser-session recovery. Passwords are never stored.
-import { fillDefaults,                                  } from "./proto.gen.js?v=df0f1436dbbcc8a6";
+import { fillDefaults,                                  } from "./proto.gen.js?v=9fd0e82e0b4d0a7d";
 
 function redactCredentials(message        )         {
   const safe = { ...message }                           ;
@@ -47,7 +47,10 @@ export class Connection {
   constructor(url        ) {
     this.url = url;
     this.storageKey = `sa-session:${url}`;
-    try { this.token = localStorage.getItem(this.storageKey) || ""; } catch { /* Session-only recovery. */ }
+    // Legacy shared credentials cannot identify which tab controls which actor.
+    // Drop them and require a fresh password login rather than cross-tab takeover.
+    try { localStorage.removeItem(this.storageKey); } catch { /* Storage unavailable. */ }
+    try { this.token = sessionStorage.getItem(this.storageKey) || ""; } catch { /* Session-only recovery. */ }
     this.readyPromise = new Promise      ((resolve, reject) => { this.resolveReady = resolve; this.rejectReady = reject; });
     // A caller can install handlers before awaiting ready, without an early
     // socket failure producing an unhandled rejection.
@@ -67,14 +70,14 @@ export class Connection {
   get recovering()          { return !this.stopped && this.handshakePending; }
   /** This transport authenticated with Resume, including a recovered lobby. */
   get recoveredSession()          { return this.authenticatedByResume; }
-  static hasSession(url        )          { try { return !!localStorage.getItem(`sa-session:${url}`); } catch { return false; } }
+  static hasSession(url        )          { try { return !!sessionStorage.getItem(`sa-session:${url}`); } catch { return false; } }
           remember(token        ) {
     // An obsolete tab must never delete a newer token stored by another tab.
     const previous = this.token;
     this.token = token;
     try {
-      if (token) localStorage.setItem(this.storageKey, token);
-      else if (localStorage.getItem(this.storageKey) === previous) localStorage.removeItem(this.storageKey);
+      if (token) sessionStorage.setItem(this.storageKey, token);
+      else if (sessionStorage.getItem(this.storageKey) === previous) sessionStorage.removeItem(this.storageKey);
     } catch { /* Keep memory token. */ }
   }
           open() {
@@ -130,7 +133,7 @@ export class Connection {
       if (ev.reason === "session_replaced" || ev.reason === "session_revoked") {
         // Same-token tab replacement must not erase the new tab's credential.
         if (ev.reason === "session_revoked") this.remember(""); else this.token = "";
-        this.terminate(ev.reason === "session_replaced" ? "账号已在其他设备或窗口登录" : "会话已撤销，请重新登录");
+        this.terminate(ev.reason === "session_replaced" ? "这个角色已在其他设备或窗口接管" : "会话已撤销，请重新登录");
         return;
       }
       this.retryTransport(ev.reason || "连接中断");
@@ -196,13 +199,23 @@ export class Connection {
       this.open();
     } else this.checkLiveness();
   };
-  on                   (t   , h                    ) { this.handlers.set(t, [...(this.handlers.get(t) ?? []), h]); }
+  on                   (t   , h                    )             {
+    // Give each subscription its own identity, even for the same callback.
+    let active = true;
+    const listener = (m       ) => { if (active) h(m); };
+    this.handlers.set(t, [...(this.handlers.get(t) ?? []), listener]);
+    return () => {
+      if (!active) return;
+      active = false;
+      const remaining = (this.handlers.get(t) ?? []).filter(x => x !== listener);
+      if (remaining.length) this.handlers.set(t, remaining); else this.handlers.delete(t);
+    };
+  }
   once                   (t   , timeoutMs = 8000)                 {
     return new Promise((resolve, reject) => {
       const h = (m       ) => { clearTimeout(timer); remove(); resolve(m); };
-      const remove = () => this.handlers.set(t, (this.handlers.get(t) ?? []).filter(x => x !== h));
+      const remove = this.on(t, h);
       const timer = setTimeout(() => { remove(); reject(new Error(`等待 ${t} 超时`)); }, timeoutMs);
-      this.on(t, h);
     });
   }
   send(m     ) {

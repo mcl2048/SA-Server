@@ -13,10 +13,10 @@
       "y": 183,
       "image": 199100,
       "base": [
-        28,
-        22,
-        30,
-        24
+        40,
+        29,
+        43,
+        37
       ],
       "attr": [
         50,
@@ -36,7 +36,13 @@
       ],
       "youngWeight": 12,
       "wildWeight": 18,
-      "wildGroup": 29011
+      "wildGroup": 29011,
+      "legacyBase": [
+        28,
+        22,
+        30,
+        24
+      ]
     },
     {
       "key": "claude",
@@ -51,10 +57,10 @@
       "y": 294,
       "image": 199101,
       "base": [
-        33,
-        20,
-        35,
-        16
+        49,
+        28,
+        50,
+        22
       ],
       "attr": [
         50,
@@ -74,7 +80,13 @@
       ],
       "youngWeight": 12,
       "wildWeight": 18,
-      "wildGroup": 29012
+      "wildGroup": 29012,
+      "legacyBase": [
+        33,
+        20,
+        35,
+        16
+      ]
     },
     {
       "key": "gluck",
@@ -89,10 +101,10 @@
       "y": 158,
       "image": 199102,
       "base": [
-        22,
-        34,
-        16,
-        32
+        30,
+        49,
+        23,
+        47
       ],
       "attr": [
         0,
@@ -112,7 +124,13 @@
       ],
       "youngWeight": 12,
       "wildWeight": 18,
-      "wildGroup": 29013
+      "wildGroup": 29013,
+      "legacyBase": [
+        22,
+        34,
+        16,
+        32
+      ]
     },
     {
       "key": "gemini",
@@ -127,10 +145,10 @@
       "y": 74,
       "image": 199103,
       "base": [
-        22,
         32,
-        17,
-        33
+        48,
+        25,
+        44
       ],
       "attr": [
         50,
@@ -150,7 +168,13 @@
       ],
       "youngWeight": 12,
       "wildWeight": 18,
-      "wildGroup": 29014
+      "wildGroup": 29014,
+      "legacyBase": [
+        22,
+        32,
+        17,
+        33
+      ]
     }
   ],
   "skills": [

@@ -13,9 +13,9 @@
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
 
-import { ANIM, findAction } from "./assets.js?v=df0f1436dbbcc8a6";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=df0f1436dbbcc8a6";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { ANIM, findAction } from "./assets.js?v=9fd0e82e0b4d0a7d";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=9fd0e82e0b4d0a7d";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,

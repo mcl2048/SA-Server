@@ -17,9 +17,9 @@ func TestAIPetsEmbeddedRegistryAndHabitat(t *testing.T) {
 		t.Fatal(err)
 	}
 	bd := g.Battle
-	reference := bd.Temps[304]
-	if reference == nil || reference.Name != "帖拉所伊朵" || reference.Base != [4]int{23, 35, 25, 21} {
-		t.Fatalf("unexpected regular mechanical reference %+v", reference)
+	reference := bd.Temps[777]
+	if reference == nil || reference.Name != "佩露夏" || reference.Base != [4]int{35, 54, 27, 33} {
+		t.Fatalf("unexpected divine reference %+v", reference)
 	}
 	baseSum := 0
 	for _, v := range reference.Base {
@@ -46,7 +46,7 @@ func TestAIPetsEmbeddedRegistryAndHabitat(t *testing.T) {
 				sum += v
 				attr += pet.Attr[i]
 			}
-			if sum != baseSum || attr != 100 || pet.InitNum > reference.InitNum || pet.LvUpPoint > reference.LvUpPoint {
+			if sum != baseSum || attr != 100 || pet.InitNum != reference.InitNum || pet.LvUpPoint != reference.LvUpPoint {
 				t.Fatalf("unbalanced growth %+v vs %+v", pet, reference)
 			}
 			if utf8.RuneCountInString(p.Story) < 100 {

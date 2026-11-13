@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"sa/server/internal/battle"
+	"sa/server/internal/data"
 	"sa/server/internal/proto"
 )
 
@@ -103,7 +104,55 @@ func parsePets(s string) *petBag {
 	if b.Ride < 0 || b.Ride >= PetSlots || b.Pets[b.Ride] == nil {
 		b.Ride = -1
 	}
+	// Both carried and deposited pets migrate on load, before any stats are sent.
+	for _, p := range b.Pets {
+		rebalanceAIPet(p)
+	}
+	for _, p := range b.Pool {
+		rebalanceAIPet(p)
+	}
 	return b
+}
+
+// rebalanceAIPet preserves each v1 pet's allocation roll (±2), training,
+// capture level, identity, skills and injury ratio. The new allocation is the
+// migration marker: new captures and repeated loads cannot receive this twice.
+// Custom/admin allocations outside the original roll range are left untouched.
+func rebalanceAIPet(p *Pet) {
+	if p == nil {
+		return
+	}
+	old, next, ok := data.AIPetRebalance(p.TempNo)
+	if !ok {
+		return
+	}
+	for i, a := range p.Alloc {
+		if a < old[i]-2 || a > old[i]+2 {
+			return
+		}
+	}
+	oldHP := max(1, p.derive().HP)
+	values := [4]*int{&p.Vital, &p.Str, &p.Tgh, &p.Dex}
+	captureGrowth := 28 + max(0, p.GetLevel-1)*4
+	for i, v := range values {
+		a := p.Alloc[i]
+		n := a + next[i] - old[i]
+		// Scale earned stats without rerolling; add only the +12 initial
+		// growth delta, using the recorded birth roll when available.
+		birth := captureGrowth * (a + 2) // fallback for early saves lacking Born
+		if p.Born != nil {
+			birth = (*p.Born)[i]
+		}
+		extra := birth * n * 12 / (a * captureGrowth)
+		*v = *v*n/a + extra
+		if p.Born != nil {
+			(*p.Born)[i] = birth*n/a + extra
+		}
+		p.Alloc[i] = n
+	}
+	if p.HP > 0 {
+		p.HP = max(1, min(p.derive().HP, p.HP*p.derive().HP/oldHP))
+	}
 }
 
 func (b *petBag) String() string {

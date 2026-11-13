@@ -287,6 +287,11 @@ func TestWarp(t *testing.T) {
 				if _, isWarp := g.WarpAt(floor, sx, sy); isWarp || !g.Tiles.Walkable(f, sx, sy) || !g.Tiles.Walkable(f, p[0], p[1]) {
 					continue
 				}
+				// A valid diagonal approach needs both orthogonal neighbors open;
+				// the warp remains reachable without squeezing through a wall corner.
+				if MOVE[d][0] != 0 && MOVE[d][1] != 0 && (!g.Tiles.Walkable(f, p[0], sy) || !g.Tiles.Walkable(f, sx, p[1])) {
+					continue
+				}
 				c := newChar(t, db, "walker", floor, sx, sy)
 				cl := &fakeClient{}
 				w.Enter(c, cl)

@@ -47,7 +47,10 @@ export class Connection {
   constructor(url: string) {
     this.url = url;
     this.storageKey = `sa-session:${url}`;
-    try { this.token = localStorage.getItem(this.storageKey) || ""; } catch { /* Session-only recovery. */ }
+    // Legacy shared credentials cannot identify which tab controls which actor.
+    // Drop them and require a fresh password login rather than cross-tab takeover.
+    try { localStorage.removeItem(this.storageKey); } catch { /* Storage unavailable. */ }
+    try { this.token = sessionStorage.getItem(this.storageKey) || ""; } catch { /* Session-only recovery. */ }
     this.readyPromise = new Promise<void>((resolve, reject) => { this.resolveReady = resolve; this.rejectReady = reject; });
     // A caller can install handlers before awaiting ready, without an early
     // socket failure producing an unhandled rejection.
@@ -67,14 +70,14 @@ export class Connection {
   get recovering(): boolean { return !this.stopped && this.handshakePending; }
   /** This transport authenticated with Resume, including a recovered lobby. */
   get recoveredSession(): boolean { return this.authenticatedByResume; }
-  static hasSession(url: string): boolean { try { return !!localStorage.getItem(`sa-session:${url}`); } catch { return false; } }
+  static hasSession(url: string): boolean { try { return !!sessionStorage.getItem(`sa-session:${url}`); } catch { return false; } }
   private remember(token: string) {
     // An obsolete tab must never delete a newer token stored by another tab.
     const previous = this.token;
     this.token = token;
     try {
-      if (token) localStorage.setItem(this.storageKey, token);
-      else if (localStorage.getItem(this.storageKey) === previous) localStorage.removeItem(this.storageKey);
+      if (token) sessionStorage.setItem(this.storageKey, token);
+      else if (sessionStorage.getItem(this.storageKey) === previous) sessionStorage.removeItem(this.storageKey);
     } catch { /* Keep memory token. */ }
   }
   private open() {
@@ -130,7 +133,7 @@ export class Connection {
       if (ev.reason === "session_replaced" || ev.reason === "session_revoked") {
         // Same-token tab replacement must not erase the new tab's credential.
         if (ev.reason === "session_revoked") this.remember(""); else this.token = "";
-        this.terminate(ev.reason === "session_replaced" ? "账号已在其他设备或窗口登录" : "会话已撤销，请重新登录");
+        this.terminate(ev.reason === "session_replaced" ? "这个角色已在其他设备或窗口接管" : "会话已撤销，请重新登录");
         return;
       }
       this.retryTransport(ev.reason || "连接中断");
@@ -196,13 +199,23 @@ export class Connection {
       this.open();
     } else this.checkLiveness();
   };
-  on<T extends S2CType>(t: T, h: (m: Of<T>) => void) { this.handlers.set(t, [...(this.handlers.get(t) ?? []), h]); }
+  on<T extends S2CType>(t: T, h: (m: Of<T>) => void): () => void {
+    // Give each subscription its own identity, even for the same callback.
+    let active = true;
+    const listener = (m: Of<T>) => { if (active) h(m); };
+    this.handlers.set(t, [...(this.handlers.get(t) ?? []), listener]);
+    return () => {
+      if (!active) return;
+      active = false;
+      const remaining = (this.handlers.get(t) ?? []).filter(x => x !== listener);
+      if (remaining.length) this.handlers.set(t, remaining); else this.handlers.delete(t);
+    };
+  }
   once<T extends S2CType>(t: T, timeoutMs = 8000): Promise<Of<T>> {
     return new Promise((resolve, reject) => {
       const h = (m: Of<T>) => { clearTimeout(timer); remove(); resolve(m); };
-      const remove = () => this.handlers.set(t, (this.handlers.get(t) ?? []).filter(x => x !== h));
+      const remove = this.on(t, h);
       const timer = setTimeout(() => { remove(); reject(new Error(`等待 ${t} 超时`)); }, timeoutMs);
-      this.on(t, h);
     });
   }
   send(m: C2S) {

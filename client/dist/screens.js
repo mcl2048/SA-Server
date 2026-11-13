@@ -5,13 +5,13 @@
 //   创建角色：选形象与颜色（selCharGraNo / selCharGraColorWin）→ 设定（editCharParam）→ 出生地（selHomeTown）
 // 原版 640×480 坐标的画面统一加 OFFSET_640 放到 800×600 中央。
 
-import { md5 } from "./md5.js?v=df0f1436dbbcc8a6";
-import { Actor } from "./field.js?v=df0f1436dbbcc8a6";
+import { md5 } from "./md5.js?v=9fd0e82e0b4d0a7d";
+import { Actor } from "./field.js?v=9fd0e82e0b4d0a7d";
 
 
-import { isMobile } from "./mobile-view.js?v=df0f1436dbbcc8a6";
+import { isMobile } from "./mobile-view.js?v=9fd0e82e0b4d0a7d";
 
-import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
 
 const [OX, OY] = OFFSET_640;
 
@@ -254,7 +254,7 @@ export class LineScreen                   {
       if (this.group >= 0) ui.text(ix + 70, iy, `${counts[i]}人`, FONT.GREEN);
     });
     if (ui.textButton(tx + (items.length >> 2) * 128, ty + 75, "  回上一页  ", FONT.YELLOW, "back")) {
-      if (this.group < 0) { this.app.disconnect(); this.app.go(new LoginScreen(this.app)); }
+      if (this.group < 0) { this.app.confirm("退出此窗口的账号？在线角色继续后台运行。", yes => { if (yes) this.app.net?.send({ t: "Logout" }); }); }
       else this.group = -1;
     }
     ui.bottomLine = this.group < 0 ? "请选择大区。" : "请选择线路。";
@@ -301,7 +301,10 @@ export class CharSelectScreen                   {
           app     ;
   constructor(app     ) { this.app = app; }
 
+          refreshAt = 0;
+  enter() { this.app.net?.send({t:"CharList"}); }
   frame() {
+    if (performance.now() - this.refreshAt > 5000) { this.refreshAt = performance.now(); this.app.net?.send({t:"CharList"}); }
     const ui = this.app.ui, ix = OX, iy = OY;
     ui.image(CG.CHR_SEL_BG, 400, 300);
     const pages = Math.max(1, Math.ceil(Math.max(this.app.maxChars, this.app.chars.length) / 2));
@@ -320,6 +323,10 @@ export class CharSelectScreen                   {
       const c = this.app.chars[k], px = i * 304 + ix;
       if (c) {
         ui.image(c.face, 169 + px, 84 + iy);
+        const badge = c.online ? (c.background ? "后台挂机中" : "在线 · 可接管") : "休息中";
+        ui.box(92 + px, 34 + iy, 246 + px, 58 + iy, c.online ? "#123e35ed" : "#26343bdd", true);
+        ui.box(92 + px, 34 + iy, 246 + px, 58 + iy, c.online ? "#6abf92" : "#637479", false);
+        ui.text(169 + px - measure(badge) / 2, 39 + iy, badge, c.online ? "#a7edbb" : "#c2cdce");
         const w = measure(c.name);
         ui.text(93 + px + (144 - w) / 2, 127 + iy, c.name, FONT.WHITE);
         num(ui, 104 + px, 152 + iy, c.level, 3);
@@ -331,10 +338,14 @@ export class CharSelectScreen                   {
         num(ui, 188 + px, 262 + iy, c.dp, 8);
         c.attrs.forEach((a, j) => attrBar(ui, 208 + px, 177 + j * 22 + iy, a, ATTR_COLORS[j]));
         num(ui, 156 + px, 284 + iy, Math.min(c.logins, 9999), 4);
-        if (ui.button(CG.CHR_SEL_LOGIN_BTN, 100 + px, 342 + iy, `login${i}`)) this.app.enterGame(c.id);
+        if (ui.button(CG.CHR_SEL_LOGIN_BTN, 100 + px, 342 + iy, `login${i}`)) {
+          if (c.online && !c.background) this.app.confirm(`接管「${c.name}」？原控制窗口将断开，角色进度实时恢复。`, yes => { if (yes) this.app.enterGame(c.id); });
+          else this.app.enterGame(c.id);
+        }
         if (ui.button(CG.CHR_SEL_DEL_BTN, 230 + px, 342 + iy, `del${i}`))
-          this.app.confirm(`确定要删除「${c.name}」吗？`, (yes) => { if (yes) this.app.net?.send({ t: "CharDelete", id: c.id }); });
-        if (ui.hovered(`login${i}`)) ui.bottomLine = "用这个人物进行游戏。";
+          if (c.online) this.app.message("角色仍在服务端运行，不能删除。");
+          else this.app.confirm(`确定要删除「${c.name}」吗？`, (yes) => { if (yes) this.app.net?.send({ t: "CharDelete", id: c.id }); });
+        if (ui.hovered(`login${i}`)) ui.bottomLine = c.online ? `恢复实时进度（线路 ${c.lineId}）；接管将断开该角色的原窗口。` : "用这个人物进行游戏。";
         if (ui.hovered(`del${i}`)) ui.bottomLine = "删除这个人物。";
       } else if (k < this.app.maxChars) {
 
@@ -345,6 +356,10 @@ export class CharSelectScreen                   {
     if (ui.button(CG.CHR_SEL_BACK_BTN, 320 + ix, 432 + iy, "back")) this.app.go(new LineScreen(this.app));
     if (ui.hovered("back")) ui.bottomLine = "回到线路选择。";
     ui.text(8, 8, this.app.lineName, FONT.YELLOW);
+    ui.text(210, 558, "切换角色或退出账号后，在线角色继续后台运行", "#b5d4c0");
+    if (ui.textButton(680, 18, "退出账号", FONT.YELLOW, "account-logout")) {
+      this.app.confirm("退出此窗口的账号？角色仍将继续后台运行。", yes => { if (yes) this.app.net?.send({t:"Logout"}); });
+    }
   }
 }
 

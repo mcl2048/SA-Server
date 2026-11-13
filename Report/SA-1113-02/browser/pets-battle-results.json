@@ -1,0 +1,66 @@
+{
+  "browser": "156.0.8078.4",
+  "scope": "Chromium component rendering, synthetic battle values using real BattleScreen and drawOverlay; not authenticated end-to-end",
+  "results": [
+    {
+      "mobile": false,
+      "labels": [
+        {
+          "text": "HP 2400/2400",
+          "size": 16
+        },
+        {
+          "text": "HP 600/2400",
+          "size": 16
+        },
+        {
+          "text": "倒地 0/2400",
+          "size": 16
+        },
+        {
+          "text": "HP 12000/12500",
+          "size": 16
+        },
+        {
+          "text": "−1284",
+          "size": 20
+        },
+        {
+          "text": "+520",
+          "size": 20
+        }
+      ],
+      "boxes": 18
+    },
+    {
+      "mobile": true,
+      "labels": [
+        {
+          "text": "HP 2400/2400",
+          "size": 24
+        },
+        {
+          "text": "HP 600/2400",
+          "size": 24
+        },
+        {
+          "text": "倒地 0/2400",
+          "size": 24
+        },
+        {
+          "text": "HP 12000/12500",
+          "size": 24
+        },
+        {
+          "text": "−1284",
+          "size": 30
+        },
+        {
+          "text": "+520",
+          "size": 30
+        }
+      ],
+      "boxes": 18
+    }
+  ]
+}

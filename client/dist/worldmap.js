@@ -12,8 +12,8 @@
 
 
 
-import { FONT, measure,         } from "./ui.js?v=df0f1436dbbcc8a6";
-import { settings, saveSettings } from "./menus.js?v=df0f1436dbbcc8a6";
+import { FONT, measure,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
+import { settings, saveSettings } from "./menus.js?v=9fd0e82e0b4d0a7d";
 
 
 
@@ -218,7 +218,7 @@ export class MapWindow {
       const sel = view && fl.floor === view.floor;
       if (ui.hitBox(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, id, false)) ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, "rgba(255,255,255,0.1)", true);
       if (sel) ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, "rgba(255,216,74,0.18)", true);
-      const mine = f && fl.floor === f.floor;
+      const mine = !!f && fl.floor === f.floor;
       ui.text(x + 32, ry, (mine ? "● " : "") + clip(fl.name || String(fl.floor), LIST_W - 20), sel ? FONT.YELLOW : mine ? FONT.GREEN : FONT.WHITE);
       if (ui.clicked(id)) { this.floor = fl.floor; this.follow = mine; if (!mine) this.fitLater = true; }
     });
@@ -240,7 +240,7 @@ export class MapWindow {
       ui.pic(this.marks, MAP_X, MAP_Y);
       ui.hitBox(MAP_X, MAP_Y, MAP_X + MAP_W, MAP_Y + MAP_H, "map-area", false);
     }
-    ui.text(x + 28, y + H * 48 - 36, this.hoverNpc ? `NPC：${this.hoverNpc}` : "点格子走过去　拖动平移　青：传送点　白：玩家　黄：NPC（停上去看名字）　框：画面范围", this.hoverNpc ? FONT.YELLOW : FONT.GRAY);
+    ui.text(x + 28, y + H * 48 - 36, f?.navigationStatus || (this.hoverNpc ? `NPC：${this.hoverNpc}` : "点格子走过去　拖动平移　青：传送点　白：玩家　黄：NPC（停上去看名字）　框：画面范围"), this.hoverNpc ? FONT.YELLOW : FONT.GRAY);
     if (ui.text(x + W * 64 - 28 - measure("关　闭"), y + H * 48 - 36, "关　闭", FONT.AQUA, "map-close")) close();
   }
 
@@ -258,19 +258,13 @@ export class MapWindow {
         const s = ZOOMS[this.zoom], hy = s * 0.75;
         const a = (m.x - MAP_X - MAP_W / 2) / s, b = (m.y - MAP_Y - MAP_H / 2) / hy; // a = dx + dy、b = dy − dx
         const gx = Math.round(this.cx + (a - b) / 2), gy = Math.round(this.cy + (a + b) / 2);
-        // 点到的格子不能走（墙、物件）就找 3 格内最近的能走的格子
-        let best                          = null, bd = 99;
-        for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) {
-          const x = gx + dx, y = gy + dy, d = Math.abs(dx) + Math.abs(dy);
-          if (d < bd && x >= 0 && y >= 0 && x < view.w && y < view.h && f.canEnter(x, y)) { best = [x, y]; bd = d; }
-        }
-        if (best) this.host.walkTo(best[0], best[1]);
+        f.navigateTo(gx, gy);
       }
     }
     if (m.down && (this.drag || inside)) {
       if (this.drag) {
         const dpx = m.x - this.drag.x, dpy = m.y - this.drag.y;
-        if (dpx || dpy) {
+        if (this.dragged || Math.hypot(dpx, dpy) >= 6) {
           const s = ZOOMS[this.zoom], hy = s * 0.75;
           const a = dpx / s, b = dpy / hy;
           this.cx -= (a - b) / 2; this.cy -= (a + b) / 2;
@@ -278,7 +272,7 @@ export class MapWindow {
           this.follow = false; this.dragged = true;
         }
       }
-      this.drag = { x: m.x, y: m.y };
+      if (!this.drag || this.dragged) this.drag = { x: m.x, y: m.y };
     } else { this.drag = null; this.dragged = false; }
   }
 
@@ -302,7 +296,7 @@ export class MapWindow {
     if (c && c.version === view.seenVersion) return c;
     let n = 0, x1 = Infinity, y1 = Infinity, x2 = -1, y2 = -1;
     for (let k = 0; k < view.seen.length; k++) {
-      if (!view.seen[k]) continue;
+      if (!this.host.field()?.minimapReveal && !view.seen[k]) continue;
       n++;
       const x = k % view.w, y = Math.floor(k / view.w);
       if (x < x1) x1 = x; if (x > x2) x2 = x; if (y < y1) y1 = y; if (y > y2) y2 = y;
@@ -335,6 +329,12 @@ export class MapWindow {
     const key = `${view.floor},${me.x},${me.y},${view.version},${view.seenVersion},${this.colors.version},${settings.mapArt}`;
     if (key !== this.drawnMini) { this.drawnMini = key; this.paint(this.mini.getContext("2d") , view, f, me.x, me.y, ZOOMS[MINI_ZOOM], MINI_W, MINI_H); }
     ui.pic(this.mini, x, y);
+    ui.hitBox(x, y, x + MINI_W, y + MINI_H, "mini-navigate", false);
+    if (ui.clicked("mini-navigate")) {
+      const s = ZOOMS[MINI_ZOOM], a = (ui.mouse.x-x-MINI_W/2)/s, b=(ui.mouse.y-y-MINI_H/2)/(s*0.75);
+      f.navigateTo(Math.round(me.x+(a-b)/2), Math.round(me.y+(a+b)/2));
+    }
+    if (f.navigationStatus) ui.text(x, y + MINI_H + 4, f.navigationStatus, FONT.YELLOW);
     ui.box(x - 1, y - 1, x + MINI_W + 1, y + MINI_H + 1, "rgba(255,255,255,0.35)", false);
     const s = ZOOMS[MINI_ZOOM];
     for (const a of f.actors.values()) { // 玩家白点、NPC 黄点（自己不在 actors 里，另画）
@@ -386,7 +386,7 @@ export class MapWindow {
     for (let y = y1; y <= y2; y++) {
       for (let x = x1; x <= x2; x++) {
         const k = y * view.w + x;
-        if (!view.seen[k] || !view.walk[k]) continue;
+        if ((!f.minimapReveal && !view.seen[k]) || !view.walk[k]) continue;
         const [px, py] = toPx(x, y);
         if (!inView(px, py)) continue;
         if (art && view.tiles[k] > 99 && sprite(view.tiles[k], px, py)) {

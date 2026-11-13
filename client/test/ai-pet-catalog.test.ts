@@ -16,7 +16,7 @@ test("four stable catalogue identities and stories match the server's single sou
     assert.ok(canonical); assert.equal(pet.story, canonical.story); assert.ok(pet.story.length >= 100);
     assert.equal(pet.brief, canonical.story.split("。")[0] + "。");
     assert.equal(pet.name, canonical.name); assert.equal(pet.key, canonical.key); assert.equal(pet.temp, canonical.temp);
-    assert.deepEqual(pet.base, canonical.base); assert.equal(pet.base.reduce((a, b) => a + b, 0), 104);
+    assert.deepEqual(pet.base, canonical.base); assert.equal(pet.base.reduce((a, b) => a + b, 0), 149);
     assert.deepEqual(pet.attrs, canonical.attr); assert.deepEqual(pet.skills, canonical.skills);
     assert.deepEqual([pet.floor, pet.x, pet.y], [canonical.floor, canonical.x, canonical.y]);
     assert.equal(aiPetForSprite(pet.sprite), pet);

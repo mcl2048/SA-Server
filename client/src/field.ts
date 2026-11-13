@@ -4,10 +4,11 @@
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
 import { album } from "./album.ts";
+import { gridPath } from "./pathfinding.ts";
 import { ANIM, findAction, type AnimAction, type Assets } from "./assets.ts";
 import { sfx } from "./audio.ts";
 import type { Connection } from "./net.ts";
-import type { ObjInfo, S2CEnterFloor, S2CMapData, NpcPos } from "./proto.gen.ts";
+import type { ObjInfo, S2CEnterFloor, S2CMapData, NpcPos, S2C, S2CType } from "./proto.gen.ts";
 import { loadFloor, saveFloor, type MapRecord } from "./mapcache.ts";
 import type { Quad } from "./renderer.ts";
 
@@ -40,7 +41,7 @@ export class Actor {
   mind = 0; mindAt = 0; // 心情图示（_MIND_ICON：动画编号；睡觉 / 咖啡 / 强调循环播，其余播一遍就消失）
 
   constructor(o: Pick<ObjInfo, "id" | "kind" | "name" | "sprite" | "x" | "y" | "dir"> & Partial<ObjInfo>) {
-    this.id = o.id; this.name = o.name; this.sprite = o.sprite; this.kind = o.kind; this.level = o.level;
+    this.id = o.id; this.name = o.name; this.sprite = o.sprite; this.kind = o.kind; this.level = o.level ?? 0;
     this.x = this.fromX = o.x; this.y = this.fromY = o.y; this.dir = o.dir;
     this.leader = !!o.leader; this.battle = o.battle ?? 0; this.help = !!o.help; this.act = o.action ?? -1; this.family = o.family ?? "";
     this.trade = !!o.trade; this.vendor = o.vendor ?? "";
@@ -216,7 +217,47 @@ export class Field {
   private meta = new Map<number, { name: string; w: number; h: number }>(); // 去过的楼层（名字、大小），存 localStorage sa.floors.<角色>
   private metaLoaded = false;
   seenVersion = 0; // 这一层看过的格子变了几次（世界地图的全图范围据此重算）
-  private pending = new Set<string>();
+  private pending = new Map<string, number>();
+  private navigationAttempt = "";
+  minimapReveal = false;
+  navigationStatus = "";
+  private mapNavigation = false;
+  private revealCursor = 0;
+  private wholeReady = false;
+  private seenPosition = "";
+  setMinimapReveal(enabled: boolean) { this.minimapReveal = enabled; this.mapVersion++; this.seenVersion++; }
+  navigateTo(x: number, y: number) {
+    this.path = []; this.pathGoal = ""; this.navigationAttempt = ""; this.wantDir = -1;
+    this.target = null; this.mapNavigation = false;
+    if (!this.self || this.locked || this.follower) { this.navigationStatus = "当前无法自动移动"; return; }
+    if (x < 0 || y < 0 || x >= this.width || y >= this.height) { this.navigationStatus = "目标在地图范围外"; return; }
+    if (this.walk[y * this.width + x] === 1) { this.navigationStatus = "目标不可达：目标格为墙体或障碍"; return; }
+    this.target = [x,y]; this.mapNavigation = true;
+    this.navigationStatus = "正在加载地图并规划路线…";
+  }
+  // One background chunk in flight at a time; view requests share a two-request cap.
+  private requestWholeFloor(): boolean {
+    if (this.wholeReady) return true;
+    if (this.cacheWait > performance.now()) return false;
+    const cols = Math.ceil(this.width / 32), rows = Math.ceil(this.height / 32), count = cols * rows;
+    for (let i = 0; i < count; i++) {
+      const index = (this.revealCursor + i) % count;
+      const bx = index % cols * 32, by = Math.floor(index / cols) * 32;
+      const ex = Math.min(this.width,bx+32), ey = Math.min(this.height,by+32);
+      let missing = false;
+      for (let y=by;y<ey && !missing;y++) for(let x=bx;x<ex;x++) if(!this.walk[y*this.width+x]) { missing=true; break; }
+      if (!missing) continue;
+      this.revealCursor = index;
+      if (this.pending.size === 0) {
+        const key = `${this.floor},${bx},${by},${ex},${ey}`;
+        this.pending.set(key, performance.now());
+        this.net.send({t:"MapReq",floor:this.floor,x1:bx,y1:by,x2:ex,y2:ey});
+      }
+      return false;
+    }
+    this.wholeReady = true;
+    return true;
+  }
 
   self: Actor | null = null;
   actors = new Map<number, Actor>();
@@ -229,42 +270,62 @@ export class Field {
   private assets: Assets;
   private net: Connection;
 
+  private subscriptions: (() => void)[] = [];
+  private disposed = false;
+
   constructor(assets: Assets, net: Connection) {
     this.assets = assets;
     this.net = net;
-    net.on("Self", (m) => { this.self = new Actor({ id: m.id, kind: "player", name: m.name, sprite: m.sprite, x: 0, y: 0, dir: 0 }); });
-    net.on("EnterFloor", (m) => this.enterFloor(m));
-    net.on("MapData", (m) => this.mapData(m));
-    net.on("NpcList", (m) => { this.npcLists.set(m.floor, m.npcs); this.npcPending.delete(m.floor); });
-    net.on("PosCorrect", (m) => { this.corrections++; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
-    net.on("ObjAppear", (m) => { for (const o of m.objs) { this.actors.set(o.id, new Actor(o)); album.seen(o.sprite); } }); // 相簿的"看到"（CheckNewPet）
-    net.on("ObjDisappear", (m) => { for (const id of m.ids) this.actors.delete(id); });
-    net.on("ObjMove", (m) => {
+    const on = <T extends S2CType>(type: T, handler: (m: Extract<S2C, {t:T}>) => void) => {
+      this.subscriptions.push(net.on(type, handler));
+    };
+    on("Self", (m) => { this.self = new Actor({ id: m.id, kind: "player", name: m.name, sprite: m.sprite, x: 0, y: 0, dir: 0 }); });
+    on("EnterFloor", (m) => this.enterFloor(m));
+    on("MapData", (m) => this.mapData(m));
+    on("NpcList", (m) => { this.npcLists.set(m.floor, m.npcs); this.npcPending.delete(m.floor); });
+    on("PosCorrect", (m) => { this.corrections++; if (this.mapNavigation) this.navigationStatus = "移动被服务端阻止，请重新选择目标"; this.mapNavigation = false; this.path = []; this.pathGoal = ""; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
+    on("ObjAppear", (m) => { for (const o of m.objs) { this.actors.set(o.id, new Actor(o)); album.seen(o.sprite); } }); // 相簿的"看到"（CheckNewPet）
+    on("ObjDisappear", (m) => { for (const id of m.ids) this.actors.delete(id); });
+    on("ObjMove", (m) => {
       if (m.id === this.self?.id) this.followSteps.push([m.x, m.y, m.dir, performance.now()]); // 队员跟着队长走（服务端替我们走）
       else this.actors.get(m.id)?.serverStep(m.x, m.y, m.dir, performance.now());
     });
-    net.on("ObjAction", (m) => { (this.self?.id === m.id ? this.self : this.actors.get(m.id))?.setAct(m.action); });
-    net.on("ObjFamily", (m) => { const a = this.actors.get(m.id); if (a) a.family = m.family; });
-    net.on("ObjMind", (m) => { const a = this.self?.id === m.id ? this.self : this.actors.get(m.id); if (a) { a.mind = m.icon; a.mindAt = performance.now(); } });
-    net.on("ObjMark", (m) => {
+    on("ObjAction", (m) => { (this.self?.id === m.id ? this.self : this.actors.get(m.id))?.setAct(m.action); });
+    on("ObjFamily", (m) => { const a = this.actors.get(m.id); if (a) a.family = m.family; });
+    on("ObjMind", (m) => { const a = this.self?.id === m.id ? this.self : this.actors.get(m.id); if (a) { a.mind = m.icon; a.mindAt = performance.now(); } });
+    on("ObjMark", (m) => {
       const a = this.self?.id === m.id ? this.self : this.actors.get(m.id);
       if (a) { a.leader = m.leader; a.battle = m.battle; a.help = m.help; a.trade = !!m.trade; a.vendor = m.vendor ?? ""; }
     });
     // 服务端送的音效（lssproto_SE：巴士 / 飞机发车、到站）：按那一格相对自己的位置放（play_se 的 x）
-    net.on("Sound", (m) => {
+    on("Sound", (m) => {
       const s = this.self;
       if (s && Math.abs(m.x - s.x) <= 12 && Math.abs(m.y - s.y) <= 12) sfx(m.se, 400 + ((m.x - s.x) + (m.y - s.y)) * 32);
     });
     // 换武器后形象改变（CHAR_getNewImagenumberFromEquip），自己和别人都一样处理
-    net.on("ObjSprite", (m) => {
+    on("ObjSprite", (m) => {
       const a = this.self?.id === m.id ? this.self : this.actors.get(m.id);
       if (a) a.sprite = m.sprite;
     });
-    net.on("ObjTurn", (m) => { const a = this.actors.get(m.id); if (a) a.dir = m.dir; });
-    net.on("ChatMsg", (m) => {
+    on("ObjTurn", (m) => { const a = this.actors.get(m.id); if (a) a.dir = m.dir; });
+    on("ChatMsg", (m) => {
       const a = m.fromId === this.self?.id ? this.self : this.actors.get(m.fromId);
       if (a && m.channel === "near") { a.speech = m.text; a.speechUntil = performance.now() + 5000; }
     });
+  }
+
+  /** Release callbacks before another character installs its own Field. */
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.saveSeen();
+    for (const unsubscribe of this.subscriptions) unsubscribe();
+    this.subscriptions = [];
+    this.floor = -1;
+    this.self = null;
+    this.actors.clear(); this.cache.clear(); this.npcLists.clear();
+    this.pending.clear(); this.npcPending.clear();
+    this.target = null; this.path = []; this.followSteps = [];
   }
 
   private enterFloor(m: S2CEnterFloor) {
@@ -290,6 +351,7 @@ export class Field {
       this.seenVersion++;
     }
     this.pending.clear();
+    this.revealCursor = 0; this.wholeReady = false; this.seenPosition = ""; this.mapNavigation = false; this.navigationStatus = "";
     this.actors.clear();
     this.target = null;
     this.waitingWarp = false;
@@ -299,7 +361,7 @@ export class Field {
     const floor = m.floor, ver = m.mapVer;
     this.cacheWait = performance.now() + 800;
     loadFloor(floor, ver).then((r) => {
-      if (this.floor !== floor || this.mapVer !== ver) return;
+      if (this.disposed || this.floor !== floor || this.mapVer !== ver) return;
       if (r && this.mergeRecord(r, this.tiles, this.objs, this.walk, this.width, this.height)) this.mapVersion++;
       this.cacheWait = 0;
       this.requestView();
@@ -353,7 +415,7 @@ export class Field {
       this.tiles[k] = m.tiles[i];
       this.objs[k] = m.objs[i];
       this.walk[k] = m.walk.charCodeAt(i) - 48 + 1; // '0'→1 不可走，'1'→2 可走，'2'→3 传送点
-      if (!this.seen[k]) { this.seen[k] = 1; this.seenDirty = true; this.seenVersion++; }
+      if (this.self && Math.abs(x-this.self.x) <= VIEW && Math.abs(y-this.self.y) <= VIEW && !this.seen[k]) { this.seen[k] = 1; this.seenDirty = true; this.seenVersion++; }
     }
     this.mapVersion++;
     if (m.ver) this.mapVer = m.ver;
@@ -393,6 +455,7 @@ export class Field {
     this.cache.set(floor, c);
     const store = c;
     loadFloor(floor).then((r) => { // 别层：浏览器里存着什么版本先用着，向服务端补要时版本不同再作废
+      if (this.disposed) return;
       if (r && this.mergeRecord(r, store.tiles, store.objs, store.walk, m.w, m.h)) { store.ver = r.ver; store.version++; }
       store.loading = false;
     });
@@ -419,12 +482,12 @@ export class Field {
       let need = false;
       for (let y = by; y < ey && !need; y++) for (let x = bx; x < ex; x++) {
         const k = y * v.w + x;
-        if (v.seen[k] && !v.walk[k]) { need = true; break; }
+        if ((this.minimapReveal || v.seen[k]) && !v.walk[k]) { need = true; break; }
       }
       if (!need) continue;
       const key = `${v.floor},${bx},${by},${ex},${ey}`;
-      if (this.pending.has(key)) continue;
-      this.pending.add(key);
+      if (this.pending.has(key) || this.pending.size >= 2) continue;
+      this.pending.set(key, performance.now());
       this.net.send({ t: "MapReq", floor: v.floor, x1: bx, y1: by, x2: ex, y2: ey });
     }
   }
@@ -475,12 +538,20 @@ export class Field {
   private requestView() {
     const s = this.self;
     if (!s || this.floor < 0 || this.cacheWait > performance.now()) return;
+    const position = `${this.floor},${s.x},${s.y},${this.mapVersion}`;
+    if (this.seenPosition !== position) {
+      this.seenPosition = position;
+      for(let y=Math.max(0,s.y-VIEW);y<Math.min(this.height,s.y+VIEW+1);y++) for(let x=Math.max(0,s.x-VIEW);x<Math.min(this.width,s.x+VIEW+1);x++) {
+        const k=y*this.width+x;
+        if(this.walk[k] && !this.seen[k]) { this.seen[k]=1; this.seenDirty=true; this.seenVersion++; }
+      }
+    }
     let run: number[] | null = null; // [x1, x2, 起始行]
     const flush = (yEnd: number) => {
       if (!run) return;
       const key = `${this.floor},${run[0]},${run[2]},${run[1]},${yEnd}`;
-      if (!this.pending.has(key)) {
-        this.pending.add(key);
+      if (!this.pending.has(key) && this.pending.size < 2) {
+        this.pending.set(key, performance.now());
         this.net.send({ t: "MapReq", floor: this.floor, x1: run[0], y1: run[2], x2: run[1], y2: yEnd });
       }
       run = null;
@@ -509,6 +580,12 @@ export class Field {
   }
 
   update(now: number) {
+    // A dropped/rejected request must not occupy a slot forever. Retrying after
+    // ten seconds keeps the same small concurrency cap, including slow links.
+    const requestNow = performance.now();
+    for (const [key, at] of this.pending) if (requestNow - at >= 10_000) this.pending.delete(key);
+    if (this.minimapReveal || this.mapNavigation) this.requestWholeFloor();
+    if (this.wantDir >= 0) { this.mapNavigation = false; this.navigationStatus = ""; }
 
     const s = this.self;
     if (!s || this.floor < 0 || this.waitingWarp || s.moving(now)) { this.requestView(); return; }
@@ -538,6 +615,24 @@ export class Field {
     if (d < 0 && this.target) {
       if (this.pathGoal !== `${this.target}`) {
         const [tx, ty] = this.target;
+        if (this.mapNavigation) {
+          if (this.walk[ty * this.width + tx] === 1) {
+            this.navigationStatus = "目标不可达：目标格为墙体或障碍";
+            this.target = null; this.mapNavigation = false; return;
+          }
+          // Known cells can already contain a complete legal detour. Do not
+          // delay that route behind unrelated chunks of a large floor.
+          const attempt = `${this.floor},${s.x},${s.y},${tx},${ty},${this.mapVersion},${this.wholeReady}`;
+          if (this.navigationAttempt === attempt) { this.requestView(); return; }
+          this.navigationAttempt = attempt;
+          const path = gridPath(this.width,this.height,this.walk,s.x,s.y,tx,ty);
+          if (path === null) {
+            if (!this.wholeReady) { this.requestView(); return; }
+            this.navigationStatus = "目标不可达：被障碍阻挡或需要经过传送点"; this.target = null; this.mapNavigation = false; return;
+          }
+          this.path = path; this.finalDir = -1; this.pathGoal = `${this.target}`;
+          this.navigationStatus = path.length ? "自动寻路中…" : "已到达目标";
+        } else {
         const r = routeTo(s.x, s.y, tx, ty, (x, y) => !this.canEnter(x, y));
         // 优先用原版路线（接近直线）；原版到不了目标时（遇障碍停下），若 BFS 能绕到就改走 BFS（H5 新增），
         // 都到不了则按原版走到停下处再转向目标
@@ -550,6 +645,7 @@ export class Field {
         this.path = useBfs ? bfs : r.route;
         this.finalDir = useBfs ? -1 : r.lastDir;
         this.pathGoal = `${this.target}`;
+        }
       }
       d = this.path.shift() ?? -1;
       if (d < 0) {
@@ -557,11 +653,12 @@ export class Field {
         if (this.finalDir >= 0 && s.dir !== this.finalDir) { s.dir = this.finalDir; this.net.send({ t: "Turn", dir: s.dir }); }
         this.target = null;
         this.pathGoal = "";
+        if (this.mapNavigation) { this.navigationStatus = "已到达目标"; this.mapNavigation = false; }
       }
     }
     if (d >= 0) {
       const nx = s.x + MOVE[d][0], ny = s.y + MOVE[d][1];
-      if (!this.canEnter(nx, ny)) {
+      if (!this.canEnter(nx, ny) || (MOVE[d][0] !== 0 && MOVE[d][1] !== 0 && (!this.canEnter(nx,s.y) || !this.canEnter(s.x,ny)))) {
         if (s.dir !== d) { s.dir = d; this.net.send({ t: "Turn", dir: d }); }
         this.target = null;
       } else {
@@ -613,7 +710,7 @@ export class Field {
         if (k !== start && this.walk[k] === 3) continue; // 不穿过传送点
         for (let d = 0; d < 8; d++) {
           const nx = x + MOVE[d][0], ny = y + MOVE[d][1], nk = key(nx, ny);
-          if (prev.has(nk) || !this.canEnter(nx, ny)) continue;
+          if (prev.has(nk) || !this.canEnter(nx, ny) || (MOVE[d][0] !== 0 && MOVE[d][1] !== 0 && (!this.canEnter(nx,y) || !this.canEnter(x,ny)))) continue;
           prev.set(nk, [k, d]);
           next.push(nk);
         }

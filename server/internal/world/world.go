@@ -488,6 +488,9 @@ func (w *World) move(e *entity, x, y, dir int) {
 	if ok {
 		nx, ny = e.x+MOVE[dir][0], e.y+MOVE[dir][1]
 		ok = w.game.Tiles.Walkable(f, nx, ny)
+		if ok && MOVE[dir][0] != 0 && MOVE[dir][1] != 0 {
+			ok = w.game.Tiles.Walkable(f, nx, e.y) && w.game.Tiles.Walkable(f, e.x, ny)
+		}
 	}
 	if !ok {
 		e.client.Send(&proto.PosCorrect{X: e.x, Y: e.y, Dir: e.dir})
@@ -830,10 +833,11 @@ func (w *World) MapReq(charID, floor, x1, y1, x2, y2 int) {
 				walk[i] = '0'
 				if f.In(x, y) {
 					md.Tiles[i], md.Objs[i] = int(f.Tiles[y*f.W+x]), int(f.Objs[y*f.W+x])
-					if _, ok := w.game.WarpAt(floor, x, y); ok {
-						walk[i] = '2'
-					} else if w.game.Tiles.Walkable(f, x, y) {
+					if w.game.Tiles.Walkable(f, x, y) {
 						walk[i] = '1'
+						if _, ok := w.game.WarpAt(floor, x, y); ok {
+							walk[i] = '2'
+						}
 					}
 				}
 				i++
@@ -1137,6 +1141,12 @@ func near(a, b *entity) bool {
 
 // refreshView 重新计算 e 能看到的实体，发出增减。
 func (w *World) refreshView(e *entity) {
+	// Detached actors still simulate movement/combat, but have no view consumer.
+	// Attach rebuilds the complete view, so retaining per-step diffs only wastes
+	// CPU and allocations for every background farming character.
+	if e.kind == "player" && !e.attached() {
+		return
+	}
 	appear := []proto.ObjInfo{}
 	gone := []int{}
 	for _, o := range w.floors[e.floor] {
@@ -1169,7 +1179,7 @@ func (w *World) refreshView(e *entity) {
 // announce 让附近的其他玩家看到 e（新出现）。
 func (w *World) announce(e *entity) {
 	for _, o := range w.floors[e.floor] {
-		if o != e && o.client != nil && near(o, e) && !o.visible[e.id] {
+		if o != e && o.client != nil && (o.kind != "player" || o.attached()) && near(o, e) && !o.visible[e.id] {
 			o.visible[e.id] = true
 			o.client.Send(&proto.ObjAppear{Objs: []proto.ObjInfo{e.info()}})
 		}
@@ -1182,7 +1192,7 @@ func (w *World) broadcastMove(e *entity) {
 		w.refreshView(e)
 	}
 	for _, o := range w.floors[e.floor] {
-		if o == e || o.client == nil {
+		if o == e || o.client == nil || (o.kind == "player" && !o.attached()) {
 			continue
 		}
 		in := near(o, e)

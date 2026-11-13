@@ -1,6 +1,6 @@
 // 由 server/tools/protogen 根据 proto/messages.json 生成，请勿手改。
 
-export interface CharSummary { id: number; name: string; sprite: number; face: number; level: number; hp: number; atk: number; def: number; agi: number; charm: number; dp: number; attrs: number[]; logins: number; hometown: number; }
+export interface CharSummary { id: number; name: string; sprite: number; face: number; level: number; hp: number; atk: number; def: number; agi: number; charm: number; dp: number; attrs: number[]; logins: number; hometown: number; online: boolean; background: boolean; lineId: number; }
 export interface LineInfo { id: number; name: string; online: number; }
 export interface ServerGroup { name: string; lines: LineInfo[]; }
 export interface ObjInfo { id: number; kind: string; name: string; sprite: number; x: number; y: number; dir: number; level: number; leader: boolean; battle: number; help: boolean; action: number; family: string; trade: boolean; vendor: string; mind: number; }
@@ -75,8 +75,9 @@ export interface C2SGmCommand { t: "GmCommand"; text: string; }
 export interface C2SGmListReq { t: "GmListReq"; kind: string; }
 export interface C2SQuestReq { t: "QuestReq"; }
 export interface C2SGmDetailReq { t: "GmDetailReq"; kind: string; id: number; }
+export interface C2SSwitchCharacter { t: "SwitchCharacter"; }
 export interface C2SLogout { t: "Logout"; }
-export type C2S = C2SSetFlags | C2SCardExchange | C2SCardDelete | C2SMailSend | C2SPetMail | C2SFamily | C2SAction | C2SMind | C2STrade | C2SParty | C2SPartyKick | C2SVendor | C2SBattleHelp | C2SJoinBattle | C2SDuel | C2SRegister | C2SResetPassword | C2SAccountInfoReq | C2SChangePassword | C2SChangeSecret | C2SLogin | C2SResume | C2SAutoPlay | C2SSelectLine | C2SCharList | C2SCharCreate | C2SCharDelete | C2SCharEnter | C2SMapReq | C2SNpcListReq | C2SMove | C2STurn | C2STalk | C2SChat | C2SReturnHome | C2SBattleCommand | C2SBattlePetCommand | C2SPetState | C2SPetRename | C2SPetDrop | C2SPetRide | C2SItemMove | C2SPetItemEquip | C2SPetSkillUse | C2SItemUse | C2SMagicUse | C2SItemDrop | C2SGoldDrop | C2SPickUp | C2SStatUp | C2SNpcWindowReply | C2SPing | C2SGmCommand | C2SGmListReq | C2SQuestReq | C2SGmDetailReq | C2SLogout;
+export type C2S = C2SSetFlags | C2SCardExchange | C2SCardDelete | C2SMailSend | C2SPetMail | C2SFamily | C2SAction | C2SMind | C2STrade | C2SParty | C2SPartyKick | C2SVendor | C2SBattleHelp | C2SJoinBattle | C2SDuel | C2SRegister | C2SResetPassword | C2SAccountInfoReq | C2SChangePassword | C2SChangeSecret | C2SLogin | C2SResume | C2SAutoPlay | C2SSelectLine | C2SCharList | C2SCharCreate | C2SCharDelete | C2SCharEnter | C2SMapReq | C2SNpcListReq | C2SMove | C2STurn | C2STalk | C2SChat | C2SReturnHome | C2SBattleCommand | C2SBattlePetCommand | C2SPetState | C2SPetRename | C2SPetDrop | C2SPetRide | C2SItemMove | C2SPetItemEquip | C2SPetSkillUse | C2SItemUse | C2SMagicUse | C2SItemDrop | C2SGoldDrop | C2SPickUp | C2SStatUp | C2SNpcWindowReply | C2SPing | C2SGmCommand | C2SGmListReq | C2SQuestReq | C2SGmDetailReq | C2SSwitchCharacter | C2SLogout;
 export type C2SType = C2S["t"];
 
 export interface S2CFlags { t: "Flags"; flags: number; }
@@ -109,10 +110,12 @@ export interface S2CVendorDetail { t: "VendorDetail"; index: number; kind: numbe
 export interface S2CSound { t: "Sound"; x: number; y: number; se: number; }
 export interface S2CHelpFlag { t: "HelpFlag"; on: boolean; }
 export interface S2CBattleJoin { t: "BattleJoin"; fighters: BattleFighter[]; resetPets: boolean; }
-export interface S2CHello { t: "Hello"; version: string; serverTime: number; }
+export interface S2CHello { t: "Hello"; version: string; serverTime: number; minimapReveal: boolean; }
 export interface S2CPetSkillResult { t: "PetSkillResult"; ok: boolean; pet: number; skill: number; }
 export interface S2CError { t: "Error"; code: string; message: string; }
 export interface S2CAuthResult { t: "AuthResult"; ok: boolean; message: string; }
+export interface S2CWorldReady { t: "WorldReady"; resumed: boolean; }
+export interface S2CLobbyReady { t: "LobbyReady"; }
 export interface S2CSession { t: "Session"; token: string; resumed: boolean; inWorld: boolean; }
 export interface S2CAutoPlayState { t: "AutoPlayState"; encounter: boolean; autoBattle: boolean; quick: boolean; paused: boolean; reason: string; }
 export interface S2CAccountInfo { t: "AccountInfo"; account: string; created: string; chars: number; hasSecret: boolean; }
@@ -142,12 +145,12 @@ export interface S2CBattleTurn { t: "BattleTurn"; turn: number; events: BattleEv
 export interface S2CBattleEnd { t: "BattleEnd"; result: string; gold: number; exp: number; levelUp: number; level: number; items: string[]; pets: PetResult[]; }
 export interface S2CPets { t: "Pets"; battle: number; ride: number; pets: PetInfo[]; }
 export interface S2CInventory { t: "Inventory"; gold: number; items: InvItem[]; }
-export type S2C = S2CFlags | S2CGmMenu | S2CGmList | S2CQuestLog | S2CGmDetail | S2CDuelResult | S2CFamilyMsg | S2CFamilyStatus | S2CObjFamily | S2CAddressBook | S2CAddressUpdate | S2CMailRecv | S2CObjAction | S2CObjMind | S2CTradeOpen | S2CTradeItem | S2CTradeGold | S2CTradePet | S2CTradeState | S2CTradeClose | S2CPartyResult | S2CPartyMember | S2CObjMark | S2CVendorSetup | S2CVendorList | S2CVendorClose | S2CVendorDetail | S2CSound | S2CHelpFlag | S2CBattleJoin | S2CHello | S2CPetSkillResult | S2CError | S2CAuthResult | S2CSession | S2CAutoPlayState | S2CAccountInfo | S2CAccountResult | S2CServerList | S2CLineSelected | S2CCharListResult | S2CCharCreateResult | S2CSelf | S2CStatus | S2CEnterFloor | S2CMapData | S2CNpcList | S2CPosCorrect | S2CObjAppear | S2CObjDisappear | S2CObjMove | S2CObjTurn | S2CObjSprite | S2CNpcTalk | S2CNpcWindow | S2CShopWindow | S2CChatMsg | S2CPong | S2CBattleStart | S2CBattleTurn | S2CBattleEnd | S2CPets | S2CInventory;
+export type S2C = S2CFlags | S2CGmMenu | S2CGmList | S2CQuestLog | S2CGmDetail | S2CDuelResult | S2CFamilyMsg | S2CFamilyStatus | S2CObjFamily | S2CAddressBook | S2CAddressUpdate | S2CMailRecv | S2CObjAction | S2CObjMind | S2CTradeOpen | S2CTradeItem | S2CTradeGold | S2CTradePet | S2CTradeState | S2CTradeClose | S2CPartyResult | S2CPartyMember | S2CObjMark | S2CVendorSetup | S2CVendorList | S2CVendorClose | S2CVendorDetail | S2CSound | S2CHelpFlag | S2CBattleJoin | S2CHello | S2CPetSkillResult | S2CError | S2CAuthResult | S2CWorldReady | S2CLobbyReady | S2CSession | S2CAutoPlayState | S2CAccountInfo | S2CAccountResult | S2CServerList | S2CLineSelected | S2CCharListResult | S2CCharCreateResult | S2CSelf | S2CStatus | S2CEnterFloor | S2CMapData | S2CNpcList | S2CPosCorrect | S2CObjAppear | S2CObjDisappear | S2CObjMove | S2CObjTurn | S2CObjSprite | S2CNpcTalk | S2CNpcWindow | S2CShopWindow | S2CChatMsg | S2CPong | S2CBattleStart | S2CBattleTurn | S2CBattleEnd | S2CPets | S2CInventory;
 export type S2CType = S2C["t"];
 
 // 栏位的预设值表（fillDefaults 用）：i 数字、s 字串、b 布林、a 阵列、T:型别、A:型别阵列
 const SCHEMA: Record<string, [string, string][]> = {
-  CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"]],
+  CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"],["online","b"],["background","b"],["lineId","i"]],
   LineInfo: [["id","i"],["name","s"],["online","i"]],
   ServerGroup: [["name","s"],["lines","A:LineInfo"]],
   ObjInfo: [["id","i"],["kind","s"],["name","s"],["sprite","i"],["x","i"],["y","i"],["dir","i"],["level","i"],["leader","b"],["battle","i"],["help","b"],["action","i"],["family","s"],["trade","b"],["vendor","s"],["mind","i"]],
@@ -195,10 +198,12 @@ const SCHEMA: Record<string, [string, string][]> = {
   Sound: [["x","i"],["y","i"],["se","i"]],
   HelpFlag: [["on","b"]],
   BattleJoin: [["fighters","A:BattleFighter"],["resetPets","b"]],
-  Hello: [["version","s"],["serverTime","i"]],
+  Hello: [["version","s"],["serverTime","i"],["minimapReveal","b"]],
   PetSkillResult: [["ok","b"],["pet","i"],["skill","i"]],
   Error: [["code","s"],["message","s"]],
   AuthResult: [["ok","b"],["message","s"]],
+  WorldReady: [["resumed","b"]],
+  LobbyReady: [],
   Session: [["token","s"],["resumed","b"],["inWorld","b"]],
   AutoPlayState: [["encounter","b"],["autoBattle","b"],["quick","b"],["paused","b"],["reason","s"]],
   AccountInfo: [["account","s"],["created","s"],["chars","i"],["hasSecret","b"]],

@@ -2,6 +2,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Connection } from "../src/net.ts";
+import { Field } from "../src/field.ts";
+import type { Assets } from "../src/assets.ts";
 import type { C2S } from "../src/proto.gen.ts";
 
 type Timer = { at: number; run: () => void; interval: number };
@@ -40,7 +42,7 @@ function environment(t: any, stored = "") {
   Socket.all = [];
   const replacements: Record<string, any> = {
     WebSocket: Socket, document,
-    localStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value), removeItem: (key: string) => storage.delete(key) },
+    sessionStorage: { getItem: (key: string) => storage.get(key) ?? null, setItem: (key: string, value: string) => storage.set(key, value), removeItem: (key: string) => storage.delete(key) },
     addEventListener: window.addEventListener.bind(window), removeEventListener: window.removeEventListener.bind(window),
     setTimeout: clock.add, clearTimeout: clock.clear,
     setInterval: (run: () => void, delay: number) => clock.add(run, delay, delay), clearInterval: clock.clear,
@@ -177,7 +179,7 @@ test("terminal replacement stops reconnecting without clearing another tab's bea
   assert.equal(Socket.all.length, 1); assert.equal(reasons.length, 1); assert.equal(storage.get(storageKey), token); assert.equal(connection.recovering, false);
 });
 
-test("failed resume rejects readiness, stops timers, and cannot erase a newer localStorage token", async t => {
+test("failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token", async t => {
   const { connection, first, storage, clock } = environment(t, token); const failed = assert.rejects(connection.ready(), /会话已失效/);
   hello(first); storage.set(storageKey, "new-device-token");
   first.message({ t: "Error", code: "resume_failed", message: "invalid" }); await failed;
@@ -202,4 +204,64 @@ test("no-token Hello timeout fails once and late messages cannot restore abandon
   const staleMessage = first.onmessage!; clock.tick(8000); await failed;
   staleMessage({ data: JSON.stringify({ t: "Session", token, resumed: true, inWorld: true }) });
   assert.equal(sessions, 0); assert.equal(closes, 1); assert.equal(clock.timers.size, 0);
+});
+
+
+test("separate tabs do not inherit or overwrite another tab's actor credential", async t => {
+ const {connection,first,storage} = environment(t,token);
+ hello(first); session(first); await connection.ready();
+ const other = new Map<string,string>();
+ Object.defineProperty(globalThis,"sessionStorage",{configurable:true,writable:true,value:{getItem:(k:string)=>other.get(k)??null,setItem:(k:string,v:string)=>other.set(k,v),removeItem:(k:string)=>other.delete(k)}});
+ assert.equal(Connection.hasSession(url),false);
+ const secondConnection = new Connection(url);
+ const second = Socket.all[1]; hello(second); await secondConnection.ready();
+ assert.deepEqual(second.sent,[]);
+ secondConnection.send({t:"Login",account:"user",password:"digest"});
+ session(second,"another-tab-token",false);
+ assert.equal(other.get(storageKey),"another-tab-token");
+ assert.equal(storage.get(storageKey),token);
+ secondConnection.close();
+});
+
+test("legacy shared localStorage credential is discarded without implicit takeover", async t => {
+ const {connection,first} = environment(t);
+ const previous = Object.getOwnPropertyDescriptor(globalThis,"localStorage");
+ const legacy = new Map([[storageKey,token]]);
+ Object.defineProperty(globalThis,"localStorage",{configurable:true,value:{removeItem:(key:string)=>legacy.delete(key)}});
+ t.after(()=>{if(previous) Object.defineProperty(globalThis,"localStorage",previous);else Reflect.deleteProperty(globalThis,"localStorage");});
+ hello(first);await connection.ready();
+ const fresh = new Connection(url);
+ const socket=Socket.all[1];hello(socket);await fresh.ready();
+ assert.equal(legacy.has(storageKey),false);assert.deepEqual(socket.sent,[]);fresh.close();
+});
+
+
+test("repeated character switching releases Field handlers and ignores disposed actors", async t => {
+ const {connection,first}=environment(t);hello(first);await connection.ready();
+ const handlers=(connection as unknown as {handlers:Map<string,unknown[]>}).handlers;
+ const count=()=>[...handlers.values()].reduce((sum,list)=>sum+list.length,0);
+ const baseline=count();
+ const keep=connection.on("Self",()=>{});
+ for(let i=0;i<100;i++) {
+  const field=new Field({} as Assets,connection);
+  const active=count();assert.ok(active>baseline+1);
+  first.message({t:"Self",id:i+1,name:"active",sprite:100000});
+  assert.equal(field.self?.id,i+1);
+  field.dispose();field.dispose();
+  assert.equal(count(),baseline+1,"only Field-owned handlers must be removed");
+  first.message({t:"Self",id:1000,name:"next",sprite:100000});
+  assert.equal(field.self,null,"disposed Field must not consume a later character snapshot");
+ }
+ keep();assert.equal(count(),baseline);
+});
+
+test("unsubscribe preserves duplicate registrations and once removes its listener",async t=>{
+ const {connection,first}=environment(t);hello(first);await connection.ready();
+ let calls=0;const callback=()=>calls++;
+ const one=connection.on("Self",callback),two=connection.on("Self",callback);
+ one();one();first.message({t:"Self",id:1,name:"one",sprite:100000});assert.equal(calls,1);
+ two();first.message({t:"Self",id:2,name:"two",sprite:100000});assert.equal(calls,1);
+ const handlers=(connection as unknown as {handlers:Map<string,unknown[]>}).handlers;
+ const result=connection.once("Self");first.message({t:"Self",id:3,name:"three",sprite:100000});
+ assert.equal((await result).id,3);assert.equal(handlers.has("Self"),false);
 });

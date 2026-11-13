@@ -7,22 +7,22 @@
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
 
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=df0f1436dbbcc8a6";
-import { ItemWindow } from "./items.js?v=df0f1436dbbcc8a6";
-import { TradeWindow } from "./trade.js?v=df0f1436dbbcc8a6";
-import { ActionWindow } from "./actions.js?v=df0f1436dbbcc8a6";
-import { MailWindow } from "./mail.js?v=df0f1436dbbcc8a6";
-import { FamilyWindow } from "./family.js?v=df0f1436dbbcc8a6";
-import { PetWindow } from "./pets.js?v=df0f1436dbbcc8a6";
-import { MapWindow } from "./worldmap.js?v=df0f1436dbbcc8a6";
-import { md5 } from "./md5.js?v=df0f1436dbbcc8a6";
-import { VendorWindow } from "./vendor.js?v=df0f1436dbbcc8a6";
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=9fd0e82e0b4d0a7d";
+import { ItemWindow } from "./items.js?v=9fd0e82e0b4d0a7d";
+import { TradeWindow } from "./trade.js?v=9fd0e82e0b4d0a7d";
+import { ActionWindow } from "./actions.js?v=9fd0e82e0b4d0a7d";
+import { MailWindow } from "./mail.js?v=9fd0e82e0b4d0a7d";
+import { FamilyWindow } from "./family.js?v=9fd0e82e0b4d0a7d";
+import { PetWindow } from "./pets.js?v=9fd0e82e0b4d0a7d";
+import { MapWindow } from "./worldmap.js?v=9fd0e82e0b4d0a7d";
+import { md5 } from "./md5.js?v=9fd0e82e0b4d0a7d";
+import { VendorWindow } from "./vendor.js?v=9fd0e82e0b4d0a7d";
 
 
-import { AiWindow } from "./aisetting.js?v=df0f1436dbbcc8a6";
-import { GmWindow } from "./gm.js?v=df0f1436dbbcc8a6";
-import { QuestWindow } from "./quests.js?v=df0f1436dbbcc8a6";
-import { album } from "./album.js?v=df0f1436dbbcc8a6";
+import { AiWindow } from "./aisetting.js?v=9fd0e82e0b4d0a7d";
+import { GmWindow } from "./gm.js?v=9fd0e82e0b4d0a7d";
+import { QuestWindow } from "./quests.js?v=9fd0e82e0b4d0a7d";
+import { album } from "./album.js?v=9fd0e82e0b4d0a7d";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {

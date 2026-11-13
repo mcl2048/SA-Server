@@ -12,14 +12,15 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=df0f1436dbbcc8a6";
-import { sfx, setSfx } from "./audio.js?v=df0f1436dbbcc8a6";
+import { ANIM, findAction,                              } from "./assets.js?v=9fd0e82e0b4d0a7d";
+import { sfx, setSfx } from "./audio.js?v=9fd0e82e0b4d0a7d";
+import { isMobile } from "./mobile-view.js?v=9fd0e82e0b4d0a7d";
 
-import { battleItems } from "./items.js?v=df0f1436dbbcc8a6";
-import { album } from "./album.js?v=df0f1436dbbcc8a6";
+import { battleItems } from "./items.js?v=9fd0e82e0b4d0a7d";
+import { album } from "./album.js?v=9fd0e82e0b4d0a7d";
 
-import { smartChoose,                                  } from "./aismart.js?v=df0f1436dbbcc8a6";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=df0f1436dbbcc8a6";
+import { smartChoose,                                  } from "./aismart.js?v=9fd0e82e0b4d0a7d";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=9fd0e82e0b4d0a7d";
 
 // Legacy presentation metadata is optional: the current server computes these
 // internally but its BattleEvent wire schema/conversion omits them. Keep this
@@ -486,14 +487,19 @@ export class BattleScreen {
    * 再往下加速 12 帧落回原处，停 60 帧后消失，共 84 帧。stay 为真时是图示型的（Guard 等）原地不动。
    */
           popup(a         , now        , p                                                                               ) {
-    const x = a.x, y = a.y - 64 + (p.dy ?? 0), ui = this.host.ui;
+    const x = a.x, y = a.y - (p.text ? (isMobile() ? 150 : 128) : 64) + (p.dy ?? 0), ui = this.host.ui;
     this.fx.push({ at: now, ms: 84 * FRAME, draw: (_t, age) => {
       const f = age / FRAME;
       // 上升：第 i 帧移动 (24 − 2i)/4；落下对称
       const up = (n        ) => { const m = Math.min(12, Math.max(0, n)); return (24 * m - m * (m - 1)) / 4; };
       const yy = p.stay ? y : f < 12 ? y - up(f) : f < 24 ? y - 39 + (39 - up(24 - f)) : y;
       if (p.icon) ui.image(p.icon, x, yy);
-      if (p.text) ui.texts.push({ x, y: yy - 8, text: p.text, color: p.color ?? FONT.RED, align: "center" });
+      if (p.text) {
+        const size = isMobile() ? 30 : 20, width = Math.max(44, p.text.length * size * .7 + 16);
+        // Opaque backing keeps damage/healing readable over every battlefield.
+        ui.box(x - width / 2, yy - size / 2 - 10, x + width / 2, yy + size / 2 - 6, "#101b2a", true);
+        ui.texts.push({ x, y: yy - 8 - size / 2, text: p.text, size, color: p.color ?? "#ffb4ab", align: "center" });
+      }
     } });
   }
 
@@ -527,8 +533,11 @@ export class BattleScreen {
       case "stat": {
         // BD|…|d1 3..6："攻 上升N％" 绿字在目标 y-64（oft.cpp 5527-5600 damage_num 37-40）
         const t = this.fighters.get(e.target) ?? a;
-        const name = ["回避", "攻", "防", "敏"][e.stat - 37] ?? "";
-        steps.push(this.waitStep(350, (now) => { this.popup(t, now, { text: `${name} ${e.statVal > 0 ? "上升" : "下降"}${Math.abs(e.statVal)}％`, color: FONT.GREEN, dy: 16 }); }));
+        // Optional legacy metadata is absent on current wire events; do not
+        // fabricate a NaN percentage when connected to the current server.
+        if (e.stat === undefined || e.statVal === undefined) break;
+        const name = ["回避", "攻", "防", "敏"][e.stat - 37] ?? "", value = e.statVal;
+        steps.push(this.waitStep(350, (now) => { this.popup(t, now, { text: `${name} ${value > 0 ? "上升" : "下降"}${Math.abs(value)}％`, color: FONT.GREEN, dy: 16 }); }));
         break;
       }
       case "escape":
@@ -1144,7 +1153,8 @@ export class BattleScreen {
   }
 
   /** 攻击者头上的技能图示（set_damage_num 的图示型：目标 y-48，静止 84 帧） */
-          skillIcon(a         , code        , now        ) {
+          skillIcon(a         , code                    , now        ) {
+    if (code === undefined) return;
     const img = SKILL_ICON[code];
     if (!img) return;
     const x = a.x, y = a.y - 48;
@@ -1366,26 +1376,37 @@ export class BattleScreen {
     }
     for (const a of list) {
       // 头顶名字（BattleNameDisp：F11 开关，全部 20 人 "名字 LVn"，自己与自己的宠物黄字）；敌人的常显（原版要滑鼠移上去才显示）
-      if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - 96), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || this.petOwner(a) === this.me ? FONT.YELLOW : FONT.WHITE, align: "center" });
+      if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - (isMobile() ? 126 : 112)), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || this.petOwner(a) === this.me ? FONT.YELLOW : FONT.WHITE, align: "center" });
       // 异常状态动画（katino）
       if (a.status > 0 && !a.dead) this.animAt(STATUS_SPR[a.status], a.x, a.y - 64, now);
-      // 己方头顶的血条（HpMeterDisp）
-      if (a.f.slot >= 10 || a.dead || a.hp <= 0) continue;
-      const mx = Math.round(a.x), my = Math.round(a.y - 80);
-      ui.image(a.f.slot === this.me ? CG.BAR_PLAYER : CG.BAR_PET, mx, my);
-      const w = Math.round(a.hp / Math.max(1, a.f.maxHp) * 40);
-      ui.box(mx - 21, my - 3, mx - 21 + w, my - 1, SYS.GREEN, true);
-      if (a.f.slot === this.me) {
-        const m = Math.round(a.mp / Math.max(1, a.f.maxMp) * 40);
-        ui.box(mx - 21, my + 1, mx - 21 + m, my + 3, SYS.YELLOW, true);
+      // Resource cards stay in logical battle coordinates; larger mobile type
+      // compensates for the 800px stage fitting onto a phone. Ratios are clamped
+      // because damage snapshots and max-resource changes can cross in transit.
+      if (a.f.slot >= 10) continue;
+      const mobile = isMobile(), mx = Math.max(70, Math.min(730, Math.round(a.x)));
+      const my = Math.max(28, Math.round(a.y - 78));
+      this.resourceCard(mx, my, a.hp, a.f.maxHp, mobile, a.dead ? "倒地" : "HP");
+      if (a.f.slot === this.me && a.f.maxMp > 0) {
+        const ratio = Math.max(0, Math.min(1, a.mp / a.f.maxMp));
+        ui.box(mx - 52, my + 16, mx + 52, my + 21, "#101b2a", true);
+        ui.box(mx - 51, my + 17, mx - 51 + 102 * ratio, my + 20, "#9acaff", true);
       }
-      // 骑着宠物时下方再画骑宠的血条（HpMeterDisp：onRide > 0 时 meterX + 20、meterY + 25）
-      if (a.f.rideMaxHp > 0 && a.rideHp > 0) {
-        const rx = mx + 20, ry = my + 25;
-        ui.image(CG.BAR_PET, rx, ry);
-        ui.box(rx - 21, ry - 1, rx - 21 + Math.round(a.rideHp / a.f.rideMaxHp * 40), ry + 1, SYS.GREEN, true);
-      }
+      if (a.f.rideMaxHp > 0) this.resourceCard(mx + 16, my + 40, a.rideHp, a.f.rideMaxHp, mobile, "骑");
     }
+  }
+
+          resourceCard(x        , y        , hp        , maxHp        , mobile         , label        ) {
+    const ui = this.host.ui, value = Math.max(0, Math.min(maxHp, hp));
+    const ratio = Math.max(0, Math.min(1, value / Math.max(1, maxHp)));
+    const text = `${label} ${value}/${Math.max(0, maxHp)}`, size = mobile ? 24 : 16;
+    const width = Math.max(mobile ? 112 : 94, text.length * size * .57 + 12);
+    x = Math.max(width / 2 + 2, Math.min(798 - width / 2, x));
+    ui.box(x - width / 2, y - size / 2 - 3, x + width / 2, y + size / 2 + 7, "#101b2a", true);
+    ui.box(x - width / 2, y - size / 2 - 3, x + width / 2, y + size / 2 + 7, "#7496ad", false);
+    ui.box(x - width / 2 + 3, y + size / 2 + 1, x + width / 2 - 3, y + size / 2 + 5, "#33465c", true);
+    ui.box(x - width / 2 + 3, y + size / 2 + 1, x - width / 2 + 3 + (width - 6) * ratio, y + size / 2 + 5,
+      ratio <= .25 ? "#ffb4ab" : ratio <= .5 ? "#ffe08a" : "#70e0b5", true);
+    ui.texts.push({ x, y: y - size / 2, text, size, color: "#f4f8ff", align: "center" });
   }
 
   /** 画一个循环播放的动画（状态标记、飞行物） */
@@ -1694,7 +1715,7 @@ export class BattleScreen {
       ui.hitBox(x, y, x + w, y + h, id); // 敌人头上本来就常显名字与等级（drawFighters），滑过时不再画一次，否则两行叠在一起像重影
       // 拿着回力镖时整排一起亮（battlemenu.cpp BATTLE_BP_BOOMERANG：ACT_ATR_HIT_BOX_ALLn）
       if (boomerang && ui.hovered(id)) for (const o of this.fighters.values()) if (Math.floor(o.f.slot / 5) === Math.floor(a.f.slot / 5) && o !== a && !o.dead && !o.gone && o.rect) ui.box(o.rect[0] - 2, o.rect[1] - 2, o.rect[0] + o.rect[2] + 2, o.rect[1] + o.rect[3] + 2, boxColor(), false);
-      if (a.f.slot < 10 && ui.hovered(id)) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - 96), text: `${a.f.name} LV${a.f.level}`, color: FONT.YELLOW, align: "center" });
+      if (a.f.slot < 10 && ui.hovered(id)) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - (isMobile() ? 126 : 112)), text: `${a.f.name} LV${a.f.level}`, color: FONT.YELLOW, align: "center" });
       if (ui.clicked(id)) {
         sfx(217, 400); // BattleTargetSelect：选定目标
         const kind = this.capturing ? "capture" : "attack";

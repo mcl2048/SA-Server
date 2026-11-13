@@ -54,12 +54,13 @@ type Server struct {
 	Log     *slog.Logger
 	Origins []string // 允许的页面来源；为空时只允许同源
 	// MaxChars 是每个账号的角色位（config.yaml maxChars），0 用原版的 MaxChars
-	MaxChars int
+	MaxChars      int
+	MinimapReveal bool
 	// GMs 是 config.yaml 的 gms（小写）：这些账号名保留给管理员，还没注册的不让别人注册走
 	GMs map[string]bool
 
 	mu       sync.Mutex
-	online   map[int64]*accountSession // 角色 ID → 保留的逻辑会话（跨线路唯一）
+	online   map[int64]*characterActor // 角色 ID → 保留的逻辑会话（跨线路唯一）
 	accounts map[int64]*accountSession
 	tokens   map[[32]byte]*accountSession
 	limit    *authLimiter // 登录 / 注册的限速（懒建）
@@ -171,7 +172,7 @@ func (s *session) run(parent context.Context) {
 	s.cancel = cancel
 	defer cancel()
 	go s.writeLoop(ctx)
-	s.Send(&proto.Hello{Version: Version, ServerTime: int(time.Now().Unix())})
+	s.Send(&proto.Hello{Version: Version, ServerTime: int(time.Now().Unix()), MinimapReveal: s.srv.MinimapReveal})
 
 	tokens, last := float64(msgsPerSecond), time.Now()
 	for {
@@ -253,7 +254,13 @@ func (s *session) handle(ctx context.Context, m proto.Message) {
 	if s.state != nil {
 		s.state.mu.Lock()
 		defer s.state.mu.Unlock()
-		if s.state.controller != s {
+		if time.Now().After(s.state.expires) {
+			s.background()
+			s.state.controller = nil
+			s.Kick("session_revoked")
+			return
+		}
+		if s.state.controller != s || (s.char != nil && (s.state.actor == nil || s.state.actor.controller != s)) {
 			return
 		} // fence every stale socket command, not only Leave
 	}
@@ -262,6 +269,13 @@ func (s *session) handle(ctx context.Context, m proto.Message) {
 	}
 	if _, ok := m.(*proto.Logout); ok && s.account.ID != 0 {
 		s.logout()
+		return
+	}
+	if _, ok := m.(*proto.SwitchCharacter); ok && s.account.ID != 0 {
+		s.background()
+		s.state.actor = nil
+		s.Send(&proto.LobbyReady{})
+		s.sendServerList()
 		return
 	}
 	switch {
@@ -363,7 +377,7 @@ func (s *session) handleAuth(ctx context.Context, m proto.Message) {
 			s.Send(&proto.AuthResult{OK: false, Message: "服务器错误"})
 			return
 		}
-		if err := s.authenticate(a, "注册成功"); err != nil {
+		if err := s.authenticate(ctx, a, "注册成功", m.Password); err != nil {
 			s.Send(&proto.AuthResult{OK: false, Message: "服务器会话已满，请稍后重试"})
 		}
 	case *proto.ResetPassword:
@@ -426,7 +440,7 @@ func (s *session) handleAuth(ctx context.Context, m proto.Message) {
 		}
 		lim.ok(ipKey)
 		lim.ok(accKey)
-		if err := s.authenticate(a, "登录成功"); err != nil {
+		if err := s.authenticate(ctx, a, "登录成功", m.Password); err != nil {
 			s.Send(&proto.AuthResult{OK: false, Message: "服务器会话已满，请稍后重试"})
 		}
 	case *proto.Resume:
@@ -471,9 +485,13 @@ func (s *session) handleLobby(ctx context.Context, m proto.Message) {
 	case *proto.CharCreate:
 		s.createChar(ctx, m)
 	case *proto.CharDelete:
-		s.srv.mu.Lock()
-		online := s.srv.online[int64(m.ID)] != nil
-		s.srv.mu.Unlock()
+		// Validate ownership before inspecting or retiring the actor under this
+		// account's lock. Missing entities may still have a pending save fence.
+		if _, err := st.GetCharacter(ctx, s.account.ID, int64(m.ID)); err != nil {
+			s.fail("not_found", "角色不存在")
+			return
+		}
+		online := s.liveActor(int64(m.ID)) != nil
 		if online { // 同账号的另一条连线正用着这个角色：删了会留下幽灵实体、名字被放出去
 			s.fail("in_use", "这个角色正在游戏中，不能删除")
 			return
@@ -488,35 +506,61 @@ func (s *session) handleLobby(ctx context.Context, m proto.Message) {
 			s.fail("not_found", "角色不存在")
 			return
 		}
-		// Authentication has already transferred any live character. A fresh
-		// entry is serialized by accountSession.mu; never reuse stale DB state
-		// to replace a character that is still running in another world.
 		s.srv.mu.Lock()
 		if s.srv.online == nil {
-			s.srv.online = map[int64]*accountSession{}
+			s.srv.online = map[int64]*characterActor{}
 		}
-		occupied := s.srv.online[int64(m.ID)]
-		if occupied == nil || occupied == s.state {
-			s.srv.online[int64(m.ID)] = s.state
-		}
+		actor := s.srv.online[int64(m.ID)]
 		s.srv.mu.Unlock()
-		if occupied != nil && occupied != s.state {
-			s.fail("in_use", "角色仍在其他会话中")
-			return
-		}
-		c, err := st.GetCharacter(ctx, s.account.ID, int64(m.ID))
-		if err != nil {
+		if actor != nil {
+			// The account lock fences old commands, late detach and replacement.
+			if old := actor.controller; old != nil && old != s {
+				old.state.actor = nil
+				old.state.controller = nil
+				s.srv.mu.Lock()
+				delete(s.srv.tokens, old.state.hash)
+				s.srv.mu.Unlock()
+				delete(old.state.root.browsers, old.state)
+				old.Kick("session_replaced")
+			}
+			s.state.actor = actor
+			s.char, s.line = actor.char, actor.line
+			s.Send(&proto.WorldReady{Resumed: true})
+			if actor.line.World.Attach(int(actor.char.ID), actor.transport, s) {
+				actor.controller, actor.transport = s, s
+				return
+			}
+			// A GM may have removed the entity while its actor index remained.
+			// Retain this index as a persistence fence until Flush succeeds;
+			// otherwise a retry could bypass a timed-out save and load stale DB.
+			s.state.actor, s.char = nil, nil
+			actor.controller = nil
+			// Administrative Leave queues persistence asynchronously. Fence that
+			// save before loading a replacement entity from storage.
+			if !actor.line.World.Flush(5 * time.Second) {
+				s.Send(&proto.LobbyReady{})
+				s.sendServerList()
+				s.fail("saving", "角色状态正在保存，请稍后重新进入")
+				return
+			}
 			s.srv.mu.Lock()
-			if s.srv.online[int64(m.ID)] == s.state {
+			if s.srv.online[int64(m.ID)] == actor {
 				delete(s.srv.online, int64(m.ID))
 			}
 			s.srv.mu.Unlock()
+		}
+		c, err := st.GetCharacter(ctx, s.account.ID, int64(m.ID))
+		if err != nil {
 			s.fail("not_found", "角色不存在")
 			return
 		}
 		st.AddLogin(ctx, c.ID)
-		s.char = &c
-		s.state.char, s.state.line, s.state.transport = &c, s.line, s
+		actor = &characterActor{char: &c, line: s.line, transport: s, controller: s}
+		s.srv.mu.Lock()
+		s.srv.online[c.ID] = actor
+		s.srv.mu.Unlock()
+		s.char, s.state.actor = &c, actor
+		s.Send(&proto.WorldReady{})
 		s.line.World.Enter(c, s)
 	default:
 		s.fail("no_character", "请先选择角色")
@@ -617,22 +661,6 @@ func (s *session) handleWorld(m proto.Message) {
 	}
 }
 
-// leaveWorld is reserved for explicit logout; transport teardown uses Detach.
-// The accountSession mutex is held by the caller.
-func (s *session) leaveWorld() {
-	if s.char == nil || s.state == nil || s.state.controller != s {
-		return
-	}
-	c := s.char
-	s.line.World.Leave(int(c.ID), s)
-	s.srv.mu.Lock()
-	if s.srv.online[c.ID] == s.state {
-		delete(s.srv.online, c.ID)
-	}
-	s.srv.mu.Unlock()
-	s.char, s.state.char, s.state.line, s.state.transport = nil, nil, nil, nil
-}
-
 // validCharName：名字只能是字母（含中文）与数字。排除空白、控制字符、零宽字符（Cf）、标点，
 // 以及 "#"（删角色时名字改成 name#id，让别人先建同名的会撞到）。
 func validCharName(name string) bool {
@@ -660,7 +688,17 @@ func (s *session) sendCharList(ctx context.Context) {
 	}
 	out := proto.CharListResult{Chars: []proto.CharSummary{}, MaxChars: s.srv.maxChars()}
 	for _, c := range list {
-		out.Chars = append(out.Chars, summary(c))
+		view := summary(c)
+		actor := s.liveActor(c.ID)
+		if actor != nil {
+			view.Online = true
+			view.LineID = actor.line.ID
+			view.Background = actor.controller == nil
+			if live, ok := actor.line.World.CharacterSummary(int(c.ID)); ok {
+				view.Level, view.HP, view.Atk, view.Def, view.Agi, view.DP = live.Level, live.HP, live.Atk, live.Def, live.Agi, live.DP
+			}
+		}
+		out.Chars = append(out.Chars, view)
 	}
 	s.Send(&out)
 }

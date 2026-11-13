@@ -34,6 +34,7 @@ type aiPetDefinition struct {
 	Y           int    `json:"y"`
 	Image       int    `json:"image"`
 	Base        [4]int `json:"base"`
+	LegacyBase  [4]int `json:"legacyBase"` // v1 allocation, used only by saved-pet migration.
 	Attr        [4]int `json:"attr"`
 	Skills      []int  `json:"skills"`
 	Get         int    `json:"get"`
@@ -57,6 +58,19 @@ func decodeAIPets(raw []byte) (aiPetCatalog, error) {
 	}
 	return c, nil
 }
+
+// AIPetRebalance exposes only the stable migration allocations, from the same
+// embedded source used to create new pets. Unknown templates return false.
+func AIPetRebalance(temp int) (legacy, current [4]int, ok bool) {
+	for _, p := range aiPetRebalanceCatalog.Pets {
+		if p.Temp == temp {
+			return p.LegacyBase, p.Base, true
+		}
+	}
+	return legacy, current, false
+}
+
+var aiPetRebalanceCatalog, _ = decodeAIPets(aiPetCatalogJSON)
 
 func (d *BattleData) installAIPets() error {
 	if d.aiPetsInstalled {
@@ -104,7 +118,7 @@ func (d *BattleData) installAIPets() error {
 			sum += v
 			attr += p.Attr[i]
 		}
-		if sum > 104 || attr != 100 || p.Get < 0 || p.Get > 40 || p.Normal[0] < 2 || p.Normal[1] < p.Normal[0] || p.Normal[1] > 100 || len(p.Skills) < 2 || len(p.Skills) > 7 || !slices.Contains(p.Skills, 1) || !slices.Contains(p.Skills, 2) || p.YoungWeight < 10 || p.YoungWeight > 15 || p.WildWeight < 1 || p.YoungWeight+p.WildWeight >= 100 || p.Image <= 0 || p.Name == "" {
+		if sum != 149 || attr != 100 || p.Get < 0 || p.Get > 40 || p.Normal[0] < 2 || p.Normal[1] < p.Normal[0] || p.Normal[1] > 100 || len(p.Skills) < 2 || len(p.Skills) > 7 || !slices.Contains(p.Skills, 1) || !slices.Contains(p.Skills, 2) || p.YoungWeight < 10 || p.YoungWeight > 15 || p.WildWeight < 1 || p.YoungWeight+p.WildWeight >= 100 || p.Image <= 0 || p.Name == "" {
 			return fmt.Errorf("invalid mechanical pet %s", p.Key)
 		}
 		for _, id := range p.Skills {
@@ -117,7 +131,7 @@ func (d *BattleData) installAIPets() error {
 		d.Skills[id] = s
 	}
 	for _, p := range c.Pets {
-		t := &EnemyTemp{TempNo: p.Temp, Name: p.Name, Image: p.Image, InitNum: 28, LvUpPoint: 4, Base: p.Base, Attr: p.Attr, Get: p.Get, ModAI: 300, Slot: 6, LimitLevel: 0, Rare: 2, Critical: 5, Counter: 5, Status: [6]int{5, 5, 5, 5, 5, 5}, Skills: [7]int{-1, -1, -1, -1, -1, -1, -1}}
+		t := &EnemyTemp{TempNo: p.Temp, Name: p.Name, Image: p.Image, InitNum: 40, LvUpPoint: 4, Base: p.Base, Attr: p.Attr, Get: p.Get, ModAI: 300, Slot: 6, LimitLevel: 0, Rare: 2, Critical: 5, Counter: 5, Status: [6]int{5, 5, 5, 5, 5, 5}, Skills: [7]int{-1, -1, -1, -1, -1, -1, -1}}
 		copy(t.Skills[:], p.Skills)
 		d.Temps[p.Temp] = t
 		for _, variant := range []struct{ id, lo, hi int }{{p.Enemy, 1, 1}, {p.WildEnemy, p.Normal[0], p.Normal[1]}} {

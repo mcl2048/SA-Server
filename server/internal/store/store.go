@@ -8,6 +8,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"net/url"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -112,6 +114,8 @@ type Store interface {
 	// AllCharacters 列出所有没删除的角色（开机时换算旧存档用）；SaveExpPets 只写回经验与宠物栏
 	AllCharacters(ctx context.Context) ([]Character, error)
 	SaveExpPets(ctx context.Context, charID int64, exp int, pets string) error
+	// MigrateExpPets 原子更新经验/宠物与迁移标记；同值标记已存在时不重复写入。仅用于开机、世界开始写入前。
+	MigrateExpPets(ctx context.Context, chars []Character, key, value string) error
 	PutKV(ctx context.Context, key, value string) error
 	PutMail(ctx context.Context, to int64, body string) error
 	TakeMails(ctx context.Context, to int64) ([]string, error)
@@ -194,26 +198,75 @@ var migrations = []string{
 	`ALTER TABLE characters ADD COLUMN luck_time INTEGER NOT NULL DEFAULT 0`,
 	`ALTER TABLE accounts ADD COLUMN secret BLOB NOT NULL DEFAULT X''`,
 	`ALTER TABLE characters ADD COLUMN trans_eq INTEGER NOT NULL DEFAULT 0`,
+	`CREATE INDEX IF NOT EXISTS mails_recipient ON mails(to_char, id)`,
+	`CREATE INDEX IF NOT EXISTS characters_duel ON characters(dp DESC, id) WHERE deleted = 0`,
 }
 
 // OpenSQLite 打开（必要时创建）数据库文件。
 func OpenSQLite(path string) (Store, error) {
-	db, err := sql.Open("sqlite", "file:"+path+"?_pragma=journal_mode(WAL)&_pragma=busy_timeout(5000)&_pragma=foreign_keys(1)")
+	// Treat path as a filename, not a URI: '?' and '#' must not inject DSN options.
+	filename := "file::memory:"
+	if path != ":memory:" {
+		absolute, err := filepath.Abs(path)
+		if err != nil {
+			return nil, err
+		}
+		filename = (&url.URL{Scheme: "file", Path: filepath.ToSlash(absolute)}).String()
+	}
+	// Each connection gets identical settings. IMMEDIATE reserves the writer before
+	// read/modify/write transactions, avoiding WAL snapshot-upgrade races.
+	db, err := sql.Open("sqlite", filename+"?_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)&_pragma=foreign_keys(1)&_pragma=synchronous(FULL)&_txlock=immediate")
 	if err != nil {
 		return nil, err
 	}
-	db.SetMaxOpenConns(1) // SQLite 单写者；M1 的写入量很小
-	if _, err := db.Exec(schema); err != nil {
+	db.SetMaxOpenConns(1) // 单机小写入量；并非 HA，也不保证复合操作原子性。
+	db.SetMaxIdleConns(1)
+	var journalMode string
+	if err := db.QueryRow(`PRAGMA journal_mode`).Scan(&journalMode); err != nil {
 		db.Close()
-		return nil, fmt.Errorf("建表：%w", err)
+		return nil, fmt.Errorf("检查日志模式：%w", err)
 	}
-	for _, m := range migrations {
-		if _, err := db.Exec(m); err != nil && !strings.Contains(err.Error(), "duplicate column") {
-			db.Close()
-			return nil, fmt.Errorf("升级表结构：%w", err)
-		}
+	if path != ":memory:" && journalMode != "wal" {
+		db.Close()
+		return nil, fmt.Errorf("数据库未启用 WAL：%s", journalMode)
+	}
+	if err := migrate(db); err != nil {
+		db.Close()
+		return nil, err
 	}
 	return &sqliteStore{db}, nil
+}
+
+// migrate is all-or-nothing, including on existing databases. Do not silently
+// ignore arbitrary ALTER errors: only skip columns verified in the catalog.
+func migrate(db *sql.DB) error {
+	tx, err := db.Begin()
+	if err != nil {
+		return fmt.Errorf("开始表结构升级：%w", err)
+	}
+	defer tx.Rollback()
+	if _, err := tx.Exec(schema); err != nil {
+		return fmt.Errorf("建表：%w", err)
+	}
+	for _, m := range migrations {
+		if strings.HasPrefix(m, "ALTER TABLE ") {
+			fields := strings.Fields(m) // migration strings are internal constants
+			var count int
+			if err := tx.QueryRow(`SELECT count(*) FROM pragma_table_info(?) WHERE name = ?`, fields[2], fields[5]).Scan(&count); err != nil {
+				return fmt.Errorf("检查表结构：%w", err)
+			}
+			if count != 0 {
+				continue
+			}
+		}
+		if _, err := tx.Exec(m); err != nil {
+			return fmt.Errorf("升级表结构：%w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("提交表结构：%w", err)
+	}
+	return nil
 }
 
 // passwordKey 是存进 pass_hash 的内容：客户端已经把密码算成 MD5（32 位十六进制，session.go 检查格式），服务端照存、照比对，
@@ -249,8 +302,20 @@ func (s *sqliteStore) ResetPassword(ctx context.Context, name, secret, password 
 	if subtle.ConstantTimeCompare(stored, passwordKey(secret)) != 1 {
 		return ErrBadLogin
 	}
-	_, err = s.db.ExecContext(ctx, `UPDATE accounts SET pass_hash = ?, pass_salt = X'' WHERE id = ?`, passwordKey(password), id)
-	return err
+	// The secret may have changed since the read above. Compare it again in the
+	// write itself so a request verified with an obsolete secret cannot succeed.
+	res, err := s.db.ExecContext(ctx, `UPDATE accounts SET pass_hash = ?, pass_salt = X'' WHERE id = ? AND secret = ?`, passwordKey(password), id, stored)
+	if err != nil {
+		return err
+	}
+	n, err := res.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
+		return ErrBadLogin
+	}
+	return nil
 }
 
 // AccountInfo 是账号的基本资料。
@@ -418,6 +483,47 @@ func (s *sqliteStore) SaveExpPets(ctx context.Context, charID int64, exp int, pe
 	return err
 }
 
+// MigrateExpPets commits every converted character together with the completion
+// marker. Recheck the marker under the writer lock so concurrent startup attempts
+// cannot overwrite a completed migration with a separately computed snapshot.
+func (s *sqliteStore) MigrateExpPets(ctx context.Context, chars []Character, key, value string) error {
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	var current string
+	err = tx.QueryRowContext(ctx, `SELECT value FROM kv WHERE key = ?`, key).Scan(&current)
+	if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return err
+	}
+	if err == nil && current == value {
+		return nil
+	}
+	stmt, err := tx.PrepareContext(ctx, `UPDATE characters SET exp=?, pets=? WHERE id=? AND deleted=0`)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+	for _, c := range chars {
+		res, err := stmt.ExecContext(ctx, c.Exp, c.Pets, c.ID)
+		if err != nil {
+			return err
+		}
+		n, err := res.RowsAffected()
+		if err != nil {
+			return err
+		}
+		if n != 1 {
+			return fmt.Errorf("迁移角色 %d：%w", c.ID, ErrNotFound)
+		}
+	}
+	if _, err := tx.ExecContext(ctx, `INSERT INTO kv(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value`, key, value); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
 func (s *sqliteStore) SaveProgress(ctx context.Context, c Character) error {
 	_, err := s.db.ExecContext(ctx, `UPDATE characters SET level=?, exp=?, dp=?, charm=?, hp=?, mp=?, points=?,
 		vital=?, str=?, tgh=?, dex=?, earth=?, water=?, fire=?, wind=?, trans=?, gold=?, items=?, elder=?, savepoints=?, fame=?, pool=?, endevent=?, nowevent=?, pets=?, magic=?, addexp=?, pig=?, addressbook=?, family=?,
@@ -453,18 +559,27 @@ func (s *sqliteStore) DengonPosts(ctx context.Context, board string, fromID, toI
 	return out, rows.Err()
 }
 
-// AddDengon 写入下一个编号，并删掉超出 DengonKeep 的旧留言（原版环形档案会被覆盖）。单一连线，编号不会撞。
+// AddDengon 原子分配编号、写入并裁剪；单连接本身无法防止多 goroutine 的语句交错。
 func (s *sqliteStore) AddDengon(ctx context.Context, board, text string) (int, error) {
-	id, err := s.DengonMaxID(ctx, board)
+	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return 0, err
 	}
-	id++
-	if _, err := s.db.ExecContext(ctx, `INSERT INTO dengon(board, id, text) VALUES(?,?,?)`, board, id, text); err != nil {
+	defer tx.Rollback()
+	var id int
+	if err := tx.QueryRowContext(ctx, `SELECT COALESCE(MAX(id), 0) + 1 FROM dengon WHERE board = ?`, board).Scan(&id); err != nil {
 		return 0, err
 	}
-	_, err = s.db.ExecContext(ctx, `DELETE FROM dengon WHERE board = ? AND id <= ?`, board, id-DengonKeep)
-	return id, err
+	if _, err := tx.ExecContext(ctx, `INSERT INTO dengon(board, id, text) VALUES(?,?,?)`, board, id, text); err != nil {
+		return 0, err
+	}
+	if _, err := tx.ExecContext(ctx, `DELETE FROM dengon WHERE board = ? AND id <= ?`, board, id-DengonKeep); err != nil {
+		return 0, err
+	}
+	if err := tx.Commit(); err != nil {
+		return 0, err
+	}
+	return id, nil
 }
 
 func (s *sqliteStore) Close() error { return s.db.Close() }
@@ -475,20 +590,30 @@ func isUnique(err error) bool { return strings.Contains(err.Error(), "UNIQUE") }
 const MailMax = 50
 
 func (s *sqliteStore) PutMail(ctx context.Context, to int64, body string) error {
-	var n int
-	if err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM mails WHERE to_char = ?`, to).Scan(&n); err != nil {
+	// A conditional INSERT enforces capacity in one atomic statement.
+	res, err := s.db.ExecContext(ctx, `INSERT INTO mails(to_char, body, created_at)
+		SELECT ?, ?, ? WHERE (SELECT COUNT(*) FROM mails WHERE to_char = ?) < ?`, to, body, time.Now().Unix(), to, MailMax)
+	if err != nil {
 		return err
 	}
-	if n >= MailMax {
+	n, err := res.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
 		return ErrMailFull
 	}
-	_, err := s.db.ExecContext(ctx, `INSERT INTO mails(to_char, body, created_at) VALUES(?,?,?)`, to, body, time.Now().Unix())
-	return err
+	return nil
 }
 
 // TakeMails 按寄出的顺序取出 to 的邮件并删掉；超过 MailKeep 的不要了。
 func (s *sqliteStore) TakeMails(ctx context.Context, to int64) ([]string, error) {
-	rows, err := s.db.QueryContext(ctx, `SELECT body FROM mails WHERE to_char = ? AND created_at >= ? ORDER BY id LIMIT ?`, to, time.Now().Add(-MailKeep).Unix(), MailMax)
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback()
+	rows, err := tx.QueryContext(ctx, `SELECT body FROM mails WHERE to_char = ? AND created_at >= ? ORDER BY id LIMIT ?`, to, time.Now().Add(-MailKeep).Unix(), MailMax)
 	if err != nil {
 		return nil, err
 	}
@@ -501,9 +626,20 @@ func (s *sqliteStore) TakeMails(ctx context.Context, to int64) ([]string, error)
 		}
 		out = append(out, b)
 	}
-	rows.Close()
-	_, err = s.db.ExecContext(ctx, `DELETE FROM mails WHERE to_char = ?`, to)
-	return out, err
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return nil, err
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if _, err := tx.ExecContext(ctx, `DELETE FROM mails WHERE to_char = ?`, to); err != nil {
+		return nil, err
+	}
+	if err := tx.Commit(); err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 // MailKeep 是邮件保留多久（原版 AC 的 MAIL_EXPIRE_TIME 只有 1 小时、上线补送又有错，这里照宠物邮件的 3 天）。

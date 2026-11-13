@@ -8,20 +8,23 @@ import (
 )
 
 type CharSummary struct {
-	ID       int    `json:"id,omitempty"`
-	Name     string `json:"name,omitempty"`
-	Sprite   int    `json:"sprite,omitempty"`
-	Face     int    `json:"face,omitempty"`
-	Level    int    `json:"level,omitempty"`
-	HP       int    `json:"hp,omitempty"`
-	Atk      int    `json:"atk,omitempty"`
-	Def      int    `json:"def,omitempty"`
-	Agi      int    `json:"agi,omitempty"`
-	Charm    int    `json:"charm,omitempty"`
-	DP       int    `json:"dp,omitempty"`
-	Attrs    []int  `json:"attrs,omitempty"`
-	Logins   int    `json:"logins,omitempty"`
-	Hometown int    `json:"hometown,omitempty"`
+	ID         int    `json:"id,omitempty"`
+	Name       string `json:"name,omitempty"`
+	Sprite     int    `json:"sprite,omitempty"`
+	Face       int    `json:"face,omitempty"`
+	Level      int    `json:"level,omitempty"`
+	HP         int    `json:"hp,omitempty"`
+	Atk        int    `json:"atk,omitempty"`
+	Def        int    `json:"def,omitempty"`
+	Agi        int    `json:"agi,omitempty"`
+	Charm      int    `json:"charm,omitempty"`
+	DP         int    `json:"dp,omitempty"`
+	Attrs      []int  `json:"attrs,omitempty"`
+	Logins     int    `json:"logins,omitempty"`
+	Hometown   int    `json:"hometown,omitempty"`
+	Online     bool   `json:"online,omitempty"`
+	Background bool   `json:"background,omitempty"`
+	LineID     int    `json:"lineId,omitempty"`
 }
 
 type LineInfo struct {
@@ -651,6 +654,11 @@ type GmDetailReq struct {
 
 func (*GmDetailReq) MsgType() string { return "GmDetailReq" }
 
+type SwitchCharacter struct {
+}
+
+func (*SwitchCharacter) MsgType() string { return "SwitchCharacter" }
+
 type Logout struct {
 }
 
@@ -878,8 +886,9 @@ type BattleJoin struct {
 func (*BattleJoin) MsgType() string { return "BattleJoin" }
 
 type Hello struct {
-	Version    string `json:"version,omitempty"`
-	ServerTime int    `json:"serverTime,omitempty"`
+	Version       string `json:"version,omitempty"`
+	ServerTime    int    `json:"serverTime,omitempty"`
+	MinimapReveal bool   `json:"minimapReveal,omitempty"`
 }
 
 func (*Hello) MsgType() string { return "Hello" }
@@ -905,6 +914,17 @@ type AuthResult struct {
 }
 
 func (*AuthResult) MsgType() string { return "AuthResult" }
+
+type WorldReady struct {
+	Resumed bool `json:"resumed,omitempty"`
+}
+
+func (*WorldReady) MsgType() string { return "WorldReady" }
+
+type LobbyReady struct {
+}
+
+func (*LobbyReady) MsgType() string { return "LobbyReady" }
 
 type Session struct {
 	Token   string `json:"token,omitempty"`
@@ -1318,6 +1338,8 @@ func DecodeClient(data []byte) (Message, error) {
 		m = &QuestReq{}
 	case "GmDetailReq":
 		m = &GmDetailReq{}
+	case "SwitchCharacter":
+		m = &SwitchCharacter{}
 	case "Logout":
 		m = &Logout{}
 	default:

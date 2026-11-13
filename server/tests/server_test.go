@@ -212,17 +212,21 @@ func TestTwoPlayers(t *testing.T) {
 		t.Fatalf("世界聊天：%v", cm)
 	}
 
-	// New-device password login takes over the live character on its current
-	// line, without re-entering from the database or selecting another line.
+	// Password authentication leaves Bob's actor and browser running.
 	b2 := dial(t, url)
 	b2.send(&proto.Login{Account: "bob01", Password: testPw})
 	if auth := b2.expect("AuthResult"); auth["ok"] != true {
-		t.Fatalf("takeover authentication failed: %v", auth)
+		t.Fatal(auth)
 	}
-	marker := b2.expect("Session")
-	if marker["inWorld"] != true || marker["resumed"] != true {
-		t.Fatalf("live takeover must return a world Session: %v", marker)
+	if marker := b2.expect("Session"); marker["inWorld"] == true {
+		t.Fatalf("login unexpectedly took over: %v", marker)
 	}
+	b2.expect("ServerList")
+	b.send(&proto.QuestReq{})
+	b.expect("QuestLog")
+	b2.send(&proto.SelectLine{ID: 2})
+	b2.expect("LineSelected")
+	b2.send(&proto.CharEnter{ID: idB}) // Resumes the actor on line one, despite selecting line two.
 	if self := b2.expect("Self"); num(self, "id") != idB {
 		t.Fatalf("takeover changed character: %v", self)
 	}
@@ -235,26 +239,24 @@ func TestTwoPlayers(t *testing.T) {
 		t.Fatalf("takeover did not preserve nearby identity: %v", cm)
 	}
 
-	// Changing lines requires explicit logout. Keep the original isolation
-	// assertion by leaving line one, authenticating again and entering line two.
+	// Logout preserves Bob on line one. A different character may run on line two.
 	b2.send(&proto.Logout{})
-	if loggedOut := b2.expect("Session"); loggedOut["token"] != nil && loggedOut["token"] != "" {
-		t.Fatalf("logout did not revoke recovery: %v", loggedOut)
+	if marker := b2.expect("Session"); marker["token"] != nil && marker["token"] != "" {
+		t.Fatal(marker)
 	}
-	a.expect("ObjDisappear", func(m map[string]any) bool { return strings.Contains(toJSON(m), itoa(idB)) })
 	b2.send(&proto.Login{Account: "bob01", Password: testPw})
-	if auth := b2.expect("AuthResult"); auth["ok"] != true {
-		t.Fatalf("relogin failed: %v", auth)
-	}
-	if marker := b2.expect("Session"); marker["inWorld"] == true {
-		t.Fatalf("explicit logout retained world session: %v", marker)
-	}
+	b2.expect("AuthResult")
+	b2.expect("Session")
 	b2.expect("ServerList")
 	b2.send(&proto.SelectLine{ID: 2})
 	b2.expect("LineSelected")
-	b2.send(&proto.CharEnter{ID: idB})
+	b2.send(validCreate("鲍勃二号"))
+	created := b2.expect("CharCreateResult")
+	if created["ok"] != true {
+		t.Fatal(created)
+	}
+	b2.send(&proto.CharEnter{ID: num(created, "id")})
 	b2.expect("EnterFloor")
-
 	// 鲍勃已在二线：一线的 a 听不到二线的附近聊天。
 	b2.send(&proto.Chat{Channel: "near", Text: "二线的人听得到"})
 	b2.expect("ChatMsg") // 自己的回显

@@ -3,7 +3,7 @@
   "types": {
     "CharSummary": [["id", "int"], ["name", "string"], ["sprite", "int"], ["face", "int"], ["level", "int"],
       ["hp", "int"], ["atk", "int"], ["def", "int"], ["agi", "int"], ["charm", "int"], ["dp", "int"],
-      ["attrs", "int[]"], ["logins", "int"], ["hometown", "int"]],
+      ["attrs", "int[]"], ["logins", "int"], ["hometown", "int"], ["online", "bool"], ["background", "bool"], ["lineId", "int"]],
     "LineInfo": [["id", "int"], ["name", "string"], ["online", "int"]],
     "ServerGroup": [["name", "string"], ["lines", "LineInfo[]"]],
     "ObjInfo": [["id", "int"], ["kind", "string"], ["name", "string"], ["sprite", "int"], ["x", "int"], ["y", "int"], ["dir", "int"], ["level", "int"],
@@ -98,6 +98,7 @@
     "GmListReq": [["kind", "string"]],
     "QuestReq": [],
     "GmDetailReq": [["kind", "string"], ["id", "int"]],
+    "SwitchCharacter": [],
     "Logout": []
   },
   "s2c": {
@@ -134,10 +135,12 @@
     "Sound": [["x", "int"], ["y", "int"], ["se", "int"]],
     "HelpFlag": [["on", "bool"]],
     "BattleJoin": [["fighters", "BattleFighter[]"], ["resetPets", "bool"]],
-    "Hello": [["version", "string"], ["serverTime", "int"]],
+    "Hello": [["version", "string"], ["serverTime", "int"], ["minimapReveal", "bool"]],
     "PetSkillResult": [["ok", "bool"], ["pet", "int"], ["skill", "int"]],
     "Error": [["code", "string"], ["message", "string"]],
     "AuthResult": [["ok", "bool"], ["message", "string"]],
+    "WorldReady": [["resumed", "bool"]],
+    "LobbyReady": [],
     "Session": [["token", "string"], ["resumed", "bool"], ["inWorld", "bool"]],
     "AutoPlayState": [["encounter", "bool"], ["autoBattle", "bool"], ["quick", "bool"], ["paused", "bool"], ["reason", "string"]],
     "AccountInfo": [["account", "string"], ["created", "string"], ["chars", "int"], ["hasSecret", "bool"]],

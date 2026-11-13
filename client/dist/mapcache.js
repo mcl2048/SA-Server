@@ -29,7 +29,10 @@ export async function loadFloor(floor        , ver         )                    
       const req = d.transaction(STORE, "readonly").objectStore(STORE).get(floor);
       req.onsuccess = () => {
         const r = req.result                         ;
-        resolve(r && (!ver || r.ver === ver) ? r : null);
+        resolve(r && Number.isInteger(r.w) && Number.isInteger(r.h) && r.w > 0 && r.h > 0 && r.w * r.h <= 4_000_000
+          && r.tiles instanceof Uint16Array && r.objs instanceof Uint16Array && r.walk instanceof Uint8Array
+          && r.tiles.length === r.w * r.h && r.objs.length === r.tiles.length && r.walk.length === r.tiles.length
+          && (!ver || r.ver === ver) ? r : null);
       };
       req.onerror = () => resolve(null);
     } catch { resolve(null); }

@@ -19,20 +19,21 @@ import (
 
 // 文件里的相对路径都以 config.yaml 所在的目录为准。
 type Config struct {
-	Warnings []string    `yaml:"-"`       // 读设定时发现的问题（写错层级、不认得的项目），开机时记进日志
-	Addr     string      `yaml:"addr"`    // 监听地址
-	Data     string      `yaml:"data"`    // 原版 gmsv 数据（含 map/ 与 npc/）
-	DB       string      `yaml:"db"`      // SQLite 数据库文件
-	Assets   string      `yaml:"assets"`  // 导出的网页资源（tools/asset-export 生成）
-	Client   string      `yaml:"client"`  // client/embedded/空值用内嵌页面；./client 或自定义路径用外部 index.html 与 dist/
-	Origins  []string    `yaml:"origins"` // 额外允许的页面来源（默认只允许同源）
-	GMs      []string    `yaml:"gms"`     // GM 的账号名（可以多个）：有 GM 指令选单、能用 GM 指令
-	Groups   []LineGroup `yaml:"groups"`  // 大区与线路
-	TLSCert  string      `yaml:"tlsCert"` // 给了就用 HTTPS / WSS（PEM 证书与私钥；对外时账号密码才不是明文）
-	TLSKey   string      `yaml:"tlsKey"`
-	Log      string      `yaml:"log"`      // 日志等级：debug / info / warn / error
-	MaxChars int         `yaml:"maxChars"` // 每个账号的角色位（原版 2）
-	Rules    RulesConfig `yaml:"rules"`    // 游戏规则（world.Rules）
+	MinimapReveal int         `yaml:"minimapReveal"` // 0 探索显示，1 全图显示（默认0）
+	Warnings      []string    `yaml:"-"`             // 读设定时发现的问题（写错层级、不认得的项目），开机时记进日志
+	Addr          string      `yaml:"addr"`          // 监听地址
+	Data          string      `yaml:"data"`          // 原版 gmsv 数据（含 map/ 与 npc/）
+	DB            string      `yaml:"db"`            // SQLite 数据库文件
+	Assets        string      `yaml:"assets"`        // 导出的网页资源（tools/asset-export 生成）
+	Client        string      `yaml:"client"`        // client/embedded/空值用内嵌页面；./client 或自定义路径用外部 index.html 与 dist/
+	Origins       []string    `yaml:"origins"`       // 额外允许的页面来源（默认只允许同源）
+	GMs           []string    `yaml:"gms"`           // GM 的账号名（可以多个）：有 GM 指令选单、能用 GM 指令
+	Groups        []LineGroup `yaml:"groups"`        // 大区与线路
+	TLSCert       string      `yaml:"tlsCert"`       // 给了就用 HTTPS / WSS（PEM 证书与私钥；对外时账号密码才不是明文）
+	TLSKey        string      `yaml:"tlsKey"`
+	Log           string      `yaml:"log"`      // 日志等级：debug / info / warn / error
+	MaxChars      int         `yaml:"maxChars"` // 每个账号的角色位（原版 2）
+	Rules         RulesConfig `yaml:"rules"`    // 游戏规则（world.Rules）
 }
 
 // RulesConfig 是 config.yaml 的 rules，对应 world.Rules（时间都以秒为单位）。没写的项目用原版的值。
@@ -160,6 +161,11 @@ func checkKeys(b []byte, file string, cfg *Config) error {
 	top, rules := yamlKeys(reflect.TypeOf(Config{})), yamlKeys(reflect.TypeOf(RulesConfig{}))
 	for k, v := range raw {
 		switch {
+		case k == "minimapReveal":
+			n, ok := v.(int)
+			if !ok || (n != 0 && n != 1) {
+				return fmt.Errorf("%s：minimapReveal 必须是整数 0 或 1", file)
+			}
 		case top[k]:
 		case rules[k]:
 			one, _ := yaml.Marshal(map[string]any{k: v})
