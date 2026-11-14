@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-02/verify-delivery.py", line 33, in <module>
+    assert inputs == {str(p.relative_to(ROOT)): sha(p.read_bytes()) for p in files}, 'client build is not repeatable'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: client build is not repeatable
+{"binary_sha256": "a8affd30c1058c8c1710538a7d413ee84d38b4d1a35fff75a9f56f00fd677157", "checks_exit_code": 1, "sigterm_sent": true, "exit_code": 0}

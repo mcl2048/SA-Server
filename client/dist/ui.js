@@ -4,7 +4,7 @@
 
 
 
-import { isMobile } from "./mobile-view.js?v=408f23f7bef662b4";
+import { isMobile } from "./mobile-view.js?v=bfc86541ebbec063";
 
 export const OFFSET_640                   = [80, 60];
 
@@ -34,9 +34,15 @@ export function boxColor(now = performance.now())         {
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
 
 
+
+
+
+
 /** Native windows describe only their currently drawn slots. The mobile view
  * rearranges these records; each action still requires its original live hit.
  */
+
+
 
 
 
@@ -281,10 +287,9 @@ export class Ui {
 
   pic(canvas                   , x        , y        ) { this.pics.push({ canvas, x, y }); }
 
-  /** A stable native pose lets fullscreen windows retain the actual model while
-   * their text and controls reflow. The ordinary animated draw stays unchanged. */
-  mobilePortrait(image        , rawIndex = false)       {
-    if (isMobile()) this.portraits.push({image,rawIndex});
+  /** The skin owns playback so native animation ticks cannot churn DOM layout. */
+  mobilePortrait(image        , rawIndex = false, animation                          )       {
+    if (isMobile()) this.portraits.push({image,rawIndex,...(animation ? {animation} : {})});
   }
 
   mobileCard(card            )       {
@@ -292,8 +297,8 @@ export class Ui {
   }
 
   /** Labels baked into native background art must remain explicit on reflow. */
-  mobileInfo(lines          , nativeTextX         )       {
-    if (isMobile()) this.panelInfo = {lines,nativeTextX};
+  mobileInfo(lines          , nativeTextX         , stats                    )       {
+    if (isMobile()) this.panelInfo = {lines,nativeTextX,...(stats ? {stats} : {})};
   }
 
   box(x1        , y1        , x2        , y2        , color        , fill         ) {

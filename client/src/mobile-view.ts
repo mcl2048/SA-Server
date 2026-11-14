@@ -13,6 +13,9 @@ if (validMode(query)) mode = query;
 let mobile = false, scene = false, loginArtwork = false, zoom = 1, panX = 0, panY = 0, fit = 1, frame = 0;
 let display: MobileDisplayMode = "classic", context: MobileContext = "lobby";
 let focusX = 400, focusY = 300, focusAt = 0;
+// Easing is presentation state. Keep the current native subject separately so
+// a narrow viewport/rotation never inherits an obsolete interpolation origin.
+let targetFocusX = 400, targetFocusY = 300, viewportWidth = 0, viewportHeight = 0;
 const validDisplay = (value: string | null): value is MobileDisplayMode => value === "classic" || value === "immersive";
 try { if (browser) { const saved = localStorage.getItem("sa-mobile-display"); if (validDisplay(saved)) display = saved; } } catch { /* In-memory mode remains available. */ }
 const displayQuery = new URLSearchParams(typeof location === "undefined" ? "" : location.search).get("view");
@@ -69,12 +72,19 @@ export function setMobileContext(value: MobileContext): void {
   if (browser) document.dispatchEvent(new Event("sa-mobile-gesture"));
   scheduleLayout();
 }
-/** Smooth camera movement is elapsed-time based, bounded after a suspended tab,
- * and disabled for reduced motion. Manual pan remains independent of the focus.
+/** Smooth only while the native subject remains visible. A new offscreen
+ * subject must be revealed immediately; reduced motion always uses its position.
  */
 export function setSceneFocus(x: number, y: number, now = typeof performance === "undefined" ? 0 : performance.now()): void {
   if (!Number.isFinite(x) || !Number.isFinite(y)) return;
-  const snap = focusAt === 0; // A newly visible scene must reveal its player/target immediately.
+  targetFocusX=x;targetFocusY=y;
+  let snap = focusAt === 0;
+  if(!snap && isImmersive() && (context==="field" || context==="battle")){
+    const width=window.visualViewport?.width ?? innerWidth,height=window.visualViewport?.height ?? innerHeight;
+    const current=immersiveScene(width,height,focusX,focusY,zoom);
+    const px=current.left+x*current.scale,py=current.top+y*current.scale,margin=Math.min(48,width/4,height/4);
+    snap=px<margin || px>width-margin || py<margin || py>height-margin;
+  }
   const dt = focusAt ? Math.max(0, Math.min(80, now - focusAt)) : 80;
   focusAt = now;
   const k = snap || browser && matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 1 - Math.exp(-dt / 140);
@@ -99,7 +109,11 @@ export function setMobileScene(active: boolean): void {
 }
 /** Zoom is relative to fit: 1 always means full width/height for this orientation. */
 export function setSceneZoom(value: number): void {
-  if (Number.isFinite(value)) { zoom = Math.max(isImmersive() ? 1 : .5, Math.min(4, value)); scheduleLayout(); }
+  if (Number.isFinite(value)) {
+    zoom = Math.max(isImmersive() ? 1 : .5, Math.min(4, value));
+    if(isImmersive()){focusX=targetFocusX;focusY=targetFocusY;panX=panY=0;}
+    scheduleLayout();
+  }
 }
 export function getSceneZoom(): number { return zoom; }
 export function resetSceneView(): void { zoom = 1; panX = panY = 0; scheduleLayout(); }
@@ -133,15 +147,18 @@ function layout(): void {
   const root = document.getElementById("mobile-root"), viewport = document.getElementById("mobile-viewport"), stage = document.querySelector<HTMLElement>(".stage");
   if (!root || !viewport || !stage) return;
   const visual = window.visualViewport;
-  // Counter browser page magnification for the control surface. Two-finger game
-  // gestures below instead magnify just the stage, leaving every control fixed.
+  // Keep the control surface in the visual viewport, including browser keyboard
+  // and page magnification changes. Fullscreen game zoom uses buttons only.
   const width = visual?.width ?? innerWidth, height = visual?.height ?? innerHeight;
+  const resized=width!==viewportWidth || height!==viewportHeight;
+  viewportWidth=width;viewportHeight=height;
   root.style.width = `${width}px`; root.style.height = `${height}px`;
   root.style.left = `${visual?.offsetLeft ?? 0}px`; root.style.top = `${visual?.offsetTop ?? 0}px`;
   // Fullscreen is a device-space presentation, including NPC/menu/login panels.
   // Native content is reflowed inside its game window by MobileShell; returning
   // to 4:3 rails here would turn every dialog into an outside webpage again.
   const cropped = isImmersive();
+  if(cropped && resized){focusX=targetFocusX;focusY=targetFocusY;panX=panY=0;focusAt=0;}
   const g = cropped ? { landscape: width > height, width, height, left: 0, top: 0, rail: 0 } : mobileGeometry(width, height);
   const nextOrientation = g.landscape ? "landscape" : "portrait";
   if (orientation !== nextOrientation) {
@@ -198,11 +215,13 @@ if (browser) {
       if (!mobile || e.pointerType !== "touch") return;
       touches.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (touches.size === 2) {
-        const [a, b] = pair();
-        initialDistance = Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)); initialZoom = zoom;
-        const rect = document.querySelector<HTMLElement>(".stage")!.getBoundingClientRect();
-        anchorX = ((a.x + b.x) / 2 - rect.left) * 800 / rect.width;
-        anchorY = ((a.y + b.y) / 2 - rect.top) * 600 / rect.height;
+        if(!isImmersive()){
+          const [a, b] = pair();
+          initialDistance = Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)); initialZoom = zoom;
+          const rect = document.querySelector<HTMLElement>(".stage")!.getBoundingClientRect();
+          anchorX = ((a.x + b.x) / 2 - rect.left) * 800 / rect.width;
+          anchorY = ((a.y + b.y) / 2 - rect.top) * 600 / rect.height;
+        }
         gesturing = true;
         document.dispatchEvent(new Event("sa-mobile-gesture"));
         for (const id of touches.keys()) viewport.setPointerCapture(id);
@@ -214,15 +233,15 @@ if (browser) {
       touches.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (!gesturing) return;
       e.preventDefault(); e.stopPropagation();
+      // Consume two-finger input and cancel native holds, but leave fullscreen
+      // camera zoom/pan untouched. Only explicit zoom buttons can change it.
+      if(isImmersive())return;
       if (touches.size < 2) return;
       const [a, b] = pair();
-      zoom = Math.max(isImmersive() ? 1 : .5, Math.min(4, initialZoom * Math.hypot(a.x - b.x, a.y - b.y) / initialDistance));
+      zoom = Math.max(.5, Math.min(4, initialZoom * Math.hypot(a.x - b.x, a.y - b.y) / initialDistance));
       const r = viewport.getBoundingClientRect(), scale = fit * zoom;
       panX = (a.x + b.x) / 2 - r.left - r.width / 2 - (anchorX - 400) * scale;
       panY = (a.y + b.y) / 2 - r.top - r.height / 2 - (anchorY - 300) * scale;
-      if (isImmersive() && (context === "field" || context === "battle")) {
-        panX += (focusX - 400) * scale; panY += (focusY - 300) * scale;
-      }
       scheduleLayout();
     }, { capture: true });
     const finish = (e: PointerEvent) => {

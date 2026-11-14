@@ -1,0 +1,12 @@
+✔ fullscreen inventory exposes explicit equipment/use actions, images and authoritative categories (10.589724ms)
+✔ primary actions revalidate live item availability, preserve self use and explicit unequip (1.923305ms)
+✔ classic and desktop retain their existing pickup and double-click behavior (6.01857ms)
+✔ explicit fullscreen actions and slot pickup both remain reachable in the actual native hit stack (6.359143ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 430.063595

@@ -2,6 +2,8 @@
 
 
 
+
+
 // These are existing game CG numbers, shared with menus.ts/fieldpanel.ts/battle.ts.
 // Presentation is deliberately independent of native hit IDs and game state.
 const ICONS                                   = {
@@ -37,13 +39,34 @@ export class MobileNativeSkin {
           portrait                        = null;
   // At most twelve 192×176 static poses; large decoded atlas pages are discarded.
                    poses = new Map                      ();
+  // Two recently selected actions, at most 32 bounded RGBA/PNG frames each.
+  // Long actions sample frames while retaining their original cycle duration.
+                   animations = new Map                            ();
+          revision = 0;
+          playback                  = null;
+          animationFrame = 0;
+                   motion                       ;
 
-  constructor(assets                            ) { this.assets = assets; }
+  constructor(assets                            ) {
+    this.assets = assets;
+    this.motion=typeof matchMedia==="function" ? matchMedia("(prefers-reduced-motion: reduce)") : null;
+    this.motion?.addEventListener?.("change",()=>this.resumePlayback());
+    document.addEventListener?.("visibilitychange",()=>this.resumePlayback());
+  }
 
-  clearPortrait()       { this.portrait=null; }
+  clearPortrait()       {
+    if(this.portrait)this.portrait.target.hidden=true;
+    this.portrait=null;this.revision++;this.playback=null;this.stopFrame();
+  }
 
   sync(root             , portrait                        )                {
-    if(portrait!==undefined)this.portrait=portrait;
+    if(portrait!==undefined){
+      const previous=this.portrait;
+      if(previous?.image!==portrait?.image || previous?.rawIndex!==portrait?.rawIndex
+        || previous?.target!==portrait?.target || previous?.animation?.key!==portrait?.animation?.key){
+        this.clearPortrait();this.portrait=portrait;
+      }
+    }
     this.dirty.add(root);
     // Several changed native frames may arrive while a page is decoding. A
     // single worker coalesces them and discovers new buttons after its await;
@@ -63,6 +86,23 @@ export class MobileNativeSkin {
 
           async paintPortrait()                {
     const selection=this.portrait;if(!selection)return;
+    const revision=this.revision;
+    if(selection.animation && selection.animation.frames.length>1){
+      const animationKey=`${selection.rawIndex}:${selection.animation.key}`;
+      if(!this.animations.has(animationKey)){
+        const pose=await this.makeAnimation(selection,revision);
+        if(this.revision!==revision)return;
+        this.animations.set(animationKey,pose);
+        if(this.animations.size>2)this.animations.delete(this.animations.keys().next().value );
+      }
+      const pose=this.animations.get(animationKey);
+      if(pose){
+        if(this.playback?.revision!==revision){
+          this.playback={pose,selection,revision,startedAt:performance.now()};this.resumePlayback();
+        }
+        return;
+      }
+    }
     const key=`${selection.rawIndex ? "raw" : "cg"}:${selection.image}`;
     if(!this.poses.has(key)){
       let source               =null;
@@ -81,10 +121,71 @@ export class MobileNativeSkin {
     }
     // A model may finish decoding after Next/Previous/Close. Never resurrect
     // the old pet or album entry after the player's newer native selection.
-    if(this.portrait?.image!==selection.image || this.portrait.rawIndex!==selection.rawIndex
-      || this.portrait.target!==selection.target)return;
+    if(this.revision!==revision)return;
     const source=this.poses.get(key);
     if(source){if(selection.target.src!==source)selection.target.src=source;selection.target.hidden=false;}
+  }
+
+          stopFrame()       {
+    if(this.animationFrame)cancelAnimationFrame(this.animationFrame);
+    this.animationFrame=0;
+  }
+
+          resumePlayback()       {
+    this.stopFrame();
+    if(!this.playback || document.hidden)return;
+    this.playback.startedAt=performance.now();
+    this.advance(this.playback.startedAt);
+  }
+
+          advance = (now        )       => {
+    this.animationFrame=0;
+    const current=this.playback;
+    if(!current || this.revision!==current.revision || document.hidden)return;
+    const {pose,selection}=current;
+    const index=this.motion?.matches ? 0 : Math.floor(Math.max(0,now-current.startedAt)/pose.frameMs)%pose.sources.length;
+    const source=pose.sources[index];
+    if(selection.target.src!==source)selection.target.src=source;
+    selection.target.hidden=false;
+    if(!this.motion?.matches && typeof requestAnimationFrame==="function")this.animationFrame=requestAnimationFrame(this.advance);
+  };
+
+          async makeAnimation(selection                , revision        )                               {
+    const animation=selection.animation ,count=animation.frames.length,samples=Math.min(32,count);
+    const bounded                                                                                =[];
+    const crops=new Map                                                                                  ();
+    let left=Infinity,top=Infinity,right=-Infinity,bottom=-Infinity;
+    try {
+      for(let i=0;i<samples;i++){
+        const [image,fx,fy]=animation.frames[Math.floor(i*count/samples)];
+        let crop=crops.get(image);
+        if(!crop){
+          const decoded=image<0 ? null : await this.assets.imageCanvas(image,selection.rawIndex);
+          if(this.revision!==revision)return null;
+          if(!decoded)return null; // Fall back to the regular first pose if art is incomplete.
+          const [original,ox,oy]=decoded,scale=Math.min(1,192/original.width,176/original.height);
+          const canvas=document.createElement("canvas");
+          canvas.width=Math.max(1,Math.round(original.width*scale));canvas.height=Math.max(1,Math.round(original.height*scale));
+          const context=canvas.getContext("2d");if(!context)return null;
+          context.imageSmoothingEnabled=false;context.drawImage(original,0,0,canvas.width,canvas.height);
+          // Native timelines often repeat image IDs with different offsets.
+          // Retain only the bounded crop, never decode its complete atlas twice.
+          crop={canvas,ox,oy,width:original.width,height:original.height};crops.set(image,crop);
+        }
+        const x=crop.ox+fx,y=crop.oy+fy;
+        bounded.push({canvas:crop.canvas,left:x,top:y,width:crop.width,height:crop.height});
+        left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x+crop.width);bottom=Math.max(bottom,y+crop.height);
+      }
+      const scale=Math.min(1,192/(right-left),176/(bottom-top)),sources         =[];
+      for(const frame of bounded){
+        const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round((right-left)*scale));canvas.height=Math.max(1,Math.round((bottom-top)*scale));
+        const context=canvas.getContext("2d");if(!context)return null;
+        context.imageSmoothingEnabled=false;
+        context.drawImage(frame.canvas,(frame.left-left)*scale,(frame.top-top)*scale,frame.width*scale,frame.height*scale);
+        sources.push(canvas.toDataURL());
+      }
+      return {sources,frameMs:Math.max(1,animation.ticks)*(1000/60)*count/samples};
+    } catch {return null;}
   }
 
           async paint(root             )                {

@@ -1,0 +1,83 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","matrix_step":"desktop-enter"}
+{"variant":"final","matrix_step":"desktop-authenticated"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-status"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-item"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-pet"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-map"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-system"}
+{"variant":"final","matrix_case":"separate desktop context and native mouse menus"}
+{"variant":"final","matrix_case":"classic 320x568"}
+{"variant":"final","matrix_case":"classic 390x844"}
+{"variant":"final","matrix_case":"classic 430x932"}
+{"variant":"final","matrix_case":"classic 844x390"}
+{"variant":"final","matrix_case":"classic 568x320"}
+{"variant":"final","matrix_case":"classic native items"}
+{"variant":"final","matrix_case":"classic native pets"}
+{"variant":"final","matrix_case":"classic native status"}
+{"variant":"final","matrix_case":"classic native quests"}
+{"variant":"final","matrix_case":"classic native map"}
+{"variant":"final","matrix_case":"classic native system"}
+{"variant":"final","matrix_case":"immersive 320x568"}
+{"variant":"final","matrix_case":"immersive 390x844"}
+{"variant":"final","matrix_case":"immersive 430x932"}
+{"variant":"final","matrix_case":"immersive 844x390"}
+{"variant":"final","matrix_case":"immersive 568x320"}
+{"variant":"final","matrix_case":"immersive native items"}
+{"variant":"final","matrix_case":"immersive native pets"}
+{"variant":"final","matrix_case":"immersive native status"}
+{"variant":"final","matrix_case":"immersive native quests"}
+{"variant":"final","matrix_case":"immersive native map"}
+{"variant":"final","matrix_case":"immersive native system"}
+{"variant":"final","matrix_case":"adaptive native items 320x568"}
+{"variant":"final","matrix_case":"adaptive native pets 320x568"}
+{"variant":"final","matrix_case":"adaptive native status 320x568"}
+{"variant":"final","matrix_case":"adaptive native quests 320x568"}
+{"variant":"final","matrix_case":"adaptive native map 320x568"}
+{"variant":"final","matrix_case":"adaptive native system 320x568"}
+{"variant":"final","matrix_case":"adaptive native items 390x844"}
+{"variant":"final","matrix_case":"adaptive native pets 390x844"}
+{"variant":"final","matrix_case":"adaptive native status 390x844"}
+{"variant":"final","matrix_case":"adaptive native quests 390x844"}
+{"variant":"final","matrix_case":"adaptive native map 390x844"}
+{"variant":"final","matrix_case":"adaptive native system 390x844"}
+{"variant":"final","matrix_case":"adaptive native items 430x932"}
+{"variant":"final","matrix_case":"adaptive native pets 430x932"}
+{"variant":"final","matrix_case":"adaptive native status 430x932"}
+{"variant":"final","matrix_case":"adaptive native quests 430x932"}
+{"variant":"final","matrix_case":"adaptive native map 430x932"}
+{"variant":"final","matrix_case":"adaptive native system 430x932"}
+{"variant":"final","matrix_case":"adaptive native items 844x390"}
+{"variant":"final","matrix_case":"adaptive native pets 844x390"}
+{"variant":"final","matrix_case":"adaptive native status 844x390"}
+{"variant":"final","matrix_case":"adaptive native quests 844x390"}
+{"variant":"final","matrix_case":"adaptive native map 844x390"}
+{"variant":"final","matrix_case":"adaptive native system 844x390"}
+{"variant":"final","matrix_case":"adaptive native items 568x320"}
+{"variant":"final","matrix_case":"adaptive native pets 568x320"}
+{"variant":"final","matrix_case":"adaptive native status 568x320"}
+{"variant":"final","matrix_case":"adaptive native quests 568x320"}
+{"variant":"final","matrix_case":"adaptive native map 568x320"}
+{"variant":"final","matrix_case":"adaptive native system 568x320"}
+{"variant":"final","matrix_case":"native item CG, selected pet model and cancelled rename input"}
+{"variant":"final","matrix_case":"real touch pans the native map without navigation"}
+{"variant":"final","matrix_case":"native map touch cancellation and precise tap navigation"}
+{"variant":"final","matrix_case":"pet basic list, native animated detail and reduced motion"}
+{"variant":"final","matrix_case":"native status avatar, four attributes, expanded detail and party page"}
+{"variant":"final","matrix_case":"real equipment image, explicit equip and unequip with server acknowledgement"}
+{"variant":"final","matrix_case":"real HP recovery image, target, consumption and Status"}
+{"variant":"final","matrix_case":"real MP recovery image, target, consumption and Status"}
+{"variant":"final","matrix_case":"real unusable letter retains its image and exposes no use operation"}
+{"variant":"final","matrix_case":"native +1 updates exactly once and exhausted points remove operations"}
+{"variant":"final","matrix_case":"field player remains visible through rotation 390x844"}
+{"variant":"final","matrix_case":"field player remains visible through rotation 844x390"}
+{"variant":"final","matrix_case":"field player remains visible through rotation 320x568"}
+{"variant":"final","matrix_case":"field player remains visible through rotation 568x320"}
+{"variant":"final","matrix_case":"field player remains visible through rotation 430x932"}
+{"variant":"final","matrix_case":"field visible zoom +, − and reset remain functional"}
+{"variant":"final","matrix_case":"field real two-finger spread and translation preserve camera and game intent"}
+{"variant":"final","matrix_case":"real joystick move and release"}
+{"variant":"final","matrix_case":"production short-screen drawer touch scroll"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-02/browser/final-field-game.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

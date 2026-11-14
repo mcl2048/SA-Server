@@ -1,0 +1,7536 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "screen": {
+        "width": 1280,
+        "height": 900
+      },
+      "mobile": false,
+      "stage": {
+        "x": 40,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "stageInBody": true,
+      "backing": {
+        "width": 1200,
+        "height": 900
+      }
+    },
+    {
+      "case": "classic 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": -0.0000152587890625,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "viewport": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 72.00001525878906,
+        "y": 1,
+        "width": 424,
+        "height": 317.9999694824219
+      },
+      "viewport": {
+        "x": 72,
+        "y": 1,
+        "width": 424,
+        "height": 318
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic native items",
+      "context": "panel",
+      "buttons": 35,
+      "closed": true
+    },
+    {
+      "case": "classic native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "classic native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "classic native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "classic native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "classic native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -240,
+        "y": -32,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 568
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -367.6666259765625,
+        "y": 0,
+        "width": 1125.333251953125,
+        "height": 844
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -406.33331298828125,
+        "y": 0,
+        "width": 1242.6666259765625,
+        "height": 932
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 932
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": 0.000030517578125,
+        "y": -146.8125,
+        "width": 844,
+        "height": 632.9999389648438
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 568,
+        "height": 320
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive native items",
+      "context": "panel",
+      "buttons": 47,
+      "closed": true
+    },
+    {
+      "case": "immersive native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "immersive native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "immersive native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "immersive native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "immersive native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "adaptive native items 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 202.5,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 173,
+          "y": 202.5,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 51,
+          "y": 346,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 173,
+          "y": 346,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 51,
+          "y": 489.5,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 173,
+          "y": 489.5,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 633,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 173,
+          "y": 633,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 51,
+          "y": 776.5,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 173,
+          "y": 776.5,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-9",
+          "x": 173,
+          "y": 901.6875,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-10",
+          "x": 51,
+          "y": 993.1875,
+          "w": 96,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 173,
+          "y": 993.1875,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-11",
+          "x": 173,
+          "y": 1118.375,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 1209.875,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-12",
+          "x": 51,
+          "y": 1335.0625,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-13",
+          "x": 173,
+          "y": 1209.875,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-13",
+          "x": 173,
+          "y": 1335.0625,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-14",
+          "x": 51,
+          "y": 1426.5625,
+          "w": 96,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 173,
+          "y": 1426.5625,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-15",
+          "x": 173,
+          "y": 1551.75,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-16",
+          "x": 51,
+          "y": 1643.25,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-16",
+          "x": 51,
+          "y": 1768.4375,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-17",
+          "x": 173,
+          "y": 1643.25,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-17",
+          "x": 173,
+          "y": 1768.4375,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1859.9375,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-18",
+          "x": 51,
+          "y": 1985.125,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-19",
+          "x": 173,
+          "y": 1859.9375,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-19",
+          "x": 173,
+          "y": 1985.125,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-20",
+          "x": 51,
+          "y": 2076.625,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-20",
+          "x": 51,
+          "y": 2201.8125,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-21",
+          "x": 173,
+          "y": 2076.625,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 51,
+          "y": 2293.3125,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-22",
+          "x": 51,
+          "y": 2418.5,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-23",
+          "x": 173,
+          "y": 2293.3125,
+          "w": 96,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-23",
+          "x": 173,
+          "y": 2418.5,
+          "w": 96,
+          "h": 44
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 2609.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 164,
+          "y": 2609.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 2665.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 164,
+          "y": 2665.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 2721.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 164,
+          "y": 2721.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 2777.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 2833.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 2889.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 2945.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 3001.5,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 2425.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 2609.5,
+        "w": 236,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9",
+            "inv-act-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11",
+            "inv-act-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12",
+            "inv-act-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13",
+            "inv-act-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15",
+            "inv-act-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16",
+            "inv-act-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17",
+            "inv-act-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18",
+            "inv-act-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19",
+            "inv-act-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20",
+            "inv-act-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22",
+            "inv-act-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23",
+            "inv-act-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 343,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 393,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 505,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 555,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 667,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 717,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 829,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 879,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 986,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 164,
+          "y": 986,
+          "w": 114,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 802
+      },
+      "actions": {
+        "x": 42,
+        "y": 986,
+        "w": 236,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 1191.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 1247.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 164,
+          "y": 1247.5,
+          "w": 114,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 1007.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 1191.5,
+        "w": 236,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 329.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-tab1",
+          "x": 164,
+          "y": 329.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 396.6875,
+          "w": 236,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 463.875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 145.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 329.5,
+        "w": 236,
+        "h": 182.375
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 556.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 164,
+          "y": 556.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 612.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 164,
+          "y": 612.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 668.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 164,
+          "y": 668.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 724.71875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 780.71875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 836.71875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 372.71875
+      },
+      "actions": {
+        "x": 42,
+        "y": 556.71875,
+        "w": 236,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 164,
+          "y": 272.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "sys-hide",
+          "x": 164,
+          "y": 328.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 395.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 164,
+          "y": 395.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 451.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 164,
+          "y": 451.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 507.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 164,
+          "y": 507.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 563.6875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 619.6875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 675.6875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 236,
+        "h": 451.1875
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 202.5,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 155.65625,
+          "y": 202.5,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 260.328125,
+          "y": 202.5,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 346,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 155.65625,
+          "y": 346,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 260.328125,
+          "y": 346,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 489.5,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 155.65625,
+          "y": 489.5,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 260.328125,
+          "y": 489.5,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 633,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-9",
+          "x": 51,
+          "y": 776.1875,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-10",
+          "x": 155.65625,
+          "y": 633,
+          "w": 78.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 260.328125,
+          "y": 633,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-11",
+          "x": 260.328125,
+          "y": 776.1875,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 867.6875,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-12",
+          "x": 51,
+          "y": 1010.875,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-13",
+          "x": 155.65625,
+          "y": 867.6875,
+          "w": 78.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-act-13",
+          "x": 155.65625,
+          "y": 1011.0625,
+          "w": 78.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-14",
+          "x": 260.328125,
+          "y": 867.6875,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 1102.5625,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-15",
+          "x": 51,
+          "y": 1245.75,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-16",
+          "x": 155.65625,
+          "y": 1102.5625,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-16",
+          "x": 155.65625,
+          "y": 1245.75,
+          "w": 78.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-17",
+          "x": 260.328125,
+          "y": 1102.5625,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-17",
+          "x": 260.328125,
+          "y": 1245.75,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1337.25,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-18",
+          "x": 51,
+          "y": 1480.4375,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-19",
+          "x": 155.65625,
+          "y": 1337.25,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-19",
+          "x": 155.65625,
+          "y": 1480.4375,
+          "w": 78.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-20",
+          "x": 260.328125,
+          "y": 1337.25,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-act-20",
+          "x": 260.328125,
+          "y": 1480.625,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1572.125,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-22",
+          "x": 155.65625,
+          "y": 1572.125,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-22",
+          "x": 155.65625,
+          "y": 1715.3125,
+          "w": 78.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-23",
+          "x": 260.328125,
+          "y": 1572.125,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-act-23",
+          "x": 260.328125,
+          "y": 1715.5,
+          "w": 78.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1906.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 199,
+          "y": 1906.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1962.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 199,
+          "y": 1962.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 2018.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 199,
+          "y": 2018.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 2074.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 2130.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 2186.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 2242.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 2298.5,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 1722.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 1906.5,
+        "w": 306,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9",
+            "inv-act-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11",
+            "inv-act-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12",
+            "inv-act-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13",
+            "inv-act-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15",
+            "inv-act-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16",
+            "inv-act-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17",
+            "inv-act-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18",
+            "inv-act-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19",
+            "inv-act-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20",
+            "inv-act-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22",
+            "inv-act-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23",
+            "inv-act-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 325,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 375,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 469,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 519,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 613,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 663,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 757,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 807,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 896,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 199,
+          "y": 896,
+          "w": 149,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 896,
+        "w": 306,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 1080,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 1136,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 199,
+          "y": 1136,
+          "w": 149,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 896
+      },
+      "actions": {
+        "x": 42,
+        "y": 1080,
+        "w": 306,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 304,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 199,
+          "y": 304,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 360,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 416,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 304,
+        "w": 306,
+        "h": 160
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 589.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 199,
+          "y": 589.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 645.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 199,
+          "y": 645.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 701.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 199,
+          "y": 701.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 757.171875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 813.171875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 869.171875,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 405.171875
+      },
+      "actions": {
+        "x": 42,
+        "y": 589.171875,
+        "w": 306,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 199,
+          "y": 272.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 199,
+          "y": 328.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 384.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 199,
+          "y": 384.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 440.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 199,
+          "y": 440.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 496.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 199,
+          "y": 496.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 552.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 608.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 664.5,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 306,
+        "h": 440
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 202.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 169,
+          "y": 202.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 287,
+          "y": 202.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 346,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 169,
+          "y": 346,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 287,
+          "y": 346,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 489.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 169,
+          "y": 489.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 287,
+          "y": 489.5,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 633,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-9",
+          "x": 51,
+          "y": 758.1875,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-10",
+          "x": 169,
+          "y": 633,
+          "w": 92,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 287,
+          "y": 633,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-11",
+          "x": 287,
+          "y": 758.1875,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 849.6875,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-12",
+          "x": 51,
+          "y": 974.875,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-13",
+          "x": 169,
+          "y": 849.6875,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-13",
+          "x": 169,
+          "y": 974.875,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-14",
+          "x": 287,
+          "y": 849.6875,
+          "w": 92,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 1066.375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-15",
+          "x": 51,
+          "y": 1191.5625,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-16",
+          "x": 169,
+          "y": 1066.375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-16",
+          "x": 169,
+          "y": 1191.5625,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-17",
+          "x": 287,
+          "y": 1066.375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-17",
+          "x": 287,
+          "y": 1191.5625,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1283.0625,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-18",
+          "x": 51,
+          "y": 1408.25,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-19",
+          "x": 169,
+          "y": 1283.0625,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-19",
+          "x": 169,
+          "y": 1408.25,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-20",
+          "x": 287,
+          "y": 1283.0625,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-20",
+          "x": 287,
+          "y": 1408.25,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1499.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 169,
+          "y": 1499.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-22",
+          "x": 169,
+          "y": 1624.9375,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-23",
+          "x": 287,
+          "y": 1499.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-23",
+          "x": 287,
+          "y": 1624.9375,
+          "w": 92,
+          "h": 44
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1790.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 219,
+          "y": 1790.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1846.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 219,
+          "y": 1846.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 1902.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 219,
+          "y": 1902.4375,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 1958.4375,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 2014.4375,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 2070.4375,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 2126.4375,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 2182.4375,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 1606.4375
+      },
+      "actions": {
+        "x": 42,
+        "y": 1790.4375,
+        "w": 346,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9",
+            "inv-act-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11",
+            "inv-act-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12",
+            "inv-act-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13",
+            "inv-act-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15",
+            "inv-act-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16",
+            "inv-act-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17",
+            "inv-act-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18",
+            "inv-act-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19",
+            "inv-act-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20",
+            "inv-act-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22",
+            "inv-act-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23",
+            "inv-act-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 325,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 375,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 469,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 519,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 613,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 663,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 757,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 807,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 896,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 219,
+          "y": 896,
+          "w": 169,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 896,
+        "w": 346,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 1054.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 1110.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 219,
+          "y": 1110.5,
+          "w": 169,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 870.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 1054.5,
+        "w": 346,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 304,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 219,
+          "y": 304,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 360,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 416,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 304,
+        "w": 346,
+        "h": 160
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 622.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 219,
+          "y": 622.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 678.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 219,
+          "y": 678.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 734.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 219,
+          "y": 734.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 790.296875,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 846.296875,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 902.296875,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 438.296875
+      },
+      "actions": {
+        "x": 42,
+        "y": 622.296875,
+        "w": 346,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 219,
+          "y": 272.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 219,
+          "y": 328.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 384.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 219,
+          "y": 384.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 440.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 219,
+          "y": 440.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 496.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 219,
+          "y": 496.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 552.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 608.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 664.5,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 346,
+        "h": 440
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 172.5,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 174.65625,
+          "y": 172.5,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 298.328125,
+          "y": 172.5,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 316,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 174.65625,
+          "y": 316,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 298.328125,
+          "y": 316,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 459.5,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 174.65625,
+          "y": 459.5,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 298.328125,
+          "y": 459.5,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 603,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-9",
+          "x": 51,
+          "y": 728.1875,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-10",
+          "x": 174.65625,
+          "y": 603,
+          "w": 97.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 298.328125,
+          "y": 603,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-11",
+          "x": 298.328125,
+          "y": 728.1875,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 819.6875,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-12",
+          "x": 51,
+          "y": 944.875,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-13",
+          "x": 174.65625,
+          "y": 819.6875,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-13",
+          "x": 174.65625,
+          "y": 944.875,
+          "w": 97.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-14",
+          "x": 298.328125,
+          "y": 819.6875,
+          "w": 97.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 1036.375,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-15",
+          "x": 51,
+          "y": 1161.5625,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-16",
+          "x": 174.65625,
+          "y": 1036.375,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-16",
+          "x": 174.65625,
+          "y": 1161.5625,
+          "w": 97.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-17",
+          "x": 298.328125,
+          "y": 1036.375,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-17",
+          "x": 298.328125,
+          "y": 1161.5625,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1253.0625,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-18",
+          "x": 51,
+          "y": 1378.25,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-19",
+          "x": 174.65625,
+          "y": 1253.0625,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-19",
+          "x": 174.65625,
+          "y": 1378.25,
+          "w": 97.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-20",
+          "x": 298.328125,
+          "y": 1253.0625,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-20",
+          "x": 298.328125,
+          "y": 1378.25,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1469.75,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 174.65625,
+          "y": 1469.75,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-22",
+          "x": 174.65625,
+          "y": 1594.9375,
+          "w": 97.671875,
+          "h": 44
+        },
+        {
+          "id": "inv-23",
+          "x": 298.328125,
+          "y": 1469.75,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-23",
+          "x": 298.328125,
+          "y": 1594.9375,
+          "w": 97.65625,
+          "h": 44
+        },
+        {
+          "id": "inv-side0",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 434,
+          "y": 304,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 434,
+          "y": 358,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 434,
+          "y": 466,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 434,
+          "y": 520,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9",
+            "inv-act-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11",
+            "inv-act-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12",
+            "inv-act-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13",
+            "inv-act-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15",
+            "inv-act-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16",
+            "inv-act-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17",
+            "inv-act-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18",
+            "inv-act-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19",
+            "inv-act-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20",
+            "inv-act-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22",
+            "inv-act-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23",
+            "inv-act-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 151,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 201,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 295,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 345,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 439,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 489,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 583,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 633,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 727,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 777,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 434,
+          "y": 142,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 434,
+          "y": 196,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 434,
+          "y": 250,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 434,
+          "y": 304,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 434,
+          "y": 358,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 434,
+          "y": 304,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 619.5,
+          "y": 304,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 434,
+          "y": 358,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 619.5,
+          "y": 358,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 434,
+          "y": 466,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 434,
+          "y": 520,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 172.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 215,
+          "y": 172.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 379,
+          "y": 172.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 316,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 215,
+          "y": 316,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 379,
+          "y": 316,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 459.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 215,
+          "y": 459.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 379,
+          "y": 459.5,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 603,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-9",
+          "x": 51,
+          "y": 728.1875,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-10",
+          "x": 215,
+          "y": 603,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-11",
+          "x": 379,
+          "y": 603,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-11",
+          "x": 379,
+          "y": 728.1875,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 819.6875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-12",
+          "x": 51,
+          "y": 944.875,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-13",
+          "x": 215,
+          "y": 819.6875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-13",
+          "x": 215,
+          "y": 944.875,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-14",
+          "x": 379,
+          "y": 819.6875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 1036.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-15",
+          "x": 51,
+          "y": 1161.5625,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-16",
+          "x": 215,
+          "y": 1036.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-16",
+          "x": 215,
+          "y": 1161.5625,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-17",
+          "x": 379,
+          "y": 1036.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-17",
+          "x": 379,
+          "y": 1161.5625,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1253.0625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-18",
+          "x": 51,
+          "y": 1378.25,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-19",
+          "x": 215,
+          "y": 1253.0625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-19",
+          "x": 215,
+          "y": 1378.25,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-20",
+          "x": 379,
+          "y": 1253.0625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-20",
+          "x": 379,
+          "y": 1378.25,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1469.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 215,
+          "y": 1469.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-22",
+          "x": 215,
+          "y": 1594.9375,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-23",
+          "x": 379,
+          "y": 1469.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-act-23",
+          "x": 379,
+          "y": 1594.9375,
+          "w": 138,
+          "h": 44
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1760.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 287,
+          "y": 1760.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1814.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 287,
+          "y": 1814.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 1868.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 287,
+          "y": 1868.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 1922.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 1976.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 2030.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 2084.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 2138.4375,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 1606.4375
+      },
+      "actions": {
+        "x": 42,
+        "y": 1760.4375,
+        "w": 484,
+        "h": 426
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9",
+            "inv-act-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11",
+            "inv-act-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12",
+            "inv-act-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13",
+            "inv-act-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15",
+            "inv-act-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16",
+            "inv-act-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17",
+            "inv-act-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18",
+            "inv-act-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19",
+            "inv-act-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20",
+            "inv-act-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22",
+            "inv-act-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23",
+            "inv-act-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 151,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 201,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 295,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 345,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 439,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 489,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 583,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 633,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 727,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 777,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 866,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 287,
+          "y": 866,
+          "w": 239,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 866,
+        "w": 484,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 1024.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 1078.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 287,
+          "y": 1078.5,
+          "w": 239,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 870.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 1024.5,
+        "w": 484,
+        "h": 102
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 274,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 287,
+          "y": 274,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 328,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 382,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 274,
+        "w": 484,
+        "h": 156
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 681.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 287,
+          "y": 681.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 735.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 287,
+          "y": 735.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 789.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 287,
+          "y": 789.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 843.046875,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 897.046875,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 951.046875,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 527.046875
+      },
+      "actions": {
+        "x": 42,
+        "y": 681.046875,
+        "w": 484,
+        "h": 318
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 242.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 287,
+          "y": 242.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 296.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 287,
+          "y": 296.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 350.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 287,
+          "y": 350.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 404.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 287,
+          "y": 404.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 458.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 287,
+          "y": 458.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 512.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 566.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 620.5,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 242.5,
+        "w": 484,
+        "h": 426
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "native item CG, selected pet model and cancelled rename input",
+      "itemArt": true,
+      "petModel": true,
+      "renameCancelled": true,
+      "originalInputLength": 0
+    },
+    {
+      "case": "real touch pans the native map without navigation",
+      "before": {
+        "cx": 379,
+        "cy": 186,
+        "follow": true,
+        "target": null
+      },
+      "after": {
+        "cx": 376.0693717277487,
+        "cy": 178.39141258597684,
+        "follow": false,
+        "target": null
+      }
+    },
+    {
+      "case": "native map touch cancellation and precise tap navigation",
+      "cancelState": {
+        "target": null,
+        "down": false
+      },
+      "destination": {
+        "x": 377,
+        "y": 184,
+        "u": 0.4441860465116279,
+        "v": 0.5
+      },
+      "positionBefore": {
+        "id": 1,
+        "floor": 300,
+        "x": 379,
+        "y": 186
+      },
+      "positionAfter": {
+        "id": 1,
+        "floor": 300,
+        "x": 379,
+        "y": 185
+      }
+    },
+    {
+      "case": "pet basic list, native animated detail and reduced motion",
+      "basic": {
+        "cards": 5,
+        "portrait": 0,
+        "info": null
+      },
+      "detail": {
+        "cards": 0,
+        "info": {
+          "lines": [
+            "奥普埃 · Lv.41 · 0转",
+            "HP 574/574 · 忠诚 94",
+            "攻击 83 · 防御 105 · 敏捷 80",
+            "经验 3052 · 下级经验 28594",
+            "地 50 · 水 0 · 火 0 · 风 50"
+          ],
+          "nativeTextX": 298
+        },
+        "animation": "pet:199100:1:3",
+        "frames": 4
+      },
+      "distinctRenderedImages": 4,
+      "reducedMotionStable": true
+    },
+    {
+      "case": "native status avatar, four attributes, expanded detail and party page",
+      "status": {
+        "portrait": {
+          "image": 30000,
+          "rawIndex": false
+        },
+        "stats": [
+          {
+            "label": "体力",
+            "value": "1000"
+          },
+          {
+            "label": "腕力",
+            "value": "1"
+          },
+          {
+            "label": "耐力",
+            "value": "0"
+          },
+          {
+            "label": "敏捷",
+            "value": "0"
+          }
+        ],
+        "info": [
+          "Mechabc9 · Lv.100 · 0转",
+          "HP 4001/4001 · MP 100/100",
+          "攻击 101 · 防御 100 · 敏捷 0",
+          "经验 29628 · 下级经验 1345723",
+          "魅力 100 · 声望 0",
+          "剩余点数 0"
+        ],
+        "rows": [
+          "体力 1000",
+          "腕力 1",
+          "耐力 0",
+          "敏捷 0"
+        ]
+      },
+      "expanded": [
+        "Mechabc9　LV100",
+        "攻击 101（本身 101　装备 +0）",
+        "防御 100（本身 100　装备 +0）",
+        "敏捷 0（本身 0　装备 +0）",
+        "耐久力 4001（本身 4001　装备 +0）",
+        "气力上限 100　会心 +0　回避 +0",
+        "魅力 100　运气 3　转生 0",
+        "属性 地100 水0 火0 风0",
+        "声望 0　DP 0",
+        "本级经验 29628 / 1345723（还差 1316095）",
+        "骑乘等级 140",
+        "魔法 地0 水0 火0 风0",
+        "抗魔 地0 水0 火0 风0"
+      ],
+      "group": {
+        "portraits": 0,
+        "stats": [],
+        "lines": [
+          "队伍",
+          "Mechabc9 · MP 100 · HP 4001/4001",
+          "奥普埃 · HP 574/574",
+          "克劳德 · HP 655/655",
+          "格鲁克 · HP 528/528",
+          "吉米奈 · HP 528/528",
+          "乌力 · HP 196/196",
+          "没有组队。"
+        ],
+        "buttons": [
+          "st-pclose"
+        ]
+      }
+    },
+    {
+      "case": "real equipment image, explicit equip and unequip with server acknowledgement",
+      "slot": 24,
+      "image": 20032,
+      "category": "人物装备",
+      "action": "装备",
+      "equippedSlot": 2,
+      "returnedToBag": true,
+      "requests": [
+        {
+          "t": "ItemMove",
+          "from": 2,
+          "to": -1
+        }
+      ]
+    },
+    {
+      "case": "real HP recovery image, target, consumption and Status",
+      "slot": 25,
+      "image": 23013,
+      "category": "可用道具",
+      "action": "使用",
+      "id": 1500,
+      "before": 1,
+      "after": 94,
+      "remainingQuantity": 0
+    },
+    {
+      "case": "real MP recovery image, target, consumption and Status",
+      "slot": 26,
+      "image": 23005,
+      "category": "可用道具",
+      "action": "使用",
+      "id": 1510,
+      "before": 1,
+      "after": 19,
+      "remainingQuantity": 0
+    },
+    {
+      "case": "real unusable letter retains its image and exposes no use operation",
+      "id": 1329,
+      "slot": 27,
+      "image": 22265,
+      "primaryAction": false
+    },
+    {
+      "case": "native +1 updates exactly once and exhausted points remove operations",
+      "before": {
+        "face": 30000,
+        "hp": 94,
+        "maxHp": 120,
+        "mp": 19,
+        "maxMp": 100,
+        "points": 1,
+        "vital": 20,
+        "str": 20,
+        "tgh": 10,
+        "dex": 10
+      },
+      "after": {
+        "face": 30000,
+        "hp": 94,
+        "maxHp": 124,
+        "mp": 19,
+        "maxMp": 100,
+        "points": 0,
+        "vital": 21,
+        "str": 20,
+        "tgh": 10,
+        "dex": 10
+      },
+      "requests": [
+        {
+          "t": "StatUp",
+          "stat": 0
+        }
+      ],
+      "exhaustedTapSent": false
+    },
+    {
+      "case": "field player remains visible through rotation 390x844",
+      "context": "field",
+      "display": "immersive",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "visual": {
+        "width": 390,
+        "height": 844,
+        "scale": 1,
+        "x": 0,
+        "y": 0
+      },
+      "transform": {
+        "scale": 1.4066666666666667,
+        "left": 195,
+        "top": 0
+      },
+      "stage": {
+        "x": -367.6666259765625,
+        "y": 0,
+        "width": 1125.333251953125,
+        "height": 844
+      },
+      "model": {
+        "x": 169.6800018310547,
+        "y": 381.2066390991211,
+        "width": 47.826663208007815,
+        "height": 81.58666076660157
+      },
+      "native": {
+        "x": 379,
+        "y": 184,
+        "sprite": 100000,
+        "dir": 3,
+        "frame": 0
+      },
+      "obstacles": [
+        {
+          "class": "mobile-shell-joystick",
+          "x": 12,
+          "y": 736,
+          "width": 96,
+          "height": 96
+        },
+        {
+          "class": "mobile-shell-status",
+          "x": 12,
+          "y": 8,
+          "width": 300,
+          "height": 34
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "x": 322,
+          "y": 776,
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "field": {
+        "x": 379,
+        "y": 184,
+        "target": null,
+        "wantDir": -1
+      },
+      "battle": null,
+      "pressed": false,
+      "panels": 0,
+      "cover": [
+        {
+          "class": "mobile-shell-joystick",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-status",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "ratio": 0
+        }
+      ]
+    },
+    {
+      "case": "field player remains visible through rotation 844x390",
+      "context": "field",
+      "display": "immersive",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "visual": {
+        "width": 844,
+        "height": 390,
+        "scale": 1,
+        "x": 0,
+        "y": 0
+      },
+      "transform": {
+        "scale": 1.055,
+        "left": 422,
+        "top": -146.82
+      },
+      "stage": {
+        "x": 0.000030517578125,
+        "y": -146.8125,
+        "width": 844,
+        "height": 632.9999389648438
+      },
+      "model": {
+        "x": 401.9550305175781,
+        "y": 139.09249999999997,
+        "width": 35.87,
+        "height": 62.245
+      },
+      "native": {
+        "x": 379,
+        "y": 184,
+        "sprite": 100000,
+        "dir": 3,
+        "frame": 1
+      },
+      "obstacles": [
+        {
+          "class": "mobile-shell-joystick",
+          "x": 12,
+          "y": 282,
+          "width": 96,
+          "height": 96
+        },
+        {
+          "class": "mobile-shell-status",
+          "x": 12,
+          "y": 8,
+          "width": 754,
+          "height": 34
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "x": 776,
+          "y": 322,
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "field": {
+        "x": 379,
+        "y": 184,
+        "target": null,
+        "wantDir": -1
+      },
+      "battle": null,
+      "pressed": false,
+      "panels": 0,
+      "cover": [
+        {
+          "class": "mobile-shell-joystick",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-status",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "ratio": 0
+        }
+      ]
+    },
+    {
+      "case": "field player remains visible through rotation 320x568",
+      "context": "field",
+      "display": "immersive",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "visual": {
+        "width": 320,
+        "height": 568,
+        "scale": 1,
+        "x": 0,
+        "y": 0
+      },
+      "transform": {
+        "scale": 1,
+        "left": 160,
+        "top": -32
+      },
+      "stage": {
+        "x": -240,
+        "y": -32,
+        "width": 800,
+        "height": 600
+      },
+      "model": {
+        "x": 145,
+        "y": 239,
+        "width": 31,
+        "height": 63
+      },
+      "native": {
+        "x": 379,
+        "y": 184,
+        "sprite": 100000,
+        "dir": 3,
+        "frame": 2
+      },
+      "obstacles": [
+        {
+          "class": "mobile-shell-joystick",
+          "x": 12,
+          "y": 460,
+          "width": 96,
+          "height": 96
+        },
+        {
+          "class": "mobile-shell-status",
+          "x": 12,
+          "y": 8,
+          "width": 230,
+          "height": 52
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "x": 252,
+          "y": 500,
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "field": {
+        "x": 379,
+        "y": 184,
+        "target": null,
+        "wantDir": -1
+      },
+      "battle": null,
+      "pressed": false,
+      "panels": 0,
+      "cover": [
+        {
+          "class": "mobile-shell-joystick",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-status",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "ratio": 0
+        }
+      ]
+    },
+    {
+      "case": "field player remains visible through rotation 568x320",
+      "context": "field",
+      "display": "immersive",
+      "viewport": {
+        "width": 568,
+        "height": 320
+      },
+      "visual": {
+        "width": 568,
+        "height": 320,
+        "scale": 1,
+        "x": 0,
+        "y": 0
+      },
+      "transform": {
+        "scale": 1,
+        "left": 284,
+        "top": -164
+      },
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "model": {
+        "x": 269,
+        "y": 107,
+        "width": 31,
+        "height": 63
+      },
+      "native": {
+        "x": 379,
+        "y": 184,
+        "sprite": 100000,
+        "dir": 3,
+        "frame": 2
+      },
+      "obstacles": [
+        {
+          "class": "mobile-shell-joystick",
+          "x": 12,
+          "y": 212,
+          "width": 96,
+          "height": 96
+        },
+        {
+          "class": "mobile-shell-status",
+          "x": 12,
+          "y": 8,
+          "width": 478,
+          "height": 34
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "x": 500,
+          "y": 252,
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "field": {
+        "x": 379,
+        "y": 184,
+        "target": null,
+        "wantDir": -1
+      },
+      "battle": null,
+      "pressed": false,
+      "panels": 0,
+      "cover": [
+        {
+          "class": "mobile-shell-joystick",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-status",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "ratio": 0
+        }
+      ]
+    },
+    {
+      "case": "field player remains visible through rotation 430x932",
+      "context": "field",
+      "display": "immersive",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "visual": {
+        "width": 430,
+        "height": 932,
+        "scale": 1,
+        "x": 0,
+        "y": 0
+      },
+      "transform": {
+        "scale": 1.5533333333333332,
+        "left": 215,
+        "top": 1.1368683772161603e-13
+      },
+      "stage": {
+        "x": -406.33331298828125,
+        "y": 0,
+        "width": 1242.6666259765625,
+        "height": 932
+      },
+      "model": {
+        "x": 191.70000076293945,
+        "y": 420.95331954956055,
+        "width": 48.1533317565918,
+        "height": 97.8599967956543
+      },
+      "native": {
+        "x": 379,
+        "y": 184,
+        "sprite": 100000,
+        "dir": 3,
+        "frame": 2
+      },
+      "obstacles": [
+        {
+          "class": "mobile-shell-joystick",
+          "x": 12,
+          "y": 824,
+          "width": 96,
+          "height": 96
+        },
+        {
+          "class": "mobile-shell-status",
+          "x": 12,
+          "y": 8,
+          "width": 340,
+          "height": 34
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "x": 362,
+          "y": 864,
+          "width": 56,
+          "height": 56
+        }
+      ],
+      "field": {
+        "x": 379,
+        "y": 184,
+        "target": null,
+        "wantDir": -1
+      },
+      "battle": null,
+      "pressed": false,
+      "panels": 0,
+      "cover": [
+        {
+          "class": "mobile-shell-joystick",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-status",
+          "ratio": 0
+        },
+        {
+          "class": "mobile-shell-tray-toggle",
+          "ratio": 0
+        }
+      ]
+    },
+    {
+      "case": "field visible zoom +, − and reset remain functional",
+      "initial": {
+        "scale": 1.4066666666666667,
+        "left": 195,
+        "top": 0
+      },
+      "larger": {
+        "scale": 1.5473333333333334,
+        "left": 195,
+        "top": -79.33600000000001
+      },
+      "smaller": {
+        "scale": 1.4066666666666667,
+        "left": 195,
+        "top": 0
+      },
+      "reset": {
+        "scale": 1.4066666666666667,
+        "left": 195,
+        "top": 0
+      }
+    },
+    {
+      "case": "field real two-finger spread and translation preserve camera and game intent",
+      "before": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visual": {
+          "width": 390,
+          "height": 844,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "stage": {
+          "x": -367.6666259765625,
+          "y": 0,
+          "width": 1125.333251953125,
+          "height": 844
+        },
+        "model": {
+          "x": 169.6800018310547,
+          "y": 381.2066390991211,
+          "width": 47.826663208007815,
+          "height": 81.58666076660157
+        },
+        "native": {
+          "x": 379,
+          "y": 184,
+          "sprite": 100000,
+          "dir": 3,
+          "frame": 0
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 736,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 300,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 322,
+            "y": 776,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 379,
+          "y": 184,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0
+      },
+      "after": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visual": {
+          "width": 390,
+          "height": 844,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "stage": {
+          "x": -367.6666259765625,
+          "y": 0,
+          "width": 1125.333251953125,
+          "height": 844
+        },
+        "model": {
+          "x": 173.9000015258789,
+          "y": 381.2066390991211,
+          "width": 43.6066635131836,
+          "height": 88.6199935913086
+        },
+        "native": {
+          "x": 379,
+          "y": 184,
+          "sprite": 100000,
+          "dir": 3,
+          "frame": 2
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 736,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 300,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 322,
+            "y": 776,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 379,
+          "y": 184,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0
+      },
+      "samples": [
+        {
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          }
+        }
+      ],
+      "businessRequests": []
+    }
+  ],
+  "binary_sha256": "9e40985918a054f020d030064ebf801d4a57bfcdeadb477f075c1ba3fe32e833",
+  "binary_version": "v0.2.13-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-14T01:31:41.934Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-14T01:31:54.727Z"
+    },
+    {
+      "stage": "real-matrix",
+      "time": "2026-11-14T01:31:54.728Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "passed": true
+    },
+    {
+      "case": "classic 320x568",
+      "passed": true
+    },
+    {
+      "case": "classic 390x844",
+      "passed": true
+    },
+    {
+      "case": "classic 430x932",
+      "passed": true
+    },
+    {
+      "case": "classic 844x390",
+      "passed": true
+    },
+    {
+      "case": "classic 568x320",
+      "passed": true
+    },
+    {
+      "case": "classic native items",
+      "passed": true
+    },
+    {
+      "case": "classic native pets",
+      "passed": true
+    },
+    {
+      "case": "classic native status",
+      "passed": true
+    },
+    {
+      "case": "classic native quests",
+      "passed": true
+    },
+    {
+      "case": "classic native map",
+      "passed": true
+    },
+    {
+      "case": "classic native system",
+      "passed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "passed": true
+    },
+    {
+      "case": "immersive 390x844",
+      "passed": true
+    },
+    {
+      "case": "immersive 430x932",
+      "passed": true
+    },
+    {
+      "case": "immersive 844x390",
+      "passed": true
+    },
+    {
+      "case": "immersive 568x320",
+      "passed": true
+    },
+    {
+      "case": "immersive native items",
+      "passed": true
+    },
+    {
+      "case": "immersive native pets",
+      "passed": true
+    },
+    {
+      "case": "immersive native status",
+      "passed": true
+    },
+    {
+      "case": "immersive native quests",
+      "passed": true
+    },
+    {
+      "case": "immersive native map",
+      "passed": true
+    },
+    {
+      "case": "immersive native system",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 568x320",
+      "passed": true
+    },
+    {
+      "case": "native item CG, selected pet model and cancelled rename input",
+      "passed": true
+    },
+    {
+      "case": "real touch pans the native map without navigation",
+      "passed": true
+    },
+    {
+      "case": "native map touch cancellation and precise tap navigation",
+      "passed": true
+    },
+    {
+      "case": "pet basic list, native animated detail and reduced motion",
+      "passed": true
+    },
+    {
+      "case": "native status avatar, four attributes, expanded detail and party page",
+      "passed": true
+    },
+    {
+      "case": "real equipment image, explicit equip and unequip with server acknowledgement",
+      "passed": true
+    },
+    {
+      "case": "real HP recovery image, target, consumption and Status",
+      "passed": true
+    },
+    {
+      "case": "real MP recovery image, target, consumption and Status",
+      "passed": true
+    },
+    {
+      "case": "real unusable letter retains its image and exposes no use operation",
+      "passed": true
+    },
+    {
+      "case": "native +1 updates exactly once and exhausted points remove operations",
+      "passed": true
+    },
+    {
+      "case": "field player remains visible through rotation 390x844",
+      "passed": true
+    },
+    {
+      "case": "field player remains visible through rotation 844x390",
+      "passed": true
+    },
+    {
+      "case": "field player remains visible through rotation 320x568",
+      "passed": true
+    },
+    {
+      "case": "field player remains visible through rotation 568x320",
+      "passed": true
+    },
+    {
+      "case": "field player remains visible through rotation 430x932",
+      "passed": true
+    },
+    {
+      "case": "field visible zoom +, − and reset remain functional",
+      "passed": true
+    },
+    {
+      "case": "field real two-finger spread and translation preserve camera and game intent",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "client_version": "bfc86541ebbec063",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "desktopEvents": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "failure": "cdpSession.send: Protocol error (Input.dispatchTouchEvent): Must send a TouchStart first to start a new touch.",
+  "failure_stack": "cdpSession.send: Protocol error (Input.dispatchTouchEvent): Must send a TouchStart first to start a new touch.\n    at zoomAndPinch (/home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:143:15)\n    at async fieldCameraLock (/home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:150:38)\n    at async Module.runMatrix (/home/coder/saserver/Report/SA-1114-02/browser/matrix-cases.mjs:95:3)\n    at async work (/home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:292:45)\n    at async file:///home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:312:5"
+}

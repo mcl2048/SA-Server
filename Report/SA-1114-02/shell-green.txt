@@ -1,0 +1,33 @@
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (12.182649ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (3.241824ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (5.303122ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (4.435367ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (3.282433ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (1.949511ms)
+✔ battle commands and targets remain human readable in a bounded sheet (3.891021ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (3.908477ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (4.414068ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (3.696827ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (3.083419ms)
+✔ native column registration is presented in visual row order and keeps action identity (1.797718ms)
+✔ immersive scene exposes a cancellable menu tray and restores classic panels (2.763384ms)
+✔ immersive battle camera stays a view command and native targets keep their real IDs (2.149698ms)
+✔ switching to desktop during browser fullscreen retains the explicit exit control (0.856485ms)
+✔ quick battle preserves its field context and native battle panels restore the complete layout (2.777801ms)
+✔ immersive battle starts with clear actors and native toggles, then exposes and closes commands (4.335004ms)
+✔ immersive field tray exposes reachable native social controls without duplicating toolbar menus (2.605923ms)
+✔ immersive native panels remain in the game viewport and hide movement behind the dialog (1.866154ms)
+✔ fullscreen map paints native map layers and maps taps back to the original hit coordinates (5.394738ms)
+✔ immersive native collections keep slot art, details and real controls together without duplicate summaries (2.545143ms)
+✔ fullscreen map drags emit native pointer phases and cancellation never emits a route tap (4.222017ms)
+✔ native pet detail replaces whole-list summaries and changing game windows resets retained scroll (2.715427ms)
+✔ fullscreen cards keep native art and put an explicit live primary action below the item (2.49775ms)
+✔ status attributes retain adjacent native +1 controls and remove exhausted point actions (2.116613ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 522.919004

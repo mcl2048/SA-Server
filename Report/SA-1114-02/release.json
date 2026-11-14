@@ -1,0 +1,42 @@
+{
+  "version": "v0.2.13-LYNX",
+  "baseline_commit": "b8e8195eacff3319e890d2a3e006d0db8675509d",
+  "baseline_version": "v0.2.12-LYNX",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16548000,
+    "sha256": "9e40985918a054f020d030064ebf801d4a57bfcdeadb477f075c1ba3fe32e833",
+    "format": "static ELF64 Linux AMD64",
+    "mode": "0755"
+  },
+  "archive": {
+    "version": "v0.2.13-LYNX",
+    "archive": "bin/saserver-v0.2.13-LYNX-linux-amd64.zip",
+    "bytes": 23703591,
+    "sha256": "534390fac272ffce79ff8ddd06d263611239a9a7ab1526162794e7259fe817ad",
+    "files": 4358,
+    "binary_sha256": "9e40985918a054f020d030064ebf801d4a57bfcdeadb477f075c1ba3fe32e833",
+    "all_entries_match_current_public_files": true,
+    "executable_mode": "0755",
+    "runtime_db_credentials_and_Assets_excluded": true
+  },
+  "old_zip_replaced": true,
+  "asset_changes": false,
+  "source_input_manifest": "Report/SA-1114-02/source-inputs.json",
+  "source_files_verified": 322,
+  "client_modules": 44,
+  "embedded_files": 46,
+  "checks": {
+    "client_and_builder_tests_pass": 168,
+    "TypeScript_exit": 0,
+    "Go_all_packages_exit": 0,
+    "Go_vet_exit": 0,
+    "server_targeted_race_real_actions": true,
+    "browser_checks": 83,
+    "browser_errors": 0,
+    "repeat_binary_identical": true
+  },
+  "browser_report": "Report/SA-1114-02/browser/final-real-game.json",
+  "scope": "Actual release ELF and real Chromium; SwiftShader GPU, emulated touch and viewport sizes. No physical Android/iOS or Safari certification.",
+  "acceptance": "Report/SA-1114-02/ACCEPTANCE.md"
+}

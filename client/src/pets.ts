@@ -16,6 +16,7 @@ import type { PetInfo, PetSkill, S2CPets } from "./proto.gen.ts";
 import { ANIM, findAction } from "./assets.ts";
 import { aiPetForSprite } from "./ai-pet-catalog.ts";
 import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure, type Ui } from "./ui.ts";
+import { isImmersive } from "./mobile-view.ts";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,
@@ -130,7 +131,9 @@ export class PetWindow {
       if (this.centerText(x + 3, y, p.freeName || p.name, color, nameId)) { this.sel = p.slot; this.page = 1; this.dir = 1; }
       if (ui.hovered(nameId)) {
         ui.bottomLine = "点名字看详细资料，按右键丢出宠物。";
-        this.extPanel(p, rects);
+        // Touch focus stays on the list after releasing a name. Fullscreen
+        // details belong to the native detail page, entered by the same click.
+        if (!isImmersive()) this.extPanel(p, rects);
         // MOUSE_RIGHT_CRICK：丢出（_DROPPETWND 先问"确定要丢出你的宠物吗？"）
         if (ui.mouse.rightClicked && p.state !== "ride") this.host.drop(p.slot); // 骑着的不能丢
       }
@@ -348,9 +351,13 @@ export class PetWindow {
     const def = ui.assets.anim(p.sprite);
     const act = def && findAction(def, this.dir, ANIM.STAND);
     if (!act || act.frames.length === 0) return;
-    // Reuse a stable native pose in the reflowed fullscreen window. Decoding
-    // every animated frame would repeatedly inflate complete texture pages.
-    if(act.frames[0][0]>=0)ui.mobilePortrait?.(act.frames[0][0],true);
+    // Publish the native action once per immediate-mode frame; the retained
+    // skin caches bounded artwork and advances it without atlas decoding.
+    const first=act.frames.find(frame=>frame[0]>=0);
+    if(first){
+      if(act.frames.length>1)ui.mobilePortrait?.(first[0],true,{key:`pet:${p.sprite}:${this.dir}:${ANIM.STAND}`,ticks:act.ticks,frames:act.frames});
+      else ui.mobilePortrait?.(first[0],true);
+    }
     const ms = Math.max(1, act.ticks) * (1000 / 60);
     const [img, fx, fy] = act.frames[Math.floor((now - this.animAt) / ms) % act.frames.length];
     if (img < 0) return;

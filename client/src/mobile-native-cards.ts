@@ -5,7 +5,7 @@ import type { MobileCard, MobileHit } from "./ui.ts";
  */
 export class MobileNativeCards {
   readonly element = document.createElement("div");
-  private rows = new Map<string, { element: HTMLElement; detail: HTMLElement; controls: HTMLElement }>();
+  private rows = new Map<string, { element: HTMLElement; category: HTMLElement; detail: HTMLElement; controls: HTMLElement; primary?: HTMLButtonElement }>();
 
   constructor() { this.element.className="mobile-native-cards";this.element.hidden=true; }
 
@@ -18,15 +18,27 @@ export class MobileNativeCards {
       keep.add(card.id);
       let row=this.rows.get(card.id);
       if(!row){
-        const element=document.createElement("article"),detail=document.createElement("small"),controls=document.createElement("div");
+        const element=document.createElement("article"),category=document.createElement("span"),detail=document.createElement("small"),controls=document.createElement("div");
         element.className="mobile-native-card";controls.className="mobile-native-card-controls";
-        element.append(controls,detail);row={element,detail,controls};this.rows.set(card.id,row);
+        category.className="mobile-native-card-category";
+        element.append(category,controls,detail);row={element,category,detail,controls};this.rows.set(card.id,row);
       }
       row.element.dataset.kind=card.kind;
+      row.category.hidden=!card.category;
+      if(row.category.textContent!==(card.category??""))row.category.textContent=card.category??"";
       if(row.detail.textContent!==card.detail)row.detail.textContent=card.detail;
+      const primary=card.primaryAction && actions.find(hit=>hit.id===card.primaryAction!.id);
+      if(row.primary && row.primary.dataset.action!==primary?.id){row.primary.remove();row.primary=undefined;}
       let prior: ChildNode | null=null;
       for(const hit of actions){
         used.add(hit.id);const control=button(hit);
+        if(hit===primary){
+          control.textContent=card.primaryAction!.label;
+          control.dataset.primaryAction="true";
+          control.setAttribute("aria-label",`${card.title}：${card.primaryAction!.label}`);
+          if(row.primary!==control || row.element.lastElementChild!==control)row.element.append(control);
+          row.primary=control;continue;
+        }
         if(hit.id===card.actions[0]){
           if(control.textContent!==card.title)control.textContent=card.title;
           const image=card.image===undefined ? "" : String(card.image);

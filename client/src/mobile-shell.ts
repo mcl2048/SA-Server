@@ -111,6 +111,8 @@ export class MobileShell {
   private readonly inputs = node("div", "mobile-shell-inputs");
   private readonly content = node("div", "mobile-shell-content");
   private readonly portrait = node("img", "mobile-shell-native-portrait");
+  private readonly nativeStats = node("div", "mobile-native-stats");
+  private readonly statRows = new Map<string, {element:HTMLElement;label:HTMLElement}>();
   private readonly actions = node("div", "mobile-shell-actions");
   private readonly dismiss = button("返回 / 取消对话", () => this.command("back"));
   private readonly sheetBack = button("返回", () => this.command("back"));
@@ -179,7 +181,7 @@ export class MobileShell {
     this.sheetBack.className = "mobile-shell-back";
     this.dismiss.className = "mobile-shell-dismiss";
     this.portrait.hidden=true;this.portrait.alt="选中宠物的形象";
-    this.content.append(this.portrait, this.nativeCards.element, this.info, this.inputs);
+    this.content.append(this.portrait, this.nativeStats, this.nativeCards.element, this.info, this.inputs);
     this.sheet.append(this.sheetBack, this.content, this.actions, this.dismiss);
     this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" && !this.trayOpen });
     this.chat.setAttribute("role", "log"); this.chat.setAttribute("aria-label", "最近聊天");
@@ -384,7 +386,8 @@ export class MobileShell {
       this.paneKey=paneKey;this.sheet.scrollTop=0;this.content.scrollTop=0;this.actions.scrollTop=0;
     }
     const pose=this.sceneImmersive && layout==="full" ? this.ui.portraits?.[0] : undefined;
-    const portraitKey=pose ? `${pose.rawIndex}:${pose.image}` : "";
+    const portraitKey=pose ? `${pose.rawIndex}:${pose.image}:${pose.animation?.key??""}` : "";
+    this.portrait.alt=state.title==="状态" ? "人物头像" : "选中宠物的形象";
     if(portraitKey!==this.portraitKey){this.portraitKey=portraitKey;this.portrait.hidden=true;}
     if (this.sceneImmersive) void this.nativeSkin?.sync(this.root,pose ? {...pose,target:this.portrait} : null);
     else this.nativeSkin?.clearPortrait();
@@ -634,6 +637,7 @@ export class MobileShell {
     const compact = this.sceneImmersive && this.layout === "battle";
     const autoHits = compact ? hits.filter(h => AUTO_ACTIONS.has(h.id)) : [];
     const collection=this.nativeCards.sync(this.sceneImmersive && this.layout==="full" ? this.ui.cards ?? [] : [],hits,hit=>this.actionButton(hit,state));
+    for(const id of this.syncStats(hits,state))collection.add(id);
     const rows = hits.filter(h=>!collection.has(h.id) && !(compact && AUTO_ACTIONS.has(h.id)));
     const container = this.sceneImmersive && this.layout === "field" ? this.extraActions : this.actions;
     const keep = new Set(hits.map(h => h.id)), rowKeep = new Set<string>();
@@ -666,6 +670,26 @@ export class MobileShell {
       && document.activeElement !== focused) focused.focus({ preventScroll: true });
   }
 
+  /** Attribute values and +1 retain the same live native action. No local point
+   * balance or batch requests: each tap waits for ordinary server Status data. */
+  private syncStats(hits:MobileHit[],state:MobileShellState):Set<string>{
+    const stats=this.sceneImmersive && this.layout==="full" ? this.ui.panelInfo?.stats??[] : [];
+    const keep=new Set<string>(),used=new Set<string>();let previous:ChildNode|null=null;
+    for(const stat of stats){
+      keep.add(stat.label);let row=this.statRows.get(stat.label);
+      if(!row){const element=node("div","mobile-native-stat"),label=node("span");element.append(label);row={element,label};this.statRows.set(stat.label,row);}
+      put(row.label,`${stat.label} ${stat.value}`);
+      const hit=stat.action ? hits.find(h=>h.id===stat.action) : undefined;
+      for(const child of Array.from(row.element.children))if(child!==row.label && (child as HTMLElement).dataset.action!==hit?.id)child.remove();
+      if(hit){const control=this.actionButton(hit,state);put(control,"+1");control.setAttribute("aria-label",`${stat.label}增加 1 点`);
+        if(control.parentElement!==row.element)row.element.append(control);used.add(hit.id);}
+      const next:ChildNode|null=previous ? previous.nextSibling : this.nativeStats.firstChild;
+      if(next!==row.element)this.nativeStats.insertBefore(row.element,next);previous=row.element;
+    }
+    for(const [id,row]of this.statRows)if(!keep.has(id)){row.element.remove();this.statRows.delete(id);}
+    this.nativeStats.hidden=!stats.length;return used;
+  }
+
   private actionButton(hit: MobileHit, state: MobileShellState): HTMLButtonElement {
     let b = this.actionNodes.get(hit.id);
     if (!b) {
@@ -681,6 +705,7 @@ export class MobileShell {
       b = created; b.dataset.action = id; this.actionNodes.set(id, b);
     }
     put(b, this.actionLabel(hit, state));
+    b.removeAttribute("aria-label");delete b.dataset.primaryAction;
     const selected = state.selectedId === hit.id;
     if (b.getAttribute("aria-current") !== String(selected)) b.setAttribute("aria-current", String(selected));
     return b;
@@ -865,6 +890,13 @@ html.sa-mobile #mobile-root[data-display='immersive'] #mobile-chrome{position:ab
 .mobile-native-cards[data-kind='pet']{grid-template-columns:minmax(0,1fr)}
 .mobile-native-card{min-width:0;border:1px solid #a5b3b76b;background:#0e2937ee;padding:8px;box-shadow:inset 0 1px #ffffff1a}
 .mobile-native-card small{display:block;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:#c6d9dc;margin-top:6px}
+.mobile-native-card-category{display:block;font-size:11px;line-height:1.5;color:#e9d99e;margin-bottom:5px}
+.mobile-native-card>button[data-primary-action]{width:100%;min-height:44px;margin-top:8px;color:#ffe996!important;border-color:#a99a67!important}
+.mobile-native-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.mobile-native-stat{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;min-width:0;background:#0e2937ee;border:1px solid #a5b3b76b}
+.mobile-native-stat span{font-size:14px;overflow-wrap:anywhere}
+.mobile-native-stat button{min-width:44px!important;min-height:44px!important;flex-shrink:0;color:#ffe996!important}
+@media(max-width:359px){.mobile-native-stats{grid-template-columns:minmax(0,1fr)}}
 .mobile-native-card-controls{display:flex;flex-wrap:wrap;gap:6px}
 .mobile-native-card-controls button{flex:1;min-width:0!important;font-size:13px!important;white-space:normal;overflow-wrap:anywhere;line-height:1.4;text-align:left}
 .mobile-native-card[data-kind='item'] .mobile-native-card-controls button{width:100%;min-height:72px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6px}

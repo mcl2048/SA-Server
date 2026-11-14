@@ -1,0 +1,6 @@
+{
+  "binary_sha256": "a8affd30c1058c8c1710538a7d413ee84d38b4d1a35fff75a9f56f00fd677157",
+  "checks_exit_code": 1,
+  "sigterm_sent": true,
+  "exit_code": 0
+}

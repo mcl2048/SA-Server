@@ -1,0 +1,1 @@
+{"state": "finished", "success": true, "checks": [{"name": "client-tests", "exit_code": 0}, {"name": "typescript", "exit_code": 0}, {"name": "build", "exit_code": 0}]}

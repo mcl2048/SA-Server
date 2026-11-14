@@ -11,8 +11,9 @@
 //   宠物页没有咒术钮与金钱。拖到宠物身上或双击宠物装备就装上（lssproto_PetItemEquip_send，骑着的宠物"骑宠不可装装备！"）。
 
 
-import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=408f23f7bef662b4";
-import { ANIM, findAction } from "./assets.js?v=408f23f7bef662b4";
+import { FONT, InputBox, boxColor, measure, wrapBytes,         } from "./ui.js?v=bfc86541ebbec063";
+import { ANIM, findAction } from "./assets.js?v=bfc86541ebbec063";
+import { isImmersive } from "./mobile-view.js?v=bfc86541ebbec063";
 
 // 宠物的地图技能（加工等，menu.cpp 的 mixFlag）：右键点道具栏标记，再到宠物窗口的技能页点技能。
 //   标记（第一个决定种类，之后的要同种）：料理（flg 4）要有"料理"、金属 / 宝石（8 / 16）要有"镶宝石"（精工）、耐久不满（32）要有"修复"，
@@ -249,7 +250,7 @@ export class ItemWindow {
     rects.push([wx, wy, wx + 271, wy + 440]);
     const pet = this.petPage ? this.pet() : undefined;
     ui.mobileInfo?.([`石币 ${this.inv.gold}`,pet ? `${pet.freeName || pet.name} · 宠物装备` : "人物装备与背包",
-      this.held >= 0 ? "已拿起道具，轻点目标格放下；双击同一格使用。" : "轻点道具拿起或移动，双击使用或装备。"]);
+      this.held >= 0 ? "已拿起道具，轻点目标格放下。" : isImmersive() ? "轻点图片拿起或移动；用下方按钮装备或使用。" : "轻点道具拿起或移动，双击使用或装备。"]);
     if (this.petPage && !pet) this.selPet = this.host.petList()[0]?.slot ?? -1; // 那只不在了就换第一只
     if (this.petPage) ui.image(CG.PET_ITEM_WND, wx + 121, wy + 220);
     else {
@@ -268,9 +269,28 @@ export class ItemWindow {
       const on = ui.hitBox(x - 24, y - 24, x + 26, y + 23, id, false);
       const it = pet && s < PET_ITEM_SLOTS ? pet.items.find((i) => i.slot === s) : this.item(s);
       const slotName = s < top ? (pet ? PET_SLOT_NAME[s] : EQUIP_NAME[s]) : `背包 ${s - EQUIP_SLOTS + 1}`;
+      const petEquipment=it ? petEquipSlot(it.type)>=0 : false;
+      const equipped=s<top;
+      // Fullscreen adds an explicit action in a separate part of the same
+      // native slot. Its live hit still passes main's modal/context checks;
+      // the original slot center remains the pickup/move action on every UI.
+      const label=it && !(pet && equipped) ? equipped ? "卸下" : petEquipment || it.equip>=0 ? "装备"
+        : it.usable && it.field!==1 && (it.target%100===0 || it.target%100===1) ? "使用" : undefined : undefined;
+      const primaryAction=isImmersive() && label ? {id:`inv-act-${s}`,label} : undefined;
+      if(primaryAction){
+        ui.hitBox(x-24,y+14,x+26,y+23,primaryAction.id,false);
+        if(ui.clicked(primaryAction.id) && it){
+          this.held=-1;this.lastClick={slot:-1,at:0};
+          if(equipped)this.host.move(s,-1);
+          else if(petEquipment){if(this.petPage)this.equipPet(s,-1);else this.setPetPage(true);}
+          else if(it.equip>=0)this.host.move(s,-1);
+          else this.useItem(it);
+        }
+      }
       ui.mobileCard?.({ id, kind: "item", title: it ? `${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}${s===this.held ? "（拿起）" : ""}` : `${slotName} · 空`,
         detail: `${slotName}${it ? ` · ${it.memo || it.magicMemo || "轻点选择，再点同一格使用"}` : ""}`,
-        image: it?.image, actions: [id] });
+        category:it ? petEquipment ? "宠物装备" : it.equip>=0 ? "人物装备" : it.usable ? it.field===1 ? "战斗道具" : "可用道具" : "其他物品" : "空位",
+        image: it?.image, actions: primaryAction ? [id,primaryAction.id] : [id],primaryAction });
       const mixing = this.anim?.carried.has(s) || (this.anim && this.anim.state !== "move" && this.anim.state !== "end" && this.mix.has(s));
       if (it && s !== this.held && !mixing) ui.image(it.image, x, y);
       if (it && this.mix.has(s) && !mixing) ui.text(x - 17, y, MIX_LABEL[this.mix.get(s) ], FONT.WHITE);

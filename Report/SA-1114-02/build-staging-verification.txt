@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: shared pet stories regenerate the catalogue and invalidate the client version
+ok 1 - shared pet stories regenerate the catalogue and invalidate the client version
+  ---
+  duration_ms: 694.826957
+  type: 'test'
+  ...
+# Subtest: artwork changes invalidate build versions and only the login PNG is staged
+ok 2 - artwork changes invalidate build versions and only the login PNG is staged
+  ---
+  duration_ms: 852.76946
+  type: 'test'
+  ...
+# Subtest: builder and stager reject source artwork symlinks before replacing releases
+ok 3 - builder and stager reject source artwork symlinks before replacing releases
+  ---
+  duration_ms: 583.921878
+  type: 'test'
+  ...
+# Subtest: stager rejects symlinks inside its exact artwork allowlist
+ok 4 - stager rejects symlinks inside its exact artwork allowlist
+  ---
+  duration_ms: 475.38884
+  type: 'test'
+  ...
+# Subtest: repeated builds match, removed imports and retired JS cannot enter the release
+ok 5 - repeated builds match, removed imports and retired JS cannot enter the release
+  ---
+  duration_ms: 886.123037
+  type: 'test'
+  ...
+# Subtest: staging refuses unrelated embedded data before changing the previous client
+ok 6 - staging refuses unrelated embedded data before changing the previous client
+  ---
+  duration_ms: 428.160689
+  type: 'test'
+  ...
+# Subtest: failed TypeScript parsing preserves prior output and entry version
+ok 7 - failed TypeScript parsing preserves prior output and entry version
+  ---
+  duration_ms: 515.884985
+  type: 'test'
+  ...
+# Subtest: builder and stager reject output symlinks without modifying the target
+ok 8 - builder and stager reject output symlinks without modifying the target
+  ---
+  duration_ms: 375.337224
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5132.34654

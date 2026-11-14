@@ -12,13 +12,13 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "v0.2.12-LYNX"
+VERSION = "v0.2.13-LYNX"
 DEST = ROOT / "bin" / f"saserver-{VERSION}-linux-amd64.zip"
 
 def main():
     paths = [ROOT / p for p in (
         "bin/saserver", "bin/saserver.sha256", "config.yaml", "README.md",
-        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.12-LYNX.md", "update/README.md",
+        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.13-LYNX.md", "update/README.md",
         "update/ai-pets-v1-assets.tar.gz", "update/ai-pets-v1-assets.manifest.json",
         "update/install-ai-pets.py", "update/install-ai-pets.sh",
     )]
@@ -53,6 +53,9 @@ def main():
     # the previous valid archive, just like build-linux.sh preserves its binary.
     if Path(temporary).parent.resolve() != DEST.parent.resolve():
         raise ValueError("unexpected temporary archive path")
+    # mkstemp starts private; the validated public release must be readable by
+    # the account that serves/downloads it, just like the prior checked-in ZIP.
+    os.chmod(temporary, 0o644)
     os.replace(temporary, DEST)
     print(f"{DEST.name}: {DEST.stat().st_size} bytes, {len(public)} files")
     print(f"SHA256 {hashlib.sha256(DEST.read_bytes()).hexdigest()}")

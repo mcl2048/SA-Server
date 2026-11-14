@@ -5,10 +5,10 @@
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 
-import { PET_ALBUM_TBL } from "./albumdata.js?v=408f23f7bef662b4";
-import { FONT, SYS, measure,         } from "./ui.js?v=408f23f7bef662b4";
-import { ANIM, findAction } from "./assets.js?v=408f23f7bef662b4";
-import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.js?v=408f23f7bef662b4";
+import { PET_ALBUM_TBL } from "./albumdata.js?v=bfc86541ebbec063";
+import { FONT, SYS, measure,         } from "./ui.js?v=bfc86541ebbec063";
+import { ANIM, findAction } from "./assets.js?v=bfc86541ebbec063";
+import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.js?v=bfc86541ebbec063";
 
 const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + AI_PET_CATALOG.length, PAGE = 8;
 // Append-only identities: never change the original SEEN/SNAP table or slots.

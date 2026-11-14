@@ -12,15 +12,15 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=408f23f7bef662b4";
-import { sfx, setSfx } from "./audio.js?v=408f23f7bef662b4";
-import { isMobile } from "./mobile-view.js?v=408f23f7bef662b4";
+import { ANIM, findAction,                              } from "./assets.js?v=bfc86541ebbec063";
+import { sfx, setSfx } from "./audio.js?v=bfc86541ebbec063";
+import { isMobile } from "./mobile-view.js?v=bfc86541ebbec063";
 
-import { battleItems } from "./items.js?v=408f23f7bef662b4";
-import { album } from "./album.js?v=408f23f7bef662b4";
+import { battleItems } from "./items.js?v=bfc86541ebbec063";
+import { album } from "./album.js?v=bfc86541ebbec063";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=408f23f7bef662b4";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=408f23f7bef662b4";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=bfc86541ebbec063";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=bfc86541ebbec063";
 
 // Legacy presentation metadata is optional: the current server computes these
 // internally but its BattleEvent wire schema/conversion omits them. Keep this

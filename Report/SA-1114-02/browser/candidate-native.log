@@ -1,0 +1,9 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+{"variant":"candidate","native_case":"pet basic list, native animated detail and reduced motion"}
+Error: native status detail did not open
+    at assert (file:///home/coder/saserver/Report/SA-1114-02/browser/pet-status-panels.mjs:2:42)
+    at Module.petStatusPanels (file:///home/coder/saserver/Report/SA-1114-02/browser/pet-status-panels.mjs:28:90)
+    at async work (file:///home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:290:210)
+    at async file:///home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:312:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-02/browser/candidate-real-game.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

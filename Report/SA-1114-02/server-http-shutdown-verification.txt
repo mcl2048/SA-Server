@@ -1,0 +1,217 @@
+=== RUN   TestClientSelectionBeforePathNormalization
+=== RUN   TestClientSelectionBeforePathNormalization/omitted
+=== RUN   TestClientSelectionBeforePathNormalization/legacy_default
+=== RUN   TestClientSelectionBeforePathNormalization/explicit_embedded
+=== RUN   TestClientSelectionBeforePathNormalization/external_default_directory
+=== RUN   TestClientSelectionBeforePathNormalization/custom_external
+=== RUN   TestClientSelectionBeforePathNormalization/local_override
+=== RUN   TestClientSelectionBeforePathNormalization/local_embedded
+--- PASS: TestClientSelectionBeforePathNormalization (0.02s)
+    --- PASS: TestClientSelectionBeforePathNormalization/omitted (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/legacy_default (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/explicit_embedded (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/external_default_directory (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/custom_external (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/local_override (0.00s)
+    --- PASS: TestClientSelectionBeforePathNormalization/local_embedded (0.00s)
+=== RUN   TestGzipTransportFailureAbortsResponse
+--- PASS: TestGzipTransportFailureAbortsResponse (0.00s)
+=== RUN   TestGzipCleanupPreservesHandlerPanic
+--- PASS: TestGzipCleanupPreservesHandlerPanic (0.00s)
+=== RUN   TestGzipEmptySuccessHasValidStream
+--- PASS: TestGzipEmptySuccessHasValidStream (0.00s)
+=== RUN   TestPrecompressedClientAvoidsDoubleGzip
+--- PASS: TestPrecompressedClientAvoidsDoubleGzip (0.00s)
+=== RUN   TestLoginArtworkThroughHTTPMiddleware
+--- PASS: TestLoginArtworkThroughHTTPMiddleware (0.00s)
+=== RUN   TestClientGzipHEAD
+--- PASS: TestClientGzipHEAD (0.00s)
+=== RUN   TestCheckKeys
+--- PASS: TestCheckKeys (0.00s)
+=== RUN   TestRulesPartialOverride
+--- PASS: TestRulesPartialOverride (0.00s)
+=== RUN   TestGameplayConfigDefaultsAndOverrides
+--- PASS: TestGameplayConfigDefaultsAndOverrides (0.00s)
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/charzero
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/charlarge
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/petnegative
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/petlarge
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/chartransnegative
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/pettranslarge
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/goldnegative
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/goldnan
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/goldinf
+=== RUN   TestGameplayConfigRejectsInvalidLimitsAndRates/goldlarge
+--- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/charzero (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/charlarge (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/petnegative (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/petlarge (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/chartransnegative (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/pettranslarge (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/goldnegative (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/goldnan (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/goldinf (0.00s)
+    --- PASS: TestGameplayConfigRejectsInvalidLimitsAndRates/goldlarge (0.00s)
+=== RUN   TestGzipNegotiationAndClientValidators
+=== RUN   TestGzipNegotiationAndClientValidators/#00
+=== RUN   TestGzipNegotiationAndClientValidators/br
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=0
+=== RUN   TestGzipNegotiationAndClientValidators/br,_gzip;q=0,_identity;q=1
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=0,_*;q=1
+=== RUN   TestGzipNegotiationAndClientValidators/notgzip
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=NaN
+=== RUN   TestGzipNegotiationAndClientValidators/gzip;q=2
+=== RUN   TestGzipNegotiationAndClientValidators/gzip
+=== RUN   TestGzipNegotiationAndClientValidators/GZip
+=== RUN   TestGzipNegotiationAndClientValidators/br,_gzip;q=0.5
+=== RUN   TestGzipNegotiationAndClientValidators/*;q=0.5
+--- PASS: TestGzipNegotiationAndClientValidators (0.02s)
+    --- PASS: TestGzipNegotiationAndClientValidators/#00 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=0 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br,_gzip;q=0,_identity;q=1 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=0,_*;q=1 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/notgzip (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=NaN (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip;q=2 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/gzip (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/GZip (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/br,_gzip;q=0.5 (0.00s)
+    --- PASS: TestGzipNegotiationAndClientValidators/*;q=0.5 (0.00s)
+=== RUN   TestGzipStatic
+--- PASS: TestGzipStatic (0.01s)
+=== RUN   TestMinimapRevealConfig
+=== RUN   TestMinimapRevealConfig/0
+=== RUN   TestMinimapRevealConfig/1
+=== RUN   TestMinimapRevealConfig/-1
+=== RUN   TestMinimapRevealConfig/2
+=== RUN   TestMinimapRevealConfig/true
+=== RUN   TestMinimapRevealConfig/false
+=== RUN   TestMinimapRevealConfig/1.0
+=== RUN   TestMinimapRevealConfig/0.5
+=== RUN   TestMinimapRevealConfig/"1"
+=== RUN   TestMinimapRevealConfig/null
+=== RUN   TestMinimapRevealConfig/[]
+--- PASS: TestMinimapRevealConfig (0.00s)
+    --- PASS: TestMinimapRevealConfig/0 (0.00s)
+    --- PASS: TestMinimapRevealConfig/1 (0.00s)
+    --- PASS: TestMinimapRevealConfig/-1 (0.00s)
+    --- PASS: TestMinimapRevealConfig/2 (0.00s)
+    --- PASS: TestMinimapRevealConfig/true (0.00s)
+    --- PASS: TestMinimapRevealConfig/false (0.00s)
+    --- PASS: TestMinimapRevealConfig/1.0 (0.00s)
+    --- PASS: TestMinimapRevealConfig/0.5 (0.00s)
+    --- PASS: TestMinimapRevealConfig/"1" (0.00s)
+    --- PASS: TestMinimapRevealConfig/null (0.00s)
+    --- PASS: TestMinimapRevealConfig/[] (0.00s)
+=== RUN   TestNoListingClosesIndexProbe
+--- PASS: TestNoListingClosesIndexProbe (0.00s)
+=== RUN   TestShutdownServerHelper
+--- PASS: TestShutdownServerHelper (0.00s)
+=== RUN   TestSIGTERMSavesOnlinePosition
+    shutdown_test.go:51: SIGTERM completed after 47.313735ms for 1 online players (slow=false, slowFamily=false)
+--- PASS: TestSIGTERMSavesOnlinePosition (1.86s)
+=== RUN   TestSIGTERMWaitsForSlowSaveQueue
+    shutdown_test.go:55: SIGTERM completed after 16.074032525s for 4 online players (slow=true, slowFamily=false)
+--- PASS: TestSIGTERMWaitsForSlowSaveQueue (17.73s)
+=== RUN   TestSIGTERMWaitsForSharedFamilySaveQueue
+    shutdown_test.go:59: SIGTERM completed after 9.068264935s for 1 online players (slow=false, slowFamily=true)
+--- PASS: TestSIGTERMWaitsForSharedFamilySaveQueue (18.62s)
+PASS
+ok  	sa/server/cmd/saserver	38.281s
+=== RUN   TestSnapshotGzipRepresentations
+=== RUN   TestSnapshotGzipRepresentations/gzip
+=== RUN   TestSnapshotGzipRepresentations/GZip;q=0.5
+=== RUN   TestSnapshotGzipRepresentations/*;q=0.5
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=0
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=0,*;q=1
+=== RUN   TestSnapshotGzipRepresentations/gzip;q=NaN
+=== RUN   TestSnapshotGzipRepresentations/identity
+--- PASS: TestSnapshotGzipRepresentations (0.01s)
+    --- PASS: TestSnapshotGzipRepresentations/gzip (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/GZip;q=0.5 (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/*;q=0.5 (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/gzip;q=0 (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/gzip;q=0,*;q=1 (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/gzip;q=NaN (0.00s)
+    --- PASS: TestSnapshotGzipRepresentations/identity (0.00s)
+=== RUN   TestSnapshotGzipCacheIsBounded
+--- PASS: TestSnapshotGzipCacheIsBounded (0.38s)
+=== RUN   TestSnapshotGzipConcurrentRequests
+--- PASS: TestSnapshotGzipConcurrentRequests (0.00s)
+=== RUN   TestBuiltRoutes
+=== RUN   TestBuiltRoutes/GET/
+=== RUN   TestBuiltRoutes/GET/index.html
+=== RUN   TestBuiltRoutes/GET/dist/main.js?v=release
+=== RUN   TestBuiltRoutes/HEAD/dist/main.js
+=== RUN   TestBuiltRoutes/GET/art/login.png?v=release
+=== RUN   TestBuiltRoutes/HEAD/art/login.png
+=== RUN   TestBuiltRoutes/GET/art/login.svg
+=== RUN   TestBuiltRoutes/GET/art/other.png
+=== RUN   TestBuiltRoutes/GET/art/FONT-LICENSE.txt
+=== RUN   TestBuiltRoutes/GET/art/../art/login.png
+=== RUN   TestBuiltRoutes/GET/art/
+=== RUN   TestBuiltRoutes/GET/src/private.ts
+=== RUN   TestBuiltRoutes/GET/dist/private.map
+=== RUN   TestBuiltRoutes/GET/dist/../index.html
+=== RUN   TestBuiltRoutes/GET/dist/%2e%2e/index.html
+=== RUN   TestBuiltRoutes/GET/dist/.private.js
+=== RUN   TestBuiltRoutes/GET/dist/
+=== RUN   TestBuiltRoutes/GET/config.yaml
+=== RUN   TestBuiltRoutes/GET/dist/missing.js
+=== RUN   TestBuiltRoutes/POST/
+--- PASS: TestBuiltRoutes (0.01s)
+    --- PASS: TestBuiltRoutes/GET/ (0.00s)
+    --- PASS: TestBuiltRoutes/GET/index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/main.js?v=release (0.00s)
+    --- PASS: TestBuiltRoutes/HEAD/dist/main.js (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/login.png?v=release (0.00s)
+    --- PASS: TestBuiltRoutes/HEAD/art/login.png (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/login.svg (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/other.png (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/FONT-LICENSE.txt (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/../art/login.png (0.00s)
+    --- PASS: TestBuiltRoutes/GET/art/ (0.00s)
+    --- PASS: TestBuiltRoutes/GET/src/private.ts (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/private.map (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/../index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/%2e%2e/index.html (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/.private.js (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/ (0.00s)
+    --- PASS: TestBuiltRoutes/GET/config.yaml (0.00s)
+    --- PASS: TestBuiltRoutes/GET/dist/missing.js (0.00s)
+    --- PASS: TestBuiltRoutes/POST/ (0.00s)
+=== RUN   TestContentValidatorAndExternalUpdates
+--- PASS: TestContentValidatorAndExternalUpdates (0.00s)
+=== RUN   TestLoginArtworkCacheAndExternalUpdate
+--- PASS: TestLoginArtworkCacheAndExternalUpdate (0.00s)
+=== RUN   TestMissingBuildAndExplicitExternal
+--- PASS: TestMissingBuildAndExplicitExternal (0.00s)
+PASS
+ok  	sa/server/webclient	0.425s
+=== RUN   TestAuthLimiterBackoff
+--- PASS: TestAuthLimiterBackoff (0.00s)
+=== RUN   TestValidCharName
+--- PASS: TestValidCharName (0.00s)
+=== RUN   TestSessionDisconnectResumeTakeoverAndLogout
+--- PASS: TestSessionDisconnectResumeTakeoverAndLogout (1.53s)
+=== RUN   TestResumeTokenOpaqueAndRevokedByPasswordReset
+--- PASS: TestResumeTokenOpaqueAndRevokedByPasswordReset (1.11s)
+=== RUN   TestMultipleCharactersRunAndSwitchIndependently
+--- PASS: TestMultipleCharactersRunAndSwitchIndependently (1.36s)
+=== RUN   TestIdleBrowserAndAccountCapacityRecycles
+--- PASS: TestIdleBrowserAndAccountCapacityRecycles (0.01s)
+=== RUN   TestPasswordMutationRejectsAlreadyVerifiedOldPassword
+=== RUN   TestPasswordMutationRejectsAlreadyVerifiedOldPassword/change
+=== RUN   TestPasswordMutationRejectsAlreadyVerifiedOldPassword/reset
+--- PASS: TestPasswordMutationRejectsAlreadyVerifiedOldPassword (2.25s)
+    --- PASS: TestPasswordMutationRejectsAlreadyVerifiedOldPassword/change (1.18s)
+    --- PASS: TestPasswordMutationRejectsAlreadyVerifiedOldPassword/reset (1.06s)
+=== RUN   TestCharEnterRecreatesActorRemovedByAdministrator
+--- PASS: TestCharEnterRecreatesActorRemovedByAdministrator (1.17s)
+=== RUN   TestRemovedActorCanBeDeletedAfterFailedResumeAndLogout
+--- PASS: TestRemovedActorCanBeDeletedAfterFailedResumeAndLogout (1.07s)
+PASS
+ok  	sa/server/internal/server	8.563s

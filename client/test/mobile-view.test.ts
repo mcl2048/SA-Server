@@ -199,3 +199,51 @@ test("native model metadata is mobile-only and resets with the normal UI frame",
   ui.begin();assert.deepEqual(ui.portraits,[]);assert.deepEqual(ui.cards,[]);assert.equal(ui.panelInfo,null);
   view.setDeviceMode("desktop");
 });
+
+test("immersive field and battle ignore two-finger zoom while retaining button zoom and cancelling game holds", () => {
+  view.setDeviceMode("mobile"); view.setMobileDisplayMode("immersive");
+  for (const context of ["field", "battle"] as const) {
+    view.setMobileContext(context); view.setSceneFocus(400, 324, 100); view.setSceneZoom(2); flush();
+    const before = {...stage.style};
+    const mouse = new Mouse(); mouse.attach(canvas as any); fire(canvas, "pointerdown");
+    fire(viewport, "pointerdown", {clientX: 100, clientY: 200});
+    fire(viewport, "pointerdown", {pointerId: 2, clientX: 200, clientY: 200});
+    fire(viewport, "pointermove", {pointerId: 2, clientX: 700, clientY: 500}); flush();
+    assert.equal(view.getSceneZoom(), 2, "only the explicit zoom buttons may change fullscreen scene scale");
+    assert.equal(stage.style["--mobile-left"], before["--mobile-left"]);
+    assert.equal(stage.style["--mobile-top"], before["--mobile-top"]);
+    assert.equal(mouse.down, false, "a disabled pinch still cancels held game input");
+    fire(viewport, "pointerup", {pointerId: 2}); fire(viewport, "pointerup");
+    view.setSceneZoom(3); flush(); assert.equal(view.getSceneZoom(), 3);
+  }
+  view.setMobileDisplayMode("classic"); view.setDeviceMode("desktop"); flush();
+});
+
+function projectedFocus(x: number, y: number) {
+  const scale = Number(stage.style["--mobile-scale"]);
+  return {x: parseFloat(stage.style["--mobile-left"]) + (x - 400) * scale,
+    y: parseFloat(stage.style["--mobile-top"]) + y * scale};
+}
+
+test("a new portrait battle focus is visible immediately instead of waiting for camera easing", () => {
+  coarse = false; Object.assign(globalThis, {innerWidth: 390, innerHeight: 844});
+  view.setDeviceMode("mobile"); view.setMobileDisplayMode("immersive"); view.setMobileContext("field"); view.setMobileContext("battle");
+  view.setSceneFocus(100, 300, 1000); flush(); view.setSceneFocus(700, 300, 1016); flush();
+  const focus = projectedFocus(700, 300);
+  assert.ok(focus.x >= 0 && focus.x <= 390 && focus.y >= 0 && focus.y <= 844,
+    `new native target must be in view on its first frame: ${JSON.stringify(focus)}`);
+  view.setMobileDisplayMode("classic"); view.setDeviceMode("desktop"); flush();
+});
+
+test("landscape-to-portrait rotation focuses the latest native model before the first resized frame", () => {
+  coarse = false; Object.assign(globalThis, {innerWidth: 844, innerHeight: 390});
+  view.setDeviceMode("mobile"); view.setMobileDisplayMode("immersive"); view.setMobileContext("field"); view.setMobileContext("battle");
+  view.setSceneFocus(100, 300, 2000); flush(); view.setSceneFocus(700, 300, 2016); flush();
+  Object.assign(globalThis, {innerWidth: 390, innerHeight: 844}); fire(win, "resize"); flush();
+  const focus = projectedFocus(700, 300);
+  assert.ok(focus.x >= 0 && focus.x <= 390 && focus.y >= 0 && focus.y <= 844,
+    `rotation cannot retain a landscape easing origin: ${JSON.stringify(focus)}`);
+  view.setSceneZoom(4); flush(); const zoomed = projectedFocus(700, 300);
+  assert.ok(Math.abs(zoomed.x - 195) < .01 && Math.abs(zoomed.y - 422) < .01, "button zoom anchors the latest model");
+  view.setMobileDisplayMode("classic"); view.setDeviceMode("desktop"); flush();
+});

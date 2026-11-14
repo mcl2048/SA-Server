@@ -7,22 +7,22 @@
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
 
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=408f23f7bef662b4";
-import { ItemWindow } from "./items.js?v=408f23f7bef662b4";
-import { TradeWindow } from "./trade.js?v=408f23f7bef662b4";
-import { ActionWindow } from "./actions.js?v=408f23f7bef662b4";
-import { MailWindow } from "./mail.js?v=408f23f7bef662b4";
-import { FamilyWindow } from "./family.js?v=408f23f7bef662b4";
-import { PetWindow } from "./pets.js?v=408f23f7bef662b4";
-import { MapWindow } from "./worldmap.js?v=408f23f7bef662b4";
-import { md5 } from "./md5.js?v=408f23f7bef662b4";
-import { VendorWindow } from "./vendor.js?v=408f23f7bef662b4";
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=bfc86541ebbec063";
+import { ItemWindow } from "./items.js?v=bfc86541ebbec063";
+import { TradeWindow } from "./trade.js?v=bfc86541ebbec063";
+import { ActionWindow } from "./actions.js?v=bfc86541ebbec063";
+import { MailWindow } from "./mail.js?v=bfc86541ebbec063";
+import { FamilyWindow } from "./family.js?v=bfc86541ebbec063";
+import { PetWindow } from "./pets.js?v=bfc86541ebbec063";
+import { MapWindow } from "./worldmap.js?v=bfc86541ebbec063";
+import { md5 } from "./md5.js?v=bfc86541ebbec063";
+import { VendorWindow } from "./vendor.js?v=bfc86541ebbec063";
 
 
-import { AiWindow } from "./aisetting.js?v=408f23f7bef662b4";
-import { GmWindow } from "./gm.js?v=408f23f7bef662b4";
-import { QuestWindow } from "./quests.js?v=408f23f7bef662b4";
-import { album } from "./album.js?v=408f23f7bef662b4";
+import { AiWindow } from "./aisetting.js?v=bfc86541ebbec063";
+import { GmWindow } from "./gm.js?v=bfc86541ebbec063";
+import { QuestWindow } from "./quests.js?v=bfc86541ebbec063";
+import { album } from "./album.js?v=bfc86541ebbec063";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {
@@ -371,6 +371,13 @@ export class Menus {
     this.rects.push([wx, wy, wx + 272, wy + 360]);
     ui.image(CG.STATUS_WND, mx, my);
     if (!st) return;
+    // Reflow labels that are baked into STATUS_WND, retaining the four original
+    // allocation IDs. Exhausted points expose values without a live operation.
+    ui.mobileInfo?.([`${st.name} · Lv.${st.level} · ${st.trans}转`,
+      `HP ${st.hp}/${st.maxHp} · MP ${st.mp}/${st.maxMp}`, `攻击 ${st.atk} · 防御 ${st.def} · 敏捷 ${st.agi}`,
+      `经验 ${st.exp} · 下级经验 ${st.nextExp}`, `魅力 ${st.charm} · 声望 ${st.dp}`, `剩余点数 ${st.points}`], wx+294,
+      [st.vital,st.str,st.tgh,st.dex].map((value,i)=>({label:["体力","腕力","耐力","敏捷"][i],value:String(value),
+        ...(st.points>0 ? {action:`st-up${i}`} : {})})));
     const num = (v        , w        ) => String(v).padStart(w, " "); // 原版 sprintf "%8d" 等（宋体半角等宽）
     let x = wx + 20, y = wy + 28;
     // CenteringStr(pc.name, CHAR_NAME_LEN)：名字在 16 个半角宽度里居中
@@ -406,6 +413,7 @@ export class Menus {
     // 头像：_CHARTITLE_STR_ 的 (209+1, 118+13) 是配 _NEW_CHARDATA_ 底图 55266 的，导出资源里没有那张图，
     // 用的是 CG_STATUS_WND，所以取配它的 (209, 118)（量过底图头像框中心在 (210, 119)）
     ui.image(st.face, wx + 209, wy + 118);
+    ui.mobilePortrait?.(st.face);
     // 升级点数（StatusUpPoint）：有点数时显示剩余点数和四个 ▲ 按钮，点一下加一点（lssproto_SKUP）
     // 位置用的是配 CG_STATUS_WND 的那一支（不加称号栏的位移）：_CHARTITLE_STR_ 的 +31 是配 55266 底图的，用在这张底图上会低一截
     if (st.points > 0) {
@@ -459,11 +467,13 @@ export class Menus {
     if (!st) return;
     const x = wx + 26;
     let y = wy + 18;
+    const mobileRows = ["队伍"];
     ui.text(x, y, "队伍", FONT.YELLOW); ui.text(x + 104, y, "ＭＰ", FONT.AQUA); ui.text(x + 146, y, "ＨＰ", FONT.AQUA); y += 20;
     const row = (name        , mp               , hp        , maxHp        , color        ) => {
       ui.text(x, y, name.length > 7 ? name.slice(0, 7) : name, color);
       if (mp !== null) ui.text(x + 104, y, String(mp), FONT.WHITE);
       ui.text(x + 146, y, `${hp}/${maxHp}`, FONT.WHITE);
+      mobileRows.push(`${name.trim()}${mp === null ? "" : ` · MP ${mp}`} · HP ${hp}/${maxHp}`);
       y += 18;
     };
     row(st.name, st.mp, st.hp, st.maxHp, FONT.WHITE);
@@ -471,13 +481,14 @@ export class Menus {
     y += 6; ui.box(x, y, x + 204, y + 1, "rgba(255,255,255,0.25)", true); y += 10;
     const party = this.host.party(), me = this.host.selfId(), leader = party[0]?.id === me;
     const members = party.map((m, slot) => ({ m, slot })).filter((v)                                        => !!v.m && v.m.id !== me);
-    if (members.length === 0) ui.text(x, y, "没有组队。", FONT.GRAY);
+    if (members.length === 0) {ui.text(x, y, "没有组队。", FONT.GRAY);mobileRows.push("没有组队。");}
     for (const { m, slot } of members) {
       const ry = y;
       row(m.name, m.mp, m.hp, m.maxHp, FONT.WHITE);
       if (leader && ui.text(x + 190, ry, "踢", FONT.RED, `st-kick${slot}`)) this.host.partyKick(slot);
       if (ui.hovered(`st-kick${slot}`)) ui.bottomLine = `把 ${m.name} 踢出队伍。`;
     }
+    ui.mobileInfo?.(mobileRows);
     if (ui.image(CG.CLOSE_BTN, wx + 128, wy + 300, "st-pclose") && ui.clicked("st-pclose")) { this.statusPage = 0; this.host.uiSe(203); }
   }
 

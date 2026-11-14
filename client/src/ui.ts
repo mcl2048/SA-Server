@@ -33,15 +33,21 @@ export interface MobileHit extends Hit { label?: string; }
 export interface Box { x1: number; y1: number; x2: number; y2: number; color: string; fill: boolean; }
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
 export interface Pic { canvas: HTMLCanvasElement; x: number; y: number; }
-export interface MobilePortrait { image: number; rawIndex: boolean; }
+export interface MobilePortraitAnimation {
+  /** Stable native action identity; playback must not change frame metadata. */
+  key: string; ticks: number; frames: readonly [number, number, number, number][];
+}
+export interface MobilePortrait { image: number; rawIndex: boolean; animation?: MobilePortraitAnimation; }
 /** Native windows describe only their currently drawn slots. The mobile view
  * rearranges these records; each action still requires its original live hit.
  */
 export interface MobileCard {
   id: string; kind: "item" | "pet"; title: string; detail: string;
   image?: number; actions: string[];
+  category?: string; primaryAction?: { id: string; label: string };
 }
-export interface MobilePanelInfo { lines: string[]; nativeTextX?: number; }
+export interface MobilePanelStat { label: string; value: string; action?: string; }
+export interface MobilePanelInfo { lines: string[]; nativeTextX?: number; stats?: MobilePanelStat[]; }
 
 export class Mouse {
   x = -1; y = -1; down = false; clicked = false; rightClicked = false;
@@ -281,10 +287,9 @@ export class Ui {
 
   pic(canvas: HTMLCanvasElement, x: number, y: number) { this.pics.push({ canvas, x, y }); }
 
-  /** A stable native pose lets fullscreen windows retain the actual model while
-   * their text and controls reflow. The ordinary animated draw stays unchanged. */
-  mobilePortrait(image: number, rawIndex = false): void {
-    if (isMobile()) this.portraits.push({image,rawIndex});
+  /** The skin owns playback so native animation ticks cannot churn DOM layout. */
+  mobilePortrait(image: number, rawIndex = false, animation?: MobilePortraitAnimation): void {
+    if (isMobile()) this.portraits.push({image,rawIndex,...(animation ? {animation} : {})});
   }
 
   mobileCard(card: MobileCard): void {
@@ -292,8 +297,8 @@ export class Ui {
   }
 
   /** Labels baked into native background art must remain explicit on reflow. */
-  mobileInfo(lines: string[], nativeTextX?: number): void {
-    if (isMobile()) this.panelInfo = {lines,nativeTextX};
+  mobileInfo(lines: string[], nativeTextX?: number, stats?: MobilePanelStat[]): void {
+    if (isMobile()) this.panelInfo = {lines,nativeTextX,...(stats ? {stats} : {})};
   }
 
   box(x1: number, y1: number, x2: number, y2: number, color: string, fill: boolean) {

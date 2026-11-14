@@ -1,27 +1,27 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=408f23f7bef662b4";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=408f23f7bef662b4";
-import { Sound, setSfx } from "./audio.js?v=408f23f7bef662b4";
-import { MAP_BGM } from "./soundtable.js?v=408f23f7bef662b4";
-import { Connection, trafficRates } from "./net.js?v=408f23f7bef662b4";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=408f23f7bef662b4";
-import { Renderer,              } from "./renderer.js?v=408f23f7bef662b4";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=408f23f7bef662b4";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=408f23f7bef662b4";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=408f23f7bef662b4";
-import { ACTION_KEYS } from "./actions.js?v=408f23f7bef662b4";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=408f23f7bef662b4";
-import { BattleScreen } from "./battle.js?v=408f23f7bef662b4";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=408f23f7bef662b4";
-import { Shop } from "./shop.js?v=408f23f7bef662b4";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=408f23f7bef662b4";
-import { loadAi } from "./ai.js?v=408f23f7bef662b4";
-import { AiMemory } from "./aismart.js?v=408f23f7bef662b4";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=408f23f7bef662b4";
-import { MobileShell } from "./mobile-shell.js?v=408f23f7bef662b4";
-import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=408f23f7bef662b4";
-import { installControlPositions } from "./mobile-position.js?v=408f23f7bef662b4";
+import { Assets } from "./assets.js?v=bfc86541ebbec063";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=bfc86541ebbec063";
+import { Sound, setSfx } from "./audio.js?v=bfc86541ebbec063";
+import { MAP_BGM } from "./soundtable.js?v=bfc86541ebbec063";
+import { Connection, trafficRates } from "./net.js?v=bfc86541ebbec063";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=bfc86541ebbec063";
+import { Renderer,              } from "./renderer.js?v=bfc86541ebbec063";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=bfc86541ebbec063";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=bfc86541ebbec063";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=bfc86541ebbec063";
+import { ACTION_KEYS } from "./actions.js?v=bfc86541ebbec063";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=bfc86541ebbec063";
+import { BattleScreen } from "./battle.js?v=bfc86541ebbec063";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=bfc86541ebbec063";
+import { Shop } from "./shop.js?v=bfc86541ebbec063";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=bfc86541ebbec063";
+import { loadAi } from "./ai.js?v=bfc86541ebbec063";
+import { AiMemory } from "./aismart.js?v=bfc86541ebbec063";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=bfc86541ebbec063";
+import { MobileShell } from "./mobile-shell.js?v=bfc86541ebbec063";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=bfc86541ebbec063";
+import { installControlPositions } from "./mobile-position.js?v=bfc86541ebbec063";
 
 
 const params = new URLSearchParams(location.search);

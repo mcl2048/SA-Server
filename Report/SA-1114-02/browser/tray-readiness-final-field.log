@@ -1,0 +1,77 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","matrix_step":"desktop-enter"}
+{"variant":"final","matrix_step":"desktop-authenticated"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-status"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-item"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-pet"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-map"}
+{"variant":"final","matrix_step":"desktop-action","id":"tb-system"}
+{"variant":"final","matrix_case":"separate desktop context and native mouse menus"}
+{"variant":"final","matrix_case":"classic 320x568"}
+{"variant":"final","matrix_case":"classic 390x844"}
+{"variant":"final","matrix_case":"classic 430x932"}
+{"variant":"final","matrix_case":"classic 844x390"}
+{"variant":"final","matrix_case":"classic 568x320"}
+{"variant":"final","matrix_case":"classic native items"}
+{"variant":"final","matrix_case":"classic native pets"}
+{"variant":"final","matrix_case":"classic native status"}
+{"variant":"final","matrix_case":"classic native quests"}
+{"variant":"final","matrix_case":"classic native map"}
+{"variant":"final","matrix_case":"classic native system"}
+{"variant":"final","matrix_case":"immersive 320x568"}
+{"variant":"final","matrix_case":"immersive 390x844"}
+{"variant":"final","matrix_case":"immersive 430x932"}
+{"variant":"final","matrix_case":"immersive 844x390"}
+{"variant":"final","matrix_case":"immersive 568x320"}
+{"variant":"final","matrix_case":"immersive native items"}
+{"variant":"final","matrix_case":"immersive native pets"}
+{"variant":"final","matrix_case":"immersive native status"}
+{"variant":"final","matrix_case":"immersive native quests"}
+{"variant":"final","matrix_case":"immersive native map"}
+{"variant":"final","matrix_case":"immersive native system"}
+{"variant":"final","matrix_case":"adaptive native items 320x568"}
+{"variant":"final","matrix_case":"adaptive native pets 320x568"}
+{"variant":"final","matrix_case":"adaptive native status 320x568"}
+{"variant":"final","matrix_case":"adaptive native quests 320x568"}
+{"variant":"final","matrix_case":"adaptive native map 320x568"}
+{"variant":"final","matrix_case":"adaptive native system 320x568"}
+{"variant":"final","matrix_case":"adaptive native items 390x844"}
+{"variant":"final","matrix_case":"adaptive native pets 390x844"}
+{"variant":"final","matrix_case":"adaptive native status 390x844"}
+{"variant":"final","matrix_case":"adaptive native quests 390x844"}
+{"variant":"final","matrix_case":"adaptive native map 390x844"}
+{"variant":"final","matrix_case":"adaptive native system 390x844"}
+{"variant":"final","matrix_case":"adaptive native items 430x932"}
+{"variant":"final","matrix_case":"adaptive native pets 430x932"}
+{"variant":"final","matrix_case":"adaptive native status 430x932"}
+{"variant":"final","matrix_case":"adaptive native quests 430x932"}
+{"variant":"final","matrix_case":"adaptive native map 430x932"}
+{"variant":"final","matrix_case":"adaptive native system 430x932"}
+{"variant":"final","matrix_case":"adaptive native items 844x390"}
+{"variant":"final","matrix_case":"adaptive native pets 844x390"}
+{"variant":"final","matrix_case":"adaptive native status 844x390"}
+{"variant":"final","matrix_case":"adaptive native quests 844x390"}
+{"variant":"final","matrix_case":"adaptive native map 844x390"}
+locator.scrollIntoViewIfNeeded: Timeout 29951.05800000002ms exceeded.
+Call log:
+[2m  - attempting scroll into view action[22m
+[2m    2 × waiting for element to be stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying scroll into view action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying scroll into view action[22m
+[2m      - waiting 100ms[22m
+[2m    46 × waiting for element to be stable[22m
+[2m       - element is not visible[22m
+[2m     - retrying scroll into view action[22m
+[2m       - waiting 500ms[22m
+
+    at GameUI.toolbar (/home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:102:11)
+    at async adaptivePanels (/home/coder/saserver/Report/SA-1114-02/browser/adaptive-panels.mjs:9:4)
+    at async Module.runMatrix (/home/coder/saserver/Report/SA-1114-02/browser/matrix-cases.mjs:93:3)
+    at async work (/home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:293:46)
+    at async file:///home/coder/saserver/Report/SA-1114-02/browser/real-game.mjs:314:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-02/browser/final-field-game.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":null,"stored_position":null,"position_matches":false}}

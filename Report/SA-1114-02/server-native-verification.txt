@@ -1,0 +1,26 @@
+=== RUN   TestSA111402NativeActions
+    sa111402_review_test.go:29: fixture id=0 image=20033 type=1 field=0 target=0 name=小斧头 func= arg=
+    sa111402_review_test.go:29: fixture id=1 image=20032 type=1 field=0 target=0 name=贝诺美斯Lv1斧头 func= arg=
+    sa111402_review_test.go:29: fixture id=1500 image=23013 type=16 field=0 target=1 name=耐久力回复药 func=ITEM_useRecovery arg=体 100
+    sa111402_review_test.go:29: fixture id=1510 image=23005 type=16 field=0 target=1 name=气力回复药 func=ITEM_useRecovery arg=气20
+    sa111402_review_test.go:29: fixture id=1329 image=22265 type=16 field=2 target=0 name=皇后写的信 func= arg=
+    sa111402_review_test.go:29: fixture id=1247 image=24043 type=20 field=1 target=1 name=治疗中毒的肉 func=ITEM_useStatusRecovery arg=毒
+    sa111402_review_test.go:29: fixture id=22626 image=22545 type=33 field=0 target=8 name=合成牙套1 func= arg=
+=== RUN   TestSA111402NativeActions/character_equipment_ID_zero_and_native_unequip
+=== RUN   TestSA111402NativeActions/HP_1500_consumes_and_sends_status
+=== RUN   TestSA111402NativeActions/MP_1510_consumes_and_sends_status
+=== RUN   TestSA111402NativeActions/pet_HP_works_pure_MP_preserved
+=== RUN   TestSA111402NativeActions/unusable_letter_and_battle_status_food_preserved
+=== RUN   TestSA111402NativeActions/pet_equipment_22626_native_slot_four
+--- PASS: TestSA111402NativeActions (6.13s)
+    --- PASS: TestSA111402NativeActions/character_equipment_ID_zero_and_native_unequip (0.00s)
+    --- PASS: TestSA111402NativeActions/HP_1500_consumes_and_sends_status (0.00s)
+    --- PASS: TestSA111402NativeActions/MP_1510_consumes_and_sends_status (0.00s)
+    --- PASS: TestSA111402NativeActions/pet_HP_works_pure_MP_preserved (0.00s)
+    --- PASS: TestSA111402NativeActions/unusable_letter_and_battle_status_food_preserved (0.00s)
+    --- PASS: TestSA111402NativeActions/pet_equipment_22626_native_slot_four (0.00s)
+=== RUN   TestSA111402ConcurrentStatUp
+    sa111402_review_test.go:144: 128 concurrent attempts spent exactly 7 points; exhausted, invalid and battle attempts rejected
+--- PASS: TestSA111402ConcurrentStatUp (0.59s)
+PASS
+ok  	sa/server/internal/world	7.894s

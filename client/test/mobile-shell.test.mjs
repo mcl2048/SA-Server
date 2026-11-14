@@ -450,3 +450,33 @@ test("native pet detail replaces whole-list summaries and changing game windows 
   assert.equal(shell.sheet.scrollTop,0);assert.equal(shell.content.scrollTop,0);
   hits=[];frame("field");view.setMobileDisplayMode("classic");frame("field");
 });
+
+test("fullscreen cards keep native art and put an explicit live primary action below the item", async()=>{
+ const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+ hits=[{id:"inv-9",x1:10,y1:10,x2:60,y2:57},{id:"inv-act-9",x1:10,y1:48,x2:60,y2:57}];
+ ui.cards=[{id:"inv-9",kind:"item",title:"回复药",detail:"恢复耐久",category:"可用道具",image:23013,actions:["inv-9","inv-act-9"],primaryAction:{id:"inv-act-9",label:"使用"}}];
+ shell.frame({phase:"field",panel:true,title:"背包"});
+ const card=body.querySelectorAll("article").find(e=>e.dataset.kind==="item");
+ const use=allButtons().find(e=>e.dataset.action==="inv-act-9"),image=allButtons().find(e=>e.dataset.action==="inv-9");
+ assert.equal(use.textContent,"使用");assert.equal(use.dataset.primaryAction,"true");
+ assert.equal(card.children.at(-1),use,"explicit action must sit below item description");
+ assert.equal(image.dataset.nativeImage,"23013");assert.equal(card.querySelectorAll("*").some(e=>e.textContent==="可用道具"),true);
+ fire(use,"click");assert.deepEqual(fired.at(-1),["action","inv-act-9"]);
+ hits=hits.slice(0,1);shell.frame({phase:"field",panel:true,title:"背包"});
+ const before=fired.length;fire(use,"click");assert.equal(fired.length,before);assert.equal(card.contains(use),false);
+ hits=[];ui.cards=[];view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("status attributes retain adjacent native +1 controls and remove exhausted point actions", async()=>{
+ const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+ hits=[{id:"st-up0",x1:20,y1:30,x2:45,y2:55}];
+ ui.panelInfo={lines:["剩余点数 1"],stats:[{label:"体力",value:"25",action:"st-up0"},{label:"腕力",value:"30"}]};
+ shell.frame({phase:"field",panel:true,title:"状态"});
+ const stats=body.querySelectorAll("*").find(e=>e.className==="mobile-native-stats");assert.ok(stats);
+ const plus=allButtons().find(e=>e.dataset.action==="st-up0");assert.equal(plus.textContent,"+1");
+ assert.equal(plus.parentNode.children.some(e=>e.textContent==="体力 25"),true);
+ assert.equal(plus.getAttribute("aria-label"),"体力增加 1 点");fire(plus,"click");assert.deepEqual(fired.at(-1),["action","st-up0"]);
+ hits=[];ui.panelInfo={lines:["剩余点数 0"],stats:[{label:"体力",value:"26"}]};shell.frame({phase:"field",panel:true,title:"状态"});
+ assert.equal(stats.contains(plus),false);const before=fired.length;fire(plus,"click");assert.equal(fired.length,before);
+ ui.panelInfo=null;view.setMobileDisplayMode("classic");frame("field");
+});
