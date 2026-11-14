@@ -141,7 +141,8 @@ func (w *World) startBattleWith(e *entity, enemies []*battle.Fighter, npc *entit
 		b.Add(f)
 	}
 	b.CanCapture = func(a, d *battle.Fighter) bool { m := room.member(a.Slot); return m != nil && w.canCapture(m, d) }
-	b.NoAbduct = npc != nil || onEnd != nil         // BATTLE_Abduct：有 WinFunc 的战斗带不走人
+	b.NoAbduct = npc != nil || onEnd != nil // BATTLE_Abduct：有 WinFunc 的战斗带不走人
+	b.NoDisplacement = slices.Contains(w.Rules.NoEscapeFloors, e.floor)
 	b.OnHit = func(a, d *battle.Fighter, dmg int) { // 装备磨损（crush.go）：打人的与挨打的各自的装备
 		for _, m := range room.members {
 			if m.fight != nil {

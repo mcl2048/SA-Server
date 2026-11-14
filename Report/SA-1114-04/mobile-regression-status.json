@@ -1,0 +1,15 @@
+{
+  "state": "finished",
+  "command": [
+    "node",
+    "Report/SA-1114-04/browser/real-game.mjs",
+    "--variant",
+    "final",
+    "--mobile-regression",
+    "--meta",
+    "/tmp/sa-1114-04-runtime-mobile-final.json"
+  ],
+  "started": 1794651658.4297814,
+  "exit_code": 0,
+  "seconds": 71.663
+}

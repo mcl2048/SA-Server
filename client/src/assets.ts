@@ -14,6 +14,7 @@ const SETS = ["i8", "rgba"];
 // integers and assetindex intentionally only understands the original two sets.
 const AI_PETS = { id: "ai-pets-v1", set: 2, imageBase: 9000000, imageLimit: 9100000, sprites: [199100, 199101, 199102, 199103] };
 const LILITH = { id: "lilith-v1", set: 3, imageBase: 9100000, imageLimit: 9200000, sprites: [199200, 199201] };
+const LISARIDO = { id: "lisarido-v1", set: 4, imageBase: 9200000, imageLimit: 9300000, sprites: [199300, 199301] };
 type ExtensionPack = typeof AI_PETS;
 interface ExtensionPage { file: string; width: number; height: number; }
 interface ExtensionManifest {
@@ -25,7 +26,7 @@ interface ExtensionManifest {
 }
 const integer = (n: unknown, low: number, high: number): n is number => Number.isInteger(n) && Number(n) >= low && Number(n) <= high;
 // Existing mechanical sprites keep pets visible with the unmodified asset pack.
-const AI_PET_FALLBACK = new Map([...AI_PETS.sprites.map(id => [id, 100374] as [number, number]), [199200, 100374], [199201, 101735]]);
+const AI_PET_FALLBACK = new Map([...AI_PETS.sprites.map(id => [id, 100374] as [number, number]), [199200, 100374], [199201, 101735], [199300, 100374], [199301, 101735]]);
 
 // 显存里的图集页：没用了很久、总量超过 gpuBudget 时先释放（core 是登录前预加载的界面页，不释放）
 interface PageSlot { tex: Texture | null; used: number; core: boolean; }
@@ -70,7 +71,7 @@ export class Assets {
     }
     this.renderer.setPalette(await this.renderer.loadTexture(this.root + "palettes.png", false));
     try { await this.loadIndex(progress); } catch (e) { console.warn("没有二进制索引，改用逐个 JSON", e); this.index = null; }
-    await Promise.all([AI_PETS, LILITH].map(pack => this.loadOptionalExtension(pack)));
+    await Promise.all([AI_PETS, LILITH, LISARIDO].map(pack => this.loadOptionalExtension(pack)));
   }
 
   /** Missing/invalid add-ons leave the original resource set fully usable. */

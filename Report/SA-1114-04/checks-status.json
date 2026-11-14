@@ -1,0 +1,54 @@
+{
+  "state": "finished",
+  "success": true,
+  "checks": [
+    {
+      "name": "client-and-build",
+      "exit_code": 0,
+      "log": "client-tests.txt",
+      "seconds": 27.004
+    },
+    {
+      "name": "typescript",
+      "exit_code": 0,
+      "log": "typescript.txt",
+      "seconds": 2.521
+    },
+    {
+      "name": "go-all",
+      "exit_code": 0,
+      "log": "go-tests.txt",
+      "seconds": 171.654
+    },
+    {
+      "name": "go-vet",
+      "exit_code": 0,
+      "log": "go-vet.txt",
+      "seconds": 8.546
+    },
+    {
+      "name": "ai-pets-installer",
+      "exit_code": 0,
+      "log": "ai-pets-install-tests.json",
+      "seconds": 5.675
+    },
+    {
+      "name": "lilith-installer",
+      "exit_code": 0,
+      "log": "lilith-install-tests.json",
+      "seconds": 5.716
+    },
+    {
+      "name": "lisarido-installer",
+      "exit_code": 0,
+      "log": "lisarido-install-tests.json",
+      "seconds": 4.91
+    },
+    {
+      "name": "matched-build",
+      "exit_code": 0,
+      "log": "build.txt",
+      "seconds": 3.422
+    }
+  ]
+}

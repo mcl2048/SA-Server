@@ -1,0 +1,46 @@
+$ go test ./internal/data ./internal/battle ./internal/world -run TestLisarido|TestElectromagneticCannon -count=1 -v -timeout=90s
+# sa/server/internal/battle [sa/server/internal/battle.test]
+internal/battle/electromagnetic_cannon_test.go:378:5: declared and not used: a
+=== RUN   TestLisaridoRegistryGrowthAndCaveHabitat
+--- PASS: TestLisaridoRegistryGrowthAndCaveHabitat (1.28s)
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/template
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/skill
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/sprite
+--- PASS: TestLisaridoInstallationRejectsCollisionsAtomically (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/template (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/skill (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/sprite (0.00s)
+=== RUN   TestLisaridoRegistryAndHabitatInstallationAreIdempotent
+--- PASS: TestLisaridoRegistryAndHabitatInstallationAreIdempotent (1.51s)
+=== RUN   TestLisaridoNaturalPickerAndRealSkillExecution
+    lisarido_play_test.go:57: 5000 real encounters: young=578 wild=940 original=3482; native skill hits=5
+--- PASS: TestLisaridoNaturalPickerAndRealSkillExecution (1.02s)
+PASS
+ok  	sa/server/internal/data	3.860s
+FAIL	sa/server/internal/battle [build failed]
+=== RUN   TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture
+--- PASS: TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture (1.55s)
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event
+--- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection (0.33s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary (0.07s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape (0.08s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc (0.08s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event (0.10s)
+PASS
+ok  	sa/server/internal/world	1.949s
+FAIL
+
+exit=1

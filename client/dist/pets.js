@@ -13,10 +13,10 @@
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
 
-import { ANIM, findAction } from "./assets.js?v=befcbe62a17abfb2";
-import { petForSprite } from "./pet-catalog.js?v=befcbe62a17abfb2";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=befcbe62a17abfb2";
-import { isImmersive } from "./mobile-view.js?v=befcbe62a17abfb2";
+import { ANIM, findAction } from "./assets.js?v=abae3f174fa9bed4";
+import { petForSprite } from "./pet-catalog.js?v=abae3f174fa9bed4";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=abae3f174fa9bed4";
+import { isImmersive } from "./mobile-view.js?v=abae3f174fa9bed4";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,

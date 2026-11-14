@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "<stdin>", line 70, in <module>
+  File "<stdin>", line 41, in run
+AssertionError: ((), 1, '', '安装失败（未覆盖原素材）: 解压后的归档体积异常，拒绝读取\n')

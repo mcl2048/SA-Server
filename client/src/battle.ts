@@ -90,6 +90,7 @@ const FX = { MIRROR: 100650, BARRIER: 100651, ABSORB: 100652, STAR: 100501, REVE
 // Extension protocol identity: Ghost Storm is a ranged physical skill carried
 // by Magic events so its caster never enters the melee movement choreography.
 const GHOST_STORM_EFFECT = 199201;
+const ELECTROMAGNETIC_CANNON_EFFECT = 199301;
 const SKILL_ICON: Record<number, number> = { 1: 26514, 2: 101415, 3: 101403, 4: 101404, 5: 101402, 6: 101405, 7: 101408, 8: 101409, 9: 101407, 10: 101410, 11: 25869, 12: 101418 };
 const MISSILE = { ARROW: 25630, STONE: 25785, STONE_SHADOW: 25786, AXE: 100504, AXE_SHADOW: 100505, BOOMERANG: 100502, SPEED: 32 };
 const ANGRY = 8; // loadsprbin.h ANIM_ANGRY
@@ -779,6 +780,7 @@ export class BattleScreen {
    */
   private magicSteps(a: Fighter, group: BattleEvent[], userEffect = JUJUTU.EFFECT_USER): Step[] {
     const first = group[0];
+    if (first.kind === "magic" && first.effect === ELECTROMAGNETIC_CANNON_EFFECT) return this.cannonSteps(a, group);
     const ghostStorm = first.kind === "magic" && first.effect === GHOST_STORM_EFFECT;
     const steps: Step[] = [];
     steps.push(this.waitStep(700, (now) => {
@@ -853,6 +855,39 @@ export class BattleScreen {
     });
     steps.push(this.waitStep(300));
     return steps;
+  }
+
+  /** Five authoritative rounds stay separate: damage, forced departure, then
+   * the next randomly selected living target. Validate when a round executes,
+   * since onTurn builds the whole queue before any flee/death has played.
+   */
+  private cannonSteps(a: Fighter, group: BattleEvent[]): Step[] {
+    return group.flatMap(e => {
+      let target: Fighter | undefined, valid = false, duration = 600, started = -1;
+      const alive = (f: Fighter | undefined): f is Fighter => !!f && !f.gone && !f.hidden && !f.fly && !f.dead && f.hp > 0;
+      const cast = this.waitStep(250, now => {
+        const original = this.fighters.get(e.target);
+        target = e.guardian >= 0 ? this.fighters.get(e.guardian) ?? original : original;
+        valid = alive(a) && alive(original) && alive(target);
+        if (!valid) return;
+        this.showSkill(e.skill, now);
+        a.dir = a.homeDir(); a.play(ANIM.HAND, now); a.mp = e.actorMp;
+      });
+      return [
+        cast,
+        (now: number) => {
+          if (!valid || !alive(target)) return true;
+          if (started < 0) {
+            started = now; this.cameraSlot = target.f.slot;
+            duration = Math.max(300, Math.min(1500, this.animOnce(ELECTROMAGNETIC_CANNON_EFFECT, target.x, target.y - 40, now)));
+          }
+          if (now - started < duration) return false;
+          this.applyHit(e, target, a, now, 0);
+          return true;
+        },
+        this.waitStep(150, now => { if (!a.dead && !a.gone) a.play(ANIM.STAND, now, true); }),
+      ];
+    });
   }
 
   private applyMagic(e: BattleEvent, t: Fighter, a: Fighter, now: number) {

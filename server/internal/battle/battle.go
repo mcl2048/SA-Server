@@ -382,6 +382,9 @@ type Battle struct {
 	Notice    func(slot int, text string)
 	// NoAbduct：NPC 开的战斗，旅程伙伴带不走人（skill2.go abduct）
 	NoAbduct bool
+	// NoDisplacement protects no-escape floors from the cannon's forced leave.
+	// It does not change the existing Abduct or ordinary flight rules.
+	NoDisplacement bool
 	// OnHit 是每一下有伤害的攻击（BATTLE_ItemCrushSeq：装备磨损由世界层做）；OnTooth 是 E啮齿术打中玩家（BATTLE_S_ToothCrushe）
 	OnHit   func(a, d *Fighter, dmg int)
 	OnTooth func(a, d *Fighter)

@@ -92,7 +92,10 @@ def read_package(script_dir):
     require(digest(archive) == archive_meta.get("sha256"), "归档SHA-256校验失败")
     # Do not use extractall: validate the entire archive before creating files.
     import io
-    tar_limit = sum(512 + ((e["size"] + 511) // 512) * 512 for e in expected.values()) + 10240
+    # Include two USTAR EOF blocks, then round to a complete tar record.
+    # A single added record is too small for some valid payload boundaries.
+    member_bytes = sum(512 + ((e["size"] + 511) // 512) * 512 for e in expected.values())
+    tar_limit = ((member_bytes + 1024 + 10239) // 10240) * 10240
     with gzip.GzipFile(fileobj=io.BytesIO(archive), mode="rb") as compressed:
         unpacked = compressed.read(tar_limit + 1)
     require(len(unpacked) <= tar_limit, "解压后的归档体积异常，拒绝读取")

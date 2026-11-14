@@ -65,3 +65,24 @@ test('an explicit Ghost Storm plan still uses the native all-enemy target',()=>{
  c.fighters.get(11)!.hp=0;
  assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[0,21]);
 });
+
+test('cannon uses its five-round total prior and stays available to a surviving ownerless pet',()=>{
+ const c=context(),s=defaultAi();
+ c.pet={name:'雷萨利朵',atk:100,skills:[skill(0,29050,'PETSKILL_ElectromagneticCannon'),skill(2,1,'PETSKILL_NormalAttack'),skill(4,2,'PETSKILL_NormalGuard',0)]};
+ c.fighters.set(11,fighter(11));
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[2,10], 'five 16.5 percent rounds total 82.5 percent and are not multiplied by enemy count');
+ c.pet.skills.splice(1,1);
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[0,10]);
+ c.fighters.get(0)!.hp=500;s.then={kind:'guard',name:'',target:'self'};
+ c.pet.skills.splice(1,0,skill(2,1,'PETSKILL_NormalAttack'));
+ assert.deepEqual(smartChoose(s,c).pet,[2,10]);
+});
+
+test('random cannon cannot endanger a capture target even through an explicit surviving-pet plan',()=>{
+ const c=context(),s=defaultAi();c.capturePlace=true;s.capture=true;c.fighters.get(10)!.level=1;c.fighters.set(11,fighter(11));
+ c.pet={name:'雷萨利朵',atk:100,skills:[{...skill(0,29050,'PETSKILL_ElectromagneticCannon'),name:'电磁火炮'},skill(4,2,'PETSKILL_NormalGuard',0)]};
+ s.petThen={kind:'skill',name:'电磁火炮',target:'enemy'};
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[4,5]);
+ s.petThen={kind:'auto',name:'',target:'auto'};
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[4,5]);
+});

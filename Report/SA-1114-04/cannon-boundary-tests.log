@@ -1,0 +1,84 @@
+$ go test ./internal/battle -run TestElectromagneticCannon -count=1 -v -timeout=90s
+=== RUN   TestElectromagneticCannonFiveRandomRemoteShots
+--- PASS: TestElectromagneticCannonFiveRandomRemoteShots (0.00s)
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/ordinary
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/guard
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/absorb
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/vanish
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/reflect
+--- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers (0.03s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/ordinary (0.01s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/guard (0.00s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/absorb (0.00s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/vanish (0.01s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/reflect (0.00s)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/equal
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=701 displacement=385 (50/50 classes, conditional 35%/20%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/upper
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=1003 displacement=596 (50/50 classes, conditional 50%/30%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/lower
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=436 displacement=195 (50/50 classes, conditional 20%/10%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/resisted
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=436 displacement=385 (50/50 classes, conditional 20%/20%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/negative-resistance
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=701 displacement=385 (50/50 classes, conditional 35%/20%)
+--- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot (0.53s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/equal (0.12s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/upper (0.08s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/lower (0.07s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/resisted (0.11s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/negative-resistance (0.15s)
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pvp
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/scripted
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-escape
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/player
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pet
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/uncapturable
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-seed
+--- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis (0.58s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pvp (0.10s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/scripted (0.10s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-escape (0.07s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/player (0.06s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pet (0.07s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/uncapturable (0.07s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-seed (0.10s)
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/departed
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/dead
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/capture
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/guardian-capture
+--- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/departed (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/dead (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/capture (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/guardian-capture (0.00s)
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/reflect
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dead
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/flown
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/escaped
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/paralysis
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/stone
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/sleep
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/barrier
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dizzy
+--- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/reflect (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dead (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/flown (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/escaped (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/paralysis (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/stone (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/sleep (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/barrier (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dizzy (0.00s)
+=== RUN   TestElectromagneticCannonFleeIsTerminalAndParalysisSkipsThreeActions
+--- PASS: TestElectromagneticCannonFleeIsTerminalAndParalysisSkipsThreeActions (0.00s)
+PASS
+ok  	sa/server/internal/battle	1.175s
+
+exit=0

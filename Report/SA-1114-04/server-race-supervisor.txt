@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["go", "test", "-race", "./internal/data", "./internal/battle", "./internal/world", "-run", "TestLisarido|TestElectromagneticCannon|TestGhostStorm|TestCounter|TestExpiredDisable", "-count=1", "-timeout=3m"], "started": 1794651300.7470174, "exit_code": 0, "seconds": 72.707}

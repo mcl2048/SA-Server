@@ -1,0 +1,48 @@
+$ go test ./internal/data ./internal/battle ./internal/world -run TestLisarido|TestElectromagneticCannon -count=1 -v -timeout=90s
+=== RUN   TestLisaridoRegistryGrowthAndCaveHabitat
+--- PASS: TestLisaridoRegistryGrowthAndCaveHabitat (1.23s)
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/template
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/skill
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/sprite
+--- PASS: TestLisaridoInstallationRejectsCollisionsAtomically (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/template (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/skill (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/sprite (0.00s)
+=== RUN   TestLisaridoRegistryAndHabitatInstallationAreIdempotent
+--- PASS: TestLisaridoRegistryAndHabitatInstallationAreIdempotent (1.39s)
+=== RUN   TestLisaridoNaturalPickerAndRealSkillExecution
+    lisarido_play_test.go:57: 5000 real encounters: young=578 wild=940 original=3482; native skill hits=5
+--- PASS: TestLisaridoNaturalPickerAndRealSkillExecution (0.94s)
+PASS
+ok  	sa/server/internal/data	3.605s
+=== RUN   TestElectromagneticCannonFiveRandomRemoteShots
+--- PASS: TestElectromagneticCannonFiveRandomRemoteShots (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.014s
+=== RUN   TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture
+--- PASS: TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture (1.65s)
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event
+--- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection (0.40s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary (0.14s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape (0.09s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc (0.08s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event (0.10s)
+=== RUN   TestLisaridoAutomaticDamageBudgetDoesNotMultiplyEnemyCount
+--- PASS: TestLisaridoAutomaticDamageBudgetDoesNotMultiplyEnemyCount (0.00s)
+PASS
+ok  	sa/server/internal/world	2.142s
+
+exit=0

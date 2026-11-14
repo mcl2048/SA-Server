@@ -63,6 +63,19 @@ try:
     run(update,ok=False);assert (assets/prefix/'pages/00000.png').read_bytes()==b'conflicting-extension';untouched(assets)
     passed+=['conflicting extension is not overwritten']
 
+    # Valid USTAR ends with two 512-byte zero blocks, then record padding.
+    # A member total ending near a record boundary needs more than 10240
+    # padding bytes; the former cap rejected this genuine, fully hashed pack.
+    path,update,assets=case('record-padding')
+    key=prefix+'/manifest.json';original=base_data[key]
+    for size in range(512,20481,512):
+        base_data[key]=b'{}'+b' '*(size-2)
+        blocks=sum(512+((len(v)+511)//512)*512 for v in base_data.values())
+        if blocks%10240==9728:break
+    assert blocks%10240==9728
+    pack(update);run(update);assert (assets/key).read_bytes()==base_data[key];untouched(assets)
+    base_data[key]=original;passed.append('valid USTAR end blocks and record padding accepted')
+
     path,update,assets=case('custom');pack(update)
     custom=fixture/'custom-target/assets';custom.mkdir(parents=True);(custom/'original.webp').write_bytes(b'original-do-not-touch')
     run(update,'--assets',custom);assert (custom/prefix/'manifest.json').exists();assert not (assets/prefix).exists();untouched(custom)

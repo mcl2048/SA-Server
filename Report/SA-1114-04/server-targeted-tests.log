@@ -1,0 +1,127 @@
+$ go test ./internal/data ./internal/battle ./internal/world -run TestLisarido|TestElectromagneticCannon -count=1 -v -timeout=90s
+=== RUN   TestLisaridoRegistryGrowthAndCaveHabitat
+--- PASS: TestLisaridoRegistryGrowthAndCaveHabitat (1.58s)
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/template
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/skill
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/young-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/adult-group
+=== RUN   TestLisaridoInstallationRejectsCollisionsAtomically/sprite
+--- PASS: TestLisaridoInstallationRejectsCollisionsAtomically (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/template (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/skill (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-enemy (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/young-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/adult-group (0.00s)
+    --- PASS: TestLisaridoInstallationRejectsCollisionsAtomically/sprite (0.00s)
+=== RUN   TestLisaridoRegistryAndHabitatInstallationAreIdempotent
+--- PASS: TestLisaridoRegistryAndHabitatInstallationAreIdempotent (1.45s)
+=== RUN   TestLisaridoNaturalPickerAndRealSkillExecution
+    lisarido_play_test.go:57: 5000 real encounters: young=578 wild=940 original=3482; native skill hits=5
+--- PASS: TestLisaridoNaturalPickerAndRealSkillExecution (0.99s)
+PASS
+ok  	sa/server/internal/data	4.076s
+=== RUN   TestElectromagneticCannonFiveRandomRemoteShots
+--- PASS: TestElectromagneticCannonFiveRandomRemoteShots (0.00s)
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/ordinary
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/guard
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/absorb
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/vanish
+=== RUN   TestElectromagneticCannonPhysicalRatioAndBarriers/reflect
+--- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers (0.02s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/ordinary (0.00s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/guard (0.00s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/absorb (0.01s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/vanish (0.00s)
+    --- PASS: TestElectromagneticCannonPhysicalRatioAndBarriers/reflect (0.00s)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/equal
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=701 displacement=385 (50/50 classes, conditional 35%/20%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/upper
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=1003 displacement=596 (50/50 classes, conditional 50%/30%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/lower
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=436 displacement=195 (50/50 classes, conditional 20%/10%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/resisted
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=436 displacement=385 (50/50 classes, conditional 20%/20%)
+=== RUN   TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/negative-resistance
+    electromagnetic_cannon_test.go:144: first positive hits=4000 paralysis=701 displacement=385 (50/50 classes, conditional 35%/20%)
+--- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot (0.37s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/equal (0.08s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/upper (0.07s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/lower (0.08s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/resisted (0.07s)
+    --- PASS: TestElectromagneticCannonEffectRatesAndExclusiveFirstShot/negative-resistance (0.07s)
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pvp
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/scripted
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-escape
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/player
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pet
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/uncapturable
+=== RUN   TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-seed
+--- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis (0.29s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pvp (0.05s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/scripted (0.04s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-escape (0.03s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/player (0.04s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/pet (0.06s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/uncapturable (0.04s)
+    --- PASS: TestElectromagneticCannonDisplacementImmunityDoesNotRerollParalysis/no-seed (0.02s)
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/departed
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/dead
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/capture
+=== RUN   TestElectromagneticCannonRetargetsAfterDepartureOrDeath/guardian-capture
+--- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/departed (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/dead (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/capture (0.00s)
+    --- PASS: TestElectromagneticCannonRetargetsAfterDepartureOrDeath/guardian-capture (0.00s)
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/reflect
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dead
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/flown
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/escaped
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/paralysis
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/stone
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/sleep
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/barrier
+=== RUN   TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dizzy
+--- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/reflect (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dead (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/flown (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/escaped (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/paralysis (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/stone (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/sleep (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/barrier (0.00s)
+    --- PASS: TestElectromagneticCannonReflectionStopsShotsAndInvalidCasterCannotAct/dizzy (0.00s)
+=== RUN   TestElectromagneticCannonFleeIsTerminalAndParalysisSkipsThreeActions
+--- PASS: TestElectromagneticCannonFleeIsTerminalAndParalysisSkipsThreeActions (0.00s)
+=== RUN   TestElectromagneticCannonGuardianAndMountUseActualDamageRecipient
+--- PASS: TestElectromagneticCannonGuardianAndMountUseActualDamageRecipient (0.00s)
+=== RUN   TestElectromagneticCannonPreservesExistingConditionsAndNeverCounters
+--- PASS: TestElectromagneticCannonPreservesExistingConditionsAndNeverCounters (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.695s
+=== RUN   TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture
+--- PASS: TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture (1.47s)
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event
+--- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection (0.37s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary (0.09s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape (0.10s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc (0.09s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event (0.09s)
+PASS
+ok  	sa/server/internal/world	1.904s
+
+exit=0

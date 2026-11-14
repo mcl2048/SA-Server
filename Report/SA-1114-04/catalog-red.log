@@ -1,0 +1,181 @@
+TAP version 13
+# Subtest: old 570-slot save survives four appended seen/snap entries and account reload
+not ok 1 - old 570-slot save survives four appended seen/snap entries and account reload
+  ---
+  duration_ms: 10.525905
+  type: 'test'
+  location: '/home/coder/saserver/client/test/album.test.ts:36:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    575 !== 576
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 576
+  actual: 575
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/album.test.ts:48:71)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: legacy seen and snapshot IDs and portraits retain their original mapping
+ok 2 - legacy seen and snapshot IDs and portraits retain their original mapping
+  ---
+  duration_ms: 1.313577
+  type: 'test'
+  ...
+# Subtest: all appended slots fit the existing last page and render raw animation portraits plus canonical stories
+ok 3 - all appended slots fit the existing last page and render raw animation portraits plus canonical stories
+  ---
+  duration_ms: 13.084612
+  type: 'test'
+  ...
+# Subtest: missing portrait decoding retries later, uses raw fallback frames, and caches success
+ok 4 - missing portrait decoding retries later, uses raw fallback frames, and caches success
+  ---
+  duration_ms: 20.866867
+  type: 'test'
+  ...
+# Subtest: new-pet brief descriptions fit the existing stat extension panel without changing old pets
+ok 5 - new-pet brief descriptions fit the existing stat extension panel without changing old pets
+  ---
+  duration_ms: 3.731143
+  type: 'test'
+  ...
+# Subtest: retaking a renamed pet updates its snapshot without overwriting adjacent original slots
+ok 6 - retaking a renamed pet updates its snapshot without overwriting adjacent original slots
+  ---
+  duration_ms: 0.967009
+  type: 'test'
+  ...
+# Subtest: pet details and album retain a stable native model for the fullscreen game window
+ok 7 - pet details and album retain a stable native model for the fullscreen game window
+  ---
+  duration_ms: 1.713204
+  type: 'test'
+  ...
+# Subtest: Lilith appends slot 575 after all four mechanical pets and persists her native portrait
+not ok 8 - Lilith appends slot 575 after all four mechanical pets and persists her native portrait
+  ---
+  duration_ms: 1.799673
+  type: 'test'
+  location: '/home/coder/saserver/client/test/album.test.ts:133:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    575 !== 576
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 576
+  actual: 575
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/album.test.ts:141:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Lisarido persists slot 576 while every existing pet identity and photograph stays in place
+not ok 9 - Lisarido persists slot 576 while every existing pet identity and photograph stays in place
+  ---
+  duration_ms: 3.116354
+  type: 'test'
+  location: '/home/coder/saserver/client/test/album.test.ts:151:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + undefined
+    - {
+    -   flag: 1,
+    -   name: '雷萨利朵',
+    -   sprite: 199300
+    - }
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    flag: 1
+    name: '雷萨利朵'
+    sprite: 199300
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/album.test.ts:155:28)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Lisarido appends an independent biography matching the authoritative cave registry
+not ok 10 - Lisarido appends an independent biography matching the authoritative cave registry
+  ---
+  duration_ms: 3.650308
+  type: 'test'
+  location: '/home/coder/saserver/client/test/lisarido-catalog.test.ts:6:1'
+  failureType: 'testCodeFailure'
+  error: 'new pet must participate in the original details and album path'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/lisarido-catalog.test.ts:9:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: GM previews Lilith with her native idle animation while keeping effect sprites out of pet previews
+ok 11 - GM previews Lilith with her native idle animation while keeping effect sprites out of pet previews
+  ---
+  duration_ms: 7.58166
+  type: 'test'
+  ...
+# Subtest: GM previews Lisarido's native idle while treating the cannon explosion as an effect
+not ok 12 - GM previews Lisarido's native idle while treating the cannon explosion as an effect
+  ---
+  duration_ms: 2.319171
+  type: 'test'
+  location: '/home/coder/saserver/client/test/pet-extension-preview.test.ts:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    0 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/pet-extension-preview.test.ts:26:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 7
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 587.180797

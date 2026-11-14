@@ -517,7 +517,7 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 		match := action.Kind == "attack" && sk.ID == 1 || action.Kind == "guard" && sk.ID == 2 || action.Kind == "skill" && sk.Name == action.Name
 		if match && !(ownerDown && (sk.Func == "PETSKILL_Guardian" || action.Target == "owner")) {
 			t := automationPetTarget(sk.Target, action.Target, me.Slot, pet.Slot, target, side, other)
-			if !automationCaptureInScope(protected, t) {
+			if !automationPetCaptureInScope(sk, protected, t, other) {
 				return slot, t
 			}
 		}
@@ -540,7 +540,7 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 			continue
 		}
 		t := automationPetTarget(sk.Target, "enemy", me.Slot, pet.Slot, target, side, other)
-		if automationCaptureInScope(protected, t) {
+		if automationPetCaptureInScope(sk, protected, t, other) {
 			continue
 		}
 		value := factor
@@ -554,6 +554,9 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 	return skill, pt
 }
 func automationSkillFactor(sk *data.Skill) float64 {
+	if sk.Func == data.ElectromagneticCannonFunc {
+		return .825 // Five independent 15..18% single shots; no enemy-count gain.
+	}
 	if sk.Func == data.GhostStormFunc {
 		// The caller multiplies whole-side scores by eligible enemy count.
 		// Use its actual per-target damage; petrification is a bonus, not a
@@ -574,6 +577,15 @@ func automationSkillFactor(sk *data.Skill) float64 {
 		factor *= .5
 	}
 	return max(.1, factor)
+}
+
+func automationPetCaptureInScope(sk *data.Skill, mask uint32, target, other int) bool {
+	if sk.Func == data.ElectromagneticCannonFunc {
+		// Its UI target is single, but any of five random shots can reach
+		// every opponent. A safe initial target cannot promise capture safety.
+		target = other
+	}
+	return automationCaptureInScope(mask, target)
 }
 func roomFirstTurn(room *battleRoom) bool { return room.turn == 0 }
 func roomCanEscape(w *World, e *entity) bool {

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "<stdin>", line 55, in <module>
+  File "<stdin>", line 46, in run
+AssertionError: ((), 1, '', '安装失败（未覆盖原素材）: 不支持的校验清单版本或包名称\n')

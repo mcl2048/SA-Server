@@ -45,7 +45,7 @@ test("old 570-slot save survives four appended seen/snap entries and account rel
     const saved = JSON.parse(values.get(key)!); assert.deepEqual(saved[0], legacy[0]); assert.deepEqual(saved[569], legacy[569]);
     assert.deepEqual(saved[570 + i], { flag: 2, name: definition.name, freeName: `伙伴${i}`, sprite: definition.sprite, level: 18, maxHp: 321, str: 45, quick: 67, def: 89, attr: [10, 20, 30, 40] });
   }
-  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 575);
+  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 576);
   for (let i = 0; i < 4; i++) assert.equal(restored.list[570 + i].freeName, `伙伴${i}`);
   assert.deepEqual(restored.list[0], legacy[0]); assert.deepEqual(restored.list[569], legacy[569]);
   restored.load("another"); assert.equal(restored.list[570].flag, 0);
@@ -138,7 +138,7 @@ test("Lilith appends slot 575 after all four mechanical pets and persists her na
   assert.deepEqual(seen[574], { flag: 1, name: "莉莉丝", sprite: 199200 });
   assert.equal(album.snap(pet(199200, "夜风")), "夜风 照相完成！");
   const restored: any = new Album(); restored.load("lilith");
-  assert.equal(restored.list.length, 575); assert.equal(restored.list[574].freeName, "夜风");
+  assert.equal(restored.list.length, 576); assert.equal(restored.list[574].freeName, "夜风");
   for (let n = 0; n < 4; n++) assert.equal(restored.list[570 + n].sprite, 199100 + n);
   restored.open = true; restored.page = 71; restored.sel = 574;
   const h = ui(), portraits: any[] = []; h.mock.mobilePortrait = (...args: any[]) => portraits.push(args);
@@ -146,4 +146,17 @@ test("Lilith appends slot 575 after all four mechanical pets and persists her na
   assert.deepEqual(portraits[0], [9000100, true]);
   assert.ok(h.text.some(line => line.text === "莉莉丝 · 简介"));
   assert.equal(restored.snap(pet(199201)), null, "a spell atlas must not become a catchable album identity");
+});
+
+test("Lisarido persists slot 576 while every existing pet identity and photograph stays in place",()=>{
+ const values=storage(),album:any=new Album();album.load("lisarido");
+ for(const sprite of [100250,199100,199101,199102,199103,199200])album.snap(pet(sprite,`伙伴${sprite}`));
+ const before=JSON.parse(values.get("sa.album.lisarido")!);
+ album.seen(199300);assert.deepEqual(JSON.parse(values.get("sa.album.lisarido")!)[575],{flag:1,name:"雷萨利朵",sprite:199300});
+ assert.equal(album.snap(pet(199300,"炮火")),"炮火 照相完成！");
+ const restored:any=new Album();restored.load("lisarido");assert.equal(restored.list.length,576);
+ const after=JSON.parse(values.get("sa.album.lisarido")!);for(const key of Object.keys(before))assert.deepEqual(after[key],before[key]);
+ assert.equal(restored.list[575].freeName,"炮火");assert.equal(restored.snap(pet(199301)),null);
+ restored.open=true;restored.page=71;restored.sel=575;const h=ui();restored.frame(h.mock,[]);
+ assert.ok(h.text.some(line=>line.text==="雷萨利朵 · 简介"));
 });

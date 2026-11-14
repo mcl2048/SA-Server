@@ -1,0 +1,3 @@
+{"pack": "lisarido-v1", "source": "img/lisarido.jpg", "source_sha256": "119ee01f5fb2e2272af72fbccd2998d17dd717eeed9badc167ea8118f70fb7cb", "character_frames": 232, "effect_frames": 24, "image_count": 256, "character_anchor": [-80, -130], "effect_anchor": [-120, -120], "source_order": [2, 5, 3, 7, 6, 1, 4, 0], "art_origin": "User JPG silhouette extraction, local ear/cannon deformation and deterministic bitmap FX. No image generation API called."}
+{"name": "lisarido-v1-assets.tar.gz", "size": 2798607, "sha256": "d4acd4a229948b857e6d37e42d17a2a0c8b690a6b8bafca4880d7cd6f3d6a12b"}
+{"all_five_regenerated_files_identical": true, "archive_identical": true, "archive_sha256": "d4acd4a229948b857e6d37e42d17a2a0c8b690a6b8bafca4880d7cd6f3d6a12b"}

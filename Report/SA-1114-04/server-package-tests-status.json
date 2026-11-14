@@ -1,0 +1,15 @@
+{
+  "state": "finished",
+  "command": [
+    "go",
+    "test",
+    "./internal/data",
+    "./internal/battle",
+    "./internal/world",
+    "-count=1",
+    "-timeout=5m"
+  ],
+  "started": 1794651179.169014,
+  "exit_code": 0,
+  "seconds": 41.017
+}

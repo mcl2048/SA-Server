@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: five cannon rounds cast in place and render one target explosion before each separate HP settlement
+ok 1 - five cannon rounds cast in place and render one target explosion before each separate HP settlement
+  ---
+  duration_ms: 77.086029
+  type: 'test'
+  ...
+# Subtest: cannon preserves reflection and guardian damage instead of applying physical HP to the original victim
+ok 2 - cannon preserves reflection and guardian damage instead of applying physical HP to the original victim
+  ---
+  duration_ms: 4.945027
+  type: 'test'
+  ...
+# Subtest: a forced live departure completes before later rounds and a stale slot never gets another explosion
+ok 3 - a forced live departure completes before later rounds and a stale slot never gets another explosion
+  ---
+  duration_ms: 6.342396
+  type: 'test'
+  ...
+# Subtest: quick cannon settles ordered damage, paralysis and departure without moving the caster
+ok 4 - quick cannon settles ordered damage, paralysis and departure without moving the caster
+  ---
+  duration_ms: 2.373306
+  type: 'test'
+  ...
+# Subtest: Ghost Storm casts with both hands in place and plays one native effect at the complete target half
+ok 5 - Ghost Storm casts with both hands in place and plays one native effect at the complete target half
+  ---
+  duration_ms: 16.428727
+  type: 'test'
+  ...
+# Subtest: Ghost Storm preserves physical reflection, absorption, barrier and dodge results
+ok 6 - Ghost Storm preserves physical reflection, absorption, barrier and dodge results
+  ---
+  duration_ms: 3.638098
+  type: 'test'
+  ...
+# Subtest: quick Ghost Storm settles all authoritative HP and petrification without moving its caster
+ok 7 - quick Ghost Storm settles all authoritative HP and petrification without moving its caster
+  ---
+  duration_ms: 2.216294
+  type: 'test'
+  ...
+# Subtest: ordinary recovery magic retains its original standing cast and per-target native effect
+ok 8 - ordinary recovery magic retains its original standing cast and per-target native effect
+  ---
+  duration_ms: 1.613581
+  type: 'test'
+  ...
+# Subtest: Ghost Storm applies guardian damage and petrification to the actual protector only
+ok 9 - Ghost Storm applies guardian damage and petrification to the actual protector only
+  ---
+  duration_ms: 1.52904
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 969.074419

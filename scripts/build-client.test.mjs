@@ -15,7 +15,7 @@ function fixture(t) {
     rmSync(root, { recursive: true, force: true });
   });
   for (const dir of ["client/src", "client/art", "scripts", "server/webclient/static", "server/internal/data"]) mkdirSync(join(root, dir), { recursive: true });
-  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "scripts/sync-lilith-catalog.mjs", "server/internal/data/ai_pets.json", "server/internal/data/lilith.json"]) cpSync(join(sourceRoot, file), join(root, file));
+  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "scripts/sync-lilith-catalog.mjs", "scripts/sync-lisarido-catalog.mjs", "server/internal/data/ai_pets.json", "server/internal/data/lilith.json", "server/internal/data/lisarido.json", "client/src/lisarido-catalog.ts", "client/src/ai-pet-catalog.ts"]) cpSync(join(sourceRoot, file), join(root, file));
   writeFileSync(join(root, "client/src/main.ts"), 'import { value } from "./dep.ts";\nconsole.log(value);\n');
   writeFileSync(join(root, "client/src/dep.ts"), "export const value: number = 42;\n");
   writeFileSync(join(root, "client/index.html"), '<script type="module" src="dist/main.js?v=old"></script>\n');
@@ -29,6 +29,17 @@ function succeeds(root, file) { const result = run(root, file); assert.equal(res
 function output(root) {
   return Object.fromEntries(["index.html", ...readdirSync(join(root, "client/dist")).map(name => "dist/" + name)].map(file => [file, readFileSync(join(root, "client", file), "utf8")]));
 }
+
+test("Lisarido biography changes regenerate its independent catalogue and invalidate the release",t=>{
+ const root=fixture(t);
+ writeFileSync(join(root,"client/src/main.ts"),'import { LISARIDO_CATALOG } from "./lisarido-catalog.ts";\nconsole.log(LISARIDO_CATALOG);\n');
+ succeeds(root,"client/build.mjs");const first=output(root),path=join(root,"server/internal/data/lisarido.json");
+ const p=JSON.parse(readFileSync(path,"utf8"));p.story+="远方的矿工循着炮火找回归路。";writeFileSync(path,JSON.stringify(p));
+ succeeds(root,"client/build.mjs");const second=output(root);
+ assert.notEqual(second["index.html"],first["index.html"]);assert.match(second["dist/lisarido-catalog.js"],/远方的矿工循着炮火找回归路/);
+ p.image=199200;writeFileSync(path,JSON.stringify(p));const rejected=run(root,"client/build.mjs");
+ assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/Invalid Lisarido catalogue identity/);assert.deepEqual(output(root),second);
+});
 
 test("shared pet stories regenerate the catalogue and invalidate the client version", t => {
   const root = fixture(t);

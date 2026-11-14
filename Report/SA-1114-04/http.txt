@@ -1,0 +1,2 @@
+{"version": "v0.2.15-LYNX", "binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa", "verified_embedded_files": 49, "private_404": 11}
+{"binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa", "checks_exit_code": 0, "sigterm_sent": true, "exit_code": 0}

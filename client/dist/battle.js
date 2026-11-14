@@ -12,15 +12,15 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=befcbe62a17abfb2";
-import { sfx, setSfx } from "./audio.js?v=befcbe62a17abfb2";
-import { isMobile } from "./mobile-view.js?v=befcbe62a17abfb2";
+import { ANIM, findAction,                              } from "./assets.js?v=abae3f174fa9bed4";
+import { sfx, setSfx } from "./audio.js?v=abae3f174fa9bed4";
+import { isMobile } from "./mobile-view.js?v=abae3f174fa9bed4";
 
-import { battleItems } from "./items.js?v=befcbe62a17abfb2";
-import { album } from "./album.js?v=befcbe62a17abfb2";
+import { battleItems } from "./items.js?v=abae3f174fa9bed4";
+import { album } from "./album.js?v=abae3f174fa9bed4";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=befcbe62a17abfb2";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=befcbe62a17abfb2";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=abae3f174fa9bed4";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=abae3f174fa9bed4";
 
 // Legacy presentation metadata is optional: the current server computes these
 // internally but its BattleEvent wire schema/conversion omits them. Keep this
@@ -90,6 +90,7 @@ const FX = { MIRROR: 100650, BARRIER: 100651, ABSORB: 100652, STAR: 100501, REVE
 // Extension protocol identity: Ghost Storm is a ranged physical skill carried
 // by Magic events so its caster never enters the melee movement choreography.
 const GHOST_STORM_EFFECT = 199201;
+const ELECTROMAGNETIC_CANNON_EFFECT = 199301;
 const SKILL_ICON                         = { 1: 26514, 2: 101415, 3: 101403, 4: 101404, 5: 101402, 6: 101405, 7: 101408, 8: 101409, 9: 101407, 10: 101410, 11: 25869, 12: 101418 };
 const MISSILE = { ARROW: 25630, STONE: 25785, STONE_SHADOW: 25786, AXE: 100504, AXE_SHADOW: 100505, BOOMERANG: 100502, SPEED: 32 };
 const ANGRY = 8; // loadsprbin.h ANIM_ANGRY
@@ -779,6 +780,7 @@ export class BattleScreen {
    */
           magicSteps(a         , group               , userEffect = JUJUTU.EFFECT_USER)         {
     const first = group[0];
+    if (first.kind === "magic" && first.effect === ELECTROMAGNETIC_CANNON_EFFECT) return this.cannonSteps(a, group);
     const ghostStorm = first.kind === "magic" && first.effect === GHOST_STORM_EFFECT;
     const steps         = [];
     steps.push(this.waitStep(700, (now) => {
@@ -853,6 +855,39 @@ export class BattleScreen {
     });
     steps.push(this.waitStep(300));
     return steps;
+  }
+
+  /** Five authoritative rounds stay separate: damage, forced departure, then
+   * the next randomly selected living target. Validate when a round executes,
+   * since onTurn builds the whole queue before any flee/death has played.
+   */
+          cannonSteps(a         , group               )         {
+    return group.flatMap(e => {
+      let target                     , valid = false, duration = 600, started = -1;
+      const alive = (f                     )               => !!f && !f.gone && !f.hidden && !f.fly && !f.dead && f.hp > 0;
+      const cast = this.waitStep(250, now => {
+        const original = this.fighters.get(e.target);
+        target = e.guardian >= 0 ? this.fighters.get(e.guardian) ?? original : original;
+        valid = alive(a) && alive(original) && alive(target);
+        if (!valid) return;
+        this.showSkill(e.skill, now);
+        a.dir = a.homeDir(); a.play(ANIM.HAND, now); a.mp = e.actorMp;
+      });
+      return [
+        cast,
+        (now        ) => {
+          if (!valid || !alive(target)) return true;
+          if (started < 0) {
+            started = now; this.cameraSlot = target.f.slot;
+            duration = Math.max(300, Math.min(1500, this.animOnce(ELECTROMAGNETIC_CANNON_EFFECT, target.x, target.y - 40, now)));
+          }
+          if (now - started < duration) return false;
+          this.applyHit(e, target, a, now, 0);
+          return true;
+        },
+        this.waitStep(150, now => { if (!a.dead && !a.gone) a.play(ANIM.STAND, now, true); }),
+      ];
+    });
   }
 
           applyMagic(e             , t         , a         , now        ) {

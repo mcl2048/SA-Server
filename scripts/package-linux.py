@@ -2,7 +2,7 @@
 """Package the matching embedded Linux release with an explicit public allowlist.
 
 Runtime databases, local configuration and the original Assets tree never enter
-this archive. The existing optional AI-pet patch is included for fresh installs.
+this archive. The independent pet patches are included for fresh installs.
 """
 from pathlib import Path
 import hashlib
@@ -12,17 +12,19 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "v0.2.14-LYNX"
+VERSION = "v0.2.15-LYNX"
 DEST = ROOT / "bin" / f"saserver-{VERSION}-linux-amd64.zip"
 
 def main():
     paths = [ROOT / p for p in (
         "bin/saserver", "bin/saserver.sha256", "config.yaml", "README.md",
-        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.14-LYNX.md", "update/README.md",
+        "CHANGELOG.md", "docs/手册.md", "docs/v0.2.15-LYNX.md", "update/README.md",
         "update/ai-pets-v1-assets.tar.gz", "update/ai-pets-v1-assets.manifest.json",
         "update/install-ai-pets.py", "update/install-ai-pets.sh",
         "update/lilith-v1-assets.tar.gz", "update/lilith-v1-assets.manifest.json",
         "update/install-lilith.py", "update/install-lilith.sh",
+        "update/lisarido-v1-assets.tar.gz", "update/lisarido-v1-assets.manifest.json",
+        "update/install-lisarido.py", "update/install-lisarido.sh",
     )]
     paths += sorted((ROOT / "gamedata").rglob("*"))
     public = []
@@ -44,7 +46,7 @@ def main():
             rel = path.relative_to(ROOT).as_posix()
             info = zipfile.ZipInfo(f"saserver-{VERSION}/{rel}", (1980, 1, 1, 0, 0, 0))
             info.create_system = 3
-            mode = 0o755 if rel in ("bin/saserver", "update/install-ai-pets.sh", "update/install-lilith.sh") else 0o644
+            mode = 0o755 if rel in ("bin/saserver", "update/install-ai-pets.sh", "update/install-lilith.sh", "update/install-lisarido.sh") else 0o644
             info.external_attr = (stat.S_IFREG | mode) << 16
             info.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(info, path.read_bytes(), compresslevel=9)

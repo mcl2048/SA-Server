@@ -1,0 +1,106 @@
+{
+  "binary_version": "v0.2.15-LYNX",
+  "binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "checks": 6,
+  "devices": [
+    {
+      "device": "desktop",
+      "attack_frames": [
+        9200098
+      ],
+      "rounds": [
+        {
+          "shots": 5,
+          "observed_bursts": 5,
+          "shot_targets": [
+            18,
+            16,
+            18,
+            17,
+            15
+          ],
+          "unique_atlas_frames": 22,
+          "max_simultaneous_atlases": 1
+        },
+        {
+          "shots": 5,
+          "observed_bursts": 5,
+          "shot_targets": [
+            17,
+            15,
+            17,
+            19,
+            15
+          ],
+          "unique_atlas_frames": 21,
+          "max_simultaneous_atlases": 1
+        }
+      ],
+      "paralyzed_slots": [
+        15
+      ],
+      "expelled_slots": [
+        {
+          "slot": 16,
+          "hp": 3140
+        },
+        {
+          "slot": 18,
+          "hp": 3287
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "attack_frames": [
+        9200098
+      ],
+      "rounds": [
+        {
+          "shots": 5,
+          "observed_bursts": 5,
+          "shot_targets": [
+            16,
+            17,
+            15,
+            16,
+            18
+          ],
+          "unique_atlas_frames": 23,
+          "max_simultaneous_atlases": 1
+        }
+      ],
+      "paralyzed_slots": [
+        15,
+        16
+      ],
+      "expelled_slots": [
+        {
+          "slot": 17,
+          "hp": 3277
+        }
+      ]
+    }
+  ]
+}

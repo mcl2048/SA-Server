@@ -31,7 +31,7 @@ function binaryIndex(conflict = false) {
   return gzipSync(Buffer.from(bytes));
 }
 type SetupOptions = { missing?: boolean; binary?: boolean; indexBytes?: Uint8Array; conflict?: boolean; mutate?: (pack: ReturnType<typeof manifest>) => void;
-  lilith?: boolean; badLilith?: boolean;
+  lilith?: boolean; badLilith?: boolean; lisarido?: boolean; badLisarido?: boolean;
   mutateAnim?: (anim: AnimDef) => void; texture?: (url: string) => Promise<Texture> };
 const environments = new WeakSet<object>();
 function setup(t: any, options: SetupOptions = {}) {
@@ -40,6 +40,9 @@ function setup(t: any, options: SetupOptions = {}) {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (input: any, _init: any) => {
     const url = String(input); requests.push(url);
+    if (url === root + "extensions/lisarido-v1/manifest.json") return options.lisarido ? Response.json({ format: 1, id: "lisarido-v1", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9200000,0,0,0,32,32,-16,-30],[9200001,0,32,0,32,32,-16,-30]], animations: [199300,199301].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
+    const lisarido = /^\/assets\/extensions\/lisarido-v1\/anim\/(19930[01])\.json$/.exec(url);
+    if (lisarido) return Response.json({id:Number(lisarido[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badLisarido ? 9100000 : 9200000 + Number(lisarido[1])-199300,0,0,0]]}]});
     if (url === root + "extensions/lilith-v1/manifest.json") return options.lilith ? Response.json({ format: 1, id: "lilith-v1", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9100000,0,0,0,32,32,-16,-30],[9100001,0,32,0,32,32,-16,-30]], animations: [199200,199201].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
     const lilith = /^\/assets\/extensions\/lilith-v1\/anim\/(19920[01])\.json$/.exec(url);
     if (lilith) return Response.json({id:Number(lilith[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badLilith ? 9000000 : 9100000 + Number(lilith[1])-199200,0,0,0]]}]});
@@ -98,6 +101,22 @@ test("a malformed Lilith frame cannot claim another pack's images or roll back m
   const {assets,warnings}=setup(t,{lilith:true,badLilith:true});await assets.init();
   assert.equal(assets.image(9100000),null);assert.equal(assets.anim(199100)?.id,199100);
   assert.equal(assets.image(9000000)?.set,2);assert.equal(warnings.length,1);
+});
+
+test("Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith",async t=>{
+  const {assets,loaded}=setup(t,{lilith:true,lisarido:true});await assets.init();
+  assert.equal(assets.anim(199300)?.id,199300);assert.equal(assets.anim(199301)?.id,199301);
+  assert.equal(assets.image(9200000)?.set,4);assert.equal(assets.image(9100000)?.set,3);assert.equal(assets.image(9000000)?.set,2);
+  assets.gpuBudget=1;for(let i=0;i<150;i++)assets.tick();assert.equal(assets.gpuBytes,0);
+  assets.anim(199300);await pending(assets);
+  assert.equal(loaded.filter(x=>x.url===root+"extensions/lisarido-v1/pages/00000.png").length,2);
+  assert.equal(loaded.filter(x=>x.url===root+"extensions/lilith-v1/pages/00000.png").length,1);
+});
+
+test("an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs",async t=>{
+  const {assets,warnings}=setup(t,{lilith:true,lisarido:true,badLisarido:true});await assets.init();
+  assert.equal(assets.image(9200000),null);assert.equal(assets.anim(199300)?.id,100374);
+  assert.equal(assets.anim(199200)?.id,199200);assert.equal(assets.anim(199100)?.id,199100);assert.equal(warnings.length,1);
 });
 
 test("a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly", async t => {

@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["python3", "scripts/package-linux.py"], "started": 1794651484.4832704, "exit_code": 0, "seconds": 37.568}

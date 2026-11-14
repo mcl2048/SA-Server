@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: Lisarido biography changes regenerate its independent catalogue and invalidate the release
+ok 1 - Lisarido biography changes regenerate its independent catalogue and invalidate the release
+  ---
+  duration_ms: 1738.04781
+  type: 'test'
+  ...
+# Subtest: shared pet stories regenerate the catalogue and invalidate the client version
+ok 2 - shared pet stories regenerate the catalogue and invalidate the client version
+  ---
+  duration_ms: 1527.160621
+  type: 'test'
+  ...
+# Subtest: artwork changes invalidate build versions and only the login PNG is staged
+ok 3 - artwork changes invalidate build versions and only the login PNG is staged
+  ---
+  duration_ms: 1808.641234
+  type: 'test'
+  ...
+# Subtest: builder and stager reject source artwork symlinks before replacing releases
+ok 4 - builder and stager reject source artwork symlinks before replacing releases
+  ---
+  duration_ms: 1028.194234
+  type: 'test'
+  ...
+# Subtest: stager rejects symlinks inside its exact artwork allowlist
+ok 5 - stager rejects symlinks inside its exact artwork allowlist
+  ---
+  duration_ms: 598.637798
+  type: 'test'
+  ...
+# Subtest: repeated builds match, removed imports and retired JS cannot enter the release
+ok 6 - repeated builds match, removed imports and retired JS cannot enter the release
+  ---
+  duration_ms: 1070.195928
+  type: 'test'
+  ...
+# Subtest: staging refuses unrelated embedded data before changing the previous client
+ok 7 - staging refuses unrelated embedded data before changing the previous client
+  ---
+  duration_ms: 616.725684
+  type: 'test'
+  ...
+# Subtest: failed TypeScript parsing preserves prior output and entry version
+ok 8 - failed TypeScript parsing preserves prior output and entry version
+  ---
+  duration_ms: 927.837104
+  type: 'test'
+  ...
+# Subtest: builder and stager reject output symlinks without modifying the target
+ok 9 - builder and stager reject output symlinks without modifying the target
+  ---
+  duration_ms: 421.417999
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10080.714323

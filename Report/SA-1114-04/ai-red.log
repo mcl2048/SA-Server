@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: dead-owner auto chooses living pets independently including zero MP and low health
+ok 1 - dead-owner auto chooses living pets independently including zero MP and low health
+  ---
+  duration_ms: 7.033067
+  type: 'test'
+  ...
+# Subtest: alive to dead transition, party pets and PvP negative control
+ok 2 - alive to dead transition, party pets and PvP negative control
+  ---
+  duration_ms: 1.758195
+  type: 'test'
+  ...
+# Subtest: dead or absent pets and defeated enemies do not get offensive commands
+ok 3 - dead or absent pets and defeated enemies do not get offensive commands
+  ---
+  duration_ms: 0.742595
+  type: 'test'
+  ...
+# Subtest: surviving Lilith uses 75 percent Ghost Storm against multiple living enemies
+ok 4 - surviving Lilith uses 75 percent Ghost Storm against multiple living enemies
+  ---
+  duration_ms: 1.104581
+  type: 'test'
+  ...
+# Subtest: incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate
+ok 5 - incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate
+  ---
+  duration_ms: 0.524723
+  type: 'test'
+  ...
+# Subtest: an explicit Ghost Storm plan still uses the native all-enemy target
+ok 6 - an explicit Ghost Storm plan still uses the native all-enemy target
+  ---
+  duration_ms: 0.506601
+  type: 'test'
+  ...
+# Subtest: cannon uses its five-round total prior and stays available to a surviving ownerless pet
+not ok 7 - cannon uses its five-round total prior and stays available to a surviving ownerless pet
+  ---
+  duration_ms: 3.099625
+  type: 'test'
+  location: '/home/coder/saserver/client/test/ai-owner-down.test.ts:69:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+    +   4,
+    +   5
+    -   0,
+    -   10
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 0
+    1: 10
+  actual:
+    0: 4
+    1: 5
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-owner-down.test.ts:75:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: random cannon cannot endanger a capture target even through an explicit surviving-pet plan
+not ok 8 - random cannon cannot endanger a capture target even through an explicit surviving-pet plan
+  ---
+  duration_ms: 1.094465
+  type: 'test'
+  location: '/home/coder/saserver/client/test/ai-owner-down.test.ts:81:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+    +   0,
+    +   10
+    -   4,
+    -   5
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 4
+    1: 5
+  actual:
+    0: 0
+    1: 10
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-owner-down.test.ts:85:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 6
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 373.068848

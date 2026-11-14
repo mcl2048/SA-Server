@@ -6,7 +6,7 @@
 // 清单上的"回"回传 "0"（服务端回选单），Esc 直接关掉。窗口座标照原版 800×600（_NEW_RESOMODE）。
 // 声望照 _NEW_MANOR_LAW 的客户端：有声望价的道具显示"声望Ｆ 价钱Ｓ"，声望不够标灰。
 
-import { FONT, Ui, measure } from "./ui.js?v=befcbe62a17abfb2";
+import { FONT, Ui, measure } from "./ui.js?v=abae3f174fa9bed4";
 
 
 const CG = {

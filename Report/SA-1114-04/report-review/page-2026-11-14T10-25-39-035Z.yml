@@ -1,0 +1,84 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - text: SA-1114-04 / RELEASE REVIEW
+    - heading "玄黄守灯者 · 雷萨利朵" [level=1] [ref=e4]
+    - generic [ref=e5]: 已验证 · v0.2.15-LYNX
+    - paragraph [ref=e6]: 火7风3，悬浮猫耳炮手。五发电磁火炮逐次随机活敌，以原生战斗事件呈现麻痹与驱离。
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - strong [ref=e9]: "199"
+      - text: 客户端与构建测试
+    - generic [ref=e10]:
+      - strong [ref=e11]: "20"
+      - text: 真实Chromium检查
+    - generic [ref=e12]:
+      - strong [ref=e13]: 98px
+      - text: 角色主体高度
+    - generic [ref=e14]:
+      - strong [ref=e15]: "49"
+      - text: 匹配嵌入文件
+  - generic [ref=e16]:
+    - heading "技能与战斗边界" [level=2] [ref=e17]
+    - paragraph [ref=e18]: 5次远程单体，每发重新随机当前合法活敌；独立15%–18%原生物理伤害系数。每发先等概率选择麻痹或驱离，再按20%–50%或10%–30%的条件概率判定，同一发两者互斥。
+    - paragraph [ref=e19]: 原地举炮，逐炮结算。保护PvP、NPC/事件、禁逃楼层与特殊敌人；死亡和离场后不再被后续炮击选中。沿用镜守、防御、守护、骑宠与反射规则。
+    - paragraph [ref=e20]:
+      - link "完整验收" [ref=e21] [cursor=pointer]:
+        - /url: ACCEPTANCE.md
+      - text: ·
+      - link "服务端红绿与边界" [ref=e22] [cursor=pointer]:
+        - /url: SERVER-WORK.md
+      - text: ·
+      - link "客户端验证" [ref=e23] [cursor=pointer]:
+        - /url: CLIENT-WORK.md
+      - text: ·
+      - link "研究依据" [ref=e24] [cursor=pointer]:
+        - /url: RESEARCH.md
+  - generic [ref=e25]:
+    - heading "原生八向与位图动画" [level=2] [ref=e26]
+    - paragraph [ref=e27]: 232角色帧、24电磁特效帧；猫耳微动、漂浮、右手炮筒举起与近爆。主体98px与莉莉丝一致，约为雷龙正面145px的2/3，透明帧格不计入身高。
+    - generic [ref=e28]:
+      - figure "八个原始方向保留右手炮筒，没有用镜像换手。" [ref=e29]:
+        - img "雷萨利朵八向与动作" [ref=e30]
+      - figure "240×240原生RGBA电磁爆炸，逐炮独立播放。" [ref=e32]:
+        - img "24帧电磁爆炸" [ref=e33]
+    - paragraph [ref=e35]: 用户JPG透明提取、局部耳/炮筒变形与程序位图特效，未调用图像生成API。五文件素材补丁可复现、原子安装，原Assets不进入仓库。
+  - generic [ref=e36]:
+    - heading "真实游戏画面" [level=2] [ref=e37]
+    - generic [ref=e38]:
+      - figure "桌面：原地右手举炮与真实电磁纹理。" [ref=e39]:
+        - link [ref=e40] [cursor=pointer]:
+          - /url: browser/final-lisarido-desktop-cannon-electric-explosion.png
+          - img "桌面原生电磁火炮" [ref=e41]
+      - figure "手机模拟：活敌镜头、逐炮播放与权威状态。" [ref=e43]:
+        - link [ref=e44] [cursor=pointer]:
+          - /url: browser/final-lisarido-mobile-cannon-electric-explosion.png
+          - img "手机模拟原生电磁火炮" [ref=e45]
+    - paragraph [ref=e47]:
+      - link "新宠6项事件证据" [ref=e48] [cursor=pointer]:
+        - /url: browser/final-lisarido.json
+      - text: ·
+      - link "移动14项回归" [ref=e49] [cursor=pointer]:
+        - /url: browser/final-mobile-regression.json
+      - text: ·
+      - link "尺寸与裁切检查" [ref=e50] [cursor=pointer]:
+        - /url: art-validation.json
+  - generic [ref=e51]:
+    - heading "发行一致性" [level=2] [ref=e52]
+    - paragraph [ref=e53]: Go全量、vet与定向race通过，重复构建ELF一致。ZIP逐项匹配公共文件，旧ZIP已替换；三个素材安装器修复USTAR末尾填充边界，摘要、白名单与冲突保留继续有效。
+    - paragraph [ref=e54]:
+      - text: Linux AMD64 SHA-256
+      - code [ref=e55]: 06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa
+    - paragraph [ref=e56]:
+      - text: ZIP SHA-256
+      - code [ref=e57]: 3a689fe196d189d8293635687284adffc19d79e772fd1ed320d068bf79162daa
+    - paragraph [ref=e58]:
+      - link "机器发行清单" [ref=e59] [cursor=pointer]:
+        - /url: release.json
+      - text: ·
+      - link "隐私检查" [ref=e60] [cursor=pointer]:
+        - /url: privacy-check.json
+  - generic [ref=e61]:
+    - heading "验证边界" [level=2] [ref=e62]
+    - paragraph [ref=e63]: 实际Linux ELF、原素材、WebSocket、隔离SQLite与Chromium。SwiftShader渲染，移动触屏和屏幕尺寸为模拟；未认证实体Android/iOS、Safari或系统安全区。受控敌群仅存在私有验收目录，正式自然分布另经原生Picker采样。
+    - paragraph [ref=e64]: 伤害系数仍受原生防御与属性影响；麻痹/驱离先二选一，再按条件概率触发。角色动画由参考图分层变形，未声称重绘全部姿势。
+  - generic [ref=e65]: 2026-11-14 · SA-1114-04 · 可离线阅读

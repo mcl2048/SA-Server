@@ -17,3 +17,14 @@ test("GM previews Lilith with her native idle animation while keeping effect spr
   gm.setDetail({ kind: "enemy", id: 29005, image: 199201, lines: [] }); gm.detailFrame(0, 0);
   assert.equal(actors.length, 1); assert.equal(images.at(-1)[0], 199201);
 });
+
+test("GM previews Lisarido's native idle while treating the cannon explosion as an effect",()=>{
+ const actors:any[]=[],images:any[]=[];
+ const ui:any={texts:[],window(){},text(){},actor:(...v:any[])=>actors.push(v),image:(...v:any[])=>images.push(v)};
+ const gm:any=new GmWindow({ui} as any);gm.hover={kind:"enemy",id:29006};
+ gm.setDetail({kind:"enemy",id:29006,image:199300,lines:[]});gm.detailFrame(0,0);
+ assert.equal(actors.length,1);const assets:any={anim:()=>({actions:[{dir:1,type:ANIM.STAND,ticks:3,frames:[[9200000,0,-12,0]]}]})};
+ assert.deepEqual(actors[0][0].frameOf(assets,0),[9200000,0,-12]);
+ gm.setDetail({kind:"enemy",id:29006,image:199301,lines:[]});gm.detailFrame(0,0);
+ assert.equal(actors.length,1);assert.equal(images.at(-1)[0],199301);
+});

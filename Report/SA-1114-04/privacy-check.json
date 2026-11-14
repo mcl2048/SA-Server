@@ -1,0 +1,157 @@
+{
+  "fixture_credential_values_absent": true,
+  "runtime_db_and_credentials_not_in_report": true,
+  "checked_at_utc": "2026-11-14T10:35:42.325586+00:00",
+  "scope": "All added/modified staged blobs and matching worktree payloads, recursive ZIP/tar regular files through two archive layers, plus the replacement privacy report before writing. Current and prior SA-1114 private runtime credentials are compared in memory only.",
+  "staged_change_entries_no_rename_detection": 220,
+  "staged_change_status_counts_no_rename_detection": {
+    "M": 61,
+    "A": 157,
+    "D": 2
+  },
+  "staged_change_entries_with_rename_detection": 219,
+  "staged_payload_files_scanned": 218,
+  "worktree_payload_files_scanned": 218,
+  "unstaged_files_before_report_update": 0,
+  "untracked_files": 0,
+  "runtime_metadata_files_checked": 17,
+  "current_task_runtime_metadata_files_checked": 3,
+  "distinct_private_credential_files_read": 17,
+  "private_value_variants_checked": 9,
+  "private_character_identifier_variants_checked": 1,
+  "value_encodings_checked": [
+    "UTF-8",
+    "JSON ASCII escape",
+    "password/secret MD5 hex in both cases",
+    "password/secret base64"
+  ],
+  "scan_counts": {
+    "index_blobs": 218,
+    "index_bytes": 71710019,
+    "worktree_blobs": 218,
+    "worktree_bytes": 71710019,
+    "index-archive_blobs": 4371,
+    "index-archive_bytes": 90801993,
+    "index-archive-archive_blobs": 19,
+    "index-archive-archive_bytes": 15750242,
+    "worktree-archive_blobs": 4371,
+    "worktree-archive_bytes": 90801993,
+    "worktree-archive-archive_blobs": 19,
+    "worktree-archive-archive_bytes": 15750242
+  },
+  "archives": [
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/lilith-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4366,
+      "regular_files": 4366
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/lilith-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip!saserver-v0.2.15-LYNX/update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree",
+      "path": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4366,
+      "regular_files": 4366
+    },
+    {
+      "scope": "index",
+      "path": "update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree",
+      "path": "update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    }
+  ],
+  "private_credential_value_hits": 0,
+  "private_character_identifier_hits": 0,
+  "common_secret_pattern_hits": 0,
+  "sensitive_path_hits": 0,
+  "unsafe_archive_path_hits": 0,
+  "release_public_config_matches_HEAD_template": true,
+  "release_zip_entries": 4366,
+  "release_zip_nested_patch_files": 19,
+  "standalone_new_patch_files": 5,
+  "release_zip_sha256": "3a689fe196d189d8293635687284adffc19d79e772fd1ed320d068bf79162daa",
+  "release_elf_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa",
+  "final_browser_supervisors_finished_exit_zero": true,
+  "reported_final_browser_checks": 20,
+  "reported_final_client_and_builder_checks": 199,
+  "browser_evidence": [
+    {
+      "file": "browser/final-lisarido.json",
+      "checks": 6,
+      "all_passed": true,
+      "errors": 0,
+      "shutdown_exit_code": 0,
+      "position_matches": true,
+      "binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa"
+    },
+    {
+      "file": "browser/final-mobile-regression.json",
+      "checks": 14,
+      "all_passed": true,
+      "errors": 0,
+      "shutdown_exit_code": 0,
+      "position_matches": true,
+      "binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa"
+    }
+  ],
+  "reproduction": [
+    "Enumerate staged payloads with git diff --cached --no-renames --name-only -z --diff-filter=ACMR; record both rename-aware and no-rename status counts.",
+    "Read each staged payload with git show :PATH and require exact worktree byte equality before and after scanning; require no unstaged or untracked files before the sole report update.",
+    "Read each /tmp/sa-1114-0*-runtime*.json credentials target in memory, deduplicate private files and encoded credential/character variants, then search literal bytes without logging values.",
+    "Search common private-key/AWS/GitHub/Slack/OpenAI/JWT patterns in payloads whose first 8192 bytes contain no NUL; check all payload logical paths for private configs, databases, key files and an exact Assets directory segment.",
+    "Recurse through regular ZIP and gzip TAR members without filesystem extraction to depth two, rejecting symbolic links and unsafe paths; scan both index and worktree views.",
+    "Compare ZIP config.yaml to git show HEAD:config.yaml, ZIP ELF bytes to bin/saserver, and final ELF/ZIP SHA256 to release.json; cross-check both browser JSON files, supervisors, empty errors, exit zero, position persistence and ELF identity."
+  ],
+  "limits": "Byte/text scanning includes binary and image bytes for known private values; no OCR or complete secret-detection guarantee. Common token regexes apply to text-like payloads. The replacement privacy report is checked before writing and is the only file changed after the staged scan; the owner must stage it before commit."
+}

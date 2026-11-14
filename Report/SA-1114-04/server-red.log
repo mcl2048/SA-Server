@@ -1,0 +1,14 @@
+$ go test ./internal/data ./internal/battle -run TestLisarido|TestElectromagneticCannon -count=1 -v
+=== RUN   TestLisaridoRegistryGrowthAndCaveHabitat
+    lisarido_test.go:9: Lisarido is missing from runtime registry
+--- FAIL: TestLisaridoRegistryGrowthAndCaveHabitat (1.35s)
+FAIL
+FAIL	sa/server/internal/data	1.396s
+=== RUN   TestElectromagneticCannonFiveRandomRemoteShots
+    electromagnetic_cannon_test.go:38: invalid independent remote shot: {Actor:5 Kind:attack Target:15 Result:normal Damage:704 HP:99296 Dead:false OK:false Skill:电磁火炮 Status:0 Guardian:-1 Combo:false ActorHP:100000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}
+--- FAIL: TestElectromagneticCannonFiveRandomRemoteShots (0.00s)
+FAIL
+FAIL	sa/server/internal/battle	0.011s
+FAIL
+
+exit=1

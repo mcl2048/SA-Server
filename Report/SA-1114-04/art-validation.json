@@ -1,0 +1,29 @@
+{
+  "character_frames": 232,
+  "effect_frames": 24,
+  "all_64_actions_animated": true,
+  "minimum_unique_action_frames": 2,
+  "clipped_opaque_character_frames": 0,
+  "idle_body_height_px": {
+    "min": 98,
+    "max": 98,
+    "frames": 32
+  },
+  "lilith_reference_body_px": [
+    96,
+    98
+  ],
+  "dragon_reference_front_px": 145,
+  "relative_to_dragon_front": [
+    0.6758620689655173,
+    0.6758620689655173
+  ],
+  "height_excludes": "transparent margins and floor ring",
+  "files": {
+    "anim/199300.json": "9e83e61e8d658933de83c6b02d4b55f3bd5691ead6060f96edf1efa7d3e4aef2",
+    "anim/199301.json": "8939dd0adfc741169af56e43f8ea2ffbbe536dc39e19fffcf35976ec5768aa2c",
+    "manifest.json": "50e9e7f7f6c310c904a439b405cc51e746f125cc2d9962dbf2362338256d6b6f",
+    "pages/00000.png": "faa19130b95de32cc824726d69f763faecabed74754752b7147484b63df7bf1c",
+    "pages/00001.png": "d83ec5fb670a7714453b208bc68b1bb39044a31721279a0f215a6fa794d1754d"
+  }
+}

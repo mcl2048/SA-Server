@@ -1,0 +1,59 @@
+{
+  "version": "v0.2.15-LYNX",
+  "baseline_commit": "811193ab4b4bfd3db07a848cab4487ef1860d44c",
+  "baseline_version": "v0.2.14-LYNX",
+  "prompt_input_sha256": "f25430fee1c9ac783d6e54317ee926b1daccef56e4ee7c762c94f6df9f79e798",
+  "prompt_delivered_sha256": "6d843b77df97fbebf58a5b05df4ef7e57727a2ddddaee733c2926c82804ac908",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16597152,
+    "sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa",
+    "format": "static ELF64 Linux AMD64",
+    "mode": "0755"
+  },
+  "archive": {
+    "version": "v0.2.15-LYNX",
+    "archive": "bin/saserver-v0.2.15-LYNX-linux-amd64.zip",
+    "bytes": 32229682,
+    "sha256": "3a689fe196d189d8293635687284adffc19d79e772fd1ed320d068bf79162daa",
+    "files": 4366,
+    "binary_sha256": "06fec5241088b2be63987021dd007c96411e79e696c5185d21e803a1dbc982aa",
+    "all_entries_match_current_public_files": true,
+    "executable_mode": "0755",
+    "runtime_db_credentials_and_Assets_excluded": true
+  },
+  "source_files_verified": 361,
+  "old_zip_replaced": true,
+  "checks": {
+    "client_and_builder": 199,
+    "typescript": true,
+    "go_all": true,
+    "go_vet": true,
+    "targeted_server_race": true,
+    "browser_checks": 20,
+    "native_pet_checks": 6,
+    "mobile_camera_checks": 14,
+    "embedded_files": 49,
+    "patch_assets": 19,
+    "installer_cases": {
+      "ai-pets": 30,
+      "lilith": 30,
+      "lisarido": 30
+    },
+    "repeat_binary_identical": true,
+    "repeat_art_identical": true
+  },
+  "art": {
+    "character_frames": 232,
+    "effect_frames": 24,
+    "idle_body_height_px": {
+      "min": 98,
+      "max": 98,
+      "frames": 32
+    },
+    "source": "img/lisarido.jpg",
+    "source_sha256": "119ee01f5fb2e2272af72fbccd2998d17dd717eeed9badc167ea8118f70fb7cb",
+    "origin": "User-provided JPG extraction, local ear/cannon layer animation and deterministic raster FX; no image generation API called."
+  },
+  "scope": "Actual Linux ELF, original assets, WebSocket, private SQLite and Chromium with SwiftShader; emulated mobile viewport and touch, no physical Android/iOS or Safari certification."
+}

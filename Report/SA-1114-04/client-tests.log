@@ -1,0 +1,1163 @@
+TAP version 13
+# Subtest: AI uses the server-reported spell cost without applying another discount
+ok 1 - AI uses the server-reported spell cost without applying another discount
+  ---
+  duration_ms: 16.38713
+  type: 'test'
+  ...
+# Subtest: capture protects its target even when the pet has a fixed attack plan
+ok 2 - capture protects its target even when the pet has a fixed attack plan
+  ---
+  duration_ms: 5.055347
+  type: 'test'
+  ...
+# Subtest: AI does not submit map-only recovery items in battle
+ok 3 - AI does not submit map-only recovery items in battle
+  ---
+  duration_ms: 1.073877
+  type: 'test'
+  ...
+# Subtest: group resurrection sends the side target accepted by the command boundary
+ok 4 - group resurrection sends the side target accepted by the command boundary
+  ---
+  duration_ms: 0.936744
+  type: 'test'
+  ...
+# Subtest: MP recovery supports both native healing spell functions before emergency fallback attacks
+ok 5 - MP recovery supports both native healing spell functions before emergency fallback attacks
+  ---
+  duration_ms: 2.359761
+  type: 'test'
+  ...
+# Subtest: resurrection items cannot masquerade as MP recovery by mentioning 气绝回复
+ok 6 - resurrection items cannot masquerade as MP recovery by mentioning 气绝回复
+  ---
+  duration_ms: 0.743142
+  type: 'test'
+  ...
+# Subtest: AI has no offensive intent when every enemy is knocked out or absent
+ok 7 - AI has no offensive intent when every enemy is knocked out or absent
+  ---
+  duration_ms: 0.438421
+  type: 'test'
+  ...
+# Subtest: dead-owner auto chooses living pets independently including zero MP and low health
+ok 8 - dead-owner auto chooses living pets independently including zero MP and low health
+  ---
+  duration_ms: 30.576771
+  type: 'test'
+  ...
+# Subtest: alive to dead transition, party pets and PvP negative control
+ok 9 - alive to dead transition, party pets and PvP negative control
+  ---
+  duration_ms: 3.911603
+  type: 'test'
+  ...
+# Subtest: dead or absent pets and defeated enemies do not get offensive commands
+ok 10 - dead or absent pets and defeated enemies do not get offensive commands
+  ---
+  duration_ms: 9.967569
+  type: 'test'
+  ...
+# Subtest: surviving Lilith uses 75 percent Ghost Storm against multiple living enemies
+ok 11 - surviving Lilith uses 75 percent Ghost Storm against multiple living enemies
+  ---
+  duration_ms: 1.15749
+  type: 'test'
+  ...
+# Subtest: incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate
+ok 12 - incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate
+  ---
+  duration_ms: 0.565475
+  type: 'test'
+  ...
+# Subtest: an explicit Ghost Storm plan still uses the native all-enemy target
+ok 13 - an explicit Ghost Storm plan still uses the native all-enemy target
+  ---
+  duration_ms: 10.773798
+  type: 'test'
+  ...
+# Subtest: cannon uses its five-round total prior and stays available to a surviving ownerless pet
+ok 14 - cannon uses its five-round total prior and stays available to a surviving ownerless pet
+  ---
+  duration_ms: 1.449289
+  type: 'test'
+  ...
+# Subtest: random cannon cannot endanger a capture target even through an explicit surviving-pet plan
+ok 15 - random cannon cannot endanger a capture target even through an explicit surviving-pet plan
+  ---
+  duration_ms: 0.57012
+  type: 'test'
+  ...
+# Subtest: four stable catalogue identities and stories match the server's single source
+ok 16 - four stable catalogue identities and stories match the server's single source
+  ---
+  duration_ms: 6.054008
+  type: 'test'
+  ...
+# Subtest: catalogue regeneration is byte stable and needs no browser server-file fetch
+ok 17 - catalogue regeneration is byte stable and needs no browser server-file fetch
+  ---
+  duration_ms: 1.77547
+  type: 'test'
+  ...
+# Subtest: desktop and mobile native settings show the authoritative recovery policy and persist the same threshold
+ok 18 - desktop and mobile native settings show the authoritative recovery policy and persist the same threshold
+  ---
+  duration_ms: 36.242164
+  type: 'test'
+  ...
+# Subtest: old 570-slot save survives four appended seen/snap entries and account reload
+ok 19 - old 570-slot save survives four appended seen/snap entries and account reload
+  ---
+  duration_ms: 15.623485
+  type: 'test'
+  ...
+# Subtest: legacy seen and snapshot IDs and portraits retain their original mapping
+ok 20 - legacy seen and snapshot IDs and portraits retain their original mapping
+  ---
+  duration_ms: 3.365459
+  type: 'test'
+  ...
+# Subtest: all appended slots fit the existing last page and render raw animation portraits plus canonical stories
+ok 21 - all appended slots fit the existing last page and render raw animation portraits plus canonical stories
+  ---
+  duration_ms: 16.637959
+  type: 'test'
+  ...
+# Subtest: missing portrait decoding retries later, uses raw fallback frames, and caches success
+ok 22 - missing portrait decoding retries later, uses raw fallback frames, and caches success
+  ---
+  duration_ms: 54.937061
+  type: 'test'
+  ...
+# Subtest: new-pet brief descriptions fit the existing stat extension panel without changing old pets
+ok 23 - new-pet brief descriptions fit the existing stat extension panel without changing old pets
+  ---
+  duration_ms: 8.789317
+  type: 'test'
+  ...
+# Subtest: retaking a renamed pet updates its snapshot without overwriting adjacent original slots
+ok 24 - retaking a renamed pet updates its snapshot without overwriting adjacent original slots
+  ---
+  duration_ms: 0.772858
+  type: 'test'
+  ...
+# Subtest: pet details and album retain a stable native model for the fullscreen game window
+ok 25 - pet details and album retain a stable native model for the fullscreen game window
+  ---
+  duration_ms: 7.807773
+  type: 'test'
+  ...
+# Subtest: Lilith appends slot 575 after all four mechanical pets and persists her native portrait
+ok 26 - Lilith appends slot 575 after all four mechanical pets and persists her native portrait
+  ---
+  duration_ms: 8.1861
+  type: 'test'
+  ...
+# Subtest: Lisarido persists slot 576 while every existing pet identity and photograph stays in place
+ok 27 - Lisarido persists slot 576 while every existing pet identity and photograph stays in place
+  ---
+  duration_ms: 10.046316
+  type: 'test'
+  ...
+# Subtest: overlay registers independent RGBA image IDs and animations without changing SAIX or core pages
+ok 28 - overlay registers independent RGBA image IDs and animations without changing SAIX or core pages
+  ---
+  duration_ms: 341.807408
+  type: 'test'
+  ...
+# Subtest: Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs
+ok 29 - Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs
+  ---
+  duration_ms: 61.099837
+  type: 'test'
+  ...
+# Subtest: a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets
+ok 30 - a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets
+  ---
+  duration_ms: 44.704349
+  type: 'test'
+  ...
+# Subtest: Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith
+ok 31 - Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith
+  ---
+  duration_ms: 51.800993
+  type: 'test'
+  ...
+# Subtest: an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs
+ok 32 - an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs
+  ---
+  duration_ms: 44.471618
+  type: 'test'
+  ...
+# Subtest: a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly
+ok 33 - a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly
+  ---
+  duration_ms: 36.150176
+  type: 'test'
+  ...
+# Subtest: missing-pack fallbacks resolve actual frame images in the original local asset index when available
+ok 34 - missing-pack fallbacks resolve actual frame images in the original local asset index when available
+  ---
+  duration_ms: 1596.96987
+  type: 'test'
+  ...
+# Subtest: the generated four-pet pack resolves every real atlas frame when installed
+ok 35 - the generated four-pet pack resolves every real atlas frame when installed
+  ---
+  duration_ms: 1178.960688
+  type: 'test'
+  ...
+# Subtest: JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests
+ok 36 - JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests
+  ---
+  duration_ms: 5.824846
+  type: 'test'
+  ...
+# Subtest: a complete overlay loads independently when the original binary index is unavailable
+ok 37 - a complete overlay loads independently when the original binary index is unavailable
+  ---
+  duration_ms: 3.109322
+  type: 'test'
+  ...
+# Subtest: invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture
+ok 38 - invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture
+  ---
+  duration_ms: 34.204912
+  type: 'test'
+  ...
+# Subtest: malformed frames, duplicate actions and original sprite collisions preserve all original resources
+ok 39 - malformed frames, duplicate actions and original sprite collisions preserve all original resources
+  ---
+  duration_ms: 20.293735
+  type: 'test'
+  ...
+# Subtest: failed atlas decoding rolls back successfully decoded sibling textures before falling back
+ok 40 - failed atlas decoding rolls back successfully decoded sibling textures before falling back
+  ---
+  duration_ms: 6.791802
+  type: 'test'
+  ...
+# Subtest: a page with unexpected decoded dimensions is disposed and cannot partially register sprites
+ok 41 - a page with unexpected decoded dimensions is disposed and cannot partially register sprites
+  ---
+  duration_ms: 6.80802
+  type: 'test'
+  ...
+# (node:807109) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: extension textures follow the GPU eviction budget and reload from their own PNG paths
+ok 42 - extension textures follow the GPU eviction budget and reload from their own PNG paths
+  ---
+  duration_ms: 9.777641
+  type: 'test'
+  ...
+# Subtest: extension deadline disposes decoded textures immediately and also disposes late arrivals
+ok 43 - extension deadline disposes decoded textures immediately and also disposes late arrivals
+  ---
+  duration_ms: 18.481724
+  type: 'test'
+  ...
+# Subtest: imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion
+ok 44 - imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion
+  ---
+  duration_ms: 42.010515
+  type: 'test'
+  ...
+# Subtest: imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup
+ok 45 - imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup
+  ---
+  duration_ms: 42.45401
+  type: 'test'
+  ...
+# Subtest: actual AI quick and auto clicks send immediately and survive an older paused lease ACK
+ok 46 - actual AI quick and auto clicks send immediately and survive an older paused lease ACK
+  ---
+  duration_ms: 35.577488
+  type: 'test'
+  ...
+# Subtest: an old ACK between actual menu click and next frame cannot overwrite unsent intent
+ok 47 - an old ACK between actual menu click and next frame cannot overwrite unsent intent
+  ---
+  duration_ms: 11.003123
+  type: 'test'
+  ...
+# Subtest: two real quick clicks before either ACK retain the newest intent, including a return to the original value
+ok 48 - two real quick clicks before either ACK retain the newest intent, including a return to the original value
+  ---
+  duration_ms: 14.931844
+  type: 'test'
+  ...
+# Subtest: authoritative encounter-only and safety stops preserve actual flags and stale ACKs cannot re-enable stopped modes
+ok 49 - authoritative encounter-only and safety stops preserve actual flags and stale ACKs cannot re-enable stopped modes
+  ---
+  duration_ms: 7.091485
+  type: 'test'
+  ...
+# Subtest: pending auto enable never hands the turn to legacy client AI, and disable waits for its server ACK
+ok 50 - pending auto enable never hands the turn to legacy client AI, and disable waits for its server ACK
+  ---
+  duration_ms: 6.62265
+  type: 'test'
+  ...
+# Subtest: the shared quick-field control is a reachable real Ui action and sends quick off without opening world menus
+ok 51 - the shared quick-field control is a reachable real Ui action and sends quick off without opening world menus
+  ---
+  duration_ms: 1.378775
+  type: 'test'
+  ...
+# Subtest: self and enemy camera preferences use native battle positions without submitting commands
+ok 52 - self and enemy camera preferences use native battle positions without submitting commands
+  ---
+  duration_ms: 15.321405
+  type: 'test'
+  ...
+# Subtest: automatic camera follows the actual actor and switches to a visible damage target
+ok 53 - automatic camera follows the actual actor and switches to a visible damage target
+  ---
+  duration_ms: 3.400583
+  type: 'test'
+  ...
+# Subtest: mobile battle status reports current playback HP/MP rather than the entry snapshot
+ok 54 - mobile battle status reports current playback HP/MP rather than the entry snapshot
+  ---
+  duration_ms: 6.3809
+  type: 'test'
+  ...
+# Subtest: enemy camera prefers a live opponent and falls back to corpses after the last defeat
+ok 55 - enemy camera prefers a live opponent and falls back to corpses after the last defeat
+  ---
+  duration_ms: 0.906751
+  type: 'test'
+  ...
+# Subtest: dead PvE owner emits no character action and live pets choose their own distinct skill slots
+ok 56 - dead PvE owner emits no character action and live pets choose their own distinct skill slots
+  ---
+  duration_ms: 97.195499
+  type: 'test'
+  ...
+# Subtest: manual and PvP dead owners preserve fallback pet commands
+ok 57 - manual and PvP dead owners preserve fallback pet commands
+  ---
+  duration_ms: 2.123808
+  type: 'test'
+  ...
+# Subtest: dead owner advances every pet from first-turn policy to subsequent-turn policy
+ok 58 - dead owner advances every pet from first-turn policy to subsequent-turn policy
+  ---
+  duration_ms: 11.295816
+  type: 'test'
+  ...
+# Subtest: five cannon rounds cast in place and render one target explosion before each separate HP settlement
+ok 59 - five cannon rounds cast in place and render one target explosion before each separate HP settlement
+  ---
+  duration_ms: 129.439475
+  type: 'test'
+  ...
+# Subtest: cannon preserves reflection and guardian damage instead of applying physical HP to the original victim
+ok 60 - cannon preserves reflection and guardian damage instead of applying physical HP to the original victim
+  ---
+  duration_ms: 16.849624
+  type: 'test'
+  ...
+# Subtest: a forced live departure completes before later rounds and a stale slot never gets another explosion
+ok 61 - a forced live departure completes before later rounds and a stale slot never gets another explosion
+  ---
+  duration_ms: 7.327371
+  type: 'test'
+  ...
+# Subtest: quick cannon settles ordered damage, paralysis and departure without moving the caster
+ok 62 - quick cannon settles ordered damage, paralysis and departure without moving the caster
+  ---
+  duration_ms: 2.352846
+  type: 'test'
+  ...
+# Subtest: Ghost Storm casts with both hands in place and plays one native effect at the complete target half
+ok 63 - Ghost Storm casts with both hands in place and plays one native effect at the complete target half
+  ---
+  duration_ms: 26.41904
+  type: 'test'
+  ...
+# Subtest: Ghost Storm preserves physical reflection, absorption, barrier and dodge results
+ok 64 - Ghost Storm preserves physical reflection, absorption, barrier and dodge results
+  ---
+  duration_ms: 3.58799
+  type: 'test'
+  ...
+# Subtest: quick Ghost Storm settles all authoritative HP and petrification without moving its caster
+ok 65 - quick Ghost Storm settles all authoritative HP and petrification without moving its caster
+  ---
+  duration_ms: 2.368714
+  type: 'test'
+  ...
+# Subtest: ordinary recovery magic retains its original standing cast and per-target native effect
+ok 66 - ordinary recovery magic retains its original standing cast and per-target native effect
+  ---
+  duration_ms: 1.479508
+  type: 'test'
+  ...
+# Subtest: Ghost Storm applies guardian damage and petrification to the actual protector only
+ok 67 - Ghost Storm applies guardian damage and petrification to the actual protector only
+  ---
+  duration_ms: 1.209541
+  type: 'test'
+  ...
+# Subtest: wire HP0 from fatal poison marks either side's player/pet dead without a fly event
+ok 68 - wire HP0 from fatal poison marks either side's player/pet dead without a fly event
+  ---
+  duration_ms: 10.569954
+  type: 'test'
+  ...
+# Subtest: reviving a knocked-down fighter clears death choreography and restores target eligibility
+ok 69 - reviving a knocked-down fighter clears death choreography and restores target eligibility
+  ---
+  duration_ms: 1.129971
+  type: 'test'
+  ...
+# Subtest: an already flown target cannot receive a second hit or damage popup
+ok 70 - an already flown target cannot receive a second hit or damage popup
+  ---
+  duration_ms: 1.256387
+  type: 'test'
+  ...
+# Subtest: native enemy support cannot revive an already flown or absent target during playback
+ok 71 - native enemy support cannot revive an already flown or absent target during playback
+  ---
+  duration_ms: 0.779051
+  type: 'test'
+  ...
+# Subtest: each owned live pet uses its bag skills and sends one independent action
+ok 72 - each owned live pet uses its bag skills and sends one independent action
+  ---
+  duration_ms: 14.274511
+  type: 'test'
+  ...
+# Subtest: pet tabs select another pending pet without borrowing another owner's pet
+ok 73 - pet tabs select another pending pet without borrowing another owner's pet
+  ---
+  duration_ms: 2.486719
+  type: 'test'
+  ...
+# Subtest: server automation prevents normal, quick and reconnect duplicate client commands
+ok 74 - server automation prevents normal, quick and reconnect duplicate client commands
+  ---
+  duration_ms: 12.651997
+  type: 'test'
+  ...
+# Subtest: resume restores turn, submitted pets, status and positions without an intro or first-turn AI
+ok 75 - resume restores turn, submitted pets, status and positions without an intro or first-turn AI
+  ---
+  duration_ms: 6.875473
+  type: 'test'
+  ...
+# Subtest: turn resolution clears previous pending menus and opens fresh per-pet submissions
+ok 76 - turn resolution clears previous pending menus and opens fresh per-pet submissions
+  ---
+  duration_ms: 6.914952
+  type: 'test'
+  ...
+# Subtest: resetPets atomically removes old pets and updates full layout without a new intro
+ok 77 - resetPets atomically removes old pets and updates full layout without a new intro
+  ---
+  duration_ms: 2.869675
+  type: 'test'
+  ...
+# Subtest: pet layout movement preserves submissions and selected skills by bag identity
+ok 78 - pet layout movement preserves submissions and selected skills by bag identity
+  ---
+  duration_ms: 5.076909
+  type: 'test'
+  ...
+# Subtest: PetOut uses event bag and owner while the Pets snapshot still names another primary
+ok 79 - PetOut uses event bag and owner while the Pets snapshot still names another primary
+  ---
+  duration_ms: 3.35826
+  type: 'test'
+  ...
+# Subtest: quick display never restarts client automation after both live auto switches are off
+ok 80 - quick display never restarts client automation after both live auto switches are off
+  ---
+  duration_ms: 1.77758
+  type: 'test'
+  ...
+# Subtest: quick display switches preserve the same fighters, queued work, turn and submissions and load the background once
+ok 81 - quick display switches preserve the same fighters, queued work, turn and submissions and load the background once
+  ---
+  duration_ms: 79.912977
+  type: 'test'
+  ...
+# Subtest: leaving fast playback preserves the remaining real command time on its advanced animation clock
+ok 82 - leaving fast playback preserves the remaining real command time on its advanced animation clock
+  ---
+  duration_ms: 1.578431
+  type: 'test'
+  ...
+# Subtest: watch mode and dead pets never expose a command slot
+ok 83 - watch mode and dead pets never expose a command slot
+  ---
+  duration_ms: 0.788279
+  type: 'test'
+  ...
+# Subtest: compact HP/MP rows clamp values and horizontal bounds on both viewports
+ok 84 - compact HP/MP rows clamp values and horizontal bounds on both viewports
+  ---
+  duration_ms: 4.076844
+  type: 'test'
+  ...
+# Subtest: five enemy damage labels remain inside every stage edge throughout the bounce
+ok 85 - five enemy damage labels remain inside every stage edge throughout the bounce
+  ---
+  duration_ms: 2.393139
+  type: 'test'
+  ...
+# Subtest: HP/MP rows lie below actual model bounds including tall pets and riding HP
+ok 86 - HP/MP rows lie below actual model bounds including tall pets and riding HP
+  ---
+  duration_ms: 2.16557
+  type: 'test'
+  ...
+# Subtest: absent legacy event metadata never creates NaN labels or invalid skill icons
+ok 87 - absent legacy event metadata never creates NaN labels or invalid skill icons
+  ---
+  duration_ms: 2.480221
+  type: 'test'
+  ...
+# Subtest: snapshot dead players and pets on both sides choose genuine DEAD pose and revive
+ok 88 - snapshot dead players and pets on both sides choose genuine DEAD pose and revive
+  ---
+  duration_ms: 6.826527
+  type: 'test'
+  ...
+# Subtest: crowded real battle formation keeps every full HP/MP/riding row disjoint and inside the stage
+ok 89 - crowded real battle formation keeps every full HP/MP/riding row disjoint and inside the stage
+  ---
+  duration_ms: 21.666391
+  type: 'test'
+  ...
+# Subtest: fullscreen inventory exposes explicit equipment/use actions, images and authoritative categories
+ok 90 - fullscreen inventory exposes explicit equipment/use actions, images and authoritative categories
+  ---
+  duration_ms: 36.145396
+  type: 'test'
+  ...
+# Subtest: primary actions revalidate live item availability, preserve self use and explicit unequip
+ok 91 - primary actions revalidate live item availability, preserve self use and explicit unequip
+  ---
+  duration_ms: 1.698467
+  type: 'test'
+  ...
+# Subtest: classic and desktop retain their existing pickup and double-click behavior
+ok 92 - classic and desktop retain their existing pickup and double-click behavior
+  ---
+  duration_ms: 22.434181
+  type: 'test'
+  ...
+# Subtest: explicit fullscreen actions and slot pickup both remain reachable in the actual native hit stack
+ok 93 - explicit fullscreen actions and slot pickup both remain reachable in the actual native hit stack
+  ---
+  duration_ms: 18.910892
+  type: 'test'
+  ...
+# Subtest: Lilith's browser biography and habitat match the independent authoritative server definition
+ok 94 - Lilith's browser biography and habitat match the independent authoritative server definition
+  ---
+  duration_ms: 4.205787
+  type: 'test'
+  ...
+# Subtest: Lilith biography regeneration is byte stable and needs no runtime server-data fetch
+ok 95 - Lilith biography regeneration is byte stable and needs no runtime server-data fetch
+  ---
+  duration_ms: 1.500972
+  type: 'test'
+  ...
+# Subtest: Lisarido appends an independent biography matching the authoritative cave registry
+ok 96 - Lisarido appends an independent biography matching the authoritative cave registry
+  ---
+  duration_ms: 4.326877
+  type: 'test'
+  ...
+# Subtest: Lisarido catalogue regeneration is byte stable
+ok 97 - Lisarido catalogue regeneration is byte stable
+  ---
+  duration_ms: 1.267356
+  type: 'test'
+  ...
+# minimap navigation integration passed
+# Subtest: client/test/minimap-navigation.test.ts
+ok 18 - client/test/minimap-navigation.test.ts
+  ---
+  duration_ms: 2116.47781
+  type: 'test'
+  ...
+# Subtest: portrait immersive scene fills the viewport at native scale or larger without stretching
+ok 99 - portrait immersive scene fills the viewport at native scale or larger without stretching
+  ---
+  duration_ms: 7.822813
+  type: 'test'
+  ...
+# Subtest: landscape immersive scene keeps native character pixels and crops vertically
+ok 100 - landscape immersive scene keeps native character pixels and crops vertically
+  ---
+  duration_ms: 0.514685
+  type: 'test'
+  ...
+# Subtest: focusing edge targets never reveals empty space outside the original scene
+ok 101 - focusing edge targets never reveals empty space outside the original scene
+  ---
+  duration_ms: 1.058295
+  type: 'test'
+  ...
+# Subtest: invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale
+ok 102 - invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale
+  ---
+  duration_ms: 0.514247
+  type: 'test'
+  ...
+# Subtest: portrait fills the full width and keeps 4:3 without borrowing control height
+ok 103 - portrait fills the full width and keeps 4:3 without borrowing control height
+  ---
+  duration_ms: 2.761998
+  type: 'test'
+  ...
+# Subtest: landscape fills height where possible, stays centered and preserves independent rails
+ok 104 - landscape fills height where possible, stays centered and preserves independent rails
+  ---
+  duration_ms: 0.810216
+  type: 'test'
+  ...
+# Subtest: dragged controls stay within the browser after large moves and rotation
+ok 105 - dragged controls stay within the browser after large moves and rotation
+  ---
+  duration_ms: 1.842005
+  type: 'test'
+  ...
+# Subtest: reflowed map taps preserve the destination rather than clicking the native map center
+ok 106 - reflowed map taps preserve the destination rather than clicking the native map center
+  ---
+  duration_ms: 5.451417
+  type: 'test'
+  ...
+# Subtest: stale, outside and nonfinite map points cannot become ground clicks
+ok 107 - stale, outside and nonfinite map points cannot become ground clicks
+  ---
+  duration_ms: 0.642661
+  type: 'test'
+  ...
+# Subtest: map drags retain the start and final move across frames without queuing unbounded pointer traffic
+ok 108 - map drags retain the start and final move across frames without queuing unbounded pointer traffic
+  ---
+  duration_ms: 2.782586
+  type: 'test'
+  ...
+# Subtest: cancelled, replaced and resized native map drags cannot resume or become clicks
+ok 109 - cancelled, replaced and resized native map drags cannot resume or become clicks
+  ---
+  duration_ms: 1.361667
+  type: 'test'
+  ...
+# Subtest: reflowed pointer traffic pans the existing native MapWindow and never starts navigation
+ok 110 - reflowed pointer traffic pans the existing native MapWindow and never starts navigation
+  ---
+  duration_ms: 6.255476
+  type: 'test'
+  ...
+# Subtest: native pan cancellation clears any retained press before the next map frame
+ok 111 - native pan cancellation clears any retained press before the next map frame
+  ---
+  duration_ms: 0.498629
+  type: 'test'
+  ...
+# Subtest: fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+ok 112 - fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+  ---
+  duration_ms: 7.134753
+  type: 'test'
+  ...
+# Subtest: unavailable optional native art leaves controls operational and retries bounded
+ok 113 - unavailable optional native art leaves controls operational and retries bounded
+  ---
+  duration_ms: 1.074755
+  type: 'test'
+  ...
+# Subtest: overlapping native frames coalesce into one decoder and still skin newly added controls
+ok 114 - overlapping native frames coalesce into one decoder and still skin newly added controls
+  ---
+  duration_ms: 23.472575
+  type: 'test'
+  ...
+# Subtest: selected native model is bounded, cached and cannot overwrite a newer pet selection
+ok 115 - selected native model is bounded, cached and cannot overwrite a newer pet selection
+  ---
+  duration_ms: 2.597767
+  type: 'test'
+  ...
+# Subtest: native inventory art follows a reused slot and clears when the slot becomes empty
+ok 116 - native inventory art follows a reused slot and clears when the slot becomes empty
+  ---
+  duration_ms: 1.649726
+  type: 'test'
+  ...
+# Subtest: native pet portrait advances at native ticks without decoding or restarting unchanged metadata
+ok 117 - native pet portrait advances at native ticks without decoding or restarting unchanged metadata
+  ---
+  duration_ms: 10.831499
+  type: 'test'
+  ...
+# Subtest: reduced motion, hidden documents and a cleared selection stop portrait playback
+ok 118 - reduced motion, hidden documents and a cleared selection stop portrait playback
+  ---
+  duration_ms: 6.184667
+  type: 'test'
+  ...
+# Subtest: an animation decoding during selection change cannot install the previous pet
+ok 119 - an animation decoding during selection change cannot install the previous pet
+  ---
+  duration_ms: 1.899694
+  type: 'test'
+  ...
+# Subtest: long native animations have a bounded decoded frame budget and evict old models
+ok 120 - long native animations have a bounded decoded frame budget and evict old models
+  ---
+  duration_ms: 20.164546
+  type: 'test'
+  ...
+# Subtest: repeated native frames reuse one decoded crop while retaining each frame offset
+ok 121 - repeated native frames reuse one decoded crop while retaining each frame offset
+  ---
+  duration_ms: 5.178079
+  type: 'test'
+  ...
+# Subtest: immersive pet list stays basic on hover and the native name opens animated details
+ok 122 - immersive pet list stays basic on hover and the native name opens animated details
+  ---
+  duration_ms: 16.260795
+  type: 'test'
+  ...
+# Subtest: status exposes the original face and adjacent attributes with only live native point actions
+ok 123 - status exposes the original face and adjacent attributes with only live native point actions
+  ---
+  duration_ms: 5.619104
+  type: 'test'
+  ...
+# Subtest: native party status shows current party rows without carrying a character portrait or allocation controls
+ok 124 - native party status shows current party rows without carrying a character portrait or allocation controls
+  ---
+  duration_ms: 1.478071
+  type: 'test'
+  ...
+# Subtest: preview caps high-DPR copies, composites overlay and throttles to 15fps
+ok 125 - preview caps high-DPR copies, composites overlay and throttles to 15fps
+  ---
+  duration_ms: 11.210047
+  type: 'test'
+  ...
+# Subtest: hidden sheets, CSS-hidden previews and desktop mode do not copy frames
+ok 126 - hidden sheets, CSS-hidden previews and desktop mode do not copy frames
+  ---
+  duration_ms: 0.876774
+  type: 'test'
+  ...
+# Subtest: desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+ok 127 - desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+  ---
+  duration_ms: 11.302033
+  type: 'test'
+  ...
+# Subtest: unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+ok 128 - unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+  ---
+  duration_ms: 4.588713
+  type: 'test'
+  ...
+# Subtest: only reachable controls render; removed controls cannot dispatch stale queued actions
+ok 129 - only reachable controls render; removed controls cannot dispatch stale queued actions
+  ---
+  duration_ms: 4.842391
+  type: 'test'
+  ...
+# Subtest: joystick uses eight original directions, center dead zone and all cancellation paths
+ok 130 - joystick uses eight original directions, center dead zone and all cancellation paths
+  ---
+  duration_ms: 4.844836
+  type: 'test'
+  ...
+# Subtest: navigation and mouse controls dispatch semantic hooks without clearing cursor
+ok 131 - navigation and mouse controls dispatch semantic hooks without clearing cursor
+  ---
+  duration_ms: 4.484305
+  type: 'test'
+  ...
+# Subtest: selection labels resolve native IDs and layout events never interrupt unchanged holds
+ok 132 - selection labels resolve native IDs and layout events never interrupt unchanged holds
+  ---
+  duration_ms: 2.79829
+  type: 'test'
+  ...
+# Subtest: battle commands and targets remain human readable in a bounded sheet
+ok 133 - battle commands and targets remain human readable in a bounded sheet
+  ---
+  duration_ms: 4.212788
+  type: 'test'
+  ...
+# Subtest: quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+ok 134 - quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+  ---
+  duration_ms: 12.78844
+  type: 'test'
+  ...
+# Subtest: native panels hide background controls and actor names, and accept contextual labels
+ok 135 - native panels hide background controls and actor names, and accept contextual labels
+  ---
+  duration_ms: 4.046176
+  type: 'test'
+  ...
+# Subtest: chat panel keeps real chat input visible and dispatches send-chat
+ok 136 - chat panel keeps real chat input visible and dispatches send-chat
+  ---
+  duration_ms: 2.889385
+  type: 'test'
+  ...
+# Subtest: movement precedes long option panels and encounter uses server capability and ack
+ok 137 - movement precedes long option panels and encounter uses server capability and ack
+  ---
+  duration_ms: 5.141276
+  type: 'test'
+  ...
+# Subtest: native column registration is presented in visual row order and keeps action identity
+ok 138 - native column registration is presented in visual row order and keeps action identity
+  ---
+  duration_ms: 2.512077
+  type: 'test'
+  ...
+# Subtest: immersive scene exposes a cancellable menu tray and restores classic panels
+ok 139 - immersive scene exposes a cancellable menu tray and restores classic panels
+  ---
+  duration_ms: 3.498167
+  type: 'test'
+  ...
+# Subtest: immersive battle camera stays a view command and native targets keep their real IDs
+ok 140 - immersive battle camera stays a view command and native targets keep their real IDs
+  ---
+  duration_ms: 3.085946
+  type: 'test'
+  ...
+# Subtest: switching to desktop during browser fullscreen retains the explicit exit control
+ok 141 - switching to desktop during browser fullscreen retains the explicit exit control
+  ---
+  duration_ms: 4.46543
+  type: 'test'
+  ...
+# Subtest: quick battle preserves its field context and native battle panels restore the complete layout
+ok 142 - quick battle preserves its field context and native battle panels restore the complete layout
+  ---
+  duration_ms: 3.890276
+  type: 'test'
+  ...
+# Subtest: immersive battle starts with clear actors and native toggles, then exposes and closes commands
+ok 143 - immersive battle starts with clear actors and native toggles, then exposes and closes commands
+  ---
+  duration_ms: 5.35071
+  type: 'test'
+  ...
+# Subtest: immersive field tray exposes reachable native social controls without duplicating toolbar menus
+ok 144 - immersive field tray exposes reachable native social controls without duplicating toolbar menus
+  ---
+  duration_ms: 5.655911
+  type: 'test'
+  ...
+# Subtest: immersive native panels remain in the game viewport and hide movement behind the dialog
+ok 145 - immersive native panels remain in the game viewport and hide movement behind the dialog
+  ---
+  duration_ms: 5.145389
+  type: 'test'
+  ...
+# Subtest: fullscreen map paints native map layers and maps taps back to the original hit coordinates
+ok 146 - fullscreen map paints native map layers and maps taps back to the original hit coordinates
+  ---
+  duration_ms: 14.385961
+  type: 'test'
+  ...
+# Subtest: immersive native collections keep slot art, details and real controls together without duplicate summaries
+ok 147 - immersive native collections keep slot art, details and real controls together without duplicate summaries
+  ---
+  duration_ms: 3.663439
+  type: 'test'
+  ...
+# Subtest: fullscreen map drags emit native pointer phases and cancellation never emits a route tap
+ok 148 - fullscreen map drags emit native pointer phases and cancellation never emits a route tap
+  ---
+  duration_ms: 18.735588
+  type: 'test'
+  ...
+# Subtest: native pet detail replaces whole-list summaries and changing game windows resets retained scroll
+ok 149 - native pet detail replaces whole-list summaries and changing game windows resets retained scroll
+  ---
+  duration_ms: 8.38213
+  type: 'test'
+  ...
+# Subtest: fullscreen cards keep native art and put an explicit live primary action below the item
+ok 150 - fullscreen cards keep native art and put an explicit live primary action below the item
+  ---
+  duration_ms: 5.727674
+  type: 'test'
+  ...
+# Subtest: status attributes retain adjacent native +1 controls and remove exhausted point actions
+ok 151 - status attributes retain adjacent native +1 controls and remove exhausted point actions
+  ---
+  duration_ms: 5.071749
+  type: 'test'
+  ...
+# Subtest: narrow desktop remains desktop; modes move and restore the original stage
+ok 152 - narrow desktop remains desktop; modes move and restore the original stage
+  ---
+  duration_ms: 6.817203
+  type: 'test'
+  ...
+# Subtest: IME confirmation never reaches native submit handlers or prevents composition
+ok 153 - IME confirmation never reaches native submit handlers or prevents composition
+  ---
+  duration_ms: 2.46581
+  type: 'test'
+  ...
+# Subtest: mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+ok 154 - mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+  ---
+  duration_ms: 4.551987
+  type: 'test'
+  ...
+# Subtest: two-finger scene pinch cancels game hold, clamps zoom and resets view
+ok 155 - two-finger scene pinch cancels game hold, clamps zoom and resets view
+  ---
+  duration_ms: 1.885319
+  type: 'test'
+  ...
+# Subtest: mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+ok 156 - mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+  ---
+  duration_ms: 1.656274
+  type: 'test'
+  ...
+# Subtest: mobile backing budgets and managed input layout do not change desktop sizing
+ok 157 - mobile backing budgets and managed input layout do not change desktop sizing
+  ---
+  duration_ms: 2.083006
+  type: 'test'
+  ...
+# Subtest: a new immersive scene immediately reveals its intended focus and recenters the field
+ok 158 - a new immersive scene immediately reveals its intended focus and recenters the field
+  ---
+  duration_ms: 1.633722
+  type: 'test'
+  ...
+# Subtest: immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+ok 159 - immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+  ---
+  duration_ms: 1.195544
+  type: 'test'
+  ...
+# Subtest: native model metadata is mobile-only and resets with the normal UI frame
+ok 160 - native model metadata is mobile-only and resets with the normal UI frame
+  ---
+  duration_ms: 1.546713
+  type: 'test'
+  ...
+# Subtest: immersive field and battle ignore two-finger zoom while retaining button zoom and cancelling game holds
+ok 161 - immersive field and battle ignore two-finger zoom while retaining button zoom and cancelling game holds
+  ---
+  duration_ms: 4.267091
+  type: 'test'
+  ...
+# Subtest: a new portrait battle focus is visible immediately instead of waiting for camera easing
+ok 162 - a new portrait battle focus is visible immediately instead of waiting for camera easing
+  ---
+  duration_ms: 0.861088
+  type: 'test'
+  ...
+# Subtest: landscape-to-portrait rotation focuses the latest native model before the first resized frame
+ok 163 - landscape-to-portrait rotation focuses the latest native model before the first resized frame
+  ---
+  duration_ms: 0.866726
+  type: 'test'
+  ...
+# Subtest: ready waits for Hello and permits password login only after no-token handshake
+ok 164 - ready waits for Hello and permits password login only after no-token handshake
+  ---
+  duration_ms: 65.084791
+  type: 'test'
+  ...
+# Subtest: token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer
+ok 165 - token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer
+  ---
+  duration_ms: 3.373269
+  type: 'test'
+  ...
+# Subtest: debug logs redact authentication credentials without modifying wire messages
+ok 166 - debug logs redact authentication credentials without modifying wire messages
+  ---
+  duration_ms: 2.006773
+  type: 'test'
+  ...
+# Subtest: recoveredSession identifies a resumed lobby and resets on explicit logout
+ok 167 - recoveredSession identifies a resumed lobby and resets on explicit logout
+  ---
+  duration_ms: 1.69178
+  type: 'test'
+  ...
+# Subtest: Hello and Session deadlines replace stale sockets while preserving one ready promise
+ok 168 - Hello and Session deadlines replace stale sockets while preserving one ready promise
+  ---
+  duration_ms: 2.502311
+  type: 'test'
+  ...
+# Subtest: waking an OPEN half-dead connection requires matching Pong within five seconds
+ok 169 - waking an OPEN half-dead connection requires matching Pong within five seconds
+  ---
+  duration_ms: 2.161323
+  type: 'test'
+  ...
+# Subtest: returning from a frozen tab immediately resumes a live socket and discards queued world history
+ok 170 - returning from a frozen tab immediately resumes a live socket and discards queued world history
+  ---
+  duration_ms: 2.523218
+  type: 'test'
+  ...
+# Subtest: lifecycle freeze without visibility changes discards old turns and resumes once when active
+ok 171 - lifecycle freeze without visibility changes discards old turns and resumes once when active
+  ---
+  duration_ms: 1.65758
+  type: 'test'
+  ...
+# Subtest: restoring from back-forward cache requests a snapshot even without a visibility event
+ok 172 - restoring from back-forward cache requests a snapshot even without a visibility event
+  ---
+  duration_ms: 1.719288
+  type: 'test'
+  ...
+# Subtest: a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot
+ok 173 - a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot
+  ---
+  duration_ms: 1.853351
+  type: 'test'
+  ...
+# Subtest: terminal replacement stops reconnecting without clearing another tab's bearer
+ok 174 - terminal replacement stops reconnecting without clearing another tab's bearer
+  ---
+  duration_ms: 1.27897
+  type: 'test'
+  ...
+# Subtest: failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token
+ok 175 - failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token
+  ---
+  duration_ms: 1.8149
+  type: 'test'
+  ...
+# Subtest: initial connection has a thirty-second total limit and retains resumable credentials
+ok 176 - initial connection has a thirty-second total limit and retains resumable credentials
+  ---
+  duration_ms: 1.02363
+  type: 'test'
+  ...
+# Subtest: manual close rejects pending readiness and detaches all timers without clearing credentials
+ok 177 - manual close rejects pending readiness and detaches all timers without clearing credentials
+  ---
+  duration_ms: 0.900987
+  type: 'test'
+  ...
+# Subtest: no-token Hello timeout fails once and late messages cannot restore abandoned UI
+ok 178 - no-token Hello timeout fails once and late messages cannot restore abandoned UI
+  ---
+  duration_ms: 0.928961
+  type: 'test'
+  ...
+# Subtest: separate tabs do not inherit or overwrite another tab's actor credential
+ok 179 - separate tabs do not inherit or overwrite another tab's actor credential
+  ---
+  duration_ms: 6.994877
+  type: 'test'
+  ...
+# Subtest: legacy shared localStorage credential is discarded without implicit takeover
+ok 180 - legacy shared localStorage credential is discarded without implicit takeover
+  ---
+  duration_ms: 1.499959
+  type: 'test'
+  ...
+# Subtest: repeated character switching releases Field handlers and ignores disposed actors
+ok 181 - repeated character switching releases Field handlers and ignores disposed actors
+  ---
+  duration_ms: 12.913999
+  type: 'test'
+  ...
+# Subtest: unsubscribe preserves duplicate registrations and once removes its listener
+ok 182 - unsubscribe preserves duplicate registrations and once removes its listener
+  ---
+  duration_ms: 1.942054
+  type: 'test'
+  ...
+# pathfinding: all checks passed
+# Subtest: client/test/pathfinding.test.ts
+ok 29 - client/test/pathfinding.test.ts
+  ---
+  duration_ms: 560.803001
+  type: 'test'
+  ...
+# Subtest: GM previews Lilith with her native idle animation while keeping effect sprites out of pet previews
+ok 184 - GM previews Lilith with her native idle animation while keeping effect sprites out of pet previews
+  ---
+  duration_ms: 7.966461
+  type: 'test'
+  ...
+# Subtest: GM previews Lisarido's native idle while treating the cannon explosion as an effect
+ok 185 - GM previews Lisarido's native idle while treating the cannon explosion as an effect
+  ---
+  duration_ms: 0.896341
+  type: 'test'
+  ...
+# Subtest: status buttons select one primary and all four remaining pets for battle
+ok 186 - status buttons select one primary and all four remaining pets for battle
+  ---
+  duration_ms: 9.178617
+  type: 'test'
+  ...
+# Subtest: a fifth selection becomes the primary when four pets are already standby
+ok 187 - a fifth selection becomes the primary when four pets are already standby
+  ---
+  duration_ms: 0.588051
+  type: 'test'
+  ...
+# Subtest: mail selection stays available separately and never consumes the fifth combat selection
+ok 188 - mail selection stays available separately and never consumes the fifth combat selection
+  ---
+  duration_ms: 1.108452
+  type: 'test'
+  ...
+# Subtest: mail, riding and zero-HP pets retain their state protections
+ok 189 - mail, riding and zero-HP pets retain their state protections
+  ---
+  duration_ms: 0.990199
+  type: 'test'
+  ...
+# ✓ dirTo 与 MOVE 表一致
+# ✓ 到达 (6,2)，路线 556565
+# ✓ 步数等于切比雪夫距离
+# ✓ 只用目标方向及其相邻方向
+# ✓ 斜步与直步交错分布（不是先斜走完再直走），路线 55556565655656556565
+# ✓ 一侧被挡仍能到达，路线 7566
+# ✓ 正前方是墙时原版路线为空
+# ✓ 停在目标前一格并朝向目标（lastDir=5）
+# 全部通过
+# Subtest: client/test/route.test.ts
+ok 32 - client/test/route.test.ts
+  ---
+  duration_ms: 582.82304
+  type: 'test'
+  ...
+1..190
+# tests 190
+# suites 0
+# pass 190
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10479.912463

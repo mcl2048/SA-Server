@@ -47,6 +47,7 @@ const HEAL_MAGIC = new Set(["MAGIC_Recovery", "MAGIC_OtherRecovery"]);
 const PET_GUARD = new Set(["PETSKILL_Guardian"]);
 const PET_DEFEND = new Set(["PETSKILL_NormalGuard", "PETSKILL_SetDuck", "PETSKILL_Barrier"]);
 const PET_MERCY = "PETSKILL_ShowMercy";
+const PET_RANDOM_CANNON = "PETSKILL_ElectromagneticCannon";
 // 不自动用的：离场、偷窃、拐走、变猪、变身、骑乘、地图技能、牺牲自己、挑衅、什么都不做等
 const PET_AVOID = new Set(["PETSKILL_Retrace", "PETSKILL_Steal", "PETSKILL_Steal2", "PETSKILL_StealMoney", "PETSKILL_Abduct",
   "PETSKILL_Temptation", "PETSKILL_BecomePig", "PETSKILL_Vary", "PETSKILL_Ride", "PETSKILL_Merge", "PETSKILL_Inslay", "PETSKILL_Upinslay",
@@ -61,6 +62,7 @@ function petSkillPrior(sk          )         {
   if (sk.func === "PETSKILL_AttackMagic") k *= 0.8;
   // Ghost Storm's native resolver uses 75% physical damage per living enemy.
   if (sk.func === "PETSKILL_GhostStorm") k *= 0.75;
+  if (sk.func === PET_RANDOM_CANNON) k *= 5 * 0.165;
   return k;
 }
 
@@ -303,7 +305,7 @@ export function smartChoose(s            , c              )                     
       const live = enemies.filter((e) => (hp.get(e.slot) ?? 0) > 0 && !(captureTarget && e.slot === captureTarget.slot));
       const petEnemy = () => (live.sort((a, b) => threat(b) - threat(a))[0] ?? enemies[0])?.slot ?? -1;
       const t = sk ? petTargetSlot(sk.target, pact.target, me, pet, side, otherSide, petEnemy) : -1;
-      if (sk && t >= 0) { out.pet = [sk.slot, t]; out.petKey = `pet:${c.pet.name}:${sk.id}`; return out; }
+      if (sk && t >= 0 && !(captureTarget && sk.func === PET_RANDOM_CANNON)) { out.pet = [sk.slot, t]; out.petKey = `pet:${c.pet.name}:${sk.id}`; return out; }
       out.chat.push(`宠物无法使用 ${pact.kind === "attack" ? "攻击" : pact.kind === "guard" ? "防御" : pact.name}，改用智能判断`);
     }
     const pplans                                                                 = [];
@@ -311,6 +313,9 @@ export function smartChoose(s            , c              )                     
     const meDanger = needs.find((n) => n.x.slot === me);
     for (const sk of c.pet.skills) {
       if (sk.field === 2 || PET_AVOID.has(sk.func)) continue; // mercy is handled by the capture override above
+      // A single selected UI target does not constrain the cannon's five
+      // random shots. Skip the entire skill while any capture is protected.
+      if (captureTarget && sk.func === PET_RANDOM_CANNON) continue;
       const key = `pet:${c.pet.name}:${sk.id}`;
       if (PET_GUARD.has(sk.func)) { pplans.push({ value: meDanger ? meDanger.need * 0.8 : 0, slot: sk.slot, target: me, key: "" }); continue; }
       if (PET_DEFEND.has(sk.func)) {
@@ -350,7 +355,8 @@ export function smartChooseSoloPet(s            , c              , petSlot      
   const mine = (slot        ) => (slot < 10) === (c.me < 10);
   const enemies = [...c.fighters.values()].filter(f => !mine(f.slot) && !f.gone && f.hp > 0);
   if (!enemies.length) return out;
-  const skills = c.pet.skills.filter(sk => sk.field !== 2 && !PET_GUARD.has(sk.func));
+  const protectedCapture = s.capture && c.capturePlace && enemies.some(e => e.level === 1);
+  const skills = c.pet.skills.filter(sk => sk.field !== 2 && !PET_GUARD.has(sk.func) && !(protectedCapture && sk.func === PET_RANDOM_CANNON));
   const side = c.me < 10 ? 20 : 21, other = c.me < 10 ? 21 : 20;
   const enemy = () => [...enemies].sort((a,b) => a.hp-b.hp || a.slot-b.slot)[0].slot;
   const select = (sk          , target        ) => { out.pet = [sk.slot, target]; out.petKey = PET_DEFEND.has(sk.func) ? "" : `pet:${c.pet .name}:${sk.id}`; return out; };
@@ -364,7 +370,7 @@ export function smartChooseSoloPet(s            , c              , petSlot      
   if (guard && pet.hp * 100 < pet.maxHp * 15) return select(guard, petSlot);
   // Choose only supported offensive skills; no sacrifice, capture or guarding
   // a corpse. Healthy pets with no usable skill fall back to protocol guard.
-  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack", "PETSKILL_GhostStorm"]);
+  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack", "PETSKILL_GhostStorm", PET_RANDOM_CANNON]);
   const ranked = skills.filter(sk => offensive.has(sk.func) && [1,3,4,6,7].includes(sk.target)).map(sk => ({ sk, score: petSkillPrior(sk) * (sk.target === 3 || sk.target === 4 ? enemies.length : 1) }));
   ranked.sort((a,b) => b.score-a.score || a.sk.slot-b.sk.slot);
   if (ranked.length) {

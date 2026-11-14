@@ -1,6 +1,6 @@
 # 新宠物增量素材升级
 
-本目录分发新增机械宠与莉莉丝的独立素材包，不包含或替换官方基础资源包。机械宠安装后的目录固定为下列路径；莉莉丝的独立目录与安装方法见本文末节。
+本目录分发新增机械宠、莉莉丝与雷萨利朵的独立素材包，不包含或替换官方基础资源包。机械宠安装后的目录固定为下列路径；莉莉丝的独立目录与安装方法见本文末节。
 
 ```text
 assets/extensions/ai-pets-v1/
@@ -88,4 +88,22 @@ bash update/install-lilith.sh --assets /srv/stoneage/Assets
 python3 scripts/generate-lilith.py --output /tmp/sa-lilith-build/extensions/lilith-v1
 python3 update/package-lilith.py --source /tmp/sa-lilith-build/extensions/lilith-v1
 bash scripts/update-lilith.test.sh
+```
+
+## v0.2.15 雷萨利朵增量包
+
+```bash
+bash update/install-lisarido.sh
+# 自定义目录须真实存在，末级名为assets或Assets：
+bash update/install-lisarido.sh --assets /srv/stoneage/Assets
+```
+
+独立目录 `extensions/lisarido-v1/` 含manifest、两张RGBA图集及动画199300/199301，共5文件；归档为 `lisarido-v1-assets.tar.gz`，每项摘要见同名manifest。角色232帧、单体电磁爆炸24帧，主体98px，与莉莉丝一致。源JPG、可复现Pillow/NumPy分层与位图特效生成脚本留在仓库；没有调用图像生成API。
+
+三个素材安装器均已修正USTAR结束块后向10240字节记录补齐的精确解压上限，避免合法包在记录边界被误拒绝；仍在写入前完成摘要、精确白名单、路径、链接及总量检查，冲突保留，幂等安装。
+
+```bash
+python3 scripts/generate-lisarido.py --output /tmp/sa-lisarido-build/extensions/lisarido-v1
+python3 update/package-lisarido.py --source /tmp/sa-lisarido-build/extensions/lisarido-v1
+bash scripts/update-lisarido.test.sh
 ```

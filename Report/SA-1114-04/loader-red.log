@@ -1,0 +1,156 @@
+TAP version 13
+# Subtest: overlay registers independent RGBA image IDs and animations without changing SAIX or core pages
+ok 1 - overlay registers independent RGBA image IDs and animations without changing SAIX or core pages
+  ---
+  duration_ms: 110.518472
+  type: 'test'
+  ...
+# Subtest: Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs
+ok 2 - Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs
+  ---
+  duration_ms: 16.222868
+  type: 'test'
+  ...
+# Subtest: a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets
+ok 3 - a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets
+  ---
+  duration_ms: 17.444314
+  type: 'test'
+  ...
+# Subtest: Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith
+not ok 4 - Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith
+  ---
+  duration_ms: 17.342493
+  type: 'test'
+  location: '/home/coder/saserver/client/test/assets-extension.test.ts:106:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + undefined
+    - 199300
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 199300
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:108:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs
+not ok 5 - an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs
+  ---
+  duration_ms: 16.271361
+  type: 'test'
+  location: '/home/coder/saserver/client/test/assets-extension.test.ts:116:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + undefined
+    - 100374
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 100374
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:118:51)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly
+ok 6 - a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly
+  ---
+  duration_ms: 7.710898
+  type: 'test'
+  ...
+# Subtest: missing-pack fallbacks resolve actual frame images in the original local asset index when available
+ok 7 - missing-pack fallbacks resolve actual frame images in the original local asset index when available
+  ---
+  duration_ms: 622.616326
+  type: 'test'
+  ...
+# Subtest: the generated four-pet pack resolves every real atlas frame when installed
+ok 8 - the generated four-pet pack resolves every real atlas frame when installed
+  ---
+  duration_ms: 503.411968
+  type: 'test'
+  ...
+# Subtest: JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests
+ok 9 - JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests
+  ---
+  duration_ms: 10.58037
+  type: 'test'
+  ...
+# Subtest: a complete overlay loads independently when the original binary index is unavailable
+ok 10 - a complete overlay loads independently when the original binary index is unavailable
+  ---
+  duration_ms: 2.980359
+  type: 'test'
+  ...
+# Subtest: invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture
+ok 11 - invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture
+  ---
+  duration_ms: 23.076848
+  type: 'test'
+  ...
+# Subtest: malformed frames, duplicate actions and original sprite collisions preserve all original resources
+ok 12 - malformed frames, duplicate actions and original sprite collisions preserve all original resources
+  ---
+  duration_ms: 15.832673
+  type: 'test'
+  ...
+# Subtest: failed atlas decoding rolls back successfully decoded sibling textures before falling back
+ok 13 - failed atlas decoding rolls back successfully decoded sibling textures before falling back
+  ---
+  duration_ms: 6.279635
+  type: 'test'
+  ...
+# Subtest: a page with unexpected decoded dimensions is disposed and cannot partially register sprites
+ok 14 - a page with unexpected decoded dimensions is disposed and cannot partially register sprites
+  ---
+  duration_ms: 6.691799
+  type: 'test'
+  ...
+# (node:804470) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: extension textures follow the GPU eviction budget and reload from their own PNG paths
+ok 15 - extension textures follow the GPU eviction budget and reload from their own PNG paths
+  ---
+  duration_ms: 13.416728
+  type: 'test'
+  ...
+# Subtest: extension deadline disposes decoded textures immediately and also disposes late arrivals
+ok 16 - extension deadline disposes decoded textures immediately and also disposes late arrivals
+  ---
+  duration_ms: 33.420403
+  type: 'test'
+  ...
+# Subtest: imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion
+ok 17 - imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion
+  ---
+  duration_ms: 18.195069
+  type: 'test'
+  ...
+# Subtest: imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup
+ok 18 - imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup
+  ---
+  duration_ms: 11.313023
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 16
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1862.774463

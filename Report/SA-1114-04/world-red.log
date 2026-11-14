@@ -1,0 +1,24 @@
+$ go test ./internal/world -run TestLisarido -count=1 -v -timeout=60s
+=== RUN   TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture
+    lisarido_automation_test.go:45: known random cannon not selected: -1/15
+    lisarido_automation_test.go:48: random cannon can hit protected capture despite selected target 16
+--- FAIL: TestLisaridoAutomationRecognizesRandomCannonAndProtectsCapture (1.50s)
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape
+    lisarido_automation_test.go:81: world encounter protection not carried into cannon: no-displacement=false no-abduct=false
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc
+=== RUN   TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event
+--- FAIL: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection (0.36s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/ordinary (0.09s)
+    --- FAIL: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/no-escape (0.09s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/npc (0.09s)
+    --- PASS: TestLisaridoNoEscapeAndScriptedBattleDisplacementProtection/event (0.09s)
+=== RUN   TestLisaridoAutomaticDamageBudgetDoesNotMultiplyEnemyCount
+    lisarido_automation_test.go:90: five random single shots must score expected total 82.5%, got 0
+--- FAIL: TestLisaridoAutomaticDamageBudgetDoesNotMultiplyEnemyCount (0.00s)
+FAIL
+FAIL	sa/server/internal/world	1.938s
+FAIL
+
+exit=1
