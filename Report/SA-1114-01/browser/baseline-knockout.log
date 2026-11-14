@@ -1,0 +1,4 @@
+{"variant":"baseline","stage":"server-ready"}
+{"variant":"baseline","stage":"authenticated-real-field"}
+{"variant":"baseline","stage":"scenario-finished"}
+{"variant":"baseline","probe":false,"result":"/home/coder/saserver/Report/SA-1114-01/browser/baseline-knockout.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":415,"y":195},"stored_position":{"floor":300,"x":415,"y":195},"position_matches":true}}

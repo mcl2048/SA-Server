@@ -1,0 +1,37 @@
+(node:682080) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (13.940264ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (1.447262ms)
+✔ an already flown target cannot receive a second hit or damage popup (1.38217ms)
+✖ native enemy support cannot revive an already flown or absent target during playback (5.475966ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 936.30006
+
+✖ failing tests:
+
+test at client/test/battle-knockout.test.ts:57:1
+✖ native enemy support cannot revive an already flown or absent target during playback (5.475966ms)
+  AssertionError [ERR_ASSERTION]: gone support target must remain absent
+
+  50 !== 0
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-knockout.test.ts:63:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 50,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

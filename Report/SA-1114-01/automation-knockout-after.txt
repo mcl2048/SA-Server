@@ -1,0 +1,16 @@
+=== RUN   TestAutomationDoesNotSpendRevivalOnFlownPet
+--- PASS: TestAutomationDoesNotSpendRevivalOnFlownPet (1.35s)
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce/auto
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce/quick
+--- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce (0.17s)
+    --- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce/auto (0.08s)
+    --- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce/quick (0.08s)
+=== RUN   TestAutomationOwnerDownPetsContinue
+=== RUN   TestAutomationOwnerDownPetsContinue/auto
+=== RUN   TestAutomationOwnerDownPetsContinue/quick
+--- PASS: TestAutomationOwnerDownPetsContinue (0.20s)
+    --- PASS: TestAutomationOwnerDownPetsContinue/auto (0.09s)
+    --- PASS: TestAutomationOwnerDownPetsContinue/quick (0.11s)
+PASS
+ok  	sa/server/internal/world	1.795s

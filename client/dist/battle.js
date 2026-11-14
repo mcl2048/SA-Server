@@ -12,15 +12,15 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=e5c6eee3f928fb08";
-import { sfx, setSfx } from "./audio.js?v=e5c6eee3f928fb08";
-import { isMobile } from "./mobile-view.js?v=e5c6eee3f928fb08";
+import { ANIM, findAction,                              } from "./assets.js?v=408f23f7bef662b4";
+import { sfx, setSfx } from "./audio.js?v=408f23f7bef662b4";
+import { isMobile } from "./mobile-view.js?v=408f23f7bef662b4";
 
-import { battleItems } from "./items.js?v=e5c6eee3f928fb08";
-import { album } from "./album.js?v=e5c6eee3f928fb08";
+import { battleItems } from "./items.js?v=408f23f7bef662b4";
+import { album } from "./album.js?v=408f23f7bef662b4";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=e5c6eee3f928fb08";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=e5c6eee3f928fb08";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=408f23f7bef662b4";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=408f23f7bef662b4";
 
 // Legacy presentation metadata is optional: the current server computes these
 // internally but its BattleEvent wire schema/conversion omits them. Keep this
@@ -108,7 +108,12 @@ class Fighter {
   x        ; y        ;      // 当前绘制位置
   homeX        ; homeY        ;
   dir        ;
-  hp        ; mp        ;
+          health = 0;
+  // HP is authoritative for every event source, including poison and fast
+  // playback. Updating it must never leave an independently live corpse.
+  get hp()         { return this.health; }
+  set hp(value        ) { this.health = value; this.dead = value <= 0; }
+  mp        ;
   rideHp        ;           // 骑着的宠物的 HP（没骑为 0；落马后为 0）
   status = 0;
   dead = false; gone = false; hidden = false;
@@ -711,6 +716,7 @@ export class BattleScreen {
           if (e.damage > 0) this.popup(a, now, { text: String(e.damage), color: FONT.PURPLE });
           if (e.petDamage > 0) this.popup(a, now, { text: String(e.petDamage), color: FONT.PURPLE, dy: 25 });
           a.play(ANIM.DAMAGE, now);
+          if (a.dead) { a.status = 0; a.motion = null; this.die(a, now); }
         }));
         break;
       case "cure":
@@ -750,6 +756,9 @@ export class BattleScreen {
         if (!t) break;
         steps.push(this.waitStep(1, (now) => { this.showSkill(e.skill, now); a.play(ANIM.ATTACK, now); }));
         steps.push(this.waitStep(600, (now) => {
+          // Validate when this queued step runs: an earlier event in the same
+          // turn may already have removed the native support target.
+          if (t.gone || t.fly) return;
           t.hp = e.hp; t.status = e.status;
           if (e.kind === "revive" && e.hp > 0) { t.dead = false; t.stars = false; t.deadAt = 0; t.dying = false; t.play(ANIM.STAND, now, true); }
           this.popup(t, now, { text: String(e.damage), color: FONT.GREEN });
@@ -822,6 +831,9 @@ export class BattleScreen {
   }
 
           applyMagic(e             , t         , a         , now        ) {
+    // A flown slot is permanently absent from this battle. A stale/invalid
+    // revival must not create an invisible fighter or a hit over empty space.
+    if (t.gone || t.fly) return;
     if (e.effect === 100606) t.reversed = e.ok; // MAGIC_AttReverse（BR）：头上的反转记号
     switch (e.result) {
       case "heal":
@@ -1113,6 +1125,7 @@ export class BattleScreen {
    * （oft.cpp bow 12、axe_shadow / stone_shadow / boomerang 252），所以呼叫的地方另外给。
    */
           applyHit(e             , t         , a         , now        , hitSe = damageSe(a.hitMarker)) {
+    if (t.gone || t.fly) return;
     switch (e.result) {
       case "dodge": {
         // 闪避：往攻击者的反方向一闪再回来（SE 8）；攻击者正站在面前，所以就是背着他退一步

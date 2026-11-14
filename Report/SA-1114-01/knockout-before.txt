@@ -1,0 +1,114 @@
+=== RUN   TestFlownEnemyCannotReturnThroughEnemyRevive
+    knockout_test.go:31: departed enemy re-entered the turn: {Actor:11 Kind:revive Target:10 Result: Damage:50 HP:50 Dead:false OK:false Skill:敌人复活 Status:0 Guardian:-1 Combo:false ActorHP:1000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}
+    knockout_test.go:31: departed enemy re-entered the turn: {Actor:10 Kind:attack Target:0 Result:dodge Damage:0 HP:10000 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:50 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}
+--- FAIL: TestFlownEnemyCannotReturnThroughEnemyRevive (0.00s)
+=== RUN   TestResurrectionExcludesDepartedFighters
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=44 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/flown
+    knockout_test.go:69: flown fighter resurrected: hp=44; events=[{Actor:11 Kind:magic Target:0 Result:revive Damage:44 HP:44 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=44 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/flown
+    knockout_test.go:69: flown fighter resurrected: hp=44; events=[{Actor:11 Kind:magic Target:0 Result:revive Damage:44 HP:44 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:true ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=70 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/flown
+    knockout_test.go:69: flown fighter resurrected: hp=70; events=[{Actor:11 Kind:magic Target:5 Result:revive Damage:70 HP:70 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=70 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/flown
+    knockout_test.go:69: flown fighter resurrected: hp=70; events=[{Actor:11 Kind:magic Target:5 Result:revive Damage:70 HP:70 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:true ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=125 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/flown
+    knockout_test.go:69: flown fighter resurrected: hp=125; events=[{Actor:11 Kind:magic Target:10 Result:revive Damage:125 HP:125 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out
+    knockout_test.go:66: explicit revival must restore life and reset kill attribution: hp=125 status=0 killedBy=-1 killedRide=true
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/flown
+    knockout_test.go:69: flown fighter resurrected: hp=125; events=[{Actor:11 Kind:magic Target:10 Result:revive Damage:125 HP:125 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100609 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:true ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/escaped
+--- FAIL: TestResurrectionExcludesDepartedFighters (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/player/magic/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/player/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/escaped (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/player/item/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/player/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/escaped (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/pet/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/escaped (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/pet/item/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/pet/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/escaped (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/enemy/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/escaped (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out (0.00s)
+    --- FAIL: TestResurrectionExcludesDepartedFighters/enemy/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/escaped (0.00s)
+=== RUN   TestEnemyReviveResetsKnockoutAttribution
+    knockout_test.go:88: ordinary enemy revival retained death state: hp=62 status=0 killedBy=0 killedRide=true events=[{Actor:11 Kind:revive Target:10 Result: Damage:62 HP:62 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+--- FAIL: TestEnemyReviveResetsKnockoutAttribution (0.00s)
+=== RUN   TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits
+    knockout_test.go:101: departed enemy delayed victory: over=false winner=-1
+    knockout_test.go:104: departed slot remained an attack target: 10
+    knockout_test.go:107: departed slot remained a spell target: [10]
+    knockout_test.go:110: finished battle emitted actions at departed slot: [{Actor:10 Kind:attack Target:0 Result:normal Damage:13 HP:31 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:0 Kind:attack Target:10 Result:critical Damage:1 HP:124 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:31 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+--- FAIL: TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits (0.00s)
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp
+    knockout_test.go:141: ordinary recovery restored flown-positive-hp fighter: before=1 after=99 events=[{Actor:11 Kind:magic Target:10 Result:heal Damage:98 HP:99 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100601 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp
+    knockout_test.go:141: ordinary recovery restored flown-positive-hp fighter: before=1 after=99 events=[{Actor:11 Kind:item Target:10 Result:heal Damage:98 HP:99 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100601 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:true ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp
+    knockout_test.go:141: ordinary recovery restored flown-positive-hp fighter: before=1 after=108 events=[{Actor:11 Kind:heal Target:10 Result: Damage:107 HP:108 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp
+    knockout_test.go:141: ordinary recovery restored flown-positive-hp fighter: before=1 after=101 events=[{Actor:11 Kind:magic Target:10 Result:heal Damage:100 HP:101 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false ActorHP:125 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:100601 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped
+--- FAIL: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown (0.00s)
+    --- FAIL: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown (0.00s)
+    --- FAIL: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown (0.00s)
+    --- FAIL: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown (0.00s)
+    --- FAIL: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped (0.00s)
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/player
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy
+--- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/player (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy (0.00s)
+=== RUN   TestReflectedKnockoutStopsDrainAndRemainingHits
+--- PASS: TestReflectedKnockoutStopsDrainAndRemainingHits (0.00s)
+FAIL
+FAIL	sa/server/internal/battle	0.025s
+FAIL

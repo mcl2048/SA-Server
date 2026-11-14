@@ -5,10 +5,10 @@
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 
-import { PET_ALBUM_TBL } from "./albumdata.js?v=e5c6eee3f928fb08";
-import { FONT, SYS, measure,         } from "./ui.js?v=e5c6eee3f928fb08";
-import { ANIM, findAction } from "./assets.js?v=e5c6eee3f928fb08";
-import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.js?v=e5c6eee3f928fb08";
+import { PET_ALBUM_TBL } from "./albumdata.js?v=408f23f7bef662b4";
+import { FONT, SYS, measure,         } from "./ui.js?v=408f23f7bef662b4";
+import { ANIM, findAction } from "./assets.js?v=408f23f7bef662b4";
+import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.js?v=408f23f7bef662b4";
 
 const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + AI_PET_CATALOG.length, PAGE = 8;
 // Append-only identities: never change the original SEEN/SNAP table or slots.
@@ -125,7 +125,7 @@ export class Album {
         const definition = ui.assets.anim(e.sprite), action = definition && findAction(definition, 1, ANIM.STAND);
         const frame = action?.frames[0];
         if (frame && frame[0] >= 0) this.spritePortrait(ui, frame[0], wx + 199, wy + 117);
-      } else if (e.face) ui.image(e.face, wx + 199, wy + 117);
+      } else if (e.face) { ui.image(e.face, wx + 199, wy + 117); ui.mobilePortrait?.(e.face); }
     }
     let y = wy + 215;
     for (let i = 0; i < PAGE; i++, y += 22) {
@@ -149,6 +149,7 @@ export class Album {
   }
 
           spritePortrait(ui    , image        , x        , y        ) {
+    ui.mobilePortrait?.(image,true);
     let entry = this.portraits.get(image);
     if (!entry) { entry = { canvas: null, pending: false, retryAt: 0 }; this.portraits.set(image, entry); }
     if (entry.canvas) { ui.pic(entry.canvas, Math.round(x - entry.canvas.width / 2), Math.round(y - entry.canvas.height / 2)); return; }

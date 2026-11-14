@@ -33,6 +33,15 @@ export interface MobileHit extends Hit { label?: string; }
 export interface Box { x1: number; y1: number; x2: number; y2: number; color: string; fill: boolean; }
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
 export interface Pic { canvas: HTMLCanvasElement; x: number; y: number; }
+export interface MobilePortrait { image: number; rawIndex: boolean; }
+/** Native windows describe only their currently drawn slots. The mobile view
+ * rearranges these records; each action still requires its original live hit.
+ */
+export interface MobileCard {
+  id: string; kind: "item" | "pet"; title: string; detail: string;
+  image?: number; actions: string[];
+}
+export interface MobilePanelInfo { lines: string[]; nativeTextX?: number; }
 
 export class Mouse {
   x = -1; y = -1; down = false; clicked = false; rightClicked = false;
@@ -129,6 +138,10 @@ export class Ui {
   texts: Text[] = [];
   boxes: Box[] = [];
   pics: Pic[] = [];
+  /** Optional presentation metadata; never enters desktop drawing or hit tests. */
+  portraits: MobilePortrait[] = [];
+  cards: MobileCard[] = [];
+  panelInfo: MobilePanelInfo | null = null;
   private hits: Hit[] = [];
   private hot = "";     // 上一帧鼠标下最上层的元素
   private clickHot = ""; // 本帧要触发点击的元素
@@ -150,7 +163,7 @@ export class Ui {
     // 点击按按下那一刻的鼠标位置、对照上一帧的热区判定（鼠标移过去立刻按下，也不能漏掉）
     if (this.mouse.clicked || (isMobile() && this.mouse.rightClicked)) this.hot = this.hitAt(this.mouse.x, this.mouse.y);
     this.clickHot = this.mouse.clicked ? this.hot : "";
-    this.quads = []; this.texts = []; this.boxes = []; this.hits = []; this.pics = [];
+    this.quads = []; this.texts = []; this.boxes = []; this.hits = []; this.pics = []; this.portraits = []; this.cards = []; this.panelInfo = null;
     this.bottomLine = "";
     this.clickSound = false;
     this.interactive.clear();
@@ -267,6 +280,21 @@ export class Ui {
   }
 
   pic(canvas: HTMLCanvasElement, x: number, y: number) { this.pics.push({ canvas, x, y }); }
+
+  /** A stable native pose lets fullscreen windows retain the actual model while
+   * their text and controls reflow. The ordinary animated draw stays unchanged. */
+  mobilePortrait(image: number, rawIndex = false): void {
+    if (isMobile()) this.portraits.push({image,rawIndex});
+  }
+
+  mobileCard(card: MobileCard): void {
+    if (isMobile()) this.cards.push(card);
+  }
+
+  /** Labels baked into native background art must remain explicit on reflow. */
+  mobileInfo(lines: string[], nativeTextX?: number): void {
+    if (isMobile()) this.panelInfo = {lines,nativeTextX};
+  }
 
   box(x1: number, y1: number, x2: number, y2: number, color: string, fill: boolean) {
     this.boxes.push({ x1, y1, x2, y2, color, fill });

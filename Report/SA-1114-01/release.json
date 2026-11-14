@@ -1,0 +1,47 @@
+{
+  "version": "v0.2.12-LYNX",
+  "baseline_commit": "1c5bd7f",
+  "baseline_version": "v0.2.11-LYNX",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16535712,
+    "sha256": "ea63b938956121a174afcde76cbaae4c01c0839d499b71602f4b360804221694",
+    "format": "static ELF64 Linux AMD64",
+    "mode": "0755"
+  },
+  "archive": {
+    "version": "v0.2.12-LYNX",
+    "archive": "bin/saserver-v0.2.12-LYNX-linux-amd64.zip",
+    "bytes": 23699994,
+    "sha256": "e2a556fbec6c77080a9149e75a018e3e1eb9c087a1cda5809fd2e023a4a11cce",
+    "files": 4358,
+    "binary_sha256": "ea63b938956121a174afcde76cbaae4c01c0839d499b71602f4b360804221694",
+    "all_entries_match_current_public_files": true,
+    "executable_mode": "0755",
+    "runtime_db_credentials_and_Assets_excluded": true
+  },
+  "old_zip_replaced": true,
+  "asset_changes": false,
+  "source_input_manifest": "Report/SA-1114-01/source-inputs.json",
+  "source_input_manifest_sha256": "64b95dd8a47a0ea54b43887de26cd28add02e9ad05f1b98490cf198746ccb05e",
+  "source_files_verified": 295,
+  "client_modules": 44,
+  "embedded_files": 46,
+  "checks": {
+    "Go_all_packages_exit": 0,
+    "Go_race_all_packages_exit": 0,
+    "client_and_builder_tests_pass": 151,
+    "TypeScript_exit": 0,
+    "Go_vet_exit": 0,
+    "browser_matrix_pass": 62,
+    "real_knockout_modes_pass": 4,
+    "browser_page_errors": 0,
+    "binary_rebuild_identical": true
+  },
+  "browser_reports": {
+    "browser/final-real-game.json": 62,
+    "browser/candidate-knockout.json": 4
+  },
+  "validation_boundary": "Real Chromium and release ELF; touch/viewports emulated, SwiftShader GPU. No physical Android/iOS or Safari certification.",
+  "acceptance": "Report/SA-1114-01/ACCEPTANCE.md"
+}

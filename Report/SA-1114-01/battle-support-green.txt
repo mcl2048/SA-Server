@@ -1,0 +1,14 @@
+(node:682097) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (15.714915ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (1.353523ms)
+✔ an already flown target cannot receive a second hit or damage popup (3.587611ms)
+✔ native enemy support cannot revive an already flown or absent target during playback (4.11825ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 917.541641

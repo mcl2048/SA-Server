@@ -20,6 +20,7 @@ import { loadAi } from "./ai.ts";
 import { AiMemory } from "./aismart.ts";
 import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.ts";
 import { MobileShell } from "./mobile-shell.ts";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.ts";
 import { installControlPositions } from "./mobile-position.ts";
 import type { AddressEntry, CharSummary, GmEntry, GmItem, S2CPartyMember as PartyMember, QuestEntry, S2CBattleEnd, S2CFamilyStatus, S2CGmDetail, S2CInventory, S2CNpcWindow, S2CPets, S2CStatus, ServerGroup } from "./proto.gen.ts";
 
@@ -1092,7 +1093,7 @@ class FieldScreen implements Screen {
   mobileSummary(): string[] {
     const m = this.menus;
     if (m.items.open) return [`石币 ${inventory.gold}`, ...inventory.items.map(it => `${it.slot < 9 ? "装备" : "背包"}${it.slot + 1}：${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}　${it.memo || it.magicMemo || ""}`)];
-    if (m.petWnd.open) return (pets?.pets ?? []).flatMap(p => {
+    if (m.petWnd.open) return isImmersive() ? [] : (pets?.pets ?? []).flatMap(p => {
       const brief = aiPetForSprite(p.sprite)?.brief;
       const status = `${p.freeName || p.name}　Lv.${p.level}　HP ${p.hp}/${p.maxHp}　${p.state}　忠诚 ${p.loyalty}　${p.skills.map(sk => sk.name).join("、")}`;
       return brief ? [status, brief] : [status];
@@ -1132,7 +1133,21 @@ const CLOSE_SE_DELAY = 250;
 // A DOM action enters the ordinary previous-frame hit path. Its screen/modal context
 // must still match; a delayed tap cannot click through into a newly opened dialog.
 let mobileDirection = -1;
-let pendingMobileAction: { id?: string; x: number; y: number; button: 0 | 2; screen: Screen; modal: Modal | null; battle: BattleScreen | null } | null = null;
+let pendingMobileAction: { id?: string; x: number; y: number; precise?: boolean; button: 0 | 2; screen: Screen; modal: Modal | null; battle: BattleScreen | null } | null = null;
+const mobileMapPointer=new MobileMapPointer();
+let mobileMapContext: {screen:FieldScreen;modal:Modal | null;battle:BattleScreen | null;floor:number} | null=null;
+function cancelMobileMapPointer(): void {
+  if(!mobileMapContext && !mobileMapPointer.active)return;
+  const owner=mobileMapContext?.screen;
+  mobileMapContext=null;mobileMapPointer.clear();
+  owner?.menus.mapWnd.cancelPointer();mouse.cancel();
+}
+function mobileMapContextCurrent(): boolean {
+  const saved=mobileMapContext;
+  return !!saved && isMobile() && isImmersive() && !document.hidden
+    && saved.screen===screen && saved.modal===modal && saved.battle===battle
+    && saved.floor===(field?.floor ?? -1) && saved.screen.menus.mapOpen;
+}
 let mobileSelection: { id: string; screen: Screen; modal: Modal | null; battle: BattleScreen | null } | null = null;
 let mobilePointer: { x: number; y: number } | null = null;
 let mobileCamera: "self" | "enemy" | "follow" = "follow";
@@ -1156,11 +1171,14 @@ function selectedMobileHit() {
   if (!hit) mobileSelection = null;
   return hit;
 }
-function queueMobileClick(button: 0 | 2, id?: string) {
+function queueMobileClick(button: 0 | 2, id?: string, precise?: { x: number; y: number }) {
   if (!isMobile()) return;
+  cancelMobileMapPointer();
   const hit = id ? mobileOptions().find(h => h.id === id) : selectedMobileHit();
   if (hit) focusMobileTarget(hit);
-  const point = hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
+  const point = precise ? mobileHitPoint(mobileOptions(), id ?? "", precise.x, precise.y)
+    : hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
+  if (precise && !point) return;
   if (!point && button === 0) {
     const first = mobileOptions()[0]; if (first) { mobileSelection = { id: first.id, screen, modal, battle }; queueMobileClick(button, first.id); }
     return;
@@ -1168,7 +1186,7 @@ function queueMobileClick(button: 0 | 2, id?: string) {
   if (!point && button === 2 && !battle) return; // No invented ground cursor or pickup/turn.
   mobileDirection = -1; keys.clear(); mouse.cancel();
   if (screen instanceof FieldScreen) screen.cancelMobileMotion();
-  pendingMobileAction = { id: hit?.id, x: point?.x ?? 400, y: point?.y ?? 300, button, screen, modal, battle };
+  pendingMobileAction = { id: hit?.id, x: point?.x ?? 400, y: point?.y ?? 300, precise: !!precise, button, screen, modal, battle };
 }
 // A direct game touch replaces virtual selection and supplies the cursor position
 // for subsequent rail mouse buttons. Never move the cursor because a rail was tapped.
@@ -1180,8 +1198,24 @@ canvas.addEventListener("pointerdown", e => {
 });
 const mobile = new MobileShell(ui, {
   action(id) { queueMobileClick(0, id); },
+  point(id, x, y) {
+    mobileSelection = null;
+    queueMobileClick(0, id, { x, y });
+  },
+  pointer(id,x,y,phase) {
+    if(phase==="cancel"){cancelMobileMapPointer();return;}
+    if(!isMobile() || !isImmersive() || document.hidden || !(screen instanceof FieldScreen)
+      || modal || battle || !screen.menus.mapOpen){cancelMobileMapPointer();return;}
+    if(phase==="start"){
+      cancelMobileMapPointer();mobileSelection=null;pendingMobileAction=null;mobileDirection=-1;
+      keys.clear();mouse.cancel();screen.cancelMobileMotion();screen.menus.mapWnd.cancelPointer();
+      mobileMapContext={screen,modal,battle,floor:field?.floor ?? -1};
+    }else if(!mobileMapContextCurrent()){cancelMobileMapPointer();return;}
+    if(!mobileMapPointer.push(mobileOptions(),id,x,y,phase))cancelMobileMapPointer();
+  },
   navigate(dir) {
     if (!isMobile()) return;
+    cancelMobileMapPointer();
     const options = mobileOptions(); if (!options.length) return;
     const selected = selectedMobileHit(), index = selected ? options.findIndex(h => h.id === selected.id) : dir > 0 ? -1 : 0;
     const hit = options[(index + dir + options.length) % options.length];
@@ -1222,10 +1256,10 @@ const mobile = new MobileShell(ui, {
     mobileDirection = isMobile() && screen instanceof FieldScreen && !modal && !battle && !screen.openCount() ? dir : -1;
     if (mobileDirection >= 0 && field) field.target = null;
   },
-  cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
+  cancel() { cancelMobileMapPointer();mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });
-installControlPositions(() => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
-const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mobilePointer = null; keys.clear(); mouse.cancel(); };
+installControlPositions(() => { cancelMobileMapPointer();mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
+const releaseMobileInput = () => { cancelMobileMapPointer();mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mobilePointer = null; keys.clear(); mouse.cancel(); };
 document.addEventListener("sa-device-change", releaseMobileInput);
 document.addEventListener("sa-mobile-gesture", () => { releaseMobileInput(); if (isMobile() && screen instanceof FieldScreen) screen.cancelMobileMotion(); });
 addEventListener("blur", releaseMobileInput);
@@ -1252,7 +1286,7 @@ function mobileFrame(now: number) {
   const battleLabels = battle?.mobileActionLabels() ?? {};
   mobile.frame({ phase, panel, context, cameraAvailable: visualBattle, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter,
     selectedLabel: selected ? battleLabels[selected.id] || selected.label || selected.id : undefined, selectedId: selected?.id,
-    title: modal ? "对话" : f?.menus.hasBattleResult() ? "战斗结果" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
+    title: modal ? "对话" : f?.menus.hasBattleResult() ? "战斗结果" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : f?.menus.mapOpen ? "地图" : f?.menus.systemOpen ? "系统" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
     actionLabels: { ...battleLabels, ...Object.fromEntries([
       ...inventory.items.map(it => [`inv-${it.slot}`, `${it.slot < 9 ? "装备" : "物品"}${it.slot + 1} · ${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}`]),
@@ -1275,9 +1309,24 @@ function frame(now: number) {
   }
   if (queued && isMobile() && queued.screen === screen && queued.modal === modal && queued.battle === battle) {
     const hit = queued.id ? mobileOptions().find(h => h.id === queued.id) : undefined;
-    if (!queued.id || hit) {
-      mouse.x = hit ? (hit.x1 + hit.x2) / 2 : queued.x; mouse.y = hit ? (hit.y1 + hit.y2) / 2 : queued.y;
+    const point = queued.precise ? mobileHitPoint(mobileOptions(), queued.id ?? "", queued.x, queued.y) : null;
+    if (queued.precise ? !!point : !queued.id || hit) {
+      mouse.x = point?.x ?? (hit ? (hit.x1 + hit.x2) / 2 : queued.x);
+      mouse.y = point?.y ?? (hit ? (hit.y1 + hit.y2) / 2 : queued.y);
       if (queued.button === 0) mouse.clicked = true; else mouse.rightClicked = true;
+    }
+  }
+  if(mobileMapContext){
+    if(!mobileMapContextCurrent())cancelMobileMapPointer();
+    else{
+      const point=mobileMapPointer.next(mobileOptions());
+      if(!point)cancelMobileMapPointer();
+      else{
+        // A map drag drives the original MapWindow.pan across native frames.
+        // clicked stays false throughout: only a separate precise tap may walk.
+        mouse.x=point.x;mouse.y=point.y;mouse.down=point.down;mouse.clicked=mouse.rightClicked=false;
+        if(!point.down)mobileMapContext=null;
+      }
     }
   }
   ui.begin();

@@ -1,0 +1,77 @@
+TAP version 13
+# Subtest: narrow desktop remains desktop; modes move and restore the original stage
+ok 1 - narrow desktop remains desktop; modes move and restore the original stage
+  ---
+  duration_ms: 7.779505
+  type: 'test'
+  ...
+# Subtest: IME confirmation never reaches native submit handlers or prevents composition
+ok 2 - IME confirmation never reaches native submit handlers or prevents composition
+  ---
+  duration_ms: 2.655716
+  type: 'test'
+  ...
+# Subtest: mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+ok 3 - mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+  ---
+  duration_ms: 7.128448
+  type: 'test'
+  ...
+# Subtest: two-finger scene pinch cancels game hold, clamps zoom and resets view
+ok 4 - two-finger scene pinch cancels game hold, clamps zoom and resets view
+  ---
+  duration_ms: 1.911704
+  type: 'test'
+  ...
+# Subtest: mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+ok 5 - mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+  ---
+  duration_ms: 1.878158
+  type: 'test'
+  ...
+# Subtest: mobile backing budgets and managed input layout do not change desktop sizing
+ok 6 - mobile backing budgets and managed input layout do not change desktop sizing
+  ---
+  duration_ms: 2.013754
+  type: 'test'
+  ...
+# Subtest: a new immersive scene immediately reveals its intended focus and recenters the field
+ok 7 - a new immersive scene immediately reveals its intended focus and recenters the field
+  ---
+  duration_ms: 1.555253
+  type: 'test'
+  ...
+# Subtest: immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+ok 8 - immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+  ---
+  duration_ms: 1.213686
+  type: 'test'
+  ...
+# Subtest: native model metadata is mobile-only and resets with the normal UI frame
+not ok 9 - native model metadata is mobile-only and resets with the normal UI frame
+  ---
+  duration_ms: 0.905718
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-view.test.ts:191:1'
+  failureType: 'testCodeFailure'
+  error: 'ui.mobilePortrait is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-view.test.ts:193:36)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 375.16769

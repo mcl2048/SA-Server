@@ -117,3 +117,14 @@ test("retaking a renamed pet updates its snapshot without overwriting adjacent o
   const saved = JSON.parse(values.get("sa.album.rename")!);
   assert.equal(saved[0].freeName, "旧宠"); assert.equal(saved[570].name, "奥普埃"); assert.equal(saved[570].freeName, "奥普埃");
 });
+
+test("pet details and album retain a stable native model for the fullscreen game window", () => {
+  const p=pet(199100),h=ui(),models:any[]=[];
+  h.mock.mobilePortrait=(...args:any[])=>models.push(args);
+  const wnd:any=new PetWindow({ui:h.mock,pets:()=>({pets:[p]}),mailPet:()=>-1} as any);
+  wnd.drawPet(p);wnd.drawPet(p);
+  assert.deepEqual(models,[[9000000,true],[9000000,true]],"animation ticks cannot create a different decoded page every frame");
+  storage();const album:any=new Album();album.load("native-model");album.open=true;
+  album.snap(p);album.page=71;album.sel=570;album.frame(h.mock,[]);
+  assert.deepEqual(models.at(-1),[9000000,true]);
+});

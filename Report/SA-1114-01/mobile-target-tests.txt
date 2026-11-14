@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+ok 1 - fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+  ---
+  duration_ms: 30.202579
+  type: 'test'
+  ...
+# Subtest: unavailable optional native art leaves controls operational and retries bounded
+ok 2 - unavailable optional native art leaves controls operational and retries bounded
+  ---
+  duration_ms: 3.97646
+  type: 'test'
+  ...
+# Subtest: overlapping native frames coalesce into one decoder and still skin newly added controls
+ok 3 - overlapping native frames coalesce into one decoder and still skin newly added controls
+  ---
+  duration_ms: 81.49236
+  type: 'test'
+  ...
+# Subtest: selected native model is bounded, cached and cannot overwrite a newer pet selection
+ok 4 - selected native model is bounded, cached and cannot overwrite a newer pet selection
+  ---
+  duration_ms: 19.907103
+  type: 'test'
+  ...
+# Subtest: desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+ok 5 - desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+  ---
+  duration_ms: 52.223406
+  type: 'test'
+  ...
+# Subtest: unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+ok 6 - unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+  ---
+  duration_ms: 22.89503
+  type: 'test'
+  ...
+# Subtest: only reachable controls render; removed controls cannot dispatch stale queued actions
+ok 7 - only reachable controls render; removed controls cannot dispatch stale queued actions
+  ---
+  duration_ms: 23.104063
+  type: 'test'
+  ...
+# Subtest: joystick uses eight original directions, center dead zone and all cancellation paths
+ok 8 - joystick uses eight original directions, center dead zone and all cancellation paths
+  ---
+  duration_ms: 15.351598
+  type: 'test'
+  ...
+# Subtest: navigation and mouse controls dispatch semantic hooks without clearing cursor
+ok 9 - navigation and mouse controls dispatch semantic hooks without clearing cursor
+  ---
+  duration_ms: 11.295797
+  type: 'test'
+  ...
+# Subtest: selection labels resolve native IDs and layout events never interrupt unchanged holds
+ok 10 - selection labels resolve native IDs and layout events never interrupt unchanged holds
+  ---
+  duration_ms: 11.372532
+  type: 'test'
+  ...
+# Subtest: battle commands and targets remain human readable in a bounded sheet
+ok 11 - battle commands and targets remain human readable in a bounded sheet
+  ---
+  duration_ms: 16.447147
+  type: 'test'
+  ...
+# Subtest: quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+ok 12 - quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+  ---
+  duration_ms: 22.713895
+  type: 'test'
+  ...
+# Subtest: native panels hide background controls and actor names, and accept contextual labels
+ok 13 - native panels hide background controls and actor names, and accept contextual labels
+  ---
+  duration_ms: 30.720971
+  type: 'test'
+  ...
+# Subtest: chat panel keeps real chat input visible and dispatches send-chat
+ok 14 - chat panel keeps real chat input visible and dispatches send-chat
+  ---
+  duration_ms: 12.795924
+  type: 'test'
+  ...
+# Subtest: movement precedes long option panels and encounter uses server capability and ack
+ok 15 - movement precedes long option panels and encounter uses server capability and ack
+  ---
+  duration_ms: 16.820279
+  type: 'test'
+  ...
+# Subtest: native column registration is presented in visual row order and keeps action identity
+ok 16 - native column registration is presented in visual row order and keeps action identity
+  ---
+  duration_ms: 13.575542
+  type: 'test'
+  ...
+# Subtest: immersive scene exposes a cancellable menu tray and restores classic panels
+ok 17 - immersive scene exposes a cancellable menu tray and restores classic panels
+  ---
+  duration_ms: 27.082048
+  type: 'test'
+  ...
+# Subtest: immersive battle camera stays a view command and native targets keep their real IDs
+ok 18 - immersive battle camera stays a view command and native targets keep their real IDs
+  ---
+  duration_ms: 13.616909
+  type: 'test'
+  ...
+# Subtest: switching to desktop during browser fullscreen retains the explicit exit control
+ok 19 - switching to desktop during browser fullscreen retains the explicit exit control
+  ---
+  duration_ms: 2.741643
+  type: 'test'
+  ...
+# Subtest: quick battle preserves its field context and native battle panels restore the complete layout
+ok 20 - quick battle preserves its field context and native battle panels restore the complete layout
+  ---
+  duration_ms: 10.913558
+  type: 'test'
+  ...
+# Subtest: immersive battle starts with clear actors and native toggles, then exposes and closes commands
+ok 21 - immersive battle starts with clear actors and native toggles, then exposes and closes commands
+  ---
+  duration_ms: 15.74455
+  type: 'test'
+  ...
+# Subtest: immersive field tray exposes reachable native social controls without duplicating toolbar menus
+ok 22 - immersive field tray exposes reachable native social controls without duplicating toolbar menus
+  ---
+  duration_ms: 9.350902
+  type: 'test'
+  ...
+# Subtest: immersive native panels remain in the game viewport and hide movement behind the dialog
+ok 23 - immersive native panels remain in the game viewport and hide movement behind the dialog
+  ---
+  duration_ms: 9.748722
+  type: 'test'
+  ...
+# Subtest: fullscreen map paints native map layers and maps taps back to the original hit coordinates
+ok 24 - fullscreen map paints native map layers and maps taps back to the original hit coordinates
+  ---
+  duration_ms: 19.383879
+  type: 'test'
+  ...
+# Subtest: narrow desktop remains desktop; modes move and restore the original stage
+ok 25 - narrow desktop remains desktop; modes move and restore the original stage
+  ---
+  duration_ms: 34.153808
+  type: 'test'
+  ...
+# Subtest: IME confirmation never reaches native submit handlers or prevents composition
+ok 26 - IME confirmation never reaches native submit handlers or prevents composition
+  ---
+  duration_ms: 5.184142
+  type: 'test'
+  ...
+# Subtest: mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+ok 27 - mobile taps release once; drag, multitouch, cancel, lost capture and blur never click
+  ---
+  duration_ms: 41.179082
+  type: 'test'
+  ...
+# Subtest: two-finger scene pinch cancels game hold, clamps zoom and resets view
+ok 28 - two-finger scene pinch cancels game hold, clamps zoom and resets view
+  ---
+  duration_ms: 2.033602
+  type: 'test'
+  ...
+# Subtest: mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+ok 29 - mobile action snapshots respect topmost modal blockers and retain non-highlight actions
+  ---
+  duration_ms: 5.256298
+  type: 'test'
+  ...
+# Subtest: mobile backing budgets and managed input layout do not change desktop sizing
+ok 30 - mobile backing budgets and managed input layout do not change desktop sizing
+  ---
+  duration_ms: 7.679333
+  type: 'test'
+  ...
+# Subtest: a new immersive scene immediately reveals its intended focus and recenters the field
+ok 31 - a new immersive scene immediately reveals its intended focus and recenters the field
+  ---
+  duration_ms: 4.596448
+  type: 'test'
+  ...
+# Subtest: immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+ok 32 - immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize
+  ---
+  duration_ms: 6.902266
+  type: 'test'
+  ...
+# Subtest: native model metadata is mobile-only and resets with the normal UI frame
+ok 33 - native model metadata is mobile-only and resets with the normal UI frame
+  ---
+  duration_ms: 1.328093
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2274.109304

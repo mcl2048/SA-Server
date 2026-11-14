@@ -1,9 +1,17 @@
-import { InputBox,                                    } from "./ui.js?v=e5c6eee3f928fb08";
+import { InputBox,                                    } from "./ui.js?v=408f23f7bef662b4";
 import { getDeviceMode, setDeviceMode, isMobile, setMobileContext, setSceneZoom, getSceneZoom, resetSceneView,
   isImmersive, getMobileDisplayMode, setMobileDisplayMode, requestMobileFullscreen, exitMobileFullscreen,
-                                                              } from "./mobile-view.js?v=e5c6eee3f928fb08";
-import { createMobileJoystick } from "./mobile-controls.js?v=e5c6eee3f928fb08";
-import { BATTLE_AUTO_ACTIONS } from "./autoplay-sync.js?v=e5c6eee3f928fb08";
+                                                              } from "./mobile-view.js?v=408f23f7bef662b4";
+import { createMobileJoystick } from "./mobile-controls.js?v=408f23f7bef662b4";
+import { BATTLE_AUTO_ACTIONS } from "./autoplay-sync.js?v=408f23f7bef662b4";
+import { MobileNativeSkin } from "./mobile-native-skin.js?v=408f23f7bef662b4";
+import { MobileNativeMap } from "./mobile-native-map.js?v=408f23f7bef662b4";
+
+import { MobileNativeCards } from "./mobile-native-cards.js?v=408f23f7bef662b4";
+
+
+
+
 
 
 
@@ -96,10 +104,13 @@ export class MobileShell {
                    sheet = node("section", "mobile-shell-sheet");
                    left = node("div", "mobile-shell-left");
                    right = node("section", "mobile-shell-right");
+                   advanced = node("details", "mobile-shell-advanced");
                    selected = node("div", "mobile-shell-selected");
                    joystick                                         ;
                    info = node("div", "mobile-shell-info");
                    inputs = node("div", "mobile-shell-inputs");
+                   content = node("div", "mobile-shell-content");
+                   portrait = node("img", "mobile-shell-native-portrait");
                    actions = node("div", "mobile-shell-actions");
                    dismiss = button("返回 / 取消对话", () => this.command("back"));
                    sheetBack = button("返回", () => this.command("back"));
@@ -112,7 +123,7 @@ export class MobileShell {
                    displayLabel = node("label", undefined, "游戏画面 ");
                    displaySelect = node("select");
                    fullscreen = button("进入全屏", () => { void this.toggleFullscreen(); });
-                   displayHelp = node("p", "mobile-shell-display-help", "沉浸画面等比放大，菜单仍可操作。");
+                   displayHelp = node("p", "mobile-shell-display-help", "场景铺满屏幕，游戏窗口随横竖屏重新排版。");
                    tray = node("section", "mobile-shell-drawer");
                    trayToggle = button("菜单", () => this.toggleTray());
                    camera = node("div", "mobile-shell-camera");
@@ -137,6 +148,11 @@ export class MobileShell {
           sceneImmersive = false;
           trayOpen = false;
           battleCommandsOpen = false;
+                   nativeSkin                         ;
+                   nativeMap                 ;
+                   nativeCards = new MobileNativeCards();
+          portraitKey = "";
+          paneKey = "";
 
                    ui    ;
                    hooks                  ;
@@ -144,6 +160,15 @@ export class MobileShell {
   constructor(ui    , hooks                  ) {
     this.ui = ui;
     this.hooks = hooks;
+    this.nativeSkin = typeof ui.assets?.imageCanvas === "function" ? new MobileNativeSkin(ui.assets) : null;
+    this.nativeMap = new MobileNativeMap(this.content,(id,x,y)=>{
+      if(!isMobile() || !this.activeActions.has(id))return;
+      this.hooks.cancel();this.hooks.point?.(id,x,y);
+    },(id,x,y,phase)=>{
+      if(phase!=="cancel" && (!isMobile() || !this.activeActions.has(id)))return;
+      if(phase==="start")this.hooks.cancel();
+      this.hooks.pointer?.(id,x,y,phase);
+    });
     this.installStyle();
     this.root.hidden = true;
     this.root.setAttribute("aria-label", "游戏移动界面");
@@ -152,7 +177,10 @@ export class MobileShell {
     this.sheet.setAttribute("aria-labelledby", this.heading.id);
     this.sheet.tabIndex = -1;
     this.sheetBack.className = "mobile-shell-back";
-    this.sheet.append(this.sheetBack, this.info, this.inputs, this.actions, this.dismiss);
+    this.dismiss.className = "mobile-shell-dismiss";
+    this.portrait.hidden=true;this.portrait.alt="选中宠物的形象";
+    this.content.append(this.portrait, this.nativeCards.element, this.info, this.inputs);
+    this.sheet.append(this.sheetBack, this.content, this.actions, this.dismiss);
     this.joystick = createMobileJoystick({ direction: dir => this.hooks.direction(dir), cancel: () => this.hooks.cancel(), enabled: () => isMobile() && this.layout === "field" && !this.trayOpen });
     this.chat.setAttribute("role", "log"); this.chat.setAttribute("aria-label", "最近聊天");
     // Deliberately not live: the native scene can change text every animation frame.
@@ -178,6 +206,7 @@ export class MobileShell {
       b.append(node("span", "mobile-shell-click-title", title), node("small", undefined, hint)); clicks.append(b);
     }
     this.right.append(selection, navigation, clicks, this.makeZoomControls());
+    this.advanced.append(node("summary", undefined, "更多操作：鼠标与缩放"));
     this.tray.id = "mobile-shell-drawer"; this.tray.setAttribute("aria-label", "游戏菜单与操作"); this.tray.hidden = true;
     this.trayToggle.className = "mobile-shell-tray-toggle"; this.trayToggle.dataset.mobileControl = "menu-tray";
     this.trayToggle.setAttribute("aria-controls", this.tray.id); this.trayToggle.hidden = true;
@@ -203,12 +232,12 @@ export class MobileShell {
     this.modeSelect.value = getDeviceMode();
     this.modeSelect.addEventListener("change", () => { this.hooks.cancel(); setDeviceMode(this.modeSelect.value              ); this.frame(this.state); });
     this.displaySelect.setAttribute("aria-label", "游戏画面");
-    for (const [value, text] of [["classic", "经典完整画面"], ["immersive", "沉浸放大画面"]]) {
+    for (const [value, text] of [["classic", "经典完整画面"], ["immersive", "全屏游戏界面"]]) {
       const option = node("option", undefined, text); option.value = value; this.displaySelect.append(option);
     }
     this.displaySelect.addEventListener("change", () => {
       this.hooks.cancel(); setMobileDisplayMode(this.displaySelect.value                     );
-      put(this.displayHelp, getMobileDisplayMode() === "immersive" ? "人物等比放大，双指可平移画面。" : "完整显示场景，控制器位于画面外。");
+      put(this.displayHelp, getMobileDisplayMode() === "immersive" ? "场景铺满屏幕，游戏窗口随横竖屏重新排版。" : "完整显示场景，控制器位于画面外。");
       this.frame(this.state);
     });
     this.fullscreen.dataset.mobileControl = "fullscreen";
@@ -245,6 +274,7 @@ export class MobileShell {
     this.syncSettings();
     if (this.modeSelect.value !== getDeviceMode()) this.modeSelect.value = getDeviceMode();
     if (!mobile) {
+      this.nativeSkin?.clearPortrait();this.portrait.hidden=true;this.portraitKey="";
       if (this.mobile) { this.joystick.release(); this.hooks.cancel(); this.restoreInputs(); }
       this.mobile = false;
       if (!this.root.hidden) this.root.hidden = true;
@@ -255,13 +285,16 @@ export class MobileShell {
     const wasMobile = this.mobile;
     const visibilityBefore = [this.sheet.hidden, this.field.hidden, this.toolbar.hidden];
     const all = this.ui.getMobileActions().filter(isControl);
+    // Map marks may change while every text/action remains identical. Reuse the
+    // native layers before the retained-DOM early return, at a bounded 20 Hz.
+    this.nativeMap.sync(this.ui,all,isImmersive());
     const boxes = [...InputBox.live];
     const visual = window.visualViewport;
     // Native UI is immediate-mode, but the DOM is retained. Unchanged native
     // frames must not rewrite attributes, invalidate styles or sort text again.
     // Input identity is checked separately so replacement fields at the same
     // logical coordinates are still adopted immediately.
-    const signature = JSON.stringify([state, all, this.ui.texts, this.ui.bottomLine,
+    const signature = JSON.stringify([state, all, this.ui.texts, this.ui.bottomLine, this.ui.portraits, this.ui.cards, this.ui.panelInfo,
       boxes.map(b => [b.el.style.display, b.el.type]),
       document.getElementById("mobile-root")?.dataset.orientation,
       visual?.offsetLeft ?? 0, visual?.offsetTop ?? 0, visual?.width ?? innerWidth, visual?.height ?? innerHeight,
@@ -289,7 +322,11 @@ export class MobileShell {
       if (layout === "full") this.focusBeforeSheet = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       this.layout = layout; this.root.dataset.layout = layout;
     }
-    this.syncSceneMode(isImmersive() && (context === "field" || context === "battle") && (layout === "field" || layout === "battle"));
+    this.syncSceneMode(isImmersive());
+    if (this.sceneImmersive) {
+      const parent = layout === "full" ? this.sheet : this.tray;
+      if (this.advanced.parentNode !== parent) parent.append(this.advanced);
+    }
     const immersiveBattle = this.sceneImmersive && layout === "battle";
     // Remembered attacks can expose native t-* immediately on a fresh battle.
     // They must not reopen an opaque sheet over the actor without a user action.
@@ -302,14 +339,14 @@ export class MobileShell {
     this.sheet.hidden = (fieldNormal && ![...InputBox.live].some(b => b.el.style.display !== "none"))
       || (immersiveBattle && !this.battleCommandsOpen);
     // Keep movement above native long lists; disabled stick never consumes menu movement.
-    this.field.hidden = state.phase !== "field" || npc || modal;
+    this.field.hidden = state.phase !== "field" || npc || modal || this.sceneImmersive && !fieldNormal;
     this.encounter.hidden = !state.canEncounter;
     this.encounter.disabled = !fieldNormal;
     this.encounter.setAttribute("aria-pressed", String(!!state.encounter));
     put(this.encounter, `自动遇敌：${state.encounter ? "开" : "关"}`);
     this.toolbar.hidden = state.phase !== "field" || !fieldNormal || (this.sceneImmersive && !this.trayOpen);
     this.tray.hidden = !this.sceneImmersive || !this.trayOpen;
-    this.trayToggle.hidden = !this.sceneImmersive;
+    this.trayToggle.hidden = !this.sceneImmersive || layout === "full";
     this.trayToggle.setAttribute("aria-expanded", String(this.trayOpen));
     put(this.trayToggle, this.trayOpen ? "收起" : layout === "battle" ? "操作" : "菜单");
     this.root.dataset.tray = this.trayOpen ? "open" : "closed";
@@ -319,7 +356,9 @@ export class MobileShell {
     put(this.battleCommands, this.battleCommandsOpen ? "收起指令" : "指令");
     this.fieldExtras.hidden = !this.sceneImmersive || layout !== "field";
     this.joystick.element.setAttribute("aria-disabled", String(layout !== "field" || this.trayOpen));
-    this.sheet.setAttribute("role", "region");
+    this.sheet.setAttribute("role", this.sceneImmersive && layout === "full" ? "dialog" : "region");
+    if (this.sceneImmersive && layout === "full") this.sheet.setAttribute("aria-modal", "true");
+    else this.sheet.removeAttribute("aria-modal");
     const selectedHit = all.find(hit => hit.id === state.selectedId);
     const selectedLabel = selectedHit && (!state.selectedLabel || state.selectedLabel === selectedHit.id)
       ? this.actionLabel(selectedHit, state) : state.selectedLabel;
@@ -337,6 +376,18 @@ export class MobileShell {
       && !(state.phase === "field" && (/^tb-/.test(h.id) || /^chat-(?:all|up|down|reset)$/.test(h.id)))
       && !(state.phase === "battle" && state.cameraAvailable === false && context === "field" && !AUTO_ACTIONS.has(h.id)));
     this.syncActions(hits, state);
+    // The same retained sheet hosts successive native windows. A previous
+    // deep list must never leave a newly opened map or dialog above the screen.
+    const paneKey=this.sceneImmersive && layout==="full"
+      ? JSON.stringify([state.phase,state.title,npc,modal,this.ui.cards?.[0]?.kind,!!this.ui.panelInfo,!!this.ui.portraits?.length]) : "";
+    if(paneKey!==this.paneKey){
+      this.paneKey=paneKey;this.sheet.scrollTop=0;this.content.scrollTop=0;this.actions.scrollTop=0;
+    }
+    const pose=this.sceneImmersive && layout==="full" ? this.ui.portraits?.[0] : undefined;
+    const portraitKey=pose ? `${pose.rawIndex}:${pose.image}` : "";
+    if(portraitKey!==this.portraitKey){this.portraitKey=portraitKey;this.portrait.hidden=true;}
+    if (this.sceneImmersive) void this.nativeSkin?.sync(this.root,pose ? {...pose,target:this.portrait} : null);
+    else this.nativeSkin?.clearPortrait();
     if (this.sceneImmersive && layout === "field") this.fieldExtras.hidden = hits.length === 0;
     this.battleCommands.disabled = immersiveBattle && !hits.some(h => !AUTO_ACTIONS.has(h.id));
     if (!wasMobile || changed || wasImmersive !== this.sceneImmersive || previousPhase !== state.phase
@@ -345,7 +396,8 @@ export class MobileShell {
     }
     if (changed && layout === "full" && !this.sheet.contains(document.activeElement)) {
       // Do not steal focus from an original input newly focused by a native screen.
-      const first = [...this.sheet.querySelectorAll             ("input,button")].find(el => !el.closest("[hidden]") && !el.hasAttribute("disabled"));
+      const first = [...this.sheet.querySelectorAll             ("input,button")].find(el => !el.closest("[hidden]") && !el.hasAttribute("disabled")
+        && (!el.getClientRects || el.getClientRects().length > 0));
       (first ?? this.sheet).focus({ preventScroll: true });
     } else if (changed && layout === "field" && this.focusBeforeSheet?.isConnected && !this.sheet.contains(document.activeElement)) {
       this.focusBeforeSheet.focus({ preventScroll: true }); this.focusBeforeSheet = null;
@@ -374,10 +426,10 @@ export class MobileShell {
           async toggleFullscreen()                {
     this.joystick.release(); this.hooks.cancel();
     if (document.fullscreenElement) {
-      await exitMobileFullscreen(); put(this.displayHelp, "已退出全屏，可继续使用沉浸画面。");
+      await exitMobileFullscreen(); put(this.displayHelp, "已退出浏览器全屏，游戏布局继续铺满可见区域。");
     } else {
       const entered = await requestMobileFullscreen();
-      put(this.displayHelp, entered ? "已进入浏览器全屏。" : "已使用沉浸画面，此浏览器暂未提供页面全屏。");
+      put(this.displayHelp, entered ? "已进入浏览器全屏。" : "游戏布局已铺满可见区域，此浏览器暂未提供页面全屏。");
     }
     this.syncSettings(); this.frame(this.state);
   }
@@ -400,7 +452,10 @@ export class MobileShell {
     this.root.dataset.immersive = String(active);
     // Only control groups move; native InputBox nodes stay in the original
     // adopted-input sheet. Returning to classic restores the exact parent order.
-    if (active) this.tray.append(this.toolbar, this.fieldExtras, this.camera, this.right);
+    if (active) {
+      this.advanced.append(this.right);
+      this.tray.append(this.toolbar, this.fieldExtras, this.camera, this.advanced);
+    }
     else {
       this.left.insertBefore(this.toolbar, this.sheet); this.root.insertBefore(this.right, this.tray);
       this.tray.hidden = true; this.trayToggle.hidden = true; this.camera.hidden = true;
@@ -442,6 +497,15 @@ export class MobileShell {
 
           readableTexts(state                  , hits             , npc         , modal         , field         )           {
     if (field) return state.summary ?? [];
+    if(this.sceneImmersive && !npc && !modal && this.ui.panelInfo){
+      const info=this.ui.panelInfo;
+      return [...info.lines,...(info.nativeTextX===undefined ? [] : this.ui.texts.filter(t=>t.x===info.nativeTextX && t.y<550).map(t=>t.text))];
+    }
+    // Collection records replace the native slot text and the old all-items
+    // summary. Never put a second inventory above the real interactive slots.
+    if(this.sceneImmersive && !npc && !modal && this.ui.cards?.some(card=>card.actions.some(id=>hits.some(hit=>hit.id===id)))) {
+      return this.ui.bottomLine ? [this.ui.bottomLine] : [];
+    }
     const chat = new Set((state.chat ?? []).map(clean));
     let texts = this.ui.texts.filter(t => clean(t.text) && !chat.has(clean(t.text)));
     if (npc) texts = texts.filter(t => t.x >= 105 && t.x <= 695 && t.y >= 70 && t.y <= 520);
@@ -569,7 +633,8 @@ export class MobileShell {
           syncActions(hits             , state                  )       {
     const compact = this.sceneImmersive && this.layout === "battle";
     const autoHits = compact ? hits.filter(h => AUTO_ACTIONS.has(h.id)) : [];
-    const rows = compact ? hits.filter(h => !AUTO_ACTIONS.has(h.id)) : hits;
+    const collection=this.nativeCards.sync(this.sceneImmersive && this.layout==="full" ? this.ui.cards ?? [] : [],hits,hit=>this.actionButton(hit,state));
+    const rows = hits.filter(h=>!collection.has(h.id) && !(compact && AUTO_ACTIONS.has(h.id)));
     const container = this.sceneImmersive && this.layout === "field" ? this.extraActions : this.actions;
     const keep = new Set(hits.map(h => h.id)), rowKeep = new Set        ();
     const focused = document.activeElement;
@@ -659,7 +724,8 @@ export class MobileShell {
   }
 
           trapFocus(event               )       {
-    const targets = Array.from(this.root.querySelectorAll             ("button,input,select,[tabindex='0']")).filter(el => !el.closest("[hidden]") && !el.hasAttribute("disabled"));
+    const targets = Array.from(this.sheet.querySelectorAll             ("button,input,select,summary,[tabindex='0']")).filter(el => !el.closest("[hidden]") && !el.hasAttribute("disabled")
+      && (!el.getClientRects || el.getClientRects().length > 0));
     const first = targets[0], last = targets[targets.length - 1];
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
@@ -783,6 +849,68 @@ html.sa-mobile #mobile-root[data-display='immersive']:is([data-context='field'],
 #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='battle'] .mobile-shell-drawer{bottom:calc(80px + env(safe-area-inset-bottom))}
 #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-tray='open'] .mobile-shell-sheet{visibility:hidden;pointer-events:none}
 html.sa-mobile:has(#mobile-root[data-display='immersive']:is([data-context='field'],[data-context='battle'])) #mobile-mode-switch{top:calc(8px + env(safe-area-inset-top));right:calc(8px + env(safe-area-inset-right));bottom:auto}
+
+/* Mobile fullscreen owns one game viewport in every phase. Dialogs are native
+   game windows inside that viewport; no webpage rails or document scrolling. */
+html.sa-mobile #mobile-root[data-display='immersive'] #mobile-viewport{position:absolute;inset:0;width:100%;height:100%}
+html.sa-mobile #mobile-root[data-display='immersive'] #mobile-chrome{position:absolute;inset:0;overflow:visible;pointer-events:none;touch-action:auto}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true']{--ink:#fff;--gold:#ffe996;--leaf:#c9dddc;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] :is(.mobile-shell-sheet,.mobile-shell-drawer){border:solid transparent;border-width:18px 24px;border-image-source:var(--native-window);border-image-slice:48 64 fill;border-image-width:18px 24px;border-image-repeat:stretch;background:#253d4bf5;border-radius:0;box-shadow:0 4px 14px #0007;padding:8px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] button{border-radius:3px;background:#193445e8;border-color:#8ea4b2;color:#fff;box-shadow:inset 0 1px #ffffff28,0 1px 2px #0006;text-shadow:1px 1px #0008}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] button:active{background:#435f6e}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] button[aria-current='true']{border-color:#ffe996;box-shadow:inset 0 0 0 1px #ffe996}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] button[data-native-icon='true']{display:flex;align-items:center;gap:7px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] button[data-native-icon='true']::before{content:'';display:block;flex:none;width:32px;height:28px;background-image:var(--native-icon);background-repeat:no-repeat;background-size:contain;background-position:center;image-rendering:pixelated;pointer-events:none}
+.mobile-native-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px;min-width:0}
+.mobile-native-cards[data-kind='pet']{grid-template-columns:minmax(0,1fr)}
+.mobile-native-card{min-width:0;border:1px solid #a5b3b76b;background:#0e2937ee;padding:8px;box-shadow:inset 0 1px #ffffff1a}
+.mobile-native-card small{display:block;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:#c6d9dc;margin-top:6px}
+.mobile-native-card-controls{display:flex;flex-wrap:wrap;gap:6px}
+.mobile-native-card-controls button{flex:1;min-width:0!important;font-size:13px!important;white-space:normal;overflow-wrap:anywhere;line-height:1.4;text-align:left}
+.mobile-native-card[data-kind='item'] .mobile-native-card-controls button{width:100%;min-height:72px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6px}
+.mobile-native-card[data-kind='pet'] .mobile-native-card-controls button:first-child{flex-basis:100%;color:#ffe996!important;font-size:16px!important}
+.mobile-native-card button[data-native-icon='true']::before{width:36px!important;height:36px!important}
+@media(min-width:390px){.mobile-native-cards[data-kind='item']{grid-template-columns:repeat(3,minmax(0,1fr))}}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-status{background:#142d40df;border-radius:3px;border-color:#a5b3b7a0;color:#fff}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-status{left:calc(12px + env(safe-area-inset-left));right:calc(78px + env(safe-area-inset-right));max-height:72px;padding:8px 12px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-status strong{display:block;font-size:17px;color:#ffe996}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-status div{max-height:20px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-sheet{position:absolute;left:calc(10px + env(safe-area-inset-left));right:calc(10px + env(safe-area-inset-right));top:calc(92px + env(safe-area-inset-top));bottom:calc(10px + env(safe-area-inset-bottom));max-height:none;min-height:0;overflow:auto;overscroll-behavior:contain;pointer-events:auto;z-index:5;scroll-padding:64px 8px 12px;touch-action:pan-y}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-back{position:sticky;top:0;z-index:2;margin:0 0 10px;min-height:44px;width:100%;background:#1d3748;color:#ffe996!important}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-info{max-height:none;overflow:visible;margin:0 0 12px;font-size:15px;line-height:1.7;color:#e3edef;scrollbar-gutter:auto}
+.mobile-shell-native-map{display:block;width:100%;height:auto;margin:0 auto 12px;border:1px solid #a5b3b7;background:#0a0f1c;image-rendering:pixelated;touch-action:none}
+.mobile-shell-native-portrait{display:block;width:192px;max-width:100%;height:176px;object-fit:contain;image-rendering:pixelated;margin:0 auto 12px;pointer-events:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-action-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-actions button{font-size:14px;min-height:48px;padding:9px 10px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-input input{background:#102d40!important;border-color:#a2b2bd!important;border-radius:2px!important;color:#fff!important}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tray-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#24455bec;color:#ffe996;border-color:#b7c0bd;text-shadow:1px 1px #0008}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-tray-toggle::before{width:26px!important;height:22px!important}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-toolbar{grid-template-columns:repeat(4,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-toolbar button{flex-direction:column;justify-content:center;gap:3px;min-height:66px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer .mobile-shell-toolbar button::before{width:36px;height:28px}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced{order:4;grid-column:1/-1;min-width:0;padding:5px 4px;color:#d2e1e6;font-size:13px;flex:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced>summary{min-height:44px;padding:10px 6px;cursor:pointer;color:#ffe996;touch-action:pan-y;border-top:1px solid #9daeb255}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced .mobile-shell-right{position:static;inset:auto;width:auto;display:grid;grid-template-columns:minmax(0,1fr) 88px;min-height:0;overflow:visible;padding:8px 4px;background:none;border:0;gap:8px;max-height:none}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced .mobile-shell-clicks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced .mobile-shell-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-advanced .mobile-shell-zoom{grid-template-columns:repeat(3,minmax(0,1fr))}
+#mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-field{display:none}
+html.sa-mobile:has(#mobile-root[data-display='immersive']) #mobile-mode-switch{top:calc(8px + env(safe-area-inset-top));right:calc(8px + env(safe-area-inset-right));bottom:auto;border-radius:3px;background:#193748ed}
+@media (min-width:700px) and (orientation:landscape){
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-sheet{top:calc(78px + env(safe-area-inset-top));display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:10px 18px;overflow:hidden}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-back{position:static;grid-column:1/-1;margin:0}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-content{grid-column:1;grid-row:2;min-height:0;overflow:auto;overscroll-behavior:contain;padding-right:8px}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-info{margin:0 0 12px;font-size:14px}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-actions{grid-column:2;grid-row:2/4;min-height:0;overflow:auto;overscroll-behavior:contain;align-self:stretch;padding:0 3px}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-dismiss{grid-column:1;grid-row:3}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-advanced{grid-column:1/-1;grid-row:4;max-height:35dvh;overflow:auto;padding:0}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'] .mobile-shell-drawer{left:auto;width:min(460px,70vw);max-height:calc(var(--viewport-height,100dvh) - 108px);bottom:calc(78px + env(safe-area-inset-bottom))}
+}
+@media (max-height:460px){
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-status{padding:4px 10px;max-height:48px}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-status div{display:none}
+  #mobile-root[data-display='immersive'] .mobile-shell[data-immersive='true'][data-layout='full'] .mobile-shell-sheet{top:calc(62px + env(safe-area-inset-top))}
+}
 `;
     document.head.append(style);
   }

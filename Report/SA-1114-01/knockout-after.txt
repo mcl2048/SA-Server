@@ -1,0 +1,90 @@
+=== RUN   TestFlownEnemyCannotReturnThroughEnemyRevive
+--- PASS: TestFlownEnemyCannotReturnThroughEnemyRevive (0.00s)
+=== RUN   TestResurrectionExcludesDepartedFighters
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/escaped
+--- PASS: TestResurrectionExcludesDepartedFighters (0.01s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/escaped (0.00s)
+=== RUN   TestEnemyReviveResetsKnockoutAttribution
+--- PASS: TestEnemyReviveResetsKnockoutAttribution (0.00s)
+=== RUN   TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits
+--- PASS: TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits (0.00s)
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped
+--- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter (0.01s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped (0.00s)
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/player
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy
+--- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/player (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy (0.00s)
+=== RUN   TestReflectedKnockoutStopsDrainAndRemainingHits
+--- PASS: TestReflectedKnockoutStopsDrainAndRemainingHits (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.027s

@@ -1,0 +1,84 @@
+{
+  "state": "finished",
+  "checks": [
+    {
+      "name": "client-tests",
+      "command": [
+        "/tmp/sa-1113-04-tools/node-v26.13.1-linux-x64/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "--test-concurrency=1",
+        "/home/coder/saserver/client/test/ai-legality.test.ts",
+        "/home/coder/saserver/client/test/ai-owner-down.test.ts",
+        "/home/coder/saserver/client/test/ai-pet-catalog.test.ts",
+        "/home/coder/saserver/client/test/album.test.ts",
+        "/home/coder/saserver/client/test/assets-extension.test.ts",
+        "/home/coder/saserver/client/test/autoplay-sync.test.ts",
+        "/home/coder/saserver/client/test/battle-camera.test.ts",
+        "/home/coder/saserver/client/test/battle-dead-owner.test.ts",
+        "/home/coder/saserver/client/test/battle-knockout.test.ts",
+        "/home/coder/saserver/client/test/battle-multipet.test.ts",
+        "/home/coder/saserver/client/test/battle-resource.test.ts",
+        "/home/coder/saserver/client/test/minimap-navigation.test.ts",
+        "/home/coder/saserver/client/test/mobile-camera.test.ts",
+        "/home/coder/saserver/client/test/mobile-geometry.test.ts",
+        "/home/coder/saserver/client/test/mobile-hit.test.ts",
+        "/home/coder/saserver/client/test/mobile-map-pan.test.ts",
+        "/home/coder/saserver/client/test/mobile-native-skin.test.ts",
+        "/home/coder/saserver/client/test/mobile-preview.test.ts",
+        "/home/coder/saserver/client/test/mobile-view.test.ts",
+        "/home/coder/saserver/client/test/net.test.ts",
+        "/home/coder/saserver/client/test/pathfinding.test.ts",
+        "/home/coder/saserver/client/test/pets-selection.test.ts",
+        "/home/coder/saserver/client/test/route.test.ts",
+        "/home/coder/saserver/client/test/mobile-shell.test.mjs",
+        "scripts/build-client.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 27.236
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "/tmp/sa-1113-04-tools/node-v26.13.1-linux-x64/bin/node",
+        "/home/coder/.npm/_npx/9ca470fa61f45e06/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--target",
+        "ES2022",
+        "--module",
+        "ESNext",
+        "--moduleResolution",
+        "bundler",
+        "--allowImportingTsExtensions",
+        "--lib",
+        "ES2022,DOM",
+        "client/src/main.ts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.205
+    },
+    {
+      "name": "go-vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.601
+    },
+    {
+      "name": "final-webclient",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-buildvcs=false",
+        "./webclient"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.513
+    }
+  ],
+  "success": true
+}

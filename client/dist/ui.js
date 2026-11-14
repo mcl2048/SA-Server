@@ -4,7 +4,7 @@
 
 
 
-import { isMobile } from "./mobile-view.js?v=e5c6eee3f928fb08";
+import { isMobile } from "./mobile-view.js?v=408f23f7bef662b4";
 
 export const OFFSET_640                   = [80, 60];
 
@@ -32,6 +32,15 @@ export function boxColor(now = performance.now())         {
 
 
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
+
+
+/** Native windows describe only their currently drawn slots. The mobile view
+ * rearranges these records; each action still requires its original live hit.
+ */
+
+
+
+
 
 
 export class Mouse {
@@ -129,6 +138,10 @@ export class Ui {
   texts         = [];
   boxes        = [];
   pics        = [];
+  /** Optional presentation metadata; never enters desktop drawing or hit tests. */
+  portraits                   = [];
+  cards               = [];
+  panelInfo                         = null;
           hits        = [];
           hot = "";     // 上一帧鼠标下最上层的元素
           clickHot = ""; // 本帧要触发点击的元素
@@ -150,7 +163,7 @@ export class Ui {
     // 点击按按下那一刻的鼠标位置、对照上一帧的热区判定（鼠标移过去立刻按下，也不能漏掉）
     if (this.mouse.clicked || (isMobile() && this.mouse.rightClicked)) this.hot = this.hitAt(this.mouse.x, this.mouse.y);
     this.clickHot = this.mouse.clicked ? this.hot : "";
-    this.quads = []; this.texts = []; this.boxes = []; this.hits = []; this.pics = [];
+    this.quads = []; this.texts = []; this.boxes = []; this.hits = []; this.pics = []; this.portraits = []; this.cards = []; this.panelInfo = null;
     this.bottomLine = "";
     this.clickSound = false;
     this.interactive.clear();
@@ -267,6 +280,21 @@ export class Ui {
   }
 
   pic(canvas                   , x        , y        ) { this.pics.push({ canvas, x, y }); }
+
+  /** A stable native pose lets fullscreen windows retain the actual model while
+   * their text and controls reflow. The ordinary animated draw stays unchanged. */
+  mobilePortrait(image        , rawIndex = false)       {
+    if (isMobile()) this.portraits.push({image,rawIndex});
+  }
+
+  mobileCard(card            )       {
+    if (isMobile()) this.cards.push(card);
+  }
+
+  /** Labels baked into native background art must remain explicit on reflow. */
+  mobileInfo(lines          , nativeTextX         )       {
+    if (isMobile()) this.panelInfo = {lines,nativeTextX};
+  }
 
   box(x1        , y1        , x2        , y2        , color        , fill         ) {
     this.boxes.push({ x1, y1, x2, y2, color, fill });

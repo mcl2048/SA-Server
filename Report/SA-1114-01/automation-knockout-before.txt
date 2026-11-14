@@ -1,0 +1,13 @@
+=== RUN   TestAutomationDoesNotSpendRevivalOnFlownPet
+    automation_knockout_test.go:45: automation spends resurrection on a departed pet: {Kind:item Target:5 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:53 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+    automation_knockout_test.go:48: departed ally prevented progress against the living enemy: {Kind:item Target:5 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:53 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationDoesNotSpendRevivalOnFlownPet (1.37s)
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce/auto
+=== RUN   TestAutomationNonFlyingKnockoutEndsExactlyOnce/quick
+--- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce (0.20s)
+    --- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce/auto (0.10s)
+    --- PASS: TestAutomationNonFlyingKnockoutEndsExactlyOnce/quick (0.10s)
+FAIL
+FAIL	sa/server/internal/world	1.648s
+FAIL

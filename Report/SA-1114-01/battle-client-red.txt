@@ -1,0 +1,55 @@
+(node:656799) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (16.375647ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (1.503953ms)
+✖ an already flown target cannot receive a second hit or damage popup (2.363493ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 583.786182
+
+✖ failing tests:
+
+test at client/test/battle-knockout.test.ts:28:1
+✖ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (16.375647ms)
+  AssertionError [ERR_ASSERTION]: HP0 slot 0 must not retain a live command/target
+
+  false !== true
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-knockout.test.ts:34:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-knockout.test.ts:46:1
+✖ an already flown target cannot receive a second hit or damage popup (2.363493ms)
+  AssertionError [ERR_ASSERTION]: no damage numbers over an empty slot
+
+  1 !== 0
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-knockout.test.ts:53:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

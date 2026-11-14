@@ -1,0 +1,43 @@
+TAP version 13
+# Subtest: fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+ok 1 - fullscreen skin reuses native nine-slice art and caches decoded icons across frames
+  ---
+  duration_ms: 5.712602
+  type: 'test'
+  ...
+# Subtest: unavailable optional native art leaves controls operational and retries bounded
+ok 2 - unavailable optional native art leaves controls operational and retries bounded
+  ---
+  duration_ms: 0.940028
+  type: 'test'
+  ...
+# Subtest: overlapping native frames coalesce into one decoder and still skin newly added controls
+ok 3 - overlapping native frames coalesce into one decoder and still skin newly added controls
+  ---
+  duration_ms: 14.637308
+  type: 'test'
+  ...
+# Subtest: selected native model is bounded, cached and cannot overwrite a newer pet selection
+not ok 4 - selected native model is bounded, cached and cannot overwrite a newer pet selection
+  ---
+  duration_ms: 4.647948
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-native-skin.test.ts:45:1'
+  failureType: 'testCodeFailure'
+  error: 'finishFirst is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-native-skin.test.ts:55:63)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 3
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 298.725736

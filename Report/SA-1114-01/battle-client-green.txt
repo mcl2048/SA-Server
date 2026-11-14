@@ -1,0 +1,40 @@
+(node:657426) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ dead PvE owner emits no character action and live pets choose their own distinct skill slots (414.536948ms)
+✔ manual and PvP dead owners preserve fallback pet commands (3.343058ms)
+✔ dead owner advances every pet from first-turn policy to subsequent-turn policy (2.230432ms)
+(node:657427) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (38.268964ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (2.933886ms)
+✔ an already flown target cannot receive a second hit or damage popup (2.441606ms)
+(node:657428) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ each owned live pet uses its bag skills and sends one independent action (43.423837ms)
+✔ pet tabs select another pending pet without borrowing another owner's pet (10.5503ms)
+✔ server automation prevents normal, quick and reconnect duplicate client commands (67.228621ms)
+✔ resume restores turn, submitted pets, status and positions without an intro or first-turn AI (8.074299ms)
+✔ turn resolution clears previous pending menus and opens fresh per-pet submissions (17.20988ms)
+✔ resetPets atomically removes old pets and updates full layout without a new intro (11.714833ms)
+✔ pet layout movement preserves submissions and selected skills by bag identity (3.841878ms)
+✔ PetOut uses event bag and owner while the Pets snapshot still names another primary (11.295401ms)
+✔ quick display never restarts client automation after both live auto switches are off (4.284265ms)
+✔ quick display switches preserve the same fighters, queued work, turn and submissions and load the background once (219.110639ms)
+✔ leaving fast playback preserves the remaining real command time on its advanced animation clock (2.773807ms)
+✔ watch mode and dead pets never expose a command slot (1.563404ms)
+(node:657466) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compact HP/MP rows clamp values and horizontal bounds on both viewports (3.688811ms)
+✔ five enemy damage labels remain inside every stage edge throughout the bounce (2.829526ms)
+✔ HP/MP rows lie below actual model bounds including tall pets and riding HP (2.065097ms)
+✔ absent legacy event metadata never creates NaN labels or invalid skill icons (2.273578ms)
+✔ snapshot dead players and pets on both sides choose genuine DEAD pose and revive (6.728343ms)
+✔ crowded real battle formation keeps every full HP/MP/riding row disjoint and inside the stage (15.331477ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2624.684563

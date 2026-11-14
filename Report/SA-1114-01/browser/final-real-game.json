@@ -1,0 +1,8995 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "screen": {
+        "width": 1280,
+        "height": 900
+      },
+      "mobile": false,
+      "stage": {
+        "x": 40,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "stageInBody": true,
+      "backing": {
+        "width": 1200,
+        "height": 900
+      }
+    },
+    {
+      "case": "classic 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 240
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 292.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": -0.0000152587890625,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 322.5
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "viewport": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "classic",
+      "stage": {
+        "x": 72.00001525878906,
+        "y": 1,
+        "width": 424,
+        "height": 317.9999694824219
+      },
+      "viewport": {
+        "x": 72,
+        "y": 1,
+        "width": 424,
+        "height": 318
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "classic native items",
+      "context": "panel",
+      "buttons": 35,
+      "closed": true
+    },
+    {
+      "case": "classic native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "classic native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "classic native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "classic native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "classic native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "screen": {
+        "width": 320,
+        "height": 568
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -240,
+        "y": -32,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 568
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 390x844",
+      "screen": {
+        "width": 390,
+        "height": 844
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -367.6666259765625,
+        "y": 0,
+        "width": 1125.333251953125,
+        "height": 844
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 430x932",
+      "screen": {
+        "width": 430,
+        "height": 932
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -406.33331298828125,
+        "y": 0,
+        "width": 1242.6666259765625,
+        "height": 932
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 932
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 844x390",
+      "screen": {
+        "width": 844,
+        "height": 390
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": 0.000030517578125,
+        "y": -146.8125,
+        "width": 844,
+        "height": 632.9999389648438
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive 568x320",
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 568,
+        "height": 320
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "case": "immersive native items",
+      "context": "panel",
+      "buttons": 35,
+      "closed": true
+    },
+    {
+      "case": "immersive native pets",
+      "context": "panel",
+      "buttons": 12,
+      "closed": true
+    },
+    {
+      "case": "immersive native status",
+      "context": "panel",
+      "buttons": 3,
+      "closed": true
+    },
+    {
+      "case": "immersive native quests",
+      "context": "panel",
+      "buttons": 4,
+      "closed": true
+    },
+    {
+      "case": "immersive native map",
+      "context": "panel",
+      "buttons": 9,
+      "closed": true
+    },
+    {
+      "case": "immersive native system",
+      "context": "panel",
+      "buttons": 13,
+      "closed": true
+    },
+    {
+      "case": "adaptive native items 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 181,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 173,
+          "y": 181,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 51,
+          "y": 303,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 173,
+          "y": 303,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 51,
+          "y": 425,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 173,
+          "y": 425,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 547,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 173,
+          "y": 547,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 51,
+          "y": 669,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 173,
+          "y": 669,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-10",
+          "x": 51,
+          "y": 809,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-11",
+          "x": 173,
+          "y": 809,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 949,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-13",
+          "x": 173,
+          "y": 949,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-14",
+          "x": 51,
+          "y": 1089,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-15",
+          "x": 173,
+          "y": 1089,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-16",
+          "x": 51,
+          "y": 1229,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-17",
+          "x": 173,
+          "y": 1229,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1369,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-19",
+          "x": 173,
+          "y": 1369,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-20",
+          "x": 51,
+          "y": 1509,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-21",
+          "x": 173,
+          "y": 1509,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-22",
+          "x": 51,
+          "y": 1649,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-23",
+          "x": 173,
+          "y": 1649,
+          "w": 96,
+          "h": 72
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1910,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 164,
+          "y": 1910,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1966,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 164,
+          "y": 1966,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 2022,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 164,
+          "y": 2022,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 2078,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 2134,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 2190,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 2246,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 2302,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 1726
+      },
+      "actions": {
+        "x": 42,
+        "y": 1910,
+        "w": 236,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 343,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 393,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 505,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 555,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 667,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 717,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 829,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 879,
+          "w": 218,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 986,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 164,
+          "y": 986,
+          "w": 114,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 802
+      },
+      "actions": {
+        "x": 42,
+        "y": 986,
+        "w": 236,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 878.5,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 934.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 164,
+          "y": 934.5,
+          "w": 114,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 694.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 878.5,
+        "w": 236,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 329.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-tab1",
+          "x": 164,
+          "y": 329.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 396.6875,
+          "w": 236,
+          "h": 59.1875
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 463.875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 145.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 329.5,
+        "w": 236,
+        "h": 182.375
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 556.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 164,
+          "y": 556.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 612.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 164,
+          "y": 612.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 668.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 164,
+          "y": 668.71875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 724.71875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 780.71875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 836.71875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 372.71875
+      },
+      "actions": {
+        "x": 42,
+        "y": 556.71875,
+        "w": 236,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 320x568",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 568
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 300,
+        "h": 466
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 164,
+          "y": 272.5,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "sys-hide",
+          "x": 164,
+          "y": 328.5,
+          "w": 114,
+          "h": 59.1875
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 395.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 164,
+          "y": 395.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 451.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 164,
+          "y": 451.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 507.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 164,
+          "y": 507.6875,
+          "w": 114,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 563.6875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 619.6875,
+          "w": 236,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 675.6875,
+          "w": 236,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 236,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 236,
+        "h": 451.1875
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 181,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 155.65625,
+          "y": 181,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 260.328125,
+          "y": 181,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 303,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 155.65625,
+          "y": 303,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 260.328125,
+          "y": 303,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 425,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 155.65625,
+          "y": 425,
+          "w": 78.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 260.328125,
+          "y": 425,
+          "w": 78.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 547,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-10",
+          "x": 155.65625,
+          "y": 547,
+          "w": 78.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 260.328125,
+          "y": 547,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 708.375,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-13",
+          "x": 155.65625,
+          "y": 708.375,
+          "w": 78.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-14",
+          "x": 260.328125,
+          "y": 708.375,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 869.75,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-16",
+          "x": 155.65625,
+          "y": 869.75,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-17",
+          "x": 260.328125,
+          "y": 869.75,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1030.9375,
+          "w": 78.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-19",
+          "x": 155.65625,
+          "y": 1030.9375,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-20",
+          "x": 260.328125,
+          "y": 1030.9375,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1192.3125,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-22",
+          "x": 155.65625,
+          "y": 1192.3125,
+          "w": 78.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-23",
+          "x": 260.328125,
+          "y": 1192.3125,
+          "w": 78.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1449.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 199,
+          "y": 1449.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1505.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 199,
+          "y": 1505.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 1561.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 199,
+          "y": 1561.1875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 1617.1875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 1673.1875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 1729.1875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 1785.1875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 1841.1875,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 1265.1875
+      },
+      "actions": {
+        "x": 42,
+        "y": 1449.1875,
+        "w": 306,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 325,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 375,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 469,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 519,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 613,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 663,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 757,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 807,
+          "w": 288,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 896,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 199,
+          "y": 896,
+          "w": 149,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 896,
+        "w": 306,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 802,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 858,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 199,
+          "y": 858,
+          "w": 149,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 618
+      },
+      "actions": {
+        "x": 42,
+        "y": 802,
+        "w": 306,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 304,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 199,
+          "y": 304,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 360,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 416,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 304,
+        "w": 306,
+        "h": 160
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 589.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 199,
+          "y": 589.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 645.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 199,
+          "y": 645.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 701.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 199,
+          "y": 701.171875,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 757.171875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 813.171875,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 869.171875,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 405.171875
+      },
+      "actions": {
+        "x": 42,
+        "y": 589.171875,
+        "w": 306,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 390x844",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 844
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 370,
+        "h": 742
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 199,
+          "y": 272.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 199,
+          "y": 328.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 384.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 199,
+          "y": 384.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 440.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 199,
+          "y": 440.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 496.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 199,
+          "y": 496.5,
+          "w": 149,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 552.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 608.5,
+          "w": 306,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 664.5,
+          "w": 306,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 306,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 306,
+        "h": 440
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 181,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 169,
+          "y": 181,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 287,
+          "y": 181,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 303,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 169,
+          "y": 303,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 287,
+          "y": 303,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 425,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 169,
+          "y": 425,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 287,
+          "y": 425,
+          "w": 92,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 547,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-10",
+          "x": 169,
+          "y": 547,
+          "w": 92,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 287,
+          "y": 547,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 708.375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-13",
+          "x": 169,
+          "y": 708.375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-14",
+          "x": 287,
+          "y": 708.375,
+          "w": 92,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 869.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-16",
+          "x": 169,
+          "y": 869.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-17",
+          "x": 287,
+          "y": 869.75,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 1012.9375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-19",
+          "x": 169,
+          "y": 1012.9375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-20",
+          "x": 287,
+          "y": 1012.9375,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1156.125,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 169,
+          "y": 1156.125,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-23",
+          "x": 287,
+          "y": 1156.125,
+          "w": 92,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1394.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 219,
+          "y": 1394.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1450.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 219,
+          "y": 1450.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 1506.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 219,
+          "y": 1506.8125,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 1562.8125,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 1618.8125,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 1674.8125,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 1730.8125,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 1786.8125,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 1210.8125
+      },
+      "actions": {
+        "x": 42,
+        "y": 1394.8125,
+        "w": 346,
+        "h": 440
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 181,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 231,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 325,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 375,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 469,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 519,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 613,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 663,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 757,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 807,
+          "w": 328,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 896,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 219,
+          "y": 896,
+          "w": 169,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 896,
+        "w": 346,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 776.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 832.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 219,
+          "y": 832.5,
+          "w": 169,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 592.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 776.5,
+        "w": 346,
+        "h": 104
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 304,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 219,
+          "y": 304,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 360,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 416,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 304,
+        "w": 346,
+        "h": 160
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 622.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 219,
+          "y": 622.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 678.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 219,
+          "y": 678.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 734.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 219,
+          "y": 734.296875,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 790.296875,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 846.296875,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 902.296875,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 438.296875
+      },
+      "actions": {
+        "x": 42,
+        "y": 622.296875,
+        "w": 346,
+        "h": 328
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 430x932",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 430,
+        "h": 932
+      },
+      "sheet": {
+        "x": 10,
+        "y": 92,
+        "w": 410,
+        "h": 830
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 272.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 219,
+          "y": 272.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 328.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 219,
+          "y": 328.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 384.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 219,
+          "y": 384.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 440.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 219,
+          "y": 440.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 496.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 219,
+          "y": 496.5,
+          "w": 169,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 552.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 608.5,
+          "w": 346,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 664.5,
+          "w": 346,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 172,
+        "w": 346,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 272.5,
+        "w": 346,
+        "h": 440
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 151,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 174.65625,
+          "y": 151,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 298.328125,
+          "y": 151,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 273,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 174.65625,
+          "y": 273,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 298.328125,
+          "y": 273,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 395,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 174.65625,
+          "y": 395,
+          "w": 97.671875,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 298.328125,
+          "y": 395,
+          "w": 97.65625,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 517,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-10",
+          "x": 174.65625,
+          "y": 517,
+          "w": 97.671875,
+          "h": 93.375
+        },
+        {
+          "id": "inv-11",
+          "x": 298.328125,
+          "y": 517,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 678.375,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-13",
+          "x": 174.65625,
+          "y": 678.375,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-14",
+          "x": 298.328125,
+          "y": 678.375,
+          "w": 97.65625,
+          "h": 93.375
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 839.75,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-16",
+          "x": 174.65625,
+          "y": 839.75,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-17",
+          "x": 298.328125,
+          "y": 839.75,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 982.9375,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-19",
+          "x": 174.65625,
+          "y": 982.9375,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-20",
+          "x": 298.328125,
+          "y": 982.9375,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1126.125,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 174.65625,
+          "y": 1126.125,
+          "w": 97.671875,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-23",
+          "x": 298.328125,
+          "y": 1126.125,
+          "w": 97.65625,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-side0",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 434,
+          "y": 304,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 434,
+          "y": 358,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 434,
+          "y": 466,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 434,
+          "y": 520,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 151,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 201,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 295,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 345,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 439,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 489,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 583,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 633,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 727,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 777,
+          "w": 345,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 434,
+          "y": 142,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 434,
+          "y": 196,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 434,
+          "y": 250,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 434,
+          "y": 304,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 434,
+          "y": 358,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 844x390",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 844,
+        "h": 390
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 824,
+        "h": 318
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 434,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 619.5,
+          "y": 142,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 434,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 619.5,
+          "y": 196,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 434,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 619.5,
+          "y": 250,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 434,
+          "y": 304,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 619.5,
+          "y": 304,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 434,
+          "y": 358,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 619.5,
+          "y": 358,
+          "w": 179.5,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 434,
+          "y": 412,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 434,
+          "y": 466,
+          "w": 365,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 434,
+          "y": 520,
+          "w": 365,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 371,
+        "h": 148
+      },
+      "actions": {
+        "x": 431,
+        "y": 142,
+        "w": 371,
+        "h": 158
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native items 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "inv-0",
+          "x": 51,
+          "y": 151,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-1",
+          "x": 215,
+          "y": 151,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-2",
+          "x": 379,
+          "y": 151,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-3",
+          "x": 51,
+          "y": 273,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-4",
+          "x": 215,
+          "y": 273,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-5",
+          "x": 379,
+          "y": 273,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-6",
+          "x": 51,
+          "y": 395,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-7",
+          "x": 215,
+          "y": 395,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-8",
+          "x": 379,
+          "y": 395,
+          "w": 138,
+          "h": 72
+        },
+        {
+          "id": "inv-9",
+          "x": 51,
+          "y": 517,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-10",
+          "x": 215,
+          "y": 517,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-11",
+          "x": 379,
+          "y": 517,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-12",
+          "x": 51,
+          "y": 660.1875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-13",
+          "x": 215,
+          "y": 660.1875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-14",
+          "x": 379,
+          "y": 660.1875,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-15",
+          "x": 51,
+          "y": 803.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-16",
+          "x": 215,
+          "y": 803.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-17",
+          "x": 379,
+          "y": 803.375,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-18",
+          "x": 51,
+          "y": 946.5625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-19",
+          "x": 215,
+          "y": 946.5625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-20",
+          "x": 379,
+          "y": 946.5625,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-21",
+          "x": 51,
+          "y": 1089.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-22",
+          "x": 215,
+          "y": 1089.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-23",
+          "x": 379,
+          "y": 1089.75,
+          "w": 138,
+          "h": 75.1875
+        },
+        {
+          "id": "inv-side0",
+          "x": 42,
+          "y": 1328.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "inv-jujutu",
+          "x": 287,
+          "y": 1328.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "inv-side1",
+          "x": 42,
+          "y": 1382.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-drop",
+          "x": 287,
+          "y": 1382.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-inc",
+          "x": 42,
+          "y": 1436.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-dec",
+          "x": 287,
+          "y": 1436.4375,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "gold-input",
+          "x": 42,
+          "y": 1490.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page0",
+          "x": 42,
+          "y": 1544.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page1",
+          "x": 42,
+          "y": 1598.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-page2",
+          "x": 42,
+          "y": 1652.4375,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "inv-close",
+          "x": 42,
+          "y": 1706.4375,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 1174.4375
+      },
+      "actions": {
+        "x": 42,
+        "y": 1328.4375,
+        "w": 484,
+        "h": 426
+      },
+      "cards": [
+        {
+          "kind": "item",
+          "actions": [
+            "inv-0"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-1"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-2"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-3"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-4"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-5"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-6"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-7"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-8"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-9"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-10"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-11"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-12"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-13"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-14"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-15"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-16"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-17"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-18"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-19"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-20"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-21"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-22"
+          ]
+        },
+        {
+          "kind": "item",
+          "actions": [
+            "inv-23"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native pets 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "pet-name0",
+          "x": 51,
+          "y": 151,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st0",
+          "x": 51,
+          "y": 201,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name1",
+          "x": 51,
+          "y": 295,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st1",
+          "x": 51,
+          "y": 345,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name2",
+          "x": 51,
+          "y": 439,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st2",
+          "x": 51,
+          "y": 489,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name3",
+          "x": 51,
+          "y": 583,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st3",
+          "x": 51,
+          "y": 633,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-name4",
+          "x": 51,
+          "y": 727,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-st4",
+          "x": 51,
+          "y": 777,
+          "w": 466,
+          "h": 44
+        },
+        {
+          "id": "pet-detail",
+          "x": 42,
+          "y": 866,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "pet-close",
+          "x": 287,
+          "y": 866,
+          "w": 239,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 712
+      },
+      "actions": {
+        "x": 42,
+        "y": 866,
+        "w": 484,
+        "h": 48
+      },
+      "cards": [
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name0",
+            "pet-st0"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name1",
+            "pet-st1"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name2",
+            "pet-st2"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name3",
+            "pet-st3"
+          ]
+        },
+        {
+          "kind": "pet",
+          "actions": [
+            "pet-name4",
+            "pet-st4"
+          ]
+        }
+      ],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native status 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "st-detail",
+          "x": 42,
+          "y": 746.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "st-group",
+          "x": 42,
+          "y": 800.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "st-close",
+          "x": 287,
+          "y": 800.5,
+          "w": 239,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 592.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 746.5,
+        "w": 484,
+        "h": 102
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native quests 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "quest-tab0",
+          "x": 42,
+          "y": 274,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "quest-tab1",
+          "x": 287,
+          "y": 274,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "quest-r0",
+          "x": 42,
+          "y": 328,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "quest-close",
+          "x": 42,
+          "y": 382,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 120
+      },
+      "actions": {
+        "x": 42,
+        "y": 274,
+        "w": 484,
+        "h": 156
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native map 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "map-out",
+          "x": 42,
+          "y": 681.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-in",
+          "x": 287,
+          "y": 681.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-fit",
+          "x": 42,
+          "y": 735.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-me",
+          "x": 287,
+          "y": 735.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-mini",
+          "x": 42,
+          "y": 789.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-art",
+          "x": 287,
+          "y": 789.046875,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "map-fl-300",
+          "x": 42,
+          "y": 843.046875,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "map-area",
+          "x": 42,
+          "y": 897.046875,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "map-close",
+          "x": 42,
+          "y": 951.046875,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 527.046875
+      },
+      "actions": {
+        "x": 42,
+        "y": 681.046875,
+        "w": 484,
+        "h": 318
+      },
+      "cards": [],
+      "map": true,
+      "context": "panel"
+    },
+    {
+      "case": "adaptive native system 568x320",
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "w": 568,
+        "h": 320
+      },
+      "sheet": {
+        "x": 10,
+        "y": 62,
+        "w": 548,
+        "h": 248
+      },
+      "role": "dialog",
+      "modal": "true",
+      "overflow": 0,
+      "bodyOverflow": 0,
+      "nativeSkin": true,
+      "buttons": [
+        {
+          "id": "sys-home",
+          "x": 42,
+          "y": 242.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-account",
+          "x": 287,
+          "y": 242.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-logout",
+          "x": 42,
+          "y": 296.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-hide",
+          "x": 287,
+          "y": 296.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-chat",
+          "x": 42,
+          "y": 350.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-ai",
+          "x": 287,
+          "y": 350.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-bgm",
+          "x": 42,
+          "y": 404.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-exp",
+          "x": 287,
+          "y": 404.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-se",
+          "x": 42,
+          "y": 458.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-gm",
+          "x": 287,
+          "y": 458.5,
+          "w": 239,
+          "h": 48
+        },
+        {
+          "id": "sys-mouse",
+          "x": 42,
+          "y": 512.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "sys-mute",
+          "x": 42,
+          "y": 566.5,
+          "w": 484,
+          "h": 48
+        },
+        {
+          "id": "sys-close",
+          "x": 42,
+          "y": 620.5,
+          "w": 484,
+          "h": 48
+        }
+      ],
+      "content": {
+        "x": 42,
+        "y": 142,
+        "w": 484,
+        "h": 88.5
+      },
+      "actions": {
+        "x": 42,
+        "y": 242.5,
+        "w": 484,
+        "h": 426
+      },
+      "cards": [],
+      "map": false,
+      "context": "panel"
+    },
+    {
+      "case": "native item CG, selected pet model and cancelled rename input",
+      "itemArt": true,
+      "petModel": true,
+      "renameCancelled": true,
+      "originalInputLength": 0
+    },
+    {
+      "case": "real touch pans the native map without navigation",
+      "before": {
+        "cx": 379,
+        "cy": 186,
+        "follow": true,
+        "target": null
+      },
+      "after": {
+        "cx": 376.0693717277487,
+        "cy": 178.39141258597684,
+        "follow": false,
+        "target": null
+      }
+    },
+    {
+      "case": "native map touch cancellation and precise tap navigation",
+      "cancelState": {
+        "target": null,
+        "down": false
+      },
+      "destination": {
+        "x": 377,
+        "y": 184,
+        "u": 0.4441860465116279,
+        "v": 0.5
+      },
+      "positionBefore": {
+        "id": 1,
+        "floor": 300,
+        "x": 379,
+        "y": 186
+      },
+      "positionAfter": {
+        "id": 1,
+        "floor": 300,
+        "x": 379,
+        "y": 185
+      }
+    },
+    {
+      "case": "real joystick move and release",
+      "before": {
+        "id": 1,
+        "floor": 300,
+        "x": 375,
+        "y": 184
+      },
+      "moved": {
+        "id": 1,
+        "floor": 300,
+        "x": 372,
+        "y": 181
+      },
+      "stopped": {
+        "id": 1,
+        "floor": 300,
+        "x": 372,
+        "y": 181
+      },
+      "stable": {
+        "id": 1,
+        "floor": 300,
+        "x": 372,
+        "y": 181
+      }
+    },
+    {
+      "case": "production short-screen drawer touch scroll",
+      "scrollBefore": 12,
+      "scrollAfter": 72
+    },
+    {
+      "case": "normal battle starts with an unobstructed native-scale player",
+      "sprite": {
+        "x": 190.2637237548828,
+        "y": 634.4066666666666,
+        "width": 47.826663208007815,
+        "height": 82.99333333333334
+      },
+      "sheetHidden": true,
+      "coverRatio": 0,
+      "hp": 6300,
+      "maxHp": 6300
+    },
+    {
+      "case": "native manual battle, pet submenu, target and victory back",
+      "result": "win",
+      "returnClosed": true
+    },
+    {
+      "case": "server-acknowledged normal automatic battle",
+      "turns": 1,
+      "end": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 293,
+        "gold": 0,
+        "levelUp": 0
+      }
+    },
+    {
+      "case": "server-acknowledged quick automatic battle",
+      "turns": 1,
+      "end": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 293,
+        "gold": 0,
+        "levelUp": 0
+      }
+    }
+  ],
+  "binary_sha256": "ea63b938956121a174afcde76cbaae4c01c0839d499b71602f4b360804221694",
+  "binary_version": "v0.2.12-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-14T00:14:06.301Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-14T00:14:25.731Z"
+    },
+    {
+      "stage": "real-matrix",
+      "time": "2026-11-14T00:14:25.733Z"
+    },
+    {
+      "stage": "scenario-finished",
+      "time": "2026-11-14T00:19:35.700Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "separate desktop context and native mouse menus",
+      "passed": true
+    },
+    {
+      "case": "classic 320x568",
+      "passed": true
+    },
+    {
+      "case": "classic 390x844",
+      "passed": true
+    },
+    {
+      "case": "classic 430x932",
+      "passed": true
+    },
+    {
+      "case": "classic 844x390",
+      "passed": true
+    },
+    {
+      "case": "classic 568x320",
+      "passed": true
+    },
+    {
+      "case": "classic native items",
+      "passed": true
+    },
+    {
+      "case": "classic native pets",
+      "passed": true
+    },
+    {
+      "case": "classic native status",
+      "passed": true
+    },
+    {
+      "case": "classic native quests",
+      "passed": true
+    },
+    {
+      "case": "classic native map",
+      "passed": true
+    },
+    {
+      "case": "classic native system",
+      "passed": true
+    },
+    {
+      "case": "immersive 320x568",
+      "passed": true
+    },
+    {
+      "case": "immersive 390x844",
+      "passed": true
+    },
+    {
+      "case": "immersive 430x932",
+      "passed": true
+    },
+    {
+      "case": "immersive 844x390",
+      "passed": true
+    },
+    {
+      "case": "immersive 568x320",
+      "passed": true
+    },
+    {
+      "case": "immersive native items",
+      "passed": true
+    },
+    {
+      "case": "immersive native pets",
+      "passed": true
+    },
+    {
+      "case": "immersive native status",
+      "passed": true
+    },
+    {
+      "case": "immersive native quests",
+      "passed": true
+    },
+    {
+      "case": "immersive native map",
+      "passed": true
+    },
+    {
+      "case": "immersive native system",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 320x568",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 390x844",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 430x932",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 844x390",
+      "passed": true
+    },
+    {
+      "case": "adaptive native items 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native pets 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native status 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native quests 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native map 568x320",
+      "passed": true
+    },
+    {
+      "case": "adaptive native system 568x320",
+      "passed": true
+    },
+    {
+      "case": "native item CG, selected pet model and cancelled rename input",
+      "passed": true
+    },
+    {
+      "case": "real touch pans the native map without navigation",
+      "passed": true
+    },
+    {
+      "case": "native map touch cancellation and precise tap navigation",
+      "passed": true
+    },
+    {
+      "case": "real joystick move and release",
+      "passed": true
+    },
+    {
+      "case": "production short-screen drawer touch scroll",
+      "passed": true
+    },
+    {
+      "case": "normal battle starts with an unobstructed native-scale player",
+      "passed": true
+    },
+    {
+      "case": "native manual battle, pet submenu, target and victory back",
+      "passed": true
+    },
+    {
+      "case": "server-acknowledged normal automatic battle",
+      "passed": true
+    },
+    {
+      "case": "server-acknowledged quick automatic battle",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "client_version": "408f23f7bef662b4",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 375,
+      "y": 184,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 138,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 6300,
+          "maxHp": 6300,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 5,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 6,
+          "name": "克劳德",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0
+        },
+        {
+          "slot": 7,
+          "name": "格鲁克",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0
+        },
+        {
+          "slot": 8,
+          "name": "吉米奈",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0
+        },
+        {
+          "slot": 15,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 40,
+          "hp": 234,
+          "maxHp": 234,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1834,
+          "hp": 0,
+          "actorHp": 6300,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "exp": 293,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 138,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 6300,
+          "maxHp": 6300,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 5,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 6,
+          "name": "克劳德",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0
+        },
+        {
+          "slot": 7,
+          "name": "格鲁克",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0
+        },
+        {
+          "slot": 8,
+          "name": "吉米奈",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0
+        },
+        {
+          "slot": 15,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 40,
+          "hp": 247,
+          "maxHp": 247,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1822,
+          "hp": 0,
+          "actorHp": 6300,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "exp": 293,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 138,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 6300,
+          "maxHp": 6300,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 5,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 6,
+          "name": "克劳德",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0
+        },
+        {
+          "slot": 7,
+          "name": "格鲁克",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0
+        },
+        {
+          "slot": 8,
+          "name": "吉米奈",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0
+        },
+        {
+          "slot": 15,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 40,
+          "hp": 239,
+          "maxHp": 239,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1922,
+          "hp": 0,
+          "actorHp": 6300,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "exp": 293,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "desktopEvents": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "drawerBefore": {
+    "target": {
+      "id": "menu-status",
+      "x": 104.75,
+      "y": 115.25,
+      "top": 12,
+      "max": 507,
+      "touchAction": "pan-y"
+    },
+    "geometry": {
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 568,
+        "height": 320
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    }
+  },
+  "drawerTouch": {
+    "target": {
+      "id": "menu-status",
+      "x": 104.75,
+      "y": 115.25,
+      "top": 12,
+      "max": 507,
+      "touchAction": "pan-y"
+    },
+    "scrollBefore": 12,
+    "scrollAfter": 72,
+    "panelCount": 0,
+    "geometry": {
+      "screen": {
+        "width": 568,
+        "height": 320
+      },
+      "mobile": true,
+      "context": "field",
+      "display": "immersive",
+      "stage": {
+        "x": -116,
+        "y": -164,
+        "width": 800,
+        "height": 600
+      },
+      "viewport": {
+        "x": 0,
+        "y": 0,
+        "width": 568,
+        "height": 320
+      },
+      "stageInBody": false,
+      "backing": {
+        "width": 800,
+        "height": 600
+      }
+    }
+  }
+}

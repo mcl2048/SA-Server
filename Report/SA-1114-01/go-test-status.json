@@ -1,0 +1,12 @@
+{
+  "state": "finished",
+  "command": [
+    "go",
+    "test",
+    "-count=1",
+    "-buildvcs=false",
+    "./..."
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 44.682
+}

@@ -171,3 +171,31 @@ test("a new immersive scene immediately reveals its intended focus and recenters
   assert.equal(stage.style["--mobile-left"], "195px", "player remains centered after a menu/scene transition");
   view.setMobileDisplayMode("classic"); view.setDeviceMode("desktop"); flush();
 });
+
+test("immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize", () => {
+  view.setDeviceMode("mobile"); view.setMobileDisplayMode("immersive");
+  for (const [width, height] of [[390,844],[844,390],[390,360]]) {
+    Object.assign(globalThis, {innerWidth:width,innerHeight:height});
+    view.setMobileContext("field"); flush();
+    view.setMobileContext("panel"); flush();
+    assert.equal(root.style["--game-width"], `${width}px`, "dialog cannot return to an outside-page rail");
+    assert.equal(root.style["--game-height"], `${height}px`);
+    assert.equal(root.style.width, `${width}px`); assert.equal(root.style.height, `${height}px`);
+    const scale = Number(stage.style["--mobile-scale"]);
+    assert.ok(scale >= width/800 && scale >= height/600, "the native scene fills the device behind its dialog");
+  }
+  Object.assign(globalThis,{innerWidth:390,innerHeight:844});
+  view.setMobileDisplayMode("classic"); view.setMobileContext("field"); view.setDeviceMode("desktop"); flush();
+});
+
+test("native model metadata is mobile-only and resets with the normal UI frame", () => {
+  const ui=new Ui({} as any,new Mouse());
+  const card={id:"inv-9",kind:"item" as const,title:"回复药",detail:"背包1",image:24001,actions:["inv-9"]};
+  view.setDeviceMode("desktop");ui.mobilePortrait(28001);ui.mobileCard(card);ui.mobileInfo(["隐藏"]);assert.deepEqual(ui.portraits,[]);assert.deepEqual(ui.cards,[]);assert.equal(ui.panelInfo,null);
+  view.setDeviceMode("mobile");ui.mobilePortrait(9000000,true);
+  ui.mobileCard(card);assert.deepEqual(ui.cards,[card]);
+  ui.mobileInfo(["HP 50/100"],298);assert.deepEqual(ui.panelInfo,{lines:["HP 50/100"],nativeTextX:298});
+  assert.deepEqual(ui.portraits,[{image:9000000,rawIndex:true}]);
+  ui.begin();assert.deepEqual(ui.portraits,[]);assert.deepEqual(ui.cards,[]);assert.equal(ui.panelInfo,null);
+  view.setDeviceMode("desktop");
+});

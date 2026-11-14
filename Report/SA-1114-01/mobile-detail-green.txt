@@ -1,0 +1,37 @@
+(node:686356) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (10.749425ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (1.486905ms)
+✔ an already flown target cannot receive a second hit or damage popup (1.779277ms)
+✔ native enemy support cannot revive an already flown or absent target during playback (1.543313ms)
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (12.055518ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (3.542164ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (5.607454ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (6.314561ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (4.813282ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (1.908418ms)
+✔ battle commands and targets remain human readable in a bounded sheet (4.364854ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (4.613824ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (4.851244ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (3.420989ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (6.825917ms)
+✔ native column registration is presented in visual row order and keeps action identity (1.852044ms)
+✔ immersive scene exposes a cancellable menu tray and restores classic panels (8.265053ms)
+✔ immersive battle camera stays a view command and native targets keep their real IDs (4.384062ms)
+✔ switching to desktop during browser fullscreen retains the explicit exit control (0.824622ms)
+✔ quick battle preserves its field context and native battle panels restore the complete layout (4.039596ms)
+✔ immersive battle starts with clear actors and native toggles, then exposes and closes commands (5.203242ms)
+✔ immersive field tray exposes reachable native social controls without duplicating toolbar menus (3.338717ms)
+✔ immersive native panels remain in the game viewport and hide movement behind the dialog (2.105513ms)
+✔ fullscreen map paints native map layers and maps taps back to the original hit coordinates (5.689925ms)
+✔ immersive native collections keep slot art, details and real controls together without duplicate summaries (2.563353ms)
+✔ fullscreen map drags emit native pointer phases and cancellation never emits a route tap (5.351349ms)
+✔ native pet detail replaces whole-list summaries and changing game windows resets retained scroll (2.124894ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 602.952769

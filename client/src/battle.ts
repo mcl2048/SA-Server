@@ -108,7 +108,12 @@ class Fighter {
   x: number; y: number;      // 当前绘制位置
   homeX: number; homeY: number;
   dir: number;
-  hp: number; mp: number;
+  private health = 0;
+  // HP is authoritative for every event source, including poison and fast
+  // playback. Updating it must never leave an independently live corpse.
+  get hp(): number { return this.health; }
+  set hp(value: number) { this.health = value; this.dead = value <= 0; }
+  mp: number;
   rideHp: number;           // 骑着的宠物的 HP（没骑为 0；落马后为 0）
   status = 0;
   dead = false; gone = false; hidden = false;
@@ -711,6 +716,7 @@ export class BattleScreen {
           if (e.damage > 0) this.popup(a, now, { text: String(e.damage), color: FONT.PURPLE });
           if (e.petDamage > 0) this.popup(a, now, { text: String(e.petDamage), color: FONT.PURPLE, dy: 25 });
           a.play(ANIM.DAMAGE, now);
+          if (a.dead) { a.status = 0; a.motion = null; this.die(a, now); }
         }));
         break;
       case "cure":
@@ -750,6 +756,9 @@ export class BattleScreen {
         if (!t) break;
         steps.push(this.waitStep(1, (now) => { this.showSkill(e.skill, now); a.play(ANIM.ATTACK, now); }));
         steps.push(this.waitStep(600, (now) => {
+          // Validate when this queued step runs: an earlier event in the same
+          // turn may already have removed the native support target.
+          if (t.gone || t.fly) return;
           t.hp = e.hp; t.status = e.status;
           if (e.kind === "revive" && e.hp > 0) { t.dead = false; t.stars = false; t.deadAt = 0; t.dying = false; t.play(ANIM.STAND, now, true); }
           this.popup(t, now, { text: String(e.damage), color: FONT.GREEN });
@@ -822,6 +831,9 @@ export class BattleScreen {
   }
 
   private applyMagic(e: BattleEvent, t: Fighter, a: Fighter, now: number) {
+    // A flown slot is permanently absent from this battle. A stale/invalid
+    // revival must not create an invisible fighter or a hit over empty space.
+    if (t.gone || t.fly) return;
     if (e.effect === 100606) t.reversed = e.ok; // MAGIC_AttReverse（BR）：头上的反转记号
     switch (e.result) {
       case "heal":
@@ -1113,6 +1125,7 @@ export class BattleScreen {
    * （oft.cpp bow 12、axe_shadow / stone_shadow / boomerang 252），所以呼叫的地方另外给。
    */
   private applyHit(e: BattleEvent, t: Fighter, a: Fighter, now: number, hitSe = damageSe(a.hitMarker)) {
+    if (t.gone || t.fly) return;
     switch (e.result) {
       case "dodge": {
         // 闪避：往攻击者的反方向一闪再回来（SE 8）；攻击者正站在面前，所以就是背着他退一步

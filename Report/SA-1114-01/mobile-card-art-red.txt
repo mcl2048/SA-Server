@@ -1,0 +1,29 @@
+✔ fullscreen skin reuses native nine-slice art and caches decoded icons across frames (6.030967ms)
+✔ unavailable optional native art leaves controls operational and retries bounded (1.325971ms)
+✔ overlapping native frames coalesce into one decoder and still skin newly added controls (17.558846ms)
+✔ selected native model is bounded, cached and cannot overwrite a newer pet selection (3.768781ms)
+✖ native inventory art follows a reused slot and clears when the slot becomes empty (2.121989ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 363.248048
+
+✖ failing tests:
+
+test at client/test/mobile-native-skin.test.ts:68:1
+✖ native inventory art follows a reused slot and clears when the slot becomes empty (2.121989ms)
+  AssertionError [ERR_ASSERTION]: The "string" argument must be of type string. Received type undefined (undefined)
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-native-skin.test.ts:72:39)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /24001/,
+    operator: 'match',
+    diff: 'simple'
+  }

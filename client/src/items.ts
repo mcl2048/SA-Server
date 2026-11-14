@@ -248,6 +248,8 @@ export class ItemWindow {
     ui.hitBox(wx, wy, wx + 271, wy + 440, "item-wnd", false);
     rects.push([wx, wy, wx + 271, wy + 440]);
     const pet = this.petPage ? this.pet() : undefined;
+    ui.mobileInfo?.([`石币 ${this.inv.gold}`,pet ? `${pet.freeName || pet.name} · 宠物装备` : "人物装备与背包",
+      this.held >= 0 ? "已拿起道具，轻点目标格放下；双击同一格使用。" : "轻点道具拿起或移动，双击使用或装备。"]);
     if (this.petPage && !pet) this.selPet = this.host.petList()[0]?.slot ?? -1; // 那只不在了就换第一只
     if (this.petPage) ui.image(CG.PET_ITEM_WND, wx + 121, wy + 220);
     else {
@@ -265,6 +267,10 @@ export class ItemWindow {
       const id = `inv-${s}`;
       const on = ui.hitBox(x - 24, y - 24, x + 26, y + 23, id, false);
       const it = pet && s < PET_ITEM_SLOTS ? pet.items.find((i) => i.slot === s) : this.item(s);
+      const slotName = s < top ? (pet ? PET_SLOT_NAME[s] : EQUIP_NAME[s]) : `背包 ${s - EQUIP_SLOTS + 1}`;
+      ui.mobileCard?.({ id, kind: "item", title: it ? `${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}${s===this.held ? "（拿起）" : ""}` : `${slotName} · 空`,
+        detail: `${slotName}${it ? ` · ${it.memo || it.magicMemo || "轻点选择，再点同一格使用"}` : ""}`,
+        image: it?.image, actions: [id] });
       const mixing = this.anim?.carried.has(s) || (this.anim && this.anim.state !== "move" && this.anim.state !== "end" && this.mix.has(s));
       if (it && s !== this.held && !mixing) ui.image(it.image, x, y);
       if (it && this.mix.has(s) && !mixing) ui.text(x - 17, y, MIX_LABEL[this.mix.get(s)!], FONT.WHITE);

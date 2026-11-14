@@ -70,7 +70,9 @@ func magicNum(opt, key string, def int) int {
 func (b *Battle) magicTargets(toNo int, dead bool) []int {
 	ok := func(i int) bool {
 		f := b.F[i]
-		if f == nil || f.Escaped || f.hidden || b.autoAvoidTargets&(1<<i) != 0 {
+		// A normal knockout may be resurrected; flight removes the fighter from
+		// this battle permanently, for healing and resurrection alike.
+		if f == nil || f.Escaped || f.Flown || f.hidden || b.autoAvoidTargets&(1<<i) != 0 {
 			return false
 		}
 		if dead {
@@ -249,7 +251,7 @@ func (b *Battle) magicRessurect(f *Fighter, c Command, ev *[]Event) {
 		if p > 0 {
 			hp = min(t.MaxHP, max(1, int(b.rand(float64(p)*0.9, float64(p)*1.1))))
 		}
-		t.HP, t.status, t.KilledBy = hp, [stCount]int{}, -1
+		t.HP, t.status, t.KilledBy, t.KilledRide = hp, [stCount]int{}, -1, false
 		if t.Pet {
 			t.AIDelta += aiFixPetRessurect
 		}

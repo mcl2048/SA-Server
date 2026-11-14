@@ -9,7 +9,7 @@
 // 输入框原版是 28 字节一行的多行框，这里用一行（最多 140 字节）。
 
 
-import { FONT, InputBox, boxColor, measure,         } from "./ui.js?v=e5c6eee3f928fb08";
+import { FONT, InputBox, boxColor, measure,         } from "./ui.js?v=408f23f7bef662b4";
 
 const CG = {
   WND: 26082, SEND_WND: 26200, PET_SEND_WND: 26201, ITEM_BTN: 26202, HISTORY_WND: 26203,

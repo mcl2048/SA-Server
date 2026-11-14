@@ -1,0 +1,7 @@
+{"meta": "/tmp/sa-1114-01-runtime-candidate.json", "base": "http://127.0.0.1:50517", "sha256": "ea63b938956121a174afcde76cbaae4c01c0839d499b71602f4b360804221694"}
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+{"variant":"candidate","knockout":"automatic","turns":5,"fly":4}
+{"variant":"candidate","knockout":"quick","turns":4,"fly":5}
+{"variant":"candidate","stage":"scenario-finished"}
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-01/browser/candidate-knockout.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

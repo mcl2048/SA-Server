@@ -219,8 +219,9 @@ type PetSeed struct {
 	Get             int  // E_T_GET（CHAR_WORKMODCAPTUREDEFAULT）
 }
 
-// Alive：还在场上（没倒下也没逃走）。
-func (f *Fighter) Alive() bool { return f != nil && f.HP > 0 && !f.Escaped }
+// Alive：仍在场且 HP > 0。击飞是这场战斗的永久离场状态；即使某个
+// 回复路径留下正 HP，也不能让不可见的离场单位重新行动、被选中或拖住胜负。
+func (f *Fighter) Alive() bool { return f != nil && f.HP > 0 && !f.Escaped && !f.Flown }
 
 // Status 返回当前的异常状态（同时只会有一种，原版附加时已有状态就不会再附加）。
 func (f *Fighter) Status() int {

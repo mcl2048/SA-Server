@@ -12,8 +12,8 @@
 
 
 
-import { FONT, measure,         } from "./ui.js?v=e5c6eee3f928fb08";
-import { settings, saveSettings } from "./menus.js?v=e5c6eee3f928fb08";
+import { FONT, measure,         } from "./ui.js?v=408f23f7bef662b4";
+import { settings, saveSettings } from "./menus.js?v=408f23f7bef662b4";
 
 
 
@@ -165,7 +165,11 @@ export class MapWindow {
   }
 
   /** 打开时回到自己那一层、跟着自己 */
-  reset() { this.floor = -1; this.follow = true; this.drag = null; }
+  reset() { this.floor = -1; this.follow = true; this.cancelPointer(); }
+
+  /** Release native gesture bookkeeping without moving its view or inventing
+   * an up/click. Used by touch cancellation, context changes and window reopen. */
+  cancelPointer()       { this.drag=null;this.dragged=false;this.pressInside=false; }
 
   frame(rects                                    , close            ) {
     const ui = this.host.ui, x = X, y = Y, f = this.host.field();

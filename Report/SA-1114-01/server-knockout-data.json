@@ -1,0 +1,322 @@
+{
+  "source": "gamedata/battle/enemybase1.txt + enemy1.txt + group1.txt; GBK decoding, skill 500 ENEMYSKILL_ReLife and nonzero matching wa weight",
+  "healerEnemyCount": 28,
+  "healerGroupCount": 8,
+  "healers": [
+    {
+      "enemyID": 1803,
+      "templateID": 909,
+      "name": "巴克",
+      "reviveSkillSlots": [
+        1
+      ],
+      "tactics": "at:0;1;1|gu:0|es:0|wa:5;2;2;3;0;0;0;"
+    },
+    {
+      "enemyID": 2252,
+      "templateID": 39,
+      "name": "假朱雀",
+      "reviveSkillSlots": [
+        4
+      ],
+      "tactics": "at:3;1;1|gu:1|es:0|rn:|wa:3;3;3;3;3;0;0;"
+    },
+    {
+      "enemyID": 2534,
+      "templateID": 1165,
+      "name": "雷尔",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:0;1;1|gu:0|es:0|rn:|wa:0;1;1;1;1;1;1;"
+    },
+    {
+      "enemyID": 2630,
+      "templateID": 1245,
+      "name": "罗多克雷-冰龙战队",
+      "reviveSkillSlots": [
+        2
+      ],
+      "tactics": "at:1;1;1|gu:0|es:0|rn:|wa:0;1;1;1;1;3;1;"
+    },
+    {
+      "enemyID": 2631,
+      "templateID": 1246,
+      "name": "德古德贝特-冰龙战队",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:1;4;1|gu:0|es:0|rn:|wa:0;1;1;1;1;3;1;"
+    },
+    {
+      "enemyID": 2663,
+      "templateID": 1275,
+      "name": "翼龙(谜之谷物)",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:1;1;1|gu:0|es:0|rn:|wa:0;1;1;1;1;3;1;"
+    },
+    {
+      "enemyID": 2906,
+      "templateID": 2006,
+      "name": "异",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:3;1;1|gu:2|es:0|rn:|wa:3;3;3;3;3;3;0;"
+    },
+    {
+      "enemyID": 11005,
+      "templateID": 11005,
+      "name": "冥界地使者",
+      "reviveSkillSlots": [
+        1
+      ],
+      "tactics": "at:3;1;1|gu:3|es:0|rn:|wa:3;3;3;3;3;3;0;"
+    },
+    {
+      "enemyID": 11006,
+      "templateID": 11006,
+      "name": "冥界水使者",
+      "reviveSkillSlots": [
+        4
+      ],
+      "tactics": "at:3;1;1|gu:2|es:0|rn:|wa:3;3;3;3;3;3;0;"
+    },
+    {
+      "enemyID": 11008,
+      "templateID": 11008,
+      "name": "冥界风使者",
+      "reviveSkillSlots": [
+        4
+      ],
+      "tactics": "at:3;1;1|gu:2|es:0|rn:|wa:3;3;3;3;3;3;0;"
+    },
+    {
+      "enemyID": 11009,
+      "templateID": 11009,
+      "name": "冥王",
+      "reviveSkillSlots": [
+        0
+      ],
+      "tactics": "at:0;1;3|gu:0|es:0|wa:1;1;1;1;1;0;0;"
+    },
+    {
+      "enemyID": 11010,
+      "templateID": 11010,
+      "name": "冥王的奴隶",
+      "reviveSkillSlots": [
+        5
+      ],
+      "tactics": "at:2;1;1|gu:0|es:0|rn:|wa:0;2;2;2;2;2;0;"
+    },
+    {
+      "enemyID": 12001,
+      "templateID": 12001,
+      "name": "天界守护",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:1;3;3|gu:0|es:0|wa:1;1;1;1;1;0;0;"
+    },
+    {
+      "enemyID": 12002,
+      "templateID": 12002,
+      "name": "天界守护",
+      "reviveSkillSlots": [
+        1
+      ],
+      "tactics": "at:1;3;3|gu:0|es:0|wa:1;1;1;1;1;0;0;"
+    },
+    {
+      "enemyID": 12003,
+      "templateID": 12003,
+      "name": "天界守护",
+      "reviveSkillSlots": [
+        1
+      ],
+      "tactics": "at:1;3;3|gu:0|es:0|wa:1;1;1;1;1;0;0;"
+    },
+    {
+      "enemyID": 12007,
+      "templateID": 12007,
+      "name": "天界火使者",
+      "reviveSkillSlots": [
+        3
+      ],
+      "tactics": "at:3;1;1|gu:2|es:0|rn:|wa:3;3;3;3;3;3;0;"
+    },
+    {
+      "enemyID": 12009,
+      "templateID": 12009,
+      "name": "天灵盖",
+      "reviveSkillSlots": [
+        0
+      ],
+      "tactics": "at:0;1;3|gu:0|es:0|wa:1;1;1;1;1;0;0;"
+    },
+    {
+      "enemyID": 12010,
+      "templateID": 12010,
+      "name": "天灵盖的保姆",
+      "reviveSkillSlots": [
+        5
+      ],
+      "tactics": "at:2;1;1|gu:0|es:0|rn:|wa:0;2;2;2;2;2;0;"
+    },
+    {
+      "enemyID": 5113,
+      "templateID": 2023,
+      "name": "冰颤魔狼王",
+      "reviveSkillSlots": [
+        1
+      ],
+      "tactics": "at:7;1;1|gu:0|es:0|rn:|wa:1;2;3;4;5;6;7;"
+    },
+    {
+      "enemyID": 5122,
+      "templateID": 2032,
+      "name": "黄泉鬼王",
+      "reviveSkillSlots": [
+        6
+      ],
+      "tactics": "at:0;1;1|gu:0|es:0|wa:0;1;5;4;1;1;1;"
+    },
+    {
+      "enemyID": 5129,
+      "templateID": 2039,
+      "name": "黄泉大鬼",
+      "reviveSkillSlots": [
+        2,
+        5
+      ],
+      "tactics": "at:0;1;3|gu:0|es:0|wa:0;1;2;3;1;1;3;"
+    },
+    {
+      "enemyID": 5130,
+      "templateID": 2040,
+      "name": "黄泉小鬼",
+      "reviveSkillSlots": [
+        5
+      ],
+      "tactics": "at:3;1;3|gu:0|es:0|wa:0;1;2;3;1;1;3;"
+    },
+    {
+      "enemyID": 6009,
+      "templateID": 33008,
+      "name": "海盗医师",
+      "reviveSkillSlots": [
+        1,
+        3
+      ],
+      "tactics": "at:3;1;1|gu:0|es:0|rn:|wa:1;2;3;1;2;3;1;"
+    },
+    {
+      "enemyID": 6054,
+      "templateID": 3049,
+      "name": "金巴尼亚",
+      "reviveSkillSlots": [
+        6
+      ],
+      "tactics": "at:3;1;1|gu:0|es:0|wa:1;2;3;4;5;6;7;"
+    },
+    {
+      "enemyID": 6056,
+      "templateID": 3049,
+      "name": "金巴尼亚",
+      "reviveSkillSlots": [
+        6
+      ],
+      "tactics": "at:0;1;1|gu:0|es:0|wa:1;2;3;4;5;6;7;"
+    },
+    {
+      "enemyID": 14031,
+      "templateID": 14031,
+      "name": "艾巴登",
+      "reviveSkillSlots": [
+        4
+      ],
+      "tactics": "at:3;1;1|gu:0|es:0|rn:|wa:1;2;3;4;5;6;7;"
+    },
+    {
+      "enemyID": 10465,
+      "templateID": 10465,
+      "name": "巫女",
+      "reviveSkillSlots": [
+        5,
+        6
+      ],
+      "tactics": "at:3;2;1|gu:0|es:0|wa:1;1;1;1;1;1;1;"
+    },
+    {
+      "enemyID": 10473,
+      "templateID": 10473,
+      "name": "猥琐大皇后",
+      "reviveSkillSlots": [
+        0,
+        5,
+        6
+      ],
+      "tactics": "at:3;2;1|gu:0|es:0|wa:1;1;1;1;1;1;1;"
+    }
+  ],
+  "groups": [
+    {
+      "id": 1230,
+      "name": "92年周年庆",
+      "healers": [
+        2252
+      ]
+    },
+    {
+      "id": 1440,
+      "name": "深海通道",
+      "healers": [
+        5113
+      ]
+    },
+    {
+      "id": 1524,
+      "name": "海盗船",
+      "healers": [
+        6009
+      ]
+    },
+    {
+      "id": 1525,
+      "name": "海盗船",
+      "healers": [
+        6009
+      ]
+    },
+    {
+      "id": 1526,
+      "name": "海盗船",
+      "healers": [
+        6009
+      ]
+    },
+    {
+      "id": 1579,
+      "name": "61002刷怪",
+      "healers": [
+        6056
+      ]
+    },
+    {
+      "id": 1580,
+      "name": "61002刷怪",
+      "healers": [
+        6056
+      ]
+    },
+    {
+      "id": 1581,
+      "name": "61005刷怪",
+      "healers": [
+        6054
+      ]
+    }
+  ]
+}

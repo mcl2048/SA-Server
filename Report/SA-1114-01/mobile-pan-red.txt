@@ -1,0 +1,73 @@
+TAP version 13
+# Subtest: reflowed map taps preserve the destination rather than clicking the native map center
+ok 1 - reflowed map taps preserve the destination rather than clicking the native map center
+  ---
+  duration_ms: 6.879076
+  type: 'test'
+  ...
+# Subtest: stale, outside and nonfinite map points cannot become ground clicks
+ok 2 - stale, outside and nonfinite map points cannot become ground clicks
+  ---
+  duration_ms: 0.62941
+  type: 'test'
+  ...
+# Subtest: map drags retain the start and final move across frames without queuing unbounded pointer traffic
+not ok 3 - map drags retain the start and final move across frames without queuing unbounded pointer traffic
+  ---
+  duration_ms: 1.148451
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-hit.test.ts:16:1'
+  failureType: 'testCodeFailure'
+  error: 'MobileMapPointer is not a constructor'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-hit.test.ts:18:15)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: cancelled, replaced and resized native map drags cannot resume or become clicks
+not ok 4 - cancelled, replaced and resized native map drags cannot resume or become clicks
+  ---
+  duration_ms: 0.790261
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-hit.test.ts:28:1'
+  failureType: 'testCodeFailure'
+  error: 'MobileMapPointer is not a constructor'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-hit.test.ts:30:15)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# file:///home/coder/saserver/client/test/mobile-map-pan.test.ts:4
+# import {MobileMapPointer} from "../src/mobile-hit.ts";
+#         ^^^^^^^^^^^^^^^^
+# SyntaxError: The requested module '../src/mobile-hit.ts' does not provide an export named 'MobileMapPointer'
+#     at ModuleJob._instantiate (node:internal/modules/esm/module_job:226:21)
+#     at async ModuleJob.run (node:internal/modules/esm/module_job:335:5)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+# Node.js v22.23.3
+# Subtest: client/test/mobile-map-pan.test.ts
+not ok 2 - client/test/mobile-map-pan.test.ts
+  ---
+  duration_ms: 648.364529
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-map-pan.test.ts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 2
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 693.223561

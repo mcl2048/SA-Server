@@ -1,0 +1,1152 @@
+{
+  "variant": "baseline",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "f92041f5775ac45ff5272534fe04a66e5a751ea50e82f40840d6120a3750aba9",
+  "binary_version": "v0.2.11-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-13T23:39:09.928Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-13T23:39:24.000Z"
+    },
+    {
+      "stage": "scenario-finished",
+      "time": "2026-11-13T23:39:57.449Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "baseline real flight/resurrection reproduced",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 415,
+      "y": 195
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 415,
+      "y": 195
+    },
+    "position_matches": true
+  },
+  "client_version": "e5c6eee3f928fb08",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 415,
+      "y": 195,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 138,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 7000,
+          "maxHp": 7000,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 5,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 6,
+          "name": "克劳德",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0
+        },
+        {
+          "slot": 7,
+          "name": "格鲁克",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0
+        },
+        {
+          "slot": 8,
+          "name": "吉米奈",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureReviver",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 407,
+          "maxHp": 407,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 16,
+          "name": "FixtureReviver",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 408,
+          "maxHp": 408,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 17,
+          "name": "FixtureReviver",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 419,
+          "maxHp": 419,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        },
+        {
+          "slot": 18,
+          "name": "FixtureReviver",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 399,
+          "maxHp": 399,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 17,
+          "damage": 5907,
+          "hp": 0,
+          "actorHp": 7000,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        },
+        {
+          "actor": 16,
+          "kind": "revive",
+          "target": 17,
+          "damage": 209,
+          "hp": 209,
+          "actorHp": 408,
+          "actorMp": 0,
+          "skill": "E复活术",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 18,
+          "kind": "attack",
+          "target": 7,
+          "damage": 0,
+          "hp": 528,
+          "actorHp": 399,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 17,
+          "kind": "attack",
+          "target": 7,
+          "damage": 0,
+          "hp": 528,
+          "actorHp": 209,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "attack",
+          "target": 0,
+          "damage": 0,
+          "hp": 7000,
+          "actorHp": 407,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 0,
+          "kind": "counter",
+          "target": 15,
+          "damage": 0,
+          "hp": 407,
+          "actorHp": 7000,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 7,
+          "kind": "attack",
+          "target": 18,
+          "damage": 0,
+          "hp": 399,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "attack",
+          "target": 18,
+          "damage": 0,
+          "hp": 399,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "Gemini Overdrive",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "attack",
+          "target": 18,
+          "damage": 0,
+          "hp": 399,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "Gemini Overdrive",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "attack",
+          "target": 18,
+          "damage": 73,
+          "hp": 326,
+          "actorHp": 574,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 6,
+          "kind": "attack",
+          "target": 18,
+          "damage": 0,
+          "hp": 326,
+          "actorHp": 655,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 9,
+          "kind": "attack",
+          "target": 18,
+          "damage": 0,
+          "hp": 326,
+          "actorHp": 196,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 2,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 16,
+          "damage": 5854,
+          "hp": 0,
+          "actorHp": 7000,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        },
+        {
+          "actor": 15,
+          "kind": "revive",
+          "target": 16,
+          "damage": 204,
+          "hp": 204,
+          "actorHp": 407,
+          "actorMp": 0,
+          "skill": "E复活术",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 17,
+          "kind": "attack",
+          "target": 7,
+          "damage": 0,
+          "hp": 528,
+          "actorHp": 209,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 18,
+          "kind": "attack",
+          "target": 9,
+          "damage": 2,
+          "hp": 194,
+          "actorHp": 326,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "attack",
+          "target": 17,
+          "damage": 67,
+          "hp": 142,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "Gemini Overdrive",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "attack",
+          "target": 17,
+          "damage": 60,
+          "hp": 82,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "Gemini Overdrive",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 7,
+          "kind": "attack",
+          "target": 17,
+          "damage": 0,
+          "hp": 82,
+          "actorHp": 528,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "attack",
+          "target": 17,
+          "damage": 0,
+          "hp": 82,
+          "actorHp": 574,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 6,
+          "kind": "attack",
+          "target": 17,
+          "damage": 0,
+          "hp": 82,
+          "actorHp": 655,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 9,
+          "kind": "attack",
+          "target": 17,
+          "damage": 0,
+          "hp": 82,
+          "actorHp": 194,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    }
+  ],
+  "knockout": [
+    {
+      "mode": "automatic",
+      "flyEvents": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 17,
+          "damage": 5907,
+          "hp": 0,
+          "actorHp": 7000,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2,
+          "turn": 1
+        }
+      ],
+      "badRevives": [
+        {
+          "actor": 16,
+          "kind": "revive",
+          "target": 17,
+          "damage": 209,
+          "hp": 209,
+          "actorHp": 408,
+          "actorMp": 0,
+          "skill": "E复活术",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0,
+          "turn": 1
+        }
+      ],
+      "ended": false,
+      "state": {
+        "battle": true,
+        "queue": 53,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 7000,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 5,
+            "hp": 574,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 6,
+            "hp": 655,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 7,
+            "hp": 528,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 8,
+            "hp": 528,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 9,
+            "hp": 196,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 15,
+            "hp": 407,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 16,
+            "hp": 408,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 17,
+            "hp": 419,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          },
+          {
+            "slot": 18,
+            "hp": 399,
+            "dead": false,
+            "gone": false,
+            "fly": false
+          }
+        ]
+      },
+      "turns": 1,
+      "end": null
+    }
+  ]
+}

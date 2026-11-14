@@ -1,0 +1,24 @@
+{"variant":"baseline","stage":"server-ready"}
+{"variant":"baseline","stage":"authenticated-real-field"}
+{"variant":"baseline","stage":"real-matrix"}
+{"variant":"baseline","matrix_step":"desktop-enter"}
+{"variant":"baseline","matrix_step":"desktop-authenticated"}
+{"variant":"baseline","matrix_step":"desktop-action","id":"tb-status"}
+{"variant":"baseline","matrix_step":"desktop-action","id":"tb-item"}
+{"variant":"baseline","matrix_step":"desktop-action","id":"tb-pet"}
+{"variant":"baseline","matrix_step":"desktop-action","id":"tb-map"}
+{"variant":"baseline","matrix_step":"desktop-action","id":"tb-system"}
+{"variant":"baseline","matrix_case":"separate desktop context and native mouse menus"}
+{"variant":"baseline","matrix_case":"classic 320x568"}
+{"variant":"baseline","matrix_case":"classic 390x844"}
+{"variant":"baseline","matrix_case":"classic 430x932"}
+{"variant":"baseline","matrix_case":"classic 844x390"}
+{"variant":"baseline","matrix_case":"classic 568x320"}
+{"variant":"baseline","matrix_case":"classic native items"}
+{"variant":"baseline","matrix_case":"classic native pets"}
+{"variant":"baseline","matrix_case":"classic native status"}
+{"variant":"baseline","matrix_case":"classic native quests"}
+{"variant":"baseline","matrix_case":"classic native map"}
+{"variant":"baseline","matrix_case":"classic native system"}
+{"variant":"baseline","stage":"scenario-finished"}
+{"variant":"baseline","probe":false,"result":"/home/coder/saserver/Report/SA-1114-01/browser/baseline-real-game.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

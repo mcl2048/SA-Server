@@ -140,6 +140,10 @@ export class PetWindow {
       if (icons[0]) ui.image(icons[0], wx + 228, y - 16);
       if (icons[1]) ui.image(icons[1], wx + 228 + 16, y - 16);
       const btnId = `pet-st${p.slot}`;
+      const stateName = ({rest:"休息",standby:"待命",battle:"出战",ride:"骑乘",mail:"邮件"} as Record<string,string>)[p.state] || p.state;
+      ui.mobileCard?.({id:nameId,kind:"pet",title:p.freeName || p.name,
+        detail:`Lv.${p.level} · HP ${p.hp}/${p.maxHp} · ${stateName} · 忠诚 ${p.loyalty} · ${p.trans}转`,
+        actions:[nameId,btnId,`pet-ride${p.slot}`,`pet-mail${p.slot}`]});
       if (ui.image(CG.PET_WND_REST_BTN + btnNo, x - 27, y - 14, btnId) && ui.clicked(btnId)) this.cycle(p, selected);
       const ride = this.host.pets()?.ride ?? -1;
       if (p.rideable && p.loyalty === 100 && (p.slot === ride || ride < 0)) {
@@ -239,6 +243,10 @@ export class PetWindow {
     ui.hitBox(wx, wy, wx + 272, wy + 332, "pet-wnd", false);
     rects.push([wx, wy, wx + 272, wy + 332]);
     ui.image(CG.PET_WND_DETAIL, wx + 136, wy + 166);
+    ui.mobileInfo?.([`${p.freeName || p.name} · Lv.${p.level} · ${p.trans}转`,
+      `HP ${p.hp}/${p.maxHp} · 忠诚 ${p.loyalty}`, `攻击 ${p.atk} · 防御 ${p.def} · 敏捷 ${p.agi}`,
+      `经验 ${p.exp} · 下级经验 ${p.nextExp}`,
+      `地 ${p.attrs[0] ?? 0} · 水 ${p.attrs[1] ?? 0} · 火 ${p.attrs[2] ?? 0} · 风 ${p.attrs[3] ?? 0}`],this.ext.x + 18);
     this.drawPet(p);
     if (!this.renameBox) this.extPanel(p, rects);
     const x = wx + 20;
@@ -336,10 +344,13 @@ export class PetWindow {
     const ui = this.host.ui, now = performance.now();
     const lizard = LIZARDS.includes(p.sprite);
     const px = this.wx + (lizard ? 220 : 200), py = this.wy + (lizard ? 124 : 144);
-    if (p.sprite < 100000) { const idx = ui.assets.tile(p.sprite); if (idx !== undefined) ui.image(idx, px, py, undefined, true); return; }
+    if (p.sprite < 100000) { const idx = ui.assets.tile(p.sprite); if (idx !== undefined) { ui.image(idx, px, py, undefined, true); ui.mobilePortrait?.(idx,true); } return; }
     const def = ui.assets.anim(p.sprite);
     const act = def && findAction(def, this.dir, ANIM.STAND);
     if (!act || act.frames.length === 0) return;
+    // Reuse a stable native pose in the reflowed fullscreen window. Decoding
+    // every animated frame would repeatedly inflate complete texture pages.
+    if(act.frames[0][0]>=0)ui.mobilePortrait?.(act.frames[0][0],true);
     const ms = Math.max(1, act.ticks) * (1000 / 60);
     const [img, fx, fy] = act.frames[Math.floor((now - this.animAt) / ms) % act.frames.length];
     if (img < 0) return;

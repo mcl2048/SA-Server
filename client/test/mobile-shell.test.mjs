@@ -345,3 +345,108 @@ test("immersive field tray exposes reachable native social controls without dupl
   hits=[];frame("field");const before=fired.length;fire(extra,"click");assert.equal(fired.length,before);
   view.setMobileDisplayMode("classic");frame("field");
 });
+
+test("immersive native panels remain in the game viewport and hide movement behind the dialog", async () => {
+  const view=await import("../src/mobile-view.ts");
+  setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  hits=[{id:"npc-btn0",label:"继续冒险",x1:200,y1:400,x2:300,y2:440}];
+  ui.texts=[{x:180,y:180,text:"村长：欢迎来到萨姆吉尔。"}];
+  shell.frame({phase:"field",panel:true,context:"panel"});
+  assert.equal(chrome.firstChild.dataset.immersive,"true", "dialogs share the fullscreen in-game presentation");
+  assert.equal(shell.sheet.hidden,false);assert.equal(shell.field.hidden,true);
+  assert.equal(shell.sheet.getAttribute("role"),"dialog");
+  assert.equal(shell.sheet.getAttribute("aria-modal"),"true");
+  fire(allButtons().find(b=>b.dataset.action==="npc-btn0"),"click");
+  assert.deepEqual(fired.at(-1),["action","npc-btn0"]);
+  hits=[{id:"bitem-9",label:"回复药",x1:520,y1:120,x2:650,y2:160}];
+  shell.frame({phase:"battle",panel:true,context:"panel"});
+  assert.equal(chrome.firstChild.dataset.immersive,"true");
+  assert.equal(allButtons().find(b=>b.dataset.action==="bitem-9").textContent,"回复药");
+  hits=[];ui.texts=[];view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("fullscreen map paints native map layers and maps taps back to the original hit coordinates", async () => {
+  const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  const drawn=[];Element.prototype.getContext=()=>({clearRect(){},drawImage(...args){drawn.push(args);}});
+  const calls=[];shell.hooks.point=(...args)=>calls.push(args);
+  const base={width:430,height:356},marks={width:430,height:356};
+  ui.pics=[{canvas:base,x:264,y:106},{canvas:marks,x:264,y:106}];
+  hits=[{id:"map-area",x1:264,y1:106,x2:694,y2:462}];
+  shell.frame({phase:"field",panel:true,context:"panel"});
+  const surface=body.querySelectorAll("canvas").find(el=>el.dataset.mobileMap==="true");
+  assert.ok(surface);assert.equal(drawn.length,2);assert.equal(drawn[0][0],base);assert.equal(drawn[1][0],marks);
+  surface.getBoundingClientRect=()=>({left:20,top:30,width:215,height:178});
+  fire(surface,"pointerdown",{pointerId:71,isPrimary:true,clientX:127.5,clientY:119});
+  fire(surface,"pointerup",{pointerId:71,clientX:127.5,clientY:119});
+  assert.deepEqual(calls,[["map-area",479,284]]);
+  fire(surface,"pointerdown",{pointerId:72,isPrimary:true,clientX:80,clientY:80});
+  fire(surface,"pointerup",{pointerId:72,clientX:120,clientY:80});
+  assert.equal(calls.length,1,"scrolling across the map cannot start navigation");
+  hits=[];ui.pics=[];frame("field");assert.equal(surface.hidden,true);
+  delete shell.hooks.point;delete Element.prototype.getContext;view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("immersive native collections keep slot art, details and real controls together without duplicate summaries", async () => {
+  const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  hits=[{id:"inv-9",x1:10,y1:10,x2:60,y2:57},{id:"inv-page1",x1:10,y1:60,x2:30,y2:110}];
+  ui.cards=[{id:"inv-9",kind:"item",title:"回复药",detail:"背包 1 · 回复耐久",image:24001,actions:["inv-9"]},
+    {id:"inv-10",kind:"item",title:"旧道具",detail:"已被新窗口遮住",image:24002,actions:["inv-10"]}];
+  ui.texts=[{x:20,y:20,text:"原始数字 123"}];
+  shell.frame({phase:"field",panel:true,title:"背包",summary:["重复的全部道具摘要"]});
+  const grid=body.querySelectorAll("*").find(e=>e.className==="mobile-native-cards");
+  assert.ok(grid,"native slots need a screen-internal collection");
+  assert.equal(grid.hidden,false);assert.equal(grid.children.length,1,"occluded slots cannot become mobile actions");
+  const item=allButtons().find(b=>b.dataset.action==="inv-9");
+  assert.equal(grid.contains(item),true);assert.equal(item.textContent,"回复药");assert.equal(item.dataset.nativeImage,"24001");
+  assert.equal(grid.querySelectorAll("*").some(e=>e.textContent==="背包 1 · 回复耐久"),true);
+  assert.equal(body.querySelectorAll("p").some(p=>p.textContent==="重复的全部道具摘要"),false);
+  fire(item,"click");assert.deepEqual(fired.at(-1),["action","inv-9"]);
+  hits=[];ui.cards=[];ui.texts=[];frame("field");const before=fired.length;fire(item,"click");assert.equal(fired.length,before);
+  view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("fullscreen map drags emit native pointer phases and cancellation never emits a route tap", async()=>{
+  const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  Element.prototype.getContext=()=>({clearRect(){},drawImage(){}});
+  const moves=[],taps=[];shell.hooks.pointer=(...args)=>moves.push(args);shell.hooks.point=(...args)=>taps.push(args);
+  ui.pics=[{canvas:{width:430,height:356},x:264,y:106}];
+  hits=[{id:"map-area",x1:264,y1:106,x2:694,y2:462}];shell.frame({phase:"field",panel:true,context:"panel"});
+  const surface=body.querySelectorAll("canvas").find(el=>el.dataset.mobileMap==="true");
+  surface.getBoundingClientRect=()=>({left:20,top:30,width:215,height:178});
+  fire(surface,"pointerdown",{pointerId:81,isPrimary:true,clientX:100,clientY:100});
+  fire(surface,"pointermove",{pointerId:81,clientX:130,clientY:110});
+  fire(surface,"pointerup",{pointerId:81,clientX:140,clientY:110});
+  assert.deepEqual(moves,[["map-area",424,246,"start"],["map-area",484,266,"move"],["map-area",504,266,"move"],["map-area",504,266,"end"]]);
+  assert.deepEqual(taps,[]);
+  for(const cancel of ["pointercancel","lostpointercapture","context","hidden","gesture","second","blur"]){
+    fire(surface,"pointerdown",{pointerId:82,isPrimary:true,clientX:100,clientY:100});
+    fire(surface,"pointermove",{pointerId:82,clientX:130,clientY:110});
+    if(cancel==="context"){hits=[];frame("field");}
+    else if(cancel==="hidden"){doc.hidden=true;fire(doc,"visibilitychange");doc.hidden=false;}
+    else if(cancel==="gesture")fire(doc,"sa-mobile-gesture");
+    else if(cancel==="second")fire(doc,"pointerdown",{pointerId:83});
+    else if(cancel==="blur")fire(win,"blur");
+    else fire(surface,cancel,{pointerId:82});
+    assert.equal(moves.at(-1)[3],"cancel",cancel);
+    const count=moves.length;fire(surface,"pointerup",{pointerId:82,clientX:130,clientY:110});
+    assert.equal(moves.length,count);assert.deepEqual(taps,[]);
+    hits=[{id:"map-area",x1:264,y1:106,x2:694,y2:462}];shell.frame({phase:"field",panel:true,context:"panel"});
+  }
+  hits=[];ui.pics=[];delete shell.hooks.pointer;delete shell.hooks.point;delete Element.prototype.getContext;
+  view.setMobileDisplayMode("classic");frame("field");
+});
+
+test("native pet detail replaces whole-list summaries and changing game windows resets retained scroll", async () => {
+  const view=await import("../src/mobile-view.ts");setDeviceMode("mobile");view.setMobileDisplayMode("immersive");
+  hits=[{id:"pet-rename",x1:30,y1:70,x2:90,y2:100}];
+  ui.panelInfo={lines:["奥普埃 · Lv.41","HP 574/574","攻击 80 · 防御 90"],nativeTextX:298};
+  ui.texts=[{x:74,y:86,text:"41"},{x:298,y:80,text:"预计 攻1.2 防1.3"}];
+  shell.frame({phase:"field",panel:true,title:"宠物",summary:["其他宠物的无关简介"]});
+  let texts=body.querySelectorAll("p").map(p=>p.textContent);
+  assert.ok(texts.includes("HP 574/574"));assert.ok(texts.includes("预计 攻1.2 防1.3"));assert.equal(texts.includes("其他宠物的无关简介"),false);assert.equal(texts.includes("41"),false);
+  shell.sheet.scrollTop=700;shell.content.scrollTop=300;
+  hits=[{id:"map-in",x1:20,y1:20,x2:80,y2:50}];ui.panelInfo=null;ui.texts=[];
+  shell.frame({phase:"field",panel:true,title:"地图"});
+  assert.equal(shell.sheet.scrollTop,0);assert.equal(shell.content.scrollTop,0);
+  hits=[];frame("field");view.setMobileDisplayMode("classic");frame("field");
+});

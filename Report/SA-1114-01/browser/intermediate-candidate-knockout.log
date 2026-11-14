@@ -1,0 +1,8 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+page.waitForFunction: Timeout 90000ms exceeded.
+    at GameUI.fieldReady (/home/coder/saserver/Report/SA-1114-01/browser/real-game.mjs:110:37)
+    at Module.runKnockout (/home/coder/saserver/Report/SA-1114-01/browser/knockout-cases.mjs:37:12)
+    at async work (/home/coder/saserver/Report/SA-1114-01/browser/real-game.mjs:277:23)
+    at async file:///home/coder/saserver/Report/SA-1114-01/browser/real-game.mjs:298:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-01/browser/candidate-knockout.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":415,"y":195},"stored_position":{"floor":300,"x":415,"y":195},"position_matches":true}}

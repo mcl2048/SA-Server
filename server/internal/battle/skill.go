@@ -317,7 +317,9 @@ func (b *Battle) support(f *Fighter, c Command, ev *[]Event) {
 	var cand []int
 	for i := side; i < side+SideOffset; i++ {
 		x := b.F[i]
-		if x == nil || x.Escaped {
+		// Enemy support must use the same permanent departure boundary as
+		// magicTargets: a healer cannot bring a flown slot back onto the field.
+		if x == nil || x.Escaped || x.Flown {
 			continue
 		}
 		if c.Kind == Heal && x.HP > 0 && x.HP < x.MaxHP*2/3 || c.Kind == Revive && x.HP <= 0 {
@@ -338,6 +340,7 @@ func (b *Battle) support(f *Fighter, c Command, ev *[]Event) {
 	} else {
 		t.HP = max(1, t.MaxHP/2)
 		t.status = [stCount]int{}
+		t.KilledBy, t.KilledRide = -1, false
 		e.Damage = t.HP
 	}
 	e.HP, e.Status = t.HP, t.Status()

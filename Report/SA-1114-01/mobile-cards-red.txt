@@ -1,0 +1,45 @@
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (13.470878ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (3.999903ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (5.730428ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (4.465988ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (3.044871ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (3.039932ms)
+✔ battle commands and targets remain human readable in a bounded sheet (4.076229ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (3.887261ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (4.58752ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (3.731002ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (5.852257ms)
+✔ native column registration is presented in visual row order and keeps action identity (1.682457ms)
+✔ immersive scene exposes a cancellable menu tray and restores classic panels (2.807264ms)
+✔ immersive battle camera stays a view command and native targets keep their real IDs (2.217052ms)
+✔ switching to desktop during browser fullscreen retains the explicit exit control (0.761866ms)
+✔ quick battle preserves its field context and native battle panels restore the complete layout (2.77005ms)
+✔ immersive battle starts with clear actors and native toggles, then exposes and closes commands (3.83743ms)
+✔ immersive field tray exposes reachable native social controls without duplicating toolbar menus (3.097117ms)
+✔ immersive native panels remain in the game viewport and hide movement behind the dialog (2.045013ms)
+✔ fullscreen map paints native map layers and maps taps back to the original hit coordinates (7.402945ms)
+✖ immersive native collections keep slot art, details and real controls together without duplicate summaries (3.138419ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 20
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 634.760436
+
+✖ failing tests:
+
+test at client/test/mobile-shell.test.mjs:389:1
+✖ immersive native collections keep slot art, details and real controls together without duplicate summaries (3.138419ms)
+  AssertionError [ERR_ASSERTION]: native slots need a screen-internal collection
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-shell.test.mjs:397:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

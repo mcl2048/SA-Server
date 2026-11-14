@@ -1,0 +1,145 @@
+TAP version 13
+# Subtest: desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+ok 1 - desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+  ---
+  duration_ms: 8.872197
+  type: 'test'
+  ...
+# Subtest: unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+ok 2 - unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+  ---
+  duration_ms: 4.277406
+  type: 'test'
+  ...
+# Subtest: only reachable controls render; removed controls cannot dispatch stale queued actions
+ok 3 - only reachable controls render; removed controls cannot dispatch stale queued actions
+  ---
+  duration_ms: 4.779691
+  type: 'test'
+  ...
+# Subtest: joystick uses eight original directions, center dead zone and all cancellation paths
+ok 4 - joystick uses eight original directions, center dead zone and all cancellation paths
+  ---
+  duration_ms: 3.9672
+  type: 'test'
+  ...
+# Subtest: navigation and mouse controls dispatch semantic hooks without clearing cursor
+ok 5 - navigation and mouse controls dispatch semantic hooks without clearing cursor
+  ---
+  duration_ms: 2.042232
+  type: 'test'
+  ...
+# Subtest: selection labels resolve native IDs and layout events never interrupt unchanged holds
+ok 6 - selection labels resolve native IDs and layout events never interrupt unchanged holds
+  ---
+  duration_ms: 2.645867
+  type: 'test'
+  ...
+# Subtest: battle commands and targets remain human readable in a bounded sheet
+ok 7 - battle commands and targets remain human readable in a bounded sheet
+  ---
+  duration_ms: 4.166167
+  type: 'test'
+  ...
+# Subtest: quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+ok 8 - quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+  ---
+  duration_ms: 5.820353
+  type: 'test'
+  ...
+# Subtest: native panels hide background controls and actor names, and accept contextual labels
+ok 9 - native panels hide background controls and actor names, and accept contextual labels
+  ---
+  duration_ms: 7.962797
+  type: 'test'
+  ...
+# Subtest: chat panel keeps real chat input visible and dispatches send-chat
+ok 10 - chat panel keeps real chat input visible and dispatches send-chat
+  ---
+  duration_ms: 3.59427
+  type: 'test'
+  ...
+# Subtest: movement precedes long option panels and encounter uses server capability and ack
+ok 11 - movement precedes long option panels and encounter uses server capability and ack
+  ---
+  duration_ms: 3.858293
+  type: 'test'
+  ...
+# Subtest: native column registration is presented in visual row order and keeps action identity
+ok 12 - native column registration is presented in visual row order and keeps action identity
+  ---
+  duration_ms: 2.301146
+  type: 'test'
+  ...
+# Subtest: immersive scene exposes a cancellable menu tray and restores classic panels
+ok 13 - immersive scene exposes a cancellable menu tray and restores classic panels
+  ---
+  duration_ms: 3.529764
+  type: 'test'
+  ...
+# Subtest: immersive battle camera stays a view command and native targets keep their real IDs
+ok 14 - immersive battle camera stays a view command and native targets keep their real IDs
+  ---
+  duration_ms: 2.863243
+  type: 'test'
+  ...
+# Subtest: switching to desktop during browser fullscreen retains the explicit exit control
+ok 15 - switching to desktop during browser fullscreen retains the explicit exit control
+  ---
+  duration_ms: 1.146866
+  type: 'test'
+  ...
+# Subtest: quick battle preserves its field context and native battle panels restore the complete layout
+ok 16 - quick battle preserves its field context and native battle panels restore the complete layout
+  ---
+  duration_ms: 3.338571
+  type: 'test'
+  ...
+# Subtest: immersive battle starts with clear actors and native toggles, then exposes and closes commands
+ok 17 - immersive battle starts with clear actors and native toggles, then exposes and closes commands
+  ---
+  duration_ms: 6.925697
+  type: 'test'
+  ...
+# Subtest: immersive field tray exposes reachable native social controls without duplicating toolbar menus
+ok 18 - immersive field tray exposes reachable native social controls without duplicating toolbar menus
+  ---
+  duration_ms: 2.506885
+  type: 'test'
+  ...
+# Subtest: immersive native panels remain in the game viewport and hide movement behind the dialog
+ok 19 - immersive native panels remain in the game viewport and hide movement behind the dialog
+  ---
+  duration_ms: 1.930768
+  type: 'test'
+  ...
+# Subtest: fullscreen map paints native map layers and maps taps back to the original hit coordinates
+not ok 20 - fullscreen map paints native map layers and maps taps back to the original hit coordinates
+  ---
+  duration_ms: 15.475001
+  type: 'test'
+  location: '/home/coder/saserver/client/test/mobile-shell.test.mjs:368:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(surface)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-shell.test.mjs:377:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 19
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 547.362439

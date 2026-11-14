@@ -1,26 +1,27 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=e5c6eee3f928fb08";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=e5c6eee3f928fb08";
-import { Sound, setSfx } from "./audio.js?v=e5c6eee3f928fb08";
-import { MAP_BGM } from "./soundtable.js?v=e5c6eee3f928fb08";
-import { Connection, trafficRates } from "./net.js?v=e5c6eee3f928fb08";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=e5c6eee3f928fb08";
-import { Renderer,              } from "./renderer.js?v=e5c6eee3f928fb08";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=e5c6eee3f928fb08";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=e5c6eee3f928fb08";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=e5c6eee3f928fb08";
-import { ACTION_KEYS } from "./actions.js?v=e5c6eee3f928fb08";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=e5c6eee3f928fb08";
-import { BattleScreen } from "./battle.js?v=e5c6eee3f928fb08";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=e5c6eee3f928fb08";
-import { Shop } from "./shop.js?v=e5c6eee3f928fb08";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=e5c6eee3f928fb08";
-import { loadAi } from "./ai.js?v=e5c6eee3f928fb08";
-import { AiMemory } from "./aismart.js?v=e5c6eee3f928fb08";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=e5c6eee3f928fb08";
-import { MobileShell } from "./mobile-shell.js?v=e5c6eee3f928fb08";
-import { installControlPositions } from "./mobile-position.js?v=e5c6eee3f928fb08";
+import { Assets } from "./assets.js?v=408f23f7bef662b4";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=408f23f7bef662b4";
+import { Sound, setSfx } from "./audio.js?v=408f23f7bef662b4";
+import { MAP_BGM } from "./soundtable.js?v=408f23f7bef662b4";
+import { Connection, trafficRates } from "./net.js?v=408f23f7bef662b4";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=408f23f7bef662b4";
+import { Renderer,              } from "./renderer.js?v=408f23f7bef662b4";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=408f23f7bef662b4";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=408f23f7bef662b4";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=408f23f7bef662b4";
+import { ACTION_KEYS } from "./actions.js?v=408f23f7bef662b4";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=408f23f7bef662b4";
+import { BattleScreen } from "./battle.js?v=408f23f7bef662b4";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=408f23f7bef662b4";
+import { Shop } from "./shop.js?v=408f23f7bef662b4";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=408f23f7bef662b4";
+import { loadAi } from "./ai.js?v=408f23f7bef662b4";
+import { AiMemory } from "./aismart.js?v=408f23f7bef662b4";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=408f23f7bef662b4";
+import { MobileShell } from "./mobile-shell.js?v=408f23f7bef662b4";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=408f23f7bef662b4";
+import { installControlPositions } from "./mobile-position.js?v=408f23f7bef662b4";
 
 
 const params = new URLSearchParams(location.search);
@@ -1092,7 +1093,7 @@ class FieldScreen                   {
   mobileSummary()           {
     const m = this.menus;
     if (m.items.open) return [`石币 ${inventory.gold}`, ...inventory.items.map(it => `${it.slot < 9 ? "装备" : "背包"}${it.slot + 1}：${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}　${it.memo || it.magicMemo || ""}`)];
-    if (m.petWnd.open) return (pets?.pets ?? []).flatMap(p => {
+    if (m.petWnd.open) return isImmersive() ? [] : (pets?.pets ?? []).flatMap(p => {
       const brief = aiPetForSprite(p.sprite)?.brief;
       const status = `${p.freeName || p.name}　Lv.${p.level}　HP ${p.hp}/${p.maxHp}　${p.state}　忠诚 ${p.loyalty}　${p.skills.map(sk => sk.name).join("、")}`;
       return brief ? [status, brief] : [status];
@@ -1132,7 +1133,21 @@ const CLOSE_SE_DELAY = 250;
 // A DOM action enters the ordinary previous-frame hit path. Its screen/modal context
 // must still match; a delayed tap cannot click through into a newly opened dialog.
 let mobileDirection = -1;
-let pendingMobileAction                                                                                                                                = null;
+let pendingMobileAction                                                                                                                                                   = null;
+const mobileMapPointer=new MobileMapPointer();
+let mobileMapContext                                                                                        =null;
+function cancelMobileMapPointer()       {
+  if(!mobileMapContext && !mobileMapPointer.active)return;
+  const owner=mobileMapContext?.screen;
+  mobileMapContext=null;mobileMapPointer.clear();
+  owner?.menus.mapWnd.cancelPointer();mouse.cancel();
+}
+function mobileMapContextCurrent()          {
+  const saved=mobileMapContext;
+  return !!saved && isMobile() && isImmersive() && !document.hidden
+    && saved.screen===screen && saved.modal===modal && saved.battle===battle
+    && saved.floor===(field?.floor ?? -1) && saved.screen.menus.mapOpen;
+}
 let mobileSelection                                                                                          = null;
 let mobilePointer                                  = null;
 let mobileCamera                              = "follow";
@@ -1156,11 +1171,14 @@ function selectedMobileHit() {
   if (!hit) mobileSelection = null;
   return hit;
 }
-function queueMobileClick(button       , id         ) {
+function queueMobileClick(button       , id         , precise                           ) {
   if (!isMobile()) return;
+  cancelMobileMapPointer();
   const hit = id ? mobileOptions().find(h => h.id === id) : selectedMobileHit();
   if (hit) focusMobileTarget(hit);
-  const point = hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
+  const point = precise ? mobileHitPoint(mobileOptions(), id ?? "", precise.x, precise.y)
+    : hit ? { x: (hit.x1 + hit.x2) / 2, y: (hit.y1 + hit.y2) / 2 } : mobilePointer;
+  if (precise && !point) return;
   if (!point && button === 0) {
     const first = mobileOptions()[0]; if (first) { mobileSelection = { id: first.id, screen, modal, battle }; queueMobileClick(button, first.id); }
     return;
@@ -1168,7 +1186,7 @@ function queueMobileClick(button       , id         ) {
   if (!point && button === 2 && !battle) return; // No invented ground cursor or pickup/turn.
   mobileDirection = -1; keys.clear(); mouse.cancel();
   if (screen instanceof FieldScreen) screen.cancelMobileMotion();
-  pendingMobileAction = { id: hit?.id, x: point?.x ?? 400, y: point?.y ?? 300, button, screen, modal, battle };
+  pendingMobileAction = { id: hit?.id, x: point?.x ?? 400, y: point?.y ?? 300, precise: !!precise, button, screen, modal, battle };
 }
 // A direct game touch replaces virtual selection and supplies the cursor position
 // for subsequent rail mouse buttons. Never move the cursor because a rail was tapped.
@@ -1180,8 +1198,24 @@ canvas.addEventListener("pointerdown", e => {
 });
 const mobile = new MobileShell(ui, {
   action(id) { queueMobileClick(0, id); },
+  point(id, x, y) {
+    mobileSelection = null;
+    queueMobileClick(0, id, { x, y });
+  },
+  pointer(id,x,y,phase) {
+    if(phase==="cancel"){cancelMobileMapPointer();return;}
+    if(!isMobile() || !isImmersive() || document.hidden || !(screen instanceof FieldScreen)
+      || modal || battle || !screen.menus.mapOpen){cancelMobileMapPointer();return;}
+    if(phase==="start"){
+      cancelMobileMapPointer();mobileSelection=null;pendingMobileAction=null;mobileDirection=-1;
+      keys.clear();mouse.cancel();screen.cancelMobileMotion();screen.menus.mapWnd.cancelPointer();
+      mobileMapContext={screen,modal,battle,floor:field?.floor ?? -1};
+    }else if(!mobileMapContextCurrent()){cancelMobileMapPointer();return;}
+    if(!mobileMapPointer.push(mobileOptions(),id,x,y,phase))cancelMobileMapPointer();
+  },
   navigate(dir) {
     if (!isMobile()) return;
+    cancelMobileMapPointer();
     const options = mobileOptions(); if (!options.length) return;
     const selected = selectedMobileHit(), index = selected ? options.findIndex(h => h.id === selected.id) : dir > 0 ? -1 : 0;
     const hit = options[(index + dir + options.length) % options.length];
@@ -1222,10 +1256,10 @@ const mobile = new MobileShell(ui, {
     mobileDirection = isMobile() && screen instanceof FieldScreen && !modal && !battle && !screen.openCount() ? dir : -1;
     if (mobileDirection >= 0 && field) field.target = null;
   },
-  cancel() { mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
+  cancel() { cancelMobileMapPointer();mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });
-installControlPositions(() => { mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
-const releaseMobileInput = () => { mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mobilePointer = null; keys.clear(); mouse.cancel(); };
+installControlPositions(() => { cancelMobileMapPointer();mobileDirection = -1; pendingMobileAction = null; mouse.cancel(); keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); });
+const releaseMobileInput = () => { cancelMobileMapPointer();mobileDirection = -1; pendingMobileAction = null; mobileSelection = null; mobilePointer = null; keys.clear(); mouse.cancel(); };
 document.addEventListener("sa-device-change", releaseMobileInput);
 document.addEventListener("sa-mobile-gesture", () => { releaseMobileInput(); if (isMobile() && screen instanceof FieldScreen) screen.cancelMobileMotion(); });
 addEventListener("blur", releaseMobileInput);
@@ -1252,7 +1286,7 @@ function mobileFrame(now        ) {
   const battleLabels = battle?.mobileActionLabels() ?? {};
   mobile.frame({ phase, panel, context, cameraAvailable: visualBattle, status, canEncounter: serverAutoPlay.canEncounter, encounter: serverAutoPlay.encounter,
     selectedLabel: selected ? battleLabels[selected.id] || selected.label || selected.id : undefined, selectedId: selected?.id,
-    title: modal ? "对话" : f?.menus.hasBattleResult() ? "战斗结果" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : undefined,
+    title: modal ? "对话" : f?.menus.hasBattleResult() ? "战斗结果" : f?.menus.items.open ? "背包" : f?.menus.petWnd.open ? "宠物" : f?.menus.statusOpen ? "状态" : f?.menus.quests.open ? "任务" : f?.menus.mapOpen ? "地图" : f?.menus.systemOpen ? "系统" : undefined,
     summary: f?.mobileSummary() ?? [], chat: f ? chatLog.slice(-2).map(l => l.text) : [],
     actionLabels: { ...battleLabels, ...Object.fromEntries([
       ...inventory.items.map(it => [`inv-${it.slot}`, `${it.slot < 9 ? "装备" : "物品"}${it.slot + 1} · ${it.name}${it.pile > 1 ? ` ×${it.pile}` : ""}`]),
@@ -1275,9 +1309,24 @@ function frame(now        ) {
   }
   if (queued && isMobile() && queued.screen === screen && queued.modal === modal && queued.battle === battle) {
     const hit = queued.id ? mobileOptions().find(h => h.id === queued.id) : undefined;
-    if (!queued.id || hit) {
-      mouse.x = hit ? (hit.x1 + hit.x2) / 2 : queued.x; mouse.y = hit ? (hit.y1 + hit.y2) / 2 : queued.y;
+    const point = queued.precise ? mobileHitPoint(mobileOptions(), queued.id ?? "", queued.x, queued.y) : null;
+    if (queued.precise ? !!point : !queued.id || hit) {
+      mouse.x = point?.x ?? (hit ? (hit.x1 + hit.x2) / 2 : queued.x);
+      mouse.y = point?.y ?? (hit ? (hit.y1 + hit.y2) / 2 : queued.y);
       if (queued.button === 0) mouse.clicked = true; else mouse.rightClicked = true;
+    }
+  }
+  if(mobileMapContext){
+    if(!mobileMapContextCurrent())cancelMobileMapPointer();
+    else{
+      const point=mobileMapPointer.next(mobileOptions());
+      if(!point)cancelMobileMapPointer();
+      else{
+        // A map drag drives the original MapWindow.pan across native frames.
+        // clicked stays false throughout: only a separate precise tap may walk.
+        mouse.x=point.x;mouse.y=point.y;mouse.down=point.down;mouse.clicked=mouse.rightClicked=false;
+        if(!point.down)mobileMapContext=null;
+      }
     }
   }
   ui.begin();

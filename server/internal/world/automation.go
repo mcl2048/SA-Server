@@ -311,7 +311,9 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 	protected, myCapture := w.automationCapturePlan(e, a)
 	enemies, allies := []*battle.Fighter{}, []*battle.Fighter{}
 	for _, f := range ft.b.F {
-		if f == nil || f.Escaped {
+		// Fallen allies remain resurrection candidates; flown allies have left
+		// this battle and must not consume every automatic turn on a futile revive.
+		if f == nil || f.Escaped || f.Flown {
 			continue
 		}
 		if f.Side() == me.Side() {

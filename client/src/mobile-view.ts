@@ -63,8 +63,8 @@ export async function exitMobileFullscreen(): Promise<void> {
 export function setMobileContext(value: MobileContext): void {
   if (context === value) return;
   context = value; scene = value === "field";
-  // A native dialog must always return to its complete logical bounds. Its
-  // readable controls live in the mobile sheet and continue to use native hits.
+  // Dialog content is reflowed by the in-game mobile window. Center its backdrop
+  // and reset scene gestures so returning to play cannot retain a menu-era pan.
   zoom = 1; panX = panY = 0; focusAt = 0;
   if (browser) document.dispatchEvent(new Event("sa-mobile-gesture"));
   scheduleLayout();
@@ -138,7 +138,10 @@ function layout(): void {
   const width = visual?.width ?? innerWidth, height = visual?.height ?? innerHeight;
   root.style.width = `${width}px`; root.style.height = `${height}px`;
   root.style.left = `${visual?.offsetLeft ?? 0}px`; root.style.top = `${visual?.offsetTop ?? 0}px`;
-  const cropped = isImmersive() && (context === "field" || context === "battle");
+  // Fullscreen is a device-space presentation, including NPC/menu/login panels.
+  // Native content is reflowed inside its game window by MobileShell; returning
+  // to 4:3 rails here would turn every dialog into an outside webpage again.
+  const cropped = isImmersive();
   const g = cropped ? { landscape: width > height, width, height, left: 0, top: 0, rail: 0 } : mobileGeometry(width, height);
   const nextOrientation = g.landscape ? "landscape" : "portrait";
   if (orientation !== nextOrientation) {
@@ -154,7 +157,9 @@ function layout(): void {
     "game-height": g.height, "rail-width": g.rail, "viewport-width": width, "viewport-height": height })) root.style.setProperty(`--${key}`, `${value}px`);
   fit = cropped ? Math.max(1, width / 800, height / 600) : g.width / (loginArtwork ? 640 : 800);
   if (cropped) {
-    const c = immersiveScene(width, height, focusX - panX / (fit * zoom), focusY - panY / (fit * zoom), zoom);
+    const inScene = context === "field" || context === "battle";
+    const c = immersiveScene(width, height, inScene ? focusX - panX / (fit * zoom) : 400,
+      inScene ? focusY - panY / (fit * zoom) : 300, zoom);
     // The CSS stage is center-origin in x; geometry.left is its actual corner.
     // Do not feed edge clamping back into pan: an automatic target at an edge
     // must not leave a manual-pan offset when the next target is in the center.

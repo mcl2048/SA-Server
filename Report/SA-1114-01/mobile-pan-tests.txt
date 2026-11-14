@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: reflowed map taps preserve the destination rather than clicking the native map center
+ok 1 - reflowed map taps preserve the destination rather than clicking the native map center
+  ---
+  duration_ms: 22.566723
+  type: 'test'
+  ...
+# Subtest: stale, outside and nonfinite map points cannot become ground clicks
+ok 2 - stale, outside and nonfinite map points cannot become ground clicks
+  ---
+  duration_ms: 0.884426
+  type: 'test'
+  ...
+# Subtest: map drags retain the start and final move across frames without queuing unbounded pointer traffic
+ok 3 - map drags retain the start and final move across frames without queuing unbounded pointer traffic
+  ---
+  duration_ms: 8.36288
+  type: 'test'
+  ...
+# Subtest: cancelled, replaced and resized native map drags cannot resume or become clicks
+ok 4 - cancelled, replaced and resized native map drags cannot resume or become clicks
+  ---
+  duration_ms: 1.006731
+  type: 'test'
+  ...
+# Subtest: reflowed pointer traffic pans the existing native MapWindow and never starts navigation
+ok 5 - reflowed pointer traffic pans the existing native MapWindow and never starts navigation
+  ---
+  duration_ms: 4.809947
+  type: 'test'
+  ...
+# Subtest: native pan cancellation clears any retained press before the next map frame
+ok 6 - native pan cancellation clears any retained press before the next map frame
+  ---
+  duration_ms: 0.488201
+  type: 'test'
+  ...
+# Subtest: desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+ok 7 - desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames
+  ---
+  duration_ms: 22.890942
+  type: 'test'
+  ...
+# Subtest: unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+ok 8 - unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted
+  ---
+  duration_ms: 6.232416
+  type: 'test'
+  ...
+# Subtest: only reachable controls render; removed controls cannot dispatch stale queued actions
+ok 9 - only reachable controls render; removed controls cannot dispatch stale queued actions
+  ---
+  duration_ms: 7.042735
+  type: 'test'
+  ...
+# Subtest: joystick uses eight original directions, center dead zone and all cancellation paths
+ok 10 - joystick uses eight original directions, center dead zone and all cancellation paths
+  ---
+  duration_ms: 4.92443
+  type: 'test'
+  ...
+# Subtest: navigation and mouse controls dispatch semantic hooks without clearing cursor
+ok 11 - navigation and mouse controls dispatch semantic hooks without clearing cursor
+  ---
+  duration_ms: 2.65226
+  type: 'test'
+  ...
+# Subtest: selection labels resolve native IDs and layout events never interrupt unchanged holds
+ok 12 - selection labels resolve native IDs and layout events never interrupt unchanged holds
+  ---
+  duration_ms: 2.589172
+  type: 'test'
+  ...
+# Subtest: battle commands and targets remain human readable in a bounded sheet
+ok 13 - battle commands and targets remain human readable in a bounded sheet
+  ---
+  duration_ms: 4.359548
+  type: 'test'
+  ...
+# Subtest: quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+ok 14 - quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden
+  ---
+  duration_ms: 6.738482
+  type: 'test'
+  ...
+# Subtest: native panels hide background controls and actor names, and accept contextual labels
+ok 15 - native panels hide background controls and actor names, and accept contextual labels
+  ---
+  duration_ms: 7.810698
+  type: 'test'
+  ...
+# Subtest: chat panel keeps real chat input visible and dispatches send-chat
+ok 16 - chat panel keeps real chat input visible and dispatches send-chat
+  ---
+  duration_ms: 5.159387
+  type: 'test'
+  ...
+# Subtest: movement precedes long option panels and encounter uses server capability and ack
+ok 17 - movement precedes long option panels and encounter uses server capability and ack
+  ---
+  duration_ms: 4.601782
+  type: 'test'
+  ...
+# Subtest: native column registration is presented in visual row order and keeps action identity
+ok 18 - native column registration is presented in visual row order and keeps action identity
+  ---
+  duration_ms: 4.8566
+  type: 'test'
+  ...
+# Subtest: immersive scene exposes a cancellable menu tray and restores classic panels
+ok 19 - immersive scene exposes a cancellable menu tray and restores classic panels
+  ---
+  duration_ms: 3.30618
+  type: 'test'
+  ...
+# Subtest: immersive battle camera stays a view command and native targets keep their real IDs
+ok 20 - immersive battle camera stays a view command and native targets keep their real IDs
+  ---
+  duration_ms: 3.006165
+  type: 'test'
+  ...
+# Subtest: switching to desktop during browser fullscreen retains the explicit exit control
+ok 21 - switching to desktop during browser fullscreen retains the explicit exit control
+  ---
+  duration_ms: 1.256617
+  type: 'test'
+  ...
+# Subtest: quick battle preserves its field context and native battle panels restore the complete layout
+ok 22 - quick battle preserves its field context and native battle panels restore the complete layout
+  ---
+  duration_ms: 3.529046
+  type: 'test'
+  ...
+# Subtest: immersive battle starts with clear actors and native toggles, then exposes and closes commands
+ok 23 - immersive battle starts with clear actors and native toggles, then exposes and closes commands
+  ---
+  duration_ms: 4.52611
+  type: 'test'
+  ...
+# Subtest: immersive field tray exposes reachable native social controls without duplicating toolbar menus
+ok 24 - immersive field tray exposes reachable native social controls without duplicating toolbar menus
+  ---
+  duration_ms: 3.002527
+  type: 'test'
+  ...
+# Subtest: immersive native panels remain in the game viewport and hide movement behind the dialog
+ok 25 - immersive native panels remain in the game viewport and hide movement behind the dialog
+  ---
+  duration_ms: 4.188208
+  type: 'test'
+  ...
+# Subtest: fullscreen map paints native map layers and maps taps back to the original hit coordinates
+ok 26 - fullscreen map paints native map layers and maps taps back to the original hit coordinates
+  ---
+  duration_ms: 8.733488
+  type: 'test'
+  ...
+# Subtest: immersive native collections keep slot art, details and real controls together without duplicate summaries
+ok 27 - immersive native collections keep slot art, details and real controls together without duplicate summaries
+  ---
+  duration_ms: 2.570927
+  type: 'test'
+  ...
+# Subtest: fullscreen map drags emit native pointer phases and cancellation never emits a route tap
+ok 28 - fullscreen map drags emit native pointer phases and cancellation never emits a route tap
+  ---
+  duration_ms: 4.247098
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 984.623497

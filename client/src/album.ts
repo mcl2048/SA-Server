@@ -125,7 +125,7 @@ export class Album {
         const definition = ui.assets.anim(e.sprite), action = definition && findAction(definition, 1, ANIM.STAND);
         const frame = action?.frames[0];
         if (frame && frame[0] >= 0) this.spritePortrait(ui, frame[0], wx + 199, wy + 117);
-      } else if (e.face) ui.image(e.face, wx + 199, wy + 117);
+      } else if (e.face) { ui.image(e.face, wx + 199, wy + 117); ui.mobilePortrait?.(e.face); }
     }
     let y = wy + 215;
     for (let i = 0; i < PAGE; i++, y += 22) {
@@ -149,6 +149,7 @@ export class Album {
   }
 
   private spritePortrait(ui: Ui, image: number, x: number, y: number) {
+    ui.mobilePortrait?.(image,true);
     let entry = this.portraits.get(image);
     if (!entry) { entry = { canvas: null, pending: false, retryAt: 0 }; this.portraits.set(image, entry); }
     if (entry.canvas) { ui.pic(entry.canvas, Math.round(x - entry.canvas.width / 2), Math.round(y - entry.canvas.height / 2)); return; }
