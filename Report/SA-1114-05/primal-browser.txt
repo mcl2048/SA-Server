@@ -1,0 +1,24 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 native list, detail, hatchling skill and page73 story"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 native idle, run/crawl, left-claw strike and return"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 actual cross neighbors, red impact, 1.8% self-heal and server defense timer"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 real defense countdown and expiry"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 adult wire and native skill menu contain only attack/guard"}
+{"variant":"final","primal_case":"desktop 克劳德斯 native list, detail, hatchling skill and page73 story"}
+{"variant":"final","primal_case":"desktop 克劳德斯 native idle, run/crawl, left-claw strike and return"}
+{"variant":"final","primal_case":"desktop 克劳德斯 actual cross neighbors, red impact, 1.8% self-heal and server defense timer"}
+{"variant":"final","primal_case":"desktop 克劳德斯 real defense countdown and expiry"}
+{"variant":"final","primal_case":"desktop 克劳德斯 adult wire and native skill menu contain only attack/guard"}
+{"variant":"final","primal_case":"mobile 萨鲁法斯 native list, detail, hatchling skill and page73 story"}
+{"variant":"final","primal_case":"mobile 萨鲁法斯 native idle, run/crawl, left-claw strike and return"}
+{"variant":"final","primal_case":"mobile 萨鲁法斯 actual cross neighbors, red impact, 1.8% self-heal and server defense timer"}
+{"variant":"final","primal_case":"mobile 萨鲁法斯 real defense countdown and expiry"}
+{"variant":"final","primal_case":"mobile 萨鲁法斯 adult wire and native skill menu contain only attack/guard"}
+{"variant":"final","primal_case":"mobile 克劳德斯 native list, detail, hatchling skill and page73 story"}
+{"variant":"final","primal_case":"mobile 克劳德斯 native idle, run/crawl, left-claw strike and return"}
+{"variant":"final","primal_case":"mobile 克劳德斯 actual cross neighbors, red impact, 1.8% self-heal and server defense timer"}
+{"variant":"final","primal_case":"mobile 克劳德斯 real defense countdown and expiry"}
+{"variant":"final","primal_case":"mobile 克劳德斯 adult wire and native skill menu contain only attack/guard"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05/browser/final-primal.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

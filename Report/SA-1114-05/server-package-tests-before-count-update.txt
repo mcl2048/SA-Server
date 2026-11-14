@@ -1,0 +1,7 @@
+--- FAIL: TestAIPetsEmbeddedRegistryAndHabitat (1.74s)
+    ai_pets_test.go:100: habitat count1166 vs1158
+FAIL
+FAIL	sa/server/internal/data	20.717s
+ok  	sa/server/internal/battle	1.109s
+ok  	sa/server/internal/world	50.660s
+FAIL

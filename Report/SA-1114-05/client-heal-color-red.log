@@ -1,0 +1,36 @@
+✔ cross target preview follows the native two-by-five edge and submits the original center (68.893959ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (2.039605ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (35.591199ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (7.369675ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (18.06285ms)
+✔ cross only offers opponent centers because the authoritative skill rejects same-side targets (0.991496ms)
+✔ native run directions match all eight S/SW/W/NW/N/NE/E/SE artwork rows (3.648282ms)
+✖ cross lifesteal displays one authoritative self-heal after all hits without adding a second claw attack (7.880883ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 650.951416
+
+✖ failing tests:
+
+test at client/test/battle-primal-claws.test.ts:93:1
+✖ cross lifesteal displays one authoritative self-heal after all hits without adding a second claw attack (7.880883ms)
+  AssertionError [ERR_ASSERTION]: native self-heal amount must use the positive recovery color
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:98:124)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

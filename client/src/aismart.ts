@@ -19,10 +19,12 @@
 
 import type { InvItem, PetSkill } from "./proto.gen.ts";
 import type { AiCommand, AiSettings, AiTarget } from "./ai.ts";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.ts";
 
 export interface SmartFighter {
   slot: number; name: string; hp: number; maxHp: number; mp: number; level: number; status: number; gone: boolean;
   rideHp?: number; rideMaxHp?: number; // 骑着的宠物（没骑为 0）：补血时连它一起算（回复会按缺的比例分给骑宠）
+  defenseBoost?: number; defenseTurns?: number;
 }
 
 export interface SmartContext {
@@ -63,6 +65,7 @@ function petSkillPrior(sk: PetSkill): number {
   // Ghost Storm's native resolver uses 75% physical damage per living enemy.
   if (sk.func === "PETSKILL_GhostStorm") k *= 0.75;
   if (sk.func === PET_RANDOM_CANNON) k *= 5 * 0.165;
+  if (sk.func === PRIMAL_CROSS_FUNC) k *= 0.8;
   return k;
 }
 
@@ -304,8 +307,12 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
       const sk = pact.kind === "attack" ? skills.find((x) => x.id === 1) : pact.kind === "guard" ? skills.find((x) => x.id === 2) : skills.find((x) => x.name === pact.name);
       const live = enemies.filter((e) => (hp.get(e.slot) ?? 0) > 0 && !(captureTarget && e.slot === captureTarget.slot));
       const petEnemy = () => (live.sort((a, b) => threat(b) - threat(a))[0] ?? enemies[0])?.slot ?? -1;
-      const t = sk ? petTargetSlot(sk.target, pact.target, me, pet, side, otherSide, petEnemy) : -1;
-      if (sk && t >= 0 && !(captureTarget && sk.func === PET_RANDOM_CANNON)) { out.pet = [sk.slot, t]; out.petKey = `pet:${c.pet.name}:${sk.id}`; return out; }
+      const crossCenter = () => live.map(center => ({ center, area: primalCrossSlots(center.slot) }))
+        .filter(({area}) => !enemies.some(e => s.capture && c.capturePlace && e.level === 1 && area.includes(e.slot)))
+        .sort((a,b) => live.filter(e => b.area.includes(e.slot)).length - live.filter(e => a.area.includes(e.slot)).length || a.center.slot-b.center.slot)[0]?.center.slot ?? -1;
+      const t = sk ? sk.func === PRIMAL_CROSS_FUNC ? crossCenter() : petTargetSlot(sk.target, pact.target, me, pet, side, otherSide, petEnemy) : -1;
+      if (sk && t >= 0 && !(captureTarget && sk.func === PET_RANDOM_CANNON)
+        && !(sk.func === PRIMAL_CROSS_FUNC && enemies.some(e => e.level === 1 && s.capture && c.capturePlace && primalCrossSlots(t).includes(e.slot)))) { out.pet = [sk.slot, t]; out.petKey = `pet:${c.pet.name}:${sk.id}`; return out; }
       out.chat.push(`宠物无法使用 ${pact.kind === "attack" ? "攻击" : pact.kind === "guard" ? "防御" : pact.name}，改用智能判断`);
     }
     const pplans: { value: number; slot: number; target: number; key: string }[] = [];
@@ -326,7 +333,18 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
       const d = c.mem.get(key, petPrior * petSkillPrior(sk));
       const live = enemies.filter((e) => (hp.get(e.slot) ?? 0) > 0 && !(captureTarget && e.slot === captureTarget.slot));
       if (!live.length) continue;
-      if (sk.target === 3 || sk.target === 4) {
+      if (sk.func === PRIMAL_CROSS_FUNC) {
+        for (const center of live) {
+          const area = primalCrossSlots(center.slot);
+          if (s.capture && c.capturePlace && enemies.some(e => e.level === 1 && area.includes(e.slot))) continue;
+          let v = (petF.defenseBoost ?? 0) > 0 && (petF.defenseTurns ?? 0) > 0 ? 0 : petPrior * 0.3;
+          for (const e of live.filter(e => area.includes(e.slot))) {
+            const left = hp.get(e.slot)!;
+            v += Math.min(d, left) + (d >= left ? threat(e) * 2 + 5 : 0) + threat(e) * 0.3;
+          }
+          pplans.push({ value: v, slot: sk.slot, target: center.slot, key });
+        }
+      } else if (sk.target === 3 || sk.target === 4) {
         let v = 0;
         for (const e of live) v += Math.min(d, hp.get(e.slot)!) + (d >= hp.get(e.slot)! ? threat(e) * 2 : 0);
         pplans.push({ value: v, slot: sk.slot, target: sk.target === 4 ? 22 : otherSide, key });
@@ -358,24 +376,32 @@ export function smartChooseSoloPet(s: AiSettings, c: SmartContext, petSlot: numb
   const protectedCapture = s.capture && c.capturePlace && enemies.some(e => e.level === 1);
   const skills = c.pet.skills.filter(sk => sk.field !== 2 && !PET_GUARD.has(sk.func) && !(protectedCapture && sk.func === PET_RANDOM_CANNON));
   const side = c.me < 10 ? 20 : 21, other = c.me < 10 ? 21 : 20;
-  const enemy = () => [...enemies].sort((a,b) => a.hp-b.hp || a.slot-b.slot)[0].slot;
+  const safe = enemies.filter(e => !(s.capture && c.capturePlace && e.level === 1));
+  const safeCross = safe.map(center => ({ center, group: safe.filter(e => primalCrossSlots(center.slot).includes(e.slot)) }))
+    .filter(({center}) => !enemies.some(e => s.capture && c.capturePlace && e.level === 1 && primalCrossSlots(center.slot).includes(e.slot)))
+    .sort((a,b) => b.group.length - a.group.length || a.center.hp-b.center.hp || a.center.slot-b.center.slot);
+  const enemy = () => [...safe].sort((a,b) => a.hp-b.hp || a.slot-b.slot)[0]?.slot ?? -1;
   const select = (sk: PetSkill, target: number) => { out.pet = [sk.slot, target]; out.petKey = PET_DEFEND.has(sk.func) ? "" : `pet:${c.pet!.name}:${sk.id}`; return out; };
   const action = c.first ? s.petFirst : s.petThen;
   const explicit = skills.find(sk => action.kind === "attack" ? sk.id === 1 : action.kind === "guard" ? sk.id === 2 : action.kind === "skill" && sk.name === action.name);
   if (explicit && action.target !== "owner") {
-    const target = petTargetSlot(explicit.target, action.target, c.me, petSlot, side, other, enemy);
+    const target = explicit.func === PRIMAL_CROSS_FUNC ? safeCross[0]?.center.slot ?? -1
+      : petTargetSlot(explicit.target, action.target, c.me, petSlot, side, other, enemy);
     if (target >= 0 && target !== c.me) return select(explicit, target);
   }
   const guard = skills.find(sk => sk.id === 2 || PET_DEFEND.has(sk.func));
   if (guard && pet.hp * 100 < pet.maxHp * 15) return select(guard, petSlot);
   // Choose only supported offensive skills; no sacrifice, capture or guarding
   // a corpse. Healthy pets with no usable skill fall back to protocol guard.
-  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack", "PETSKILL_GhostStorm", PET_RANDOM_CANNON]);
-  const ranked = skills.filter(sk => offensive.has(sk.func) && [1,3,4,6,7].includes(sk.target)).map(sk => ({ sk, score: petSkillPrior(sk) * (sk.target === 3 || sk.target === 4 ? enemies.length : 1) }));
+  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack", "PETSKILL_GhostStorm", PET_RANDOM_CANNON, PRIMAL_CROSS_FUNC]);
+  const ranked = skills.filter(sk => offensive.has(sk.func) && [1,3,4,6,7].includes(sk.target)
+    && (sk.func === PRIMAL_CROSS_FUNC ? safeCross.length > 0 : safe.length > 0))
+    .map(sk => ({ sk, score: petSkillPrior(sk) * (sk.func === PRIMAL_CROSS_FUNC ? safeCross[0].group.length : sk.target === 3 || sk.target === 4 ? safe.length : 1)
+      + (sk.func === PRIMAL_CROSS_FUNC && !((pet.defenseBoost ?? 0) > 0 && (pet.defenseTurns ?? 0) > 0) ? 0.3 : 0) }));
   ranked.sort((a,b) => b.score-a.score || a.sk.slot-b.sk.slot);
   if (ranked.length) {
     const sk = ranked[0].sk;
-    return select(sk, petTargetSlot(sk.target, "enemy", c.me, petSlot, side, other, enemy));
+    return select(sk, sk.func === PRIMAL_CROSS_FUNC ? safeCross[0].center.slot : petTargetSlot(sk.target, "enemy", c.me, petSlot, side, other, enemy));
   }
   return guard ? select(guard, petSlot) : out;
 }

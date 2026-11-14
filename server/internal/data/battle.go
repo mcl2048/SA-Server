@@ -53,6 +53,9 @@ type Enemy struct {
 	PetFlag      int
 	Items        [10]int // 掉落道具（ENEMY_ITEM1..10）
 	ItemProbs    [10]int // 掉落机率，千分比（_FIX_ITEMPROB：RAND(0,999) < 机率）
+	// Nil preserves native template skills. An explicit variant list also
+	// becomes the capture seed, so wild adults cannot regain a removed skill.
+	SkillOverride *[7]int
 }
 
 // EnemyTemp 是 enemybase1.txt 的一行（ENEMYTEMP_DATAINT）。
@@ -86,9 +89,10 @@ type AtomFix struct {
 
 // BattleData 汇总战斗用的原版数据。
 type BattleData struct {
-	aiPetsInstalled, aiHabitatsInstalled        bool
-	lilithInstalled, lilithHabitatInstalled     bool
-	lisaridoInstalled, lisaridoHabitatInstalled bool
+	aiPetsInstalled, aiHabitatsInstalled               bool
+	lilithInstalled, lilithHabitatInstalled            bool
+	lisaridoInstalled, lisaridoHabitatInstalled        bool
+	primalClawsInstalled, primalClawsHabitatsInstalled bool
 
 	Areas     []EncountArea
 	Groups    map[int]*Group
@@ -289,6 +293,9 @@ func LoadBattle(dataDir string) (*BattleData, error) {
 	}
 	if err := d.installLisarido(); err != nil {
 		return nil, fmt.Errorf("读取雷萨利朵：%w", err)
+	}
+	if err := d.installPrimalClaws(); err != nil {
+		return nil, fmt.Errorf("读取原初双爪：%w", err)
 	}
 	return d, nil
 }

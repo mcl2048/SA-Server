@@ -1,0 +1,63 @@
+✔ surviving pet chooses the most populated actual cross without counting row wraps (6.672663ms)
+✔ living-owner AI scores the shared skill over each independent native neighbor group (3.498322ms)
+✔ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (1.254028ms)
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (157.60088ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (18.311332ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (11.294141ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (8.75242ms)
+✔ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (15.047641ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (7.025836ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (625.127187ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (559.930643ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (8.948623ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (3.888747ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (19.63326ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (16.738079ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (6.70905ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (5.853693ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (5.817225ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (9.238747ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (13.194522ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (12.810136ms)
+✔ primal pets and claw effects own independent set5 pages that reload after eviction (8.697728ms)
+✔ invalid primal frames cannot borrow a previous extension's images (6.701156ms)
+✖ cross target preview follows the native two-by-five edge and submits the original center (80.650137ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (3.84296ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (45.980158ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (18.350337ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (21.055254ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 27
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2035.393986
+
+✖ failing tests:
+
+test at client/test/battle-primal-claws.test.ts:32:1
+✖ cross target preview follows the native two-by-five edge and submits the original center (80.650137ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      2,
+      14,
+  +   5
+  -   0
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:36:48)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 2, 14, 5 ],
+    expected: [ 2, 14, 0 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

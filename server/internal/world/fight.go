@@ -237,7 +237,7 @@ func (w *World) sendResumedBattleStart(m *entity) {
 // fighterInfo 是一个战斗者在 B| 字串里的资料。
 func (w *World) fighterInfo(room *battleRoom, f *battle.Fighter) proto.BattleFighter {
 	bf := proto.BattleFighter{Slot: f.Slot, Name: f.Name, Sprite: f.Sprite,
-		Level: f.Level, HP: f.HP, MaxHp: f.MaxHP, Mp: f.MP, MaxMp: f.MaxMP, Status: int(f.Status())}
+		Level: f.Level, HP: f.HP, MaxHp: f.MaxHP, Mp: f.MP, MaxMp: f.MaxMP, Status: int(f.Status()), DefenseBoost: f.DefenseBoost(), DefenseTurns: f.DefenseTurns()}
 	if f.Pet {
 		if owner := room.member(f.Slot); owner != nil {
 			bf.OwnerSlot = owner.fight.slot
@@ -637,7 +637,7 @@ func (w *World) sendBattleTurn(room *battleRoom, ev []battle.Event) {
 			Result: string(x.Result), Damage: x.Damage, HP: x.HP, Dead: x.Dead, OK: x.OK, Skill: x.Skill,
 			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
 			PetDamage: x.PetDamage, RideHp: x.RideHP, Fall: x.Fall, Effect: x.Effect, ActorMp: x.ActorMP, Shoot: x.Shoot, Fly: x.Fly,
-			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att})
+			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att, Stat: x.Stat, StatVal: x.StatVal, StatTurns: x.StatTurns})
 		if x.Kind == battle.PetOut {
 			if owner := room.member(x.Target); owner != nil {
 				last := &msg.Events[len(msg.Events)-1]

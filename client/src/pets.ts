@@ -17,6 +17,8 @@ import { ANIM, findAction } from "./assets.ts";
 import { petForSprite } from "./pet-catalog.ts";
 import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure, type Ui } from "./ui.ts";
 import { isImmersive } from "./mobile-view.ts";
+import { PRIMAL_CROSS_FUNC } from "./battle-targets.ts";
+import { SkillMemoPages } from "./skill-memo.ts";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,
@@ -75,6 +77,7 @@ export class PetWindow {
   private waiting: S2CPets | null = null;    // BattlePetReceiveFlag：送出后等服务端回新的宠物栏
   private waitAt = 0;
   private host: PetHost;
+  private primalMemo = new SkillMemoPages();
   readonly wx = 4;
   readonly wy = 4;
 
@@ -429,7 +432,9 @@ export class PetWindow {
       }
       y += 25;
     }
-    if (hover) splitBytes(hover.memo.trim(), 24).forEach((l, i) => ui.text(wx + 32, wy + 252 + i * 20, l, FONT.WHITE));
+    const memo = hover ?? p.skills.find(s => s.func === PRIMAL_CROSS_FUNC);
+    if (memo?.func === PRIMAL_CROSS_FUNC) this.primalMemo.draw(ui, "pet", memo.memo, wx + 32, wy + 252);
+    else if (memo) splitBytes(memo.memo.trim(), 24).forEach((l, i) => ui.text(wx + 32, wy + 252 + i * 20, l, FONT.WHITE));
     x = wx + 20; y = wy + 330;
     if (ui.image(CG.RETURN_BTN, x + 100 + 70, y, "pet-return") && ui.clicked("pet-return")) this.page = 1;
     if (ui.button(CG.PREV_BTN, x + 16 + 16 + 8, y, "pet-prev", CG.PREV_BTN + 1)) this.step(-1);

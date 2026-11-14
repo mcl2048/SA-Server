@@ -1,0 +1,282 @@
+(node:837018) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ surviving pet chooses the most populated actual cross without counting row wraps (15.347749ms)
+✖ living-owner AI scores the shared skill over each independent native neighbor group (6.124727ms)
+✖ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (1.036094ms)
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (158.105693ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (12.455639ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (10.277388ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (10.905041ms)
+✔ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (10.708427ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (6.292709ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (626.780297ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (459.629108ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (10.062333ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (3.582332ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (19.17275ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (15.677646ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (6.67212ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (6.182215ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (5.875524ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (9.550745ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (13.735165ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (12.099097ms)
+✖ primal pets and claw effects own independent set5 pages that reload after eviction (10.846307ms)
+✖ invalid primal frames cannot borrow a previous extension's images (7.940446ms)
+(node:837025) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ cross target preview follows the native two-by-five edge and submits the original center (84.238058ms)
+✖ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (1.806466ms)
+✖ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (20.629915ms)
+✖ defense percentages and remaining turns come from wire events and reconnect snapshots (2.1953ms)
+(node:837041) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ both primal claw pets join the native catalogue after every saved extension identity (8.493817ms)
+✖ native GM previews animate both new pets and keep the shared claw effect outside the pet catalogue (2.381394ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 18
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1989.210132
+
+✖ failing tests:
+
+test at client/test/ai-primal-cross.test.ts:9:1
+✖ surviving pet chooses the most populated actual cross without counting row wraps (15.347749ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+  +   1,
+  +   14
+  -   0,
+  -   16
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-primal-cross.test.ts:10:40)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 1, 14 ],
+    expected: [ 0, 16 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/ai-primal-cross.test.ts:14:1
+✖ living-owner AI scores the shared skill over each independent native neighbor group (6.124727ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      0,
+  +   10
+  -   16
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-primal-cross.test.ts:16:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 0, 10 ],
+    expected: [ 0, 16 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/ai-primal-cross.test.ts:18:1
+✖ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (1.036094ms)
+  AssertionError [ERR_ASSERTION]: unsafe fixed cross falls back to a safe single hit
+  + actual - expected
+
+    [
+  +   0,
+  -   1,
+      16
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-primal-cross.test.ts:23:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 0, 16 ],
+    expected: [ 1, 16 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:320:2
+✖ primal pets and claw effects own independent set5 pages that reload after eviction (10.846307ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 199400
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:322:48)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 199400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:329:2
+✖ invalid primal frames cannot borrow a previous extension's images (7.940446ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 100374
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:331:50)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 100374,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-primal-claws.test.ts:29:1
+✖ cross target preview follows the native two-by-five edge and submits the original center (84.238058ms)
+  AssertionError [ERR_ASSERTION]: 14 links left13 and opposite19, never wraps to15
+  + actual - expected
+
+  + []
+  - [
+  -   [
+  -     17,
+  -     138,
+  -     57,
+  -     202
+  -   ],
+  -   [
+  -     305,
+  -     46,
+  -     345,
+  -     110
+  -   ]
+  - ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:32:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 17, 138, 57, 202 ], [ 305, 46, 345, 110 ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-primal-claws.test.ts:36:1
+✖ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (1.806466ms)
+  ReferenceError [Error]: document is not defined
+      at measure (file:///home/coder/saserver/client/src/ui.ts:329:18)
+      at BattleScreen.petWindow (file:///home/coder/saserver/client/src/battle.ts:2048:45)
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:38:58)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at client/test/battle-primal-claws.test.ts:41:1
+✖ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (20.629915ms)
+  AssertionError [ERR_ASSERTION]: shared skill must draw its red claw impact atlas at hit time
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:52:97)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at client/test/battle-primal-claws.test.ts:57:1
+✖ defense percentages and remaining turns come from wire events and reconnect snapshots (2.1953ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  undefined !== 46
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:58:37)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 46,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/primal-claws-catalog.test.ts:7:1
+✖ both primal claw pets join the native catalogue after every saved extension identity (8.493817ms)
+  AssertionError [ERR_ASSERTION]: Cyrufas must be available through native catalogue consumers
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/primal-claws-catalog.test.ts:10:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at client/test/primal-claws-catalog.test.ts:20:1
+✖ native GM previews animate both new pets and keep the shared claw effect outside the pet catalogue (2.381394ms)
+  AssertionError [ERR_ASSERTION]: pet preview must use the native animated actor
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/primal-claws-catalog.test.ts:26:43)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

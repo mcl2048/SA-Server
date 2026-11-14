@@ -1,0 +1,16 @@
+✔ cross target preview follows the native two-by-five edge and submits the original center (68.804291ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (2.017463ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (34.952561ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (6.941248ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (21.364427ms)
+✔ cross only offers opponent centers because the authoritative skill rejects same-side targets (1.269136ms)
+✔ native run directions match all eight S/SW/W/NW/N/NE/E/SE artwork rows (4.943698ms)
+✔ cross lifesteal displays one authoritative self-heal after all hits without adding a second claw attack (10.320745ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 672.421131

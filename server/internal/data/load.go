@@ -58,6 +58,7 @@ func Load(dataDir string) (*Game, error) {
 	g.installAIPetHabitats()
 	g.installLilithHabitat()
 	g.installLisaridoHabitat()
+	g.installPrimalClawsHabitats()
 	if g.Items, err = LoadItems(dataDir); err != nil {
 		return nil, fmt.Errorf("读取道具：%w", err)
 	}

@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["/tmp/loft-hyraken-paas-venv/bin/python", "Report/SA-1114-05/verify-art-repeat.py"], "started": 1794663568.7415535, "exit_code": 0, "seconds": 183.68}

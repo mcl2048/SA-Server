@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05/verify-art.py", line 10, in <module>
+    assert sum(p.width*p.height for p in pages)<=10*1024*1024, "new 100px pets must not allocate more than 40MiB decoded texture memory"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: new 100px pets must not allocate more than 40MiB decoded texture memory

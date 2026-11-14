@@ -76,22 +76,24 @@ type VendorEntry struct {
 }
 
 type BattleFighter struct {
-	Slot       int    `json:"slot,omitempty"`
-	Name       string `json:"name,omitempty"`
-	Sprite     int    `json:"sprite,omitempty"`
-	Level      int    `json:"level,omitempty"`
-	HP         int    `json:"hp,omitempty"`
-	MaxHp      int    `json:"maxHp,omitempty"`
-	Mp         int    `json:"mp,omitempty"`
-	MaxMp      int    `json:"maxMp,omitempty"`
-	RideName   string `json:"rideName,omitempty"`
-	RideLevel  int    `json:"rideLevel,omitempty"`
-	RideHp     int    `json:"rideHp,omitempty"`
-	RideMaxHp  int    `json:"rideMaxHp,omitempty"`
-	FallSprite int    `json:"fallSprite,omitempty"`
-	OwnerSlot  int    `json:"ownerSlot,omitempty"`
-	BagSlot    int    `json:"bagSlot,omitempty"`
-	Status     int    `json:"status,omitempty"`
+	Slot         int    `json:"slot,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Sprite       int    `json:"sprite,omitempty"`
+	Level        int    `json:"level,omitempty"`
+	HP           int    `json:"hp,omitempty"`
+	MaxHp        int    `json:"maxHp,omitempty"`
+	Mp           int    `json:"mp,omitempty"`
+	MaxMp        int    `json:"maxMp,omitempty"`
+	RideName     string `json:"rideName,omitempty"`
+	RideLevel    int    `json:"rideLevel,omitempty"`
+	RideHp       int    `json:"rideHp,omitempty"`
+	RideMaxHp    int    `json:"rideMaxHp,omitempty"`
+	FallSprite   int    `json:"fallSprite,omitempty"`
+	OwnerSlot    int    `json:"ownerSlot,omitempty"`
+	BagSlot      int    `json:"bagSlot,omitempty"`
+	Status       int    `json:"status,omitempty"`
+	DefenseBoost int    `json:"defenseBoost,omitempty"`
+	DefenseTurns int    `json:"defenseTurns,omitempty"`
 }
 
 type InvItem struct {
@@ -153,6 +155,9 @@ type BattleEvent struct {
 	Att       string `json:"att,omitempty"`
 	OwnerSlot int    `json:"ownerSlot,omitempty"`
 	BagSlot   int    `json:"bagSlot,omitempty"`
+	Stat      int    `json:"stat,omitempty"`
+	StatVal   int    `json:"statVal,omitempty"`
+	StatTurns int    `json:"statTurns,omitempty"`
 }
 
 type ShopItem struct {

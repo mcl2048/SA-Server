@@ -1,0 +1,17 @@
+{
+  "server/internal/battle/battle.go": "892d66a24de4c3614de17fec305b56ccd56a720b40f3330dc23daa7b1d8d7790",
+  "server/internal/battle/enemy.go": "00cddebdfa5f95e165faadb43da70e9d681b36842032c76e600c584ba90c5bd3",
+  "server/internal/battle/primal_cross.go": "aefe6cb40790da9dc3a82ec928bfb8dc7cc1b36a29fe4aad183b86d0e1d1a5b7",
+  "server/internal/battle/primal_cross_test.go": "5ed7140bdf5b0193e40611e6a62c6fc61c21d5c7a39d0a720ea9990b9af7b50a",
+  "server/internal/battle/skill2.go": "c44a8987e5e58b4312e05718682a6bdb24f6c7507ece08948fc2182876a211b6",
+  "server/internal/data/ai_pets_test.go": "96664993a024bb000292fa8eb8d5d5f4fc249082b8a5920e480d539b0980faa4",
+  "server/internal/data/battle.go": "54b5cbb7c99499a92b437889418e62dbf8afe6efc117fe3210236819367cd889",
+  "server/internal/data/load.go": "353ce2029cdd1f94e64ff6358b2b73530d67277ffc6733073c5426cb3ef368e1",
+  "server/internal/data/primal_claws.go": "0d9da2fee4959aec9049babab6511f8a3aac84ee26dafe02747a41b2ebe3a48b",
+  "server/internal/data/primal_claws.json": "d4afbca1a3433ecdc285c78769389d637d824add7b93a54e3e67e268017c34b1",
+  "server/internal/data/primal_claws_play_test.go": "dc28be67135966e1ca3d5e9165f8a2067c53a365e287d665ba5711aba3482fde",
+  "server/internal/data/primal_claws_test.go": "f4ba5f463b4a962996d5c89062253346ac17662651493cdded0811e0d51ea7f8",
+  "server/internal/world/automation.go": "186f3c58df3b1ab7be2c2941ef84a5b13892d605f568a2e059fde68a2bec773a",
+  "server/internal/world/fight.go": "ac28f55488106a954453c17aabe6545ac796fb5c53ba171ecd0b86d782ce45ed",
+  "server/internal/world/primal_claws_automation_test.go": "b188f5a274df7d49d480433197cc442c30e464cf7c43c7f9504171fcee4f40cd"
+}

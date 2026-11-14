@@ -1,0 +1,49 @@
+✖ long claw skill description stays above return controls and every later line is reachable through native pagination (6.358932ms)
+✖ battle claw memo uses the same bounded native pages without selecting or submitting a skill (73.931336ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 624.763535
+
+✖ failing tests:
+
+test at client/test/primal-skill-memo.test.ts:17:1
+✖ long claw skill description stays above return controls and every later line is reachable through native pagination (6.358932ms)
+  AssertionError [ERR_ASSERTION]: description must not draw over return buttons or below the window
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/primal-skill-memo.test.ts:19:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at client/test/primal-skill-memo.test.ts:27:1
+✖ battle claw memo uses the same bounded native pages without selecting or submitting a skill (73.931336ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(h.texts.filter(t=>t.y>=353).every(t=>t.y<=425))
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/primal-skill-memo.test.ts:29:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

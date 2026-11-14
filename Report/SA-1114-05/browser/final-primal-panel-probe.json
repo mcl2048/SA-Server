@@ -1,0 +1,1351 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4",
+  "binary_version": "v0.2.16-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-14T14:31:03.703Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-14T14:31:17.964Z"
+    },
+    {
+      "stage": "scenario-finished",
+      "time": "2026-11-14T14:31:46.337Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "desktop native pet skills/details/list close 1",
+      "passed": true
+    },
+    {
+      "case": "desktop native pet skills/details/list close 2",
+      "passed": true
+    },
+    {
+      "case": "desktop native pet skills/details/list close 3",
+      "passed": true
+    },
+    {
+      "case": "desktop native pet skills/details/list close 4",
+      "passed": true
+    },
+    {
+      "case": "desktop native pet skills/details/list close 5",
+      "passed": true
+    },
+    {
+      "case": "desktop native pet skills/details/list close 6",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "client_version": "54d9206af168411f",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 30,
+          "hp": 326,
+          "maxHp": 326,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "克劳德斯",
+          "freeName": "",
+          "sprite": 199401,
+          "level": 30,
+          "hp": 405,
+          "maxHp": 405,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 30,
+          "hp": 319,
+          "maxHp": 319,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "克劳德斯",
+          "freeName": "",
+          "sprite": 199401,
+          "level": 30,
+          "hp": 438,
+          "maxHp": 438,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 30,
+          "hp": 324,
+          "maxHp": 324,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "克劳德斯",
+          "freeName": "",
+          "sprite": 199401,
+          "level": 30,
+          "hp": 418,
+          "maxHp": 418,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 native list, detail, hatchling skill and page73 story"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 native idle, run/crawl, left-claw strike and return"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 actual cross neighbors, red impact, 1.8% self-heal and server defense timer"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 real defense countdown and expiry"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 adult wire and native skill menu contain only attack/guard"}
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:74:19)
+    at GameUI.closePanels (/home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:186:26)
+    at async gm (/home/coder/saserver/Report/SA-1114-05/browser/primal-cases.mjs:23:52)
+    at async Module.runPrimal (/home/coder/saserver/Report/SA-1114-05/browser/primal-cases.mjs:153:5)
+    at async work (/home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:299:35)
+    at async file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:335:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05/browser/final-primal.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

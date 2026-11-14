@@ -1,0 +1,15 @@
+ok  	sa/server/cmd/saserver	38.014s
+ok  	sa/server/internal/battle	0.811s
+--- FAIL: TestAIPetsEmbeddedRegistryAndHabitat (1.43s)
+    ai_pets_test.go:100: habitat count1166 vs1158
+FAIL
+FAIL	sa/server/internal/data	17.467s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	8.786s
+ok  	sa/server/internal/store	0.993s
+ok  	sa/server/internal/world	38.108s
+ok  	sa/server/tests	12.615s
+?   	sa/server/tools/assetindex	[no test files]
+?   	sa/server/tools/protogen	[no test files]
+ok  	sa/server/webclient	0.464s
+FAIL

@@ -1,0 +1,8 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+Error: supplementary cast did not send native shared command
+    at assert (file:///home/coder/saserver/Report/SA-1114-05/browser/primal-red-probe.mjs:5:42)
+    at Module.runPrimalRedProbe (file:///home/coder/saserver/Report/SA-1114-05/browser/primal-red-probe.mjs:40:3)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:318:50)
+    at async file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:354:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05/browser/final-primal-red-probe.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

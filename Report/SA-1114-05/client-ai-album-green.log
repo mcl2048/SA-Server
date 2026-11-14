@@ -1,0 +1,51 @@
+✔ surviving pet chooses the most populated actual cross without counting row wraps (6.03387ms)
+✔ living-owner AI scores the shared skill over each independent native neighbor group (3.76178ms)
+✔ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (1.048636ms)
+✖ a fixed living-owner cross plan chooses a legal populated center without wrapping or sacrificing capture neighbors (4.310935ms)
+✔ old 570-slot save survives four appended seen/snap entries and account reload (9.967757ms)
+✔ legacy seen and snapshot IDs and portraits retain their original mapping (1.246339ms)
+✔ all appended slots fit the existing last page and render raw animation portraits plus canonical stories (10.997286ms)
+✔ missing portrait decoding retries later, uses raw fallback frames, and caches success (17.936605ms)
+✔ new-pet brief descriptions fit the existing stat extension panel without changing old pets (3.219668ms)
+✔ retaking a renamed pet updates its snapshot without overwriting adjacent original slots (0.622254ms)
+✔ pet details and album retain a stable native model for the fullscreen game window (1.344287ms)
+✔ Lilith appends slot 575 after all four mechanical pets and persists her native portrait (1.400225ms)
+✔ Lisarido persists slot 576 while every existing pet identity and photograph stays in place (1.624206ms)
+✔ two claw pets persist in new slots577/578 on page73 while previous photographs remain unchanged (2.020436ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 515.273732
+
+✖ failing tests:
+
+test at client/test/ai-primal-cross.test.ts:28:1
+✖ a fixed living-owner cross plan chooses a legal populated center without wrapping or sacrificing capture neighbors (4.310935ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+  +   2,
+  +   5
+  -   0,
+  -   11
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-primal-cross.test.ts:33:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 2, 5 ],
+    expected: [ 0, 11 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

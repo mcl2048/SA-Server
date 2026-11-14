@@ -1,0 +1,60 @@
+{
+  "version": "v0.2.16-LYNX",
+  "baseline_commit": "9689b9c8b84a8f0f878a2133f3813e31747125d0",
+  "baseline_version": "v0.2.15-LYNX",
+  "prompt_input_sha256": "57d34d915496283eaef8350dcf76c501cbf65dc0692ed42b0ef679a797ffe335",
+  "prompt_delivered_sha256": "1da3d8c3f36a7b830959592ac96a95b7214ead7912a079a5569573d7abe6aa68",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16638112,
+    "sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4",
+    "format": "static ELF64 Linux AMD64",
+    "mode": "0755"
+  },
+  "archive": {
+    "version": "v0.2.16-LYNX",
+    "archive": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip",
+    "bytes": 38690466,
+    "sha256": "978f200f1417e395b5203b8b1cf646458d173a9643ddb5db7caf11f9125cd20b",
+    "files": 4370,
+    "binary_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4",
+    "all_entries_match_current_public_files": true,
+    "executable_mode": "0755",
+    "runtime_db_credentials_and_Assets_excluded": true
+  },
+  "source_files_verified": 382,
+  "old_zip_replaced": true,
+  "checks": {
+    "client_and_builder": 220,
+    "typescript": true,
+    "go_all": true,
+    "go_vet": true,
+    "targeted_server_race": true,
+    "browser_checks": 34,
+    "native_pet_checks": 20,
+    "mobile_camera_checks": 14,
+    "mobile_claw_viewport_visibility": true,
+    "supplemental_red_capture": true,
+    "embedded_files": 52,
+    "patch_assets": 26,
+    "installer_cases": {
+      "ai-pets": 30,
+      "lilith": 30,
+      "lisarido": 30,
+      "primal-claws": 30
+    },
+    "repeat_binary_identical": true,
+    "repeat_art_identical": true
+  },
+  "art": {
+    "character_frames": 752,
+    "effect_frames": 24,
+    "actions": 128,
+    "source_sha256": {
+      "cyrufas": "5ea22b7a5b28159993e61c8aa706c8f6c2a4ec6768d9095e9e742da2d3b8c9e4",
+      "claudes": "12b29cccc0da8f0e3039ea0afbbffacf5d64898bbb83982d8edc34efb02923f3"
+    },
+    "origin": "Uploaded JPG eight-way cutouts, manually segmented local hinges and authored deterministic raster claw effects; no external image API."
+  },
+  "scope": "Actual Linux ELF, original assets, WebSocket, private SQLite, Chromium with SwiftShader and emulated mobile touch/viewports. No physical Android/iOS/Safari certification. Pose quality is a visual judgment, not a proof from automated tests."
+}

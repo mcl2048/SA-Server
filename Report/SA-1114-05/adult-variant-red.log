@@ -1,0 +1,6 @@
+=== RUN   TestPrimalClawsNaturalVariantsHaveDifferentActualSkills
+    primal_claws_play_test.go:27: adult capture seed retained shared skill: &{TempNo:29007 EnemyID:29017 Alloc:[21 35 38 35] Rank:0 ModAI:300 Slot:7 LimitLevel:0 Skills:[1 2 29060 -1 -1 -1 -1] Critical:1 Counter:1 Capture:true Get:20}
+--- FAIL: TestPrimalClawsNaturalVariantsHaveDifferentActualSkills (1.32s)
+FAIL
+FAIL	sa/server/internal/data	1.368s
+FAIL

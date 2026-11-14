@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["go", "test", "./internal/data", "./internal/battle", "./internal/world", "-count=1"], "started": 1794663123.0088346, "exit_code": 1, "seconds": 57.33}

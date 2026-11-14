@@ -13,10 +13,12 @@
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
 
-import { ANIM, findAction } from "./assets.js?v=abae3f174fa9bed4";
-import { petForSprite } from "./pet-catalog.js?v=abae3f174fa9bed4";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=abae3f174fa9bed4";
-import { isImmersive } from "./mobile-view.js?v=abae3f174fa9bed4";
+import { ANIM, findAction } from "./assets.js?v=54d9206af168411f";
+import { petForSprite } from "./pet-catalog.js?v=54d9206af168411f";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=54d9206af168411f";
+import { isImmersive } from "./mobile-view.js?v=54d9206af168411f";
+import { PRIMAL_CROSS_FUNC } from "./battle-targets.js?v=54d9206af168411f";
+import { SkillMemoPages } from "./skill-memo.js?v=54d9206af168411f";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,
@@ -75,6 +77,7 @@ export class PetWindow {
           waiting                 = null;    // BattlePetReceiveFlag：送出后等服务端回新的宠物栏
           waitAt = 0;
           host         ;
+          primalMemo = new SkillMemoPages();
            wx = 4;
            wy = 4;
 
@@ -429,7 +432,9 @@ export class PetWindow {
       }
       y += 25;
     }
-    if (hover) splitBytes(hover.memo.trim(), 24).forEach((l, i) => ui.text(wx + 32, wy + 252 + i * 20, l, FONT.WHITE));
+    const memo = hover ?? p.skills.find(s => s.func === PRIMAL_CROSS_FUNC);
+    if (memo?.func === PRIMAL_CROSS_FUNC) this.primalMemo.draw(ui, "pet", memo.memo, wx + 32, wy + 252);
+    else if (memo) splitBytes(memo.memo.trim(), 24).forEach((l, i) => ui.text(wx + 32, wy + 252 + i * 20, l, FONT.WHITE));
     x = wx + 20; y = wy + 330;
     if (ui.image(CG.RETURN_BTN, x + 100 + 70, y, "pet-return") && ui.clicked("pet-return")) this.page = 1;
     if (ui.button(CG.PREV_BTN, x + 16 + 16 + 8, y, "pet-prev", CG.PREV_BTN + 1)) this.step(-1);

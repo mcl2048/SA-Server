@@ -1,0 +1,164 @@
+{
+  "fixture_credential_values_absent": true,
+  "runtime_db_and_credentials_not_in_report": true,
+  "checked_at_utc": "2026-11-14T15:21:06.328208+00:00",
+  "scope": "Added/modified staged blobs and matching worktree bytes, recursive ZIP/TAR regular members through two archive layers, and replacement privacy report. Private values remain in memory only.",
+  "staged_change_entries_with_rename_detection": 432,
+  "staged_change_entries_no_rename_detection": 433,
+  "staged_change_status_counts_no_rename_detection": {
+    "M": 61,
+    "A": 370,
+    "D": 2
+  },
+  "staged_payload_files_scanned": 431,
+  "worktree_payload_files_scanned": 431,
+  "unstaged_files_before_report_update": 0,
+  "untracked_files": 0,
+  "runtime_metadata_files_checked": 22,
+  "current_task_runtime_metadata_files_checked": 5,
+  "distinct_private_credential_files_read": 22,
+  "private_value_variants_checked": 9,
+  "private_character_identifier_variants_checked": 1,
+  "value_encodings_checked": [
+    "UTF-8",
+    "JSON ASCII escape",
+    "password/secret MD5 hex in both cases",
+    "password/secret base64"
+  ],
+  "scan_counts": {
+    "index_blobs": 431,
+    "index_bytes": 184049613,
+    "worktree_blobs": 431,
+    "worktree_bytes": 184049613,
+    "index-archive_blobs": 4377,
+    "index-archive_bytes": 100966403,
+    "index-archive-archive_blobs": 26,
+    "index-archive-archive_bytes": 22275780,
+    "worktree-archive_blobs": 4377,
+    "worktree-archive_bytes": 100966403,
+    "worktree-archive-archive_blobs": 26,
+    "worktree-archive-archive_bytes": 22275780
+  },
+  "archives": [
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/lilith-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/primal-claws-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "index",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4370,
+      "regular_files": 4370
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/lilith-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/lisarido-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip!saserver-v0.2.16-LYNX/update/primal-claws-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "worktree",
+      "path": "bin/saserver-v0.2.16-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4370,
+      "regular_files": 4370
+    },
+    {
+      "scope": "index",
+      "path": "update/primal-claws-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "worktree",
+      "path": "update/primal-claws-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    }
+  ],
+  "private_credential_value_hits": 0,
+  "private_character_identifier_hits": 0,
+  "common_secret_pattern_hits": 0,
+  "sensitive_path_hits": 0,
+  "unsafe_archive_path_hits": 0,
+  "release_public_config_matches_HEAD_template": true,
+  "release_zip_entries": 4370,
+  "release_zip_nested_patch_files": 26,
+  "standalone_new_patch_files": 7,
+  "release_zip_sha256": "978f200f1417e395b5203b8b1cf646458d173a9643ddb5db7caf11f9125cd20b",
+  "release_elf_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4",
+  "final_browser_supervisors_finished_exit_zero": true,
+  "reported_final_browser_checks": 34,
+  "reported_final_client_and_builder_checks": 220,
+  "browser_evidence": [
+    {
+      "file": "browser/final-primal.json",
+      "checks": 20,
+      "all_passed": true,
+      "errors": 0,
+      "shutdown_exit_code": 0,
+      "position_matches": true,
+      "binary_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4"
+    },
+    {
+      "file": "browser/final-mobile-regression.json",
+      "checks": 14,
+      "all_passed": true,
+      "errors": 0,
+      "shutdown_exit_code": 0,
+      "position_matches": true,
+      "binary_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4"
+    }
+  ],
+  "reproduction": "python3 Report/SA-1114-05/privacy-scan.py --write-report; first stage all public files including a placeholder privacy-check.json, freeze all writers, then stage only the resulting privacy report after success.",
+  "limits": "Known private values are compared in all bytes including images, with no OCR. Common token regexes run on text-like blobs (no NUL in first 8192 bytes). This is bounded byte scanning, not a complete secret-detection guarantee. The replacement report is checked before writing and is the sole unstaged change afterward."
+}

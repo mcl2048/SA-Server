@@ -1,0 +1,24 @@
+{
+  "state": "finished",
+  "success": false,
+  "checks": [
+    {
+      "name": "client-and-build",
+      "exit_code": 0,
+      "log": "client-tests.txt",
+      "seconds": 34.062
+    },
+    {
+      "name": "typescript",
+      "exit_code": 0,
+      "log": "typescript.txt",
+      "seconds": 2.565
+    },
+    {
+      "name": "go-all",
+      "exit_code": 1,
+      "log": "go-tests.txt",
+      "seconds": 139.771
+    }
+  ]
+}

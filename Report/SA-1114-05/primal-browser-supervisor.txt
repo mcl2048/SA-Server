@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["/tmp/sa-1113-04-tools/node-v26.13.1-linux-x64/bin/node", "Report/SA-1114-05/browser/real-game.mjs", "--primal", "--meta", "/tmp/sa-1114-05-runtime-primal.json"], "started": 1794666732.803384, "exit_code": 0, "seconds": 565.669}

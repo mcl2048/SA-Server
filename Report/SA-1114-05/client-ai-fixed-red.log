@@ -1,0 +1,40 @@
+✔ surviving pet chooses the most populated actual cross without counting row wraps (9.048222ms)
+✔ living-owner AI scores the shared skill over each independent native neighbor group (5.323881ms)
+✔ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (0.992938ms)
+✖ a fixed living-owner cross plan chooses a legal populated center without wrapping or sacrificing capture neighbors (4.922294ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 387.66499
+
+✖ failing tests:
+
+test at client/test/ai-primal-cross.test.ts:28:1
+✖ a fixed living-owner cross plan chooses a legal populated center without wrapping or sacrificing capture neighbors (4.922294ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+      0,
+  +   11
+  -   16
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-primal-cross.test.ts:31:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 0, 11 ],
+    expected: [ 0, 16 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["/tmp/loft-hyraken-paas-venv/bin/python", "scripts/generate-primal-claws.py"], "started": 1794662143.2815435, "exit_code": 0, "seconds": 180.78}

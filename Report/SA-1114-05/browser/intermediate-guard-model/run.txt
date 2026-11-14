@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","primal_case":"desktop 萨鲁法斯 native list, detail, hatchling skill and page73 story"}
+Error: desktop: native pet target selection absent
+    at wait (file:///home/coder/saserver/Report/SA-1114-05/browser/primal-cases.mjs:19:163)
+    at async choose (file:///home/coder/saserver/Report/SA-1114-05/browser/primal-cases.mjs:52:6)
+    at async Module.runPrimal (file:///home/coder/saserver/Report/SA-1114-05/browser/primal-cases.mjs:92:31)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:299:35)
+    at async file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:335:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05/browser/final-primal.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

@@ -1,0 +1,3998 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4",
+  "binary_version": "v0.2.16-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-14T13:49:30.713Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-14T13:49:44.949Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "desktop 萨鲁法斯 native list, detail, hatchling skill and page73 story",
+      "passed": true,
+      "evidence": {
+        "details": {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "sprite": 199400,
+          "level": 60,
+          "attrs": [
+            50,
+            0,
+            0,
+            50
+          ],
+          "atk": 144,
+          "def": 141,
+          "agi": 123,
+          "maxHp": 670,
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "memo": "通常攻击"
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "memo": "通常防御"
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "memo": "近身攻击目标及前后左右邻敌，普通命中80%。自身防御随机提高30%–60%，持续5回合（含施放回合），重复施放刷新、不叠加。对黑暗精灵王、柯黑穆肯、黑蛙王及天空岛敌人造成150%伤害；防御或石化者必中破防、造成150%；已中猛毒者120%，倍率不相乘。其余无异常活敌在受到伤害后，有28%–43%概率中猛毒；未净化者经5次毒伤后阵亡。攻击结束，将实际造成总伤害的1.8%转为自身HP（向下取整、以HP上限为限）；反射致死不回复。"
+            }
+          ],
+          "std": [
+            20,
+            34,
+            36,
+            34
+          ],
+          "grow": [
+            216,
+            212,
+            183,
+            1000
+          ]
+        },
+        "album": {
+          "lines": [
+            "萨鲁法斯 · 简介",
+            "漆黑的洞窟地下十七楼，黑暗精灵",
+            "王与柯黑穆肯留下的暗流正沿着岩",
+            "缝侵蚀矿脉。为了挫败他们的阴谋",
+            "，全体原始人聚在篝火旁，借助Ch",
+            "atGPT反复推演守护洞窟的方法，将",
+            "勇敢的佩露夏改造成萨鲁法斯。她",
+            "保留了虎族敏捷的步伐和不肯后退",
+            "的勇气，又学会用坚韧的身躯护住",
+            "同伴。黑暗逼近时，她便奔到敌人",
+            "面前，像熊一样直立，以左手红爪",
+            "划开迷雾；赤色爪痕消散后，她会",
+            "摇着尾巴回到族人身边。幼年的萨",
+            "鲁法斯记得赤爪裂阵的完整节奏，",
+            "成年野生个体则专注于最朴实的攻",
+            "击与防御，默默守住通往地底的岔",
+            "路。"
+          ],
+          "portraits": []
+        },
+        "memoPages": [
+          {
+            "lines": [
+              "近身攻击目标及前后左右邻",
+              "敌，普通命中80%。自身防",
+              "御随机提高30%–60%，持续"
+            ],
+            "page": "1/6"
+          },
+          {
+            "lines": [
+              "5回合（含施放回合），重",
+              "复施放刷新、不叠加。对黑",
+              "暗精灵王、柯黑穆肯、黑蛙"
+            ],
+            "page": "2/6"
+          },
+          {
+            "lines": [
+              "王及天空岛敌人造成150%伤",
+              "害；防御或石化者必中破防",
+              "、造成150%；已中猛毒者12"
+            ],
+            "page": "3/6"
+          },
+          {
+            "lines": [
+              "0%，倍率不相乘。其余无异",
+              "常活敌在受到伤害后，有28",
+              "%–43%概率中猛毒；未净化"
+            ],
+            "page": "4/6"
+          },
+          {
+            "lines": [
+              "者经5次毒伤后阵亡。攻击",
+              "结束，将实际造成总伤害的",
+              "1.8%转为自身HP（向下取整"
+            ],
+            "page": "5/6"
+          },
+          {
+            "lines": [
+              "、以HP上限为限）；反射致",
+              "死不回复。"
+            ],
+            "page": "6/6"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "client_version": "54d9206af168411f",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 1,
+          "hp": 84,
+          "maxHp": 84,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 84,
+          "maxHp": 670,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 84,
+          "maxHp": 670,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 670,
+          "maxHp": 670,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 670,
+          "maxHp": 670,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 670,
+          "maxHp": 670,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 138,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 1600,
+          "maxHp": 1600,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 5,
+          "name": "萨鲁法斯",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 670,
+          "maxHp": 670,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixturePetInjury",
+          "sprite": 100250,
+          "level": 60,
+          "hp": 521,
+          "maxHp": 521,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 1600,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 670,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "防御",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "attack",
+          "target": 5,
+          "damage": 48,
+          "hp": 622,
+          "actorHp": 521,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 2,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 1600,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 622,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "防御",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "attack",
+          "target": 5,
+          "damage": 10,
+          "hp": 612,
+          "actorHp": 521,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 3,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 1600,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 612,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "防御",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "attack",
+          "target": 5,
+          "damage": 41,
+          "hp": 571,
+          "actorHp": 521,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 4,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "escape",
+          "target": -1,
+          "damage": 0,
+          "hp": 1600,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": true,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "escape",
+      "exp": 0,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "萨鲁法斯",
+          "freeName": "",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 571,
+          "maxHp": 670,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29060,
+              "slot": 2,
+              "name": "赤爪裂阵",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 450,
+      "y": 230,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 2,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 1600,
+          "maxHp": 1600,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 5,
+          "name": "萨鲁法斯",
+          "sprite": 199400,
+          "level": 60,
+          "hp": 571,
+          "maxHp": 670,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 10,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3340,
+          "maxHp": 3340,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 11,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3380,
+          "maxHp": 3380,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 12,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3300,
+          "maxHp": 3300,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 13,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3280,
+          "maxHp": 3280,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 14,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3420,
+          "maxHp": 3420,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3270,
+          "maxHp": 3270,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 16,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3310,
+          "maxHp": 3310,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 17,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3370,
+          "maxHp": 3370,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 18,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3290,
+          "maxHp": 3290,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 19,
+          "name": "FixtureCannonGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 3430,
+          "maxHp": 3430,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 1600,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "attack",
+          "target": 16,
+          "damage": 1056,
+          "hp": 2254,
+          "actorHp": 571,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 18,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3290,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 19,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3430,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 12,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3300,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 16,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 2254,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 11,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3380,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 17,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3370,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 13,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3280,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3270,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 10,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3340,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 14,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 3420,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    }
+  ],
+  "primal": [],
+  "primalDiagnostic": {
+    "device": "desktop",
+    "pet": "cyrufas",
+    "kind": "injury-2",
+    "events": [
+      {
+        "t": "BattleTurn",
+        "turn": 3,
+        "events": [
+          {
+            "actor": 0,
+            "kind": "guard",
+            "target": -1,
+            "guardian": -1,
+            "result": "",
+            "skill": "",
+            "damage": 0,
+            "hp": 1600,
+            "actorHp": 0,
+            "status": 0,
+            "effect": 0,
+            "combo": 0,
+            "dead": 0,
+            "fly": 0,
+            "stat": 0,
+            "statVal": 0,
+            "statTurns": 0
+          },
+          {
+            "actor": 5,
+            "kind": "guard",
+            "target": -1,
+            "guardian": -1,
+            "result": "",
+            "skill": "防御",
+            "damage": 0,
+            "hp": 612,
+            "actorHp": 0,
+            "status": 0,
+            "effect": 0,
+            "combo": 0,
+            "dead": 0,
+            "fly": 0,
+            "stat": 0,
+            "statVal": 0,
+            "statTurns": 0
+          },
+          {
+            "actor": 15,
+            "kind": "attack",
+            "target": 5,
+            "guardian": -1,
+            "result": "normal",
+            "skill": "",
+            "damage": 41,
+            "hp": 571,
+            "actorHp": 521,
+            "status": 0,
+            "effect": 0,
+            "combo": 0,
+            "dead": 0,
+            "fly": 0,
+            "stat": 0,
+            "statVal": 0,
+            "statTurns": 0
+          }
+        ]
+      }
+    ],
+    "samples": [
+      {
+        "battle": true,
+        "now": 63686.5,
+        "queue": 0,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "萨鲁法斯",
+          "攻击",
+          "防御",
+          "赤爪裂阵",
+          "上一页",
+          "1/6",
+          "下一页",
+          "近身攻击目标及前后左右邻",
+          "敌，普通命中80%。自身防",
+          "御随机提高30%–60%，持续",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 63941.39999997616,
+        "queue": 0,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "萨鲁法斯",
+          "攻击",
+          "防御",
+          "赤爪裂阵",
+          "上一页",
+          "1/6",
+          "下一页",
+          "近身攻击目标及前后左右邻",
+          "敌，普通命中80%。自身防",
+          "御随机提高30%–60%，持续",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 64188.300000071526,
+        "queue": 0,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 3,
+          "frame": 9300144,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300144,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "萨鲁法斯",
+          "攻击",
+          "防御",
+          "赤爪裂阵",
+          "上一页",
+          "1/6",
+          "下一页",
+          "近身攻击目标及前后左右邻",
+          "敌，普通命中80%。自身防",
+          "御随机提高30%–60%，持续",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 64437.39999997616,
+        "queue": 7,
+        "sent": true,
+        "focus": 0,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 64666.200000047684,
+        "queue": 7,
+        "sent": true,
+        "focus": 0,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 64926.60000002384,
+        "queue": 7,
+        "sent": true,
+        "focus": 0,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 65199.700000047684,
+        "queue": 6,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 10,
+          "index": 0,
+          "frame": 9300182,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300182,
+            "x": 546,
+            "y": 366,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 65458.200000047684,
+        "queue": 6,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 10,
+          "index": 2,
+          "frame": 9300184,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300184,
+            "x": 546,
+            "y": 366,
+            "w": 69,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 65731.89999997616,
+        "queue": 6,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 65969.39999997616,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 201.40821896055832,
+            "y": 204.64033948158442
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 66263.5,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 236.6211776035857,
+            "y": 225.73143450214766
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 66503.5,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 284.9796035661292,
+            "y": 254.69611671929613
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 66753.20000004768,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 5,
+          "frame": 9300146,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 328.95620708883007,
+            "y": 281.0362698709139
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300146,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 67015.20000004768,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 364.1427692111379,
+            "y": 302.11155447542114
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "防御",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 67285.39999997616,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 403.73755029400775,
+            "y": 325.8271785615151
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 67551.70000004768,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 3,
+          "frame": 9300144,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 443.3587278975973,
+            "y": 349.55861306366506
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300144,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 67802.70000004768,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 482.92711245973607,
+            "y": 373.2584267336961
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 68070,
+        "queue": 4,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 5,
+          "frame": 9300146,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 518.1400711027673,
+            "y": 394.3495217542617
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300146,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 68287.80000007153,
+        "queue": 3,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 68520.5,
+        "queue": 3,
+        "sent": true,
+        "focus": 15,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 612,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 68754.5,
+        "queue": 3,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 10,
+          "index": 0,
+          "frame": 9300182,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300182,
+            "x": 550,
+            "y": 366,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 69012.39999997616,
+        "queue": 3,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 10,
+          "index": 2,
+          "frame": 9300184,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300184,
+            "x": 546,
+            "y": 366,
+            "w": 69,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 69295.80000007153,
+        "queue": 3,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 69547.60000002384,
+        "queue": 3,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 69799.70000004768,
+        "queue": 3,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 70071.80000007153,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 526.0952368984257,
+            "y": 399.1143346006196
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 70353.10000002384,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 5,
+          "frame": 9300146,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 486.50045581555963,
+            "y": 375.3987105145279
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300146,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 70603.60000002384,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 451.34029021397146,
+            "y": 354.33923632607673
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 70850.30000007153,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 416.1537280916676,
+            "y": 333.26395172157174
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 71094.30000007153,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 380.94076944864025,
+            "y": 312.17285670100847
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 71323.89999997616,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 341.3195918450507,
+            "y": 288.4414221988585
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 71601,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 5,
+          "frame": 9300146,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 306.15942624347025,
+            "y": 267.38194801041186
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300146,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 71860.89999997616,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 0,
+          "frame": 9300141,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 270.94646760043906,
+            "y": 246.29085298984631
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300141,
+            "x": 546,
+            "y": 365,
+            "w": 70,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 72117.5,
+        "queue": 2,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 1,
+          "frame": 9300142,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 231.3780830383003,
+            "y": 222.59103931981528
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300142,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 72378.10000002384,
+        "queue": 1,
+        "sent": true,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 2,
+          "frame": 9300143,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300143,
+            "x": 546,
+            "y": 365,
+            "w": 82,
+            "h": 103
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      },
+      {
+        "battle": true,
+        "now": 72665,
+        "queue": 0,
+        "sent": false,
+        "focus": 5,
+        "actor": {
+          "slot": 5,
+          "x": 581,
+          "y": 432,
+          "homeX": 581,
+          "homeY": 432,
+          "dir": 3,
+          "action": 3,
+          "index": 4,
+          "frame": 9300145,
+          "hp": 571,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        "targets": [
+          {
+            "slot": 15,
+            "hp": 521,
+            "status": 0,
+            "dead": false,
+            "gone": false,
+            "x": 197,
+            "y": 202
+          }
+        ],
+        "quads": [
+          {
+            "image": 9300145,
+            "x": 546,
+            "y": 364,
+            "w": 69,
+            "h": 104
+          }
+        ],
+        "claws": [],
+        "loaded": true,
+        "texts": [
+          "FixturePetInjury LV60",
+          "萨鲁法斯 LV60",
+          "Mechabc9 LV100",
+          "自动：关",
+          "快速：关"
+        ]
+      }
+    ],
+    "captured": [],
+    "requests": [
+      {
+        "t": "BattlePetCommand",
+        "skill": 1,
+        "target": 5,
+        "petSlot": 5
+      }
+    ]
+  },
+  "failure": "interrupted by SIGTERM",
+  "failure_stack": "Error: interrupted by SIGTERM\n    at onInterrupt (file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:38:57)\n    at process.sigterm (file:///home/coder/saserver/Report/SA-1114-05/browser/real-game.mjs:39:52)\n    at process.emit (node:events:526:24)"
+}

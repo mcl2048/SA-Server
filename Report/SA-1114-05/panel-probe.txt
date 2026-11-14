@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"panel_probe":1}
+{"panel_probe":2}
+{"panel_probe":3}
+{"panel_probe":4}
+{"panel_probe":5}
+{"panel_probe":6}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05/browser/final-primal-panel-probe.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

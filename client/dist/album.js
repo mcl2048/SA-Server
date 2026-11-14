@@ -1,14 +1,14 @@
 // 宠物相簿 / 图鉴（原版 __ALBUM_47，menu.cpp）：完全在客户端，原版存在 data\album_47.dat，这里存 localStorage（sa.album.<账号>）。
 //   看到：画面上出现过（地图上的角色、战斗中的每一个人，CheckNewPet / CheckBattleNewPet）→ 灰色的名字
 //   照相：宠物详细资料的"照相"钮 → 记下那时的能力值，名字前出现 NEW；点开看过后去掉 NEW
-//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（原 570 格后追加扩展宠物，共 576 格、72 页）
+//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（原 570 格后追加扩展宠物，共 578 格、73 页）
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 
-import { PET_ALBUM_TBL } from "./albumdata.js?v=abae3f174fa9bed4";
-import { FONT, SYS, measure,         } from "./ui.js?v=abae3f174fa9bed4";
-import { ANIM, findAction } from "./assets.js?v=abae3f174fa9bed4";
-import { PET_CATALOG, petForSprite } from "./pet-catalog.js?v=abae3f174fa9bed4";
+import { PET_ALBUM_TBL } from "./albumdata.js?v=54d9206af168411f";
+import { FONT, SYS, measure,         } from "./ui.js?v=54d9206af168411f";
+import { ANIM, findAction } from "./assets.js?v=54d9206af168411f";
+import { PET_CATALOG, petForSprite } from "./pet-catalog.js?v=54d9206af168411f";
 
 const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + PET_CATALOG.length, PAGE = 8;
 // Append-only identities: never change the original SEEN/SNAP table or slots.

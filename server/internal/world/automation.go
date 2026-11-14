@@ -540,10 +540,37 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 			continue
 		}
 		t := automationPetTarget(sk.Target, "enemy", me.Slot, pet.Slot, target, side, other)
-		if automationPetCaptureInScope(sk, protected, t, other) {
+		if sk.Func != data.PrimalCrossFunc && automationPetCaptureInScope(sk, protected, t, other) {
 			continue
 		}
 		value := factor
+		if sk.Func == data.PrimalCrossFunc {
+			// A cross is not a whole-side skill. Evaluate each real center,
+			// including capture scope, instead of multiplying by all enemies.
+			value, t = -1, -1
+			for _, center := range enemies {
+				if automationPetCaptureInScope(sk, protected, center.Slot, other) {
+					continue
+				}
+				score := 0.0
+				for _, hit := range battle.PrimalCrossSlots(center.Slot) {
+					if f := ft.b.F[hit]; f.Alive() && f.Side() != pet.Side() {
+						score += factor
+					}
+				}
+				// Defensive utility makes an initial solo cast useful; while
+				// the buff persists, the actual .8 damage score stands alone.
+				if pet.DefenseTurns() == 0 {
+					score += .3
+				}
+				if score > value {
+					value, t = score, center.Slot
+				}
+			}
+			if t < 0 {
+				continue
+			}
+		}
 		if sk.Target == 3 || sk.Target == 4 {
 			value *= float64(len(enemies))
 		}
@@ -554,6 +581,9 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 	return skill, pt
 }
 func automationSkillFactor(sk *data.Skill) float64 {
+	if sk.Func == data.PrimalCrossFunc {
+		return .8
+	}
 	if sk.Func == data.ElectromagneticCannonFunc {
 		return .825 // Five independent 15..18% single shots; no enemy-count gain.
 	}
@@ -580,6 +610,14 @@ func automationSkillFactor(sk *data.Skill) float64 {
 }
 
 func automationPetCaptureInScope(sk *data.Skill, mask uint32, target, other int) bool {
+	if sk.Func == data.PrimalCrossFunc && target >= 0 && target < battle.Slots {
+		for _, slot := range battle.PrimalCrossSlots(target) {
+			if mask&(1<<slot) != 0 {
+				return true
+			}
+		}
+		return false
+	}
 	if sk.Func == data.ElectromagneticCannonFunc {
 		// Its UI target is single, but any of five random shots can reach
 		// every opponent. A safe initial target cannot promise capture safety.

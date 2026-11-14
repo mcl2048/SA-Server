@@ -45,7 +45,7 @@ test("old 570-slot save survives four appended seen/snap entries and account rel
     const saved = JSON.parse(values.get(key)!); assert.deepEqual(saved[0], legacy[0]); assert.deepEqual(saved[569], legacy[569]);
     assert.deepEqual(saved[570 + i], { flag: 2, name: definition.name, freeName: `伙伴${i}`, sprite: definition.sprite, level: 18, maxHp: 321, str: 45, quick: 67, def: 89, attr: [10, 20, 30, 40] });
   }
-  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 576);
+  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 578);
   for (let i = 0; i < 4; i++) assert.equal(restored.list[570 + i].freeName, `伙伴${i}`);
   assert.deepEqual(restored.list[0], legacy[0]); assert.deepEqual(restored.list[569], legacy[569]);
   restored.load("another"); assert.equal(restored.list[570].flag, 0);
@@ -62,7 +62,7 @@ test("legacy seen and snapshot IDs and portraits retain their original mapping",
 test("all appended slots fit the existing last page and render raw animation portraits plus canonical stories", async () => {
   const values = storage(), album: any = new Album(); album.load("faces"); album.open = true;
   for (const petData of AI_PET_CATALOG) album.snap(pet(petData.sprite));
-  const h = ui(); h.click("album-prev"); album.frame(h.mock, []); h.click("");
+  const h = ui(); h.click("album-prev"); album.frame(h.mock, []); h.click(""); album.page=71;
   assert.equal(album.page, 71);
   album.frame(h.mock, []);
   for (const petData of AI_PET_CATALOG) assert.ok(h.text.some(line => line.text === petData.name));
@@ -138,7 +138,7 @@ test("Lilith appends slot 575 after all four mechanical pets and persists her na
   assert.deepEqual(seen[574], { flag: 1, name: "莉莉丝", sprite: 199200 });
   assert.equal(album.snap(pet(199200, "夜风")), "夜风 照相完成！");
   const restored: any = new Album(); restored.load("lilith");
-  assert.equal(restored.list.length, 576); assert.equal(restored.list[574].freeName, "夜风");
+  assert.equal(restored.list.length, 578); assert.equal(restored.list[574].freeName, "夜风");
   for (let n = 0; n < 4; n++) assert.equal(restored.list[570 + n].sprite, 199100 + n);
   restored.open = true; restored.page = 71; restored.sel = 574;
   const h = ui(), portraits: any[] = []; h.mock.mobilePortrait = (...args: any[]) => portraits.push(args);
@@ -154,9 +154,24 @@ test("Lisarido persists slot 576 while every existing pet identity and photograp
  const before=JSON.parse(values.get("sa.album.lisarido")!);
  album.seen(199300);assert.deepEqual(JSON.parse(values.get("sa.album.lisarido")!)[575],{flag:1,name:"雷萨利朵",sprite:199300});
  assert.equal(album.snap(pet(199300,"炮火")),"炮火 照相完成！");
- const restored:any=new Album();restored.load("lisarido");assert.equal(restored.list.length,576);
+ const restored:any=new Album();restored.load("lisarido");assert.equal(restored.list.length,578);
  const after=JSON.parse(values.get("sa.album.lisarido")!);for(const key of Object.keys(before))assert.deepEqual(after[key],before[key]);
  assert.equal(restored.list[575].freeName,"炮火");assert.equal(restored.snap(pet(199301)),null);
  restored.open=true;restored.page=71;restored.sel=575;const h=ui();restored.frame(h.mock,[]);
  assert.ok(h.text.some(line=>line.text==="雷萨利朵 · 简介"));
+});
+
+test("two claw pets persist in new slots577/578 on page73 while previous photographs remain unchanged",()=>{
+ const values=storage(),album:any=new Album();album.load("primal");
+ for(const sprite of [100250,199100,199200,199300])album.snap(pet(sprite,`旧伙伴${sprite}`));
+ const before=JSON.parse(values.get("sa.album.primal")!);
+ for(const [i,sprite,name] of [[576,199400,"萨鲁法斯"],[577,199401,"克劳德斯"]] as const){
+  album.seen(sprite);assert.deepEqual(JSON.parse(values.get("sa.album.primal")!)[i],{flag:1,name,sprite});
+  assert.equal(album.snap(pet(sprite)),`${name} 照相完成！`);
+ }
+ const restored:any=new Album();restored.load("primal");assert.equal(restored.list.length,578);
+ const after=JSON.parse(values.get("sa.album.primal")!);for(const key of Object.keys(before))assert.deepEqual(after[key],before[key]);
+ restored.open=true;const h=ui();h.click("album-prev");restored.frame(h.mock,[]);h.click("");assert.equal(restored.page,72);
+ restored.frame(h.mock,[]);assert.ok(h.text.some(a=>a.text==="萨鲁法斯"));assert.ok(h.text.some(a=>a.text==="克劳德斯"));
+ assert.equal(restored.snap(pet(199402)),null);
 });

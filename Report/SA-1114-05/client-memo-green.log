@@ -1,0 +1,10 @@
+✔ long claw skill description stays above return controls and every later line is reachable through native pagination (6.624887ms)
+✔ battle claw memo uses the same bounded native pages without selecting or submitting a skill (60.030459ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 585.181651

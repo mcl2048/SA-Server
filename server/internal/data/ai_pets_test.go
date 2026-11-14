@@ -96,7 +96,7 @@ func TestAIPetsEmbeddedRegistryAndHabitat(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(bd.Areas) != len(original.Areas)+6 { // Four mechanical habitats, Lilith and independent Lisarido.
+	if len(bd.Areas) != len(original.Areas)+8 { // Four mechanical, Lilith, Lisarido and two independent primal habitats.
 		t.Fatalf("habitat count%d vs%d", len(bd.Areas), len(original.Areas))
 	}
 	if !reflect.DeepEqual(bd.Areas[:len(original.Areas)], original.Areas) {

@@ -27,7 +27,7 @@ import (
 )
 
 // version is stamped by scripts/build-linux.sh.
-var version = "v0.2.15-LYNX-dev"
+var version = "v0.2.16-LYNX-dev"
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "--version" {

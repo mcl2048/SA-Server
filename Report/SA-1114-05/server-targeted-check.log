@@ -1,0 +1,58 @@
+=== RUN   TestPrimalClawsRuntimeRegistryAndActualCaveHabitats
+--- PASS: TestPrimalClawsRuntimeRegistryAndActualCaveHabitats (1.46s)
+=== RUN   TestPrimalClawsNaturalVariantsHaveDifferentActualSkills
+    primal_claws_play_test.go:63: floor 32017: 5000 native picks map[adult:870 original:3550 young:580]; live+capture skill variants verified
+    primal_claws_play_test.go:63: floor 32016: 5000 native picks map[adult:905 original:3496 young:599]; live+capture skill variants verified
+--- PASS: TestPrimalClawsNaturalVariantsHaveDifferentActualSkills (1.41s)
+PASS
+ok  	sa/server/internal/data	2.916s
+=== RUN   TestPrimalCrossFormationUsesOnlyOrthogonalNeighbors
+--- PASS: TestPrimalCrossFormationUsesOnlyOrthogonalNeighbors (0.00s)
+=== RUN   TestPrimalCrossDefenseIsSelfOnlyRefreshesAndExpiresAfterFiveRounds
+--- PASS: TestPrimalCrossDefenseIsSelfOnlyRefreshesAndExpiresAfterFiveRounds (0.00s)
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/ordinary
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/agile
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/boss
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/guard
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/stone
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/existing-poison
+--- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds (0.57s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/ordinary (0.08s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/agile (0.09s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/boss (0.10s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/guard (0.10s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/stone (0.09s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/existing-poison (0.10s)
+=== RUN   TestPrimalCrossSpecialDamagePrioritiesUseActualEnemyID
+--- PASS: TestPrimalCrossSpecialDamagePrioritiesUseActualEnemyID (0.01s)
+=== RUN   TestPrimalCrossSkipsRetiredTargetsAndCaptureProtectedGuardian
+--- PASS: TestPrimalCrossSkipsRetiredTargetsAndCaptureProtectedGuardian (0.00s)
+=== RUN   TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense
+--- PASS: TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense (0.01s)
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/guardian
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/mount
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/absorb
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/vanish
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/reflect
+--- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/guardian (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/mount (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/absorb (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/vanish (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/reflect (0.00s)
+=== RUN   TestPrimalCrossLethalReflectionAndKnockoutStopInvalidEffects
+--- PASS: TestPrimalCrossLethalReflectionAndKnockoutStopInvalidEffects (0.00s)
+=== RUN   TestPrimalCrossBuffDoesNotActWhenCasterOrTargetsAreUnavailable
+--- PASS: TestPrimalCrossBuffDoesNotActWhenCasterOrTargetsAreUnavailable (0.00s)
+=== RUN   TestPrimalCrossPoisonProbabilityClampsAndNativeFatalLifecycle
+--- PASS: TestPrimalCrossPoisonProbabilityClampsAndNativeFatalLifecycle (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.607s
+=== RUN   TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense
+--- PASS: TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense (1.56s)
+=== RUN   TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly
+--- PASS: TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly (0.05s)
+PASS
+ok  	sa/server/internal/world	1.684s

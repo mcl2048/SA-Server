@@ -1,0 +1,22 @@
+# SA-1114-05 客户端进度
+
+- 已阅读任务、权威数据与官方资料核对；客户端/协议由mobile_review独占，root负责图包/发行，server_audit负责权威计算。
+- RED证据：client-red.log、client-battle-red.log、client-ai-fixed-red.log、client-ai-buff-red.log。首轮缺失包括catalog、set5隔离、跨邻预览、命中爪痕、buff快照及剩余、AI范围/捕获保护。
+- 已接入append-only两宠；旧576格身份不变，新图鉴578格73页。客户端build从primal_claws.json生成共享资料，成年个体技能仅信任PetInfo。
+- 新独立set5素材注册与回收；跨邻只认两排五列，14不连接15；共用攻击走原生物理命中帧，逐目标移动/击爪后返回，原生守护/反射保留，过期离场目标不再播放。
+- 协议增加stat/statVal/statTurns和defenseBoost/defenseTurns，并生成Go/TS；UI仅呈现服务器百分比/剩余回合，本地不倒计时；普通回合减少不重复弹出施放提示。
+- AI按真实十字活敌数×80%估值，初次无防御增益时加0.3防御效用；固定/智能/主人倒地路径保护1级捕获邻居。原生八向确认S/SW/W/NW/N/NE/E/SE。
+- 定向已通过；最终全量client210/210、build10/10、TypeScript退出0。
+- 增补RED→GREEN：同侧目标被server拒绝，UI仅共享技能过滤同侧；原生八向实际移动；吸血收尾Heal不额外爪击，正向回复显示绿色；普通伤害保持原黄色。
+- 长技能说明先RED复现越界，再仅PrimalCross增加三行原生分页；上一/下一页在说明上方，保留原返回/关闭hitbox；214字玩家说明可完整阅读，已加入桌面/移动全页串接与battle原生分页点击验收。
+- 新增private原生宠物目标攻击fixture90006，所有HP损失通过敌人真实攻击制造，再在多敌守卫场景观察1.8%自疗。没有直接写DB、浏览器业务状态或注入事件。
+- 最终浏览器使用root冻结的v0.2.16-LYNX ELF，SHA256 `51afb6f59c7501889740e2bac3017931b44027ab1cd77699a7e01c2efe2602d4`。验证范围为实际Chromium桌面和触摸视口模拟，不能宣称实体设备认证。
+- 浏览器中间尝试完整归档：`intermediate-guard-model`纠正harness把原生Target5防御误当成需选目标；`intermediate-read-only`主动停止并把会刷新LRU的`assets.anim`改成缓存读取`anims.get`；`intermediate-album-memory`纠正图鉴会记住73页的事实；`intermediate-self-camera`因移动截图未证明宠物动作在视口内而主动停止（已18项通过，不能作为最终通过）；`intermediate-impact-sampling`保留第5轮真实漏帧失败，角色投影100%可见，但rise截图请求使采样从index4跳到8。
+- 第6轮harness优化仅影响观察：图块匹配从每quad扫描全表改为只读局部Map；rise仅保留帧采样，命中/红效才发出必要截图，同一采样的两个证据文件共享一次截图buffer。不改变原生动作、速度、回合等待、业务状态或可见性阈值。
+- 源码`mobileCamera`初始值为`follow`；第4轮只能证明截图可见性不足，原因未定，不能表述为产品默认self。最终移动动作明确点击原生“跟随”，并要求命中角色中心入视口、投影面积至少80%可见；红效至少35%可见且至少两帧推进。JSON保留camera、视口、投影比例、中心标记与对应PNG文件名。
+- 第6轮首宠5/5后，清理成年宠技能窗遇到harness跨帧竞态，归档`intermediate-panel-transition`。技能页/资料页复用`pet-return`，上一帧hitbox可能落后于实际page；现同一只读快照读取count/page/actions，每次返回等待真实新帧发布新页面且clickHot清除。独立原生开窗/返回/删除probe交替两宠连续6/6，`final-primal-panel-probe.json`退出0、停服0、位置一致。
+- 第7轮完整业务验收`final-primal.json`为20/20，四组真实自疗量分别桌面萨鲁法斯16、桌面克劳德斯89、移动萨鲁法斯85、移动克劳德斯69；均验证实际HP损失×1.8%向下取整/缺失HP上限与权威HP差值。四组cross命中角色投影均100%可见，原始红效可见帧数分别20/21/23/22；五回合增防、十字16/15/17/11、成年仅1/2均通过；browser errors为空，SIGTERM退出0、保存坐标一致。
+- 对实际PNG单独目视：两宠桌面/移动的普通及共享左爪命中均清楚可见；桌面两宠及移动克劳德斯的独立199402红效截图有效。移动萨鲁法斯原`cross-red-impact`截图晚到返回后，不能用其文件存在或先前quad采样冒作视觉通过；原始20项JSON和该PNG保存在`original-primal-r7/`。
+- 单独`final-primal-red-probe.json`在同一最终ELF通过一次真实移动萨鲁法斯施放，原生栏位2发送29060技能，权威199402四击16/15/17/11；CDP raster PNG三张已逐一目视，01为全身宠物与清晰十字红爪，02为红弧淡出，03为红白爆点。投影采样早于CDP截图请求，不能声称截图精确对应采样帧。规范化脚本`attach-red-evidence.py`同时给`primal[].visibility.cross`与对应check增加`redEvidenceSource`/`sourceScope`，明确是独立补充施放；原始probe JSON保存在`original-red-probe/`。第一次补充probe末尾把技能栏位误比为技能ID的harness断言失败保存在`intermediate-red-probe-slot/`。
+- 最终`final-mobile-regression.json`为14/14：field/battle各5种尺寸旋转（390×844、844×390、320×568、568×320、430×932）、可见缩放/缩小/复位及真实双指缩放/平移不泄漏业务意图。四份最终报告均errors为空、SIGTERM退出0、保存位置一致；相应supervisor为`primal-browser`、`mobile-regression`、`panel-probe`、`red-probe`，均finished/exit0。
+- 最后只读交叉核验：规范化报告的原20业务events/samples/adult与原始报告逐项一致，四组正数Heal及两宠移动原生follow/中心/比例证据均有效；browser根目录62张final PNG全在本次成功20项开始后生成，旧failure及移动萨鲁法斯延迟红效PNG仅在原始/中间目录留存。客户端、协议、素材加载与生产源保持冻结；本子Agent完成客户端/浏览器所有权工作并停止报告写入，交root最终发行审查和提交。

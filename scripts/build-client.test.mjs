@@ -15,7 +15,7 @@ function fixture(t) {
     rmSync(root, { recursive: true, force: true });
   });
   for (const dir of ["client/src", "client/art", "scripts", "server/webclient/static", "server/internal/data"]) mkdirSync(join(root, dir), { recursive: true });
-  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "scripts/sync-lilith-catalog.mjs", "scripts/sync-lisarido-catalog.mjs", "server/internal/data/ai_pets.json", "server/internal/data/lilith.json", "server/internal/data/lisarido.json", "client/src/lisarido-catalog.ts", "client/src/ai-pet-catalog.ts"]) cpSync(join(sourceRoot, file), join(root, file));
+  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "scripts/sync-lilith-catalog.mjs", "scripts/sync-lisarido-catalog.mjs", "scripts/sync-primal-claws-catalog.mjs", "server/internal/data/ai_pets.json", "server/internal/data/lilith.json", "server/internal/data/lisarido.json", "server/internal/data/primal_claws.json", "client/src/lisarido-catalog.ts", "client/src/ai-pet-catalog.ts"]) cpSync(join(sourceRoot, file), join(root, file));
   writeFileSync(join(root, "client/src/main.ts"), 'import { value } from "./dep.ts";\nconsole.log(value);\n');
   writeFileSync(join(root, "client/src/dep.ts"), "export const value: number = 42;\n");
   writeFileSync(join(root, "client/index.html"), '<script type="module" src="dist/main.js?v=old"></script>\n');
@@ -133,4 +133,15 @@ test("builder and stager reject output symlinks without modifying the target", t
   let result = run(root, "client/build.mjs"); assert.notEqual(result.status, 0); assert.match(result.stderr, /symlink at client dist/);
   result = run(root, "scripts/stage-client.mjs"); assert.notEqual(result.status, 0); assert.match(result.stderr, /symlink at client dist/);
   assert.equal(readFileSync(join(outside, "keep.txt"), "utf8"), "KEEP");
+});
+
+test("primal biographies regenerate together and invalidate cache without allowing identity collisions",t=>{
+ const root=fixture(t);
+ writeFileSync(join(root,"client/src/main.ts"),'import { PRIMAL_CLAWS_CATALOG } from "./primal-claws-catalog.ts";\nconsole.log(PRIMAL_CLAWS_CATALOG);\n');
+ succeeds(root,"client/build.mjs");const first=output(root),path=join(root,"server/internal/data/primal_claws.json");
+ const data=JSON.parse(readFileSync(path,"utf8"));data.pets[1].story+="红瞳照亮回家的石廊。";writeFileSync(path,JSON.stringify(data));
+ succeeds(root,"client/build.mjs");const second=output(root);
+ assert.notEqual(first["index.html"],second["index.html"]);assert.match(second["dist/primal-claws-catalog.js"],/红瞳照亮回家的石廊/);
+ data.pets[1].image=199400;writeFileSync(path,JSON.stringify(data));const result=run(root,"client/build.mjs");
+ assert.notEqual(result.status,0);assert.match(result.stderr,/Invalid primal claw catalogue identity/);assert.deepEqual(output(root),second);
 });

@@ -170,13 +170,17 @@ func NewEnemy(s EnemySpec, slot int, skills map[int]*data.Skill, rnd *rand.Rand)
 	for i := 1; i <= len(t.Status); i++ {
 		f.Resist[i] = t.Status[i-1] // 模板的毒/麻/眠/石/醉/乱（E_T_POISON..）就是抗性（CHAR_WORKMODPOISON..）
 	}
-	for i, id := range t.Skills {
+	knownSkills := t.Skills
+	if s.Enemy.SkillOverride != nil {
+		knownSkills = *s.Enemy.SkillOverride
+	}
+	for i, id := range knownSkills {
 		if id >= 0 {
 			f.Skills[i] = skills[id]
 		}
 	}
 	f.Seed = &PetSeed{TempNo: t.TempNo, EnemyID: s.Enemy.ID, Alloc: alloc, Rank: data.EnemyRank(t), ModAI: t.ModAI,
-		Slot: t.Slot, LimitLevel: t.LimitLevel, Skills: t.Skills, Critical: t.Critical, Counter: t.Counter,
+		Slot: t.Slot, LimitLevel: t.LimitLevel, Skills: knownSkills, Critical: t.Critical, Counter: t.Counter,
 		Capture: s.Enemy.PetFlag != 0, Get: t.Get}
 	// ENEMY_createEnemy：身上的道具按千分比机率产生（_FIX_ITEMPROB：RAND(0,999) < 机率）
 	for i, id := range s.Enemy.Items {

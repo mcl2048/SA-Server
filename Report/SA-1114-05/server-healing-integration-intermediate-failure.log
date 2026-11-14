@@ -1,0 +1,100 @@
+=== RUN   TestPrimalClawsRuntimeRegistryAndActualCaveHabitats
+--- PASS: TestPrimalClawsRuntimeRegistryAndActualCaveHabitats (1.39s)
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/first-template
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/second-template
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/skill
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/young-enemy
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/adult-enemy
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/young-group
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/adult-group
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/first-sprite
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/second-sprite
+=== RUN   TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/effect-sprite
+--- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/first-template (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/second-template (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/skill (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/young-enemy (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/adult-enemy (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/young-group (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/adult-group (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/first-sprite (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/second-sprite (0.00s)
+    --- PASS: TestPrimalClawsCollisionsLeaveAllRegistriesUnchanged/effect-sprite (0.00s)
+=== RUN   TestPrimalClawsInstallationIsIdempotentAndOriginalPetsStayIntact
+--- PASS: TestPrimalClawsInstallationIsIdempotentAndOriginalPetsStayIntact (1.49s)
+=== RUN   TestPrimalClawsNaturalVariantsHaveDifferentActualSkills
+    primal_claws_play_test.go:63: floor 32017: 5000 native picks map[adult:870 original:3550 young:580]; live+capture skill variants verified
+    primal_claws_play_test.go:63: floor 32016: 5000 native picks map[adult:905 original:3496 young:599]; live+capture skill variants verified
+--- PASS: TestPrimalClawsNaturalVariantsHaveDifferentActualSkills (1.04s)
+PASS
+ok  	sa/server/internal/data	3.999s
+=== RUN   TestPrimalCrossFormationUsesOnlyOrthogonalNeighbors
+--- PASS: TestPrimalCrossFormationUsesOnlyOrthogonalNeighbors (0.00s)
+=== RUN   TestPrimalCrossDefenseIsSelfOnlyRefreshesAndExpiresAfterFiveRounds
+--- PASS: TestPrimalCrossDefenseIsSelfOnlyRefreshesAndExpiresAfterFiveRounds (0.00s)
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/ordinary
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/agile
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/boss
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/guard
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/stone
+=== RUN   TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/existing-poison
+--- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds (0.32s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/ordinary (0.06s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/agile (0.04s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/boss (0.04s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/guard (0.04s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/stone (0.08s)
+    --- PASS: TestPrimalCrossExactAccuracyExceptionsAndPoisonBounds/existing-poison (0.05s)
+=== RUN   TestPrimalCrossSpecialDamagePrioritiesUseActualEnemyID
+--- PASS: TestPrimalCrossSpecialDamagePrioritiesUseActualEnemyID (0.01s)
+=== RUN   TestPrimalCrossSkipsRetiredTargetsAndCaptureProtectedGuardian
+--- PASS: TestPrimalCrossSkipsRetiredTargetsAndCaptureProtectedGuardian (0.00s)
+=== RUN   TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense
+--- PASS: TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense (0.00s)
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/guardian
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/mount
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/absorb
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/vanish
+=== RUN   TestPrimalCrossPreservesGuardianMountAndBarrierResults/reflect
+    primal_cross_test.go:321: reflect settlement/proc wrong: [{Actor:5 Kind:attack Target:12 Result:reflect Damage:1050 HP:100000 Dead:false OK:false Skill:赤爪裂阵 Status:0 Guardian:-1 Combo:true ActorHP:98950 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:1 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:5 Kind:attack Target:11 Result:normal Damage:716 HP:99284 Dead:false OK:false Skill:赤爪裂阵 Status:0 Guardian:-1 Combo:true ActorHP:98950 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:5 Kind:attack Target:13 Result:normal Damage:695 HP:99305 Dead:false OK:false Skill:赤爪裂阵 Status:8 Guardian:-1 Combo:true ActorHP:98950 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} {Actor:5 Kind:attack Target:17 Result:dodge Damage:0 HP:100000 Dead:false OK:false Skill:赤爪裂阵 Status:0 Guardian:-1 Combo:false ActorHP:98950 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}]
+--- FAIL: TestPrimalCrossPreservesGuardianMountAndBarrierResults (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/guardian (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/mount (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/absorb (0.00s)
+    --- PASS: TestPrimalCrossPreservesGuardianMountAndBarrierResults/vanish (0.00s)
+    --- FAIL: TestPrimalCrossPreservesGuardianMountAndBarrierResults/reflect (0.00s)
+=== RUN   TestPrimalCrossLethalReflectionAndKnockoutStopInvalidEffects
+--- PASS: TestPrimalCrossLethalReflectionAndKnockoutStopInvalidEffects (0.00s)
+=== RUN   TestPrimalCrossBuffDoesNotActWhenCasterOrTargetsAreUnavailable
+--- PASS: TestPrimalCrossBuffDoesNotActWhenCasterOrTargetsAreUnavailable (0.00s)
+=== RUN   TestPrimalCrossPoisonProbabilityClampsAndNativeFatalLifecycle
+--- PASS: TestPrimalCrossPoisonProbabilityClampsAndNativeFatalLifecycle (0.00s)
+=== RUN   TestPrimalCrossHealsOnceFromSummedActualLossWithFloor
+=== RUN   TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/below-boundary
+=== RUN   TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/first-point
+=== RUN   TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/sum-before-floor
+=== RUN   TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/overkill-bounded
+--- PASS: TestPrimalCrossHealsOnceFromSummedActualLossWithFloor (0.00s)
+    --- PASS: TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/below-boundary (0.00s)
+    --- PASS: TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/first-point (0.00s)
+    --- PASS: TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/sum-before-floor (0.00s)
+    --- PASS: TestPrimalCrossHealsOnceFromSummedActualLossWithFloor/overkill-bounded (0.00s)
+=== RUN   TestPrimalCrossHealingCountsGuardianAndMountActualLossOnly
+--- PASS: TestPrimalCrossHealingCountsGuardianAndMountActualLossOnly (0.00s)
+=== RUN   TestPrimalCrossHealingIgnoresBarriersAndCannotReviveOrOverheal
+--- PASS: TestPrimalCrossHealingIgnoresBarriersAndCannotReviveOrOverheal (0.00s)
+=== RUN   TestPrimalCrossEarlierRealDamageCannotHealLaterFatalReflection
+--- PASS: TestPrimalCrossEarlierRealDamageCannotHealLaterFatalReflection (0.00s)
+FAIL
+FAIL	sa/server/internal/battle	0.356s
+=== RUN   TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense
+--- PASS: TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense (1.47s)
+=== RUN   TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly
+--- PASS: TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly (0.07s)
+PASS
+ok  	sa/server/internal/world	1.608s
+FAIL

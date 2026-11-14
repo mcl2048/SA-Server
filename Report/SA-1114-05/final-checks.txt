@@ -1,0 +1,9 @@
+client-and-build 0
+typescript 0
+go-all 0
+go-vet 0
+ai-pets-installer 0
+lilith-installer 0
+lisarido-installer 0
+primal-claws-installer 0
+matched-build 0

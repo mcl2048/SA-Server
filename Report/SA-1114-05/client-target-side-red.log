@@ -1,0 +1,38 @@
+✔ cross target preview follows the native two-by-five edge and submits the original center (71.580365ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (1.969299ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (53.91585ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (7.681314ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (17.1765ms)
+✖ cross only offers opponent centers because the authoritative skill rejects same-side targets (11.351196ms)
+✔ native run directions match all eight S/SW/W/NW/N/NE/E/SE artwork rows (3.892592ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 787.40141
+
+✖ failing tests:
+
+test at client/test/battle-primal-claws.test.ts:82:2
+✖ cross only offers opponent centers because the authoritative skill rejects same-side targets (11.351196ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(!h.targetIds.includes("pt-0")&&!h.targetIds.includes("pt-5"))
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:84:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

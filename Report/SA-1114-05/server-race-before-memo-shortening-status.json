@@ -1,0 +1,17 @@
+{
+  "state": "finished",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "./internal/data",
+    "./internal/battle",
+    "./internal/world",
+    "-run",
+    "TestPrimal|TestElectromagneticCannon|TestGhostStorm",
+    "-count=1"
+  ],
+  "started": 1794663123.0116699,
+  "exit_code": 0,
+  "seconds": 82.573
+}

@@ -1,0 +1,88 @@
+✖ cross target preview follows the native two-by-five edge and submits the original center (70.653265ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (2.285422ms)
+✖ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (19.393156ms)
+✖ defense percentages and remaining turns come from wire events and reconnect snapshots (2.100465ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (29.124883ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 2
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 624.648495
+
+✖ failing tests:
+
+test at client/test/battle-primal-claws.test.ts:32:1
+✖ cross target preview follows the native two-by-five edge and submits the original center (70.653265ms)
+  AssertionError [ERR_ASSERTION]: 14 links left13 and opposite19, never wraps to15
+  + actual - expected
+
+  + []
+  - [
+  -   [
+  -     17,
+  -     138,
+  -     57,
+  -     202
+  -   ],
+  -   [
+  -     305,
+  -     46,
+  -     345,
+  -     110
+  -   ]
+  - ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:35:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 17, 138, 57, 202 ], [ 305, 46, 345, 110 ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-primal-claws.test.ts:44:1
+✖ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (19.393156ms)
+  AssertionError [ERR_ASSERTION]: shared skill must draw its red claw impact atlas at hit time
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:55:97)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at client/test/battle-primal-claws.test.ts:60:1
+✖ defense percentages and remaining turns come from wire events and reconnect snapshots (2.100465ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  undefined !== 46
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-primal-claws.test.ts:61:37)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 46,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

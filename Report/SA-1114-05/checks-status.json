@@ -1,0 +1,60 @@
+{
+  "state": "finished",
+  "success": true,
+  "checks": [
+    {
+      "name": "client-and-build",
+      "exit_code": 0,
+      "log": "client-tests.txt",
+      "seconds": 24.782
+    },
+    {
+      "name": "typescript",
+      "exit_code": 0,
+      "log": "typescript.txt",
+      "seconds": 1.949
+    },
+    {
+      "name": "go-all",
+      "exit_code": 0,
+      "log": "go-tests.txt",
+      "seconds": 139.211
+    },
+    {
+      "name": "go-vet",
+      "exit_code": 0,
+      "log": "go-vet.txt",
+      "seconds": 5.256
+    },
+    {
+      "name": "ai-pets-installer",
+      "exit_code": 0,
+      "log": "ai-pets-install-tests.json",
+      "seconds": 4.934
+    },
+    {
+      "name": "lilith-installer",
+      "exit_code": 0,
+      "log": "lilith-install-tests.json",
+      "seconds": 4.654
+    },
+    {
+      "name": "lisarido-installer",
+      "exit_code": 0,
+      "log": "lisarido-install-tests.json",
+      "seconds": 4.81
+    },
+    {
+      "name": "primal-claws-installer",
+      "exit_code": 0,
+      "log": "primal-claws-install-tests.json",
+      "seconds": 4.632
+    },
+    {
+      "name": "matched-build",
+      "exit_code": 0,
+      "log": "build.txt",
+      "seconds": 12.425
+    }
+  ]
+}

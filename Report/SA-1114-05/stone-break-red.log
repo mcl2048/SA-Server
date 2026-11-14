@@ -1,0 +1,6 @@
+=== RUN   TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense
+    primal_cross_test.go:249: stone defense still doubled, base defense lost, or status transiently cleared: guard={Actor:5 Kind:attack Target:10 Result:normal Damage:559 HP:99441 Dead:false OK:false Skill:赤爪裂阵 Status:0 Guardian:-1 Combo:false ActorHP:100000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:1 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} stone={Actor:5 Kind:attack Target:10 Result:normal Damage:102 HP:99898 Dead:false OK:false Skill:赤爪裂阵 Status:4 Guardian:-1 Combo:false ActorHP:100000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:199402 ActorMP:0 Shoot:0 Fly:0 Icon:1 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0} observed=true
+--- FAIL: TestPrimalCrossStoneBreakKeepsStatusButBypassesOnlyExtraDefense (0.00s)
+FAIL
+FAIL	sa/server/internal/battle	0.016s
+FAIL

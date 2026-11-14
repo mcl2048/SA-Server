@@ -1,0 +1,3 @@
+client-and-build 0
+typescript 0
+go-all 1

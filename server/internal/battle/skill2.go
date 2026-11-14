@@ -158,7 +158,7 @@ func (b *Battle) setup2(f *Fighter, c Command) (Command, bool) {
 		f.Quick += int(f.Base[1] / 100 * 0.5) // WORKFIXDEX 只在这一回合
 		f.Atk = int(f.Base[1] / 100 * 0.7)
 	case "PETSKILL_ShowMercy", "PETSKILL_BecomePig", "PETSKILL_BecomeFox", "PETSKILL_ToothCrushe",
-		"PETSKILL_SetMagicPet", "PETSKILL_SetDuck", "PETSKILL_Abduct", "PETSKILL_Steal", "PETSKILL_BatFly", "PETSKILL_DivideAttack", data.GhostStormFunc, data.ElectromagneticCannonFunc:
+		"PETSKILL_SetMagicPet", "PETSKILL_SetDuck", "PETSKILL_Abduct", "PETSKILL_Steal", "PETSKILL_BatFly", "PETSKILL_DivideAttack", data.GhostStormFunc, data.ElectromagneticCannonFunc, data.PrimalCrossFunc:
 	default:
 		if unregistered[s.Func] {
 			return none, true
@@ -189,6 +189,9 @@ func (b *Battle) skill2(f *Fighter, c Command, ev *[]Event) bool {
 	s := c.Skill
 	o := attackOpts{name: s.Name, noCounter: true}
 	switch s.Func {
+	case data.PrimalCrossFunc:
+		b.primalCross(f, c, ev)
+		return true
 	case data.ElectromagneticCannonFunc:
 		b.electromagneticCannon(f, c, ev)
 		return true

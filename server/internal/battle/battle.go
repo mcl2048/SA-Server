@@ -163,6 +163,9 @@ type Fighter struct {
 	dexTurns, dexP   int    // 束缚 / 风之吹息（MYSKILLDEX）：剩下的回合、敏捷加减（耐力的 %）
 	vary             int    // 暗月变身：变身中剩下的行动次数
 	varySave         [4]int // 变身前的 FixAtk / FixDef / FixQuick / Sprite
+	// Cross-claw defense is a combat-only contribution, refreshed rather than
+	// added again. Duration is in completed global rounds, including casting.
+	primalDefPercent, primalDefTurns, primalDefApplied int
 }
 
 func (f *Fighter) Side() int { return f.Slot / SideOffset }
@@ -348,6 +351,7 @@ type Event struct {
 	Icon int
 	// 能力变化（Kind StatChange）
 	Stat, StatVal int
+	StatTurns     int // Authoritative remaining rounds for the primal defense buff.
 	// 道具用掉了（item.go，不送给客户端）：Consume 一个、ConsumeAll 整叠
 	Consume, ConsumeAll bool `json:"-"`
 	// 攻击魔法放动画的位置（attmagic.bin）："攻击方式|时间差|显示方式|x|y"
@@ -559,6 +563,9 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 			c = b.enemyAI(f)
 		}
 		all[i] = b.setup(f, c)
+		// Apply after this round's normal setup so temporary/native modifiers
+		// remain meaningful and a refresh can remove precisely our own share.
+		f.applyPrimalDefense()
 	}
 	// 行动顺序：(速度 + 20) − RAND(0, 10%)，大的先动
 	type ord struct {
@@ -620,6 +627,7 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 		b.autoAvoidTargets = 0
 	}
 	b.tickMagicStatus()
+	b.tickPrimalDefense(&ev)
 	// 战场属性的回合数：到了就回到无属性（"BV|15|0|"）
 	if b.fieldTurns > 0 {
 		if b.fieldTurns--; b.fieldTurns == 0 {
@@ -793,19 +801,21 @@ type attackOpts struct {
 	drain    int // 吸血：伤害的百分比回到自己身上
 	mpDamage int // MP 攻击：目标 MP 的百分比
 	// skill2.go 的技能
-	noCounter  bool    // 不会引起反击（只有普通攻击那一组 case 有反击，BATTLE_S_AttackDamage 等没有）
-	criMod     float64 // 会心机率倍率（浴血狂袭 ×1.3），0 视为 1
-	mercy      bool    // 手下留情：打不死对方（剩 1）
-	tear       int     // 撕裂伤口：再加上对方缺的 HP 的 %
-	modifyElem int     // 强化攻击：对方有这个属性时伤害 +20%（地水火风 1..4，0 为没有）
-	mdfyElem   int     // 属性转换：攻方属性当作只有这一种 100（1..4，0 为没有）
-	fallRide   bool    // 落马术
-	randomNext bool    // 狂乱暴走：第二下起打对方随机的人
-	lightTake  string  // 穿透术 / 破镜重圆：对方的光镜守正好是这一种时，自己也得到一次
-	noBarrier  bool    // 火线猎杀：不看光镜守（BATTLE_DamageSub_FIREKILL）
-	explode    bool    // 爆裂攻击（PvP）
-	tooth      bool    // E啮齿术（客户端画 SPR_tooth）
-	roar       bool    // 狂狮怒吼（客户端画 CG_ICON_ROAR）
+	noCounter          bool    // 不会引起反击（只有普通攻击那一组 case 有反击，BATTLE_S_AttackDamage 等没有）
+	criMod             float64 // 会心机率倍率（浴血狂袭 ×1.3），0 视为 1
+	mercy              bool    // 手下留情：打不死对方（剩 1）
+	tear               int     // 撕裂伤口：再加上对方缺的 HP 的 %
+	modifyElem         int     // 强化攻击：对方有这个属性时伤害 +20%（地水火风 1..4，0 为没有）
+	mdfyElem           int     // 属性转换：攻方属性当作只有这一种 100（1..4，0 为没有）
+	fallRide           bool    // 落马术
+	randomNext         bool    // 狂乱暴走：第二下起打对方随机的人
+	lightTake          string  // 穿透术 / 破镜重圆：对方的光镜守正好是这一种时，自己也得到一次
+	noBarrier          bool    // 火线猎杀：不看光镜守（BATTLE_DamageSub_FIREKILL）
+	explode            bool    // 爆裂攻击（PvP）
+	tooth              bool    // E啮齿术（客户端画 SPR_tooth）
+	roar               bool    // 狂狮怒吼（客户端画 CG_ICON_ROAR）
+	primalCross        bool    // exact 80% accuracy and recipient-based cross-claw rules
+	ignoreStoneDefense bool    // bypass only petrification's extra defense, not its status
 }
 
 // icon 是攻击者头上要画的技能图示（Event.Icon）。
@@ -920,7 +930,7 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 	if d.Pet && b.PetOwner(d) == a.Slot {
 		d.AIDelta += aiFixSekkan // 主人打自己的宠物
 	}
-	if b.duck(a, d, o.duckMod) {
+	if !o.primalCross && b.duck(a, d, o.duckMod) {
 		e.Result, e.HP, e.Status, e.ActorHP = Dodge, d.HP, d.Status(), a.HP
 		return e, cont
 	}
@@ -942,6 +952,29 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 		e.HP, e.Status, e.ActorHP = original.HP, original.Status(), a.HP
 		return e, false
 	}
+	primalPoison := false
+	if o.primalCross {
+		breakGuard := d.guard && d.status[StConfusion] <= 0 || d.status[StStone] > 0
+		if !breakGuard && b.Rnd.IntN(100) >= 80 {
+			e.Result, e.HP, e.Status, e.ActorHP = Dodge, d.HP, d.Status(), a.HP
+			return e, false
+		}
+		special := d.Enemy() && d.Seed != nil && data.PrimalCrossSpecialEnemy(d.Seed.EnemyID)
+		switch {
+		case breakGuard || special:
+			o.dmgMod = 1.5
+		case d.status[StDeepPoison] > 0:
+			o.dmgMod = 1.2
+		default:
+			o.dmgMod = 1
+			primalPoison = true
+		}
+		if breakGuard {
+			d.guard = false
+			e.Icon = 1
+			o.ignoreStoneDefense = true
+		}
+	}
 	var dmg int
 	if o.mdfyElem > 0 {
 		// BATTLE_AttrAdjust 的 BCF_MODIFY：攻方属性只剩选的那一种（满 100）
@@ -956,14 +989,14 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 	}
 	if b.Rnd.IntN(10000)+1 < criPer {
 		if a.Weapon == data.ItemBow {
-			dmg = b.damage(a, d) // 弓的会心一击没有额外伤害
+			dmg = b.physicalDamage(a, d, o.ignoreStoneDefense) // 弓的会心一击没有额外伤害
 		} else {
-			dmg = b.criDamage(a, d)
+			dmg = b.criticalDamage(a, d, o.ignoreStoneDefense)
 		}
 		e.Result = Critical
 		cont = false
 	} else {
-		dmg = b.damage(a, d)
+		dmg = b.physicalDamage(a, d, o.ignoreStoneDefense)
 		e.Result = Normal
 	}
 	guarding := d.guard && d.status[StConfusion] <= 0
@@ -1100,6 +1133,11 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 	}
 	if dmg > 0 && o.status > 0 && d.HP > 0 && b.statusCheck(a, d, o.status) {
 		d.status[o.status] = o.turns + 1
+	}
+	if primalPoison && dmg > 0 && d.Alive() && d.Status() == StNone && d.dizzy <= 0 && b.Rnd.IntN(100) < primalPoisonChance(a.Level, d.Level, d.Resist[StPoison]) {
+		// Native PETSKILL_Deeppoison uses requested five turns plus two status
+		// ticks. It ticks damage for five actions and is fatal if left uncured.
+		d.status[StDeepPoison] = 7
 	}
 	if dmg > 0 && o.drain > 0 {
 		a.HP = min(a.MaxHP, a.HP+dmg*o.drain/100)
@@ -1299,6 +1337,12 @@ func (b *Battle) criticalPer(a, d *Fighter) int {
 
 // damage 是 BATTLE_DamageCalc。石化的目标防御力 ×2。
 func (b *Battle) damage(a, d *Fighter) int {
+	return b.physicalDamage(a, d, false)
+}
+
+// Keep stone's actual status intact throughout damage callbacks. The cross
+// skill bypasses its added defense without changing native/base defense.
+func (b *Battle) physicalDamage(a, d *Fighter, ignoreStoneDefense bool) int {
 	attack := a.rideAtk()
 	defense := d.rideDef() * 0.70    // _BATTLE_NEWPOWER
 	if d.magStatus == magSuperWall { // 铁壁（_MAGIC_SUPERWALL）：防御 +(n + rand%20)%
@@ -1310,7 +1354,7 @@ func (b *Battle) damage(a, d *Fighter) int {
 	if a.Enemy() {
 		attack += (attack*float64(b.Rnd.IntN(10)) + 2) / 100
 	}
-	if d.status[StStone] > 0 {
+	if d.status[StStone] > 0 && !ignoreStoneDefense {
 		defense *= 2
 	}
 	var dmg int
@@ -1338,11 +1382,15 @@ func (b *Battle) fieldPower(attr [4]int) float64 {
 
 // criDamage 是 BATTLE_CriDamageCalc：普通伤害 + 守方防御力 × 攻方等级 / 守方等级 × 0.5。
 func (b *Battle) criDamage(a, d *Fighter) int {
+	return b.criticalDamage(a, d, false)
+}
+
+func (b *Battle) criticalDamage(a, d *Fighter, ignoreStoneDefense bool) int {
 	lv := 1.0
 	if d.Level > 0 {
 		lv = float64(a.Level) / float64(d.Level)
 	}
-	return b.damage(a, d) + int(float64(d.Def)*lv*0.5)
+	return b.physicalDamage(a, d, ignoreStoneDefense) + int(float64(d.Def)*lv*0.5)
 }
 
 // guardAdjust 是 BATTLE_GuardAdjust：原版防御时伤害随机减为 0%..50%（25% 的机会完全挡掉）。

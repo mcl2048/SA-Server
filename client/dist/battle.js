@@ -12,19 +12,20 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=abae3f174fa9bed4";
-import { sfx, setSfx } from "./audio.js?v=abae3f174fa9bed4";
-import { isMobile } from "./mobile-view.js?v=abae3f174fa9bed4";
+import { ANIM, findAction,                              } from "./assets.js?v=54d9206af168411f";
+import { sfx, setSfx } from "./audio.js?v=54d9206af168411f";
+import { isMobile } from "./mobile-view.js?v=54d9206af168411f";
 
-import { battleItems } from "./items.js?v=abae3f174fa9bed4";
-import { album } from "./album.js?v=abae3f174fa9bed4";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=54d9206af168411f";
+import { SkillMemoPages } from "./skill-memo.js?v=54d9206af168411f";
+import { battleItems } from "./items.js?v=54d9206af168411f";
+import { album } from "./album.js?v=54d9206af168411f";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=abae3f174fa9bed4";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=abae3f174fa9bed4";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=54d9206af168411f";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=54d9206af168411f";
 
-// Legacy presentation metadata is optional: the current server computes these
-// internally but its BattleEvent wire schema/conversion omits them. Keep this
-// reader compatible without changing generated protocol types or gameplay.
+// The legacy icon remains optional; stat percentages and turn counts are
+// declared in the shared wire schema and synchronized by the server.
 
 
 const CG = {
@@ -91,6 +92,7 @@ const FX = { MIRROR: 100650, BARRIER: 100651, ABSORB: 100652, STAR: 100501, REVE
 // by Magic events so its caster never enters the melee movement choreography.
 const GHOST_STORM_EFFECT = 199201;
 const ELECTROMAGNETIC_CANNON_EFFECT = 199301;
+const PRIMAL_CROSS_EFFECT = 199402;
 const SKILL_ICON                         = { 1: 26514, 2: 101415, 3: 101403, 4: 101404, 5: 101402, 6: 101405, 7: 101408, 8: 101409, 9: 101407, 10: 101410, 11: 25869, 12: 101418 };
 const MISSILE = { ARROW: 25630, STONE: 25785, STONE_SHADOW: 25786, AXE: 100504, AXE_SHADOW: 100505, BOOMERANG: 100502, SPEED: 32 };
 const ANGRY = 8; // loadsprbin.h ANIM_ANGRY
@@ -120,6 +122,7 @@ class Fighter {
   mp        ;
   rideHp        ;           // 骑着的宠物的 HP（没骑为 0；落马后为 0）
   status = 0;
+  defenseBoost = 0; defenseTurns = 0; // Server percentages/turns, including reconnect; never count client frames as turns.
   dead = false; gone = false; hidden = false;
   fly                          = null; // 被击飞：每毫秒的位移，飞出画面就 gone（oft.cpp case 55）
   shakeUntil = 0;        // 挨打后原地抖动到几时（hit stop：普通 8 帧、会心 / 反射 32 帧）
@@ -153,6 +156,7 @@ class Fighter {
     this.dir = this.homeDir();
     this.hp = f.hp; this.mp = f.mp; this.rideHp = f.rideMaxHp > 0 ? f.rideHp : 0;
     this.status = f.status ?? 0; this.dead = f.hp <= 0;
+    this.defenseBoost = f.defenseBoost ?? 0; this.defenseTurns = f.defenseTurns ?? 0;
     if (this.dead) { this.action = ANIM.DEAD; this.loop = false; }
   }
 
@@ -567,7 +571,7 @@ export class BattleScreen {
       if (p.text) {
         // Clamp the complete outlined bitmap at every bounce frame, including
         // the topmost enemy in a five-enemy formation. Never clip the glyphs.
-        const label = this.combatLabel(p.text, isMobile() ? 32 : 24, "#ffdf45");
+        const label = this.combatLabel(p.text, isMobile() ? 32 : 24, p.color === FONT.GREEN ? FONT.GREEN : "#ffdf45");
         ui.pic(label, Math.max(4, Math.min(796 - label.width, x - label.width / 2)),
           Math.max(4, Math.min(596 - label.height, yy - label.height)));
       }
@@ -604,11 +608,16 @@ export class BattleScreen {
       case "stat": {
         // BD|…|d1 3..6："攻 上升N％" 绿字在目标 y-64（oft.cpp 5527-5600 damage_num 37-40）
         const t = this.fighters.get(e.target) ?? a;
-        // Optional legacy metadata is absent on current wire events; do not
-        // fabricate a NaN percentage when connected to the current server.
-        if (e.stat === undefined || e.statVal === undefined) break;
+        if (e.stat < 37 || e.stat > 40 || !e.statVal) break;
         const name = ["回避", "攻", "防", "敏"][e.stat - 37] ?? "", value = e.statVal;
-        steps.push(this.waitStep(350, (now) => { this.popup(t, now, { text: `${name} ${value > 0 ? "上升" : "下降"}${Math.abs(value)}％`, color: FONT.GREEN, dy: 16 }); }));
+        steps.push(this.waitStep(350, (now) => {
+          const tick = e.stat === 39 && value === t.defenseBoost && e.statTurns > 0 && e.statTurns < t.defenseTurns;
+          if (e.stat === 39 && (e.statTurns > 0 || value < 0 && t.defenseBoost > 0)) {
+            t.defenseBoost = e.statTurns > 0 ? Math.max(0, value) : 0;
+            t.defenseTurns = Math.max(0, e.statTurns);
+          }
+          if (!tick) this.popup(t, now, { text: `${name} ${value > 0 ? "上升" : "下降"}${Math.abs(value)}％`, color: FONT.GREEN, dy: 16 });
+        }));
         break;
       }
       case "escape":
@@ -696,7 +705,7 @@ export class BattleScreen {
       case "petout": {
         // BATTLE_PetOut（BS f1）：主人头上冒"Go!"（oft.cpp case 62），新的宠物从画面外跑进来
         const f                = { slot: e.target, name: e.name, sprite: e.sprite, level: e.level, hp: e.hp, maxHp: e.maxHp, mp: 0, maxMp: 0,
-          rideName: "", rideLevel: 0, rideHp: 0, rideMaxHp: 0, fallSprite: 0, ownerSlot: e.ownerSlot, bagSlot: e.bagSlot, status: e.status };
+          rideName: "", rideLevel: 0, rideHp: 0, rideMaxHp: 0, fallSprite: 0, ownerSlot: e.ownerSlot, bagSlot: e.bagSlot, status: e.status, defenseBoost: 0, defenseTurns: 0 };
         const n = new Fighter(f);
         const off = f.slot < 10 ? 400 : -400;
         steps.push(this.waitStep(400, (now) => { this.popup(a, now, { icon: CG.ICON_GO }); }));
@@ -758,6 +767,17 @@ export class BattleScreen {
       case "revive": {
         const t = this.fighters.get(e.target);
         if (!t) break;
+        if (e.kind === "heal" && e.effect === PRIMAL_CROSS_EFFECT && e.target === e.actor) {
+          // Cast-end lifesteal is already resolved by the server. It follows
+          // all cross strikes and adds no second attack or invented healing.
+          steps.push(this.waitStep(600, now => {
+            if (t.dead || t.gone || t.fly) return;
+            t.hp = e.hp; t.status = e.status;
+            this.popup(t, now, { text: String(e.damage), color: FONT.GREEN });
+            sfx(102, t.x);
+          }));
+          break;
+        }
         steps.push(this.waitStep(1, (now) => { this.showSkill(e.skill, now); a.play(ANIM.ATTACK, now); }));
         steps.push(this.waitStep(600, (now) => {
           // Validate when this queued step runs: an earlier event in the same
@@ -993,6 +1013,7 @@ export class BattleScreen {
           attackSteps(a         , group               )         {
     const steps         = [];
     const first = group[0];
+    const cross = first.effect === PRIMAL_CROSS_EFFECT;
     if (first.shoot > 0 && !a.hidden) return first.shoot === 4 ? this.boomerangSteps(a, group) : this.shootSteps(a, group);
     const t0 = this.fighters.get(first.target);
     if (!t0) return [];
@@ -1019,6 +1040,14 @@ export class BattleScreen {
     for (const e of group) {
       const t = this.fighters.get(e.target);
       if (!t) continue;
+      const targetStart = steps.length;
+      let allowed = true;
+      if (cross) {
+        // The whole turn is queued before playback. Recheck departures/deaths
+        // here, when this strike executes, rather than trusting a stale slot.
+        steps.push(this.waitStep(1, () => { allowed = !a.dead && !a.gone && !t.dead && !t.gone && !t.hidden; }));
+        if (e !== first) steps.push(this.walkStep(a, () => front(t)));
+      }
       const g = e.guardian >= 0 ? this.fighters.get(e.guardian) : undefined;
       if (g) {
         // 守护者冲到被守护者身前替他挨打
@@ -1031,7 +1060,9 @@ export class BattleScreen {
       let hit = false, at = 0, ended = 0;
       const strike = (now        ) => {
         if (hit) return;
-        hit = true; this.applyHit(e, g ?? t, a, now);
+        hit = true;
+        if (cross) this.animOnce(PRIMAL_CROSS_EFFECT, (g ?? t).x, (g ?? t).y - 40, now);
+        this.applyHit(e, g ?? t, a, now);
         if (e.damage > 0 || e.result === "vanish" || e.result === "absorb") a.freeze(now, (e.result === "critical" ? 32 : 8) * FRAME);
       };
       steps.push((now) => {
@@ -1047,10 +1078,18 @@ export class BattleScreen {
         return ended > 0 && now - ended >= (e.combo ? 0 : 20 * FRAME);
       });
       if (g) steps.push(this.moveStep(g, () => [g.homeX, g.homeY], 200));
+      if (cross) for (let i = targetStart + 1; i < steps.length; i++) {
+        const step = steps[i]; steps[i] = now => !allowed || step(now);
+      }
     }
     steps.push(this.walkStep(a, () => [a.homeX, a.homeY]));
     steps.push(this.waitStep(1, () => { a.dir = a.homeDir(); }));
-    return steps;
+    if (!cross) return steps;
+    let checked = false, skip = false;
+    return steps.map(step => now => {
+      if (!checked) { checked = true; skip = a.dead || a.gone || t0.dead || t0.gone || t0.hidden; }
+      return skip || step(now);
+    });
   }
 
   /**
@@ -1516,6 +1555,7 @@ export class BattleScreen {
     for (const a of list) {
       // 头顶名字（BattleNameDisp：F11 开关，全部 20 人 "名字 LVn"，自己与自己的宠物黄字）；敌人的常显（原版要滑鼠移上去才显示）
       if (!a.dead && (a.f.slot >= 10 || this.host.names())) ui.texts.push({ x: Math.round(a.x), y: Math.round(a.y - (isMobile() ? 126 : 112)), text: `${a.f.name} LV${a.f.level}`, color: a.f.slot === this.me || this.petOwner(a) === this.me ? FONT.YELLOW : FONT.WHITE, align: "center" });
+      if (!a.dead && a.defenseBoost > 0 && a.defenseTurns > 0) ui.texts.push({ x: Math.round(Math.max(100, Math.min(700, a.x))), y: Math.round(Math.max(24, a.y - (isMobile() ? 106 : 92))), text: `防御 +${a.defenseBoost}% · ${a.defenseTurns}回合`, color: FONT.GREEN, align: "center" });
       // 异常状态动画（katino）
       if (a.status > 0 && !a.dead) this.animAt(STATUS_SPR[a.status], a.x, a.y - 64, now);
       // Anchor below the actual drawn sprite (also works for large pets), not
@@ -1886,7 +1926,7 @@ export class BattleScreen {
     const sf = new Map                      ();
     for (const [slot, a] of this.fighters) {
       sf.set(slot, { slot, name: a.f.name, hp: a.dead ? 0 : a.hp, maxHp: a.f.maxHp, mp: a.mp, level: a.f.level, status: a.status, gone: a.gone || a.hidden,
-        rideHp: a.rideHp, rideMaxHp: a.f.rideMaxHp });
+        rideHp: a.rideHp, rideMaxHp: a.f.rideMaxHp, defenseBoost: a.defenseBoost, defenseTurns: a.defenseTurns });
     }
     const cmd = smartChoose(s, {
       me: this.me, first: this.aiFirst, fighters: sf, inv: this.host.inventory().items, myAtk: this.host.myAtk(),
@@ -1972,7 +2012,7 @@ export class BattleScreen {
         const fighters = new Map                      ();
         for (const [slot, f] of this.fighters) fighters.set(slot, {
           slot, name: f.f.name, hp: f.dead ? 0 : f.hp, maxHp: f.f.maxHp, mp: f.mp,
-          level: f.f.level, status: f.status, gone: f.gone || f.hidden, rideHp: f.rideHp, rideMaxHp: f.f.rideMaxHp,
+          level: f.f.level, status: f.status, gone: f.gone || f.hidden, rideHp: f.rideHp, rideMaxHp: f.f.rideMaxHp, defenseBoost: f.defenseBoost, defenseTurns: f.defenseTurns,
         });
         // Historical helper name; current policy also handles a downed PvE
         // party member. Supply this pet's bag skills, never the first pet's.
@@ -2040,12 +2080,14 @@ export class BattleScreen {
   }
 
   /** BattleButtonWaza 的技能窗口：MakeWindowDisp(364, 41, 272, 348) 在 800 模式下平移到 (444, 101) */
+          primalMemo = new SkillMemoPages();
           petWindow(info         ) {
     const ui = this.host.ui, wx = 444, wy = 101, mx = wx + 136;
     ui.image(CG.PET_WAZA_WND, mx, wy + 174);
     for (let i = 0; i < info.maxSkill && i < 7; i++) ui.image(CG.PET_WAZA_BAR_1 + i, mx, wy + 174);
     const name = info.freeName || info.name;
     ui.text(wx + 12 + Math.max(0, (16 * 7 - measure(name)) / 2), wy + 32, name, FONT.WHITE);
+    let memo = info.skills.find(s => s.func === PRIMAL_CROSS_FUNC);
     for (let i = 0; i < info.maxSkill && i < 7; i++) {
       const s = info.skills.find((x) => x.slot === i);
       if (!s) continue;
@@ -2054,8 +2096,10 @@ export class BattleScreen {
       if (ui.text(wx + 15 + 44, y, s.name, usable ? FONT.WHITE : FONT.GRAY, id)) {
         if (usable) this.chooseSkill(s.slot, s.target);
       }
-      if (ui.hovered(id)) wrapBytes(s.memo, 24).forEach((l, k) => ui.text(wx + 32, wy + 252 + k * 20, l, FONT.WHITE));
+      if (ui.hovered(id)) memo = s;
     }
+    if (memo?.func === PRIMAL_CROSS_FUNC) this.primalMemo.draw(ui, "pw", memo.memo, wx + 32, wy + 252);
+    else if (memo) wrapBytes(memo.memo, 24).forEach((l, k) => ui.text(wx + 32, wy + 252 + k * 20, l, FONT.WHITE));
     if (ui.image(CG.CLOSE_BTN, mx, wy + 330, "pw-close") && ui.clicked("pw-close")) this.petWnd = false;
   }
 
@@ -2068,13 +2112,15 @@ export class BattleScreen {
 
   /** 宠物技能的选目标：按技能的目标种类决定哪些人可以点（全体类的点任何一个都行）；右键取消在 petMenu 处理 */
           petTarget(type        ) {
-    const ui = this.host.ui, me = this.me, pet = this.myPet()?.a.f.slot ?? -1;
+    const own = this.myPet(), ui = this.host.ui, me = this.me, pet = own?.a.f.slot ?? -1;
+    const cross = own?.info.skills.find(s => s.slot === this.petSkill)?.func === PRIMAL_CROSS_FUNC;
     let wy = 416;
     if (ui.mouse.y > 400) wy = 4;
     ui.window(290, wy, 3, 2);
     ui.text(290 + 38, wy + 28, "请选择", FONT.YELLOW);
     ui.text(290 + 38, wy + 52, "您的目标", FONT.YELLOW);
     const ok = (slot        ) => {
+      if (cross) return (slot < 10) !== (me < 10); // Same-side centers are rejected by the authoritative shared skill.
       switch (type) {
         case T_MYSELF: return slot === pet;
         case T_ALLMYSIDE: return (slot < 10) === (me < 10);
@@ -2085,11 +2131,20 @@ export class BattleScreen {
       }
       return (slot < 10) !== (me < 10);
     };
+    let hot = -1;
     for (const a of this.fighters.values()) {
       if (!ok(a.f.slot) || a.dead || a.gone || a.hidden || !a.rect) continue;
       const [x, y, w, h] = a.rect, id = `pt-${a.f.slot}`;
-      if (ui.hitBox(x, y, x + w, y + h, id) && a.f.slot < 10) ui.texts.push({ x: a.x, y: y - 16, text: `${a.f.name} LV${a.f.level}`, color: FONT.WHITE, align: "center" }); // 敌人头上常显名字，不重画
+      if (ui.hitBox(x, y, x + w, y + h, id)) {
+        hot = a.f.slot;
+        if (a.f.slot < 10) ui.texts.push({ x: a.x, y: y - 16, text: `${a.f.name} LV${a.f.level}`, color: FONT.WHITE, align: "center" }); // 敌人头上常显名字，不重画
+      }
       if (ui.clicked(id)) { this.sendPet(this.petSkill, a.f.slot); return; }
+    }
+    if (cross && hot >= 0) for (const slot of primalCrossSlots(hot)) {
+      const a = this.fighters.get(slot);
+      if (slot === hot || !a?.rect || a.dead || a.gone || a.hidden) continue;
+      const [x, y, w, h] = a.rect; ui.box(x, y, x + w, y + h, boxColor(), false);
     }
   }
 

@@ -1,0 +1,49 @@
+✔ surviving pet chooses the most populated actual cross without counting row wraps (6.36614ms)
+✔ living-owner AI scores the shared skill over each independent native neighbor group (3.648729ms)
+✔ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (1.051183ms)
+✔ old 570-slot save survives four appended seen/snap entries and account reload (11.075657ms)
+✔ legacy seen and snapshot IDs and portraits retain their original mapping (1.249779ms)
+✔ all appended slots fit the existing last page and render raw animation portraits plus canonical stories (11.68664ms)
+✔ missing portrait decoding retries later, uses raw fallback frames, and caches success (25.60253ms)
+✔ new-pet brief descriptions fit the existing stat extension panel without changing old pets (3.973047ms)
+✔ retaking a renamed pet updates its snapshot without overwriting adjacent original slots (0.620194ms)
+✔ pet details and album retain a stable native model for the fullscreen game window (1.284092ms)
+✔ Lilith appends slot 575 after all four mechanical pets and persists her native portrait (1.496973ms)
+✔ Lisarido persists slot 576 while every existing pet identity and photograph stays in place (2.800905ms)
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (140.485305ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (13.328836ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (9.920467ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (11.173536ms)
+✔ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (12.573102ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (7.36985ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (736.861911ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (491.774266ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (10.047507ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (3.550015ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (23.852154ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (25.259752ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (10.227131ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (8.108848ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (6.976496ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (10.969854ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (13.517788ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (12.182024ms)
+✔ primal pets and claw effects own independent set5 pages that reload after eviction (8.375529ms)
+✔ invalid primal frames cannot borrow a previous extension's images (6.40115ms)
+✔ cross target preview follows the native two-by-five edge and submits the original center (84.845856ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (1.98107ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (40.663562ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (6.779759ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (17.11112ms)
+(node:839626) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both primal claw pets join the native catalogue after every saved extension identity (4.48219ms)
+✔ native GM previews animate both new pets and keep the shared claw effect outside the pet catalogue (5.299893ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2097.663713

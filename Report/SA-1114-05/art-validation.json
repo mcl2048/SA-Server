@@ -1,0 +1,374 @@
+{
+  "pets": [
+    {
+      "name": "cyrufas",
+      "sprite": 199400,
+      "frames": 376,
+      "actions": 64,
+      "minimum_distinct_frames": 2,
+      "idle_dimensions": [
+        {
+          "dir": 0,
+          "visible_bbox": [
+            67,
+            85,
+            125,
+            164
+          ],
+          "actual_size_px": [
+            58,
+            79
+          ],
+          "native_size_px": [
+            58,
+            79
+          ],
+          "native_anchor": [
+            -29,
+            -57
+          ]
+        },
+        {
+          "dir": 1,
+          "visible_bbox": [
+            62,
+            83,
+            151,
+            161
+          ],
+          "actual_size_px": [
+            89,
+            78
+          ],
+          "native_size_px": [
+            89,
+            78
+          ],
+          "native_anchor": [
+            -34,
+            -59
+          ]
+        },
+        {
+          "dir": 2,
+          "visible_bbox": [
+            57,
+            82,
+            152,
+            160
+          ],
+          "actual_size_px": [
+            95,
+            78
+          ],
+          "native_size_px": [
+            95,
+            78
+          ],
+          "native_anchor": [
+            -39,
+            -60
+          ]
+        },
+        {
+          "dir": 3,
+          "visible_bbox": [
+            63,
+            77,
+            129,
+            176
+          ],
+          "actual_size_px": [
+            66,
+            99
+          ],
+          "native_size_px": [
+            66,
+            99
+          ],
+          "native_anchor": [
+            -33,
+            -65
+          ]
+        },
+        {
+          "dir": 4,
+          "visible_bbox": [
+            64,
+            75,
+            124,
+            175
+          ],
+          "actual_size_px": [
+            60,
+            100
+          ],
+          "native_size_px": [
+            60,
+            100
+          ],
+          "native_anchor": [
+            -32,
+            -67
+          ]
+        },
+        {
+          "dir": 5,
+          "visible_bbox": [
+            38,
+            77,
+            128,
+            161
+          ],
+          "actual_size_px": [
+            90,
+            84
+          ],
+          "native_size_px": [
+            90,
+            84
+          ],
+          "native_anchor": [
+            -58,
+            -65
+          ]
+        },
+        {
+          "dir": 6,
+          "visible_bbox": [
+            41,
+            82,
+            134,
+            159
+          ],
+          "actual_size_px": [
+            93,
+            77
+          ],
+          "native_size_px": [
+            93,
+            77
+          ],
+          "native_anchor": [
+            -55,
+            -60
+          ]
+        },
+        {
+          "dir": 7,
+          "visible_bbox": [
+            64,
+            83,
+            129,
+            161
+          ],
+          "actual_size_px": [
+            65,
+            78
+          ],
+          "native_size_px": [
+            65,
+            78
+          ],
+          "native_anchor": [
+            -32,
+            -59
+          ]
+        }
+      ]
+    },
+    {
+      "name": "claudes",
+      "sprite": 199401,
+      "frames": 376,
+      "actions": 64,
+      "minimum_distinct_frames": 2,
+      "idle_dimensions": [
+        {
+          "dir": 0,
+          "visible_bbox": [
+            62,
+            84,
+            129,
+            176
+          ],
+          "actual_size_px": [
+            67,
+            92
+          ],
+          "native_size_px": [
+            67,
+            92
+          ],
+          "native_anchor": [
+            -34,
+            -58
+          ]
+        },
+        {
+          "dir": 1,
+          "visible_bbox": [
+            48,
+            85,
+            143,
+            168
+          ],
+          "actual_size_px": [
+            95,
+            83
+          ],
+          "native_size_px": [
+            95,
+            83
+          ],
+          "native_anchor": [
+            -48,
+            -57
+          ]
+        },
+        {
+          "dir": 2,
+          "visible_bbox": [
+            37,
+            85,
+            155,
+            161
+          ],
+          "actual_size_px": [
+            118,
+            76
+          ],
+          "native_size_px": [
+            118,
+            76
+          ],
+          "native_anchor": [
+            -59,
+            -57
+          ]
+        },
+        {
+          "dir": 3,
+          "visible_bbox": [
+            52,
+            84,
+            139,
+            171
+          ],
+          "actual_size_px": [
+            87,
+            87
+          ],
+          "native_size_px": [
+            87,
+            87
+          ],
+          "native_anchor": [
+            -44,
+            -58
+          ]
+        },
+        {
+          "dir": 4,
+          "visible_bbox": [
+            63,
+            82,
+            127,
+            178
+          ],
+          "actual_size_px": [
+            64,
+            96
+          ],
+          "native_size_px": [
+            64,
+            96
+          ],
+          "native_anchor": [
+            -33,
+            -60
+          ]
+        },
+        {
+          "dir": 5,
+          "visible_bbox": [
+            46,
+            84,
+            142,
+            167
+          ],
+          "actual_size_px": [
+            96,
+            83
+          ],
+          "native_size_px": [
+            96,
+            83
+          ],
+          "native_anchor": [
+            -50,
+            -58
+          ]
+        },
+        {
+          "dir": 6,
+          "visible_bbox": [
+            37,
+            85,
+            154,
+            161
+          ],
+          "actual_size_px": [
+            117,
+            76
+          ],
+          "native_size_px": [
+            117,
+            76
+          ],
+          "native_anchor": [
+            -59,
+            -57
+          ]
+        },
+        {
+          "dir": 7,
+          "visible_bbox": [
+            55,
+            85,
+            141,
+            170
+          ],
+          "actual_size_px": [
+            86,
+            85
+          ],
+          "native_size_px": [
+            86,
+            85
+          ],
+          "native_anchor": [
+            -41,
+            -57
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_pixels": 8931328,
+  "decoded_texture_bytes": 35725312,
+  "character_frames": 752,
+  "effect_frames": 24,
+  "all_128_actions_animated": true,
+  "clipped_frames": [],
+  "files": {
+    "anim/199400.json": "0ecfc1f148444c21da018f3a7ba278f18ee93d6e419de47e24ad0c0ac20c8e51",
+    "anim/199401.json": "6edda1a5266b27299158f1624e2d6d137d2fb87151cb48eab9e7ccdcdf6388cd",
+    "anim/199402.json": "3e9c683b80f319c588577bc90eabffa2af5653cdedbe7dc3cf5af763ebb3c346",
+    "manifest.json": "af08c3ee36f678ef2d708b25d7039eae1d7cf0c8d07d73593d892ae9e99d2ee6",
+    "pages/00000.png": "5c5c526d5b190aded42179d4625832964d44e168de58e0922d485e56c7ef7d98",
+    "pages/00001.png": "8c11d38dd676fab94ae2a36690ba3efea8578c0b7b30e950284e5ea8b753a9b7",
+    "pages/00002.png": "41d66d506545680f86ca9af9bb218caef33e8b02e08af81edc5711731b2a413e"
+  },
+  "scope": "Frame bounds, timing definitions, unique frames and native-size comparison are automated. Pose quality is reviewed separately using action sheets and the real game."
+}

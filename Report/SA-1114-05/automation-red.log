@@ -1,0 +1,13 @@
+=== RUN   TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense
+    primal_claws_automation_test.go:22: cross missing or aimed at sparse edge: skill=0 target=10
+    primal_claws_automation_test.go:33: native wire result hits=0 stats=0
+--- FAIL: TestPrimalClawsAutomationUsesRealCrossAndTransmitsSelfDefense (1.30s)
+=== RUN   TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly
+    primal_claws_automation_test.go:45: center 12 protected 11: got false want true
+    primal_claws_automation_test.go:45: center 12 protected 13: got false want true
+    primal_claws_automation_test.go:45: center 12 protected 17: got false want true
+    primal_claws_automation_test.go:45: center 14 protected 19: got false want true
+--- FAIL: TestPrimalClawsAutomaticCaptureScopeIncludesAdjacentSlotsOnly (0.04s)
+FAIL
+FAIL	sa/server/internal/world	1.389s
+FAIL

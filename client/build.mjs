@@ -9,10 +9,12 @@ import { fileURLToPath } from "node:url";
 import { syncAiPetCatalog } from "../scripts/sync-ai-pet-catalog.mjs";
 import { syncLilithCatalog } from "../scripts/sync-lilith-catalog.mjs";
 import { syncLisaridoCatalog } from "../scripts/sync-lisarido-catalog.mjs";
+import { syncPrimalClawsCatalog } from "../scripts/sync-primal-claws-catalog.mjs";
 
 syncAiPetCatalog();
 syncLilithCatalog();
 syncLisaridoCatalog();
+syncPrimalClawsCatalog();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "src");
 const out = join(dirname(fileURLToPath(import.meta.url)), "dist");
