@@ -1,0 +1,5 @@
+$ go test -race ./internal/data ./internal/battle -count=1
+ok  	sa/server/internal/data	43.844s
+ok  	sa/server/internal/battle	1.908s
+
+exit=0

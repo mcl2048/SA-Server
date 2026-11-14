@@ -1,18 +1,18 @@
 // 宠物相簿 / 图鉴（原版 __ALBUM_47，menu.cpp）：完全在客户端，原版存在 data\album_47.dat，这里存 localStorage（sa.album.<账号>）。
 //   看到：画面上出现过（地图上的角色、战斗中的每一个人，CheckNewPet / CheckBattleNewPet）→ 灰色的名字
 //   照相：宠物详细资料的"照相"钮 → 记下那时的能力值，名字前出现 NEW；点开看过后去掉 NEW
-//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（原 570 格后追加 4 格，共 574 格、72 页）
+//   窗口：MakeWindowDisp(4, 4, 272, 448)，底图 CG_ALBUM_WND 26230；上半是选中那一只的资料与头像，下半每页 8 只（原 570 格后追加扩展宠物，共 575 格、72 页）
 //   开关：任务栏的"图鉴"或 Ctrl+A
 
 import type { PetInfo } from "./proto.gen.ts";
 import { PET_ALBUM_TBL } from "./albumdata.ts";
 import { FONT, SYS, measure, type Ui } from "./ui.ts";
 import { ANIM, findAction } from "./assets.ts";
-import { AI_PET_CATALOG, aiPetForSprite } from "./ai-pet-catalog.ts";
+import { PET_CATALOG, petForSprite } from "./pet-catalog.ts";
 
-const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + AI_PET_CATALOG.length, PAGE = 8;
+const LEGACY_PET_KINDS = 570, MAX_PET_KIND = LEGACY_PET_KINDS + PET_CATALOG.length, PAGE = 8;
 // Append-only identities: never change the original SEEN/SNAP table or slots.
-const EXTRA_ALBUM_SPRITES = [199100, 199101, 199102, 199103] as const;
+const EXTRA_ALBUM_SPRITES = PET_CATALOG.map(p => p.sprite);
 const CG = { WND: 26230, NEW_ICON: 26231, PREV: 26180, NEXT: 26182, CLOSE: 26042 };
 // 照相钮不能用的宠物形象（menu.cpp 照相的检查）
 const NO_SNAP = new Set([100451, 100432, 101280, 101281, 100015, 100018, 101279, 100401, 101414, 101167, 101172, 102011, 102012]);
@@ -66,7 +66,7 @@ export class Album {
   }
 
   private albumNo(gra: number, steps: Step[]): number {
-    const extra = EXTRA_ALBUM_SPRITES.indexOf(gra as typeof EXTRA_ALBUM_SPRITES[number]);
+    const extra = EXTRA_ALBUM_SPRITES.indexOf(gra);
     if (extra >= 0) return LEGACY_PET_KINDS + extra;
     const t = tblNo(gra, steps);
     return t >= 0 && t < PET_ALBUM_TBL.length ? PET_ALBUM_TBL[t][0] : -1;
@@ -77,7 +77,7 @@ export class Album {
     if (!this.key || gra < 100250) return;
     const no = this.albumNo(gra, SEEN);
     if (no < 0 || no >= MAX_PET_KIND || this.list[no].flag !== 0) return;
-    const extra = aiPetForSprite(gra);
+    const extra = petForSprite(gra);
     this.list[no] = extra ? { flag: 1, name: extra.name, sprite: gra } : { flag: 1, name: PET_ALBUM_TBL[tblNo(gra, SEEN)][1] };
     this.save();
   }
@@ -85,7 +85,7 @@ export class Album {
   /** 照相：回传要显示的讯息（"%s 照相完成！"），不能照时回 null */
   snap(p: PetInfo): string | null {
     if (NO_SNAP.has(p.sprite)) return null;
-    const extra = aiPetForSprite(p.sprite), t = tblNo(p.sprite, SNAP);
+    const extra = petForSprite(p.sprite), t = tblNo(p.sprite, SNAP);
     const no = this.albumNo(p.sprite, SNAP);
     if (no < 0 || no >= MAX_PET_KIND) return null;
     const name = extra?.name ?? PET_ALBUM_TBL[t][1], face = extra ? undefined : PET_ALBUM_TBL[t][2];
@@ -121,7 +121,7 @@ export class Album {
         ui.box(x + 35, by + 1, x + 35 + w + 1, by + 10, bars[i][1], false);
         ui.box(x + 34, by, x + 34 + w, by + 8, bars[i][0], true);
       });
-      if (e.sprite && aiPetForSprite(e.sprite)) {
+      if (e.sprite && petForSprite(e.sprite)) {
         const definition = ui.assets.anim(e.sprite), action = definition && findAction(definition, 1, ANIM.STAND);
         const frame = action?.frames[0];
         if (frame && frame[0] >= 0) this.spritePortrait(ui, frame[0], wx + 199, wy + 117);
@@ -175,7 +175,7 @@ export class Album {
   }
 
   private storyPanel(ui: Ui, rects: [number, number, number, number][], sprite: number) {
-    const pet = aiPetForSprite(sprite);
+    const pet = petForSprite(sprite);
     if (!pet) return;
     const x = 280, y = 4, lines: string[] = [];
     let line = "";

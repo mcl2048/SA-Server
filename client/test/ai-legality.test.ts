@@ -60,3 +60,28 @@ test('group resurrection sends the side target accepted by the command boundary'
   assert.equal(cmd.kind, 'magic');
   assert.equal(cmd.target, 20, 'whole own-side magic cannot send a single dead slot');
 });
+
+test('MP recovery supports both native healing spell functions before emergency fallback attacks', () => {
+  for (const magicFunc of ['MAGIC_Recovery', 'MAGIC_OtherRecovery']) {
+    const c = context(), s = defaultAi(); c.fighters.get(0)!.hp = 50; c.fighters.get(0)!.mp = 5;
+    c.inv = [{...spell(10), magic: '滋润的精灵', magicFunc, magicTarget: 1, magicOption: '100'},
+      {...spell(0), slot: 9, magic: '', usable: true, memo: '回复气力100', name: '气力恢复药'}];
+    const cmd = smartChoose(s, c);
+    assert.equal(cmd.kind, 'item', `${magicFunc} must trigger recovery when its authoritative MP cost is unaffordable`);
+    assert.equal(cmd.item, 9); assert.equal(cmd.target, 0);
+  }
+});
+
+test('resurrection items cannot masquerade as MP recovery by mentioning 气绝回复', () => {
+  const c = context(), s = defaultAi(); c.fighters.get(0)!.mp = 5;
+  c.inv = [{...spell(10), magic: '滋润的精灵', magicFunc: 'MAGIC_Recovery', magicTarget: 1, magicOption: '100'},
+    {...spell(0), slot: 9, magic: '', usable: true, memo: '气绝回复，恢复耐力', name: '复活药'}];
+  assert.equal(smartChoose(s, c).kind, 'attack', 'a living caster must not consume revival medicine as MP');
+});
+
+test('AI has no offensive intent when every enemy is knocked out or absent', () => {
+  const c = context(), s = defaultAi(); c.fighters.get(15)!.hp = 0;
+  const absent = fighter(16); absent.gone = true; c.fighters.set(16, absent);
+  const cmd = smartChoose(s, c);
+  assert.equal(cmd.kind, 'guard'); assert.equal(cmd.target, -1); assert.deepEqual(cmd.pet, [-1, -1]);
+});

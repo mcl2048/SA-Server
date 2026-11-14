@@ -1,0 +1,133 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - text: SA-1114-03 / RELEASE REVIEW
+    - heading "自动恢复与幽风伙伴莉莉丝" [level=1] [ref=e4]
+    - generic [ref=e5]: 已验证 · v0.2.14-LYNX
+    - paragraph [ref=e6]: 从可复现失败到真实回合与实际发行程序，检查不能行动仍反击、恢复候选、气力补充及移动端镜头。基线 256f7ab / v0.2.13-LYNX。
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - strong [ref=e9]: "186"
+      - text: 客户端与构建测试
+    - generic [ref=e10]:
+      - strong [ref=e11]: "46"
+      - text: 真实 Chromium 检查
+    - generic [ref=e12]:
+      - strong [ref=e13]: "24"
+      - text: 桌面／手机恢复战斗
+    - generic [ref=e14]:
+      - strong [ref=e15]: "48"
+      - text: 匹配嵌入文件
+  - generic [ref=e16]:
+    - heading "修复与证据" [level=2] [ref=e17]
+    - table [ref=e18]:
+      - rowgroup [ref=e19]:
+        - row [ref=e20]:
+          - rowheader "不能行动仍反击" [ref=e21]
+          - cell "执行时检查 canMove，保留受击唤醒规则" [ref=e22]
+          - cell [ref=e23]:
+            - link "复现" [ref=e24] [cursor=pointer]:
+              - /url: battle-action-red.log
+            - text: ·
+            - link "验证" [ref=e25] [cursor=pointer]:
+              - /url: battle-action-green.log
+        - row [ref=e26]:
+          - rowheader "到期状态重新显示" [ref=e27]
+          - cell "Stun 发送当前状态，最后禁行动回合仍跳过" [ref=e28]
+          - cell [ref=e29]:
+            - link "复现" [ref=e30] [cursor=pointer]:
+              - /url: battle-action-red.log
+            - text: ·
+            - link "验证" [ref=e31] [cursor=pointer]:
+              - /url: SERVER-WORK.md
+        - row [ref=e32]:
+          - rowheader "恢复候选被阻塞" [ref=e33]
+          - cell "逐个尝试可治疗对象，覆盖仍在骑乘的低血坐骑" [ref=e34]
+          - cell [ref=e35]:
+            - link "复现" [ref=e36] [cursor=pointer]:
+              - /url: world-recovery-red.log
+            - text: ·
+            - link "验证" [ref=e37] [cursor=pointer]:
+              - /url: world-recovery-green.log
+        - row [ref=e38]:
+          - rowheader "气力补充无效" [ref=e39]
+          - cell "匹配体优先语义，按当前受伤对象所需精灵补气" [ref=e40]
+          - cell [ref=e41]:
+            - link "复现" [ref=e42] [cursor=pointer]:
+              - /url: world-recovery-review-red.log
+            - text: ·
+            - link "验证" [ref=e43] [cursor=pointer]:
+              - /url: world-race.txt
+        - row [ref=e44]:
+          - rowheader "客户端策略与文案" [ref=e45]
+          - cell "两种恢复精灵、复活药识别、无活敌防御与同一阈值" [ref=e46]
+          - cell [ref=e47]:
+            - link "复现" [ref=e48] [cursor=pointer]:
+              - /url: CLIENT-WORK.md
+            - text: ·
+            - link "验证" [ref=e49] [cursor=pointer]:
+              - /url: client-tests.txt
+    - paragraph [ref=e50]:
+      - link "完整验收报告" [ref=e51] [cursor=pointer]:
+        - /url: ACCEPTANCE.md
+      - text: ·
+      - link "官方研究依据" [ref=e52] [cursor=pointer]:
+        - /url: RESEARCH.md
+      - text: ·
+      - link "机器可读发行清单" [ref=e53] [cursor=pointer]:
+        - /url: release.json
+  - generic [ref=e54]:
+    - heading "实际游戏画面" [level=2] [ref=e55]
+    - generic [ref=e56]:
+      - figure "手机原生设置：真实点击、持久化和服务端策略消息。" [ref=e57]:
+        - link [ref=e58] [cursor=pointer]:
+          - /url: browser/final-recovery-mobile-native-threshold-40.png
+          - img "手机原生战斗设置与补血阈值" [ref=e59]
+      - figure "竖屏战斗：原生模型、控制区与安全显示边界。" [ref=e61]:
+        - link [ref=e62] [cursor=pointer]:
+          - /url: browser/final-camera-battle-390x844.png
+          - img "竖屏战斗镜头与原生模型" [ref=e63]
+  - generic [ref=e65]:
+    - heading "莉莉丝 · 原生位图动画" [level=2] [ref=e66]
+    - paragraph [ref=e67]: 风8火2，佩露夏同档成长，偏攻击与敏捷。幽风林缘守护者以双手释放蓝紫能量；幽灵风暴原地覆盖敌半场，并对存活目标附加35%–80%石化概率。32个八向站立帧主体高96–98px，相对雷龙正面145px为66.2%–67.6%；透明边距与脚下光环不计入角色高度。
+    - generic [ref=e68]:
+      - figure "208帧角色图集，用户原JPG透明提取与分层变形；没有调用图像生成API。" [ref=e69]:
+        - img "莉莉丝八方向与动作预览" [ref=e70]
+      - figure "原生RGBA半场特效，28帧；独立补丁只增加5个文件。" [ref=e72]:
+        - img "原生幽蓝骷髅火焰28帧" [ref=e73]
+    - paragraph [ref=e75]:
+      - link "服务端回归" [ref=e76] [cursor=pointer]:
+        - /url: LILITH-SERVER.md
+      - text: ·
+      - link "客户端回归" [ref=e77] [cursor=pointer]:
+        - /url: CLIENT-LILITH-WORK.md
+      - text: ·
+      - link "真实桌面与移动事件" [ref=e78] [cursor=pointer]:
+        - /url: browser/final-lilith.json
+      - text: ·
+      - link "素材校验" [ref=e79] [cursor=pointer]:
+        - /url: lilith-art-validation.json
+  - generic [ref=e80]:
+    - heading "莉莉丝 · 实际原生画面" [level=2] [ref=e81]
+    - generic [ref=e82]:
+      - figure "桌面：原地施法，半场骷髅火焰进入真实纹理渲染。" [ref=e83]:
+        - link [ref=e84] [cursor=pointer]:
+          - /url: browser/final-lilith-desktop-storm-half-flames.png
+          - img "桌面原生幽灵风暴覆盖敌半场" [ref=e85]
+      - figure "手机模拟：原生位图、镜头与真实服务端结算。" [ref=e87]:
+        - link [ref=e88] [cursor=pointer]:
+          - /url: browser/final-lilith-mobile-storm-half-flames.png
+          - img "手机竖屏原生幽灵风暴" [ref=e89]
+  - generic [ref=e91]:
+    - heading "发行一致性" [level=2] [ref=e92]
+    - paragraph [ref=e93]: Go 全量、vet、战斗与自动策略 race 均通过。相同输入重复构建二进制一致，ZIP 逐项匹配公共文件，旧 ZIP 已替换。新增莉莉丝只通过独立5文件补丁分发；Assets原树、数据库与凭据均未进入交付。
+    - paragraph [ref=e94]:
+      - text: Linux AMD64 SHA-256
+      - code [ref=e95]: 5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1
+    - paragraph [ref=e96]:
+      - text: ZIP SHA-256
+      - code [ref=e97]: cc4e6f901e15d0664b073acd505aa204de8d54c1d7f938a52b215b98b50284d2
+  - generic [ref=e98]:
+    - heading "验证边界" [level=2] [ref=e99]
+    - paragraph [ref=e100]: 实际静态 Linux AMD64 程序、原素材、WebSocket、隔离 SQLite 和真实 Chromium。GPU 使用 SwiftShader，手机尺寸与触屏由浏览器模拟；未进行实体 Android／iOS、Safari、软键盘及系统安全区认证。受控敌人仅存在私有验收数据中，未修改正式 gamedata。
+    - paragraph [ref=e101]: 中间工具失败保留并明确披露；最终证据以状态 JSON、摘要、回合事件和验收报告为准。
+  - generic [ref=e102]: 2026-11-14 · SA-1114-03 · 可离线阅读

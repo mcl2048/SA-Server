@@ -1,0 +1,1 @@
+{"state": "finished", "command": ["node", "Report/SA-1114-03/browser/real-game.mjs", "--variant", "final", "--lilith", "--meta", "/tmp/sa-1114-03-runtime-lilith-final.json"], "started": 1794645812.9500694, "exit_code": 1, "seconds": 154.452}

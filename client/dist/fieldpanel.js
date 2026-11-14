@@ -8,7 +8,7 @@
 // 与原版不同：骑宠查询、队长切换、商城的图不在资源里（这台服务端按了也没有作用），不画；右上的昼夜条原版要裁在底图的小窗里，
 // 这里画固定的 CG_FIELD_MENU_RIGHT_BACK 26121；摆摊与任务查询的窗口自己画（vendor.ts、quests.ts）。
 
-import { FONT, boxColor,         } from "./ui.js?v=bfc86541ebbec063";
+import { FONT, boxColor,         } from "./ui.js?v=befcbe62a17abfb2";
 
 const CG = {
   LEFT: 28553, MENU: 26101, CARD: 26103, PARTY: 26105, TRADE: 26234, FAMILY: 26237, VENDOR: 35227, MAIL_LAMP: 26107,

@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","recovery_case":"desktop native heal threshold change, reload persistence and AutoPlay.settings"}
+Error: desktop/spirit-1001-before-items: actual encounter did not win
+    at assert (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:5:50)
+    at encounter (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:127:7)
+    at async Module.runRecovery (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:190:11)
+    at async work (file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:297:37)
+    at async file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:331:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-recovery.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

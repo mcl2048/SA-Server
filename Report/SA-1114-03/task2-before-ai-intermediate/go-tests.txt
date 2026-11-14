@@ -1,0 +1,11 @@
+ok  	sa/server/cmd/saserver	37.888s
+ok  	sa/server/internal/battle	0.245s
+ok  	sa/server/internal/data	8.349s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	8.751s
+ok  	sa/server/internal/store	1.026s
+ok  	sa/server/internal/world	36.279s
+ok  	sa/server/tests	11.943s
+?   	sa/server/tools/assetindex	[no test files]
+?   	sa/server/tools/protogen	[no test files]
+ok  	sa/server/webclient	0.410s

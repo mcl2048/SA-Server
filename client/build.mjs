@@ -7,8 +7,10 @@ import { mkdirSync, readFileSync, writeFileSync, lstatSync, rmSync } from "node:
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { syncAiPetCatalog } from "../scripts/sync-ai-pet-catalog.mjs";
+import { syncLilithCatalog } from "../scripts/sync-lilith-catalog.mjs";
 
 syncAiPetCatalog();
+syncLilithCatalog();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "src");
 const out = join(dirname(fileURLToPath(import.meta.url)), "dist");

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { Album } from "../src/album.ts";
 import { AI_PET_CATALOG } from "../src/ai-pet-catalog.ts";
+import { LILITH_CATALOG } from "../src/lilith-catalog.ts";
 import { ANIM } from "../src/assets.ts";
 import { PetWindow, type PetHost } from "../src/pets.ts";
 import type { PetInfo } from "../src/proto.gen.ts";
@@ -44,7 +45,7 @@ test("old 570-slot save survives four appended seen/snap entries and account rel
     const saved = JSON.parse(values.get(key)!); assert.deepEqual(saved[0], legacy[0]); assert.deepEqual(saved[569], legacy[569]);
     assert.deepEqual(saved[570 + i], { flag: 2, name: definition.name, freeName: `伙伴${i}`, sprite: definition.sprite, level: 18, maxHp: 321, str: 45, quick: 67, def: 89, attr: [10, 20, 30, 40] });
   }
-  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 574);
+  const restored: any = new Album(); restored.load("account"); assert.equal(restored.list.length, 575);
   for (let i = 0; i < 4; i++) assert.equal(restored.list[570 + i].freeName, `伙伴${i}`);
   assert.deepEqual(restored.list[0], legacy[0]); assert.deepEqual(restored.list[569], legacy[569]);
   restored.load("another"); assert.equal(restored.list[570].flag, 0);
@@ -99,7 +100,7 @@ test("missing portrait decoding retries later, uses raw fallback frames, and cac
 test("new-pet brief descriptions fit the existing stat extension panel without changing old pets", () => {
   const h = ui(), window: any = new PetWindow({ ui: h.mock } as PetHost);
   const extension = { rank: 104, getLevel: 20, enemyId: 29001, alloc: [28, 22, 30, 24], std: [28, 22, 30, 24], grow: [1, 2, 3, 4], real: [1, 2, 3, 4], init: [1, 2, 3, 4], resist: [0, 0, 0, 0, 0, 0], critical: 0, counter: 0, rare: 0, vai: 0, magic: [0, 0, 0, 0, 0, 0, 0, 0] };
-  for (const definition of AI_PET_CATALOG) {
+  for (const definition of [...AI_PET_CATALOG, LILITH_CATALOG]) {
     h.text.length = 0; const rects: number[][] = [];
     window.extPanel({ ...pet(definition.sprite), name: definition.name, rideInfo: "ok", ext: extension }, rects);
     assert.ok(h.text.some(line => line.text === "简介（完整故事见图鉴）"));
@@ -127,4 +128,22 @@ test("pet details and album retain a stable native model for the fullscreen game
   storage();const album:any=new Album();album.load("native-model");album.open=true;
   album.snap(p);album.page=71;album.sel=570;album.frame(h.mock,[]);
   assert.deepEqual(models.at(-1),[9000000,true]);
+});
+
+test("Lilith appends slot 575 after all four mechanical pets and persists her native portrait", () => {
+  const values = storage(), album: any = new Album(); album.load("lilith");
+  for (const definition of AI_PET_CATALOG) album.snap(pet(definition.sprite));
+  album.seen(199200);
+  const seen = JSON.parse(values.get("sa.album.lilith")!);
+  assert.deepEqual(seen[574], { flag: 1, name: "莉莉丝", sprite: 199200 });
+  assert.equal(album.snap(pet(199200, "夜风")), "夜风 照相完成！");
+  const restored: any = new Album(); restored.load("lilith");
+  assert.equal(restored.list.length, 575); assert.equal(restored.list[574].freeName, "夜风");
+  for (let n = 0; n < 4; n++) assert.equal(restored.list[570 + n].sprite, 199100 + n);
+  restored.open = true; restored.page = 71; restored.sel = 574;
+  const h = ui(), portraits: any[] = []; h.mock.mobilePortrait = (...args: any[]) => portraits.push(args);
+  restored.frame(h.mock, []);
+  assert.deepEqual(portraits[0], [9000100, true]);
+  assert.ok(h.text.some(line => line.text === "莉莉丝 · 简介"));
+  assert.equal(restored.snap(pet(199201)), null, "a spell atlas must not become a catchable album identity");
 });

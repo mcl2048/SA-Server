@@ -1,0 +1,54 @@
+{
+  "state": "finished",
+  "success": true,
+  "checks": [
+    {
+      "name": "client-and-build",
+      "exit_code": 0,
+      "log": "client-tests.txt",
+      "seconds": 21.408
+    },
+    {
+      "name": "typescript",
+      "exit_code": 0,
+      "log": "typescript.txt",
+      "seconds": 2.15
+    },
+    {
+      "name": "go-all",
+      "exit_code": 0,
+      "log": "go-tests.txt",
+      "seconds": 243.411
+    },
+    {
+      "name": "go-vet",
+      "exit_code": 0,
+      "log": "go-vet.txt",
+      "seconds": 7.64
+    },
+    {
+      "name": "world-automation-race",
+      "exit_code": 0,
+      "log": "world-race.txt",
+      "seconds": 90.886
+    },
+    {
+      "name": "battle-race",
+      "exit_code": 0,
+      "log": "battle-race.log",
+      "seconds": 4.103
+    },
+    {
+      "name": "lilith-installer",
+      "exit_code": 0,
+      "log": "lilith-install-tests.json",
+      "seconds": 4.67
+    },
+    {
+      "name": "matched-build",
+      "exit_code": 0,
+      "log": "build.txt",
+      "seconds": 6.905
+    }
+  ]
+}

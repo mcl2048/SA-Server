@@ -56,6 +56,7 @@ func Load(dataDir string) (*Game, error) {
 		return nil, fmt.Errorf("读取战斗数据：%w", err)
 	}
 	g.installAIPetHabitats()
+	g.installLilithHabitat()
 	if g.Items, err = LoadItems(dataDir); err != nil {
 		return nil, fmt.Errorf("读取道具：%w", err)
 	}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "packageId": "lilith-v1",
+  "targetRoot": "assets/extensions/lilith-v1",
+  "installPrefix": "extensions/lilith-v1",
+  "source": "Reference-derived Lilith bitmap and ghost-fire extension; official base asset archive is excluded.",
+  "archive": {
+    "name": "lilith-v1-assets.tar.gz",
+    "size": 5692117,
+    "sha256": "6aabb973201878b26f7f074fa586821edda5dce984502f8fdfecf7ffeda78d11"
+  },
+  "entries": [
+    {
+      "path": "extensions/lilith-v1/anim/199200.json",
+      "size": 5954,
+      "sha256": "da2a0a6d6762e3f4ed72a5e99d4e98f75224fb7acb50eb94d76af8a5a35cf5cf"
+    },
+    {
+      "path": "extensions/lilith-v1/anim/199201.json",
+      "size": 538,
+      "sha256": "ebe45de899a37848b0946e347da98085dbb7a1396d5df3a71a42eef85223c93c"
+    },
+    {
+      "path": "extensions/lilith-v1/manifest.json",
+      "size": 9166,
+      "sha256": "3c228887312011bff1c71208c89885dfa6ce3ff4dec91d2813a958e104385e3b"
+    },
+    {
+      "path": "extensions/lilith-v1/pages/00000.png",
+      "size": 1763274,
+      "sha256": "7eb8e9456c2986f1e4db714951350e69c90ff37665cbb58057be5008b17858d9"
+    },
+    {
+      "path": "extensions/lilith-v1/pages/00001.png",
+      "size": 3965632,
+      "sha256": "fa0b5a555901fa84287f4fa1c689f44b0e9152a9812482311f2eaba599413628"
+    }
+  ]
+}

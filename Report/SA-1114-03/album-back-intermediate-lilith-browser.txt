@@ -1,0 +1,14 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","lilith_case":"desktop native Lilith list, stats, skill and appended album"}
+{"variant":"final","lilith_case":"desktop Lilith normal attack floats and renders native blue/purple energy"}
+{"variant":"final","lilith_case":"desktop Ghost Storm stays in place, covers enemy half and petrifies living opponents"}
+{"variant":"final","lilith_case":"mobile native Lilith list, stats, skill and appended album"}
+Error: native field panel did not close
+    at assert (file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:43:42)
+    at GameUI.closePanels (file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:189:4)
+    at async menu (file:///home/coder/saserver/Report/SA-1114-03/browser/lilith-cases.mjs:36:7)
+    at async Module.runLilith (file:///home/coder/saserver/Report/SA-1114-03/browser/lilith-cases.mjs:137:7)
+    at async work (file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:300:40)
+    at async file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:334:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-lilith.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

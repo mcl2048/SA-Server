@@ -1,0 +1,13 @@
+{
+  "state": "interrupted",
+  "command": [
+    "node",
+    "Report/SA-1114-03/browser/real-game.mjs",
+    "--variant",
+    "final",
+    "--mobile-regression"
+  ],
+  "started": 1794642999.1749365,
+  "terminal_exit_code": 143,
+  "excluded_from_final_acceptance": true
+}

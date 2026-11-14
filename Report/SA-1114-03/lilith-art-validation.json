@@ -1,0 +1,47 @@
+{
+  "pack": "lilith-v1",
+  "source": "/home/coder/saserver/img/lilyse.jpg",
+  "source_sha256": "663a49dd3799bd418fe8e28a7b0ed9d5e5f439e6ba6e1c2a783c432d19b8c62c",
+  "pages": 2,
+  "character_frames": 208,
+  "effect_frames": 28,
+  "character_anchor": [
+    -80,
+    -130
+  ],
+  "image_count": 236,
+  "manifest_sha256": "3c228887312011bff1c71208c89885dfa6ce3ff4dec91d2813a958e104385e3b",
+  "art_origin": "User-provided JPG, checkerboard removal, directional cutouts and deterministic bitmap deformation/painted native RGBA effects; no image generation API was available or called.",
+  "all_actions_animated": true,
+  "minimum_unique_frames_per_action": 2,
+  "clipped_opaque_character_frames": 0,
+  "character_opaque_extent": [
+    29,
+    4,
+    139,
+    143
+  ],
+  "native_large_dragon_reference": {
+    "sprite": 100353,
+    "front_first_stand_height": 145,
+    "left_up_first_stand_height": 179
+  },
+  "files": {
+    "anim/199200.json": "da2a0a6d6762e3f4ed72a5e99d4e98f75224fb7acb50eb94d76af8a5a35cf5cf",
+    "anim/199201.json": "ebe45de899a37848b0946e347da98085dbb7a1396d5df3a71a42eef85223c93c",
+    "manifest.json": "3c228887312011bff1c71208c89885dfa6ce3ff4dec91d2813a958e104385e3b",
+    "pages/00000.png": "7eb8e9456c2986f1e4db714951350e69c90ff37665cbb58057be5008b17858d9",
+    "pages/00001.png": "fa0b5a555901fa84287f4fa1c689f44b0e9152a9812482311f2eaba599413628"
+  },
+  "idle_body_height_px": {
+    "min": 96,
+    "max": 98,
+    "frames": 32,
+    "excludes": "transparent margins and separate ground light"
+  },
+  "body_to_front_dragon_height_ratio": {
+    "min": 0.6620689655172414,
+    "max": 0.6758620689655173,
+    "target": 0.6666666666666666
+  }
+}

@@ -13,6 +13,8 @@ const SETS = ["i8", "rgba"];
 // Extensions never enter the legacy SAIX index: its page/set fields are compact
 // integers and assetindex intentionally only understands the original two sets.
 const AI_PETS = { id: "ai-pets-v1", set: 2, imageBase: 9000000, imageLimit: 9100000, sprites: [199100, 199101, 199102, 199103] };
+const LILITH = { id: "lilith-v1", set: 3, imageBase: 9100000, imageLimit: 9200000, sprites: [199200, 199201] };
+type ExtensionPack = typeof AI_PETS;
 interface ExtensionPage { file: string; width: number; height: number; }
 interface ExtensionManifest {
   format: 1; id: string;
@@ -23,7 +25,7 @@ interface ExtensionManifest {
 }
 const integer = (n: unknown, low: number, high: number): n is number => Number.isInteger(n) && Number(n) >= low && Number(n) <= high;
 // Existing mechanical sprites keep pets visible with the unmodified asset pack.
-const AI_PET_FALLBACK = new Map(AI_PETS.sprites.map(id => [id, 100374]));
+const AI_PET_FALLBACK = new Map([...AI_PETS.sprites.map(id => [id, 100374] as [number, number]), [199200, 100374], [199201, 101735]]);
 
 // 显存里的图集页：没用了很久、总量超过 gpuBudget 时先释放（core 是登录前预加载的界面页，不释放）
 interface PageSlot { tex: Texture | null; used: number; core: boolean; }
@@ -35,7 +37,7 @@ export class Assets {
   private anims = new Map<number, AnimDef | null>();
   private extensionImages = new Map<number, ImageEntry>();
   private extensionPageUrls = new Map<string, string>();
-  private extensionAnims = new Set<number>();
+  private extensionAnims = new Map<number, number>();
   private tileIndex = new Map<number, number>(); // 地图图号 → 图像索引
   private tileSize = new Map<number, [number, number]>(); // 地图图号 → 占地格数 [x, y]（adrn atari）
   private tileFlat = new Set<number>(); // 地图图号：贴地的可走物件（adrn hit 的百位 = 3，map.cpp checkPrioPartsVsChar：永远画在角色下面，如桥、地毯）
@@ -68,33 +70,33 @@ export class Assets {
     }
     this.renderer.setPalette(await this.renderer.loadTexture(this.root + "palettes.png", false));
     try { await this.loadIndex(progress); } catch (e) { console.warn("没有二进制索引，改用逐个 JSON", e); this.index = null; }
-    await this.loadOptionalExtension();
+    await Promise.all([AI_PETS, LILITH].map(pack => this.loadOptionalExtension(pack)));
   }
 
   /** Missing/invalid add-ons leave the original resource set fully usable. */
-  private async loadOptionalExtension() {
+  private async loadOptionalExtension(pack: ExtensionPack) {
     const controller = new AbortController();
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       await Promise.race([
-        this.loadExtension(controller.signal),
+        this.loadExtension(pack, controller.signal),
         new Promise<never>((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(new Error("扩展资源读取超时")); }, 5000); }),
       ]);
     } catch (error) {
       controller.abort();
-      console.warn("机械宠扩展不可用，保留原资源", error);
+      console.warn(`${pack.id}扩展不可用，保留原资源`, error);
     } finally { if (timer !== undefined) clearTimeout(timer); }
   }
 
-  private async loadExtension(signal: AbortSignal) {
-    const base = `${this.root}extensions/${AI_PETS.id}/`;
+  private async loadExtension(pack: ExtensionPack, signal: AbortSignal) {
+    const base = `${this.root}extensions/${pack.id}/`;
     const response = await fetch(base + "manifest.json", { signal });
     if (response.status === 404) return;
     if (!response.ok) throw new Error(`扩展清单: ${response.status}`);
     const manifest = await response.json() as ExtensionManifest;
-    if (manifest.format !== 1 || manifest.id !== AI_PETS.id || !Array.isArray(manifest.pages) || manifest.pages.length < 1 || manifest.pages.length > 16
+    if (manifest.format !== 1 || manifest.id !== pack.id || !Array.isArray(manifest.pages) || manifest.pages.length < 1 || manifest.pages.length > 16
       || !Array.isArray(manifest.images) || manifest.images.length < 1 || manifest.images.length > 10000
-      || !Array.isArray(manifest.animations) || manifest.animations.length !== AI_PETS.sprites.length) throw new Error("扩展清单格式无效");
+      || !Array.isArray(manifest.animations) || manifest.animations.length !== pack.sprites.length) throw new Error("扩展清单格式无效");
     let pixels = 0;
     const pageFiles = new Set<string>();
     for (const page of manifest.pages) {
@@ -105,17 +107,17 @@ export class Assets {
     if (pixels > 32 * 1024 * 1024) throw new Error("扩展纹理页过大");
     const images = new Map<number, ImageEntry>();
     for (const row of manifest.images) {
-      if (!Array.isArray(row) || row.length !== 8 || !integer(row[0], AI_PETS.imageBase, AI_PETS.imageLimit - 1)
+      if (!Array.isArray(row) || row.length !== 8 || !integer(row[0], pack.imageBase, pack.imageLimit - 1)
         || images.has(row[0]) || !integer(row[1], 0, manifest.pages.length - 1)
         || !row.slice(2, 6).every(n => integer(n, 0, 4096)) || row[4] < 1 || row[5] < 1
         || !row.slice(6).every(n => integer(n, -32768, 32767))) throw new Error("扩展图像无效");
       const [id, page, x, y, w, h, ox, oy] = row, size = manifest.pages[page];
       if (x + w > size.width || y + h > size.height || this.hasBaseImage(id)) throw new Error("扩展图像越界或编号冲突");
-      images.set(id, { set: AI_PETS.set, page, x, y, w, h, ox, oy });
+      images.set(id, { set: pack.set, page, x, y, w, h, ox, oy });
     }
     const spriteIds = new Set<number>();
     for (const entry of manifest.animations) {
-      if (!entry || !AI_PETS.sprites.includes(entry.id) || spriteIds.has(entry.id)
+      if (!entry || !pack.sprites.includes(entry.id) || spriteIds.has(entry.id)
         || entry.file !== `anim/${entry.id}.json` || this.animAt.has(entry.id)) throw new Error("扩展动画编号无效或冲突");
       spriteIds.add(entry.id);
     }
@@ -138,7 +140,7 @@ export class Assets {
         }
       }
       // Derive this list rather than trusting paths supplied by the add-on.
-      anim.pages = [...pages].sort((a, b) => a - b).map(page => `${AI_PETS.id}/${page}`);
+      anim.pages = [...pages].sort((a, b) => a - b).map(page => `${pack.id}/${page}`);
       return anim;
     }));
     // Register the complete pack only once its atlas pages have decoded. A late
@@ -162,12 +164,12 @@ export class Assets {
     }
     for (const [id, image] of images) this.extensionImages.set(id, image);
     for (let page = 0; page < manifest.pages.length; page++) {
-      const key = `${AI_PETS.set}/${page}`, slot: PageSlot = { tex: null, used: this.frameNo, core: false };
+      const key = `${pack.set}/${page}`, slot: PageSlot = { tex: null, used: this.frameNo, core: false };
       this.extensionPageUrls.set(key, base + manifest.pages[page].file);
       this.pages.set(key, slot);
       this.setTexture(slot, (textures[page] as PromiseFulfilledResult<Texture>).value);
     }
-    for (const anim of animations) { this.anims.set(anim.id, anim); this.extensionAnims.add(anim.id); }
+    for (const anim of animations) { this.anims.set(anim.id, anim); this.extensionAnims.set(anim.id, pack.set); }
   }
 
   private hasBaseImage(id: number): boolean {
@@ -341,7 +343,7 @@ export class Assets {
   anim(id: number): AnimDef | null {
     const a = this.anims.get(id);
     if (a !== undefined) {
-      if (a && this.extensionAnims.has(id)) for (const p of a.pages) this.page(AI_PETS.set, Number(p.slice(p.lastIndexOf("/") + 1)));
+      if (a && this.extensionAnims.has(id)) for (const p of a.pages) this.page(this.extensionAnims.get(id)!, Number(p.slice(p.lastIndexOf("/") + 1)));
       return a;
     }
     const fallback = AI_PET_FALLBACK.get(id);

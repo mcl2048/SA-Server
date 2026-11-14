@@ -632,7 +632,6 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 func (b *Battle) statusSeq(f *Fighter, c Command, ev *[]Event) (Command, bool) {
 	b.tickImprecate(f, ev)
 	stunned := !f.canMove()
-	stunStatus := f.Status()
 	if f.dizzy > 0 {
 		f.dizzy--
 	}
@@ -694,7 +693,9 @@ func (b *Battle) statusSeq(f *Fighter, c Command, ev *[]Event) (Command, bool) {
 	}
 	if stunned {
 		f.charge = -1
-		*ev = append(*ev, Event{Actor: f.Slot, Kind: Stun, Target: -1, HP: f.HP, Status: stunStatus, Guardian: -1})
+		// This turn is still skipped when the final status tick expires. Publish
+		// its current state so Stun cannot reinstate the icon just cleared by Cure.
+		*ev = append(*ev, Event{Actor: f.Slot, Kind: Stun, Target: -1, HP: f.HP, Status: f.Status(), Guardian: -1})
 		return c, false
 	}
 	return c, true
@@ -1112,7 +1113,9 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 // counter 是 BATTLE_Counter：x 反击 y。x 这回合必须是攻击或不防守战法；没击中就结束反击。
 // 返回事件、是否发生、之后能否继续反击。
 func (b *Battle) counter(x, y *Fighter) (Event, bool, bool) {
-	if !x.Alive() || !y.Alive() || (x.com != Attack && x.com != NoGuard) {
+	// Immediate counters bypass statusSeq; the queued attack command alone
+	// cannot authorize a fighter that is currently unable to move.
+	if !x.Alive() || !y.Alive() || !x.canMove() || (x.com != Attack && x.com != NoGuard) {
 		return Event{}, false, false
 	}
 	if !b.counterCheck(x, y) {

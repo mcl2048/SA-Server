@@ -86,7 +86,8 @@ type AtomFix struct {
 
 // BattleData 汇总战斗用的原版数据。
 type BattleData struct {
-	aiPetsInstalled, aiHabitatsInstalled bool
+	aiPetsInstalled, aiHabitatsInstalled    bool
+	lilithInstalled, lilithHabitatInstalled bool
 
 	Areas     []EncountArea
 	Groups    map[int]*Group
@@ -281,6 +282,9 @@ func LoadBattle(dataDir string) (*BattleData, error) {
 	}
 	if err := d.installAIPets(); err != nil {
 		return nil, fmt.Errorf("读取机械伙伴：%w", err)
+	}
+	if err := d.installLilith(); err != nil {
+		return nil, fmt.Errorf("读取莉莉丝：%w", err)
 	}
 	return d, nil
 }

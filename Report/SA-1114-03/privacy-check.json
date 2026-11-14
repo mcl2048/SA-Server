@@ -1,0 +1,109 @@
+{
+  "fixture_credential_values_absent": true,
+  "runtime_db_and_credentials_not_in_report": true,
+  "checked_at_utc": "2026-11-14T09:21:08.790402+00:00",
+  "scope": "All final changed staged blobs and identical worktree files, release ZIP, standalone Lilith patch and recursively nested patch archives; no credential values are retained in this report.",
+  "staged_change_entries_no_rename_detection": 311,
+  "staged_change_status_counts_no_rename_detection": {
+    "A": 252,
+    "D": 2,
+    "M": 57
+  },
+  "staged_payload_files_scanned": 309,
+  "worktree_payload_files_scanned": 309,
+  "unstaged_files_before_report_update": 0,
+  "untracked_files": 0,
+  "runtime_metadata_files_checked": 6,
+  "distinct_private_credential_files_read": 6,
+  "private_value_variants_checked": 7,
+  "private_character_identifier_variants_checked": 1,
+  "value_encodings_checked": [
+    "UTF-8",
+    "JSON ASCII escape",
+    "password/secret MD5 hex",
+    "password/secret base64"
+  ],
+  "scan_counts": {
+    "index_blobs": 309,
+    "index_bytes": 88603726,
+    "work_blobs": 309,
+    "work_bytes": 88603726,
+    "index-archive_blobs": 4367,
+    "index-archive_bytes": 90857763,
+    "index-archive-archive_blobs": 14,
+    "index-archive-archive_bytes": 12897241,
+    "work-archive_blobs": 4367,
+    "work-archive_bytes": 90857763,
+    "work-archive-archive_blobs": 14,
+    "work-archive-archive_bytes": 12897241
+  },
+  "archives": [
+    {
+      "scope": "index",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip",
+      "entries": 4362
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip!saserver-v0.2.14-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "entries": 9
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip!saserver-v0.2.14-LYNX/update/lilith-v1-assets.tar.gz",
+      "entries": 5
+    },
+    {
+      "scope": "work",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip",
+      "entries": 4362
+    },
+    {
+      "scope": "work-archive",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip!saserver-v0.2.14-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "entries": 9
+    },
+    {
+      "scope": "work-archive",
+      "path": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip!saserver-v0.2.14-LYNX/update/lilith-v1-assets.tar.gz",
+      "entries": 5
+    },
+    {
+      "scope": "index",
+      "path": "update/lilith-v1-assets.tar.gz",
+      "entries": 5
+    },
+    {
+      "scope": "work",
+      "path": "update/lilith-v1-assets.tar.gz",
+      "entries": 5
+    }
+  ],
+  "private_credential_value_hits": 0,
+  "private_character_identifier_hits": 0,
+  "common_secret_pattern_hits": 0,
+  "sensitive_path_hits": 0,
+  "sensitive_path_classes": [
+    "Assets original trees",
+    "SQLite/database files",
+    "credentials or secret files",
+    "private runtime config overrides"
+  ],
+  "release_public_config_matches_HEAD_template": true,
+  "release_zip_entries": 4362,
+  "release_zip_sha256": "cc4e6f901e15d0664b073acd505aa204de8d54c1d7f938a52b215b98b50284d2",
+  "release_elf_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+  "final_browser_supervisors_finished_exit_zero": true,
+  "reported_final_browser_checks": 46,
+  "reported_final_client_and_builder_checks": 186,
+  "reproduction": [
+    "Enumerate nondeleted payloads using git diff --cached --name-only -z --diff-filter=ACMR; count all changes with --no-renames --name-status -z.",
+    "Assert git diff --name-only -z and git ls-files --others --exclude-standard -z are empty; compare each git show :path blob with its worktree bytes.",
+    "Read credential paths from /tmp/sa-1114-03-runtime-*.json in memory; compare exact values and listed encodings without printing or retaining any values.",
+    "Recursively inspect ZIP and tar.gz regular-file payloads with Python zipfile/tarfile; scan known values, common key/token patterns, and sensitive path classes.",
+    "Compare release config.yaml bytes with git show HEAD:config.yaml and check ELF/ZIP SHA-256 against release.json."
+  ],
+  "limits": "Byte and text pattern scanning, including image file bytes; no OCR of rendered screenshot pixels. This report is the only authorized post-scan worktree update and must be staged by the release owner.",
+  "staged_change_entries_with_rename_detection": 310,
+  "staged_deleted_entries_no_rename_detection": 2
+}

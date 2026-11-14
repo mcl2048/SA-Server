@@ -1,0 +1,15 @@
+$ go test ./internal/world -run TestLilithAutomation -count=1 -v -timeout=60s
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/multiple-enemies
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/single-enemy
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/teammate-capture
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/explicit-storm
+--- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture (1.72s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/multiple-enemies (1.44s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/single-enemy (0.08s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/teammate-capture (0.11s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/explicit-storm (0.10s)
+PASS
+ok  	sa/server/internal/world	1.774s
+
+exit=0

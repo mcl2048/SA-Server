@@ -12,8 +12,8 @@
 
 
 
-import { FONT, measure,         } from "./ui.js?v=bfc86541ebbec063";
-import { settings, saveSettings } from "./menus.js?v=bfc86541ebbec063";
+import { FONT, measure,         } from "./ui.js?v=befcbe62a17abfb2";
+import { settings, saveSettings } from "./menus.js?v=befcbe62a17abfb2";
 
 
 

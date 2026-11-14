@@ -31,6 +31,7 @@ function binaryIndex(conflict = false) {
   return gzipSync(Buffer.from(bytes));
 }
 type SetupOptions = { missing?: boolean; binary?: boolean; indexBytes?: Uint8Array; conflict?: boolean; mutate?: (pack: ReturnType<typeof manifest>) => void;
+  lilith?: boolean; badLilith?: boolean;
   mutateAnim?: (anim: AnimDef) => void; texture?: (url: string) => Promise<Texture> };
 const environments = new WeakSet<object>();
 function setup(t: any, options: SetupOptions = {}) {
@@ -39,6 +40,9 @@ function setup(t: any, options: SetupOptions = {}) {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (input: any, _init: any) => {
     const url = String(input); requests.push(url);
+    if (url === root + "extensions/lilith-v1/manifest.json") return options.lilith ? Response.json({ format: 1, id: "lilith-v1", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9100000,0,0,0,32,32,-16,-30],[9100001,0,32,0,32,32,-16,-30]], animations: [199200,199201].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
+    const lilith = /^\/assets\/extensions\/lilith-v1\/anim\/(19920[01])\.json$/.exec(url);
+    if (lilith) return Response.json({id:Number(lilith[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badLilith ? 9000000 : 9100000 + Number(lilith[1])-199200,0,0,0]]}]});
     if (url === root + "manifest.json") return Response.json({ format: 1, chunkShift: 12, pageFormat: "webp", palettes: 16, imageChunks: [0] });
     if (url === root + "tiles.json") return Response.json({ tiles: [[29025, 0, 1, 1, 0]] });
     if (url === root + "index.bin.gz") return options.binary === false ? new Response(null, { status: 404 }) : new Response(options.indexBytes ?? binaryIndex(options.conflict));
@@ -59,7 +63,7 @@ function setup(t: any, options: SetupOptions = {}) {
   const renderer = { loadTexture: async (url: string, indexed: boolean) => {
     loaded.push({ url, indexed });
     if (url.startsWith(extension) && options.texture) return options.texture(url);
-    return { tex: {} as WebGLTexture, indexed, w: url.startsWith(extension) ? 64 : 2, h: url.startsWith(extension) ? 64 : 2 };
+    return { tex: {} as WebGLTexture, indexed, w: url.includes("/extensions/") ? 64 : 2, h: url.includes("/extensions/") ? 64 : 2 };
   }, deleteTexture: (tex: Texture) => { deleted.push(tex); }, setPalette: (_tex: Texture) => {} };
   const assets = new Assets(root, renderer as unknown as Renderer);
   return { assets, requests, loaded, deleted, warnings, pack };
@@ -76,6 +80,24 @@ test("overlay registers independent RGBA image IDs and animations without changi
   await assets.preloadCore(() => {}); assert.ok(loaded.some(r => r.url === root + "pages/i8/00000.webp" && r.indexed));
   assert.ok(loaded.some(r => r.url === extension + "pages/00000.png" && !r.indexed));
   assert.ok(!requests.some(r => /images\/2197|anim\/19910[0-3]\.json$/.test(r) && !r.startsWith(extension)));
+});
+
+test("Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs", async t => {
+  const {assets,loaded}=setup(t,{lilith:true}); await assets.init();
+  assert.equal(assets.anim(199200)?.id,199200); assert.equal(assets.anim(199201)?.id,199201);
+  assert.equal(assets.image(9100000)?.set,3); assert.equal(assets.image(9000000)?.set,2);
+  assert.equal(assets.gpuBytes,2*64*64*4);
+  assets.gpuBudget=1; for(let i=0;i<150;i++)assets.tick(); assert.equal(assets.gpuBytes,0);
+  assets.anim(199200); await pending(assets);
+  assert.equal(assets.gpuBytes,64*64*4);
+  assert.equal(loaded.filter(x=>x.url===root+"extensions/lilith-v1/pages/00000.png").length,2);
+  assert.equal(loaded.filter(x=>x.url===extension+"pages/00000.png").length,1);
+});
+
+test("a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets",async t=>{
+  const {assets,warnings}=setup(t,{lilith:true,badLilith:true});await assets.init();
+  assert.equal(assets.image(9100000),null);assert.equal(assets.anim(199100)?.id,199100);
+  assert.equal(assets.image(9000000)?.set,2);assert.equal(warnings.length,1);
 });
 
 test("a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly", async t => {

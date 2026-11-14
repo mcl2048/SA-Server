@@ -1,0 +1,68 @@
+{
+  "binary_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+  "binary_version": "v0.2.14-LYNX",
+  "checks": 6,
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "normal_attack_max_displacement": 383.61,
+      "unique_native_flame_frames": 20,
+      "max_flame_quads": 1,
+      "flame_geometry": [
+        [
+          0,
+          20,
+          440,
+          330
+        ]
+      ],
+      "petrified_target_slots": [
+        15,
+        17,
+        19
+      ]
+    },
+    {
+      "device": "mobile",
+      "normal_attack_max_displacement": 383.61,
+      "unique_native_flame_frames": 14,
+      "max_flame_quads": 1,
+      "flame_geometry": [
+        [
+          0,
+          20,
+          440,
+          330
+        ]
+      ],
+      "petrified_target_slots": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ]
+}

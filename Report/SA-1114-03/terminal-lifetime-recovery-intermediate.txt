@@ -1,0 +1,8 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","recovery_case":"desktop native heal threshold change, reload persistence and AutoPlay.settings"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1001-before-items"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1002-before-items"}
+{"variant":"final","recovery_case":"desktop automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"desktop automatic hp-potion-recovery"}
+{"variant":"final","recovery_case":"desktop automatic meat-recovery"}

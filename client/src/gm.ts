@@ -6,6 +6,7 @@
 
 import type { GmEntry, GmItem, PetInfo, S2CGmDetail, S2CStatus } from "./proto.gen.ts";
 import { ANIM, findAction, type Assets } from "./assets.ts";
+import { petForSprite } from "./pet-catalog.ts";
 import { FONT, InputBox, measure, wrapBytes, type Ui } from "./ui.ts";
 
 export interface GmHost {
@@ -278,7 +279,7 @@ export class GmWindow {
     if (!d) { ui.text(dx + 18, dy + 24, "读取中…", FONT.GRAY); return; }
     let ty = dy + 22;
     if (d.image > 0) {
-      if ((d.image >= 100000 && d.image < 140000) || (d.image >= 199100 && d.image <= 199103)) {
+      if ((d.image >= 100000 && d.image < 140000) || petForSprite(d.image)) {
         // 动画（宠物、玩家）：站立动作循环播放，脚底对齐
         const id = d.image;
         ui.actor({ frameOf: (assets: Assets, now: number) => {

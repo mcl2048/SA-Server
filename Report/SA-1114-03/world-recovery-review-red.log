@@ -1,0 +1,7 @@
+--- FAIL: TestAutomationRecoveryWhileSilencedUsesMeat (1.36s)
+    automation_recovery_test.go:119: silenced caster must use meat instead of failing a spirit: {Kind:magic Target:0 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:1 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationMPForActualInjuredAlly (0.07s)
+    automation_recovery_test.go:148: unrelated affordable self heal prevented MP recovery for injured pet: {Kind:attack Target:15 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:-1 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+FAIL
+FAIL	sa/server/internal/world	1.477s
+FAIL

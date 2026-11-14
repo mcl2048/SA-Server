@@ -1,0 +1,8 @@
+client-and-build 0
+typescript 0
+go-all 0
+go-vet 0
+world-automation-race 0
+battle-race 0
+lilith-installer 0
+matched-build 0

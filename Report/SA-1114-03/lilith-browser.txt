@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","lilith_case":"desktop native Lilith list, stats, skill and appended album"}
+{"variant":"final","lilith_case":"desktop Lilith normal attack floats and renders native blue/purple energy"}
+{"variant":"final","lilith_case":"desktop Ghost Storm stays in place, covers enemy half and petrifies living opponents"}
+{"variant":"final","lilith_case":"mobile native Lilith list, stats, skill and appended album"}
+{"variant":"final","lilith_case":"mobile Lilith normal attack floats and renders native blue/purple energy"}
+{"variant":"final","lilith_case":"mobile Ghost Storm stays in place, covers enemy half and petrifies living opponents"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-lilith.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

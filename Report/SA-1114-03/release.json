@@ -1,0 +1,44 @@
+{
+  "version": "v0.2.14-LYNX",
+  "baseline_commit": "256f7abb09059b69917133518509ca2b5480e842",
+  "baseline_version": "v0.2.13-LYNX",
+  "prompt_input_sha256": "a958fc643b6a4ef61c688d9c3371de41da8803ac1c713e03813f364de88b8a89",
+  "prompt_delivered_sha256": "d0e4bfa60666ecf6165c11817e2282d63d89af62feaae9e68ac73b1d62043053",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16576672,
+    "sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+    "format": "static ELF64 Linux AMD64",
+    "mode": "0755"
+  },
+  "archive": {
+    "version": "v0.2.14-LYNX",
+    "archive": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip",
+    "bytes": 29420038,
+    "sha256": "cc4e6f901e15d0664b073acd505aa204de8d54c1d7f938a52b215b98b50284d2",
+    "files": 4362,
+    "binary_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+    "all_entries_match_current_public_files": true,
+    "executable_mode": "0755",
+    "runtime_db_credentials_and_Assets_excluded": true
+  },
+  "old_zip_replaced": true,
+  "asset_changes": true,
+  "source_files_verified": 347,
+  "checks": {
+    "client_and_builder": 186,
+    "typescript_exit": 0,
+    "go_all_exit": 0,
+    "go_vet_exit": 0,
+    "battle_and_automation_race": true,
+    "browser_checks": 46,
+    "recovery_battles": 24,
+    "embedded_files": 48,
+    "lilith_browser_checks": 6,
+    "lilith_frames": 208,
+    "ghost_storm_frames": 28,
+    "lilith_installer_cases": 29,
+    "repeat_binary_identical": true
+  },
+  "scope": "Actual Linux release ELF, original assets and Chromium; SwiftShader and emulated mobile viewport/touch. No physical Android/iOS or Safari certification."
+}

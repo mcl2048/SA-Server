@@ -352,13 +352,26 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			hpSum += f.HP
 		}
 	}
-	var need *battle.Fighter
+	var needs []*battle.Fighter
 	for _, f := range allies {
-		if f.Alive() && f.HP*100 < f.MaxHP*s.HealAt && (need == nil || float64(f.HP)/float64(max(1, f.MaxHP)) < float64(need.HP)/float64(max(1, need.MaxHP))) {
-			need = f
+		if f.Alive() && (f.HP*100 < f.MaxHP*s.HealAt ||
+			f.Ride != nil && f.Ride.HP > 0 && !f.Ride.Fell && f.Ride.HP*100 < f.Ride.MaxHP*s.HealAt) {
+			needs = append(needs, f)
 		}
 	}
-	if need != nil {
+	// An injured pet may be outside a self-only spirit's scope. Try the next
+	// injured ally instead of allowing that pet to block the owner's recovery.
+	slices.SortStableFunc(needs, func(a, b *battle.Fighter) int {
+		x, y := automationHealthRatio(a), automationHealthRatio(b)
+		if x < y {
+			return -1
+		}
+		if x > y {
+			return 1
+		}
+		return 0
+	})
+	for _, need := range needs {
 		if c, ok := w.automationRecovery(e, need, false); ok {
 			cmd = c
 			goto petChoice
@@ -380,7 +393,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			}
 		}
 	}
-	if c, ok := w.automationMP(e, me); ok {
+	if c, ok := w.automationMP(e, me, needs...); ok {
 		cmd = c
 		goto petChoice
 	}
@@ -541,6 +554,12 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 	return skill, pt
 }
 func automationSkillFactor(sk *data.Skill) float64 {
+	if sk.Func == data.GhostStormFunc {
+		// The caller multiplies whole-side scores by eligible enemy count.
+		// Use its actual per-target damage; petrification is a bonus, not a
+		// reason to prefer 75% damage over an ordinary hit on one opponent.
+		return .75
+	}
 	if !slices.Contains([]string{"PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack"}, sk.Func) {
 		return 0
 	}
@@ -617,6 +636,35 @@ func automationPetTarget(kind int, want string, me, pet, enemy, side, other int)
 	}
 	return enemy
 }
+
+// Native recovery splits HP between rider and mount. A low active mount must
+// trigger the same threshold; a fallen mount is no longer a healing target.
+func automationHealthRatio(f *battle.Fighter) float64 {
+	ratio := float64(f.HP) / float64(max(1, f.MaxHP))
+	if f.Ride != nil && f.Ride.HP > 0 && !f.Ride.Fell {
+		ratio = min(ratio, float64(f.Ride.HP)/float64(max(1, f.Ride.MaxHP)))
+	}
+	return ratio
+}
+
+// Match battle.ITEM_useRecovery's HP-first branch, including mixed dishes.
+// Descriptions can mention MP even when combat executes only the HP effect.
+func automationItemRecovers(d *data.ItemDef, mp bool) bool {
+	if d.UseFunc != "ITEM_useRecovery" {
+		return false
+	}
+	key := "体"
+	if mp {
+		if strings.Contains(d.Argument, key) {
+			return false
+		}
+		key = "气"
+	}
+	_, tail, found := strings.Cut(d.Argument, key)
+	amount := data.Atoi(tail)
+	return found && (amount > 0 || !mp && amount == -1)
+}
+
 func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive bool) (battle.Command, bool) {
 	me := e.fight.b.F[e.fight.slot]
 	best, bestAmount, bestMP := -1, 0, 0
@@ -626,7 +674,7 @@ func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive boo
 	}
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
-		if m == nil || m.Field == 2 || mp > me.MP {
+		if m == nil || m.Field == 2 || mp > me.MP || me.Status() == battle.StNocast {
 			continue
 		}
 		valid := !revive && (m.Func == "MAGIC_Recovery" || m.Func == "MAGIC_OtherRecovery") || revive && (m.Func == "MAGIC_Ressurect" || m.Func == "MAGIC_ResAndDef")
@@ -634,8 +682,11 @@ func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive boo
 			continue
 		}
 		amount := data.Atoi(m.Option)
-		if revive && amount == 0 {
+		if revive && amount <= 0 {
 			amount = target.MaxHP
+		}
+		if amount <= 0 {
+			continue
 		}
 		// Prefer the smallest estimated sufficient heal, then the largest
 		// insufficient one. Equal recovery favors lower actual MP consumption.
@@ -661,7 +712,7 @@ func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive boo
 		if d == nil || d.Field == 2 || !itemTargetValid(d, target.Slot, me.Slot) {
 			continue
 		}
-		valid := !revive && d.UseFunc == "ITEM_useRecovery" && strings.Contains(d.Argument, "体") || revive && strings.Contains(d.Memo, "气绝回复")
+		valid := !revive && automationItemRecovers(d, false) || revive && d.UseFunc == "ITEM_useRessurect"
 		if valid {
 			return battle.Command{Kind: battle.UseItem, Target: target.Slot, ItemSlot: slot}, true
 		}
@@ -674,6 +725,9 @@ func (w *World) automationCure(e *entity, target *battle.Fighter) (battle.Comman
 		return battle.Command{}, false
 	}
 	me := e.fight.b.F[e.fight.slot]
+	if me.Status() == battle.StNocast {
+		return battle.Command{}, false
+	}
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
 		if m != nil && m.Field != 2 && mp <= me.MP && m.Func == "MAGIC_StatusRecovery" && (strings.Contains(m.Option, "全") || strings.Contains(m.Option, ch)) {
@@ -686,15 +740,25 @@ func (w *World) automationCure(e *entity, target *battle.Fighter) (battle.Comman
 	}
 	return battle.Command{}, false
 }
-func (w *World) automationMP(e *entity, me *battle.Fighter) (battle.Command, bool) {
+func (w *World) automationMP(e *entity, me *battle.Fighter, needs ...*battle.Fighter) (battle.Command, bool) {
+	if me.Status() == battle.StNocast {
+		return battle.Command{}, false
+	}
 	cheapest := int(^uint(0) >> 1)
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
-		if m != nil && m.Field != 2 && (m.Func == "MAGIC_Recovery" || m.Func == "MAGIC_OtherRecovery") {
+		if m != nil && m.Field != 2 && data.Atoi(m.Option) > 0 && mp <= me.MaxMP && (m.Func == "MAGIC_Recovery" || m.Func == "MAGIC_OtherRecovery") {
+			// A cheap self-only spirit cannot restore an injured pet. Reserve MP
+			// for a spirit that can reach at least one current recovery candidate.
+			if len(needs) > 0 && !slices.ContainsFunc(needs, func(f *battle.Fighter) bool {
+				return m.Target != data.MagicTargetMyself || f.Slot == me.Slot
+			}) {
+				continue
+			}
 			cheapest = min(cheapest, mp)
 		}
 	}
-	if cheapest == int(^uint(0)>>1) || me.MP >= cheapest {
+	if cheapest == int(^uint(0)>>1) || me.MP >= cheapest || me.MP >= me.MaxMP {
 		return battle.Command{}, false
 	}
 	for slot := data.EquipSlots; slot < data.ItemSlots; slot++ {
@@ -703,7 +767,7 @@ func (w *World) automationMP(e *entity, me *battle.Fighter) (battle.Command, boo
 			continue
 		}
 		d := w.game.Items[it.ID]
-		if d != nil && d.Field != 2 && d.UseFunc == "ITEM_useRecovery" && strings.Contains(d.Argument, "气") && itemTargetValid(d, me.Slot, me.Slot) {
+		if d != nil && d.Field != 2 && automationItemRecovers(d, true) && itemTargetValid(d, me.Slot, me.Slot) {
 			return battle.Command{Kind: battle.UseItem, Target: me.Slot, ItemSlot: slot}, true
 		}
 	}

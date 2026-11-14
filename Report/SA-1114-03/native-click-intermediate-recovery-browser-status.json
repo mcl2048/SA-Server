@@ -1,0 +1,15 @@
+{
+  "state": "finished",
+  "command": [
+    "node",
+    "Report/SA-1114-03/browser/real-game.mjs",
+    "--variant",
+    "final",
+    "--recovery",
+    "--meta",
+    "/tmp/sa-1114-03-runtime-recovery-final.json"
+  ],
+  "started": 1794645813.126941,
+  "exit_code": 1,
+  "seconds": 161.523
+}

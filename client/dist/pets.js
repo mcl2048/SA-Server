@@ -13,10 +13,10 @@
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
 
-import { ANIM, findAction } from "./assets.js?v=bfc86541ebbec063";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=bfc86541ebbec063";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=bfc86541ebbec063";
-import { isImmersive } from "./mobile-view.js?v=bfc86541ebbec063";
+import { ANIM, findAction } from "./assets.js?v=befcbe62a17abfb2";
+import { petForSprite } from "./pet-catalog.js?v=befcbe62a17abfb2";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=befcbe62a17abfb2";
+import { isImmersive } from "./mobile-view.js?v=befcbe62a17abfb2";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,
@@ -323,7 +323,7 @@ export class PetWindow {
       lines.push([`魔法 ${el.map((n, i) => `${n}${ex.magic[i]}`).join(" ")}`, FONT.YELLOW]);
       lines.push([`抗魔 ${el.map((n, i) => `${n}${ex.magic[4 + i]}`).join(" ")}`, FONT.YELLOW]);
     }
-    const catalog = aiPetForSprite(p.sprite);
+    const catalog = petForSprite(p.sprite);
     if (catalog) {
       lines.push(["简介（完整故事见图鉴）", FONT.YELLOW]);
       let line = "";

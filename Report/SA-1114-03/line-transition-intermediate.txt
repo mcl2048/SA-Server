@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-action="item0"]:visible').first()[22m
+
+    at GameUI.action (/home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:83:35)
+    at async GameUI.enter (/home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:132:31)
+    at async work (/home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:296:2)
+    at async file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:331:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-mobile-regression.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":null,"stored_position":null,"position_matches":false}}

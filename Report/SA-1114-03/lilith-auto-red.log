@@ -1,0 +1,17 @@
+$ go test ./internal/world -run TestLilithAutomation -count=1 -v -timeout=60s
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/multiple-enemies
+    lilith_automation_test.go:74: native Lilith auto choice = 0/15, want 2/21
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/single-enemy
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/teammate-capture
+=== RUN   TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/explicit-storm
+--- FAIL: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture (2.74s)
+    --- FAIL: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/multiple-enemies (2.30s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/single-enemy (0.11s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/teammate-capture (0.17s)
+    --- PASS: TestLilithAutomationSelectsStormByEnemyCountAndProtectsCapture/explicit-storm (0.15s)
+FAIL
+FAIL	sa/server/internal/world	2.816s
+FAIL
+
+exit=1

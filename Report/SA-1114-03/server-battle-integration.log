@@ -1,0 +1,22 @@
+$ go test ./... -count=1
+ok  	sa/server/cmd/saserver	44.193s
+ok  	sa/server/internal/battle	0.315s
+ok  	sa/server/internal/data	14.381s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	19.537s
+ok  	sa/server/internal/store	1.620s
+--- FAIL: TestAutomationRecoveryDoesNotLetUntreatablePetBlockOwner (0.13s)
+    automation_recovery_test.go:32: unhealable lower-HP pet blocked owner's self heal: {Kind:guard Target:-1 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationRecoveryIncludesActiveMountThreshold (0.11s)
+    automation_recovery_test.go:59: low active mount HP did not trigger native recovery: {Kind:attack Target:15 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:-1 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationMPRejectsNativeHPFirstMixedRecovery (0.11s)
+    automation_recovery_test.go:84: selected HP-only wine as MP recovery: {Kind:item Target:0 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:9 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>} valid=true
+FAIL
+FAIL	sa/server/internal/world	36.730s
+ok  	sa/server/tests	12.838s
+?   	sa/server/tools/assetindex	[no test files]
+?   	sa/server/tools/protogen	[no test files]
+ok  	sa/server/webclient	0.519s
+FAIL
+
+exit=1

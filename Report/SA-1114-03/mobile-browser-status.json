@@ -1,0 +1,15 @@
+{
+  "state": "finished",
+  "command": [
+    "node",
+    "Report/SA-1114-03/browser/real-game.mjs",
+    "--variant",
+    "final",
+    "--meta",
+    "/tmp/sa-1114-03-runtime-camera.json",
+    "--mobile-regression"
+  ],
+  "started": 1794645896.990192,
+  "exit_code": 0,
+  "seconds": 147.302
+}

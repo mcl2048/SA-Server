@@ -1,6 +1,6 @@
-# 四只机械宠增量素材升级
+# 新宠物增量素材升级
 
-本目录只分发新追加的机械宠素材，不包含或替换官方基础资源包。安装后的目录固定为：
+本目录分发新增机械宠与莉莉丝的独立素材包，不包含或替换官方基础资源包。机械宠安装后的目录固定为下列路径；莉莉丝的独立目录与安装方法见本文末节。
 
 ```text
 assets/extensions/ai-pets-v1/
@@ -29,7 +29,7 @@ bash /srv/saserver/update/install-ai-pets.sh --assets /srv/stoneage/assets
 
 为防止选错路径，末级目录名必须是 `assets`（大小写不敏感，允许服务器已有的 `Assets`）；显式目标必须已存在。目标或其任一父目录、`extensions` 或本扩展目录中含符号链接时拒绝安装。默认目标缺失时，只允许在具有 `server/`、`client/`、`config.yaml` 的本仓库根目录下创建 `assets/`。这只安装新增扩展，不能代替首次部署所需的官方基础素材。
 
-## 本批增量包
+## 机械宠增量包
 
 - 文件：`ai-pets-v1-assets.tar.gz`
 - 大小：6,941,740字节
@@ -69,3 +69,23 @@ bash scripts/update-assets.test.sh
 生成器只读取该扩展的指定9个文件，拒绝符号链接和额外文件。tar按路径排序、固定权限/所有者/时间戳，gzip不写当前时间或原始文件名；相同文件字节产生相同归档。它不会把官方素材压缩包或整个 `assets/` 纳入提交。
 
 运行时 `assets/**` 已被仓库忽略；应提交的是本目录的增量归档、校验清单、安装器和说明。校验结果与实际归档摘要见 [升级包审查记录](../Report/SA-1113-01/UPDATE-REVIEW.md)。
+
+## v0.2.14 莉莉丝增量包
+
+```bash
+bash update/install-lilith.sh
+# 自定义目录须真实存在，末级名为assets或Assets：
+bash update/install-lilith.sh --assets /srv/stoneage/Assets
+```
+
+独立目录 `extensions/lilith-v1/`：`manifest.json`、`pages/00000.png`、`pages/00001.png`、`anim/199200.json`、`anim/199201.json`，共5文件。包名 `lilith-v1-assets.tar.gz`，摘要和条目见同目录 `lilith-v1-assets.manifest.json`。安装的路径校验、符号链接拒绝、逐文件校验、冲突保留与原子发布规则与上文一致；不会更改原四宠扩展或官方素材。
+
+原生客户端加载独立RGBA set3，角色208帧、幽蓝骷髅火焰28帧；未安装时保留原资源回退。绘制使用用户提供的JPG和可复现Pillow/NumPy位图脚本，没有调用图像生成API。
+
+开发复现（需Pillow与NumPy；部署安装器仅需Python标准库）：
+
+```bash
+python3 scripts/generate-lilith.py --output /tmp/sa-lilith-build/extensions/lilith-v1
+python3 update/package-lilith.py --source /tmp/sa-lilith-build/extensions/lilith-v1
+bash scripts/update-lilith.test.sh
+```

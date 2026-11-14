@@ -1,0 +1,4799 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+  "binary_version": "v0.2.14-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-14T08:43:35.929Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-14T08:44:06.589Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "desktop native heal threshold change, reload persistence and AutoPlay.settings",
+      "passed": true,
+      "evidence": {
+        "from": 35,
+        "to": 40,
+        "reloaded": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 379,
+      "y": 186
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 379,
+      "y": 186
+    },
+    "position_matches": true
+  },
+  "client_version": "befcbe62a17abfb2",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "哈鲁Lv1铠1",
+          "pile": 1,
+          "type": 7,
+          "target": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    }
+  ],
+  "recovery": [],
+  "recoveryDiagnostic": {
+    "device": "desktop",
+    "wire": [],
+    "sent": [
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": false,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": false,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 35,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": true,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": false,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": false,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": false,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      },
+      {
+        "t": "AutoPlay",
+        "autoBattle": false,
+        "quick": false,
+        "encounter": false,
+        "paused": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    ]
+  },
+  "failure": "desktop: equipment movement lacks authoritative Inventory/Status",
+  "failure_stack": "Error: desktop: equipment movement lacks authoritative Inventory/Status\n    at wait (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:63:13)\n    at async move (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:95:7)\n    at async equip (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:114:7)\n    at async Module.runRecovery (file:///home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:198:22)\n    at async work (file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:299:37)\n    at async file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:334:5",
+  "failure_state": {
+    "screen": "FieldScreen",
+    "field": true,
+    "battle": false,
+    "actions": [
+      {
+        "id": "chat-all",
+        "label": "◆",
+        "x1": 776,
+        "y1": 471,
+        "x2": 788.421875,
+        "y2": 489
+      },
+      {
+        "id": "tb-map",
+        "x1": 0,
+        "y1": 576,
+        "x2": 92,
+        "y2": 600
+      },
+      {
+        "id": "tb-status",
+        "x1": 116,
+        "y1": 576,
+        "x2": 208,
+        "y2": 600
+      },
+      {
+        "id": "tb-pet",
+        "x1": 232,
+        "y1": 576,
+        "x2": 324,
+        "y2": 600
+      },
+      {
+        "id": "tb-item",
+        "x1": 348,
+        "y1": 576,
+        "x2": 440,
+        "y2": 600
+      },
+      {
+        "id": "tb-mail",
+        "x1": 463,
+        "y1": 576,
+        "x2": 555,
+        "y2": 600
+      },
+      {
+        "id": "tb-album",
+        "x1": 578,
+        "y1": 576,
+        "x2": 670,
+        "y2": 600
+      },
+      {
+        "id": "tb-system",
+        "x1": 692,
+        "y1": 576,
+        "x2": 780,
+        "y2": 600
+      },
+      {
+        "id": "inv-side0",
+        "x1": 504,
+        "y1": 16,
+        "x2": 527,
+        "y2": 76
+      },
+      {
+        "id": "inv-side1",
+        "x1": 504,
+        "y1": 94,
+        "x2": 527,
+        "y2": 158
+      },
+      {
+        "id": "inv-0",
+        "x1": 587,
+        "y1": 12,
+        "x2": 637,
+        "y2": 59
+      },
+      {
+        "id": "inv-1",
+        "x1": 587,
+        "y1": 63,
+        "x2": 637,
+        "y2": 110
+      },
+      {
+        "id": "inv-2",
+        "x1": 537,
+        "y1": 111,
+        "x2": 587,
+        "y2": 158
+      },
+      {
+        "id": "inv-3",
+        "x1": 637,
+        "y1": 12,
+        "x2": 687,
+        "y2": 59
+      },
+      {
+        "id": "inv-4",
+        "x1": 537,
+        "y1": 12,
+        "x2": 587,
+        "y2": 59
+      },
+      {
+        "id": "inv-5",
+        "x1": 587,
+        "y1": 111,
+        "x2": 637,
+        "y2": 158
+      },
+      {
+        "id": "inv-6",
+        "x1": 637,
+        "y1": 63,
+        "x2": 687,
+        "y2": 110
+      },
+      {
+        "id": "inv-7",
+        "x1": 637,
+        "y1": 111,
+        "x2": 687,
+        "y2": 158
+      },
+      {
+        "id": "inv-8",
+        "x1": 537,
+        "y1": 63,
+        "x2": 587,
+        "y2": 110
+      },
+      {
+        "id": "inv-9",
+        "x1": 533,
+        "y1": 180,
+        "x2": 583,
+        "y2": 227
+      },
+      {
+        "id": "inv-10",
+        "x1": 584,
+        "y1": 180,
+        "x2": 634,
+        "y2": 227
+      },
+      {
+        "id": "inv-11",
+        "x1": 635,
+        "y1": 180,
+        "x2": 685,
+        "y2": 227
+      },
+      {
+        "id": "inv-12",
+        "x1": 686,
+        "y1": 180,
+        "x2": 736,
+        "y2": 227
+      },
+      {
+        "id": "inv-13",
+        "x1": 737,
+        "y1": 180,
+        "x2": 787,
+        "y2": 227
+      },
+      {
+        "id": "inv-14",
+        "x1": 533,
+        "y1": 228,
+        "x2": 583,
+        "y2": 275
+      },
+      {
+        "id": "inv-15",
+        "x1": 584,
+        "y1": 228,
+        "x2": 634,
+        "y2": 275
+      },
+      {
+        "id": "inv-16",
+        "x1": 635,
+        "y1": 228,
+        "x2": 685,
+        "y2": 275
+      },
+      {
+        "id": "inv-17",
+        "x1": 686,
+        "y1": 228,
+        "x2": 736,
+        "y2": 275
+      },
+      {
+        "id": "inv-18",
+        "x1": 737,
+        "y1": 228,
+        "x2": 787,
+        "y2": 275
+      },
+      {
+        "id": "inv-19",
+        "x1": 533,
+        "y1": 276,
+        "x2": 583,
+        "y2": 323
+      },
+      {
+        "id": "inv-20",
+        "x1": 584,
+        "y1": 276,
+        "x2": 634,
+        "y2": 323
+      },
+      {
+        "id": "inv-21",
+        "x1": 635,
+        "y1": 276,
+        "x2": 685,
+        "y2": 323
+      },
+      {
+        "id": "inv-22",
+        "x1": 686,
+        "y1": 276,
+        "x2": 736,
+        "y2": 323
+      },
+      {
+        "id": "inv-23",
+        "x1": 737,
+        "y1": 276,
+        "x2": 787,
+        "y2": 323
+      },
+      {
+        "id": "inv-page0",
+        "label": "壹",
+        "x1": 506,
+        "y1": 160,
+        "x2": 524,
+        "y2": 211
+      },
+      {
+        "id": "inv-page1",
+        "label": "贰",
+        "x1": 506,
+        "y1": 216,
+        "x2": 524,
+        "y2": 267
+      },
+      {
+        "id": "inv-page2",
+        "label": "叁",
+        "x1": 506,
+        "y1": 272,
+        "x2": 524,
+        "y2": 323
+      },
+      {
+        "id": "inv-close",
+        "x1": 620,
+        "y1": 418,
+        "x2": 700,
+        "y2": 434
+      },
+      {
+        "id": "gold-input",
+        "label": "0",
+        "x1": 700,
+        "y1": 137,
+        "x2": 786,
+        "y2": 162
+      },
+      {
+        "id": "gold-drop",
+        "x1": 698,
+        "y1": 116,
+        "x2": 749,
+        "y2": 133
+      },
+      {
+        "id": "gold-inc",
+        "x1": 754,
+        "y1": 118,
+        "x2": 768,
+        "y2": 132
+      },
+      {
+        "id": "gold-dec",
+        "x1": 773,
+        "y1": 118,
+        "x2": 787,
+        "y2": 132
+      },
+      {
+        "id": "inv-jujutu",
+        "x1": 701,
+        "y1": 30,
+        "x2": 787,
+        "y2": 57
+      }
+    ]
+  }
+}

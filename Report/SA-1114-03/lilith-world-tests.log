@@ -1,0 +1,4 @@
+$ go test ./internal/world -count=1 -timeout=5m
+ok  	sa/server/internal/world	39.845s
+
+exit=0

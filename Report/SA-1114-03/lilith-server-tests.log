@@ -1,0 +1,439 @@
+$ go test ./internal/data ./internal/battle -count=1 -v
+=== RUN   TestAIPetsEmbeddedRegistryAndHabitat
+=== RUN   TestAIPetsEmbeddedRegistryAndHabitat/opus
+    ai_pets_test.go:92: 奥普埃 吉鲁岛[300] rect(361,173)-(381,193), walkable(371,183)-(372,183), lv1=12% wild44..48=18%
+=== RUN   TestAIPetsEmbeddedRegistryAndHabitat/claude
+    ai_pets_test.go:92: 克劳德 吉鲁岛[300] rect(195,284)-(215,304), walkable(205,294)-(206,294), lv1=12% wild44..48=18%
+=== RUN   TestAIPetsEmbeddedRegistryAndHabitat/gluck
+    ai_pets_test.go:92: 格鲁克 吉鲁岛[300] rect(484,148)-(504,168), walkable(494,158)-(495,158), lv1=12% wild44..46=18%
+=== RUN   TestAIPetsEmbeddedRegistryAndHabitat/gemini
+    ai_pets_test.go:92: 吉米奈 沙姆岛[400] rect(64,64)-(84,84), walkable(74,74)-(75,74), lv1=12% wild48..60=18%
+--- PASS: TestAIPetsEmbeddedRegistryAndHabitat (2.27s)
+    --- PASS: TestAIPetsEmbeddedRegistryAndHabitat/opus (0.00s)
+    --- PASS: TestAIPetsEmbeddedRegistryAndHabitat/claude (0.00s)
+    --- PASS: TestAIPetsEmbeddedRegistryAndHabitat/gluck (0.00s)
+    --- PASS: TestAIPetsEmbeddedRegistryAndHabitat/gemini (0.00s)
+=== RUN   TestAIPetsNoExternalExtensionFileRequired
+--- PASS: TestAIPetsNoExternalExtensionFileRequired (0.18s)
+=== RUN   TestAIPetsCollisionsRejectWithoutChangingOriginals
+=== RUN   TestAIPetsCollisionsRejectWithoutChangingOriginals/template
+=== RUN   TestAIPetsCollisionsRejectWithoutChangingOriginals/enemy
+=== RUN   TestAIPetsCollisionsRejectWithoutChangingOriginals/group
+=== RUN   TestAIPetsCollisionsRejectWithoutChangingOriginals/skill
+--- PASS: TestAIPetsCollisionsRejectWithoutChangingOriginals (0.00s)
+    --- PASS: TestAIPetsCollisionsRejectWithoutChangingOriginals/template (0.00s)
+    --- PASS: TestAIPetsCollisionsRejectWithoutChangingOriginals/enemy (0.00s)
+    --- PASS: TestAIPetsCollisionsRejectWithoutChangingOriginals/group (0.00s)
+    --- PASS: TestAIPetsCollisionsRejectWithoutChangingOriginals/skill (0.00s)
+=== RUN   TestNextLevelExpPreservesOriginalTableAndExtendsTail
+--- PASS: TestNextLevelExpPreservesOriginalTableAndExtendsTail (0.00s)
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/negative-level
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/empty
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/no-positive-tail
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/no-sentinel
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/one-positive
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/declining-tail
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/interior-sentinel-preserved
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/sentinel-and-beyond
+=== RUN   TestNextLevelExpInvalidTablesAndOverflow/saturates
+--- PASS: TestNextLevelExpInvalidTablesAndOverflow (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/negative-level (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/empty (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/no-positive-tail (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/no-sentinel (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/one-positive (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/declining-tail (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/interior-sentinel-preserved (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/sentinel-and-beyond (0.00s)
+    --- PASS: TestNextLevelExpInvalidTablesAndOverflow/saturates (0.00s)
+=== RUN   TestLoadRealData
+    data_test.go:32: 楼层 1382，图号属性 20250，传送点 5832，可显示 NPC 3062，警告 0
+    data_test.go:44: 出生村庄 0：1006 萨姆吉尔的村长家 30x40
+    data_test.go:44: 出生村庄 1：2006 玛丽娜丝的村长家 40x30
+    data_test.go:44: 出生村庄 2：3006 加加的村长家 40x30
+    data_test.go:44: 出生村庄 3：4006 卡鲁它那的村长家 30x40
+    data_test.go:56: 传送目标不可走：36 / 5832
+--- PASS: TestLoadRealData (1.37s)
+=== RUN   TestParseFloorHeader
+--- PASS: TestParseFloorHeader (0.00s)
+=== RUN   TestWalkableRule
+--- PASS: TestWalkableRule (0.00s)
+=== RUN   TestLoadItems
+--- PASS: TestLoadItems (0.25s)
+=== RUN   TestNpcArgAndWindows
+    data_test.go:139: NPC 功能：map[:111 Action:8 Airplane:36 Bankman:18 Bus:7 Charm:9 Dengon:39 Duelranking:7 ExChangeMan:767 FMPKCallMan:6 FMPKMan:14 FMWarpMan:15 Familyman:21 FmDengon:21 FmHealer:9 FmLetter:4 Healer:5 ItemShop:300 ItemchangeMan:28 Janken:9 LuckyMan:4 ManorSman:10 Mic:4 NPCEnemy:353 PetShop:21 PetSkillShop:26 PoolItemShop:9 Quiz:22 Riderman:4 SavePoint:27 Scheduleman:5 SignBoard:225 TimeMan:34 TownPeople:529 Transmigration:1 WarpMan:292 WindowHealer:32 Windowman:30]
+--- PASS: TestNpcArgAndWindows (2.22s)
+=== RUN   TestLilithRegistryGrowthAndNaturalHabitat
+--- PASS: TestLilithRegistryGrowthAndNaturalHabitat (1.11s)
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/template
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/skill
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/young-enemy
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/adult-enemy
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/young-group
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/adult-group
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/sprite
+--- PASS: TestLilithInstallationRejectsCollisionsAtomically (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/template (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/skill (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/young-enemy (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/adult-enemy (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/young-group (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/adult-group (0.00s)
+    --- PASS: TestLilithInstallationRejectsCollisionsAtomically/sprite (0.00s)
+=== RUN   TestLilithRegistryAndHabitatInstallationAreIdempotent
+--- PASS: TestLilithRegistryAndHabitatInstallationAreIdempotent (1.49s)
+=== RUN   TestAIPetsPlayableCaptureAndSkills
+=== RUN   TestAIPetsPlayableCaptureAndSkills/奥普埃
+=== RUN   TestAIPetsPlayableCaptureAndSkills/克劳德
+=== RUN   TestAIPetsPlayableCaptureAndSkills/格鲁克
+=== RUN   TestAIPetsPlayableCaptureAndSkills/吉米奈
+--- PASS: TestAIPetsPlayableCaptureAndSkills (0.06s)
+    --- PASS: TestAIPetsPlayableCaptureAndSkills/奥普埃 (0.00s)
+    --- PASS: TestAIPetsPlayableCaptureAndSkills/克劳德 (0.00s)
+    --- PASS: TestAIPetsPlayableCaptureAndSkills/格鲁克 (0.00s)
+    --- PASS: TestAIPetsPlayableCaptureAndSkills/吉米奈 (0.00s)
+=== RUN   TestAIPetsNaturalEncounterPicker
+=== RUN   TestAIPetsNaturalEncounterPicker/奥普埃
+    ai_pets_play_test.go:122: actual picker/5000 young603 wild902 original3495
+=== RUN   TestAIPetsNaturalEncounterPicker/克劳德
+    ai_pets_play_test.go:122: actual picker/5000 young582 wild940 original3478
+=== RUN   TestAIPetsNaturalEncounterPicker/格鲁克
+    ai_pets_play_test.go:122: actual picker/5000 young602 wild891 original3507
+=== RUN   TestAIPetsNaturalEncounterPicker/吉米奈
+    ai_pets_play_test.go:122: actual picker/5000 young654 wild908 original3438
+--- PASS: TestAIPetsNaturalEncounterPicker (1.16s)
+    --- PASS: TestAIPetsNaturalEncounterPicker/奥普埃 (0.00s)
+    --- PASS: TestAIPetsNaturalEncounterPicker/克劳德 (0.00s)
+    --- PASS: TestAIPetsNaturalEncounterPicker/格鲁克 (0.00s)
+    --- PASS: TestAIPetsNaturalEncounterPicker/吉米奈 (0.01s)
+=== RUN   TestLilithNaturalPickerAndRealSkillExecution
+    lilith_play_test.go:57: 5000 real encounters: young=578 wild=940 original=3482; native skill hits=2
+--- PASS: TestLilithNaturalPickerAndRealSkillExecution (1.48s)
+PASS
+ok  	sa/server/internal/data	11.645s
+=== RUN   TestCounterRequiresCurrentActionAbility
+=== RUN   TestCounterRequiresCurrentActionAbility/active
+=== RUN   TestCounterRequiresCurrentActionAbility/paralysis
+=== RUN   TestCounterRequiresCurrentActionAbility/stone
+=== RUN   TestCounterRequiresCurrentActionAbility/barrier
+=== RUN   TestCounterRequiresCurrentActionAbility/dizzy
+=== RUN   TestCounterRequiresCurrentActionAbility/sleep-woken-by-damage
+=== RUN   TestCounterRequiresCurrentActionAbility/sleep-without-damage
+--- PASS: TestCounterRequiresCurrentActionAbility (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/active (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/paralysis (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/stone (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/barrier (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/dizzy (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/sleep-woken-by-damage (0.00s)
+    --- PASS: TestCounterRequiresCurrentActionAbility/sleep-without-damage (0.00s)
+=== RUN   TestExpiredDisableStatusDoesNotReturnInEvents
+=== RUN   TestExpiredDisableStatusDoesNotReturnInEvents/2
+=== RUN   TestExpiredDisableStatusDoesNotReturnInEvents/4
+=== RUN   TestExpiredDisableStatusDoesNotReturnInEvents/3
+=== RUN   TestExpiredDisableStatusDoesNotReturnInEvents/9
+--- PASS: TestExpiredDisableStatusDoesNotReturnInEvents (0.00s)
+    --- PASS: TestExpiredDisableStatusDoesNotReturnInEvents/2 (0.00s)
+    --- PASS: TestExpiredDisableStatusDoesNotReturnInEvents/4 (0.00s)
+    --- PASS: TestExpiredDisableStatusDoesNotReturnInEvents/3 (0.00s)
+    --- PASS: TestExpiredDisableStatusDoesNotReturnInEvents/9 (0.00s)
+=== RUN   TestCaptureProtectionAppliesOnlyToAutomaticCommands
+=== RUN   TestCaptureProtectionAppliesOnlyToAutomaticCommands/manual
+=== RUN   TestCaptureProtectionAppliesOnlyToAutomaticCommands/automatic
+--- PASS: TestCaptureProtectionAppliesOnlyToAutomaticCommands (0.00s)
+    --- PASS: TestCaptureProtectionAppliesOnlyToAutomaticCommands/manual (0.00s)
+    --- PASS: TestCaptureProtectionAppliesOnlyToAutomaticCommands/automatic (0.00s)
+=== RUN   TestAutomaticGroupMagicExcludesPendingCapture
+--- PASS: TestAutomaticGroupMagicExcludesPendingCapture (0.00s)
+=== RUN   TestAutomaticChargedPetDoesNotAttackCapture
+--- PASS: TestAutomaticChargedPetDoesNotAttackCapture (0.00s)
+=== RUN   TestAutomaticMercyKeepsCaptureAliveThroughCounterChain
+--- PASS: TestAutomaticMercyKeepsCaptureAliveThroughCounterChain (0.00s)
+=== RUN   TestAutomaticAttackDoesNotDamageCapturableGuardian
+--- PASS: TestAutomaticAttackDoesNotDamageCapturableGuardian (0.00s)
+=== RUN   TestEnemyAIExcludesUnavailableSkills
+=== RUN   TestEnemyAIExcludesUnavailableSkills/empty
+=== RUN   TestEnemyAIExcludesUnavailableSkills/map-only
+--- PASS: TestEnemyAIExcludesUnavailableSkills (0.00s)
+    --- PASS: TestEnemyAIExcludesUnavailableSkills/empty (0.00s)
+    --- PASS: TestEnemyAIExcludesUnavailableSkills/map-only (0.00s)
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/self
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/own-side
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/other-side
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/chosen-side
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/row
+=== RUN   TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all-rows
+--- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/self (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/own-side (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/other-side (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/chosen-side (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/row (0.00s)
+    --- PASS: TestEnemyAISelfAndGroupSkillsRespectTheirTarget/all-rows (0.00s)
+=== RUN   TestEnemyAITacticsAndSkillsStayCurrent
+--- PASS: TestEnemyAITacticsAndSkillsStayCurrent (0.00s)
+=== RUN   TestDerive
+--- PASS: TestDerive (0.00s)
+=== RUN   TestAttrAdjust
+--- PASS: TestAttrAdjust (0.00s)
+=== RUN   TestGuardReducesDamage
+--- PASS: TestGuardReducesDamage (0.00s)
+=== RUN   TestTurnAndOutcome
+--- PASS: TestTurnAndOutcome (0.00s)
+=== RUN   TestEscapeAndTimeout
+--- PASS: TestEscapeAndTimeout (0.00s)
+=== RUN   TestEnemyAITargetsPlayer
+--- PASS: TestEnemyAITargetsPlayer (0.00s)
+=== RUN   TestKillExp
+--- PASS: TestKillExp (0.00s)
+=== RUN   TestPickEnemiesFromRealData
+--- PASS: TestPickEnemiesFromRealData (0.20s)
+=== RUN   TestUltimate
+--- PASS: TestUltimate (0.00s)
+=== RUN   TestEnemyGuardScale
+--- PASS: TestEnemyGuardScale (0.00s)
+=== RUN   TestPickEnemiesByItem
+--- PASS: TestPickEnemiesByItem (0.11s)
+=== RUN   TestGhostStormResolveHitsOnlyCurrentEnemySide
+--- PASS: TestGhostStormResolveHitsOnlyCurrentEnemySide (0.00s)
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/ordinary
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/guard
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/vanish
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/absorb
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/reflect
+=== RUN   TestGhostStormPhysicalDamageRatioAndBarrierSemantics/capture
+--- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/ordinary (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/guard (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/vanish (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/absorb (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/reflect (0.00s)
+    --- PASS: TestGhostStormPhysicalDamageRatioAndBarrierSemantics/capture (0.00s)
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/dead
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/flown
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/escaped
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/paralysis
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/stone
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/sleep
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/barrier
+=== RUN   TestGhostStormCannotActAfterKnockoutDepartureOrDisable/dizzy
+--- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/dead (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/flown (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/escaped (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/paralysis (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/stone (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/sleep (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/barrier (0.00s)
+    --- PASS: TestGhostStormCannotActAfterKnockoutDepartureOrDisable/dizzy (0.00s)
+=== RUN   TestGhostStormPetrificationRateAndDuration
+=== RUN   TestGhostStormPetrificationRateAndDuration/equal
+=== RUN   TestGhostStormPetrificationRateAndDuration/advantage
+=== RUN   TestGhostStormPetrificationRateAndDuration/disadvantage
+=== RUN   TestGhostStormPetrificationRateAndDuration/resisted
+=== RUN   TestGhostStormPetrificationRateAndDuration/high-resistance-floor
+=== RUN   TestGhostStormPetrificationRateAndDuration/negative-resistance
+--- PASS: TestGhostStormPetrificationRateAndDuration (0.07s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/equal (0.00s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/advantage (0.01s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/disadvantage (0.01s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/resisted (0.02s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/high-resistance-floor (0.02s)
+    --- PASS: TestGhostStormPetrificationRateAndDuration/negative-resistance (0.01s)
+=== RUN   TestGhostStormReflectionStopsRemainingTargets
+--- PASS: TestGhostStormReflectionStopsRemainingTargets (0.00s)
+=== RUN   TestGhostStormGroupKnockoutsAndMidActionDeparture
+=== RUN   TestGhostStormGroupKnockoutsAndMidActionDeparture/group-flight
+=== RUN   TestGhostStormGroupKnockoutsAndMidActionDeparture/later-target-leaves
+--- PASS: TestGhostStormGroupKnockoutsAndMidActionDeparture (0.00s)
+    --- PASS: TestGhostStormGroupKnockoutsAndMidActionDeparture/group-flight (0.00s)
+    --- PASS: TestGhostStormGroupKnockoutsAndMidActionDeparture/later-target-leaves (0.00s)
+=== RUN   TestGhostStormGuardianUsesActualRecipientAndCaptureProtection
+--- PASS: TestGhostStormGuardianUsesActualRecipientAndCaptureProtection (0.00s)
+=== RUN   TestFieldChangeAndFirecracker
+--- PASS: TestFieldChangeAndFirecracker (0.00s)
+=== RUN   TestBecomeFox
+--- PASS: TestBecomeFox (0.00s)
+=== RUN   TestBecomePig
+--- PASS: TestBecomePig (0.00s)
+=== RUN   TestFirekill
+--- PASS: TestFirekill (0.00s)
+=== RUN   TestItemArgNum
+--- PASS: TestItemArgNum (0.00s)
+=== RUN   TestBattleItems
+--- PASS: TestBattleItems (0.00s)
+=== RUN   TestFlownEnemyCannotReturnThroughEnemyRevive
+--- PASS: TestFlownEnemyCannotReturnThroughEnemyRevive (0.00s)
+=== RUN   TestResurrectionExcludesDepartedFighters
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/player/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/player/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/pet/item/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/magic/escaped
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/flown
+=== RUN   TestResurrectionExcludesDepartedFighters/enemy/item/escaped
+--- PASS: TestResurrectionExcludesDepartedFighters (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/player/item/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/pet/item/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/magic/escaped (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/knocked-out (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/flown (0.00s)
+    --- PASS: TestResurrectionExcludesDepartedFighters/enemy/item/escaped (0.00s)
+=== RUN   TestEnemyReviveResetsKnockoutAttribution
+--- PASS: TestEnemyReviveResetsKnockoutAttribution (0.00s)
+=== RUN   TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits
+--- PASS: TestFlownFighterPositiveHPDoesNotDelayVictoryOrReceiveHits (0.00s)
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp
+=== RUN   TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped
+--- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/magic/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/item/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/enemy/escaped (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/knocked-out (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/flown-positive-hp (0.00s)
+    --- PASS: TestRecoveryCannotRestoreKnockedOutOrDepartedFighter/skill/escaped (0.00s)
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/player
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet
+=== RUN   TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy
+--- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/player (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/pet (0.00s)
+    --- PASS: TestDeepPoisonKnockoutEndsBattleWithoutFlight/enemy (0.00s)
+=== RUN   TestOrdinaryKnockoutSkipsQueuedAndLaterActions
+=== RUN   TestOrdinaryKnockoutSkipsQueuedAndLaterActions/player
+=== RUN   TestOrdinaryKnockoutSkipsQueuedAndLaterActions/pet
+=== RUN   TestOrdinaryKnockoutSkipsQueuedAndLaterActions/enemy
+--- PASS: TestOrdinaryKnockoutSkipsQueuedAndLaterActions (0.00s)
+    --- PASS: TestOrdinaryKnockoutSkipsQueuedAndLaterActions/player (0.00s)
+    --- PASS: TestOrdinaryKnockoutSkipsQueuedAndLaterActions/pet (0.00s)
+    --- PASS: TestOrdinaryKnockoutSkipsQueuedAndLaterActions/enemy (0.00s)
+=== RUN   TestReflectedKnockoutStopsDrainAndRemainingHits
+--- PASS: TestReflectedKnockoutStopsDrainAndRemainingHits (0.00s)
+=== RUN   TestMultiPetOwnershipAndLegacyLayout
+--- PASS: TestMultiPetOwnershipAndLegacyLayout (0.00s)
+=== RUN   TestMultiPetEscapeAndFleeOnlyTakeOwnedPets
+--- PASS: TestMultiPetEscapeAndFleeOnlyTakeOwnedPets (0.00s)
+=== RUN   TestMultiPetDisobeysAndPunishmentUseActualOwner
+--- PASS: TestMultiPetDisobeysAndPunishmentUseActualOwner (0.00s)
+=== RUN   TestMultiPetSwapPreservesOtherOwners
+--- PASS: TestMultiPetSwapPreservesOtherOwners (0.00s)
+=== RUN   TestMultiPetRecallThenResummonOnlyUsesPrimaryColumn
+--- PASS: TestMultiPetRecallThenResummonOnlyUsesPrimaryColumn (0.00s)
+=== RUN   TestMultiPetMetamoOnlyAllowsActualOwnedPets
+--- PASS: TestMultiPetMetamoOnlyAllowsActualOwnedPets (0.00s)
+=== RUN   TestMultiPetGuardianAndRegretUseActualOwner
+--- PASS: TestMultiPetGuardianAndRegretUseActualOwner (0.00s)
+=== RUN   TestMultiPetRemapGuardianKeepsActualProtector
+--- PASS: TestMultiPetRemapGuardianKeepsActualProtector (0.00s)
+=== RUN   TestMultiPetRemapPendingEarthTargetAndAuras
+--- PASS: TestMultiPetRemapPendingEarthTargetAndAuras (0.00s)
+=== RUN   TestPetLoyalCheck
+--- PASS: TestPetLoyalCheck (0.00s)
+=== RUN   TestPetEscapeWithOwner
+--- PASS: TestPetEscapeWithOwner (0.00s)
+=== RUN   TestSekkan
+--- PASS: TestSekkan (0.00s)
+=== RUN   TestCaptureRate
+--- PASS: TestCaptureRate (0.00s)
+=== RUN   TestRideHeal
+--- PASS: TestRideHeal (0.00s)
+=== RUN   TestSkillNoCounterMercyUnregistered
+--- PASS: TestSkillNoCounterMercyUnregistered (0.00s)
+=== RUN   TestGyrateAndTear
+--- PASS: TestGyrateAndTear (0.00s)
+=== RUN   TestFallGroundAndSetDuck
+--- PASS: TestFallGroundAndSetDuck (0.00s)
+=== RUN   TestAbductAndSteal
+--- PASS: TestAbductAndSteal (0.00s)
+=== RUN   TestBattleModelAndRegret
+--- PASS: TestBattleModelAndRegret (0.00s)
+=== RUN   TestVaryAndDeeppoison
+--- PASS: TestVaryAndDeeppoison (0.00s)
+=== RUN   TestEarthRoundKeepsTarget
+--- PASS: TestEarthRoundKeepsTarget (0.00s)
+=== RUN   TestOptParse
+--- PASS: TestOptParse (0.00s)
+=== RUN   TestContinuationAttackHitsN
+--- PASS: TestContinuationAttackHitsN (0.00s)
+=== RUN   TestStatusPoisonAndSleep
+--- PASS: TestStatusPoisonAndSleep (0.00s)
+=== RUN   TestStatusInflictChance
+--- PASS: TestStatusInflictChance (0.00s)
+=== RUN   TestCounterHappens
+--- PASS: TestCounterHappens (0.00s)
+=== RUN   TestGuardBreakAndGuardian
+--- PASS: TestGuardBreakAndGuardian (0.00s)
+=== RUN   TestEnemyHealRevive
+--- PASS: TestEnemyHealRevive (0.00s)
+=== RUN   TestChargeAndEarthRound
+--- PASS: TestChargeAndEarthRound (0.00s)
+=== RUN   TestSurprise
+--- PASS: TestSurprise (0.00s)
+=== RUN   TestPlayerMultiHit
+--- PASS: TestPlayerMultiHit (0.00s)
+=== RUN   TestRidePoison
+--- PASS: TestRidePoison (0.00s)
+=== RUN   TestBoomerangRow
+--- PASS: TestBoomerangRow (0.00s)
+=== RUN   TestThrowWeapons
+--- PASS: TestThrowWeapons (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.426s
+
+exit=0

@@ -1,0 +1,24 @@
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (139.512396ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (11.824623ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (8.481312ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (5.152437ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (584.722781ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (522.567139ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (10.5025ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (3.35426ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (22.541467ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (16.480438ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (6.532524ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (6.118646ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (4.785581ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (7.870778ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (12.230974ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (11.793655ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1772.773587

@@ -1,0 +1,54 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","recovery_case":"desktop native heal threshold change, reload persistence and AutoPlay.settings"}
+{"variant":"final","recovery_start":"desktop automatic spirit-1001-before-items"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1001-before-items"}
+{"variant":"final","recovery_start":"desktop automatic spirit-1002-before-items"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1002-before-items"}
+{"variant":"final","recovery_start":"desktop automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"desktop automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"desktop automatic hp-potion-recovery"}
+{"variant":"final","recovery_case":"desktop automatic hp-potion-recovery"}
+{"variant":"final","recovery_start":"desktop automatic meat-recovery"}
+{"variant":"final","recovery_case":"desktop automatic meat-recovery"}
+{"variant":"final","recovery_start":"desktop automatic threshold-not-below"}
+{"variant":"final","recovery_case":"desktop automatic threshold-not-below"}
+{"variant":"final","recovery_start":"desktop quick spirit-1001-before-items"}
+{"variant":"final","recovery_case":"desktop quick spirit-1001-before-items"}
+{"variant":"final","recovery_start":"desktop quick spirit-1002-before-items"}
+{"variant":"final","recovery_case":"desktop quick spirit-1002-before-items"}
+{"variant":"final","recovery_start":"desktop quick mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"desktop quick mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"desktop quick hp-potion-recovery"}
+{"variant":"final","recovery_case":"desktop quick hp-potion-recovery"}
+{"variant":"final","recovery_start":"desktop quick meat-recovery"}
+{"variant":"final","recovery_case":"desktop quick meat-recovery"}
+{"variant":"final","recovery_start":"desktop quick threshold-not-below"}
+{"variant":"final","recovery_case":"desktop quick threshold-not-below"}
+{"variant":"final","recovery_case":"mobile native heal threshold change, reload persistence and AutoPlay.settings"}
+{"variant":"final","recovery_start":"mobile automatic spirit-1001-before-items"}
+{"variant":"final","recovery_case":"mobile automatic spirit-1001-before-items"}
+{"variant":"final","recovery_start":"mobile automatic spirit-1002-before-items"}
+{"variant":"final","recovery_case":"mobile automatic spirit-1002-before-items"}
+{"variant":"final","recovery_start":"mobile automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"mobile automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"mobile automatic hp-potion-recovery"}
+{"variant":"final","recovery_case":"mobile automatic hp-potion-recovery"}
+{"variant":"final","recovery_start":"mobile automatic meat-recovery"}
+{"variant":"final","recovery_case":"mobile automatic meat-recovery"}
+{"variant":"final","recovery_start":"mobile automatic threshold-not-below"}
+{"variant":"final","recovery_case":"mobile automatic threshold-not-below"}
+{"variant":"final","recovery_start":"mobile quick spirit-1001-before-items"}
+{"variant":"final","recovery_case":"mobile quick spirit-1001-before-items"}
+{"variant":"final","recovery_start":"mobile quick spirit-1002-before-items"}
+{"variant":"final","recovery_case":"mobile quick spirit-1002-before-items"}
+{"variant":"final","recovery_start":"mobile quick mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"mobile quick mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"mobile quick hp-potion-recovery"}
+{"variant":"final","recovery_case":"mobile quick hp-potion-recovery"}
+{"variant":"final","recovery_start":"mobile quick meat-recovery"}
+{"variant":"final","recovery_case":"mobile quick meat-recovery"}
+{"variant":"final","recovery_start":"mobile quick threshold-not-below"}
+{"variant":"final","recovery_case":"mobile quick threshold-not-below"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-recovery.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

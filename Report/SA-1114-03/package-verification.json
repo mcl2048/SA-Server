@@ -1,0 +1,11 @@
+{
+  "version": "v0.2.14-LYNX",
+  "archive": "bin/saserver-v0.2.14-LYNX-linux-amd64.zip",
+  "bytes": 29420038,
+  "sha256": "cc4e6f901e15d0664b073acd505aa204de8d54c1d7f938a52b215b98b50284d2",
+  "files": 4362,
+  "binary_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+  "all_entries_match_current_public_files": true,
+  "executable_mode": "0755",
+  "runtime_db_credentials_and_Assets_excluded": true
+}

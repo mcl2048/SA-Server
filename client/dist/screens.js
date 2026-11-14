@@ -5,13 +5,13 @@
 //   创建角色：选形象与颜色（selCharGraNo / selCharGraColorWin）→ 设定（editCharParam）→ 出生地（selHomeTown）
 // 原版 640×480 坐标的画面统一加 OFFSET_640 放到 800×600 中央。
 
-import { md5 } from "./md5.js?v=bfc86541ebbec063";
-import { Actor } from "./field.js?v=bfc86541ebbec063";
+import { md5 } from "./md5.js?v=befcbe62a17abfb2";
+import { Actor } from "./field.js?v=befcbe62a17abfb2";
 
 
-import { isMobile } from "./mobile-view.js?v=bfc86541ebbec063";
+import { isMobile } from "./mobile-view.js?v=befcbe62a17abfb2";
 
-import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=bfc86541ebbec063";
+import { FONT, InputBox, OFFSET_640, SYS, measure,         } from "./ui.js?v=befcbe62a17abfb2";
 
 const [OX, OY] = OFFSET_640;
 

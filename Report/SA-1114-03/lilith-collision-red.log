@@ -1,0 +1,11 @@
+$ go test ./internal/data -run TestLilithInstallationRejectsCollisionsAtomically/sprite -count=1 -v
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically
+=== RUN   TestLilithInstallationRejectsCollisionsAtomically/sprite
+    lilith_test.go:79: collision sprite must leave every original registry unchanged: err=<nil>
+--- FAIL: TestLilithInstallationRejectsCollisionsAtomically (0.00s)
+    --- FAIL: TestLilithInstallationRejectsCollisionsAtomically/sprite (0.00s)
+FAIL
+FAIL	sa/server/internal/data	0.012s
+FAIL
+
+exit=1

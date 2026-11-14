@@ -1,0 +1,37 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","recovery_case":"desktop native heal threshold change, reload persistence and AutoPlay.settings"}
+{"variant":"final","recovery_start":"desktop automatic spirit-1001-before-items"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1001-before-items"}
+{"variant":"final","recovery_start":"desktop automatic spirit-1002-before-items"}
+{"variant":"final","recovery_case":"desktop automatic spirit-1002-before-items"}
+{"variant":"final","recovery_start":"desktop automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"desktop automatic mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"desktop automatic hp-potion-recovery"}
+{"variant":"final","recovery_case":"desktop automatic hp-potion-recovery"}
+{"variant":"final","recovery_start":"desktop automatic meat-recovery"}
+{"variant":"final","recovery_case":"desktop automatic meat-recovery"}
+{"variant":"final","recovery_start":"desktop automatic threshold-not-below"}
+{"variant":"final","recovery_case":"desktop automatic threshold-not-below"}
+{"variant":"final","recovery_start":"desktop quick spirit-1001-before-items"}
+{"variant":"final","recovery_case":"desktop quick spirit-1001-before-items"}
+{"variant":"final","recovery_start":"desktop quick spirit-1002-before-items"}
+{"variant":"final","recovery_case":"desktop quick spirit-1002-before-items"}
+{"variant":"final","recovery_start":"desktop quick mp-potion-then-spirit"}
+{"variant":"final","recovery_case":"desktop quick mp-potion-then-spirit"}
+{"variant":"final","recovery_start":"desktop quick hp-potion-recovery"}
+{"variant":"final","recovery_case":"desktop quick hp-potion-recovery"}
+{"variant":"final","recovery_start":"desktop quick meat-recovery"}
+{"variant":"final","recovery_case":"desktop quick meat-recovery"}
+{"variant":"final","recovery_start":"desktop quick threshold-not-below"}
+{"variant":"final","recovery_case":"desktop quick threshold-not-below"}
+{"variant":"final","recovery_case":"mobile native heal threshold change, reload persistence and AutoPlay.settings"}
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:74:19)
+    at move (/home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:91:28)
+    at async clearEquipment (/home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:104:9)
+    at async equip (/home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:109:7)
+    at async Module.runRecovery (/home/coder/saserver/Report/SA-1114-03/browser/recovery-cases.mjs:196:22)
+    at async work (/home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:299:37)
+    at async file:///home/coder/saserver/Report/SA-1114-03/browser/real-game.mjs:333:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-recovery.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

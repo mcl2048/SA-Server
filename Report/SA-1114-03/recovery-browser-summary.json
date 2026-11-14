@@ -1,0 +1,413 @@
+{
+  "binary_sha256": "5184f6b440a4369a6073fb22ae17a83ddbacc3442f0861cd9e2dc163b6b49cc1",
+  "binary_version": "v0.2.14-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "checks": 26,
+  "battle_count": 24,
+  "cases": [
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "spirit-1001-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "治愈的精灵 Lv1",
+        "target": 0,
+        "damage": 80,
+        "mpDamage": 0,
+        "actorMp": 95
+      },
+      "turn_count": 6,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "spirit-1002-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "滋润的精灵 Lv1",
+        "target": 0,
+        "damage": 61,
+        "mpDamage": 0,
+        "actorMp": 92
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "mp-potion-then-spirit",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "气力回复药",
+        "target": 0,
+        "damage": 0,
+        "mpDamage": 18,
+        "actorMp": 18
+      },
+      "turn_count": 5,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "hp-potion-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "耐久力回复药",
+        "target": 0,
+        "damage": 97,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 4,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "meat-recovery",
+      "first_action": {
+        "turn": 2,
+        "kind": "item",
+        "skill": "小块肉",
+        "target": 0,
+        "damage": 22,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 4,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "threshold-not-below",
+      "first_action": {
+        "turn": 1,
+        "kind": "attack",
+        "skill": "",
+        "target": 15,
+        "damage": 27,
+        "mpDamage": 0,
+        "actorMp": 0
+      },
+      "turn_count": 3,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "spirit-1001-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "治愈的精灵 Lv1",
+        "target": 0,
+        "damage": 73,
+        "mpDamage": 0,
+        "actorMp": 95
+      },
+      "turn_count": 3,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "spirit-1002-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "滋润的精灵 Lv1",
+        "target": 0,
+        "damage": 71,
+        "mpDamage": 0,
+        "actorMp": 92
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "mp-potion-then-spirit",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "气力回复药",
+        "target": 0,
+        "damage": 0,
+        "mpDamage": 21,
+        "actorMp": 21
+      },
+      "turn_count": 7,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "hp-potion-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "耐久力回复药",
+        "target": 0,
+        "damage": 104,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 4,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "meat-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "小块肉",
+        "target": 0,
+        "damage": 19,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "threshold-not-below",
+      "first_action": {
+        "turn": 1,
+        "kind": "attack",
+        "skill": "",
+        "target": 15,
+        "damage": 25,
+        "mpDamage": 0,
+        "actorMp": 0
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "spirit-1001-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "治愈的精灵 Lv1",
+        "target": 0,
+        "damage": 79,
+        "mpDamage": 0,
+        "actorMp": 95
+      },
+      "turn_count": 3,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "spirit-1002-before-items",
+      "first_action": {
+        "turn": 2,
+        "kind": "magic",
+        "skill": "滋润的精灵 Lv1",
+        "target": 0,
+        "damage": 62,
+        "mpDamage": 0,
+        "actorMp": 92
+      },
+      "turn_count": 6,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "mp-potion-then-spirit",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "气力回复药",
+        "target": 0,
+        "damage": 0,
+        "mpDamage": 19,
+        "actorMp": 19
+      },
+      "turn_count": 4,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "hp-potion-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "耐久力回复药",
+        "target": 0,
+        "damage": 108,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "meat-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "小块肉",
+        "target": 0,
+        "damage": 20,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 5,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "threshold-not-below",
+      "first_action": {
+        "turn": 1,
+        "kind": "attack",
+        "skill": "",
+        "target": 15,
+        "damage": 26,
+        "mpDamage": 0,
+        "actorMp": 0
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "spirit-1001-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "治愈的精灵 Lv1",
+        "target": 0,
+        "damage": 80,
+        "mpDamage": 0,
+        "actorMp": 95
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "spirit-1002-before-items",
+      "first_action": {
+        "turn": 1,
+        "kind": "magic",
+        "skill": "滋润的精灵 Lv1",
+        "target": 0,
+        "damage": 61,
+        "mpDamage": 0,
+        "actorMp": 92
+      },
+      "turn_count": 2,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "mp-potion-then-spirit",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "气力回复药",
+        "target": 0,
+        "damage": 0,
+        "mpDamage": 20,
+        "actorMp": 20
+      },
+      "turn_count": 3,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "hp-potion-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "耐久力回复药",
+        "target": 0,
+        "damage": 102,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 4,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "meat-recovery",
+      "first_action": {
+        "turn": 1,
+        "kind": "item",
+        "skill": "小块肉",
+        "target": 0,
+        "damage": 22,
+        "mpDamage": 0,
+        "actorMp": 100
+      },
+      "turn_count": 3,
+      "result": "win"
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "threshold-not-below",
+      "first_action": {
+        "turn": 1,
+        "kind": "attack",
+        "skill": "",
+        "target": 15,
+        "damage": 51,
+        "mpDamage": 0,
+        "actorMp": 0
+      },
+      "turn_count": 2,
+      "result": "win"
+    }
+  ]
+}

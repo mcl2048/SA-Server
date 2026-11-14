@@ -14,7 +14,7 @@
 
 import type { PetInfo, PetSkill, S2CPets } from "./proto.gen.ts";
 import { ANIM, findAction } from "./assets.ts";
-import { aiPetForSprite } from "./ai-pet-catalog.ts";
+import { petForSprite } from "./pet-catalog.ts";
 import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure, type Ui } from "./ui.ts";
 import { isImmersive } from "./mobile-view.ts";
 
@@ -323,7 +323,7 @@ export class PetWindow {
       lines.push([`魔法 ${el.map((n, i) => `${n}${ex.magic[i]}`).join(" ")}`, FONT.YELLOW]);
       lines.push([`抗魔 ${el.map((n, i) => `${n}${ex.magic[4 + i]}`).join(" ")}`, FONT.YELLOW]);
     }
-    const catalog = aiPetForSprite(p.sprite);
+    const catalog = petForSprite(p.sprite);
     if (catalog) {
       lines.push(["简介（完整故事见图鉴）", FONT.YELLOW]);
       let line = "";

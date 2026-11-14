@@ -41,6 +41,7 @@ export interface SmartContext {
 const DISABLED = new Set([2, 3, 4, 9]); // 麻、眠、石、障：不能行动
 const STATUS_CHAR: Record<number, string> = { 1: "毒", 2: "麻", 3: "眠", 4: "石", 5: "醉", 6: "乱", 8: "毒" };
 const ME_WEIGHT = 1.3, PLAYER_WEIGHT = 1.15, PET_WEIGHT = 1.0;
+const HEAL_MAGIC = new Set(["MAGIC_Recovery", "MAGIC_OtherRecovery"]);
 
 // 宠物技能的种类（按 petskill2.txt 的函数名）
 const PET_GUARD = new Set(["PETSKILL_Guardian"]);
@@ -58,6 +59,8 @@ function petSkillPrior(sk: PetSkill): number {
   let k = m ? 1 + Number(m[1]) / 100 : 1;
   if (sk.func === "PETSKILL_ContinuationAttack") k *= Math.max(1, Number(sk.option) || 2) * 0.6;
   if (sk.func === "PETSKILL_AttackMagic") k *= 0.8;
+  // Ghost Storm's native resolver uses 75% physical damage per living enemy.
+  if (sk.func === "PETSKILL_GhostStorm") k *= 0.75;
   return k;
 }
 
@@ -128,7 +131,9 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
   const allies = [...c.fighters.values()].filter((x) => !x.gone && mine(x.slot));
   const aliveAllies = allies.filter((x) => x.hp > 0);
   const enemies = [...c.fighters.values()].filter((x) => !x.gone && !mine(x.slot) && x.hp > 0);
-  if (enemies.length === 0) { out.kind = "attack"; return out; }
+  // A final KO can arrive before BattleEnd. Do not manufacture an attack with
+  // target=-1 while the authoritative battle is finishing.
+  if (enemies.length === 0) { out.kind = "guard"; return out; }
 
   // 威胁：学到的平均伤害，没学到时按等级估；不能动的敌人这回合没有威胁
   const threat = (e: SmartFighter) => DISABLED.has(e.status) ? 0 : c.mem.threat(e.name, e.level * 2.5 + 10);
@@ -154,7 +159,7 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
 
   // 补血
   if (!done && needs.length) {
-    const heals = spells.filter((m) => m.magicFunc === "MAGIC_Recovery" || m.magicFunc === "MAGIC_OtherRecovery");
+    const heals = spells.filter((m) => HEAL_MAGIC.has(m.magicFunc));
     const group = heals.filter((m) => m.magicTarget === 2 || m.magicTarget === 8).sort((a, b) => Number(b.magicOption) - Number(a.magicOption))[0];
     if (needs.length >= 2 && group) send("magic", side, group.slot, `全体补血：${group.magic}`);
     else {
@@ -197,9 +202,11 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
 
   // 补气：MP 连最便宜的补血精灵都放不了
   if (!done) {
-    const allHeals = c.inv.filter((it) => it.slot >= 0 && it.slot < 9 && it.magicField !== 2 && it.magicFunc === "MAGIC_Recovery");
+    const allHeals = c.inv.filter((it) => it.slot >= 0 && it.slot < 9 && it.magicField !== 2 && HEAL_MAGIC.has(it.magicFunc));
     const cheapest = Math.min(...allHeals.map((m) => m.magicMp));
-    const mpItem = items.find((it) => it.memo.includes("气") && it.memo.includes("回复") && !it.memo.includes("耐久力"));
+    // The wire catalogue exposes descriptions rather than item use functions.
+    // Require the MP resource name; “气绝回复” denotes revival, never MP.
+    const mpItem = items.find((it) => /气力/.test(it.memo) && /回复|恢复/.test(it.memo) && !/耐久力|耐力|气绝/.test(it.memo));
     if (allHeals.length && meF.mp < cheapest && mpItem) send("item", me, mpItem.slot, "补气");
   }
 
@@ -221,7 +228,7 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
     const d = c.mem.get("me:attack", atkPrior);
     plans.push({ value: value(new Map([[e.slot, d]]), 0), kind: "attack", target: e.slot, item: -1, label: `攻击：${e.name}`, key: "me:attack", hits: new Map([[e.slot, d]]) });
   }
-  const mpReserve = Math.min(...c.inv.filter((it) => it.magicFunc === "MAGIC_Recovery").map((m) => m.magicMp), 1e9);
+  const mpReserve = Math.min(...c.inv.filter((it) => it.slot >= 0 && it.slot < 9 && it.magicField !== 2 && HEAL_MAGIC.has(it.magicFunc)).map((m) => m.magicMp), 1e9);
   for (const m of s.magic ? spells.filter((m) => m.magicFunc === "MAGIC_AttMagic") : []) { // "用精灵进攻"关掉：不用攻击精灵
     const key = `me:magic:${m.magic}`, d = c.mem.get(key, atkPrior * 0.8);
     const cost = m.magicMp * (meF.mp - m.magicMp < mpReserve ? 1.5 : 0.3); // 会吃掉补血用的 MP 就贵一点
@@ -357,7 +364,7 @@ export function smartChooseSoloPet(s: AiSettings, c: SmartContext, petSlot: numb
   if (guard && pet.hp * 100 < pet.maxHp * 15) return select(guard, petSlot);
   // Choose only supported offensive skills; no sacrifice, capture or guarding
   // a corpse. Healthy pets with no usable skill fall back to protocol guard.
-  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack"]);
+  const offensive = new Set(["PETSKILL_NormalAttack", "PETSKILL_ContinuationAttack", "PETSKILL_ChargeAttack", "PETSKILL_Mighty", "PETSKILL_PowerBalance", "PETSKILL_StatusChange", "PETSKILL_GuardBreak2", "PETSKILL_WildViolentAttack", "PETSKILL_DamageToHp", "PETSKILL_AttackMagic", "PETSKILL_WholeAttack", "PETSKILL_GhostStorm"]);
   const ranked = skills.filter(sk => offensive.has(sk.func) && [1,3,4,6,7].includes(sk.target)).map(sk => ({ sk, score: petSkillPrior(sk) * (sk.target === 3 || sk.target === 4 ? enemies.length : 1) }));
   ranked.sort((a,b) => b.score-a.score || a.sk.slot-b.sk.slot);
   if (ranked.length) {

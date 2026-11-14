@@ -1,0 +1,18 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 390x844"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 844x390"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 320x568"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 568x320"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 430x932"}
+{"variant":"final","mobile_case":"field visible zoom +, − and reset remain functional"}
+{"variant":"final","mobile_case":"field real two-finger spread and translation preserve camera and game intent"}
+{"variant":"final","mobile_case":"battle player remains visible through rotation 390x844"}
+{"variant":"final","mobile_case":"battle player remains visible through rotation 844x390"}
+{"variant":"final","mobile_case":"battle player remains visible through rotation 320x568"}
+{"variant":"final","mobile_case":"battle player remains visible through rotation 568x320"}
+{"variant":"final","mobile_case":"battle player remains visible through rotation 430x932"}
+{"variant":"final","mobile_case":"battle visible zoom +, − and reset remain functional"}
+{"variant":"final","mobile_case":"battle real two-finger spread and translation preserve camera and game intent"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-03/browser/final-mobile-regression.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

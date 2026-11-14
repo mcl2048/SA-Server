@@ -15,7 +15,7 @@ function fixture(t) {
     rmSync(root, { recursive: true, force: true });
   });
   for (const dir of ["client/src", "client/art", "scripts", "server/webclient/static", "server/internal/data"]) mkdirSync(join(root, dir), { recursive: true });
-  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "server/internal/data/ai_pets.json"]) cpSync(join(sourceRoot, file), join(root, file));
+  for (const file of ["client/build.mjs", "scripts/stage-client.mjs", "scripts/sync-ai-pet-catalog.mjs", "scripts/sync-lilith-catalog.mjs", "server/internal/data/ai_pets.json", "server/internal/data/lilith.json"]) cpSync(join(sourceRoot, file), join(root, file));
   writeFileSync(join(root, "client/src/main.ts"), 'import { value } from "./dep.ts";\nconsole.log(value);\n');
   writeFileSync(join(root, "client/src/dep.ts"), "export const value: number = 42;\n");
   writeFileSync(join(root, "client/index.html"), '<script type="module" src="dist/main.js?v=old"></script>\n');

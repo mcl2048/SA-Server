@@ -35,3 +35,33 @@ test('dead or absent pets and defeated enemies do not get offensive commands',()
  c.fighters.get(5)!.hp=100;c.fighters.get(10)!.hp=0;
  assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[-1,-1]);
 });
+
+function lilithContext():SmartContext {
+ const c=context();
+ c.pet={name:'莉莉丝',atk:100,skills:[skill(0,29040,'PETSKILL_GhostStorm',3),skill(2,1,'PETSKILL_NormalAttack'),skill(4,2,'PETSKILL_NormalGuard',0)]};
+ c.fighters.set(11,fighter(11));
+ return c;
+}
+test('surviving Lilith uses 75 percent Ghost Storm against multiple living enemies',()=>{
+ const c=lilithContext(),s=defaultAi();
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[0,21]);
+ assert.deepEqual(smartChoose(s,c).pet,[0,21]);
+ // A single target favors the full physical attack, even when storm's slot sorts first.
+ c.fighters.get(11)!.hp=0;
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[2,10]);
+});
+test('incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate',()=>{
+ const c=lilithContext(),s=defaultAi();
+ c.fighters.get(11)!.gone=true;
+ c.fighters.set(12,fighter(12,0));
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[2,10]);
+ c.fighters.get(11)!.gone=false;
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[0,21]);
+});
+test('an explicit Ghost Storm plan still uses the native all-enemy target',()=>{
+ const c=lilithContext(),s=defaultAi();
+ c.pet!.skills[0].name='幽灵风暴';
+ s.petThen={kind:'skill',name:'幽灵风暴',target:'enemies'};
+ c.fighters.get(11)!.hp=0;
+ assert.deepEqual(smartChooseSoloPet(s,c,5).pet,[0,21]);
+});

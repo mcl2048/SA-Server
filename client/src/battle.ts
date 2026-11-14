@@ -87,6 +87,9 @@ const battleSpeed = () => speedMul;
  *  回力镖 SPR_boomerang 100502 在这套（和 8.0 的）客户端资源里都没有，照原版代码里留的备选改用投掷斧的图。 */
 /** 光 / 镜 / 守挨打的记号（set_guard_mark）、攻击者头上的技能图示（set_damage_num 的图示型）、倒地的星星、属性反转、战场属性 */
 const FX = { MIRROR: 100650, BARRIER: 100651, ABSORB: 100652, STAR: 100501, REVERSE: 100556, FIELD: 100600, ATR_ICON: 25131 };
+// Extension protocol identity: Ghost Storm is a ranged physical skill carried
+// by Magic events so its caster never enters the melee movement choreography.
+const GHOST_STORM_EFFECT = 199201;
 const SKILL_ICON: Record<number, number> = { 1: 26514, 2: 101415, 3: 101403, 4: 101404, 5: 101402, 6: 101405, 7: 101408, 8: 101409, 9: 101407, 10: 101410, 11: 25869, 12: 101418 };
 const MISSILE = { ARROW: 25630, STONE: 25785, STONE_SHADOW: 25786, AXE: 100504, AXE_SHADOW: 100505, BOOMERANG: 100502, SPEED: 32 };
 const ANGRY = 8; // loadsprbin.h ANIM_ANGRY
@@ -776,13 +779,16 @@ export class BattleScreen {
    */
   private magicSteps(a: Fighter, group: BattleEvent[], userEffect = JUJUTU.EFFECT_USER): Step[] {
     const first = group[0];
+    const ghostStorm = first.kind === "magic" && first.effect === GHOST_STORM_EFFECT;
     const steps: Step[] = [];
     steps.push(this.waitStep(700, (now) => {
       this.showSkill(first.skill, now);
       // oft.cpp ATT_JUJUTSU → case 75：施法的人（人或宠物）不做攻击动作，只转回自己那一边的方向（我方 3、敌方 7）站着，
       // 效果动画放在他身上（以前这里播攻击动作，宠物施法时会对着空气扑一下）
       a.dir = a.homeDir();
-      a.play(ANIM.STAND, now, true);
+      // Lilith's extension supplies a native two-hand cast, anchored at the
+      // same home position. Ordinary spirits keep their original idle cast.
+      a.play(ghostStorm ? ANIM.HAND : ANIM.STAND, now, !ghostStorm);
       a.mp = first.actorMp;
 
       this.animOnce(userEffect, a.x, a.y, now);
@@ -792,6 +798,16 @@ export class BattleScreen {
     if (hits.length === 0) return steps;
     let wait = 600;
     steps.push(this.waitStep(1, (now) => {
+      if (ghostStorm) {
+        // A half-field texture is drawn once per affected side, independent
+        // of how many opponents remain. Target averages drift toward the edge
+        // after knockouts and clip the full 440x330 native explosion atlas.
+        const sides = new Set(hits.map(e => e.target < 10));
+        for (const own of sides) wait = Math.max(wait, Math.min(2500,
+          this.animOnce(GHOST_STORM_EFFECT, own ? 580 : 220, own ? 415 : 185, now)));
+        this.cameraSlot = hits[0].target;
+        return;
+      }
       // 攻击魔法照 attmagic.bin 放动画（BuildAttackMagicData / RunTimeMagic）：显示方式 1 是画面上的固定位置（640 座标）；
       // 整排同时 / 全体同时是所有目标的中心 + (x, y) 放一次；其余每个目标的位置 + (x, y)，轮流的按时间差依次放
       const att = first.att ? first.att.split("|").map(Number) : null;
@@ -823,7 +839,16 @@ export class BattleScreen {
       // 等最长的效果动画播完再结算
       if (at < 0) at = now;
       if (now - at < wait) return false;
-      for (const e of hits) this.applyMagic(e, this.fighters.get(e.target)!, a, now);
+      for (const e of hits) {
+        const target = (ghostStorm && e.guardian >= 0 ? this.fighters.get(e.guardian) : undefined)
+          ?? this.fighters.get(e.target)!;
+        // The server resolves Ghost Storm through the physical attack rules,
+        // retaining mirror/absorption/barrier/dodge and authoritative status.
+        // Reuse that same hit consumer rather than losing reflected actor HP
+        // in applyMagic's spell-only result switch.
+        if (ghostStorm) this.applyHit(e, target, a, now, 0);
+        else this.applyMagic(e, target, a, now);
+      }
       return true;
     });
     steps.push(this.waitStep(300));

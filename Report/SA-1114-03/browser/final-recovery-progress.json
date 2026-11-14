@@ -1,0 +1,6330 @@
+{
+  "completed": 24,
+  "checks": [
+    {
+      "case": "desktop native heal threshold change, reload persistence and AutoPlay.settings",
+      "passed": true,
+      "evidence": {
+        "from": 35,
+        "to": 40,
+        "reloaded": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    },
+    {
+      "case": "desktop automatic spirit-1001-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "治愈的精灵 Lv1",
+            "damage": 80,
+            "mpDamage": 0,
+            "hp": 81,
+            "actorHp": 81,
+            "actorMp": 95,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 98,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 72,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 47,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 4
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 22,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 5
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 50,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 6
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 81,
+          "maxHp": 141,
+          "mp": 95,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop automatic spirit-1002-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 61,
+            "mpDamage": 0,
+            "hp": 62,
+            "actorHp": 62,
+            "actorMp": 92,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 127,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 62,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 62,
+          "maxHp": 141,
+          "mp": 92,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop automatic mp-potion-then-spirit",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "气力回复药",
+            "damage": 0,
+            "mpDamage": 18,
+            "hp": 1,
+            "actorHp": 1,
+            "actorMp": 18,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 60,
+            "mpDamage": 0,
+            "hp": 61,
+            "actorHp": 61,
+            "actorMp": 10,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 99,
+            "actorHp": 61,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 51,
+            "mpDamage": 0,
+            "hp": 48,
+            "actorHp": 61,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 4
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 23,
+            "actorHp": 61,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 5
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 61,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 5
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 0,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 61,
+          "maxHp": 141,
+          "mp": 10,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop automatic hp-potion-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "耐久力回复药",
+            "damage": 97,
+            "mpDamage": 0,
+            "hp": 98,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 97,
+            "actorHp": 98,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 75,
+            "mpDamage": 0,
+            "hp": 22,
+            "actorHp": 98,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 98,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 4
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 98,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop automatic meat-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "none",
+            "target": -1,
+            "result": "",
+            "skill": "",
+            "damage": 0,
+            "mpDamage": 0,
+            "hp": 1,
+            "actorHp": 0,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "小块肉",
+            "damage": 22,
+            "mpDamage": 0,
+            "hp": 23,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 51,
+            "mpDamage": 0,
+            "hp": 71,
+            "actorHp": 23,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 76,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 23,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 4
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 23,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop automatic threshold-not-below",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 27,
+            "mpDamage": 0,
+            "hp": 93,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 68,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 78,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 3
+          }
+        ],
+        "before": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick spirit-1001-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "治愈的精灵 Lv1",
+            "damage": 73,
+            "mpDamage": 0,
+            "hp": 74,
+            "actorHp": 74,
+            "actorMp": 95,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 78,
+            "mpDamage": 0,
+            "hp": 45,
+            "actorHp": 74,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 80,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 74,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 3
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 74,
+          "maxHp": 141,
+          "mp": 95,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick spirit-1002-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 71,
+            "mpDamage": 0,
+            "hp": 72,
+            "actorHp": 72,
+            "actorMp": 92,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 127,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 72,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 72,
+          "maxHp": 141,
+          "mp": 92,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick mp-potion-then-spirit",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "气力回复药",
+            "damage": 0,
+            "mpDamage": 21,
+            "hp": 1,
+            "actorHp": 1,
+            "actorMp": 21,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 59,
+            "mpDamage": 0,
+            "hp": 60,
+            "actorHp": 60,
+            "actorMp": 13,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 98,
+            "actorHp": 60,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 73,
+            "actorHp": 60,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 4
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 47,
+            "actorHp": 60,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 5
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 21,
+            "actorHp": 60,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 6
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 60,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 7
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 0,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 60,
+          "maxHp": 141,
+          "mp": 13,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick hp-potion-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "耐久力回复药",
+            "damage": 104,
+            "mpDamage": 0,
+            "hp": 105,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 76,
+            "mpDamage": 0,
+            "hp": 46,
+            "actorHp": 105,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 20,
+            "actorHp": 105,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 128,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 105,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 4
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 105,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick meat-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "小块肉",
+            "damage": 19,
+            "mpDamage": 0,
+            "hp": 20,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 130,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 20,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 20,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "desktop quick threshold-not-below",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 94,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 103,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile native heal threshold change, reload persistence and AutoPlay.settings",
+      "passed": true,
+      "evidence": {
+        "from": 35,
+        "to": 40,
+        "reloaded": true,
+        "settings": {
+          "v": 2,
+          "healAt": 40,
+          "escape": false,
+          "magic": false,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    },
+    {
+      "case": "mobile automatic spirit-1001-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "治愈的精灵 Lv1",
+            "damage": 79,
+            "mpDamage": 0,
+            "hp": 80,
+            "actorHp": 80,
+            "actorMp": 95,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 107,
+            "mpDamage": 0,
+            "hp": 15,
+            "actorHp": 80,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 80,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 3
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 80,
+          "maxHp": 141,
+          "mp": 95,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile automatic spirit-1002-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "none",
+            "target": -1,
+            "result": "",
+            "skill": "",
+            "damage": 0,
+            "mpDamage": 0,
+            "hp": 1,
+            "actorHp": 0,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 62,
+            "mpDamage": 0,
+            "hp": 63,
+            "actorHp": 63,
+            "actorMp": 92,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 96,
+            "actorHp": 63,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 54,
+            "mpDamage": 0,
+            "hp": 42,
+            "actorHp": 63,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 4
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 16,
+            "actorHp": 63,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 5
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 76,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 63,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 6
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 63,
+          "maxHp": 141,
+          "mp": 92,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile automatic mp-potion-then-spirit",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "气力回复药",
+            "damage": 0,
+            "mpDamage": 19,
+            "hp": 1,
+            "actorHp": 1,
+            "actorMp": 19,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 70,
+            "mpDamage": 0,
+            "hp": 71,
+            "actorHp": 71,
+            "actorMp": 11,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 80,
+            "mpDamage": 0,
+            "hp": 45,
+            "actorHp": 71,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 79,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 71,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 4
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 0,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 71,
+          "maxHp": 141,
+          "mp": 11,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile automatic hp-potion-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "耐久力回复药",
+            "damage": 108,
+            "mpDamage": 0,
+            "hp": 109,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 130,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 109,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 109,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile automatic meat-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "小块肉",
+            "damage": 20,
+            "mpDamage": 0,
+            "hp": 21,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 54,
+            "mpDamage": 0,
+            "hp": 69,
+            "actorHp": 21,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 43,
+            "actorHp": 21,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 18,
+            "actorHp": 21,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 4
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 53,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 21,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 5
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 21,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile automatic threshold-not-below",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 100,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 131,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick spirit-1001-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "治愈的精灵 Lv1",
+            "damage": 80,
+            "mpDamage": 0,
+            "hp": 81,
+            "actorHp": 81,
+            "actorMp": 95,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 108,
+            "mpDamage": 0,
+            "hp": 16,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 81,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 81,
+          "maxHp": 141,
+          "mp": 95,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick spirit-1002-before-items",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 61,
+            "mpDamage": 0,
+            "hp": 62,
+            "actorHp": 62,
+            "actorMp": 92,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 97,
+            "actorHp": 62,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 101,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 62,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 62,
+          "maxHp": 141,
+          "mp": 92,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick mp-potion-then-spirit",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "气力回复药",
+            "damage": 0,
+            "mpDamage": 20,
+            "hp": 1,
+            "actorHp": 1,
+            "actorMp": 20,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "magic",
+            "target": 0,
+            "result": "heal",
+            "skill": "滋润的精灵 Lv1",
+            "damage": 69,
+            "mpDamage": 0,
+            "hp": 70,
+            "actorHp": 70,
+            "actorMp": 12,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 132,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 70,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 3
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 0,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 70,
+          "maxHp": 141,
+          "mp": 12,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick hp-potion-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "耐久力回复药",
+            "damage": 102,
+            "mpDamage": 0,
+            "hp": 103,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 76,
+            "mpDamage": 0,
+            "hp": 48,
+            "actorHp": 103,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 26,
+            "mpDamage": 0,
+            "hp": 22,
+            "actorHp": 103,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 3
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 25,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 103,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 4
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 103,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick meat-recovery",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "item",
+            "target": 0,
+            "result": "heal",
+            "skill": "小块肉",
+            "damage": 22,
+            "mpDamage": 0,
+            "hp": 23,
+            "actorHp": 1,
+            "actorMp": 100,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 80,
+            "mpDamage": 0,
+            "hp": 46,
+            "actorHp": 23,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 2
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 52,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 23,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 3
+          }
+        ],
+        "before": {
+          "hp": 1,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 23,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    },
+    {
+      "case": "mobile quick threshold-not-below",
+      "passed": true,
+      "evidence": {
+        "playerEvents": [
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 51,
+            "mpDamage": 0,
+            "hp": 72,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": 0,
+            "status": 0,
+            "turn": 1
+          },
+          {
+            "actor": 0,
+            "kind": "attack",
+            "target": 15,
+            "result": "normal",
+            "skill": "",
+            "damage": 76,
+            "mpDamage": 0,
+            "hp": 0,
+            "actorHp": 57,
+            "actorMp": 0,
+            "dead": true,
+            "status": 0,
+            "turn": 2
+          }
+        ],
+        "before": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        },
+        "after": {
+          "hp": 57,
+          "maxHp": 141,
+          "mp": 100,
+          "maxMp": 100
+        }
+      }
+    }
+  ],
+  "recovery": [
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "spirit-1001-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 81,
+        "maxHp": 141,
+        "mp": 95,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "治愈的精灵 Lv1",
+              "damage": 80,
+              "mpDamage": 0,
+              "hp": 81,
+              "actorHp": 81,
+              "actorMp": 95,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 98,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 98,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 72,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 72,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 47,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 5,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 47,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 6,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 50,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "spirit-1002-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 62,
+        "maxHp": 141,
+        "mp": 92,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 121,
+            "maxHp": 121,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 121,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 61,
+              "mpDamage": 0,
+              "hp": 62,
+              "actorHp": 62,
+              "actorMp": 92,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 121,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 127,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 62,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "mp-potion-then-spirit",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 0,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 61,
+        "maxHp": 141,
+        "mp": 10,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1510,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "气力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 0,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 125,
+            "maxHp": 125,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "气力回复药",
+              "damage": 0,
+              "mpDamage": 18,
+              "hp": 1,
+              "actorHp": 1,
+              "actorMp": 18,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 60,
+              "mpDamage": 0,
+              "hp": 61,
+              "actorHp": 61,
+              "actorMp": 10,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 99,
+              "actorHp": 61,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 99,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 51,
+              "mpDamage": 0,
+              "hp": 48,
+              "actorHp": 61,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 5,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 48,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 23,
+              "actorHp": 61,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 61,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "hp-potion-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 98,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "耐久力回复药",
+              "damage": 97,
+              "mpDamage": 0,
+              "hp": 98,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 97,
+              "actorHp": 98,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 97,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 75,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 98,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 98,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "meat-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 23,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1234,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 2,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 122,
+            "maxHp": 122,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "none",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 1,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "小块肉",
+              "damage": 22,
+              "mpDamage": 0,
+              "hp": 23,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 51,
+              "mpDamage": 0,
+              "hp": 71,
+              "actorHp": 23,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 71,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 76,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 23,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "automatic",
+      "name": "threshold-not-below",
+      "before": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 57,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 120,
+            "maxHp": 120,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 120,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 27,
+              "mpDamage": 0,
+              "hp": 93,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 93,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 68,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 68,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 78,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "spirit-1001-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 74,
+        "maxHp": 141,
+        "mp": 95,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "治愈的精灵 Lv1",
+              "damage": 73,
+              "mpDamage": 0,
+              "hp": 74,
+              "actorHp": 74,
+              "actorMp": 95,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 78,
+              "mpDamage": 0,
+              "hp": 45,
+              "actorHp": 74,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 45,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 80,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 74,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "spirit-1002-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 72,
+        "maxHp": 141,
+        "mp": 92,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 120,
+            "maxHp": 120,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 120,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 71,
+              "mpDamage": 0,
+              "hp": 72,
+              "actorHp": 72,
+              "actorMp": 92,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 120,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 127,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 72,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "mp-potion-then-spirit",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 0,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 60,
+        "maxHp": 141,
+        "mp": 13,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1510,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "气力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 0,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "气力回复药",
+              "damage": 0,
+              "mpDamage": 21,
+              "hp": 1,
+              "actorHp": 1,
+              "actorMp": 21,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 59,
+              "mpDamage": 0,
+              "hp": 60,
+              "actorHp": 60,
+              "actorMp": 13,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 98,
+              "actorHp": 60,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 98,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 73,
+              "actorHp": 60,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 5,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 73,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 47,
+              "actorHp": 60,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 6,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 47,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 21,
+              "actorHp": 60,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 7,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 21,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 60,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "hp-potion-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 105,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 122,
+            "maxHp": 122,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "耐久力回复药",
+              "damage": 104,
+              "mpDamage": 0,
+              "hp": 105,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 76,
+              "mpDamage": 0,
+              "hp": 46,
+              "actorHp": 105,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 46,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 20,
+              "actorHp": 105,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 20,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 128,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 105,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "meat-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 20,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1234,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 122,
+            "maxHp": 122,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "小块肉",
+              "damage": 19,
+              "mpDamage": 0,
+              "hp": 20,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 130,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 20,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "desktop",
+      "mode": "quick",
+      "name": "threshold-not-below",
+      "before": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 57,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 119,
+            "maxHp": 119,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 119,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 94,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 94,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 103,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "spirit-1001-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 80,
+        "maxHp": 141,
+        "mp": 95,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 122,
+            "maxHp": 122,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "治愈的精灵 Lv1",
+              "damage": 79,
+              "mpDamage": 0,
+              "hp": 80,
+              "actorHp": 80,
+              "actorMp": 95,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 107,
+              "mpDamage": 0,
+              "hp": 15,
+              "actorHp": 80,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 15,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 80,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "spirit-1002-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 63,
+        "maxHp": 141,
+        "mp": 92,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 2,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 121,
+            "maxHp": 121,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 121,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "none",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 1,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 121,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 62,
+              "mpDamage": 0,
+              "hp": 63,
+              "actorHp": 63,
+              "actorMp": 92,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 121,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 96,
+              "actorHp": 63,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 96,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 54,
+              "mpDamage": 0,
+              "hp": 42,
+              "actorHp": 63,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 5,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 42,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 16,
+              "actorHp": 63,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 6,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 16,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 76,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 63,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "mp-potion-then-spirit",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 0,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 71,
+        "maxHp": 141,
+        "mp": 11,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1510,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "气力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 0,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 125,
+            "maxHp": 125,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "气力回复药",
+              "damage": 0,
+              "mpDamage": 19,
+              "hp": 1,
+              "actorHp": 1,
+              "actorMp": 19,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 70,
+              "mpDamage": 0,
+              "hp": 71,
+              "actorHp": 71,
+              "actorMp": 11,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 125,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 80,
+              "mpDamage": 0,
+              "hp": 45,
+              "actorHp": 71,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 45,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 79,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 71,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "hp-potion-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 109,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 118,
+            "maxHp": 118,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 118,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "耐久力回复药",
+              "damage": 108,
+              "mpDamage": 0,
+              "hp": 109,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 118,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 130,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 109,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "meat-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 21,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1234,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "小块肉",
+              "damage": 20,
+              "mpDamage": 0,
+              "hp": 21,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 54,
+              "mpDamage": 0,
+              "hp": 69,
+              "actorHp": 21,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 69,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 43,
+              "actorHp": 21,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 43,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 18,
+              "actorHp": 21,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 5,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 18,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 53,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 21,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "automatic",
+      "name": "threshold-not-below",
+      "before": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 57,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 126,
+            "maxHp": 126,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 126,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 100,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 100,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 131,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "spirit-1001-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 81,
+        "maxHp": 141,
+        "mp": 95,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 124,
+            "maxHp": 124,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 124,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "治愈的精灵 Lv1",
+              "damage": 80,
+              "mpDamage": 0,
+              "hp": 81,
+              "actorHp": 81,
+              "actorMp": 95,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 124,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 108,
+              "mpDamage": 0,
+              "hp": 16,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 81,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "spirit-1002-before-items",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 62,
+        "maxHp": 141,
+        "mp": 92,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        },
+        {
+          "id": 1234,
+          "slot": 10,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 1,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 122,
+            "maxHp": 122,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "none",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 61,
+              "mpDamage": 0,
+              "hp": 62,
+              "actorHp": 62,
+              "actorMp": 92,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 122,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 97,
+              "actorHp": 62,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 101,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 62,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "mp-potion-then-spirit",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 0,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 70,
+        "maxHp": 141,
+        "mp": 12,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1510,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "气力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 0,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 118,
+            "maxHp": 118,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 118,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "气力回复药",
+              "damage": 0,
+              "mpDamage": 20,
+              "hp": 1,
+              "actorHp": 1,
+              "actorMp": 20,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 118,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "magic",
+              "target": 0,
+              "result": "heal",
+              "skill": "滋润的精灵 Lv1",
+              "damage": 69,
+              "mpDamage": 0,
+              "hp": 70,
+              "actorHp": 70,
+              "actorMp": 12,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 118,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 132,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 70,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "hp-potion-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 103,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1500,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "耐久力回复药",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 124,
+            "maxHp": 124,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 124,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "耐久力回复药",
+              "damage": 102,
+              "mpDamage": 0,
+              "hp": 103,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 124,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 76,
+              "mpDamage": 0,
+              "hp": 48,
+              "actorHp": 103,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 48,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 26,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 103,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 4,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 22,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 25,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 103,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "meat-recovery",
+      "before": {
+        "hp": 1,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 23,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [
+        {
+          "id": 1234,
+          "slot": 9,
+          "pile": 1,
+          "equip": -1,
+          "name": "小块肉",
+          "magic": "",
+          "magicMp": 0,
+          "magicFunc": "",
+          "magicTarget": 0
+        }
+      ],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 1,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 126,
+            "maxHp": 126,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 126,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "item",
+              "target": 0,
+              "result": "heal",
+              "skill": "小块肉",
+              "damage": 22,
+              "mpDamage": 0,
+              "hp": 23,
+              "actorHp": 1,
+              "actorMp": 100,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 126,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 80,
+              "mpDamage": 0,
+              "hp": 46,
+              "actorHp": 23,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 3,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 46,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 52,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 23,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    },
+    {
+      "device": "mobile",
+      "mode": "quick",
+      "name": "threshold-not-below",
+      "before": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "after": {
+        "hp": 57,
+        "maxHp": 141,
+        "mp": 100,
+        "maxMp": 100
+      },
+      "itemsBefore": [],
+      "itemsAfter": [],
+      "start": {
+        "t": "BattleStart",
+        "mySlot": 0,
+        "surprise": 0,
+        "fighters": [
+          {
+            "slot": 0,
+            "hp": 57,
+            "maxHp": 141,
+            "mp": 100,
+            "maxMp": 100,
+            "ownerSlot": 0
+          },
+          {
+            "slot": 15,
+            "hp": 123,
+            "maxHp": 123,
+            "mp": 0,
+            "maxMp": 0,
+            "ownerSlot": 0
+          }
+        ]
+      },
+      "turns": [
+        {
+          "t": "BattleTurn",
+          "turn": 1,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 123,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 51,
+              "mpDamage": 0,
+              "hp": 72,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            }
+          ]
+        },
+        {
+          "t": "BattleTurn",
+          "turn": 2,
+          "events": [
+            {
+              "actor": 15,
+              "kind": "guard",
+              "target": -1,
+              "result": "",
+              "skill": "",
+              "damage": 0,
+              "mpDamage": 0,
+              "hp": 72,
+              "actorHp": 0,
+              "actorMp": 0,
+              "dead": 0,
+              "status": 0
+            },
+            {
+              "actor": 0,
+              "kind": "attack",
+              "target": 15,
+              "result": "normal",
+              "skill": "",
+              "damage": 76,
+              "mpDamage": 0,
+              "hp": 0,
+              "actorHp": 57,
+              "actorMp": 0,
+              "dead": true,
+              "status": 0
+            }
+          ]
+        }
+      ],
+      "end": {
+        "t": "BattleEnd",
+        "result": "win"
+      }
+    }
+  ]
+}

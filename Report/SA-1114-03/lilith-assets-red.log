@@ -1,0 +1,64 @@
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (161.826384ms)
+✖ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (17.843417ms)
+✖ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (13.650385ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (7.193788ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (615.449083ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (506.915303ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (13.913195ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (3.447334ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (19.778978ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (17.651293ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (8.369138ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (7.865444ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (8.977226ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (11.238426ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (17.766484ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (17.592673ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 14
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1848.675498
+
+✖ failing tests:
+
+test at client/test/assets-extension.test.ts:85:1
+✖ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (17.843417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 199200
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:87:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 199200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:97:1
+✖ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (13.650385ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:100:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
