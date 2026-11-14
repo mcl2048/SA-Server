@@ -1,0 +1,20 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"art_case":"desktop cyrufas actual dir3 with native reference"}
+{"art_case":"desktop cyrufas walk, articulated strike and return"}
+{"art_case":"desktop cyrufas actual dir7 with native reference"}
+{"art_case":"desktop claudes actual dir3 with native reference"}
+{"art_case":"desktop claudes walk, articulated strike and return"}
+{"art_case":"desktop claudes actual dir7 with native reference"}
+{"art_case":"mobile cyrufas actual dir3 with native reference"}
+{"art_case":"cyrufas 844x390 actual combat visibility"}
+{"art_case":"cyrufas 390x844 actual combat visibility"}
+{"art_case":"mobile cyrufas walk, articulated strike and return"}
+{"art_case":"mobile cyrufas actual dir7 with native reference"}
+{"art_case":"mobile claudes actual dir3 with native reference"}
+{"art_case":"claudes 844x390 actual combat visibility"}
+{"art_case":"claudes 390x844 actual combat visibility"}
+{"art_case":"mobile claudes walk, articulated strike and return"}
+{"art_case":"mobile claudes actual dir7 with native reference"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/final-art.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

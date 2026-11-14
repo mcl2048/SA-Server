@@ -1,0 +1,290 @@
+[
+  {
+    "pet": "cyrufas",
+    "dir": 0,
+    "source_px": [
+      193,
+      225
+    ],
+    "output_px": [
+      72,
+      84
+    ],
+    "scale_x_over_y": 0.9992598075499629,
+    "offset_px": [
+      -36,
+      -69
+    ],
+    "support_y_world": 11.64
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 1,
+    "source_px": [
+      285,
+      207
+    ],
+    "output_px": [
+      112,
+      81
+    ],
+    "scale_x_over_y": 1.0042884990253411,
+    "offset_px": [
+      -54,
+      -66
+    ],
+    "support_y_world": 11.760000000000005
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 2,
+    "source_px": [
+      347,
+      196
+    ],
+    "output_px": [
+      112,
+      63
+    ],
+    "scale_x_over_y": 1.0041626641050272,
+    "offset_px": [
+      -54,
+      -48
+    ],
+    "support_y_world": 12.479999999999997
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 3,
+    "source_px": [
+      270,
+      203
+    ],
+    "output_px": [
+      112,
+      84
+    ],
+    "scale_x_over_y": 1.002469135802469,
+    "offset_px": [
+      -52,
+      -69
+    ],
+    "support_y_world": 12.480000000000004
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 4,
+    "source_px": [
+      146,
+      220
+    ],
+    "output_px": [
+      56,
+      84
+    ],
+    "scale_x_over_y": 1.004566210045662,
+    "offset_px": [
+      -28,
+      -70
+    ],
+    "support_y_world": 12.319999999999993
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 5,
+    "source_px": [
+      306,
+      217
+    ],
+    "output_px": [
+      112,
+      79
+    ],
+    "scale_x_over_y": 1.0053776784975594,
+    "offset_px": [
+      -66,
+      -65
+    ],
+    "support_y_world": 11.629999999999995
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 6,
+    "source_px": [
+      332,
+      196
+    ],
+    "output_px": [
+      112,
+      66
+    ],
+    "scale_x_over_y": 1.0018254837531946,
+    "offset_px": [
+      -58,
+      -52
+    ],
+    "support_y_world": 12.019999999999996
+  },
+  {
+    "pet": "cyrufas",
+    "dir": 7,
+    "source_px": [
+      329,
+      202
+    ],
+    "output_px": [
+      112,
+      69
+    ],
+    "scale_x_over_y": 0.9966080789392536,
+    "offset_px": [
+      -59,
+      -55
+    ],
+    "support_y_world": 11.930000000000007
+  },
+  {
+    "pet": "claudes",
+    "dir": 0,
+    "source_px": [
+      232,
+      244
+    ],
+    "output_px": [
+      87,
+      92
+    ],
+    "scale_x_over_y": 0.9945652173913044,
+    "offset_px": [
+      -44,
+      -74
+    ],
+    "support_y_world": 12.480000000000004
+  },
+  {
+    "pet": "claudes",
+    "dir": 1,
+    "source_px": [
+      276,
+      250
+    ],
+    "output_px": [
+      102,
+      92
+    ],
+    "scale_x_over_y": 1.0042533081285443,
+    "offset_px": [
+      -55,
+      -75
+    ],
+    "support_y_world": 12.400000000000006
+  },
+  {
+    "pet": "claudes",
+    "dir": 2,
+    "source_px": [
+      311,
+      224
+    ],
+    "output_px": [
+      118,
+      85
+    ],
+    "scale_x_over_y": 0.999886514091167,
+    "offset_px": [
+      -66,
+      -69
+    ],
+    "support_y_world": 11.75
+  },
+  {
+    "pet": "claudes",
+    "dir": 3,
+    "source_px": [
+      320,
+      218
+    ],
+    "output_px": [
+      118,
+      80
+    ],
+    "scale_x_over_y": 1.00484375,
+    "offset_px": [
+      -65,
+      -65
+    ],
+    "support_y_world": 11.799999999999997
+  },
+  {
+    "pet": "claudes",
+    "dir": 4,
+    "source_px": [
+      199,
+      223
+    ],
+    "output_px": [
+      82,
+      92
+    ],
+    "scale_x_over_y": 0.9987983395237054,
+    "offset_px": [
+      -41,
+      -77
+    ],
+    "support_y_world": 12.239999999999995
+  },
+  {
+    "pet": "claudes",
+    "dir": 5,
+    "source_px": [
+      344,
+      215
+    ],
+    "output_px": [
+      118,
+      74
+    ],
+    "scale_x_over_y": 0.9966216216216216,
+    "offset_px": [
+      -55,
+      -59
+    ],
+    "support_y_world": 12.040000000000006
+  },
+  {
+    "pet": "claudes",
+    "dir": 6,
+    "source_px": [
+      314,
+      216
+    ],
+    "output_px": [
+      118,
+      81
+    ],
+    "scale_x_over_y": 1.0021231422505308,
+    "offset_px": [
+      -53,
+      -66
+    ],
+    "support_y_world": 11.760000000000005
+  },
+  {
+    "pet": "claudes",
+    "dir": 7,
+    "source_px": [
+      276,
+      250
+    ],
+    "output_px": [
+      102,
+      92
+    ],
+    "scale_x_over_y": 1.0042533081285443,
+    "offset_px": [
+      -54,
+      -75
+    ],
+    "support_y_world": 12.400000000000006
+  }
+]

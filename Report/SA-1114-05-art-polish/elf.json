@@ -1,0 +1,8 @@
+{
+  "format": "ELF64",
+  "architecture": "AMD64",
+  "endianness": "little",
+  "static": true,
+  "program_headers": 6,
+  "mode": "0o755"
+}

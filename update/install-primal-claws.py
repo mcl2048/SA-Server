@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and atomically install only the primal-claws-v1 asset extension."""
+"""Validate and atomically install only the primal-claws-v2 asset extension."""
 import argparse
 import fcntl
 import gzip
@@ -14,7 +14,7 @@ import sys
 import tarfile
 import tempfile
 
-PACKAGE_ID = "primal-claws-v1"
+PACKAGE_ID = "primal-claws-v2"
 PREFIX = "extensions/" + PACKAGE_ID
 ARCHIVE = PACKAGE_ID + "-assets.tar.gz"
 CHECKSUMS = PACKAGE_ID + "-assets.manifest.json"
@@ -151,7 +151,7 @@ def install(assets, expected, payloads):
             print("已安装且7个文件校验一致，无需更改: " + str(destination))
             return
         extensions.mkdir(mode=0o755, exist_ok=True)
-        stage = Path(tempfile.mkdtemp(prefix=".primal-claws-v1-stage-", dir=extensions))
+        stage = Path(tempfile.mkdtemp(prefix=".primal-claws-v2-stage-", dir=extensions))
         try:
             os.chmod(stage, 0o755)
             for name in sorted(payloads):
@@ -172,13 +172,13 @@ def install(assets, expected, payloads):
             finally:
                 os.close(parent_fd)
             print("安装完成，7个文件校验通过: " + str(destination))
-            print("原有素材保持不变；仅补装素材包时刷新网页即可。")
-            print("若同时更新了bin/saserver，请按正常存档停服流程重启服务；本脚本不停止服务。")
+            print("v0.2.17客户端加载v2；原有素材和旧v1目录保持不变。")
+            print("从v0.2.16升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。")
         finally:
             # Only remove this invocation's verified temporary staging directory.
             # Never delete or replace an existing installed extension/base asset.
             if stage.exists():
-                require(stage.parent == extensions and stage.name.startswith(".primal-claws-v1-stage-")
+                require(stage.parent == extensions and stage.name.startswith(".primal-claws-v2-stage-")
                         and not stage.is_symlink(), "临时目录异常，拒绝清理")
                 shutil.rmtree(stage)
     finally:
@@ -231,7 +231,7 @@ def configured_assets(repo_root):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="离线校验并安装莉莉丝增量素材，保留原素材")
+    parser = argparse.ArgumentParser(description="离线校验并安装萨鲁法斯／克劳德斯增量素材，保留原素材")
     parser.add_argument("--assets", metavar="DIR", help="显式指定已存在且末级名为assets/Assets的目录；默认脚本上级的assets")
     args = parser.parse_args()
     script_dir = safe_path(Path(__file__).absolute().parent)

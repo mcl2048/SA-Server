@@ -1,0 +1,23 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "7ca259765f118cd9733b49b19ca02fcbb883112a8e905682632de5e73ec5a93e",
+  "binary_version": "v0.2.17-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [],
+  "checks": [],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": false,
+    "exit_code": 1,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "failure": "owned ELF exited during startup",
+  "failure_stack": "Error: owned ELF exited during startup\n    at work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:309:60)\n    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5"
+}

@@ -1,0 +1,374 @@
+{
+  "pets": [
+    {
+      "name": "cyrufas",
+      "sprite": 199400,
+      "frames": 376,
+      "actions": 64,
+      "minimum_distinct_frames": 2,
+      "idle_dimensions": [
+        {
+          "dir": 0,
+          "visible_bbox": [
+            60,
+            73,
+            131,
+            157
+          ],
+          "actual_size_px": [
+            71,
+            84
+          ],
+          "reference_pose_size_px": [
+            58,
+            79
+          ],
+          "native_anchor": [
+            -29,
+            -57
+          ]
+        },
+        {
+          "dir": 1,
+          "visible_bbox": [
+            43,
+            76,
+            152,
+            157
+          ],
+          "actual_size_px": [
+            109,
+            81
+          ],
+          "reference_pose_size_px": [
+            89,
+            78
+          ],
+          "native_anchor": [
+            -34,
+            -59
+          ]
+        },
+        {
+          "dir": 2,
+          "visible_bbox": [
+            42,
+            94,
+            154,
+            157
+          ],
+          "actual_size_px": [
+            112,
+            63
+          ],
+          "reference_pose_size_px": [
+            95,
+            78
+          ],
+          "native_anchor": [
+            -39,
+            -60
+          ]
+        },
+        {
+          "dir": 3,
+          "visible_bbox": [
+            44,
+            73,
+            156,
+            157
+          ],
+          "actual_size_px": [
+            112,
+            84
+          ],
+          "reference_pose_size_px": [
+            66,
+            99
+          ],
+          "native_anchor": [
+            -33,
+            -65
+          ]
+        },
+        {
+          "dir": 4,
+          "visible_bbox": [
+            68,
+            72,
+            124,
+            156
+          ],
+          "actual_size_px": [
+            56,
+            84
+          ],
+          "reference_pose_size_px": [
+            60,
+            100
+          ],
+          "native_anchor": [
+            -32,
+            -67
+          ]
+        },
+        {
+          "dir": 5,
+          "visible_bbox": [
+            30,
+            77,
+            142,
+            156
+          ],
+          "actual_size_px": [
+            112,
+            79
+          ],
+          "reference_pose_size_px": [
+            90,
+            84
+          ],
+          "native_anchor": [
+            -58,
+            -65
+          ]
+        },
+        {
+          "dir": 6,
+          "visible_bbox": [
+            38,
+            90,
+            150,
+            156
+          ],
+          "actual_size_px": [
+            112,
+            66
+          ],
+          "reference_pose_size_px": [
+            93,
+            77
+          ],
+          "native_anchor": [
+            -55,
+            -60
+          ]
+        },
+        {
+          "dir": 7,
+          "visible_bbox": [
+            37,
+            87,
+            149,
+            156
+          ],
+          "actual_size_px": [
+            112,
+            69
+          ],
+          "reference_pose_size_px": [
+            65,
+            78
+          ],
+          "native_anchor": [
+            -32,
+            -59
+          ]
+        }
+      ]
+    },
+    {
+      "name": "claudes",
+      "sprite": 199401,
+      "frames": 376,
+      "actions": 64,
+      "minimum_distinct_frames": 2,
+      "idle_dimensions": [
+        {
+          "dir": 0,
+          "visible_bbox": [
+            52,
+            68,
+            139,
+            159
+          ],
+          "actual_size_px": [
+            87,
+            91
+          ],
+          "reference_pose_size_px": [
+            67,
+            92
+          ],
+          "native_anchor": [
+            -34,
+            -58
+          ]
+        },
+        {
+          "dir": 1,
+          "visible_bbox": [
+            41,
+            67,
+            143,
+            159
+          ],
+          "actual_size_px": [
+            102,
+            92
+          ],
+          "reference_pose_size_px": [
+            95,
+            83
+          ],
+          "native_anchor": [
+            -48,
+            -57
+          ]
+        },
+        {
+          "dir": 2,
+          "visible_bbox": [
+            30,
+            73,
+            148,
+            155
+          ],
+          "actual_size_px": [
+            118,
+            82
+          ],
+          "reference_pose_size_px": [
+            118,
+            76
+          ],
+          "native_anchor": [
+            -59,
+            -57
+          ]
+        },
+        {
+          "dir": 3,
+          "visible_bbox": [
+            31,
+            77,
+            149,
+            157
+          ],
+          "actual_size_px": [
+            118,
+            80
+          ],
+          "reference_pose_size_px": [
+            87,
+            87
+          ],
+          "native_anchor": [
+            -44,
+            -58
+          ]
+        },
+        {
+          "dir": 4,
+          "visible_bbox": [
+            55,
+            65,
+            137,
+            154
+          ],
+          "actual_size_px": [
+            82,
+            89
+          ],
+          "reference_pose_size_px": [
+            64,
+            96
+          ],
+          "native_anchor": [
+            -33,
+            -60
+          ]
+        },
+        {
+          "dir": 5,
+          "visible_bbox": [
+            41,
+            83,
+            159,
+            157
+          ],
+          "actual_size_px": [
+            118,
+            74
+          ],
+          "reference_pose_size_px": [
+            96,
+            83
+          ],
+          "native_anchor": [
+            -50,
+            -58
+          ]
+        },
+        {
+          "dir": 6,
+          "visible_bbox": [
+            43,
+            76,
+            161,
+            157
+          ],
+          "actual_size_px": [
+            118,
+            81
+          ],
+          "reference_pose_size_px": [
+            117,
+            76
+          ],
+          "native_anchor": [
+            -59,
+            -57
+          ]
+        },
+        {
+          "dir": 7,
+          "visible_bbox": [
+            42,
+            67,
+            144,
+            159
+          ],
+          "actual_size_px": [
+            102,
+            92
+          ],
+          "reference_pose_size_px": [
+            86,
+            85
+          ],
+          "native_anchor": [
+            -41,
+            -57
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_pixels": 10213376,
+  "decoded_texture_bytes": 40853504,
+  "character_frames": 752,
+  "effect_frames": 24,
+  "all_128_actions_animated": true,
+  "clipped_frames": [],
+  "files": {
+    "anim/199400.json": "9b6d3a14351e90a68eff0a30668138ead1dcac8cfc67304c7294fe9adb2ce074",
+    "anim/199401.json": "06ba51818b2d0385e5b1b17b8b6fcd7ff80e9e47425a31346a3cab93016b5ed8",
+    "anim/199402.json": "8877c5c27ce2ab2f45e0fba6b968a4473b18c85e634502bcbe8a8bd80f587e3b",
+    "manifest.json": "8b6d98728247ba7c20752e874be271fc3e45053a621aec7ab8332088237c4cc0",
+    "pages/00000.png": "39e3bfe0535c3907e9a16919eaa044b41acb956f76195855ad084d6d44e1c99b",
+    "pages/00001.png": "b3a476b2a2b8c15d8817ce2a5a9fb3ccd5a2144ff0673cf12f116baba8b4c256",
+    "pages/00002.png": "41d66d506545680f86ca9af9bb218caef33e8b02e08af81edc5711731b2a413e"
+  },
+  "scope": "All frame bounds, nonempty alpha, timing, distinct poses, texture budget and compact-anchor restoration. Reference bounds describe different poses and must not be imposed on source anatomy. Source aspect regression and live combat inspection are separate checks."
+}

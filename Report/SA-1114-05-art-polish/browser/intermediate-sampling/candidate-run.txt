@@ -1,0 +1,9 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+{"art_case":"desktop cyrufas actual dir3 with native reference"}
+Error: claw attack not visible in actual draw
+    at assert (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:4:42)
+    at Module.runArt (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:66:5)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:316:32)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/candidate-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

@@ -1,0 +1,75 @@
+{
+  "version": "v0.2.17-LYNX",
+  "baseline_commit": "e5aa5d331ac5f50981948206a9d93917a8b49d7b",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16642208,
+    "sha256": "bd1c3f3cfcad405b22d1c6a7c2a13ae46dfeedf07e24264d8c6228c9e8046e95",
+    "format": {
+      "format": "ELF64",
+      "architecture": "AMD64",
+      "endianness": "little",
+      "static": true,
+      "program_headers": 6,
+      "mode": "0o755"
+    }
+  },
+  "archive": {
+    "path": "bin/saserver-v0.2.17-LYNX-linux-amd64.zip",
+    "bytes": 40343902,
+    "sha256": "cd960dd55f9617909e24e5ac0c361782f5f3976769ee3e6376e19184b5c84f9a",
+    "files": 4370,
+    "all_entries_match_current_public_files": true,
+    "patches": [
+      {
+        "archive": "update/ai-pets-v1-assets.tar.gz",
+        "files": 9
+      },
+      {
+        "archive": "update/lilith-v1-assets.tar.gz",
+        "files": 5
+      },
+      {
+        "archive": "update/lisarido-v1-assets.tar.gz",
+        "files": 5
+      },
+      {
+        "archive": "update/primal-claws-v2-assets.tar.gz",
+        "files": 7
+      }
+    ]
+  },
+  "checks": {
+    "client_and_builder": 224,
+    "installers": 31,
+    "browser_checks": 30,
+    "browsers": {
+      "final-art": {
+        "checks": 16,
+        "errors": 0,
+        "shutdown_exit_code": 0,
+        "position_matches": true
+      },
+      "final-mobile-regression": {
+        "checks": 14,
+        "errors": 0,
+        "shutdown_exit_code": 0,
+        "position_matches": true
+      }
+    },
+    "frozen_source_inputs": 383,
+    "embedded_http_files": 52,
+    "final_patch_http_files": 7,
+    "repeat_binary_identical": true
+  },
+  "art": {
+    "character_frames": 752,
+    "effect_frames": 24,
+    "actions": 128,
+    "uniform_source_aspect_all_16_views": true,
+    "clipped_frames": 0,
+    "patch_sha256": "5af30668f03911ce6ec60a951fa0fe0c11c1f6f64c92096434cd637f779c1c68"
+  },
+  "prompt_sha256": "e8316a1a5a6289a8bbccdf7cd591ed96e98ee0377b2d86a93831e29ffd5f8a6b",
+  "scope": "Real Linux AMD64 ELF, native UI/GM, original assets, Chromium with SwiftShader, viewport/touch emulation. No physical Android/iOS/Safari certification; visual quality reviewed separately."
+}

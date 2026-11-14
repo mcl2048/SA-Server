@@ -1,0 +1,17 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 390x844"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 844x390"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 320x568"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 568x320"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 430x932"}
+{"variant":"final","mobile_case":"field visible zoom +, − and reset remain functional"}
+{"variant":"final","mobile_case":"field real two-finger spread and translation preserve camera and game intent"}
+Error: battle player bitmap is outside the safe visible viewport: {"model":{"x":347.1543487548828,"y":634.4066207885743,"width":47.826663208007815,"height":82.99332733154297},"viewport":{"width":390,"height":844}}
+    at assert (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:3:50)
+    at verifyVisible (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:55:3)
+    at rotate (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:69:51)
+    at async battleCameraLock (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:161:3)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:325:250)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/final-mobile-regression.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

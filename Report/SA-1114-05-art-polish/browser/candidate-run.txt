@@ -1,0 +1,12 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+{"art_case":"desktop cyrufas actual dir3 with native reference"}
+{"art_case":"desktop cyrufas walk, articulated strike and return"}
+{"art_case":"desktop cyrufas actual dir7 with native reference"}
+{"art_case":"desktop claudes actual dir3 with native reference"}
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:74:19)
+    at Module.runArt (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:55:75)
+    at async work (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:316:32)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/candidate-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

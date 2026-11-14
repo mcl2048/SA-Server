@@ -108,19 +108,22 @@ python3 update/package-lisarido.py --source /tmp/sa-lisarido-build/extensions/li
 bash scripts/update-lisarido.test.sh
 ```
 
-## v0.2.16 萨鲁法斯／克劳德斯增量包
+## v0.2.17 萨鲁法斯／克劳德斯增量包
 
 ```bash
 bash update/install-primal-claws.sh
 bash update/install-primal-claws.sh --assets /srv/stoneage/Assets
 ```
 
-独立`extensions/primal-claws-v1/`含manifest、3张RGBA图集、3个动画JSON，共7文件。角色199400／199401各376帧，共用十字红爪特效199402共24帧；使用上传JPG的八个真实方向、局部关节分层和位图特效，无图像生成API调用。档案与逐文件SHA-256见`primal-claws-v1-assets.manifest.json`。
+独立`extensions/primal-claws-v2/`含manifest、3张RGBA图集、3个动画JSON，共7文件。角色199400／199401各376帧，共用十字红爪特效199402共24帧；使用上传JPG的八个真实方向、局部关节分层和位图特效，无图像生成API调用。档案与逐文件SHA-256见`primal-claws-v2-assets.manifest.json`。
 
 路径／符号链接拒绝、摘要与精确白名单验证、冲突保留和原子发布规则同上。该扩展独立于此前三个包，不改基础素材。部署仅需Python标准库，开发复现需要Pillow／NumPy：
 
 ```bash
-python3 scripts/generate-primal-claws.py --output /tmp/sa-primal-claws-build/extensions/primal-claws-v1
-python3 update/package-primal-claws.py --source /tmp/sa-primal-claws-build/extensions/primal-claws-v1
+python3 scripts/generate-primal-claws.py --output /tmp/sa-primal-claws-build/extensions/primal-claws-v2
+python3 update/package-primal-claws.py --source /tmp/sa-primal-claws-build/extensions/primal-claws-v2
 bash scripts/update-primal-claws.test.sh
 ```
+
+
+v0.2.17修正原图拉伸与战场足底定位，优化侧面关节与动作。v2与旧v1并存，安装器不会覆盖或删除v1；新程序只加载v2。必须一并更新 `bin/saserver`（或完整重新构建客户端），正常保存停服后重启、刷新网页。仅安装v2而继续运行v0.2.16程序不会切换至新素材。其他三组扩展不受影响。

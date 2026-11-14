@@ -1,27 +1,27 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=54d9206af168411f";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=54d9206af168411f";
-import { Sound, setSfx } from "./audio.js?v=54d9206af168411f";
-import { MAP_BGM } from "./soundtable.js?v=54d9206af168411f";
-import { Connection, trafficRates } from "./net.js?v=54d9206af168411f";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=54d9206af168411f";
-import { Renderer,              } from "./renderer.js?v=54d9206af168411f";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=54d9206af168411f";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=54d9206af168411f";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=54d9206af168411f";
-import { ACTION_KEYS } from "./actions.js?v=54d9206af168411f";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=54d9206af168411f";
-import { BattleScreen } from "./battle.js?v=54d9206af168411f";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=54d9206af168411f";
-import { Shop } from "./shop.js?v=54d9206af168411f";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=54d9206af168411f";
-import { loadAi } from "./ai.js?v=54d9206af168411f";
-import { AiMemory } from "./aismart.js?v=54d9206af168411f";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.js?v=54d9206af168411f";
-import { MobileShell } from "./mobile-shell.js?v=54d9206af168411f";
-import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=54d9206af168411f";
-import { installControlPositions } from "./mobile-position.js?v=54d9206af168411f";
+import { Assets } from "./assets.js?v=9256777782deda32";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=9256777782deda32";
+import { Sound, setSfx } from "./audio.js?v=9256777782deda32";
+import { MAP_BGM } from "./soundtable.js?v=9256777782deda32";
+import { Connection, trafficRates } from "./net.js?v=9256777782deda32";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=9256777782deda32";
+import { Renderer,              } from "./renderer.js?v=9256777782deda32";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=9256777782deda32";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=9256777782deda32";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=9256777782deda32";
+import { ACTION_KEYS } from "./actions.js?v=9256777782deda32";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=9256777782deda32";
+import { BattleScreen } from "./battle.js?v=9256777782deda32";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=9256777782deda32";
+import { Shop } from "./shop.js?v=9256777782deda32";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=9256777782deda32";
+import { loadAi } from "./ai.js?v=9256777782deda32";
+import { AiMemory } from "./aismart.js?v=9256777782deda32";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.js?v=9256777782deda32";
+import { MobileShell } from "./mobile-shell.js?v=9256777782deda32";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=9256777782deda32";
+import { installControlPositions } from "./mobile-position.js?v=9256777782deda32";
 
 
 const params = new URLSearchParams(location.search);
@@ -1274,7 +1274,8 @@ function mobileFrame(now        ) {
   setMobileContext(context);
   if (isImmersive() && !panel) {
     const held = mobileFocusHold && mobileFocusHold.battle === battle && now < mobileFocusHold.until ? mobileFocusHold : null;
-    const focus = visualBattle ? held ?? battle .mobileFocus(mobileCamera) : { x: 400, y: 324 };
+    const focus = visualBattle ? held ?? battle .mobileFocus(mobileCamera,
+      window.visualViewport?.width ?? innerWidth, window.visualViewport?.height ?? innerHeight, getSceneZoom()) : { x: 400, y: 324 };
     setSceneFocus(focus.x, focus.y, now);
   }
   setMobileLoginArtwork(screen instanceof LoginScreen && !app.loginArt && !modal);

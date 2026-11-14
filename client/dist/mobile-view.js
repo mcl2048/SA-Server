@@ -1,5 +1,5 @@
 // Presentation only: the game, UI and network always use 800 × 600 coordinates.
-import { immersiveScene } from "./mobile-camera.js?v=54d9206af168411f";
+import { immersiveScene } from "./mobile-camera.js?v=9256777782deda32";
 
 
 

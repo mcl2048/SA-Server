@@ -12,17 +12,18 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=54d9206af168411f";
-import { sfx, setSfx } from "./audio.js?v=54d9206af168411f";
-import { isMobile } from "./mobile-view.js?v=54d9206af168411f";
+import { ANIM, findAction,                              } from "./assets.js?v=9256777782deda32";
+import { sfx, setSfx } from "./audio.js?v=9256777782deda32";
+import { isMobile } from "./mobile-view.js?v=9256777782deda32";
+import { immersiveScene } from "./mobile-camera.js?v=9256777782deda32";
 
-import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=54d9206af168411f";
-import { SkillMemoPages } from "./skill-memo.js?v=54d9206af168411f";
-import { battleItems } from "./items.js?v=54d9206af168411f";
-import { album } from "./album.js?v=54d9206af168411f";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=9256777782deda32";
+import { SkillMemoPages } from "./skill-memo.js?v=9256777782deda32";
+import { battleItems } from "./items.js?v=9256777782deda32";
+import { album } from "./album.js?v=9256777782deda32";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=54d9206af168411f";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=54d9206af168411f";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=9256777782deda32";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=9256777782deda32";
 
 // The legacy icon remains optional; stat percentages and turn counts are
 // declared in the shared wire schema and synchronized by the server.
@@ -315,13 +316,36 @@ export class BattleScreen {
    * Follow uses playback, not the authoritative future event state. A knocked
    * out unit remains visible; a gone/hidden unit falls back to a visible ally.
    */
-  mobileFocus(preference                             ) {
+  mobileFocus(preference                             , width = 800, height = 600, zoom = 1) {
     const available = (a                     )               => !!a && !a.gone && !a.hidden;
     const sameSide = (a         ) => (a.f.slot < 10) === (this.me < 10);
     const list = [...this.fighters.values()].filter(available);
     const preferred = preference === "enemy" ? list.find(a => !sameSide(a) && !a.dead && a.hp > 0) ?? list.find(a => !sameSide(a))
       : this.fighters.get(preference === "follow" && this.cameraSlot >= 0 ? this.cameraSlot : this.me);
     const a = available(preferred) ? preferred : list.find(sameSide) ?? list[0];
+    // At rest, frame the player together with deployed companions using the
+    // rectangles actually drawn. A player-only center clips ordinary wide pets
+    // in portrait after rotation. Playback retains the individual actor focus;
+    // changing the camera must never change targeting or native formation.
+    if (a?.f.slot === this.me && preference !== "enemy" && this.queue.length === 0 && a.rect) {
+      const party = list.filter(f => f === a || sameSide(f) && f.f.slot % 10 >= 5 && f.f.ownerSlot === this.me);
+      const rects = party.flatMap(f => f.rect ? [f.rect] : []);
+      if (rects.length > 1) {
+        const left = Math.min(...rects.map(r => r[0])), right = Math.max(...rects.map(r => r[0] + r[2]));
+        // A large multi-pet formation can exceed the window at native scale.
+        // Keep the selected player inside a 12px safe inset even in that case;
+        // do not shrink sprites or change the user's explicit zoom setting.
+        const scale = immersiveScene(width, height, 400, 300, zoom).scale;
+        const axis = (center        , start        , length        , viewport        ) => {
+          const half = viewport / (2 * scale), margin = Math.min(12 / scale, half / 4);
+          const low = start + length + margin - half, high = start - margin + half;
+          return low <= high ? Math.max(low, Math.min(high, center)) : start + length / 2;
+        };
+        // Preserve the established vertical player framing above the battle
+        // footer. Tall companions must not pull that subject behind controls.
+        return { x: axis((left + right) / 2, a.rect[0], a.rect[2], width), y: a.y - 48, label: a.f.name };
+      }
+    }
     return a ? { x: a.x, y: a.y - 48, label: a.f.name } : { x: 400, y: 300, label: "战场" };
   }
 

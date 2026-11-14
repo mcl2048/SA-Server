@@ -1,0 +1,4 @@
+Error: owned ELF exited during startup
+    at work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:309:60)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/final-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":false,"exit_code":1,"signal":null,"timed_out":false,"expected_position":null,"stored_position":null,"position_matches":false}}

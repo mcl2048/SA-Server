@@ -1,0 +1,28 @@
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (122.636723ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (12.551452ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (8.442064ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (7.679961ms)
+✔ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (10.019236ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (6.487535ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (522.462828ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (561.326206ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (10.584827ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (4.232739ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (22.824075ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (18.268029ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (6.552153ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (6.200317ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (6.321944ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (9.601316ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (16.675312ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (12.536006ms)
+✔ primal pets and claw effects own independent set5 pages that reload after eviction (8.307802ms)
+✔ invalid primal frames cannot borrow a previous extension's images (6.42989ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1774.605186

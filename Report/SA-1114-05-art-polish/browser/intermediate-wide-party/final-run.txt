@@ -1,0 +1,9 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"art_case":"desktop cyrufas actual dir3 with native reference"}
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:74:19)
+    at Module.runArt (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:58:53)
+    at async work (/home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:316:32)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/final-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

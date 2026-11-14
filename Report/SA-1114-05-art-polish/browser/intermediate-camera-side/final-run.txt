@@ -1,0 +1,16 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"art_case":"desktop cyrufas actual dir3 with native reference"}
+{"art_case":"desktop cyrufas walk, articulated strike and return"}
+{"art_case":"desktop cyrufas actual dir7 with native reference"}
+{"art_case":"desktop claudes actual dir3 with native reference"}
+{"art_case":"desktop claudes walk, articulated strike and return"}
+{"art_case":"desktop claudes actual dir7 with native reference"}
+{"art_case":"mobile cyrufas actual dir3 with native reference"}
+{"art_case":"cyrufas 844x390 actual combat visibility"}
+Error: mobile orientation clips the real pet
+    at assert (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:4:42)
+    at Module.runArt (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/art-cases.mjs:49:7)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:316:32)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:355:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-art-polish/browser/final-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

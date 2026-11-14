@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "<stdin>", line 59, in <module>
+  File "<stdin>", line 46, in run
+AssertionError: ((), 1, '', "安装失败（未覆盖原素材）: [Errno 2] No such file or directory: '/tmp/sa-ai-assets-test-s1v4oxiv/v1-to-v2/update/primal-claws-v1-assets.manifest.json'\n")

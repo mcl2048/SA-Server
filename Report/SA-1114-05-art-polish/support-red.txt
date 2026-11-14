@@ -1,0 +1,14 @@
+.E.
+======================================================================
+ERROR: test_support_joint_moves_while_sole_stays_planted (__main__.JointSkin.test_support_joint_moves_while_sole_stays_planted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 27, in test_support_joint_moves_while_sole_stays_planted
+    pinned=art.pin_support(im,(30,30),(25,20),(30,60))
+           ^^^^^^^^^^^^^^^
+AttributeError: module 'primal_art' has no attribute 'pin_support'
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.592s
+
+FAILED (errors=1)

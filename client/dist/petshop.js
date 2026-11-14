@@ -4,7 +4,7 @@
 //                 技能清单 → 要让谁学 → 要在哪一格 → "让[宠物]将[技能]学起来吗？" → 回传 "第几个技能|第几只|第几格|价格"
 // 窗口座标照原版 800×600（_NEW_RESOMODE）。
 
-import { FONT, Ui, measure } from "./ui.js?v=54d9206af168411f";
+import { FONT, Ui, measure } from "./ui.js?v=9256777782deda32";
 
 
 const CG = {

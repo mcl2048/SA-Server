@@ -18,7 +18,7 @@ import { Shop } from "./shop.ts";
 import { PetSkillShop, drawPetSelect } from "./petshop.ts";
 import { loadAi } from "./ai.ts";
 import { AiMemory } from "./aismart.ts";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView } from "./mobile-view.ts";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.ts";
 import { MobileShell } from "./mobile-shell.ts";
 import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.ts";
 import { installControlPositions } from "./mobile-position.ts";
@@ -1274,7 +1274,8 @@ function mobileFrame(now: number) {
   setMobileContext(context);
   if (isImmersive() && !panel) {
     const held = mobileFocusHold && mobileFocusHold.battle === battle && now < mobileFocusHold.until ? mobileFocusHold : null;
-    const focus = visualBattle ? held ?? battle!.mobileFocus(mobileCamera) : { x: 400, y: 324 };
+    const focus = visualBattle ? held ?? battle!.mobileFocus(mobileCamera,
+      window.visualViewport?.width ?? innerWidth, window.visualViewport?.height ?? innerHeight, getSceneZoom()) : { x: 400, y: 324 };
     setSceneFocus(focus.x, focus.y, now);
   }
   setMobileLoginArtwork(screen instanceof LoginScreen && !app.loginArt && !modal);

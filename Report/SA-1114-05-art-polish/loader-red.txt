@@ -1,0 +1,155 @@
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (242.518569ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (22.041407ms)
+✖ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (16.062703ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (14.484213ms)
+✖ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (12.12462ms)
+✖ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (7.88581ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (697.378178ms)
+✖ the generated four-pet pack resolves every real atlas frame when installed (493.998396ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (11.13629ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (4.144385ms)
+✖ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (9.536622ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (16.943037ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (5.188363ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (5.876003ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (6.463051ms)
+✖ extension deadline disposes decoded textures immediately and also disposes late arrivals (10.620034ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (15.796109ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (10.881499ms)
+✖ primal pets and claw effects own independent set5 pages that reload after eviction (8.068012ms)
+✔ invalid primal frames cannot borrow a previous extension's images (10.200613ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 13
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2280.313842
+
+✖ failing tests:
+
+test at client/test/assets-extension.test.ts:103:1
+✖ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (16.062703ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:106:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:119:1
+✖ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (12.12462ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:122:100)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:125:1
+✖ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (7.88581ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 0
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:128:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:145:1
+✖ the generated four-pet pack resolves every real atlas frame when installed (493.998396ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 0
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:165:35)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:191:1
+✖ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (9.536622ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:202:89)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:242:1
+✖ extension deadline disposes decoded textures immediately and also disposes late arrivals (10.620034ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:254:77)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/assets-extension.test.ts:320:2
+✖ primal pets and claw effects own independent set5 pages that reload after eviction (8.068012ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  100374 !== 199400
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/assets-extension.test.ts:322:48)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 100374,
+    expected: 199400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

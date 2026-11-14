@@ -1,0 +1,47 @@
+(node:933127) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (13.340693ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (2.731144ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.045446ms)
+✔ enemy camera prefers a live opponent and falls back to corpses after the last defeat (0.863812ms)
+✔ idle self framing keeps the real player and wide deployed pet inside a portrait crop (1.632673ms)
+✔ companion framing never pulls the camera away from an actor during playback (0.872394ms)
+✖ idle party framing excludes enemy records whose absent owner defaults to slot zero (4.85176ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 526.737365
+
+✖ failing tests:
+
+test at client/test/battle-camera.test.ts:82:1
+✖ idle party framing excludes enemy records whose absent owner defaults to slot zero (4.85176ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      label: 'unit0',
+  +   x: 421.5,
+  +   y: 328.5
+  -   x: 603.5,
+  -   y: 439
+    }
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-camera.test.ts:88:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { x: 421.5, y: 328.5, label: 'unit0' },
+    expected: { x: 603.5, y: 439, label: 'unit0' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

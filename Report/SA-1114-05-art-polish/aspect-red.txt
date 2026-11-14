@@ -1,0 +1,149 @@
+FFFFFFFFFFFFFFFF
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.14409392011543243 not less than 0.015 : anatomy stretched: x/y=0.856
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.17125506072874486 not less than 0.015 : anatomy stretched: x/y=0.829
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.3120520209857386 not less than 0.015 : anatomy stretched: x/y=0.688
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.49876543209876545 not less than 0.015 : anatomy stretched: x/y=0.501
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.09589041095890416 not less than 0.015 : anatomy stretched: x/y=0.904
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.24019607843137247 not less than 0.015 : anatomy stretched: x/y=0.760
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.28696604600219056 not less than 0.015 : anatomy stretched: x/y=0.713
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='cyrufas', direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.48834853090172237 not less than 0.015 : anatomy stretched: x/y=0.512
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.23407046476761617 not less than 0.015 : anatomy stretched: x/y=0.766
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.03675571852627879 not less than 0.015 : anatomy stretched: x/y=1.037
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.11829412760196312 not less than 0.015 : anatomy stretched: x/y=1.118
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.3187500000000001 not less than 0.015 : anatomy stretched: x/y=0.681
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.2529313232830821 not less than 0.015 : anatomy stretched: x/y=0.747
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.27710843373493976 not less than 0.015 : anatomy stretched: x/y=0.723
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.05900100569896072 not less than 0.015 : anatomy stretched: x/y=1.059
+
+======================================================================
+FAIL: test_all_eight_directions_keep_source_aspect_ratio (__main__.SourceAnatomy.test_all_eight_directions_keep_source_aspect_ratio) (pet='claudes', direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 20, in test_all_eight_directions_keep_source_aspect_ratio
+    self.assertLess(abs(ratio-1),.015,f'anatomy stretched: x/y={ratio:.3f}')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.08354646206308614 not less than 0.015 : anatomy stretched: x/y=0.916
+
+----------------------------------------------------------------------
+Ran 1 test in 6.404s
+
+FAILED (failures=16)

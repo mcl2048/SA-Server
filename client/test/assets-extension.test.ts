@@ -40,8 +40,8 @@ function setup(t: any, options: SetupOptions = {}) {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (input: any, _init: any) => {
     const url = String(input); requests.push(url);
-    if (url === root + "extensions/primal-claws-v1/manifest.json") return options.primal ? Response.json({format:1,id:"primal-claws-v1",pages:[{file:"pages/00000.png",width:64,height:64}],images:[0,1,2].map(i=>[9300000+i,0,(i%2)*32,Math.floor(i/2)*32,32,32,-16,-30]),animations:[199400,199401,199402].map(id=>({id,file:`anim/${id}.json`}))}) : new Response(null,{status:404});
-    const primal = /^\/assets\/extensions\/primal-claws-v1\/anim\/(19940[012])\.json$/.exec(url);
+    if (url === root + "extensions/primal-claws-v2/manifest.json") return options.primal ? Response.json({format:1,id:"primal-claws-v2",pages:[{file:"pages/00000.png",width:64,height:64}],images:[0,1,2].map(i=>[9300000+i,0,(i%2)*32,Math.floor(i/2)*32,32,32,-16,-30]),animations:[199400,199401,199402].map(id=>({id,file:`anim/${id}.json`}))}) : new Response(null,{status:404});
+    const primal = /^\/assets\/extensions\/primal-claws-v2\/anim\/(19940[012])\.json$/.exec(url);
     if (primal) return Response.json({id:Number(primal[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badPrimal?9200000:9300000+Number(primal[1])-199400,0,0,0]]}]});
     if (url === root + "extensions/lisarido-v1/manifest.json") return options.lisarido ? Response.json({ format: 1, id: "lisarido-v1", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9200000,0,0,0,32,32,-16,-30],[9200001,0,32,0,32,32,-16,-30]], animations: [199300,199301].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
     const lisarido = /^\/assets\/extensions\/lisarido-v1\/anim\/(19930[01])\.json$/.exec(url);
@@ -323,7 +323,7 @@ test("imageCanvas decodes high extension IDs with RGBA transparency and anchors 
  assert.equal(assets.image(9300000)?.set,5);assert.equal(assets.image(9200000)?.set,4);
  assets.gpuBudget=1;for(let i=0;i<150;i++)assets.tick();assert.equal(assets.gpuBytes,0);
  assets.anim(199401);await pending(assets);
- assert.equal(loaded.filter(p=>p.url===root+"extensions/primal-claws-v1/pages/00000.png").length,2);
+ assert.equal(loaded.filter(p=>p.url===root+"extensions/primal-claws-v2/pages/00000.png").length,2);
  assert.equal(loaded.filter(p=>p.url===root+"extensions/lisarido-v1/pages/00000.png").length,1);
  });
  test("invalid primal frames cannot borrow a previous extension's images",async t=>{

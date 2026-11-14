@@ -1,0 +1,18 @@
+(node:943522) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (9.166346ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (3.712805ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.135348ms)
+✔ enemy camera prefers a live opponent and falls back to corpses after the last defeat (1.001074ms)
+✔ idle self framing keeps the real player and wide deployed pet inside a portrait crop (2.541543ms)
+✔ companion framing never pulls the camera away from an actor during playback (1.056999ms)
+✔ idle party framing excludes enemy records whose absent owner defaults to slot zero (1.901644ms)
+✔ a party wider than the portrait window keeps the selected player inside the safe crop (0.898693ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 781.456765
