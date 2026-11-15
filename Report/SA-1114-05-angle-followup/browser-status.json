@@ -1,0 +1,10 @@
+[
+  {
+    "step": "prepare",
+    "exit": 0
+  },
+  {
+    "step": "browser",
+    "exit": 0
+  }
+]

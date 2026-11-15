@@ -1,0 +1,32 @@
+[
+  {
+    "pet": "lilith",
+    "installed": "assets/extensions/lilith-v2",
+    "verified_files": 5,
+    "verified_archive_sha256": "4898c80869ea091dc1da43bcff4f25b6d6189f7b174b1a23b577dd7477adfe3f",
+    "known_v1_absent": true,
+    "repeat_install_exit": 0,
+    "repeat_install_preserves_file_mtimes": true,
+    "repeat_output": [
+      "已验证离线素材包，目标目录: <repo>/assets",
+      "新版已安装且5个文件校验一致，无需重写: <repo>/assets/extensions/lilith-v2",
+      "v0.2.18客户端加载v2；官方基础素材与其他宠物扩展保持不变。",
+      "从旧版升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。"
+    ]
+  },
+  {
+    "pet": "lisarido",
+    "installed": "assets/extensions/lisarido-v2",
+    "verified_files": 5,
+    "verified_archive_sha256": "92524b93ae85a88973f3fce4cd8328fb126f064f65097e19448b647b3a7b09ae",
+    "known_v1_absent": true,
+    "repeat_install_exit": 0,
+    "repeat_install_preserves_file_mtimes": true,
+    "repeat_output": [
+      "已验证离线素材包，目标目录: <repo>/assets",
+      "新版已安装且5个文件校验一致，无需重写: <repo>/assets/extensions/lisarido-v2",
+      "v0.2.18客户端加载v2；官方基础素材与其他宠物扩展保持不变。",
+      "从旧版升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。"
+    ]
+  }
+]

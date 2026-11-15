@@ -1,0 +1,5 @@
+{
+  "generator_sha256": "42927482f6e86faa5beee254db6d47140a8e97d6e9642158cddb4b1c9ad0413c",
+  "scope": "TIGER source3/4/5/8, TAIL source4/5/8; source4 front root corrected",
+  "tests": 4
+}

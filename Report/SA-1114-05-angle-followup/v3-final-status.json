@@ -1,0 +1,34 @@
+[
+  {
+    "step": "art-green",
+    "exit": 0
+  },
+  {
+    "step": "generation",
+    "exit": 0
+  },
+  {
+    "step": "package-art",
+    "exit": 0
+  },
+  {
+    "step": "install-art",
+    "exit": 0
+  },
+  {
+    "step": "verify-art",
+    "exit": 0
+  },
+  {
+    "step": "inspect-angles",
+    "exit": 0
+  },
+  {
+    "step": "real-upgrade",
+    "exit": 0
+  },
+  {
+    "step": "installer-final",
+    "exit": 0
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "version": "v0.2.18-LYNX",
+  "baseline": "cc6243e3a5c66557cdea8ff97f7ec6ad1c45279b",
+  "binary": {
+    "path": "bin/saserver",
+    "bytes": 16642208,
+    "sha256": "c838d059060308f766a2d3de6b3a03b8b9ac9d6c7ff3d2aff23aecdfb3e81af6",
+    "format": "static ELF64 Linux AMD64"
+  },
+  "archive": {
+    "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip",
+    "files": 4377,
+    "bytes": 42458765,
+    "sha256": "d981cf2374db55d7668e6669db2a412be041ee251e29938926de529e08ce5ae5"
+  },
+  "patches": [
+    {
+      "id": "primal-claws-v3",
+      "files": 7,
+      "name": "primal-claws-v3-assets.tar.gz",
+      "size": 10452182,
+      "sha256": "186361e569b97cb571a34b162d033f0aff0babda568af96d309d19b7240b4245"
+    },
+    {
+      "id": "lilith-v2",
+      "files": 5,
+      "name": "lilith-v2-assets.tar.gz",
+      "size": 5510538,
+      "sha256": "4898c80869ea091dc1da43bcff4f25b6d6189f7b174b1a23b577dd7477adfe3f"
+    },
+    {
+      "id": "lisarido-v2",
+      "files": 5,
+      "name": "lisarido-v2-assets.tar.gz",
+      "size": 2711868,
+      "sha256": "92524b93ae85a88973f3fce4cd8328fb126f064f65097e19448b647b3a7b09ae"
+    }
+  ],
+  "checks": {
+    "client_and_builder": 224,
+    "installers": 126,
+    "browser_checks": 39,
+    "browsers": {
+      "final-art": {
+        "checks": 25,
+        "errors": 0,
+        "saved_position_matches": true
+      },
+      "final-mobile-regression": {
+        "checks": 14,
+        "errors": 0,
+        "saved_position_matches": true
+      }
+    },
+    "http_files": 69,
+    "old_packs_http_404": 4,
+    "source_inputs": 383,
+    "repeat_binary_identical": true
+  },
+  "art": {
+    "character_frames": 1192,
+    "effect_frames": 76,
+    "actions": 256,
+    "source_aspect_all_16_primal_views": true,
+    "all_new_frames_no_clipping": true,
+    "body_height_calibration": {
+      "cyrufas": 84,
+      "claudes": 88
+    }
+  },
+  "scope": "actual Linux release, native UI/GM, original resources and Chromium SwiftShader; mobile viewport/touch emulation, no physical Android/iOS/Safari certification; no production restart"
+}

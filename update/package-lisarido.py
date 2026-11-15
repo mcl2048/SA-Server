@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the offline package from an already generated lisarido-v1 directory."""
+"""Reproduce the offline package from an already generated lisarido-v2 directory."""
 import argparse
 import gzip
 import hashlib
@@ -9,13 +9,13 @@ import os
 from pathlib import Path
 import tarfile
 
-PREFIX = "extensions/lisarido-v1"
+PREFIX = "extensions/lisarido-v2"
 RELATIVE = ["manifest.json"] + ["pages/%05d.png" % i for i in range(2)] + ["anim/%d.json" % i for i in (199300, 199301)]
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, required=True, help="生成的lisarido-v1目录，不含官方基础素材")
+    parser.add_argument("--source", type=Path, required=True, help="生成的lisarido-v2目录，不含官方基础素材")
     args = parser.parse_args()
     source = args.source.absolute()
     for p in (source, *source.parents):
@@ -57,11 +57,11 @@ def main():
     with gzip.GzipFile(filename="", mode="wb", fileobj=packed, mtime=0, compresslevel=9) as compressed:
         compressed.write(raw.getvalue())
     output = Path(__file__).resolve().parent
-    package_name = "lisarido-v1-assets.tar.gz"
+    package_name = "lisarido-v2-assets.tar.gz"
     package = packed.getvalue()
     manifest = {
         "schemaVersion": 1,
-        "packageId": "lisarido-v1",
+        "packageId": "lisarido-v2",
         "targetRoot": "assets/" + PREFIX,
         "installPrefix": PREFIX,
         "source": "Reference-derived Lisarido bitmap and electromagnetic burst extension; official base asset archive is excluded.",
@@ -69,7 +69,7 @@ def main():
         "entries": [{"path": name, "size": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in sorted(contents.items())],
     }
     (output / package_name).write_bytes(package)
-    (output / "lisarido-v1-assets.manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    (output / "lisarido-v2-assets.manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps(manifest["archive"], ensure_ascii=False))
 
 

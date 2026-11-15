@@ -12,8 +12,10 @@ repo=Path(sys.argv[1]).resolve()
 fixture=Path(tempfile.mkdtemp(prefix='sa-ai-assets-test-',dir='/tmp')).resolve()
 assert fixture.parent==Path('/tmp') and fixture.name.startswith('sa-ai-assets-test-')
 installer=repo/'update/install-lilith.sh'
-prefix='extensions/lilith-v1'
+prefix='extensions/lilith-v2'
 known=['manifest.json']+['pages/%05d.png'%i for i in range(2)]+['anim/%d.json'%i for i in (199200,199201)]
+legacy_prefix='extensions/lilith-v1'
+legacy_data={legacy_prefix+'/'+name:('old-v1-'+name).encode() for name in known}
 base_data={prefix+'/'+name:(b'\x89PNG\r\n\x1a\n'+name.encode() if name.endswith('.png') else json.dumps({'fixture':name}).encode()) for name in known}
 passed=[]
 
@@ -22,6 +24,8 @@ def case(name):
     update=path/'update';update.mkdir(parents=True)
     for source in ('install-lilith.sh','install-lilith.py'):
         shutil.copyfile(repo/'update'/source,update/source)
+    old_manifest={'schemaVersion':1,'packageId':'lilith-v1','targetRoot':'assets/'+legacy_prefix,'installPrefix':legacy_prefix,'archive':{'name':'lilith-v1-assets.tar.gz','size':1,'sha256':'0'*64},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(legacy_data.items())]}
+    (update/'lilith-v1-assets.manifest.json').write_text(json.dumps(old_manifest))
     (path/'server').mkdir();(path/'client').mkdir();(path/'config.yaml').write_text('assets: assets\n')
     assets=path/'assets';assets.mkdir();(assets/'original.webp').write_bytes(b'original-do-not-touch')
     return path,update,assets
@@ -37,9 +41,9 @@ def pack(update, *, additions=(), omit=None, corrupt_file=None, duplicate=None):
         if duplicate:
             data=base_data[duplicate];item=tarfile.TarInfo(duplicate);item.size=len(data);tar.addfile(item,io.BytesIO(data))
     archive=gzip.compress(buf.getvalue(),mtime=0)
-    (update/'lilith-v1-assets.tar.gz').write_bytes(archive)
-    manifest={'schemaVersion':1,'packageId':'lilith-v1','targetRoot':'assets/'+prefix,'installPrefix':prefix,'archive':{'name':'lilith-v1-assets.tar.gz','size':len(archive),'sha256':hashlib.sha256(archive).hexdigest()},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(base_data.items())]}
-    (update/'lilith-v1-assets.manifest.json').write_text(json.dumps(manifest))
+    (update/'lilith-v2-assets.tar.gz').write_bytes(archive)
+    manifest={'schemaVersion':1,'packageId':'lilith-v2','targetRoot':'assets/'+prefix,'installPrefix':prefix,'archive':{'name':'lilith-v2-assets.tar.gz','size':len(archive),'sha256':hashlib.sha256(archive).hexdigest()},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(base_data.items())]}
+    (update/'lilith-v2-assets.manifest.json').write_text(json.dumps(manifest))
     return manifest
 
 def run(update,*args,ok=True,cwd=None):
@@ -49,9 +53,59 @@ def run(update,*args,ok=True,cwd=None):
 
 def untouched(assets):
     assert (assets/'original.webp').read_bytes()==b'original-do-not-touch'
-    assert not list(assets.glob('extensions/.lilith-v1-stage-*'))
+    assert not list(assets.glob('extensions/.lilith-v2-stage-*'))
+    assert not list(assets.glob('extensions/.lilith-v1-retired-*'))
 
 try:
+    def old_pack(assets):
+        for name,data in legacy_data.items():
+            target=assets/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+        return assets/legacy_prefix
+
+    path,update,assets=case('v1-to-v2');pack(update);old=old_pack(assets)
+    other=assets/'extensions/other-pet-v1/keep';other.parent.mkdir();other.write_bytes(b'other-pet')
+    run(update);assert not old.exists(),'obsolete v1 still active'
+    assert other.read_bytes()==b'other-pet';untouched(assets);passed.append('new v2 verified before old v1 removal; other extension preserved')
+    mtimes={p:p.stat().st_mtime_ns for p in (assets/prefix).rglob('*')}
+    old=old_pack(assets);run(update);assert not old.exists()
+    assert all(p.stat().st_mtime_ns==stamp for p,stamp in mtimes.items());untouched(assets)
+    passed.append('already-installed v2 still retires v1 without rewriting v2')
+
+    path,update,assets=case('partial-v1');pack(update);old=old_pack(assets)
+    (old/'pages/00001.png').unlink();run(update);assert not old.exists();untouched(assets)
+    passed.append('known partial old installation safely removed')
+
+    for label,mutate in [
+        ('old-unknown-file',lambda p:(p/'custom.txt').write_bytes(b'custom')),
+        ('old-empty-directory',lambda p:(p/'custom').mkdir()),
+        ('old-modified',lambda p:(p/'pages/00000.png').write_bytes(b'modified')),
+        ('old-file-symlink',lambda p:((p/'pages/00000.png').unlink(),(p/'pages/00000.png').symlink_to(assets/'original.webp'))),
+    ]:
+        path,update,assets=case(label);pack(update);old=old_pack(assets);mutate(old)
+        run(update,ok=False);assert old.exists() and not (assets/prefix).exists();untouched(assets)
+        passed.append(label+' preserved before mutation')
+
+    path,update,assets=case('old-root-symlink');pack(update)
+    outside=fixture/'outside-legacy';outside.mkdir();(outside/'keep').write_bytes(b'keep')
+    (assets/'extensions').mkdir();(assets/legacy_prefix).symlink_to(outside,target_is_directory=True)
+    run(update,ok=False);assert (outside/'keep').read_bytes()==b'keep';assert not (assets/prefix).exists();untouched(assets)
+    passed.append('old directory symlink does not redirect cleanup')
+
+    path,update,assets=case('new-invalid-keeps-old');pack(update);old=old_pack(assets)
+    (update/(prefix.split('/')[-1]+'-assets.tar.gz')).write_bytes(b'bad-new')
+    run(update,ok=False);assert all((assets/k).read_bytes()==v for k,v in legacy_data.items());untouched(assets)
+    passed.append('invalid new package leaves old art intact')
+
+    path,update,assets=case('new-conflict-keeps-old');pack(update);old=old_pack(assets)
+    target=assets/prefix;target.mkdir();(target/'manifest.json').write_bytes(b'custom-new')
+    run(update,ok=False);assert all((assets/k).read_bytes()==v for k,v in legacy_data.items());untouched(assets)
+    passed.append('new directory conflict leaves old art intact')
+
+    path,update,assets=case('missing-old-checksums');pack(update);old=old_pack(assets)
+    (update/(legacy_prefix.split('/')[-1]+'-assets.manifest.json')).unlink()
+    run(update,ok=False);assert old.exists() and not (assets/prefix).exists();untouched(assets)
+    passed.append('missing old identity cannot permit deletion')
+
     path,update,assets=case('default-and-idempotent');pack(update)
     run(update,cwd=update)
     for name,data in base_data.items():assert (assets/name).read_bytes()==data
@@ -133,25 +187,25 @@ try:
         path,update,assets=case(label);pack(update,**kwargs);run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append(label+' rejected before mutation')
 
     path,update,assets=case('archive-sha');pack(update)
-    archive=update/'lilith-v1-assets.tar.gz';archive.write_bytes(archive.read_bytes()+b'X')
+    archive=update/'lilith-v2-assets.tar.gz';archive.write_bytes(archive.read_bytes()+b'X')
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('archive tampering rejected')
 
     path,update,assets=case('entry-sha');manifest=pack(update)
-    manifest['entries'][0]['sha256']='0'*64;(update/'lilith-v1-assets.manifest.json').write_text(json.dumps(manifest))
+    manifest['entries'][0]['sha256']='0'*64;(update/'lilith-v2-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('per-file digest mismatch rejected')
 
     path,update,assets=case('manifest-escape');manifest=pack(update)
-    manifest['entries'][0]['path']='../base.png';(update/'lilith-v1-assets.manifest.json').write_text(json.dumps(manifest))
+    manifest['entries'][0]['path']='../base.png';(update/'lilith-v2-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('manifest traversal rejected')
 
     path,update,assets=case('package-link');pack(update)
-    package=update/'lilith-v1-assets.tar.gz';safe=fixture/'safe-package.tar.gz';package.rename(safe);package.symlink_to(safe)
+    package=update/'lilith-v2-assets.tar.gz';safe=fixture/'safe-package.tar.gz';package.rename(safe);package.symlink_to(safe)
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('package symlink rejected')
 
     path,update,assets=case('decompression-limit');manifest=pack(update)
     archive=gzip.compress(b'\0'*200000,mtime=0)
     manifest['archive']['size']=len(archive);manifest['archive']['sha256']=hashlib.sha256(archive).hexdigest()
-    (update/'lilith-v1-assets.tar.gz').write_bytes(archive);(update/'lilith-v1-assets.manifest.json').write_text(json.dumps(manifest))
+    (update/'lilith-v2-assets.tar.gz').write_bytes(archive);(update/'lilith-v2-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('expanded tar size bounded before metadata parsing')
 
     path,update,assets=case('incomplete-installed');pack(update);target=assets/prefix;target.mkdir(parents=True);(target/'manifest.json').write_bytes(base_data[prefix+'/manifest.json'])

@@ -1,0 +1,28 @@
+test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) ... ok
+test_lateral_hind_paws_retain_their_original_texture (__main__.SourceLegOwnership.test_lateral_hind_paws_retain_their_original_texture) ...
+  test_lateral_hind_paws_retain_their_original_texture (__main__.SourceLegOwnership.test_lateral_hind_paws_retain_their_original_texture) (direction=2, source=(62, 93)) ... FAIL
+test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) ...
+  test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) (direction=6) ... FAIL
+
+======================================================================
+FAIL: test_lateral_hind_paws_retain_their_original_texture (__main__.SourceLegOwnership.test_lateral_hind_paws_retain_their_original_texture) (direction=2, source=(62, 93))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 43, in test_lateral_hind_paws_retain_their_original_texture
+    self.assertGreaterEqual(parts[3][0].getpixel(pos)[3], original-16, 'far hind paw was clipped out of its source layer')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than or equal to 239 : far hind paw was clipped out of its source layer
+
+======================================================================
+FAIL: test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) (direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 52, in test_lateral_torso_contains_no_old_pixels_below_the_knees
+    self.assertEqual(opaque, 0, 'a duplicate lower-leg fragment still moves with the torso')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(6) != 0 : a duplicate lower-leg fragment still moves with the torso
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.457s
+
+FAILED (failures=2)

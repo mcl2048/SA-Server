@@ -1,0 +1,26 @@
+[
+  {
+    "step": "installer-tests",
+    "exit": 0
+  },
+  {
+    "step": "art-tests",
+    "exit": 0
+  },
+  {
+    "step": "client-tests",
+    "exit": 0
+  },
+  {
+    "step": "go-tests",
+    "exit": 0
+  },
+  {
+    "step": "go-vet",
+    "exit": 0
+  },
+  {
+    "step": "build",
+    "exit": 0
+  }
+]

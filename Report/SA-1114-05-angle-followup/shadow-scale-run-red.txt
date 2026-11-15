@@ -1,0 +1,86 @@
+FF...FFFFFFF
+======================================================================
+FAIL: test_shadow_remains_on_ground_during_rear_and_jump (__main__.GroundShadow.test_shadow_remains_on_ground_during_rear_and_jump)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 35, in test_shadow_remains_on_ground_during_rear_and_jump
+    self.assertTrue(callable(getattr(art,'ground_shadow',None)), 'missing native floor shadow')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing native floor shadow
+
+======================================================================
+FAIL: test_running_leg_bends_at_knee_and_reaches_contact (__main__.JointSkin.test_running_leg_bends_at_knee_and_reaches_contact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 55, in test_running_leg_bends_at_knee_and_reaches_contact
+    self.assertTrue(callable(getattr(art,'run_limb',None)), 'missing two-joint running articulation')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing two-joint running articulation
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='cyrufas', direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 63 not greater than or equal to 80 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='cyrufas', direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 79 not greater than or equal to 80 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='cyrufas', direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 66 not greater than or equal to 80 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='cyrufas', direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 69 not greater than or equal to 80 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='claudes', direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 80 not greater than or equal to 84 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='claudes', direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 74 not greater than or equal to 84 : side-view animal shrinks on turning
+
+======================================================================
+FAIL: test_turning_does_not_shrink_a_long_side_view (__main__.SourceAnatomy.test_turning_does_not_shrink_a_long_side_view) (pet='claudes', direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/primal-art.test.py", line 30, in test_turning_does_not_shrink_a_long_side_view
+    self.assertGreaterEqual(h,lo,'side-view animal shrinks on turning')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 81 not greater than or equal to 84 : side-view animal shrinks on turning
+
+----------------------------------------------------------------------
+Ran 6 tests in 21.592s
+
+FAILED (failures=9)

@@ -14,11 +14,46 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "img/lilyse.jpg"
-PACK = "lilith-v1"
+PACK = "lilith-v2"
 CHAR = 199200
 EFFECT = 199201
 IMAGE_BASE = 9100000
 CELL = 160
+
+
+def ground_shadow(direction: int, action: str, frame: int) -> Image.Image:
+    """A floor-space projection, never rotated or translated with the body.
+
+    Native tiger shadows are low, dark and nearly horizontal. A narrow soft
+    edge keeps this RGBA extension readable on both stone and grass floors.
+    """
+    scale=3
+    layer=Image.new('RGBA',(CELL*scale,CELL*scale))
+    draw=ImageDraw.Draw(layer)
+    width=(52,56,46,50,52,50,46,56)[direction]
+    if action=='dead':width+=8
+    cx,cy=80*scale,130*scale
+    draw.ellipse((cx-width*scale/2,cy-6*scale,cx+width*scale/2,cy+6*scale),fill=(0,0,0,145))
+    return layer.filter(ImageFilter.GaussianBlur(.7*scale)).resize((CELL,CELL),Image.Resampling.LANCZOS)
+
+
+def clean_alpha_fringe(image: Image.Image) -> Image.Image:
+    """Extend real interior colours into the feathered matte, removing JPG grey halos."""
+    arr=np.array(image);alpha=arr[:,:,3];known=alpha>=248
+    for _ in range(2):
+        total=np.zeros(arr[:,:,:3].shape,np.float32);count=np.zeros(alpha.shape,np.float32)
+        for dy,dx in ((-1,0),(1,0),(0,-1),(0,1),(-1,-1),(-1,1),(1,-1),(1,1)):
+            support=np.roll(known,(dy,dx),(0,1))
+            # Cropped alpha has a transparent margin; do not wrap across edges.
+            if dy<0:support[-1,:]=False
+            if dy>0:support[0,:]=False
+            if dx<0:support[:,-1]=False
+            if dx>0:support[:,0]=False
+            total+=np.roll(arr[:,:,:3],(dy,dx),(0,1))*support[:,:,None];count+=support
+        weak=(alpha>0)&~known&(count>0)
+        arr[weak,:3]=np.rint(total[weak]/count[weak,None]).clip(0,255).astype(np.uint8)
+        known|=weak
+    return Image.fromarray(arr)
 
 def neutral_background(im: Image.Image) -> Image.Image:
     """Remove pale neutral checkerboard and its enclosed holes."""
@@ -53,7 +88,7 @@ def neutral_background(im: Image.Image) -> Image.Image:
     # thin gold ring. Keep the transition narrow and deterministic.
     alpha = alpha.filter(ImageFilter.GaussianBlur(0.65))
     out.putalpha(alpha)
-    return out
+    return clean_alpha_fringe(out)
 
 def source_frames() -> list[Image.Image]:
     im = neutral_background(Image.open(SOURCE))
@@ -98,15 +133,10 @@ def transform(base: Image.Image, action: str, frame: int, direction: int) -> Ima
     for py in range(94,CELL):
         for px in range(CELL):
             r,g,b,a=pix[px,py]
-            if min(r,g,b)>65: pix[px,py]=(0,0,0,0)
+            if min(r,g,b)>65 or (r>110 and g>85 and b<r*.8): pix[px,py]=(0,0,0,0)
     bob=round(math.sin(phase)*1.5)-4
     if action=='dead': bob=[0,8,15][frame]
     floating=Image.new('RGBA',im.size);floating.alpha_composite(im,(0,bob))
-    ring=Image.new('RGBA',im.size);rd=ImageDraw.Draw(ring)
-    for radius,color in [(37,(242,192,64,40)),(34,(255,221,101,150)),(29,(255,241,157,175))]:
-        rd.ellipse((80-radius,126-radius*.19,80+radius,126+radius*.19),outline=color,width=1)
-    floating=Image.alpha_composite(ring.filter(ImageFilter.GaussianBlur(2)),floating)
-    floating=Image.alpha_composite(floating,ring)
     im=floating
     if action in ('attack','hand','throw'):
         reach=([0.0,.45,1,.85,.2] if action=='attack' else [.25,.65,1,.65])[frame]
@@ -139,7 +169,15 @@ def transform(base: Image.Image, action: str, frame: int, direction: int) -> Ima
         im=im.rotate([-4,2][frame],resample=Image.Resampling.BICUBIC,center=(80,115))
     if action=='dead':
         im=im.rotate([-6,-16,-28][frame],resample=Image.Resampling.BICUBIC,center=(80,115))
-    return im
+    # Floor light and dark projection are composed after body transforms.
+    # The previous compositor rotated the complete ring on damage/death and
+    # retained part of the source's baked ring beneath the floating boots.
+    ring=Image.new('RGBA',im.size);rd=ImageDraw.Draw(ring)
+    for radius,color in [(37,(242,192,64,40)),(34,(255,221,101,150)),(29,(255,241,157,175))]:
+        rd.ellipse((80-radius,130-radius*.19,80+radius,130+radius*.19),outline=color,width=1)
+    floor=Image.alpha_composite(ground_shadow(direction,action,frame),ring.filter(ImageFilter.GaussianBlur(1.2)))
+    floor=Image.alpha_composite(floor,ring)
+    return Image.alpha_composite(floor,im)
 
 
 def effect_frame(frame: int, count: int = 28) -> Image.Image:
@@ -192,7 +230,7 @@ def effect_frame(frame: int, count: int = 28) -> Image.Image:
     d.ellipse((220-rw/2,280-rh/2,220+rw/2,280+rh/2),outline=(89,203,255,round(160*fade)),width=2)
     return im
 
-def generate(out: Path) -> dict:
+def generate(out: Path, report: Path | None = None) -> dict:
     out.mkdir(parents=True, exist_ok=True); (out/'pages').mkdir(exist_ok=True); (out/'anim').mkdir(exist_ok=True)
     refs = source_frames(); images=[]; actions=[]; image_id=IMAGE_BASE
     for direction, base in enumerate(refs):
@@ -223,9 +261,10 @@ def generate(out: Path) -> dict:
     for p in manifest['pages']:
         im=Image.open(out/p['file']); assert im.mode=='RGBA' and im.size==(p['width'],p['height'])
     assert len(images)==208+28 and len(char_actions)==64
-    result={'pack':PACK,'source':str(SOURCE),'source_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),'pages':2,'character_frames':208,'effect_frames':28,'character_anchor':[-80,-130],'image_count':len(images),'manifest_sha256':hashlib.sha256((out/'manifest.json').read_bytes()).hexdigest()}
-    (ROOT/'Report/SA-1114-03/lilith-art-validation.json').write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
+    result={'pack':PACK,'source':str(SOURCE.relative_to(ROOT)),'source_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),'pages':2,'character_frames':208,'effect_frames':28,'character_anchor':[-80,-130],'image_count':len(images),'manifest_sha256':hashlib.sha256((out/'manifest.json').read_bytes()).hexdigest()}
+    report=report or ROOT/'Report/SA-1114-05-shadow-design';report.mkdir(parents=True,exist_ok=True)
+    (report/'lilith-art-validation.json').write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
     print(json.dumps(result,ensure_ascii=False)); return manifest
 
 if __name__ == '__main__':
-    ap=argparse.ArgumentParser(); ap.add_argument('--output',type=Path,default=Path('/tmp/sa-lilith-build/extensions/lilith-v1')); generate(ap.parse_args().output.resolve())
+    ap=argparse.ArgumentParser(); ap.add_argument('--output',type=Path,default=Path('/tmp/sa-lilith-build/extensions/lilith-v2'));ap.add_argument('--report',type=Path);args=ap.parse_args();generate(args.output.resolve(),args.report)

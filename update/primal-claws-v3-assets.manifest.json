@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "packageId": "primal-claws-v3",
+  "targetRoot": "assets/extensions/primal-claws-v3",
+  "installPrefix": "extensions/primal-claws-v3",
+  "source": "Reference-derived Cyrufas/Claudes bitmap and articulated claw extension; official base asset archive is excluded.",
+  "archive": {
+    "name": "primal-claws-v3-assets.tar.gz",
+    "size": 10452182,
+    "sha256": "186361e569b97cb571a34b162d033f0aff0babda568af96d309d19b7240b4245"
+  },
+  "entries": [
+    {
+      "path": "extensions/primal-claws-v3/anim/199400.json",
+      "size": 8648,
+      "sha256": "261ccd1ebc281f0edaa275ed0cfa8e7c34dcd02e5a188b46809773066e028d59"
+    },
+    {
+      "path": "extensions/primal-claws-v3/anim/199401.json",
+      "size": 8648,
+      "sha256": "33d30211f087955a525a0a330f89137aec59d121c56c6130101d8d24ad1cdfe2"
+    },
+    {
+      "path": "extensions/primal-claws-v3/anim/199402.json",
+      "size": 480,
+      "sha256": "f5b2c087217cece58963c788134121f5c5f205237c8db4897bdadcdb52268cb3"
+    },
+    {
+      "path": "extensions/primal-claws-v3/manifest.json",
+      "size": 28258,
+      "sha256": "73956437c82bd9ea1b7513ebee404657647650069ca5f0245c0c117adbb3991d"
+    },
+    {
+      "path": "extensions/primal-claws-v3/pages/00000.png",
+      "size": 5827889,
+      "sha256": "30af96844153c8cd5f1b024c09557beff3108530dae6b02432e7d9c9029914ee"
+    },
+    {
+      "path": "extensions/primal-claws-v3/pages/00001.png",
+      "size": 4276422,
+      "sha256": "9f7654a0f4b4d19a4e4a674c7beea704075c2dd125e1050f279dec602f953685"
+    },
+    {
+      "path": "extensions/primal-claws-v3/pages/00002.png",
+      "size": 421925,
+      "sha256": "41d66d506545680f86ca9af9bb218caef33e8b02e08af81edc5711731b2a413e"
+    }
+  ]
+}

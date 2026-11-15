@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "img/lisarido.jpg"
-PACK, CHAR, EFFECT, IMAGE_BASE = "lisarido-v1", 199300, 199301, 9200000
+PACK, CHAR, EFFECT, IMAGE_BASE = "lisarido-v2", 199300, 199301, 9200000
 CELL, EFFECT_SIZE, EFFECT_FRAMES = 160, 240, 24
 # Native directions run SW, W, NW, N, NE, E, SE, S. These are eight distinct
 # source views; mirroring would move the cannon to her left hand.
@@ -29,6 +29,41 @@ ACTIONS = ((3, "stand", 4, 8), (4, "walk", 4, 5), (0, "attack", 6, 4),
            (1, "damage", 2, 6), (2, "dead", 3, 8), (6, "hand", 6, 4),
            (10, "guard", 2, 8), (12, "throw", 2, 6))
 
+
+
+def ground_shadow(direction: int, action: str, frame: int) -> Image.Image:
+    """A floor-space projection, never rotated or translated with the body.
+
+    Native tiger shadows are low, dark and nearly horizontal. A narrow soft
+    edge keeps this RGBA extension readable on both stone and grass floors.
+    """
+    scale=3
+    layer=Image.new('RGBA',(CELL*scale,CELL*scale))
+    draw=ImageDraw.Draw(layer)
+    width=(52,56,46,50,52,50,46,56)[direction]
+    if action=='dead':width+=8
+    cx,cy=80*scale,130*scale
+    draw.ellipse((cx-width*scale/2,cy-6*scale,cx+width*scale/2,cy+6*scale),fill=(0,0,0,145))
+    return layer.filter(ImageFilter.GaussianBlur(.7*scale)).resize((CELL,CELL),Image.Resampling.LANCZOS)
+
+
+def clean_alpha_fringe(image: Image.Image) -> Image.Image:
+    """Extend real interior colours into the feathered matte, removing JPG grey halos."""
+    arr=np.array(image);alpha=arr[:,:,3];known=alpha>=248
+    for _ in range(2):
+        total=np.zeros(arr[:,:,:3].shape,np.float32);count=np.zeros(alpha.shape,np.float32)
+        for dy,dx in ((-1,0),(1,0),(0,-1),(0,1),(-1,-1),(-1,1),(1,-1),(1,1)):
+            support=np.roll(known,(dy,dx),(0,1))
+            # Cropped alpha has a transparent margin; do not wrap across edges.
+            if dy<0:support[-1,:]=False
+            if dy>0:support[0,:]=False
+            if dx<0:support[:,-1]=False
+            if dx>0:support[:,0]=False
+            total+=np.roll(arr[:,:,:3],(dy,dx),(0,1))*support[:,:,None];count+=support
+        weak=(alpha>0)&~known&(count>0)
+        arr[weak,:3]=np.rint(total[weak]/count[weak,None]).clip(0,255).astype(np.uint8)
+        known|=weak
+    return Image.fromarray(arr)
 
 def fill_holes(mask: Image.Image) -> Image.Image:
     """Fill only enclosed background, so neutral white fur is never hollow."""
@@ -78,7 +113,7 @@ def cutout(cell: Image.Image) -> Image.Image:
     result = cell.convert("RGBA"); result.putalpha(clean)
     box = clean.point(lambda v: 255 if v >= 100 else 0).getbbox()
     assert box, "reference cell has no character"
-    return result.crop(box)
+    return clean_alpha_fringe(result.crop(box))
 
 
 def source_frames() -> list[Image.Image]:
@@ -168,16 +203,26 @@ def character_frame(base: Image.Image, action: str, frame: int, direction: int) 
             d.ellipse((cx-radius*.5, cy-radius*.5, cx+radius*.5, cy+radius*.5), fill=(220, 253, 255, 255))
             body = Image.alpha_composite(body, burst.filter(ImageFilter.GaussianBlur(2)))
             body = Image.alpha_composite(body, burst)
-    bob = round(math.sin(phase)*1.5)-2
-    if action == "damage": body = body.rotate((-4, 3)[frame], Image.Resampling.BICUBIC, center=(80, 100))
+    # Keep ground contact explicit: v1 placed feet ~20px above its floor ring
+    # and bobbed the entire standing body. Ears and cannon still animate, while
+    # planted feet stay at the native origin (image y130, world y0).
+    source_alpha=np.asarray(base.getchannel('A'))>128
+    yy,xx=np.nonzero(source_alpha)
+    support_y=int(yy.max())
+    shift=130-support_y
+    if action == "damage": body = body.rotate((-4, 3)[frame], Image.Resampling.BICUBIC, center=(80, support_y))
     if action == "dead":
-        body = body.rotate((0, 15, 28)[frame], Image.Resampling.BICUBIC, center=(80, 90)); bob += frame*5
-    im = Image.new("RGBA", base.size); im.alpha_composite(body, (0, bob))
+        # Fall around the contact point instead of sinking an already floating
+        # cutout through the ground. Shadow remains a separate flat floor layer.
+        body = body.rotate((0, 15, 28)[frame], Image.Resampling.BICUBIC, center=(80, support_y))
+    im=ground_shadow(direction,action,frame)
     ring = Image.new("RGBA", base.size); d = ImageDraw.Draw(ring)
-    d.ellipse((51, 124, 109, 134), outline=(110, 228, 255, 145), width=1)
-    d.ellipse((55, 126, 105, 132), outline=(220, 180, 255, 110), width=1)
-    im = Image.alpha_composite(ring.filter(ImageFilter.GaussianBlur(2)), im)
-    return Image.alpha_composite(im, ring)
+    d.ellipse((51,125,109,135),outline=(110,228,255,105),width=1)
+    d.ellipse((55,127,105,133),outline=(220,180,255,85),width=1)
+    im=Image.alpha_composite(im,ring.filter(ImageFilter.GaussianBlur(.8)))
+    floor=Image.alpha_composite(im,ring)
+    im=Image.new('RGBA',base.size);im.alpha_composite(body,(0,shift))
+    return Image.alpha_composite(floor,im)
 
 
 def electromagnetic_frame(frame: int) -> Image.Image:
@@ -208,7 +253,7 @@ def electromagnetic_frame(frame: int) -> Image.Image:
     return Image.alpha_composite(im,bolt)
 
 
-def generate(out: Path) -> dict:
+def generate(out: Path, report: Path | None = None) -> dict:
     if not SOURCE.is_file(): raise FileNotFoundError(SOURCE)
     out.mkdir(parents=True,exist_ok=True)
     (out/'pages').mkdir(exist_ok=True); (out/'anim').mkdir(exist_ok=True)
@@ -237,7 +282,7 @@ def generate(out: Path) -> dict:
     manifest={'format':1,'id':PACK,'pages':[{'file':'pages/00000.png','width':page.width,'height':page.height},{'file':'pages/00001.png','width':effect_page.width,'height':effect_page.height}], 'images':images,'animations':[{'id':i,'file':f'anim/{i}.json'} for i in (CHAR,EFFECT)]}
     (out/'manifest.json').write_text(json.dumps(manifest,separators=(',',':'))+'\n')
     result={'pack':PACK,'source':str(SOURCE.relative_to(ROOT)),'source_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),'character_frames':character_count,'effect_frames':EFFECT_FRAMES,'image_count':len(images),'character_anchor':[-80,-130],'effect_anchor':[-120,-120],'source_order':list(SOURCE_ORDER),'art_origin':'User JPG silhouette extraction, local ear/cannon deformation and deterministic bitmap FX. No image generation API called.'}
-    report=ROOT/'Report/SA-1114-04'; report.mkdir(exist_ok=True)
+    report=report or ROOT/'Report/SA-1114-05-shadow-design'; report.mkdir(parents=True,exist_ok=True)
     (report/'lisarido-art-generation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(result,ensure_ascii=False))
     return manifest
@@ -245,5 +290,5 @@ def generate(out: Path) -> dict:
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output',type=Path,default=Path('/tmp/sa-lisarido-build/extensions/lisarido-v1'))
-    generate(parser.parse_args().output.resolve())
+    parser.add_argument('--output',type=Path,default=Path('/tmp/sa-lisarido-build/extensions/lisarido-v2'))
+    parser.add_argument('--report',type=Path);args=parser.parse_args();generate(args.output.resolve(),args.report)

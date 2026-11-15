@@ -1,13 +1,13 @@
-import { InputBox,                                    } from "./ui.js?v=9256777782deda32";
+import { InputBox,                                    } from "./ui.js?v=8a026288d656cdb2";
 import { getDeviceMode, setDeviceMode, isMobile, setMobileContext, setSceneZoom, getSceneZoom, resetSceneView,
   isImmersive, getMobileDisplayMode, setMobileDisplayMode, requestMobileFullscreen, exitMobileFullscreen,
-                                                              } from "./mobile-view.js?v=9256777782deda32";
-import { createMobileJoystick } from "./mobile-controls.js?v=9256777782deda32";
-import { BATTLE_AUTO_ACTIONS } from "./autoplay-sync.js?v=9256777782deda32";
-import { MobileNativeSkin } from "./mobile-native-skin.js?v=9256777782deda32";
-import { MobileNativeMap } from "./mobile-native-map.js?v=9256777782deda32";
+                                                              } from "./mobile-view.js?v=8a026288d656cdb2";
+import { createMobileJoystick } from "./mobile-controls.js?v=8a026288d656cdb2";
+import { BATTLE_AUTO_ACTIONS } from "./autoplay-sync.js?v=8a026288d656cdb2";
+import { MobileNativeSkin } from "./mobile-native-skin.js?v=8a026288d656cdb2";
+import { MobileNativeMap } from "./mobile-native-map.js?v=8a026288d656cdb2";
 
-import { MobileNativeCards } from "./mobile-native-cards.js?v=9256777782deda32";
+import { MobileNativeCards } from "./mobile-native-cards.js?v=8a026288d656cdb2";
 
 
 

@@ -1,0 +1,8 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+Error: browser errors
+    at assert (file:///home/coder/saserver/Report/SA-1114-05-angle-followup/browser/shadow-cases.mjs:4:34)
+    at Module.runShadows (file:///home/coder/saserver/Report/SA-1114-05-angle-followup/browser/shadow-cases.mjs:39:4)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:317:32)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:356:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-angle-followup/browser/candidate-art.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

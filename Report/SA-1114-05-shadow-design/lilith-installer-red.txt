@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "<stdin>", line 61, in <module>
+  File "<stdin>", line 45, in run
+AssertionError: ((), 1, '', "安装失败（未覆盖原素材）: [Errno 2] No such file or directory: '/tmp/sa-ai-assets-test-uvhciaa4/v1-to-v2/update/lilith-v1-assets.tar.gz'\n")

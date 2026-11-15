@@ -1,0 +1,14 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 390x844"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 844x390"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 320x568"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 568x320"}
+{"variant":"final","mobile_case":"field player remains visible through rotation 430x932"}
+Error: field visible − zoom did not reduce the scene
+    at assert (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:3:50)
+    at zoomAndPinch (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:99:3)
+    at async fieldCameraLock (file:///home/coder/saserver/Report/SA-1114-02/browser/camera-lock.mjs:153:38)
+    at async work (file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:327:114)
+    at async file:///home/coder/saserver/Report/SA-1114-05-art-polish/browser/real-game.mjs:357:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1114-05-angle-followup/browser/final-mobile-regression.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

@@ -1,0 +1,66 @@
+test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) ...
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(37, 80)) ... FAIL
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(36, 88)) ... FAIL
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(35, 94)) ... FAIL
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(65, 77)) ... FAIL
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(69, 85)) ... FAIL
+  test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(73, 94)) ... FAIL
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(37, 80))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 255 not less than or equal to 16 : old lower leg remains attached to torso
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(36, 88))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 251 not less than or equal to 16 : old lower leg remains attached to torso
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=2, source=(35, 94))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 255 not less than or equal to 16 : old lower leg remains attached to torso
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(65, 77))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 255 not less than or equal to 16 : old lower leg remains attached to torso
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(69, 85))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 252 not less than or equal to 16 : old lower leg remains attached to torso
+
+======================================================================
+FAIL: test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) (direction=6, source=(73, 94))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 30, in test_lateral_front_lower_leg_is_owned_by_the_animated_limb
+    self.assertLessEqual(body.getpixel(pos)[3], 16, 'old lower leg remains attached to torso')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 255 not less than or equal to 16 : old lower leg remains attached to torso
+
+----------------------------------------------------------------------
+Ran 1 test in 3.451s
+
+FAILED (failures=6)

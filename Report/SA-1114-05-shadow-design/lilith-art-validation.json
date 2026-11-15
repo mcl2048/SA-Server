@@ -1,0 +1,14 @@
+{
+  "pack": "lilith-v2",
+  "source": "img/lilyse.jpg",
+  "source_sha256": "663a49dd3799bd418fe8e28a7b0ed9d5e5f439e6ba6e1c2a783c432d19b8c62c",
+  "pages": 2,
+  "character_frames": 208,
+  "effect_frames": 28,
+  "character_anchor": [
+    -80,
+    -130
+  ],
+  "image_count": 236,
+  "manifest_sha256": "cee2db0ab05d010dc53cf6b2f2d0d745469e00abb5d01d6da9416b164c839e60"
+}

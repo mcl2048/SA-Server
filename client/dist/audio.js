@@ -8,7 +8,7 @@
 // 帧照本项目的惯例按 60 帧 / 秒算（原版 VER25 的主循环是 6 ms 一次，计时比这里快约 2.8 倍）。
 // 浏览器要等使用者第一次点击或按键才允许出声，unlock() 挂在那两个事件上；在那之前要播的背景音乐记下来，解锁后再开始。
 
-import { BGM, PAN_GAIN, PITCH_RATE, SE, VOLUME_GAIN } from "./soundtable.js?v=9256777782deda32";
+import { BGM, PAN_GAIN, PITCH_RATE, SE, VOLUME_GAIN } from "./soundtable.js?v=8a026288d656cdb2";
 
 const TICK = 1000 / 60;
 const SE_LOCK_MS = 5 * TICK; // tone_tbl[].play_time = 5

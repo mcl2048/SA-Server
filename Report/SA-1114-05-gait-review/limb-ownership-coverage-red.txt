@@ -1,0 +1,59 @@
+test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) ... ok
+test_lateral_hind_paws_retain_their_original_texture (__main__.SourceLegOwnership.test_lateral_hind_paws_retain_their_original_texture) ... ok
+test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) ...
+  test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) (direction=7) ... FAIL
+test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) ...
+  test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=2) ... FAIL
+  test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=6) ... FAIL
+  test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=3) ... FAIL
+  test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=7) ... FAIL
+
+======================================================================
+FAIL: test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) (direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 54, in test_lateral_torso_contains_no_old_pixels_below_the_knees
+    self.assertEqual(opaque, 0, 'a duplicate lower-leg fragment still moves with the torso')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(28) != 0 : a duplicate lower-leg fragment still moves with the torso
+
+======================================================================
+FAIL: test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 67, in test_no_original_lower_leg_texture_is_discarded
+    self.assertEqual(missing, 0, 'source paw/armour pixels were discarded instead of assigned to a limb')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(167) != 0 : source paw/armour pixels were discarded instead of assigned to a limb
+
+======================================================================
+FAIL: test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 67, in test_no_original_lower_leg_texture_is_discarded
+    self.assertEqual(missing, 0, 'source paw/armour pixels were discarded instead of assigned to a limb')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(425) != 0 : source paw/armour pixels were discarded instead of assigned to a limb
+
+======================================================================
+FAIL: test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 67, in test_no_original_lower_leg_texture_is_discarded
+    self.assertEqual(missing, 0, 'source paw/armour pixels were discarded instead of assigned to a limb')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(315) != 0 : source paw/armour pixels were discarded instead of assigned to a limb
+
+======================================================================
+FAIL: test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) (direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-gait-review/test_limb_ownership.py", line 67, in test_no_original_lower_leg_texture_is_discarded
+    self.assertEqual(missing, 0, 'source paw/armour pixels were discarded instead of assigned to a limb')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(829) != 0 : source paw/armour pixels were discarded instead of assigned to a limb
+
+----------------------------------------------------------------------
+Ran 4 tests in 17.233s
+
+FAILED (failures=5)

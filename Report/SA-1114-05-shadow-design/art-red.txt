@@ -1,0 +1,41 @@
+FFFF
+======================================================================
+FAIL: test_both_pets_have_a_shadow_independent_of_body_animation (__main__.GroundPlanes.test_both_pets_have_a_shadow_independent_of_body_animation) (pet='lilith-v1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-shadow-design/art-regression.py", line 14, in test_both_pets_have_a_shadow_independent_of_body_animation
+    self.assertTrue(callable(getattr(module,'ground_shadow',None)),'missing independent ground shadow')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independent ground shadow
+
+======================================================================
+FAIL: test_both_pets_have_a_shadow_independent_of_body_animation (__main__.GroundPlanes.test_both_pets_have_a_shadow_independent_of_body_animation) (pet='lisarido-v1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-shadow-design/art-regression.py", line 14, in test_both_pets_have_a_shadow_independent_of_body_animation
+    self.assertTrue(callable(getattr(module,'ground_shadow',None)),'missing independent ground shadow')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independent ground shadow
+
+======================================================================
+FAIL: test_lilith_ground_layer_is_not_rotated_on_damage_or_death (__main__.GroundPlanes.test_lilith_ground_layer_is_not_rotated_on_damage_or_death)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-shadow-design/art-regression.py", line 32, in test_lilith_ground_layer_is_not_rotated_on_damage_or_death
+    self.assertTrue(callable(getattr(lilith,'ground_shadow',None)))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_lisarido_stand_and_shoot_keep_feet_at_ground (__main__.GroundPlanes.test_lisarido_stand_and_shoot_keep_feet_at_ground)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/Report/SA-1114-05-shadow-design/art-regression.py", line 30, in test_lisarido_stand_and_shoot_keep_feet_at_ground
+    bottom=int(np.nonzero(body)[0].max());self.assertGreaterEqual(bottom,129,'standing feet float above floor');self.assertLessEqual(bottom,130)
+                                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 108 not greater than or equal to 129 : standing feet float above floor
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.024s
+
+FAILED (failures=4)

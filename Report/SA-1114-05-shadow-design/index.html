@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SA-1114-05 · 阴影与地面</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101a19;color:#e7ece4}body{max-width:1380px;margin:auto;padding:clamp(20px,4vw,64px)}h1{font-size:clamp(28px,4vw,52px);letter-spacing:-.03em;line-height:1.15}h2{font-size:23px;margin-top:48px}p{line-height:1.8;max-width:950px;color:#bdcbc2}small{color:#9eae9f}.tag{color:#efce8b;letter-spacing:.12em}.stats{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0}.stats span{padding:14px 22px;border:1px solid #3c5047;border-radius:10px;background:#1c2a25}img{display:block;width:100%;height:auto;border:1px solid #3c5047;border-radius:8px;margin:16px 0}a{color:#efce8b}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}figure{margin:0}figcaption{color:#bdcbc2;line-height:1.7}.actions{overflow:auto}.actions img{min-width:1000px}.note{border-left:3px solid #e1c783;padding-left:18px;margin:32px 0}
+</style>
+<div class="tag">STONEAGE · SA-1114-05 · ART REVIEW</div>
+<h1>让投影落在地面，<br>让角色保持自己的姿态。</h1>
+<p>莉莉丝与 Lisarido 的新版贴图补充暗色地影，修正地环随身体旋转和脚底悬空；保留角色设计、原有高度、图号与动作契约。</p>
+<div class="stats"><span>440 角色帧完整验证</span><span>128 动作保持兼容</span><span>82 安装器用例通过</span><span>3 地面行为回归通过</span></div>
+<p class="note">本页为离线素材合成审阅；浅色地面来自原生战场截图的空白地面裁片。它用于检查投影可见性，不代表新的真实运行截图或实体移动设备认证。</p>
+<h2>莉莉丝 · 八向前后</h2><p>上行为v1，下行为v2。原有漂浮高度保留；独立地影、固定金环与主体变换分离。</p><a href="lilith-before-after.png"><img src="lilith-before-after.png" alt="莉莉丝八向前后对照"></a>
+<h2>Lisarido · 脚底与地面</h2><p>上行为v1，下行为v2。主体高度仍为98px，双足落在世界地面；耳朵和炮管继续活动，站立时不再整体上下滑动。</p><a href="lisarido-before-after.png"><img src="lisarido-before-after.png" alt="Lisarido八向脚底前后对照"></a>
+<h2>光圈之内，保留清楚的暗色投影</h2><p>默认己方dir3、敌方dir7以及受击／死亡末帧，分别在原生浅色地面、浅色与深色控制底上放大2倍检查。暗色填充可辨，地影在身体倾斜时仍保持水平。</p>
+<div class="grid"><figure><a href="lilith-shadow-clarity.png"><img src="lilith-shadow-clarity.png" alt="莉莉丝地影可见性与受击死亡关键帧"></a><figcaption>莉莉丝：身体漂浮，地影固定。</figcaption></figure><figure><a href="lisarido-shadow-clarity.png"><img src="lisarido-shadow-clarity.png" alt="Lisarido地影与足底关键帧"></a><figcaption>Lisarido：脚底落地，地环位于身体后方。</figcaption></figure></div>
+<h2>动作审阅</h2><div class="actions"><a href="lilith-actions.png"><img src="lilith-actions.png" alt="莉莉丝八向待机攻击死亡"></a><a href="lisarido-actions.png"><img src="lisarido-actions.png" alt="Lisarido八向待机攻击死亡"></a></div>
+<div class="grid"><figure><img src="lilith-idle.gif" alt="莉莉丝待机循环"><figcaption>莉莉丝：待机</figcaption></figure><figure><img src="lilith-attack.gif" alt="莉莉丝攻击循环"><figcaption>莉莉丝：攻击</figcaption></figure><figure><img src="lisarido-idle.gif" alt="Lisarido待机循环"><figcaption>Lisarido：待机</figcaption></figure><figure><img src="lisarido-attack.gif" alt="Lisarido攻击循环"><figcaption>Lisarido：攻击</figcaption></figure></div>
+<h2>可复核证据</h2><p><a href="ACCEPTANCE.md">验收说明</a> · <a href="final-assets.json">完整素材验证</a> · <a href="local-install-verification.json">本地升级与幂等</a> · <a href="lilith-installer-green.json">莉莉丝41项安装测试</a> · <a href="lisarido-installer-green.json">Lisarido 41项安装测试</a> · <a href="art-regression.py">地面行为回归</a></p>
+<small>独立素材报告 · 最终ELF、实战与发行ZIP由主任务报告整合。</small>
+</html>

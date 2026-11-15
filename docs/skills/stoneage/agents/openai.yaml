@@ -1,0 +1,4 @@
+interface:
+  display_name: "StoneAge 素材与动画"
+  short_description: "制作与优化石器时代八向贴图、跑姿、贴地阴影及素材升级验证"
+  default_prompt: "使用 $stoneage 检查并优化这些宠物贴图、八向动作和地面阴影，以实际战场验证。"

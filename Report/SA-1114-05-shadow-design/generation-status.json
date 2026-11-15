@@ -1,0 +1,22 @@
+[
+  {
+    "pet": "lilith",
+    "step": "generate",
+    "exit": 0
+  },
+  {
+    "pet": "lilith",
+    "step": "package",
+    "exit": 0
+  },
+  {
+    "pet": "lisarido",
+    "step": "generate",
+    "exit": 0
+  },
+  {
+    "pet": "lisarido",
+    "step": "package",
+    "exit": 0
+  }
+]

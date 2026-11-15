@@ -1,0 +1,144 @@
+{
+  "checked_at_utc": "2026-11-15T01:08:38.363619+00:00",
+  "scope": "staged and matching working bytes, recursive ZIP/TAR members through two archive layers; private fixture values stay only in memory; no OCR",
+  "staged_payload_files_scanned": 321,
+  "worktree_payload_files_scanned": 321,
+  "runtime_metadata_files_checked": 26,
+  "current_task_runtime_metadata_files_checked": 1,
+  "distinct_private_credential_files_read": 26,
+  "private_value_variants_checked": 9,
+  "private_character_variants_checked": 1,
+  "sensitive_hits": 0,
+  "scan_counts": {
+    "index_blobs": 321,
+    "index_bytes": 125086368,
+    "worktree_blobs": 321,
+    "worktree_bytes": 125086368,
+    "index-archive_blobs": 4394,
+    "index-archive_bytes": 117130625,
+    "index-archive-archive_blobs": 26,
+    "index-archive-archive_bytes": 26059459,
+    "worktree-archive_blobs": 4394,
+    "worktree-archive_bytes": 117130625,
+    "worktree-archive-archive_blobs": 26,
+    "worktree-archive-archive_bytes": 26059459
+  },
+  "archives": [
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/lilith-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/lisarido-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/primal-claws-v3-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "index",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4377,
+      "regular_files": 4377
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/ai-pets-v1-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 9,
+      "regular_files": 9
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/lilith-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/lisarido-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree-archive",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip!saserver-v0.2.18-LYNX/update/primal-claws-v3-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "worktree",
+      "path": "bin/saserver-v0.2.18-LYNX-linux-amd64.zip",
+      "format": "zip",
+      "entries": 4377,
+      "regular_files": 4377
+    },
+    {
+      "scope": "index",
+      "path": "update/lilith-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree",
+      "path": "update/lilith-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index",
+      "path": "update/lisarido-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "worktree",
+      "path": "update/lisarido-v2-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 5,
+      "regular_files": 5
+    },
+    {
+      "scope": "index",
+      "path": "update/primal-claws-v3-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    },
+    {
+      "scope": "worktree",
+      "path": "update/primal-claws-v3-assets.tar.gz",
+      "format": "tar.gz",
+      "entries": 7,
+      "regular_files": 7
+    }
+  ],
+  "fixture_credential_values_absent": true,
+  "runtime_db_and_credentials_not_in_report": true,
+  "assets_tree_excluded": true,
+  "stage_worktree_match": true
+}

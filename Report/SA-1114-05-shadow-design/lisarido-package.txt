@@ -1,0 +1,1 @@
+{"name": "lisarido-v2-assets.tar.gz", "size": 2711868, "sha256": "92524b93ae85a88973f3fce4cd8328fb126f064f65097e19448b647b3a7b09ae"}

@@ -1,0 +1,3 @@
+Traceback (most recent call last):
+  File "<stdin>", line 70, in <module>
+AssertionError: old narrow v1 atlas remains after successful upgrade

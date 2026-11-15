@@ -1,0 +1,5 @@
+已验证离线素材包，目标目录: /home/coder/saserver/assets
+新版已安装且7个文件校验一致，无需重写: /home/coder/saserver/assets/extensions/primal-claws-v2
+已自动删除旧v1素材（已核对原版文件摘要）: /home/coder/saserver/assets/extensions/primal-claws-v1
+v0.2.17及更新客户端加载v2；官方基础素材与其他宠物扩展保持不变。
+从v0.2.16升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。

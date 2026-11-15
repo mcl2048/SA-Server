@@ -4,7 +4,7 @@
 
 
 
-import { isMobile } from "./mobile-view.js?v=9256777782deda32";
+import { isMobile } from "./mobile-view.js?v=8a026288d656cdb2";
 
 export const OFFSET_640                   = [80, 60];
 

@@ -12,18 +12,18 @@
 // 每回合服务端给出按速度排好的行动列表（BattleTurn），这里按顺序播放：
 // 攻击者走到目标面前 → 攻击动画 → 在动画的命中帧（事件 10000..10099）让目标受伤 / 闪避 → 走回原位；连击时中途不走回去。
 
-import { ANIM, findAction,                              } from "./assets.js?v=9256777782deda32";
-import { sfx, setSfx } from "./audio.js?v=9256777782deda32";
-import { isMobile } from "./mobile-view.js?v=9256777782deda32";
-import { immersiveScene } from "./mobile-camera.js?v=9256777782deda32";
+import { ANIM, findAction,                              } from "./assets.js?v=8a026288d656cdb2";
+import { sfx, setSfx } from "./audio.js?v=8a026288d656cdb2";
+import { isMobile } from "./mobile-view.js?v=8a026288d656cdb2";
+import { immersiveScene } from "./mobile-camera.js?v=8a026288d656cdb2";
 
-import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=9256777782deda32";
-import { SkillMemoPages } from "./skill-memo.js?v=9256777782deda32";
-import { battleItems } from "./items.js?v=9256777782deda32";
-import { album } from "./album.js?v=9256777782deda32";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=8a026288d656cdb2";
+import { SkillMemoPages } from "./skill-memo.js?v=8a026288d656cdb2";
+import { battleItems } from "./items.js?v=8a026288d656cdb2";
+import { album } from "./album.js?v=8a026288d656cdb2";
 
-import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=9256777782deda32";
-import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=9256777782deda32";
+import { smartChoose, smartChooseSoloPet,                                  } from "./aismart.js?v=8a026288d656cdb2";
+import { FONT, SYS, boxColor, measure, wrapBytes,         } from "./ui.js?v=8a026288d656cdb2";
 
 // The legacy icon remains optional; stat percentages and turn counts are
 // declared in the shared wire schema and synchronized by the server.

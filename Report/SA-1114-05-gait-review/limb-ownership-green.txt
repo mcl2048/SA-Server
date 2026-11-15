@@ -1,0 +1,9 @@
+test_lateral_front_lower_leg_is_owned_by_the_animated_limb (__main__.SourceLegOwnership.test_lateral_front_lower_leg_is_owned_by_the_animated_limb) ... ok
+test_lateral_hind_paws_retain_their_original_texture (__main__.SourceLegOwnership.test_lateral_hind_paws_retain_their_original_texture) ... ok
+test_lateral_torso_contains_no_old_pixels_below_the_knees (__main__.SourceLegOwnership.test_lateral_torso_contains_no_old_pixels_below_the_knees) ... ok
+test_no_original_lower_leg_texture_is_discarded (__main__.SourceLegOwnership.test_no_original_lower_leg_texture_is_discarded) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 18.321s
+
+OK

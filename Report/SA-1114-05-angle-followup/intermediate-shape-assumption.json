@@ -1,0 +1,30 @@
+{
+  "failure": "dir7 retains the old narrow silhouette",
+  "checks_before_failure": [
+    "desktop cyrufas actual dir3 with native reference",
+    "desktop cyrufas walk, articulated strike and return",
+    "desktop cyrufas actual dir7 with native reference",
+    "desktop claudes actual dir3 with native reference",
+    "desktop claudes walk, articulated strike and return"
+  ],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "cause": "The acceptance script incorrectly required every default pose to be wider than 1.2x its height. Claudes dir7 is naturally near-square (106x97). Replace that generic threshold with exact final-v2 frame geometry plus independent aspect-preserving projection checks; source anatomy is separately verified for all 16 views."
+}

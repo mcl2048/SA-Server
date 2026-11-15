@@ -1,0 +1,254 @@
+{
+  "passed": true,
+  "local_links": 62,
+  "checks": [
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "user-angle-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "user-angle-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "cyrufas-all-angles.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "cyrufas-all-angles.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "claudes-all-angles.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "claudes-all-angles.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/cyrufas-walk.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/cyrufas-walk.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-gait-review/dir3-run.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-gait-review/dir3-run.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/cyrufas-directions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/cyrufas-directions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/claudes-directions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "art/claudes-directions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-shadow-design/lilith-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-shadow-design/lilith-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-shadow-design/lisarido-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-shadow-design/lisarido-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-cyrufas-native-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-cyrufas-native-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-claudes-native-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-claudes-native-comparison.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-lilith-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-lilith-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-lisarido-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-desktop-lisarido-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-cyrufas-portrait-idle.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-cyrufas-portrait-idle.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-claudes-portrait-idle.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-claudes-portrait-idle.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-lilith-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-lilith-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-lisarido-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-lisarido-ground-shadow.png"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "release.json"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "ACCEPTANCE.md"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-art.json"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "browser/final-mobile-regression.json"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../SA-1114-05-shadow-design/index.html"
+    },
+    {
+      "page": "Report/SA-1114-05-angle-followup/index.html",
+      "target": "../../docs/skills/stoneage/SKILL.md"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-before-after.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-before-after.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-before-after.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-before-after.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-shadow-clarity.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-actions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-actions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-actions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-actions.png"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-idle.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-attack.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-idle.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-attack.gif"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "ACCEPTANCE.md"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "final-assets.json"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "local-install-verification.json"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lilith-installer-green.json"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "lisarido-installer-green.json"
+    },
+    {
+      "page": "Report/SA-1114-05-shadow-design/index.html",
+      "target": "art-regression.py"
+    }
+  ]
+}

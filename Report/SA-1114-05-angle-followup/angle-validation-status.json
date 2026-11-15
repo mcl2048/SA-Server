@@ -1,0 +1,10 @@
+[
+  {
+    "step": "inspect-angles",
+    "exit": 0
+  },
+  {
+    "step": "verify-art",
+    "exit": 0
+  }
+]

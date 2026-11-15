@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and atomically install only the lilith-v1 asset extension."""
+"""Install verified v2 art before retiring the known v1 extension."""
 import argparse
 import fcntl
 import gzip
@@ -14,10 +14,10 @@ import sys
 import tarfile
 import tempfile
 
-PACKAGE_ID = "lilith-v1"
+PACKAGE_ID = "lilith-v2"
 PREFIX = "extensions/" + PACKAGE_ID
 ARCHIVE = PACKAGE_ID + "-assets.tar.gz"
-CHECKSUMS = PACKAGE_ID + "-assets.manifest.json"
+LEGACY_IDS = ("lilith-v1",)
 MAX_ARCHIVE = 100 * 1024 * 1024
 MAX_UNPACKED = 100 * 1024 * 1024
 EXPECTED = {PREFIX + "/manifest.json"}
@@ -60,24 +60,36 @@ def regular_bytes(path, maximum):
         return source.read(maximum + 1)
 
 
-def read_package(script_dir):
-    raw = regular_bytes(script_dir / CHECKSUMS, 128 * 1024)
+def sync_directory(path):
+    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def read_manifest(script_dir, package_id):
+    # Both revisions use the same seven relative files. The old checksum list
+    # identifies what may be deleted; it never supplies arbitrary cleanup paths.
+    prefix = "extensions/" + package_id
+    allowed = {prefix + name.removeprefix(PREFIX) for name in EXPECTED}
+    raw = regular_bytes(script_dir / (package_id + "-assets.manifest.json"), 128 * 1024)
     manifest = json.loads(raw, object_pairs_hook=strict_object)
     require(isinstance(manifest, dict), "校验清单必须为JSON对象")
-    require(manifest.get("schemaVersion") == 1 and manifest.get("packageId") == PACKAGE_ID,
+    require(manifest.get("schemaVersion") == 1 and manifest.get("packageId") == package_id,
             "不支持的校验清单版本或包名称")
-    require(manifest.get("targetRoot") == "assets/" + PREFIX and manifest.get("installPrefix") == PREFIX,
+    require(manifest.get("targetRoot") == "assets/" + prefix and manifest.get("installPrefix") == prefix,
             "目标目录合同不匹配")
     archive_meta = manifest.get("archive", {})
     require(isinstance(archive_meta, dict), "归档校验信息必须为对象")
-    require(archive_meta.get("name") == ARCHIVE, "归档名称不匹配")
+    require(archive_meta.get("name") == package_id + "-assets.tar.gz", "归档名称不匹配")
     entries = manifest.get("entries")
     require(isinstance(entries, list) and len(entries) == len(EXPECTED), "清单必须只包含指定的5个资源文件")
     expected = {}
     for entry in entries:
         require(isinstance(entry, dict), "无效的文件清单条目")
         name = entry.get("path")
-        require(isinstance(name, str) and name in EXPECTED and name not in expected,
+        require(isinstance(name, str) and name in allowed and name not in expected,
                 "清单路径不在精确白名单内或有重复: " + str(name))
         require(isinstance(entry.get("size"), int) and not isinstance(entry.get("size"), bool)
                 and 0 < entry["size"] <= MAX_UNPACKED, "无效的资源大小")
@@ -85,15 +97,21 @@ def read_package(script_dir):
         require(isinstance(checksum, str) and len(checksum) == 64
                 and all(c in "0123456789abcdef" for c in checksum), "无效的SHA-256")
         expected[name] = entry
-    require(set(expected) == EXPECTED, "文件清单不完整")
+    require(set(expected) == allowed, "文件清单不完整")
     require(sum(e["size"] for e in expected.values()) <= MAX_UNPACKED, "解压后总大小超过限制")
+    return manifest, expected
+
+
+def read_package(script_dir):
+    manifest, expected = read_manifest(script_dir, PACKAGE_ID)
+    archive_meta = manifest["archive"]
     archive = regular_bytes(script_dir / ARCHIVE, MAX_ARCHIVE)
     require(len(archive) == archive_meta.get("size"), "归档大小校验失败")
     require(digest(archive) == archive_meta.get("sha256"), "归档SHA-256校验失败")
     # Do not use extractall: validate the entire archive before creating files.
     import io
-    # Include two USTAR EOF blocks, then round to a complete tar record.
-    # A single added record is too small for some valid payload boundaries.
+    # USTAR adds two EOF blocks before rounding to a full 10240-byte record.
+    # Adding just one record can reject a valid archive near that boundary.
     member_bytes = sum(512 + ((e["size"] + 511) // 512) * 512 for e in expected.values())
     tar_limit = ((member_bytes + 1024 + 10239) // 10240) * 10240
     with gzip.GzipFile(fileobj=io.BytesIO(archive), mode="rb") as compressed:
@@ -119,25 +137,60 @@ def read_package(script_dir):
     return manifest, expected, payloads
 
 
-def verify_existing(destination, expected):
+def verify_existing(destination, expected, prefix=PREFIX, allow_incomplete=False):
     actual = set()
-    for base, dirs, files in os.walk(destination, followlinks=False):
+    allowed_dirs = {str(parent) for name in expected for parent in PurePosixPath(name).parents}
+    def walk_error(error):
+        raise error
+    for base, dirs, files in os.walk(destination, followlinks=False, onerror=walk_error):
         for name in dirs + files:
             item = Path(base) / name
             safe_path(item)
             require(item.is_dir() or item.is_file(), "现有扩展含非普通文件: " + str(item))
+            if item.is_dir():
+                key = prefix + "/" + item.relative_to(destination).as_posix()
+                require(key in allowed_dirs, "现有扩展含未知目录，保留现状: " + key)
         for name in files:
             item = Path(base) / name
-            key = PREFIX + "/" + item.relative_to(destination).as_posix()
+            key = prefix + "/" + item.relative_to(destination).as_posix()
             require(key in expected, "现有扩展含未知文件，保留现状并拒绝覆盖: " + key)
             data = regular_bytes(item, MAX_UNPACKED)
             require(len(data) == expected[key]["size"] and digest(data) == expected[key]["sha256"],
                     "现有扩展文件冲突，保留原文件并拒绝覆盖: " + key)
             actual.add(key)
-    require(actual == EXPECTED, "现有扩展不完整，保留现状并拒绝覆盖；请人工检查该扩展目录")
+    require(allow_incomplete or actual == set(expected), "现有扩展不完整，保留现状并拒绝覆盖；请人工检查该扩展目录")
 
 
-def install(assets, expected, payloads):
+def remove_legacy(legacy, expected, legacy_id):
+    """Retire validated old files only after the new package is fully verified.
+
+    Rename detaches the old served path in one operation. Recheck the detached
+    directory before deleting it, so a changed/custom extension is preserved.
+    The temporary parent belongs only to this invocation; other extensions and
+    the base assets never enter the cleanup scope.
+    """
+    prefix = "extensions/" + legacy_id
+    verify_existing(legacy, expected, prefix, allow_incomplete=True)
+    retired = Path(tempfile.mkdtemp(prefix="." + legacy_id + "-retired-", dir=legacy.parent))
+    detached = retired / legacy_id
+    try:
+        os.rename(legacy, detached)
+        try:
+            verify_existing(detached, expected, prefix, allow_incomplete=True)
+        except (OSError, ValueError):
+            if not legacy.exists() and not legacy.is_symlink():
+                os.rename(detached, legacy)
+            raise
+        # rmtree refuses a symlink root and does not follow child symlinks.
+        # It only receives our fixed, just-verified private staging path.
+        shutil.rmtree(detached)
+        print("已自动删除旧素材（已核对原版文件摘要）: " + str(legacy))
+    finally:
+        if not detached.exists() and not detached.is_symlink():
+            retired.rmdir()
+
+
+def install(assets, expected, payloads, script_dir):
     # Directory flock prevents two instances of this installer racing installation.
     lock = os.open(assets, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
     try:
@@ -145,42 +198,58 @@ def install(assets, expected, payloads):
         extensions = safe_path(assets / "extensions")
         require(not extensions.exists() or extensions.is_dir(), "extensions 必须是普通目录")
         destination = safe_path(extensions / PACKAGE_ID)
+        obsolete = []
+        for legacy_id in LEGACY_IDS:
+            legacy = safe_path(extensions / legacy_id)
+            if legacy.exists():
+                require(legacy.is_dir(), "旧素材不是普通目录，拒绝删除")
+                _, legacy_expected = read_manifest(script_dir, legacy_id)
+                verify_existing(legacy, legacy_expected, "extensions/" + legacy_id, allow_incomplete=True)
+                obsolete.append((legacy, legacy_expected, legacy_id))
         if destination.exists():
             require(destination.is_dir(), "目标扩展不是目录，拒绝覆盖")
             verify_existing(destination, expected)
-            print("已安装且5个文件校验一致，无需更改: " + str(destination))
-            return
-        extensions.mkdir(mode=0o755, exist_ok=True)
-        stage = Path(tempfile.mkdtemp(prefix=".lilith-v1-stage-", dir=extensions))
-        try:
-            os.chmod(stage, 0o755)
-            for name in sorted(payloads):
-                target = stage / PurePosixPath(name).relative_to(PREFIX)
-                target.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
-                with target.open("xb") as output:
-                    output.write(payloads[name])
-                    output.flush()
-                    os.fsync(output.fileno())
-                os.chmod(target, 0o644)
-            # Stage beside destination: a single directory rename publishes the
-            # complete extension, never a partially copied manifest/pages pair.
-            require(not destination.exists() and not destination.is_symlink(), "目标目录在安装期间发生变化")
-            os.rename(stage, destination)
-            parent_fd = os.open(extensions, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            print("新版已安装且5个文件校验一致，无需重写: " + str(destination))
+        else:
+            extensions.mkdir(mode=0o755, exist_ok=True)
+            stage = Path(tempfile.mkdtemp(prefix=".lilith-v2-stage-", dir=extensions))
             try:
-                os.fsync(parent_fd)
+                os.chmod(stage, 0o755)
+                for name in sorted(payloads):
+                    target = stage / PurePosixPath(name).relative_to(PREFIX)
+                    target.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
+                    with target.open("xb") as output:
+                        output.write(payloads[name])
+                        output.flush()
+                        os.fsync(output.fileno())
+                    os.chmod(target, 0o644)
+                # Publish only a fully verified sibling directory.
+                verify_existing(stage, expected)
+                # Persist both the file data and directory entries before old
+                # art can be retired; syncing only the parent is insufficient.
+                for folder in (stage / "anim", stage / "pages", stage):
+                    sync_directory(folder)
+                require(not destination.exists() and not destination.is_symlink(), "目标目录在安装期间发生变化")
+                os.rename(stage, destination)
+                print("安装完成，5个文件校验通过: " + str(destination))
             finally:
-                os.close(parent_fd)
-            print("安装完成，5个文件校验通过: " + str(destination))
-            print("原有素材保持不变；仅补装素材包时刷新网页即可。")
-            print("若同时更新了bin/saserver，请按正常存档停服流程重启服务；本脚本不停止服务。")
+                if stage.exists():
+                    require(stage.parent == extensions and stage.name.startswith(".lilith-v2-stage-")
+                            and not stage.is_symlink(), "临时目录异常，拒绝清理")
+                    shutil.rmtree(stage)
+        # No early return for an existing v2: a repeat invocation must still
+        # retire a known v1 directory that has been restored beside the new art.
+        verify_existing(destination, expected)
+        parent_fd = os.open(extensions, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        try:
+            os.fsync(parent_fd)
+            for legacy, legacy_expected, legacy_id in obsolete:
+                remove_legacy(legacy, legacy_expected, legacy_id)
+                os.fsync(parent_fd)
         finally:
-            # Only remove this invocation's verified temporary staging directory.
-            # Never delete or replace an existing installed extension/base asset.
-            if stage.exists():
-                require(stage.parent == extensions and stage.name.startswith(".lilith-v1-stage-")
-                        and not stage.is_symlink(), "临时目录异常，拒绝清理")
-                shutil.rmtree(stage)
+            os.close(parent_fd)
+        print("v0.2.18客户端加载v2；官方基础素材与其他宠物扩展保持不变。")
+        print("从旧版升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。")
     finally:
         os.close(lock)
 
@@ -231,7 +300,7 @@ def configured_assets(repo_root):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="离线校验并安装莉莉丝增量素材，保留原素材")
+    parser = argparse.ArgumentParser(description="校验安装莉莉丝v2素材，成功后自动清理已知旧v1；保留基础素材及其他扩展")
     parser.add_argument("--assets", metavar="DIR", help="显式指定已存在且末级名为assets/Assets的目录；默认脚本上级的assets")
     args = parser.parse_args()
     script_dir = safe_path(Path(__file__).absolute().parent)
@@ -253,12 +322,12 @@ def main():
         assets.mkdir(mode=0o755, exist_ok=True)
     require(assets.is_dir(), "目标assets不是目录")
     print("已验证离线素材包，目标目录: " + str(assets))
-    install(assets, expected, payloads)
+    install(assets, expected, payloads, script_dir)
 
 
 if __name__ == "__main__":
     try:
         main()
     except (OSError, ValueError, tarfile.TarError, KeyError, TypeError, EOFError) as error:
-        print("安装失败（未覆盖原素材）: " + str(error), file=sys.stderr)
+        print("安装或旧版清理失败（新版不会覆盖冲突文件）: " + str(error), file=sys.stderr)
         sys.exit(1)

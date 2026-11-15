@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 ROOT=Path(__file__).resolve().parents[1]
-PACK='primal-claws-v2'; BASE=9300000; CELL=192; GROUND=(96,142); SS=3
+PACK='primal-claws-v3'; BASE=9300000; CELL=240; GROUND=(120,174); SS=3
 ACTIONS=((3,'stand',6,7),(4,'walk',8,4),(0,'attack',10,5),(1,'damage',3,6),
          (2,'dead',4,8),(6,'hand',10,5),(10,'guard',3,8),(12,'throw',3,6))
 # Native order S, SW, W, NW, N, NE, E, SE. Extra reference view is unused.
@@ -24,10 +24,10 @@ SIZES={'cyrufas':[(58,79,-29,-57),(89,78,-34,-59),(95,78,-39,-60),(66,99,-33,-65
  'claudes':[(67,92,-34,-58),(95,83,-48,-57),(118,76,-59,-57),(87,87,-44,-58),
  (64,96,-33,-60),(96,83,-50,-58),(117,76,-59,-57),(86,85,-41,-57)]}
 # Reference poses are seated/curled, unlike the uploaded quadruped. Their
-# per-view bounding boxes are NOT anatomical proportions. Fit each original
-# uniformly into a species envelope, then place its support feet at y+12.
+# per-view bounding boxes are NOT anatomical proportions. Calibrate body height
+# across directions: a tail/claw extending sideways must not shrink the animal.
 # Source-space support centers exclude the tiger's tail and the crab's claws.
-ENVELOPE={'cyrufas':(112,84),'claudes':(118,92)}
+BODY_HEIGHT={'cyrufas':84,'claudes':88}
 FEET={'cyrufas':[(50,96),(48,96),(48,96),(46,97),(50,98),(59,97),(52,97),(53,97)],
       'claudes':[(50,94),(54,95),(56,95),(55,96),(50,97),(47,96),(45,96),(53,95)]}
 # Normalized source-space polygons. Each claw/limb is segmented from its real
@@ -36,15 +36,15 @@ FEET={'cyrufas':[(50,96),(48,96),(48,96),(46,97),(50,98),(59,97),(52,97),(53,97)
 TIGER={
 0:[((21,49),[(7,45),(36,47),(39,86),(24,94),(0,94)],'front'),((79,51),[(67,48),(93,50),(100,95),(79,100),(64,88)],'claw'),((31,65),[(28,62),(38,63),(40,89),(28,90)],'hind'),((64,66),[(60,62),(70,62),(74,89),(59,89)],'hind')],
 6:[((21,53),[(11,49),(33,53),(31,83),(21,97),(0,95)],'front'),((57,46),[(47,41),(63,44),(65,62),(57,85),(45,100),(26,97),(32,77)],'claw'),((75,53),[(65,45),(81,47),(83,88),(69,91),(68,73)],'hind'),((65,56),[(59,53),(68,51),(69,83),(57,86)],'hind')],
-3:[((35,51),[(27,43),(43,48),(39,72),(31,95),(17,98),(18,86)],'front'),((25,51),[(18,49),(28,54),(16,78),(9,100),(0,97),(2,75)],'claw'),((65,41),[(56,37),(73,42),(74,68),(80,79),(81,98),(66,100),(67,78),(58,64)],'hind'),((57,53),[(53,48),(63,50),(67,74),(59,91),(49,92),(52,74)],'hind')],
-4:[((30,51),[(24,44),(38,49),(36,76),(28,96),(16,96),(19,78)],'front'),((22,53),[(16,48),(28,51),(20,73),(13,97),(0,96),(0,76)],'claw'),((56,37),[(49,32),(67,39),(66,65),(66,98),(50,100),(51,74),(46,58)],'hind'),((72,52),[(65,47),(75,49),(82,88),(72,96),(64,94),(67,74)],'hind')],
+3:[((35,51),[(27,43),(43,48),(45,55),(43,69),(40,83),(36,100),(20,100),(20,89),(27,85),(29,72),(29,55)],'front'),((25,51),[(18,49),(31,53),(33,63),(27,76),(23,85),(23,98),(10,100),(0,98),(1,77),(6,69)],'claw'),((65,41),[(56,37),(74,42),(76,61),(82,70),(83,99),(65,100),(64,77),(58,64)],'hind'),((57,53),[(53,48),(63,50),(67,74),(67,96),(49,96),(48,90),(52,74)],'hind')],
+4:[((43,57),[(37,49),(48,53),(49,66),(47,78),(46,94),(30,95),(30,88),(36,80),(37,67)],'front'),((22,53),[(16,48),(32,51),(32,63),(25,77),(22,95),(0,98),(0,76)],'claw'),((56,37),[(49,32),(67,39),(66,65),(66,100),(44,100),(47,88),(50,76),(46,58)],'hind'),((72,52),[(63,47),(75,49),(84,75),(86,96),(69,98),(67,86),(67,74),(61,60)],'hind')],
 1:[((22,58),[(7,53),(34,54),(35,99),(7,100)],'hind'),((78,57),[(65,53),(90,53),(100,95),(73,100),(65,82)],'hind'),((38,45),[(31,42),(42,42),(42,78),(33,78)],'front'),((62,43),[(55,40),(68,40),(69,77),(57,78)],'claw')],
 2:[((68,47),[(58,41),(75,42),(80,65),(79,96),(66,96),(65,72)],'front'),((79,52),[(73,47),(86,50),(98,73),(100,96),(88,96),(79,77),(65,65)],'claw'),((47,43),[(38,35),(53,37),(57,61),(52,73),(54,100),(40,100),(39,76)],'hind'),((25,50),[(17,44),(32,42),(29,70),(23,94),(12,94),(14,75)],'hind')],
-5:[((55,55),[(49,44),(64,46),(61,68),(68,87),(70,100),(56,100),(51,78)],'front'),((73,57),[(68,52),(78,51),(89,73),(94,98),(81,98),(70,78)],'claw'),((28,42),[(22,32),(38,38),(37,62),(26,80),(29,96),(17,100),(12,86),(19,63)],'hind'),((38,54),[(36,48),(45,48),(42,76),(47,89),(40,94),(31,87)],'hind')],
-8:[((54,52),[(47,45),(59,49),(60,75),(69,96),(56,100),(48,83)],'front'),((76,55),[(68,46),(79,49),(92,69),(100,95),(91,98),(81,81),(69,65)],'claw'),((29,41),[(20,31),(38,34),(38,56),(26,76),(28,94),(15,97),(12,77)],'hind'),((33,57),[(31,51),(39,51),(39,80),(43,90),(33,93),(27,80)],'hind')],
+5:[((55,55),[(49,44),(64,46),(69,55),(69,73),(75,86),(77,90),(77,100),(59,100),(55,88),(51,78)],'front'),((73,57),[(68,52),(78,51),(90,69),(95,77),(96,90),(94,100),(80,100),(75,85),(67,75)],'claw'),((28,42),[(22,32),(38,38),(38,62),(28,80),(31,100),(14,100),(10,86),(13,65)],'hind'),((38,54),[(36,48),(45,48),(43,66),(37,75),(40,83),(46,88),(46,96),(31,96),(28,84),(28,73)],'hind')],
+8:[((54,52),[(47,45),(59,49),(62,65),(65,79),(73,89),(73,100),(56,100),(50,86),(48,73)],'front'),((76,55),[(68,46),(79,49),(94,69),(99,78),(100,98),(87,100),(77,89),(75,78),(67,67)],'claw'),((29,41),[(20,31),(38,34),(38,56),(26,76),(30,100),(10,100),(10,77)],'hind'),((33,57),[(34,49),(46,49),(46,59),(38,68),(38,77),(45,85),(46,92),(31,94),(29,82),(28,67)],'hind')],
 }
 # Root/polygon for the tiger tail. It is occluded in front view, not invented.
-TAIL={1:((50,44),[(44,41),(58,43),(62,94),(45,96),(43,79)]),2:((21,41),[(15,38),(27,40),(17,71),(6,86),(0,86),(0,76),(10,68)]),3:((79,34),[(75,30),(86,38),(91,61),(100,74),(100,84),(91,82),(83,69)]),4:((70,35),[(65,29),(77,34),(84,64),(94,79),(100,78),(100,89),(90,91),(79,75)]),5:((20,39),[(15,35),(25,40),(14,67),(3,79),(0,79),(0,68),(8,60)]),6:((76,40),[(72,34),(83,40),(90,66),(99,68),(100,77),(92,79),(83,71)]),8:((23,40),[(18,33),(29,35),(21,61),(6,76),(0,76),(0,66),(12,55)])}
+TAIL={1:((50,44),[(44,41),(58,43),(62,94),(45,96),(43,79)]),2:((21,41),[(15,38),(27,40),(17,71),(6,86),(0,86),(0,76),(10,68)]),3:((79,34),[(75,30),(86,38),(91,61),(100,74),(100,84),(91,82),(83,69)]),4:((70,35),[(65,29),(77,34),(84,64),(94,77),(100,75),(100,91),(90,93),(79,75)]),5:((20,39),[(15,35),(25,40),(18,62),(9,77),(3,83),(0,84),(0,68),(8,60)]),6:((76,40),[(72,34),(83,40),(90,66),(99,68),(100,77),(92,79),(83,71)]),8:((23,40),[(18,33),(29,35),(21,61),(9,75),(4,81),(0,81),(0,66),(12,55)])}
 # Crab legs are isolated below their spherical sockets, preserving the shell.
 CRAB={
 4:[((16,49),[(11,46),(22,49),(14,72),(4,83),(0,80),(4,64)],'leg'),((28,61),[(21,57),(32,60),(34,86),(25,99),(16,94),(19,76)],'leg'),((78,61),[(72,56),(84,57),(91,77),(91,97),(81,100),(76,83)],'leg'),((86,50),[(80,48),(91,46),(100,80),(96,85),(88,68)],'leg'),((76,58),[(67,49),(83,52),(84,64),(87,89),(80,100),(67,96),(64,79)],'claw')],
@@ -152,7 +152,7 @@ def pin_support(im,pivot,target,foot):
 
 
 def rig(name,source,direction):
-    scale=min(ENVELOPE[name][0]/source.width,ENVELOPE[name][1]/source.height)
+    scale=BODY_HEIGHT[name]/source.height
     w,h=round(source.width*scale),round(source.height*scale)
     fx,fy=FEET[name][direction]
     origin=(round(GROUND[0]-w*fx/100),round(GROUND[1]+12-h*fy/100))
@@ -184,6 +184,50 @@ def rig(name,source,direction):
     used=ImageChops.subtract(occupied,sockets)
     body=base.copy();body.putalpha(ImageChops.subtract(base.getchannel('A'),used));body=connected_skin(body)
     return base,body,parts,origin,(w,h)
+
+
+def run_limb(im,root,knee,foot,new_root,target,bend=1):
+    """Two-bone textured gait: bend the knee and preserve each segment's width.
+
+    Splitting source pixels at the knee allows a gather/extend cycle instead of
+    four rigid strips swinging back and forth. Joint overlap retains armour.
+    """
+    root,knee,foot,new_root,target=(np.array(p,float) for p in (root,knee,foot,new_root,target))
+    upper=np.linalg.norm(knee-root);lower=np.linalg.norm(foot-knee)
+    delta=target-new_root;length=np.linalg.norm(delta)
+    if min(upper,lower,length)<.5:return im
+    # Keep the sole's requested contact, allowing a small textured reach rather
+    # than clamping the foot up off the ground when the torso pitches away.
+    reach=max(1,(length+.1)/(upper+lower));upper*=reach;lower*=reach
+    length=max(abs(upper-lower)+.1,length);axis=delta/np.linalg.norm(delta)
+    target=new_root+axis*length
+    along=(upper**2-lower**2+length**2)/(2*length)
+    joint=new_root+axis*along+np.array([-axis[1],axis[0]])*math.sqrt(max(0,upper**2-along**2))*bend
+    yy,xx=np.indices((im.height,im.width));old_axis=(foot-root)/np.linalg.norm(foot-root)
+    distance=(xx/SS-knee[0])*old_axis[0]+(yy/SS-knee[1])*old_axis[1]
+    result=Image.new('RGBA',im.size)
+    for start,end,a,b,mask in ((root,knee,new_root,joint,distance<=2),(knee,foot,joint,target,distance>=-2)):
+        old=end-start;new=b-a;u=old/np.linalg.norm(old);v=np.array([-u[1],u[0]])
+        nv=np.array([-new[1],new[0]])/np.linalg.norm(new)
+        matrix=np.outer(new/np.linalg.norm(old),u)+np.outer(nv,v);inverse=np.linalg.inv(matrix)
+        offset=(start-inverse@a)*SS
+        part=im.copy();part.putalpha(ImageChops.multiply(im.getchannel('A'),Image.fromarray(np.uint8(mask)*255)))
+        part=part.transform(im.size,Image.Transform.AFFINE,(*inverse[0],offset[0],*inverse[1],offset[1]),Image.Resampling.BICUBIC)
+        result=Image.alpha_composite(result,part)
+    return result
+
+
+def ground_shadow(name,direction,action,frame,count):
+    """Native-style dark floor projection; never follows body lift or rotation."""
+    im=Image.new('RGBA',(CELL*SS,CELL*SS));draw=ImageDraw.Draw(im)
+    # The footprint is shorter in front/back views. Keep a crisp contact core
+    # and a narrow soft edge like the original palette sprites.
+    lateral=abs(math.sin(direction*math.pi/4));rx=(22+20*lateral) if name=='cyrufas' else (28+15*lateral)
+    ry=7 if name=='cyrufas' else 8
+    jump=math.sin(frame/max(1,count-1)*math.pi) if name=='claudes' and action in ('attack','hand') else 0
+    rx*=1-.15*jump;ry*=1-.12*jump;cx=GROUND[0];cy=GROUND[1]+10
+    draw.ellipse(((cx-rx)*SS,(cy-ry)*SS,(cx+rx)*SS,(cy+ry)*SS),fill=(7,10,13,round(170-45*jump)))
+    return im.filter(ImageFilter.GaussianBlur(.55*SS))
 
 
 def marks(im,center,direction,kind,progress,opacity=1):
@@ -220,6 +264,11 @@ def animate(name,model,direction,action,frame,count):
     hip=tuple(sum(p[k] for p in hips)/len(hips) for k in (0,1)) if hips else (origin[0]+w/2,origin[1]+h*.6)
     body_angle=side*42*rear if name=='cyrufas' and not frontal else 0
     lift=(-h*.22*rear if frontal else 0) if name=='cyrufas' else -22*rear
+    if walking and name=='cyrufas':
+        # Native tiger gait gathers the hindquarters then extends the forelegs.
+        # Torso pitch and suspension complement, rather than replace, knee bend.
+        body_angle=side*5*math.sin(phase)
+        lift=-2-4*(.5+.5*math.sin(phase-.6))
     # Breathing is deliberately subtle; the articulated limbs/tail carry motion.
     breathe=math.sin(phase)*.45 if action=='stand' else 0
     torso=move(body,body_angle,hip,dy=lift+breathe)
@@ -230,7 +279,7 @@ def animate(name,model,direction,action,frame,count):
     for i,(part,pivot,role) in enumerate(parts):
         swing=math.sin(phase+(i%2)*math.pi)
         angle=0;dy=0;dx=0
-        if walking:
+        if walking and name!='cyrufas':
             angle=swing*(13 if name=='cyrufas' else 17);dy=-max(0,swing)*2
             dx=swing*(.5 if frontal else 1)
         if role=='tail':angle=math.sin(phase)*9+(math.sin(phase*2)*3 if walking else 0)
@@ -245,14 +294,31 @@ def animate(name,model,direction,action,frame,count):
         if action=='throw' and role=='claw':
             angle=side*(0,-35,20)[frame];dy=(0,-4,0)[frame]
         support=name=='cyrufas' and role=='hind'
-        if support and attacking:
+        running=walking and name=='cyrufas' and role in ('front','claw','hind')
+        if running:
+            yy,xx=np.nonzero(np.asarray(part.getchannel('A'))>64)
+            sole=yy.max();foot=(float(np.median(xx[yy>=sole-SS*2]))/SS,sole/SS)
+            # Fore/hind pairs lead one another, with a smaller left/right lag;
+            # the stance portion stays on the floor, swing gathers upward.
+            t=(frame/count+(.53 if role=='hind' else 0)+(i%2)*.10)%1
+            if t<.46:travel=1-2*t/.46;raise_foot=0
+            else:
+                u=(t-.46)/.54;travel=-math.cos(math.pi*u);raise_foot=math.sin(math.pi*u)*15
+            heading=(0,-.75,-1,-.75,0,.75,1,.75)[direction]
+            depth=(1,.4,0,-.4,-1,-.4,0,.4)[direction]
+            target=(foot[0]+heading*travel*14,foot[1]+depth*travel*3-raise_foot)
+            rad=math.radians(body_angle);rx,ry=pivot[0]-hip[0],pivot[1]-hip[1]
+            new_root=(hip[0]+rx*math.cos(rad)+ry*math.sin(rad),hip[1]-rx*math.sin(rad)+ry*math.cos(rad)+lift)
+            knee=(pivot[0]+(foot[0]-pivot[0])*.48,pivot[1]+(foot[1]-pivot[1])*.48)
+            part=run_limb(part,pivot,knee,foot,new_root,target,1 if heading<=0 else -1)
+        elif support and attacking:
             yy,xx=np.nonzero(np.asarray(part.getchannel('A'))>64)
             sole=yy.max();foot=(float(np.median(xx[yy>=sole-SS*2]))/SS,sole/SS)
             rad=math.radians(body_angle);rx,ry=pivot[0]-hip[0],pivot[1]-hip[1]
             target=(hip[0]+rx*math.cos(rad)+ry*math.sin(rad),hip[1]-rx*math.sin(rad)+ry*math.cos(rad)+lift+breathe)
             part=pin_support(part,pivot,target,foot)
         else:part=move(part,angle,pivot,dx,dy)
-        if not support:part=move(part,body_angle,hip,dy=lift+breathe)
+        if not support and not running:part=move(part,body_angle,hip,dy=lift+breathe)
         (behind if role in ('hind','tail') else front).append(part)
     for part in behind:result=Image.alpha_composite(result,part)
     result=Image.alpha_composite(result,torso)
@@ -269,10 +335,11 @@ def animate(name,model,direction,action,frame,count):
         # at the target before the hit event and performs the return walk.
         center=(origin[0]+w*(.28 if side<0 else .72),origin[1]+h*.54+lift)
         result=marks(result,center,direction,name,(.35,.72,1,1)[frame-4],(1,1,1,.55)[frame-4])
-    if walking:result=move(result,dy=-abs(math.sin(phase))*1.5)
+    if walking and name!='cyrufas':result=move(result,dy=-abs(math.sin(phase))*1.5)
     if action=='damage':result=move(result,angle=(0,-side*8,side*4)[frame],pivot=GROUND,dx=(0,-side*3,0)[frame])
     if action=='guard':result=move(result,dy=(1,2,1)[frame])
     if action=='dead':result=move(result,angle=side*(0,12,22,32)[frame],pivot=(origin[0]+w/2,origin[1]+h/2))
+    result=Image.alpha_composite(ground_shadow(name,direction,action,frame,count),result)
     result=result.resize((CELL,CELL),Image.Resampling.LANCZOS)
     # Metal detail must remain readable at the native ~100px scale. Lift only
     # RGB midtones and sharpen once after downsampling, preserving alpha edges.
@@ -360,8 +427,8 @@ def generate(out,report):
     obj={'id':199402,'actions':[{'dir':0,'type':3,'ticks':2,'frames':frames}],'pages':[PACK+'/2']};(out/'anim/199402.json').write_text(json.dumps(obj,separators=(',',':'))+'\n');animations.append({'id':199402,'file':'anim/199402.json'})
     manifest={'format':1,'id':PACK,'pages':page_defs,'images':images,'animations':animations};(out/'manifest.json').write_text(json.dumps(manifest,separators=(',',':'))+'\n')
     compact=compact_pages(out)
-    result={'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'texture_compaction':compact,'pack':PACK,'characters':2,'character_frames_each':count,'effect_frames':24,'image_count':len(images),'source_order':ORDER,'reference_pose_bounds':SIZES,'uniform_fit_envelope':ENVELOPE,'support_centers_percent':FEET,'source_sha256':{n:hashlib.sha256((ROOT/'img'/f'{n}.jpg').read_bytes()).hexdigest() for n in ORDER},'art_origin':'Uploaded JPG cutouts with manually segmented hinge layers, raster transforms and authored red FX. No external image generation service called.','independent_parts':'tiger: foreleg, left claw, hind legs, tail; crab: four legs and left claw; original source pixels only, no mirrored directions.'}
+    result={'generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'texture_compaction':compact,'pack':PACK,'characters':2,'character_frames_each':count,'effect_frames':24,'image_count':len(images),'source_order':ORDER,'reference_pose_bounds':SIZES,'body_height_by_species':BODY_HEIGHT,'support_centers_percent':FEET,'source_sha256':{n:hashlib.sha256((ROOT/'img'/f'{n}.jpg').read_bytes()).hexdigest() for n in ORDER},'art_origin':'Uploaded JPG cutouts with manually segmented hinge layers, two-bone running gait and stationary floor shadows. No external image generation service called.','independent_parts':'tiger: foreleg, left claw, hind legs, tail; crab: four legs and left claw; original source pixels only, no mirrored directions.'}
     report.mkdir(parents=True,exist_ok=True);(report/'art-generation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(json.dumps(result,ensure_ascii=False))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,default=Path('/tmp/sa-primal-claws-build/extensions/primal-claws-v2'));p.add_argument('--report',type=Path,default=ROOT/'Report/SA-1114-05-art-polish');args=p.parse_args();generate(args.output.resolve(),args.report.resolve())
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,default=Path('/tmp/sa-primal-claws-build/extensions/primal-claws-v3'));p.add_argument('--report',type=Path,default=ROOT/'Report/SA-1114-05-angle-followup');args=p.parse_args();generate(args.output.resolve(),args.report.resolve())

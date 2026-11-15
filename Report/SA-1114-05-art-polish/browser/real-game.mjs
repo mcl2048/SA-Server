@@ -9,7 +9,8 @@ import {resolve,dirname} from "node:path";
 import {fileURLToPath} from "node:url";
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"../../..");
-const out=resolve(root,"Report/SA-1114-05-art-polish/browser");mkdirSync(out,{recursive:true});
+const outIndex=process.argv.indexOf("--out");
+const out=resolve(root,outIndex<0?"Report/SA-1114-05-art-polish/browser":process.argv[outIndex+1]);mkdirSync(out,{recursive:true});
 const argv=process.argv.slice(2),option=name=>{const i=argv.indexOf(name);return i<0?undefined:argv[i+1];};
 const variant=option("--variant")??"final",probe=argv.includes("--probe"),inputOnly=argv.includes("--input-only"),resultOnly=argv.includes("--result-only"),cameraOnly=argv.includes("--camera-only");
 const matrix=argv.includes("--matrix"), knockout=argv.includes("--knockout");
@@ -308,12 +309,13 @@ async function work(){
  const deadline=Date.now()+90000;
  while(Date.now()<deadline){if(child.exitCode!==null)throw Error("owned ELF exited during startup");try{const response=await fetch(base+"/",{signal:AbortSignal.timeout(2000)});if(response.status===200){results.client_version=(/dist\/main\.js\?v=([\w]+)/.exec(await response.text())??[])[1];break;}}catch{}await delay(150);}
  assert(child.exitCode===null&&results.client_version,"owned ELF did not become HTTP ready");announce("server-ready");
+ if(option("--http-script"))execFileSync("python3",[option("--http-script"),"--meta",option("--meta")],{stdio:"inherit"});
  const {chromium}=await import(process.env.SA_PLAYWRIGHT_MODULE??"/home/coder/.npm/_npx/31e32ef8478fbf80/node_modules/playwright/index.mjs");
  browser=await chromium.launch({headless:true,executablePath:process.env.SA_CHROMIUM??"/home/coder/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell",args:["--no-sandbox","--use-angle=swiftshader","--enable-unsafe-swiftshader","--disable-background-timer-throttling","--disable-backgrounding-occluded-windows","--disable-renderer-backgrounding"]});
  results.browser=browser.version();const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
  let ui=new GameUI(await context.newPage(),true);liveUi=ui;results.events=ui.events;results.errors=ui.errors;
  await ui.enter();await normalizeAuto(ui);await ui.noEncounter();await ui.gm("/heal");announce("authenticated-real-field");
- if(argv.includes("--art")){ui=await(await import("./art-cases.mjs")).runArt(ui,results,{variant,out});liveUi=ui;}
+ if(argv.includes("--art")){ui=await(await import(option("--art-module")??"./art-cases.mjs")).runArt(ui,results,{variant,out});liveUi=ui;}
  else if(argv.includes("--primal")){ui=await(await import("../../SA-1114-05/browser/primal-cases.mjs")).runPrimal(ui,results,{variant,out});liveUi=ui;}
  else if(argv.includes("--primal-panel-probe")){ui=await(await import("../../SA-1114-05/browser/primal-cases.mjs")).runPrimalPanelProbe(ui,results);liveUi=ui;}
  else if(argv.includes("--primal-red-probe")){ui=await(await import("./primal-red-probe.mjs")).runPrimalRedProbe(ui,results,{variant,out});liveUi=ui;}
@@ -321,7 +323,7 @@ async function work(){
  else if(argv.includes("--lilith")){ui=await(await import("./lilith-cases.mjs")).runLilith(ui,results,{variant,out});liveUi=ui;}
  else if(argv.includes("--mobile-regression")){
   const record=(name,evidence)=>{results.checks.push({case:name,passed:true,evidence});console.log(JSON.stringify({variant,mobile_case:name}));};
-  const {fieldCameraLock,battleCameraLock}=await import("../../SA-1114-02/browser/camera-lock.mjs");
+  const {fieldCameraLock,battleCameraLock}=await import(option("--camera-module")??"../../SA-1114-02/browser/camera-lock.mjs");
   await ui.gm("/warp 300 371 183");await ui.page.waitForFunction(()=>sa.assets.pending===0,null,{timeout:60000});await fieldCameraLock(ui,record);await ui.mode("classic");await ui.gm("/heal");await ui.gm("/encount 90004 1",true);await ui.waitMenu();await battleCameraLock(ui,record);await ui.mode("classic");await ui.escape();
  }
  else if(probe){if(cameraOnly){announce("camera-probe");results.camera=await cameraProbe(ui);}else{

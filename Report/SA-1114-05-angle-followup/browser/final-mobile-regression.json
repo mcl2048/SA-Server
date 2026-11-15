@@ -1,0 +1,2475 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "c838d059060308f766a2d3de6b3a03b8b9ac9d6c7ff3d2aff23aecdfb3e81af6",
+  "binary_version": "v0.2.18-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T00:31:18.287Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T00:31:32.322Z"
+    },
+    {
+      "stage": "scenario-finished",
+      "time": "2026-11-15T00:32:24.208Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "field player remains visible through rotation 390x844",
+      "passed": true,
+      "evidence": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visual": {
+          "width": 390,
+          "height": 844,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "stage": {
+          "x": -367.6666259765625,
+          "y": 0,
+          "width": 1125.333251953125,
+          "height": 844
+        },
+        "model": {
+          "x": 172.49333496093755,
+          "y": 378.39330596923827,
+          "width": 47.826663208007815,
+          "height": 91.4333267211914
+        },
+        "native": {
+          "x": 371,
+          "y": 183,
+          "sprite": 100000,
+          "dir": 7,
+          "frame": 3
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 736,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 300,
+            "height": 52
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 322,
+            "y": 776,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-joystick",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "field player remains visible through rotation 844x390",
+      "passed": true,
+      "evidence": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visual": {
+          "width": 844,
+          "height": 390,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.055,
+          "left": 422,
+          "top": -146.82
+        },
+        "stage": {
+          "x": 0.000030517578125,
+          "y": -146.8125,
+          "width": 844,
+          "height": 632.9999389648438
+        },
+        "model": {
+          "x": 405.12003051757813,
+          "y": 136.98249999999996,
+          "width": 35.87,
+          "height": 68.575
+        },
+        "native": {
+          "x": 371,
+          "y": 183,
+          "sprite": 100000,
+          "dir": 7,
+          "frame": 3
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 282,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 754,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 776,
+            "y": 322,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-joystick",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "field player remains visible through rotation 320x568",
+      "passed": true,
+      "evidence": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "visual": {
+          "width": 320,
+          "height": 568,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1,
+          "left": 160,
+          "top": -32
+        },
+        "stage": {
+          "x": -240,
+          "y": -32,
+          "width": 800,
+          "height": 600
+        },
+        "model": {
+          "x": 144,
+          "y": 237,
+          "width": 34,
+          "height": 65
+        },
+        "native": {
+          "x": 371,
+          "y": 183,
+          "sprite": 100000,
+          "dir": 7,
+          "frame": 1
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 460,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 230,
+            "height": 52
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 252,
+            "y": 500,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-joystick",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "field player remains visible through rotation 568x320",
+      "passed": true,
+      "evidence": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 568,
+          "height": 320
+        },
+        "visual": {
+          "width": 568,
+          "height": 320,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1,
+          "left": 284,
+          "top": -164
+        },
+        "stage": {
+          "x": -116,
+          "y": -164,
+          "width": 800,
+          "height": 600
+        },
+        "model": {
+          "x": 268,
+          "y": 105,
+          "width": 33,
+          "height": 62
+        },
+        "native": {
+          "x": 371,
+          "y": 183,
+          "sprite": 100000,
+          "dir": 7,
+          "frame": 0
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 212,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 478,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 500,
+            "y": 252,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-joystick",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "field player remains visible through rotation 430x932",
+      "passed": true,
+      "evidence": {
+        "context": "field",
+        "display": "immersive",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "visual": {
+          "width": 430,
+          "height": 932,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.5533333333333332,
+          "left": 215,
+          "top": 1.1368683772161603e-13
+        },
+        "stage": {
+          "x": -406.33331298828125,
+          "y": 0,
+          "width": 1242.6666259765625,
+          "height": 932
+        },
+        "model": {
+          "x": 190.14666748046875,
+          "y": 417.84665298461914,
+          "width": 46.599998474121094,
+          "height": 100.9666633605957
+        },
+        "native": {
+          "x": 371,
+          "y": 183,
+          "sprite": 100000,
+          "dir": 7,
+          "frame": 2
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-joystick",
+            "x": 12,
+            "y": 824,
+            "width": 96,
+            "height": 96
+          },
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 340,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 362,
+            "y": 864,
+            "width": 56,
+            "height": 56
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": null,
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-joystick",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "field visible zoom +, − and reset remain functional",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "larger": {
+          "scale": 1.5473333333333334,
+          "left": 195,
+          "top": -79.33600000000001
+        },
+        "smaller": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "reset": {
+          "scale": 1.4066666666666667,
+          "left": 195,
+          "top": 0
+        },
+        "nativeButtonEvents": [
+          {
+            "kind": "pointerdown",
+            "when": "event",
+            "label": "放大场景",
+            "time": 27240.299999952316,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerup",
+            "when": "event",
+            "label": "放大场景",
+            "time": 27242,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "event",
+            "label": "放大场景",
+            "time": 27244.299999952316,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "frame",
+            "label": "放大场景",
+            "time": 27273.699999928474,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "task",
+            "label": "放大场景",
+            "time": 27281.5,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerdown",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 27859,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerup",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 27862.600000023842,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 27864.600000023842,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "frame",
+            "label": "缩小场景",
+            "time": 27897.699999928474,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "task",
+            "label": "缩小场景",
+            "time": 27900,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          }
+        ]
+      }
+    },
+    {
+      "case": "field real two-finger spread and translation preserve camera and game intent",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "context": "field",
+          "display": "immersive",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          },
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "stage": {
+            "x": -367.6666259765625,
+            "y": 0,
+            "width": 1125.333251953125,
+            "height": 844
+          },
+          "model": {
+            "x": 172.49333496093755,
+            "y": 378.39330596923827,
+            "width": 47.826663208007815,
+            "height": 91.4333267211914
+          },
+          "native": {
+            "x": 371,
+            "y": 183,
+            "sprite": 100000,
+            "dir": 7,
+            "frame": 1
+          },
+          "obstacles": [
+            {
+              "class": "mobile-shell-joystick",
+              "x": 12,
+              "y": 736,
+              "width": 96,
+              "height": 96
+            },
+            {
+              "class": "mobile-shell-status",
+              "x": 12,
+              "y": 8,
+              "width": 300,
+              "height": 52
+            },
+            {
+              "class": "mobile-shell-tray-toggle",
+              "x": 322,
+              "y": 776,
+              "width": 56,
+              "height": 56
+            }
+          ],
+          "field": {
+            "x": 371,
+            "y": 183,
+            "target": null,
+            "wantDir": -1
+          },
+          "battle": null,
+          "pressed": false,
+          "panels": 0
+        },
+        "after": {
+          "context": "field",
+          "display": "immersive",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          },
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": 195,
+            "top": 0
+          },
+          "stage": {
+            "x": -367.6666259765625,
+            "y": 0,
+            "width": 1125.333251953125,
+            "height": 844
+          },
+          "model": {
+            "x": 172.49333496093755,
+            "y": 378.39330596923827,
+            "width": 47.826663208007815,
+            "height": 91.4333267211914
+          },
+          "native": {
+            "x": 371,
+            "y": 183,
+            "sprite": 100000,
+            "dir": 7,
+            "frame": 3
+          },
+          "obstacles": [
+            {
+              "class": "mobile-shell-joystick",
+              "x": 12,
+              "y": 736,
+              "width": 96,
+              "height": 96
+            },
+            {
+              "class": "mobile-shell-status",
+              "x": 12,
+              "y": 8,
+              "width": 300,
+              "height": 52
+            },
+            {
+              "class": "mobile-shell-tray-toggle",
+              "x": 322,
+              "y": 776,
+              "width": 56,
+              "height": 56
+            }
+          ],
+          "field": {
+            "x": 371,
+            "y": 183,
+            "target": null,
+            "wantDir": -1
+          },
+          "battle": null,
+          "pressed": false,
+          "panels": 0
+        },
+        "samples": [
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": 195,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": 195,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": 195,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": 195,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": 195,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "businessRequests": []
+      }
+    },
+    {
+      "case": "battle player remains visible through rotation 390x844",
+      "passed": true,
+      "evidence": {
+        "context": "battle",
+        "display": "immersive",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visual": {
+          "width": 390,
+          "height": 844,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.4066666666666667,
+          "left": -33.7373068464226,
+          "top": 0
+        },
+        "stage": {
+          "x": -596.4010009765625,
+          "y": 0,
+          "width": 1125.333251953125,
+          "height": 844
+        },
+        "model": {
+          "x": 334.81226501464846,
+          "y": 634.4066207885743,
+          "width": 43.6066635131836,
+          "height": 88.6199935913086
+        },
+        "native": {
+          "x": 677,
+          "y": 504,
+          "slot": 0,
+          "sprite": 100000,
+          "hp": 4001,
+          "dead": false,
+          "hidden": false,
+          "gone": false
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 300,
+            "height": 52
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 322,
+            "y": 776,
+            "width": 56,
+            "height": 56
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "x": 12,
+            "y": 788,
+            "width": 298,
+            "height": 44
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": {
+          "queue": 0,
+          "sent": false,
+          "turn": 0,
+          "me": 0
+        },
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle player remains visible through rotation 844x390",
+      "passed": true,
+      "evidence": {
+        "context": "battle",
+        "display": "immersive",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visual": {
+          "width": 844,
+          "height": 390,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.055,
+          "left": 422,
+          "top": -243
+        },
+        "stage": {
+          "x": 0.000030517578125,
+          "y": -243,
+          "width": 844,
+          "height": 632.9999389648438
+        },
+        "model": {
+          "x": 694.1900305175781,
+          "y": 232.80499999999995,
+          "width": 35.87,
+          "height": 62.245
+        },
+        "native": {
+          "x": 677,
+          "y": 504,
+          "slot": 0,
+          "sprite": 100000,
+          "hp": 4001,
+          "dead": false,
+          "hidden": false,
+          "gone": false
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 754,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 776,
+            "y": 322,
+            "width": 56,
+            "height": 56
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "x": 12,
+            "y": 334,
+            "width": 752,
+            "height": 44
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": {
+          "queue": 0,
+          "sent": false,
+          "turn": 0,
+          "me": 0
+        },
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle player remains visible through rotation 320x568",
+      "passed": true,
+      "evidence": {
+        "context": "battle",
+        "display": "immersive",
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "visual": {
+          "width": 320,
+          "height": 568,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1,
+          "left": 9.89540988485976,
+          "top": -32
+        },
+        "stage": {
+          "x": -390.109375,
+          "y": -32,
+          "width": 800,
+          "height": 600
+        },
+        "model": {
+          "x": 267.890625,
+          "y": 419,
+          "width": 34,
+          "height": 59
+        },
+        "native": {
+          "x": 677,
+          "y": 504,
+          "slot": 0,
+          "sprite": 100000,
+          "hp": 4001,
+          "dead": false,
+          "hidden": false,
+          "gone": false
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 230,
+            "height": 52
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 252,
+            "y": 500,
+            "width": 56,
+            "height": 56
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "x": 12,
+            "y": 512,
+            "width": 228,
+            "height": 44
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": {
+          "queue": 0,
+          "sent": false,
+          "turn": 0,
+          "me": 0
+        },
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle player remains visible through rotation 568x320",
+      "passed": true,
+      "evidence": {
+        "context": "battle",
+        "display": "immersive",
+        "viewport": {
+          "width": 568,
+          "height": 320
+        },
+        "visual": {
+          "width": 568,
+          "height": 320,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1,
+          "left": 168,
+          "top": -280
+        },
+        "stage": {
+          "x": -232,
+          "y": -280,
+          "width": 800,
+          "height": 600
+        },
+        "model": {
+          "x": 426,
+          "y": 171,
+          "width": 34,
+          "height": 59
+        },
+        "native": {
+          "x": 677,
+          "y": 504,
+          "slot": 0,
+          "sprite": 100000,
+          "hp": 4001,
+          "dead": false,
+          "hidden": false,
+          "gone": false
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 478,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 500,
+            "y": 252,
+            "width": 56,
+            "height": 56
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "x": 12,
+            "y": 264,
+            "width": 476,
+            "height": 44
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": {
+          "queue": 0,
+          "sent": false,
+          "turn": 0,
+          "me": 0
+        },
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle player remains visible through rotation 430x932",
+      "passed": true,
+      "evidence": {
+        "context": "battle",
+        "display": "immersive",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "visual": {
+          "width": 430,
+          "height": 932,
+          "scale": 1,
+          "x": 0,
+          "y": 0
+        },
+        "transform": {
+          "scale": 1.5533333333333332,
+          "left": -35.986336009950946,
+          "top": 1.1368683772161603e-13
+        },
+        "stage": {
+          "x": -657.3176879882812,
+          "y": 0,
+          "width": 1242.6666259765625,
+          "height": 932
+        },
+        "model": {
+          "x": 370.9889450073242,
+          "y": 700.5533103942871,
+          "width": 48.1533317565918,
+          "height": 97.8599967956543
+        },
+        "native": {
+          "x": 677,
+          "y": 504,
+          "slot": 0,
+          "sprite": 100000,
+          "hp": 4001,
+          "dead": false,
+          "hidden": false,
+          "gone": false
+        },
+        "obstacles": [
+          {
+            "class": "mobile-shell-status",
+            "x": 12,
+            "y": 8,
+            "width": 340,
+            "height": 34
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "x": 362,
+            "y": 864,
+            "width": 56,
+            "height": 56
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "x": 12,
+            "y": 876,
+            "width": 338,
+            "height": 44
+          }
+        ],
+        "field": {
+          "x": 371,
+          "y": 183,
+          "target": null,
+          "wantDir": -1
+        },
+        "battle": {
+          "queue": 0,
+          "sent": false,
+          "turn": 0,
+          "me": 0
+        },
+        "pressed": false,
+        "panels": 0,
+        "cover": [
+          {
+            "class": "mobile-shell-status",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-tray-toggle",
+            "ratio": 0
+          },
+          {
+            "class": "mobile-shell-battle-footer",
+            "ratio": 0
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle visible zoom +, − and reset remain functional",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "scale": 1.4066666666666667,
+          "left": -33.15488808861994,
+          "top": 0
+        },
+        "larger": {
+          "scale": 1.5473333333333334,
+          "left": -65.6202050913289,
+          "top": -84.40000000000009
+        },
+        "smaller": {
+          "scale": 1.4066666666666667,
+          "left": -40.8850445265507,
+          "top": 0
+        },
+        "reset": {
+          "scale": 1.4066666666666667,
+          "left": -33.752870772020515,
+          "top": 0
+        },
+        "nativeButtonEvents": [
+          {
+            "kind": "pointerdown",
+            "when": "event",
+            "label": "放大场景",
+            "time": 53867.299999952316,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerup",
+            "when": "event",
+            "label": "放大场景",
+            "time": 53867.799999952316,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "event",
+            "label": "放大场景",
+            "time": 53874.39999997616,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "frame",
+            "label": "放大场景",
+            "time": 53921.299999952316,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "task",
+            "label": "放大场景",
+            "time": 53929.60000002384,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerdown",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 54439.60000002384,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "pointerup",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 54447.299999952316,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "event",
+            "label": "缩小场景",
+            "time": 54453.89999997616,
+            "scale": "1.5473333333333334",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "frame",
+            "label": "缩小场景",
+            "time": 54491.89999997616,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          },
+          {
+            "kind": "click",
+            "when": "task",
+            "label": "缩小场景",
+            "time": 54493.699999928474,
+            "scale": "1.4066666666666667",
+            "viewportScale": 1
+          }
+        ]
+      }
+    },
+    {
+      "case": "battle real two-finger spread and translation preserve camera and game intent",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "context": "battle",
+          "display": "immersive",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          },
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": -33.752870772020515,
+            "top": 0
+          },
+          "stage": {
+            "x": -596.4166259765625,
+            "y": 0,
+            "width": 1125.333251953125,
+            "height": 844
+          },
+          "model": {
+            "x": 334.79664001464846,
+            "y": 634.4066207885743,
+            "width": 43.6066635131836,
+            "height": 88.6199935913086
+          },
+          "native": {
+            "x": 677,
+            "y": 504,
+            "slot": 0,
+            "sprite": 100000,
+            "hp": 4001,
+            "dead": false,
+            "hidden": false,
+            "gone": false
+          },
+          "obstacles": [
+            {
+              "class": "mobile-shell-status",
+              "x": 12,
+              "y": 8,
+              "width": 300,
+              "height": 52
+            },
+            {
+              "class": "mobile-shell-tray-toggle",
+              "x": 322,
+              "y": 776,
+              "width": 56,
+              "height": 56
+            },
+            {
+              "class": "mobile-shell-battle-footer",
+              "x": 12,
+              "y": 788,
+              "width": 298,
+              "height": 44
+            }
+          ],
+          "field": {
+            "x": 371,
+            "y": 183,
+            "target": null,
+            "wantDir": -1
+          },
+          "battle": {
+            "queue": 0,
+            "sent": false,
+            "turn": 0,
+            "me": 0
+          },
+          "pressed": false,
+          "panels": 0
+        },
+        "after": {
+          "context": "battle",
+          "display": "immersive",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "visual": {
+            "width": 390,
+            "height": 844,
+            "scale": 1,
+            "x": 0,
+            "y": 0
+          },
+          "transform": {
+            "scale": 1.4066666666666667,
+            "left": -33.41470145563983,
+            "top": 0
+          },
+          "stage": {
+            "x": -596.0728759765625,
+            "y": 0,
+            "width": 1125.333251953125,
+            "height": 844
+          },
+          "model": {
+            "x": 329.5137237548828,
+            "y": 634.4066207885743,
+            "width": 47.826663208007815,
+            "height": 82.99332733154297
+          },
+          "native": {
+            "x": 677,
+            "y": 504,
+            "slot": 0,
+            "sprite": 100000,
+            "hp": 4001,
+            "dead": false,
+            "hidden": false,
+            "gone": false
+          },
+          "obstacles": [
+            {
+              "class": "mobile-shell-status",
+              "x": 12,
+              "y": 8,
+              "width": 300,
+              "height": 52
+            },
+            {
+              "class": "mobile-shell-tray-toggle",
+              "x": 322,
+              "y": 776,
+              "width": 56,
+              "height": 56
+            },
+            {
+              "class": "mobile-shell-battle-footer",
+              "x": 12,
+              "y": 788,
+              "width": 298,
+              "height": 44
+            }
+          ],
+          "field": {
+            "x": 371,
+            "y": 183,
+            "target": null,
+            "wantDir": -1
+          },
+          "battle": {
+            "queue": 0,
+            "sent": false,
+            "turn": 0,
+            "me": 0
+          },
+          "pressed": false,
+          "panels": 0
+        },
+        "samples": [
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": -33.250085358734964,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": -33.41557171939269,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": -33.79216828848746,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": -33.32332622381716,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "transform": {
+              "scale": 1.4066666666666667,
+              "left": -33.50217877722798,
+              "top": 0
+            },
+            "visual": {
+              "width": 390,
+              "height": 844,
+              "scale": 1,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "businessRequests": []
+      }
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 371,
+      "y": 183
+    },
+    "position_matches": true
+  },
+  "client_version": "8a026288d656cdb2",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 140,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 4001,
+          "maxHp": 4001,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 5,
+          "name": "奥普埃",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 6,
+          "name": "克劳德",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 7,
+          "name": "格鲁克",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 8,
+          "name": "吉米奈",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureRecoveryGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 122,
+          "maxHp": 122,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 7,
+          "kind": "none",
+          "target": -1,
+          "damage": 0,
+          "hp": 528,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "none",
+          "target": -1,
+          "damage": 0,
+          "hp": 528,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 122,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "none",
+          "target": -1,
+          "damage": 0,
+          "hp": 574,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 6,
+          "kind": "none",
+          "target": -1,
+          "damage": 0,
+          "hp": 655,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 9,
+          "kind": "none",
+          "target": -1,
+          "damage": 0,
+          "hp": 196,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 0,
+          "kind": "escape",
+          "target": -1,
+          "damage": 0,
+          "hp": 4001,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": true,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "escape",
+      "exp": 0,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 371,
+      "y": 183,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 新宠物增量素材升级
 
-本目录分发新增机械宠、莉莉丝与雷萨利朵的独立素材包，不包含或替换官方基础资源包。机械宠安装后的目录固定为下列路径；莉莉丝的独立目录与安装方法见本文末节。
+本目录分发机械宠、莉莉丝、雷萨利朵与双爪宠物的独立素材包，不包含官方基础资源包。当前版本为v0.2.18-LYNX；四宠更新及自动清旧方法见本文后半部分。机械宠目录如下：
 
 ```text
 assets/extensions/ai-pets-v1/
@@ -70,60 +70,56 @@ bash scripts/update-assets.test.sh
 
 运行时 `assets/**` 已被仓库忽略；应提交的是本目录的增量归档、校验清单、安装器和说明。校验结果与实际归档摘要见 [升级包审查记录](../Report/SA-1113-01/UPDATE-REVIEW.md)。
 
-## v0.2.14 莉莉丝增量包
+## v0.2.18 四宠图包与自动清旧
 
-```bash
-bash update/install-lilith.sh
-# 自定义目录须真实存在，末级名为assets或Assets：
-bash update/install-lilith.sh --assets /srv/stoneage/Assets
-```
-
-独立目录 `extensions/lilith-v1/`：`manifest.json`、`pages/00000.png`、`pages/00001.png`、`anim/199200.json`、`anim/199201.json`，共5文件。包名 `lilith-v1-assets.tar.gz`，摘要和条目见同目录 `lilith-v1-assets.manifest.json`。安装的路径校验、符号链接拒绝、逐文件校验、冲突保留与原子发布规则与上文一致；不会更改原四宠扩展或官方素材。
-
-原生客户端加载独立RGBA set3，角色208帧、幽蓝骷髅火焰28帧；未安装时保留原资源回退。绘制使用用户提供的JPG和可复现Pillow/NumPy位图脚本，没有调用图像生成API。
-
-开发复现（需Pillow与NumPy；部署安装器仅需Python标准库）：
-
-```bash
-python3 scripts/generate-lilith.py --output /tmp/sa-lilith-build/extensions/lilith-v1
-python3 update/package-lilith.py --source /tmp/sa-lilith-build/extensions/lilith-v1
-bash scripts/update-lilith.test.sh
-```
-
-## v0.2.15 雷萨利朵增量包
-
-```bash
-bash update/install-lisarido.sh
-# 自定义目录须真实存在，末级名为assets或Assets：
-bash update/install-lisarido.sh --assets /srv/stoneage/Assets
-```
-
-独立目录 `extensions/lisarido-v1/` 含manifest、两张RGBA图集及动画199300/199301，共5文件；归档为 `lisarido-v1-assets.tar.gz`，每项摘要见同名manifest。角色232帧、单体电磁爆炸24帧，主体98px，与莉莉丝一致。源JPG、可复现Pillow/NumPy分层与位图特效生成脚本留在仓库；没有调用图像生成API。
-
-三个素材安装器均已修正USTAR结束块后向10240字节记录补齐的精确解压上限，避免合法包在记录边界被误拒绝；仍在写入前完成摘要、精确白名单、路径、链接及总量检查，冲突保留，幂等安装。
-
-```bash
-python3 scripts/generate-lisarido.py --output /tmp/sa-lisarido-build/extensions/lisarido-v1
-python3 update/package-lisarido.py --source /tmp/sa-lisarido-build/extensions/lisarido-v1
-bash scripts/update-lisarido.test.sh
-```
-
-## v0.2.17 萨鲁法斯／克劳德斯增量包
+在仓库根目录依次执行：
 
 ```bash
 bash update/install-primal-claws.sh
-bash update/install-primal-claws.sh --assets /srv/stoneage/Assets
+bash update/install-lilith.sh
+bash update/install-lisarido.sh
 ```
 
-独立`extensions/primal-claws-v2/`含manifest、3张RGBA图集、3个动画JSON，共7文件。角色199400／199401各376帧，共用十字红爪特效199402共24帧；使用上传JPG的八个真实方向、局部关节分层和位图特效，无图像生成API调用。档案与逐文件SHA-256见`primal-claws-v2-assets.manifest.json`。
+自定义素材目录时，为每个命令添加 `--assets /实际路径/Assets`；路径必须真实存在，末级名为assets或Assets。脚本只安装素材，不停止服务或替换二进制。
 
-路径／符号链接拒绝、摘要与精确白名单验证、冲突保留和原子发布规则同上。该扩展独立于此前三个包，不改基础素材。部署仅需Python标准库，开发复现需要Pillow／NumPy：
+| 安装器 | 当前目录／归档前缀 | 自动清理的已知旧目录 | 新包文件数 |
+| --- | --- | --- | --- |
+| install-primal-claws.sh | primal-claws-v3 | primal-claws-v1、primal-claws-v2 | 7 |
+| install-lilith.sh | lilith-v2 | lilith-v1 | 5 |
+| install-lisarido.sh | lisarido-v2 | lisarido-v1 | 5 |
+
+各图包归档为`<前缀>-assets.tar.gz`，归档与逐文件摘要见同名前缀的`-assets.manifest.json`。发行ZIP同时携带四份旧版manifest用于识别可删除文件，不要求重新安装旧图包。
+
+三个安装器均先验证新归档摘要、精确白名单、路径／链接和解压总量，暂存后原子发布，并复核新版完整性，再清理旧包。已有新版也会清理旧残留，重复运行不重写新版、保持mtime。旧目录只删除与旧发行清单摘要一致的文件；可处理部分已知文件缺失的残留。未知文件／目录、修改内容和链接报错并保留；损坏新包或新版冲突时不会先删除旧包。基础资源和其他扩展不进入清理范围。
+
+必须同步更新匹配的`bin/saserver`，使用外部client目录时同步新客户端。按正常SIGTERM停服存档流程重启服务，再刷新网页。仅删除旧目录无法让旧程序或已加载网页自动请求新目录。
+
+### 双爪：比例、跑姿与地影
+
+`extensions/primal-claws-v3/`含manifest、3张RGBA图集和3个动画JSON。角色199400／199401各376帧，共用红爪特效199402共24帧。v3按主体高度等比例校准八向体积，避免最长边限制导致横向缩水；萨鲁法斯跑步使用屈膝收腿、蹬地、前伸落脚与躯干俯仰，修正前腿／足掌分层，双爪均加入固定地面影。图号、动作、ticks与特效兼容。
+
+用户img1／img2匹配旧v1默认战斗方向，进一步检查v2也发现独立的侧面缩小问题；不能只把截图问题归因于未升级。三版对照及实战见[截图与角度复核](../Report/SA-1114-05-angle-followup/index.html)。
+
+### 莉莉丝与雷萨利朵：阴影、足底与边缘
+
+`extensions/lilith-v2/`含manifest、两张RGBA图集和动画199200／199201，共5文件；208角色帧、28特效帧。保留漂浮高度，移除原图残留地环，独立地面暗影与金环不随身体受击旋转。
+
+`extensions/lisarido-v2/`同样5文件，动画199300／199301；232角色帧、24特效帧。主体保持98px，校正脚底与地面关系，追加地影并修整边缘。两宠保持原技能特效PNG和动作契约；设计图与实际程序证据见[阴影设计报告](../Report/SA-1114-05-shadow-design/index.html)。
+
+### 开发复现
+
+生成器需Pillow／NumPy；安装器仅需Python标准库。源JPG和分层生成脚本均在仓库，未调用图像生成API。
 
 ```bash
-python3 scripts/generate-primal-claws.py --output /tmp/sa-primal-claws-build/extensions/primal-claws-v2
-python3 update/package-primal-claws.py --source /tmp/sa-primal-claws-build/extensions/primal-claws-v2
+python3 scripts/generate-primal-claws.py --output /tmp/sa-primal-claws-build/extensions/primal-claws-v3
+python3 update/package-primal-claws.py --source /tmp/sa-primal-claws-build/extensions/primal-claws-v3
+python3 scripts/generate-lilith.py --output /tmp/sa-lilith-build/extensions/lilith-v2
+python3 update/package-lilith.py --source /tmp/sa-lilith-build/extensions/lilith-v2
+python3 scripts/generate-lisarido.py --output /tmp/sa-lisarido-build/extensions/lisarido-v2
+python3 update/package-lisarido.py --source /tmp/sa-lisarido-build/extensions/lisarido-v2
 bash scripts/update-primal-claws.test.sh
+bash scripts/update-lilith.test.sh
+bash scripts/update-lisarido.test.sh
 ```
 
-
-v0.2.17修正原图拉伸与战场足底定位，优化侧面关节与动作。v2与旧v1并存，安装器不会覆盖或删除v1；新程序只加载v2。必须一并更新 `bin/saserver`（或完整重新构建客户端），正常保存停服后重启、刷新网页。仅安装v2而继续运行v0.2.16程序不会切换至新素材。其他三组扩展不受影响。
+历史v0.2.14／v0.2.15采用lilith-v1／lisarido-v1；v0.2.17采用primal-claws-v2旁装保留v1。当前安装器已升级为上表的新装与清旧流程。可复用的八向、关节、阴影和验证要求见[stoneage skill](../docs/skills/stoneage/SKILL.md)。

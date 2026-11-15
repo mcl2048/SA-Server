@@ -13,9 +13,9 @@ const SETS = ["i8", "rgba"];
 // Extensions never enter the legacy SAIX index: its page/set fields are compact
 // integers and assetindex intentionally only understands the original two sets.
 const AI_PETS = { id: "ai-pets-v1", set: 2, imageBase: 9000000, imageLimit: 9100000, sprites: [199100, 199101, 199102, 199103] };
-const LILITH = { id: "lilith-v1", set: 3, imageBase: 9100000, imageLimit: 9200000, sprites: [199200, 199201] };
-const LISARIDO = { id: "lisarido-v1", set: 4, imageBase: 9200000, imageLimit: 9300000, sprites: [199300, 199301] };
-const PRIMAL_CLAWS = { id: "primal-claws-v2", set: 5, imageBase: 9300000, imageLimit: 9400000, sprites: [199400, 199401, 199402] };
+const LILITH = { id: "lilith-v2", set: 3, imageBase: 9100000, imageLimit: 9200000, sprites: [199200, 199201] };
+const LISARIDO = { id: "lisarido-v2", set: 4, imageBase: 9200000, imageLimit: 9300000, sprites: [199300, 199301] };
+const PRIMAL_CLAWS = { id: "primal-claws-v3", set: 5, imageBase: 9300000, imageLimit: 9400000, sprites: [199400, 199401, 199402] };
 type ExtensionPack = typeof AI_PETS;
 interface ExtensionPage { file: string; width: number; height: number; }
 interface ExtensionManifest {
