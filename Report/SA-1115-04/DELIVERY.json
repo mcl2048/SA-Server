@@ -1,0 +1,12 @@
+{
+  "verified_utc": "2026-11-15T10:42:43.708656+00:00",
+  "repository": "https://github.com/mcl2048/SA-Server.git",
+  "branch": "main",
+  "implementation_commit": "a3fb45634fc272f77d7fcaa5ef49f5d84233dc33",
+  "verified_remote_commit": "a3fb45634fc272f77d7fcaa5ef49f5d84233dc33",
+  "push_exit_code": 0,
+  "version": "v0.2.22-LYNX",
+  "binary_sha256": "474c883b4e9d16b542d96dd76ec2be4adb9f50cde191ebfdbccc454b842fd441",
+  "release_validation": "release.json",
+  "note": "This receipt records the implementation delivery; its documentation commit follows on main."
+}
