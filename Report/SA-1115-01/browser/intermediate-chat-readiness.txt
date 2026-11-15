@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+locator.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('input:visible').first()[22m
+
+    at GameUI.gm (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:149:70)
+    at async GameUI.noEncounter (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:156:22)
+    at async work (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:243:19)
+    at async file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:262:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-01/browser/final-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

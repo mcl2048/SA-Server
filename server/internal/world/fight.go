@@ -635,7 +635,7 @@ func (w *World) sendBattleTurn(room *battleRoom, ev []battle.Event) {
 	for _, x := range ev {
 		msg.Events = append(msg.Events, proto.BattleEvent{Actor: x.Actor, Kind: string(x.Kind), Target: x.Target,
 			Result: string(x.Result), Damage: x.Damage, HP: x.HP, Dead: x.Dead, OK: x.OK, Skill: x.Skill,
-			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
+			Status: x.Status, Guardian: x.Guardian, Combo: x.Combo, Coattack: x.Coattack, ActorHp: x.ActorHP, MpDamage: x.MPDamage, Guarded: x.Guarded,
 			PetDamage: x.PetDamage, RideHp: x.RideHP, Fall: x.Fall, Effect: x.Effect, ActorMp: x.ActorMP, Shoot: x.Shoot, Fly: x.Fly,
 			Name: x.Name, Sprite: x.Sprite, Level: x.Level, MaxHp: x.MaxHP, Att: x.Att, Stat: x.Stat, StatVal: x.StatVal, StatTurns: x.StatTurns})
 		if x.Kind == battle.PetOut {
@@ -671,6 +671,13 @@ func (r *battleRoom) removeMember(m *entity) {
 // afterMemberTurn 是一回合结算后 m 自己的部分：宠物栏、装备磨损、道具消耗。
 func (w *World) afterMemberTurn(e *entity, ev []battle.Event) {
 	ft := e.fight
+	if a := e.automation; a != nil && a.settings.AutoEscape && a.escapeRoom == ft.room && ft.cmd != nil && ft.cmd.Automatic && ft.cmd.Kind == battle.Escape {
+		for _, x := range ev {
+			if x.Actor == ft.slot && x.Kind == battle.Escape && !x.OK {
+				a.escapeFailures++
+			}
+		}
+	}
 	w.afterTurn(e, ev)
 	if ft.itemsDirty {
 		ft.itemsDirty = false

@@ -1,0 +1,4 @@
+5fd99c72e68269223cc7ab169eb4e921ba41a5f02db9db40c343c0edf5910e06  server/internal/battle/battle.go
+6aa6707013784be09d40538d41500d4d754d461ba38ad8e0431fd14425951601  server/internal/battle/coattack.go
+138a7d5ef6e5ee2c7f58e93337070176591c748fee844bea2a9aafead2356a4a  server/internal/world/automation.go
+1c47ce5ffb78656ec740cb5fb079b839d42204a28e35d723d66a1794cc4e1250  server/internal/world/fight.go

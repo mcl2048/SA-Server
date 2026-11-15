@@ -1,0 +1,9 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:87:33)
+    at async GameUI.enter (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:139:10)
+    at async Module.run (/home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:10:49)
+    at async work (/home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:244:5)
+    at async file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:262:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-01/browser/final-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

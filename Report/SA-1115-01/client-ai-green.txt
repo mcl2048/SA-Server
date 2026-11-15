@@ -1,0 +1,14 @@
+✔ new automation switches default off and remain isolated per character (3.637271ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (3.920989ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (3.776064ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (1.107378ms)
+✔ self-only meat is not selected for an injured teammate (0.906119ms)
+✔ mixed HP-first descriptions cannot masquerade as an MP recovery item (0.786354ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 444.069679

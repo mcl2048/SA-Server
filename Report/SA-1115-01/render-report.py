@@ -1,0 +1,83 @@
+"""Render the acceptance page from the verified release, without private fixtures."""
+from pathlib import Path
+import html,json
+
+OUT=Path(__file__).resolve().parent
+release=json.loads((OUT/'release.json').read_text())
+assert release['success']
+H=html.escape
+digest=release['binary_sha256']; package=release['package']
+tasks=[
+ ('导航与精确坐标','快速战斗暂停路线，战后重算并续行；小地图可输入 X/Y。普通战斗、换层与手动方向仍取消路线。','避免战斗中非法移动、入口点击穿透及残留输入框。','navigation/ACCEPTANCE.md','桌面与移动各 6 场真实快速战斗后抵达；两端战斗期 Move 均为 0。'),
+ ('按比例恢复','HP／MP 共用恢复比例；肉优先，再药物，最后恢复精灵。没有恢复装备也会按 MP 比例补气。','按原生使用函数区分恢复资源；自用物品不会错误投向队友。','browser/final-automation.json','两端分别验证自动／快速战斗吃肉优先及无装备补气；边界由业务测试覆盖。'),
+ ('自动逃跑','新增默认关闭开关；开启时优先逃跑，同场实际失败三次后恢复战斗策略。','不把轮询或异常阻止行动算作失败；不突破任务／头目／决斗限制。','server/RESEARCH.md','真实战斗验证优先逃跑；三次失败及新场重置由确定性业务测试证明。'),
+ ('关键词自动丢弃','自动遇敌下方新增默认关闭开关；以 | 分隔，名字字面包含即可整叠丢弃。关闭隐藏输入框。','忽略空段，排除装备和占用物品；前台编辑时暂停执行。','browser/final-automation.json','双端验证默认值、保存、隐藏、编辑暂停、日常丢弃和关闭后保留；战后入口有业务测试。'),
+ ('多人／人宠合击','相邻行动、同阵营、同目标的普通近战攻击概率合击；玩家／宠物 50%，怪物 20%。','独立 coattack 协议，保留同人 combo；同时动画仍按服务端顺序落 HP。','server/RESEARCH.md','固定原作源码与玩家讨论交叉印证；两端真实玩家＋宠物普通攻击同时接近，边界测试覆盖反射／骑乘／死亡。'),
+ ('雷萨利朵举炮','右炮臂以肩关节抬起瞄准，炮焰跟随炮口；保留图号、影子、漂浮与其他动作。','清除旧炮底残条；五文件 v3 补丁先校验安装再清理已识别旧版。','lisarido/browser/final-lisarido.json','双端普通攻击出击／回位与 HAND 原地五炮通过，八向艺术检查与 42 项安装测试通过。'),
+]
+rows=''.join(f'<tr><th scope="row"><span class="tick">✓</span>{H(title)}</th><td>{H(behavior)}<small>{H(risk)}</small></td><td>{H(evidence)}<br><a href="{H(link)}">查看证据</a></td></tr>' for title,behavior,risk,link,evidence in tasks)
+cases=[]
+for label,path in [('导航','navigation/final-navigation.json'),('战斗策略与合击','browser/final-automation.json'),('雷萨利朵','lisarido/browser/final-lisarido.json')]:
+    data=json.loads((OUT/path).read_text())
+    assert data['binary_sha256']==digest and not data.get('failure') and not data.get('errors')
+    for case in data['checks']:
+        assert case['passed']
+        name=case['case'];device='mobile' if name.startswith('mobile') else 'desktop'
+        cases.append(f'<li data-device="{device}"><span class="tick">✓</span><div><strong>{H(label)}</strong><span>{H(name)}</span></div></li>')
+count=len(cases)
+page='''<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SA-1115-01 · v0.2.19-LYNX 验收记录</title>
+<style>
+:root{color-scheme:light;--paper:#eef4f5;--ink:#182832;--sea:#17495c;--teal:#147d89;--brass:#96611f;--leaf:#d6efdf;--line:#c4d4d9}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.75 "Noto Sans CJK SC","Microsoft YaHei",sans-serif}a{color:var(--sea);text-decoration-thickness:1px;text-underline-offset:4px}a:hover{text-decoration-thickness:2px}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--brass);outline-offset:4px}header,main,footer{max-width:1240px;margin:auto;padding:0 36px}nav{display:flex;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:center;flex-wrap:wrap}nav strong{margin-right:auto}h1,h2{font-family:"Noto Serif CJK SC","Songti SC","SimSun",serif;line-height:1.22;font-weight:700}h1{font-size:clamp(35px,4.2vw,57px);margin:0 0 26px}h2{font-size:30px;margin:0 0 22px}.hero{display:grid;grid-template-columns:5fr 6fr;gap:42px;align-items:center;padding:48px 0}.hero p{max-width:31em;margin:18px 0}.version{display:inline-block;background:var(--sea);color:white;padding:4px 13px;margin-bottom:25px;border-radius:3px}.proof{color:var(--sea);font-weight:600}.hero figure{margin:0;transform:rotate(-1deg);background:white;padding:10px;box-shadow:9px 12px 0 #d2e1e5}.hero img{width:100%;display:block}figcaption{font-size:13px;padding:10px 5px 2px;color:#48616c}.lede{border-left:5px solid var(--teal);padding:14px 22px;background:white;margin:16px 0 46px}.lede p{margin:0;max-width:75ch}.section{margin:0 0 54px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;text-align:left;background:white}th,td{padding:22px 20px;border-bottom:1px solid var(--line);vertical-align:top}thead th{background:var(--sea);color:white;font-size:14px}tbody th{min-width:165px;width:17%;font-weight:600}tbody td{font-size:15px}tbody td:nth-child(2){width:45%}small{display:block;color:#506671;font-size:13px;line-height:1.6;margin-top:8px}.tick{display:inline-block;color:#166947;margin-right:10px;font-weight:700}.pictures{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start}.pictures figure{margin:0;background:white;padding:12px}.pictures img{display:block;width:100%;height:auto}.numbers{display:flex;flex-wrap:wrap;gap:0;margin:24px 0 0;border-block:1px solid var(--line)}.numbers p{margin:0;padding:20px 26px 20px 0;flex:1;min-width:185px}.numbers strong{display:block;color:var(--sea);font-size:26px;line-height:1.3}.numbers span{font-size:14px}.filter{display:flex;gap:9px;margin:22px 0}button{font:inherit;font-size:14px;cursor:pointer;color:var(--sea);border:1px solid var(--line);background:white;padding:7px 17px;border-radius:4px}button[aria-pressed="true"]{background:var(--sea);color:white;border-color:var(--sea)}.checks{padding:0;margin:0;list-style:none;columns:2;column-gap:32px}.checks li{display:flex;align-items:start;break-inside:avoid;padding:14px 0;border-top:1px solid var(--line)}.checks li[hidden]{display:none}.checks li strong{display:block;font-size:13px;color:var(--sea)}.checks li div>span{font-size:13px;overflow-wrap:anywhere;display:block}.release{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;background:white;border-top:5px solid var(--brass);padding:30px}.release h3{margin-top:0}.release code{display:block;overflow-wrap:anywhere;font:13px/1.8 ui-monospace,monospace;color:var(--sea)}.release p{margin:12px 0}.release ul{padding-left:22px}.footnotes{font-size:14px;max-width:82ch}.footnotes li{margin:9px 0}footer{font-size:13px;color:#506671;padding-bottom:32px}.source-links{display:flex;flex-wrap:wrap;gap:10px 24px}details{margin:20px 0}summary{cursor:pointer;color:var(--sea)}@media(max-width:760px){header,main,footer{padding-left:20px;padding-right:20px}.hero{grid-template-columns:1fr;gap:20px;padding:32px 0}.hero figure{transform:none}.hero p{max-width:none}h1{margin-bottom:20px}.pictures,.release{grid-template-columns:1fr}.checks{columns:1}.release{padding:24px}.table-wrap table{min-width:720px}.numbers p{min-width:46%;padding-right:12px}nav{gap:12px 20px}h2{font-size:26px}}@media print{.filter{display:none}.hero figure{transform:none;box-shadow:none}.checks{columns:1}body{background:white}header,main,footer{padding:0}.section{break-inside:avoid}}
+</style></head><body>
+<header><nav><strong>石器时代 · 发行验收记录</strong><a href="ACCEPTANCE.md">验收文档</a><a href="../../README.md">项目说明</a><a href="release.json">机器可读摘要</a></nav>
+<div class="hero"><div><span class="version">v0.2.19-LYNX</span><h1>战后继续赶路，<br>伙伴并肩出击。</h1><p>快速战斗不再打断导航。恢复、逃跑、物品清理遵循明确设置；人宠合击与雷萨利朵举炮动作回归真实战场。</p><p class="proof">SA-1115-01 六项任务完成 · 2026-11-15</p><a href="../../bin/saserver-v0.2.19-LYNX-linux-amd64.zip">下载 Linux AMD64 发行包</a></div><figure><a href="lisarido/browser/final-lisarido-desktop-cannon-electric-explosion.png"><img src="lisarido/browser/final-lisarido-desktop-cannon-electric-explosion.png" alt="最终二进制真实战斗中雷萨利朵举起右炮臂发射电磁火炮"></a><figcaption>最终发行程序中的真实 Chromium 战斗画面。右炮臂按肩关节抬起，炮口与电磁特效联动。</figcaption></figure></div></header>
+<main><div class="lede"><p>以下证据绑定同一静态 Linux AMD64 二进制。使用真实 Chromium、原生界面与授权 GM 命令驱动业务；移动部分为触屏与视口模拟。生产实例没有停服或部署。</p></div>
+<section class="section"><h2>六项任务与验证依据</h2><div class="table-wrap"><table><thead><tr><th>完成项</th><th>最终行为与风险处理</th><th>实际证据</th></tr></thead><tbody>@@ROWS@@</tbody></table></div></section>
+<section class="section"><h2>把动作与落点放回游戏里检查</h2><div class="pictures"><figure><a href="lisarido/aim-eight-directions.png"><img loading="lazy" src="lisarido/aim-eight-directions.png" alt="雷萨利朵八方向抬炮瞄准接触表"></a><figcaption>八向瞄准检查：肩、握点、炮口使用同一变换；地面影子保持固定。<a href="lisarido/attack-eight-directions.gif">查看完整动作</a></figcaption></figure><figure><a href="navigation/final-mobile-exact-arrival.png"><img loading="lazy" src="navigation/final-mobile-exact-arrival.png" alt="移动触屏模拟中精确导航绕墙抵达指定坐标"></a><figcaption>移动模拟完成绕墙导航至 (379,186)，另验证连续快速战斗后的续航及横竖屏切换。</figcaption></figure></div></section>
+<section class="section"><h2>验证记录</h2><div class="numbers"><p><strong>244 / 244</strong><span>客户端与构建工具测试</span></p><p><strong>@@COUNT@@ / @@COUNT@@</strong><span>最终程序浏览器检查</span></p><p><strong>57 / 57</strong><span>HTTP 文件逐字节匹配</span></p><p><strong>42 / 42</strong><span>素材安装与升级检查</span></p></div><p>完整 Go 测试、race、vet、TypeScript 与 5 项艺术测试通过；重复构建 SHA-256 一致。三组私有实例均正常 SIGTERM 退出，SQLite 保存位置与退出前一致。</p><div class="filter" role="group" aria-label="筛选浏览器设备"><button type="button" data-filter="all" aria-pressed="true">全部</button><button type="button" data-filter="desktop" aria-pressed="false">桌面</button><button type="button" data-filter="mobile" aria-pressed="false">移动模拟</button></div><ul class="checks">@@CASES@@</ul><details><summary>查看测试和研究原始记录</summary><div class="source-links"><a href="client-tests.txt">客户端测试</a><a href="go-checks.json">Go test / vet</a><a href="server/go-race.txt">Go race</a><a href="http-content.json">HTTP 一致性</a><a href="build-repeatability.json">重复构建</a><a href="server/RESEARCH.md">合击原作研究</a><a href="research/sources.json">输入与性能研究</a><a href="PROGRESS.md">执行与中间失败说明</a></div></details></section>
+<section class="section release"><div><h2>唯一最终发行</h2><p>程序 · 16,674,976 字节 · 静态 Linux AMD64</p><code>@@BINARY@@</code><p><a href="../../bin/saserver-v0.2.19-LYNX-linux-amd64.zip">完整 ZIP · @@BYTES@@ 字节</a></p><code>@@ZIP@@</code><p><a href="../../update/lisarido-v3-assets.tar.gz">雷萨利朵 v3 增量素材</a></p><code>@@ART@@</code></div><div><h3>更新时使用匹配的一整套</h3><p>保留配置、数据库和原始 Assets；正常存档停服后替换程序，执行：</p><code>bash update/install-lisarido.sh</code><p>安装器先核验新包，再清理清单可证明未修改的旧素材。外部客户端（如使用）需同步更新，随后刷新网页。</p><p><a href="../../docs/v0.2.19-LYNX.md">发布与升级说明</a><br><a href="../../docs/skills/stoneage/references/automation-and-navigation.md">复用本轮开发经验</a></p></div></section>
+<section class="section footnotes"><h2>验证范围与限制</h2><ul><li>Chromium 156 的桌面和触屏／横竖视口模拟已验；没有实体 Android、iOS 或 Safari 认证。</li><li>合击数值来自固定提交的公开原作 C 代码变体，并以玩家讨论交叉印证；未取得可读取的同期官方公式，不宣称覆盖全部运营时期。</li><li>真实普通攻击的人宠合击已观测；极高防御、反射、骑乘、保护目标、死亡及三次逃跑失败由确定性业务测试覆盖。</li><li>本轮没有重做雷萨利朵相簿故事内容验收。旧相簿翻页脚本失败已保留；最终艺术流程收窄到原生宠物部署、攻击、五炮、回位与移动视口。</li><li>自动丢弃无需确认，开启前核对关键字。Assets 原树、数据库、凭据、会话资料不进入交付仓库。</li></ul></section></main><footer>基线 6b5cfde / v0.2.18-LYNX。最终证据以本页链接的 release.json 与 SHA-256 为准。</footer>
+<script>for(const b of document.querySelectorAll('[data-filter]'))b.addEventListener('click',()=>{for(const x of document.querySelectorAll('[data-filter]'))x.setAttribute('aria-pressed',String(x===b));for(const row of document.querySelectorAll('[data-device]'))row.hidden=b.dataset.filter!=='all'&&row.dataset.device!==b.dataset.filter;});</script></body></html>'''
+for key,value in {'ROWS':rows,'CASES':''.join(cases),'COUNT':str(count),'BINARY':digest,'ZIP':package['sha256'],'BYTES':f"{package['bytes']:,}",'ART':release['art_package_sha256']}.items():page=page.replace('@@'+key+'@@',value)
+(OUT/'index.html').write_text(page)
+md=f'''# SA-1115-01 · v0.2.19-LYNX 最终验收
+
+基线 `6b5cfde / v0.2.18-LYNX`。六项任务全部完成，发行证据绑定唯一二进制。
+
+| 项目 | 最终行为与证据 |
+| --- | --- |
+'''
+for title,behavior,risk,link,evidence in tasks:md+=f'| ✅ {title} | {behavior} {evidence} [证据]({link}) |\n'
+md+=f'''
+## 验证
+
+- 客户端／构建工具 244/244，TypeScript 通过；完整 Go test、race、vet 通过。
+- 最终程序真实 Chromium {count}/{count} 项：导航 3、策略／合击 20、艺术 6。两端各 6 场快速战斗后继续导航，战斗期移动数为 0。
+- 57 个 HTTP 文件逐字节匹配，300 个原始输入摘要保持一致；另一个安装器测试脚本仅补清理断言与夹具名，已记录差异并重跑 42 项。两次构建二进制摘要一致。
+- 42 项素材安装／升级、5 项艺术测试通过。三组私有实例 SIGTERM exit 0，SQLite 最终位置一致。
+- [发行自动核验](release.json)、[浏览器导航](navigation/final-navigation.json)、[策略与合击](browser/final-automation.json)、[艺术](lisarido/browser/final-lisarido.json)。
+
+## 最终产物
+
+| 文件 | 字节 | SHA-256 |
+| --- | ---: | --- |
+| `bin/saserver`，静态 Linux AMD64 | 16674976 | `{digest}` |
+| `{package['path']}` | {package['bytes']} | `{package['sha256']}` |
+| `update/lisarido-v3-assets.tar.gz` | 2435124 | `{release['art_package_sha256']}` |
+
+完整 ZIP 逐文件核验与工作区一致、可执行位正确、不含原 Assets／数据库／本机配置；已替换旧 v0.2.18 ZIP。更新时保留配置和存档，正常停服后替换匹配程序／客户端，执行 `bash update/install-lisarido.sh` 并刷新网页。
+
+## 范围与限制
+
+真实 Chromium 156 使用原生 UI 与授权 GM 命令，页面只读观测；移动为触屏／视口模拟，没有实体 Android／iOS／Safari 认证。仅隔离实例被启动与停服，没有部署或重启生产实例。
+
+合击研究基于固定的公开原作代码变体及两篇可读取玩家讨论；未取得可用的同期官方公式，不杜撰固定敏差或额外倍率。三次失败回退与少见合击边界由确定性业务测试证明，真实浏览器验证实际默认逃跑与普通玩家／宠物合击。
+
+本轮未重做相簿故事内容验收；相簿旧脚本与其他场景时序／验收假设失败均留在 intermediate 目录，不能作为最终通过记录。最终艺术聚焦部署、ATTACK 出击／回位、HAND 原地五炮与举炮特效。输入框生命周期、地图入口穿透、镜头、药物优先级及高防御最小伤害的独立审查问题已闭环。
+
+[可视报告](index.html) · [过程](PROGRESS.md) · [原作研究](server/RESEARCH.md) · [发布说明](../../docs/v0.2.19-LYNX.md) · [stoneage 经验](../../docs/skills/stoneage/references/automation-and-navigation.md)
+'''
+(OUT/'ACCEPTANCE.md').write_text(md)
+print(f'Rendered {count} verified browser cases and six task rows.')

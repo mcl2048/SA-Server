@@ -1,0 +1,91 @@
+{
+  "device": "desktop",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "picked": {
+    "start": {
+      "x": 371,
+      "y": 183
+    },
+    "goal": {
+      "x": 365,
+      "y": 177,
+      "length": 6
+    },
+    "wall": {
+      "x": 364,
+      "y": 174
+    }
+  },
+  "exactArrival": {
+    "id": 1,
+    "floor": 300,
+    "x": 365,
+    "y": 177
+  },
+  "quickGoal": {
+    "x": 365,
+    "y": 177,
+    "length": 6
+  },
+  "quickArrival": {
+    "id": 1,
+    "floor": 300,
+    "x": 365,
+    "y": 177
+  },
+  "quickBattleStarts": 6,
+  "quickBattleEnds": 6,
+  "quickRouteMoves": [
+    {
+      "x": 371,
+      "y": 183,
+      "dir": 2
+    },
+    {
+      "x": 370,
+      "y": 182,
+      "dir": 2
+    },
+    {
+      "x": 369,
+      "y": 181,
+      "dir": 2
+    },
+    {
+      "x": 368,
+      "y": 180,
+      "dir": 2
+    },
+    {
+      "x": 367,
+      "y": 179,
+      "dir": 2
+    },
+    {
+      "x": 366,
+      "y": 178,
+      "dir": 2
+    },
+    {
+      "x": 371,
+      "y": 183,
+      "dir": 2
+    }
+  ],
+  "movesDuringBattle": 0,
+  "normalGoal": {
+    "x": 365,
+    "y": 177,
+    "length": 6
+  },
+  "normalStopped": {
+    "id": 1,
+    "floor": 300,
+    "x": 370,
+    "y": 182
+  },
+  "errors": []
+}

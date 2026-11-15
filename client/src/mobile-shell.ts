@@ -54,7 +54,7 @@ const LABELS: Record<string, string> = {
   "chat-all": "完整聊天记录", "chat-up": "较早聊天", "chat-down": "较新聊天", "chat-reset": "恢复最新聊天", "chat-more": "增加聊天行数", "chat-less": "减少聊天行数", "chat-color": "更换聊天颜色", "chat-back": "返回聊天设定", chan: "切换聊天频道",
   "map-lu": "上一批已探索区域", "map-ld": "下一批已探索区域", "pb-waza": "使用宠物技能", "pb-cancel": "取消宠物指令", "bpet-return": "收回出战宠物", "watch-leave": "离开观战",
   "voice-more": "增大发言音量", "voice-less": "减小发言音量", "se-more": "增大音效音量", "se-less": "减小音效音量", "se-stereo": "切换立体声 / 单声道", "bgm-more": "增大音乐音量", "bgm-less": "减小音乐音量", "bgm-fast": "加快音乐", "bgm-slow": "放慢音乐", "mouse-mode": "切换鼠标样式", "acct-pw": "修改密码", "acct-secret": "修改安全码",
-  "map-out": "缩小地图", "map-in": "放大地图", "map-fit": "显示全图", "map-me": "地图回到自己", "map-mini": "切换小地图", "map-art": "切换实景地图", "map-area": "点击地图目的地", "map-close": "关闭地图",
+  "map-out": "缩小地图", "map-in": "放大地图", "map-fit": "显示全图", "map-me": "地图回到自己", "map-mini": "切换小地图", "map-art": "切换实景地图", "map-area": "点击地图目的地", "map-close": "关闭地图", "map-go": "到目的地", "mini-coordinates": "输入坐标",
   "fp-menu": "游戏设定", "fp-card": "面对玩家交换名片", "fp-party": "面对玩家组队 / 离队", "fp-trade": "面对玩家交易", "fp-family": "家族功能", "fp-vendor": "摆摊 / 查看摊位", "fp-join": "加入战斗 / 观战", "fp-duel": "面对玩家决斗", "fp-act": "动作 / 表情", "fp-help": "任务查询",
   "eye-": "上一种眼睛 / 鼻子", "eye+": "下一种眼睛 / 鼻子", "mouth-": "上一种嘴巴", "mouth+": "下一种嘴巴", "chr-prev": "上一页角色", "chr-next": "下一页角色",
 };
@@ -608,6 +608,7 @@ export class MobileShell {
   }
 
   private inputLabel(el: HTMLInputElement, state: MobileShellState, npc: boolean): string {
+    if (el.dataset.inputLabel) return el.dataset.inputLabel;
     const x = Number(el.dataset.logicalX), y = Number(el.dataset.logicalY);
     if (state.phase === "field" && y >= 530) return "聊天消息";
     if (npc) return "输入内容";

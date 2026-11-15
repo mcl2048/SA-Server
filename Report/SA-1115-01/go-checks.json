@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "name": "go-test-all",
+      "command": [
+        "go",
+        "test",
+        "./...",
+        "-count=1",
+        "-timeout=180s"
+      ],
+      "exit_code": 0,
+      "seconds": 88.6
+    },
+    {
+      "name": "go-vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 2.07
+    }
+  ],
+  "success": true,
+  "complete": true
+}

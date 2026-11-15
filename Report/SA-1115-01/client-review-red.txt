@@ -1,0 +1,65 @@
+✔ new automation switches default off and remain isolated per character (4.981503ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (6.91942ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (3.204692ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (2.060516ms)
+✔ self-only meat is not selected for an injured teammate (1.61239ms)
+✔ mixed HP-first descriptions cannot masquerade as an MP recovery item (0.971979ms)
+✖ medicine precedes a whole-party healing spirit when multiple allies are low (6.35458ms)
+(node:1052790) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ coattack members advance and strike together while authoritative HP stays ordered (123.396478ms)
+✔ quick coattack finishes with the final server HP and no stuck movement (11.029887ms)
+✔ escape failures come from own failed events and reset with a new battle (5.28042ms)
+✖ enemy coattack focuses the follow camera before its approach (3.313024ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 9
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1274.819769
+
+✖ failing tests:
+
+test at client/test/ai-automation.test.ts:54:1
+✖ medicine precedes a whole-party healing spirit when multiple allies are low (6.35458ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'magic' !== 'item'
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-automation.test.ts:57:46)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'magic',
+    expected: 'item',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-coattack.test.ts:44:1
+✖ enemy coattack focuses the follow camera before its approach (3.313024ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  5 !== 15
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-coattack.test.ts:47:30)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 5,
+    expected: 15,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

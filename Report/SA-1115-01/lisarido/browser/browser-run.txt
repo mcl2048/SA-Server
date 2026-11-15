@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"variant":"final","lisarido_case":"desktop native Lisarido pet list and unmodified stats/skills"}
+{"variant":"final","lisarido_case":"desktop Lisarido normal attack floats and renders native right-cannon close explosion"}
+{"variant":"final","lisarido_case":"desktop right arm raises and fires HAND from home, with original electrical FX"}
+{"variant":"final","lisarido_case":"mobile native Lisarido pet list and unmodified stats/skills"}
+{"variant":"final","lisarido_case":"mobile Lisarido normal attack floats and renders native right-cannon close explosion"}
+{"variant":"final","lisarido_case":"mobile right arm raises and fires HAND from home, with original electrical FX"}
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-01/lisarido/browser/final-lisarido.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":371,"y":183},"stored_position":{"floor":300,"x":371,"y":183},"position_matches":true}}

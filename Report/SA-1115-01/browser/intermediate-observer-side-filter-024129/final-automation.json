@@ -1,0 +1,192 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "c9118a90071366a2aedf38ef28cda70faa2e122792811a81d1be0caeb96aa8f4",
+  "binary_version": "v0.2.19-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T02:40:43.813Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T02:40:55.461Z"
+    }
+  ],
+  "checks": [],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "client_version": "08f6b4cf8a3cf7f0",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "hp": 143,
+          "maxHp": 143,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "automation": [],
+  "failure": "interrupted by SIGTERM",
+  "failure_stack": "Error: interrupted by SIGTERM\n    at onInterrupt (file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:38:57)\n    at process.sigterm (file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:39:52)\n    at process.emit (node:events:526:24)"
+}

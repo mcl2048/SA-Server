@@ -138,6 +138,7 @@ type BattleEvent struct {
 	Status    int    `json:"status,omitempty"`
 	Guardian  int    `json:"guardian,omitempty"`
 	Combo     bool   `json:"combo,omitempty"`
+	Coattack  int    `json:"coattack,omitempty"`
 	ActorHp   int    `json:"actorHp,omitempty"`
 	MpDamage  int    `json:"mpDamage,omitempty"`
 	Guarded   bool   `json:"guarded,omitempty"`

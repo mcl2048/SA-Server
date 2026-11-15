@@ -1,0 +1,28 @@
+(node:1036265) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ coordinate form routes to exact integers and removes native inputs on close (7.633461ms)
+✔ coordinate form rejects decimals and incomplete numbers without partial parsing (1.094671ms)
+✔ a floor transition invalidates an old coordinate form before it can move the player (1.372589ms)
+(node:1036266) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+minimap navigation integration passed
+✔ client/test/minimap-navigation.test.ts (2183.037669ms)
+(node:1036271) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ reflowed pointer traffic pans the existing native MapWindow and never starts navigation (4.613198ms)
+✔ native pan cancellation clears any retained press before the next map frame (0.513318ms)
+(node:1036303) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ quick battle pauses movement then resumes the same minimap destination (24.46286ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (4.492065ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (5.63973ms)
+✔ quick battle cannot revive a route after a floor change (5.693483ms)
+✔ exact destinations reject fractional and non-finite coordinates (3.157914ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2781.511844

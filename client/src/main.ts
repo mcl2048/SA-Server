@@ -395,9 +395,11 @@ const app: App = {
       if (!(screen instanceof FieldScreen) || !field) return;
       const back = screen;
       battleAllowsAuto = !m.watch && !m.pvp;
-      field.target = null;
       // 快速战斗：留在地图画面、音乐不换，BattleScreen 只在背后跑（quickFrame）
       let quick = settings.quickBattle && !m.watch && !m.pvp; // 观战一定看画面；玩家决斗（PK）也一定看画面，不走快速战斗
+      field.beginBattle(quick);
+      back.menus.mapWnd.syncVisibility(false);
+      back.menus.ai.close(); // Quick battle retains FieldScreen, so leave() is not called.
       // 遇敌：SE 215，地图音乐马上停（不淡出），记下来打完再从头播；环境音停掉
       const fieldBgm = audio.currentBgm, bgm = battleBgm(m.pvp || m.event, field.floor, fieldBgm);
       if (!quick) {
@@ -424,6 +426,7 @@ const app: App = {
         myAtk: () => selfStatus?.atk ?? 10,
         place: () => [field?.floor ?? -1, field?.self?.x ?? 0, field?.self?.y ?? 0],
         finish: (end) => {
+          field?.endBattle();
           battle = null; changeBattleQuick = null; battleAllowsAuto = false;
           // 战斗结束淡出，回到地图后原来的地图音乐从头播（之后照地图记号）
           if (!quick) audio.fadeOutBgm(() => audio.playBgm(fieldBgm));
@@ -446,6 +449,7 @@ const app: App = {
         on = on && !m.watch && !m.pvp;
         if (battle !== b || quick === on) return;
         quick = on; b.setQuick(on);
+        if (!on) field?.beginBattle(false);
         if (on) { audio.playBgm(fieldBgm); app.go(back); }
         else { audio.ambientFrame([], 0); audio.playBgm(bgm); app.go(battleView); }
       };
@@ -980,7 +984,7 @@ class FieldScreen implements Screen {
     if (s && !this.menus.items.open && !this.menus.mapOpen && !this.menus.actions.open && !this.menus.vendor.open) {
       ui.text(792 - measure(`${f.floorName}  ${s.x},${s.y}`), 68, `${f.floorName}  ${s.x},${s.y}`, FONT.WHITE);
       if (settings.minimap && !this.menus.windowOpen() && !modal) this.menus.mapWnd.miniFrame(792 - 160, 88); // 右上角小地图（地图窗口里开关）
-      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 26 : 88); // 追踪中的任务
+      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 52 : 88); // 追踪中的任务
     }
     ui.bottomLineY = 558; // 任务栏常驻在 576..600
     if (battle?.quick) {
@@ -1030,10 +1034,11 @@ class FieldScreen implements Screen {
     chat,
   });
 
-  /** Cancel both held movement and an earlier click-to-walk/talk intent. */
+  /** Release held/manual input when mobile chrome changes; explicit map
+   * navigation remains armed across quick combat and layout transitions. */
   cancelMobileMotion() {
     this.talkTarget = null;
-    if (field) { field.wantDir = -1; field.target = null; }
+    field?.cancelManualMotion();
   }
 
   /** Mobile chrome invokes the same menu/state transitions as desktop shortcuts. */

@@ -1,0 +1,19 @@
+(node:1035325) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+minimap navigation integration passed
+✔ client/test/minimap-navigation.test.ts (2086.278898ms)
+(node:1035326) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ quick battle pauses movement then resumes the same minimap destination (25.83938ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (4.318504ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (2.937659ms)
+✔ quick battle cannot revive a route after a floor change (3.893343ms)
+✔ exact destinations reject fractional and non-finite coordinates (3.195014ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2128.17951

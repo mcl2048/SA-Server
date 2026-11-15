@@ -1,0 +1,5 @@
+--- FAIL: TestAutomationKeywordDiscardWaitsForEditingAndTrade (4.02s)
+    automation_consumables_test.go:105: foreground editing discarded partially typed keywords
+FAIL
+FAIL	sa/server/internal/world	4.120s
+FAIL

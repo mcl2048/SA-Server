@@ -1,0 +1,8 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+Error: input not removed after disable
+    at assert (file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:4:42)
+    at Module.run (file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:52:115)
+    at async work (file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:244:5)
+    at async file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:262:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-01/browser/final-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

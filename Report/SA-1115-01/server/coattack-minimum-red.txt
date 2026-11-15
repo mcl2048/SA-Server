@@ -1,0 +1,5 @@
+--- FAIL: TestCoattackMinimumDamageIsReportedAsHit (0.00s)
+    coattack_test.go:204: native minimum contribution must be a hit: seed=1 guarded=false event={Actor:0 Kind:attack Target:15 Result:miss Damage:1 HP:100000 Dead:false OK:false Skill: Status:0 Guardian:-1 Combo:false Coattack:1 ActorHP:100000 MPDamage:0 Guarded:false PetDamage:0 RideHP:0 Fall:false Effect:0 ActorMP:0 Shoot:0 Fly:0 Icon:0 Stat:0 StatVal:0 StatTurns:0 Consume:false ConsumeAll:false Att: Name: Sprite:0 Level:0 MaxHP:0}
+FAIL
+FAIL	sa/server/internal/battle	0.010s
+FAIL

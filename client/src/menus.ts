@@ -183,7 +183,7 @@ export class Menus {
       petSkill: (p, s, d) => host.petSkill(p, s, d),
     });
     this.ai = new AiWindow({
-      ui, inv: () => this.items.inv.items,
+      ui, canvas: host.canvas, inv: () => this.items.inv.items,
       petSkills: () => (this.pets?.pets ?? []).find((p) => p.state === "battle")?.skills ?? null,
       autoBattle: () => settings.autoBattle, toggleAuto: () => this.toggleAuto(),
       quickBattle: () => settings.quickBattle, toggleQuick: () => this.toggleQuick(),
@@ -193,7 +193,8 @@ export class Menus {
       ui, canvas: host.canvas, send: (t) => host.gmSend(t), list: (k) => host.gmList(k), detail: (k, id) => host.gmDetail(k, id), place: () => host.place(),
       status: () => host.status, pets: () => (this.pets?.pets ?? []).filter((p) => p.slot >= 0 && p.slot < 5).sort((a, b) => a.slot - b.slot),
     });
-    this.mapWnd = new MapWindow({ ui, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.target = [x, y]; } });
+    this.mapWnd = new MapWindow({ ui, canvas: host.canvas, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.target = [x, y]; },
+      openMap: () => { if (!this.mapOpen) this.toggleMap(); }, closeMap: () => { this.mapOpen = false; } });
     this.vendor = new VendorWindow({
       ui, canvas: host.canvas, items: () => this.items.inv.items, pets: () => this.pets?.pets ?? [], ridePet: () => this.pets?.ride ?? -1,
       gold: () => this.items.inv.gold, send: (cmd, title = "", kinds = [], slots = [], prices = []) => host.vendor(cmd, title, kinds, slots, prices),
@@ -250,18 +251,18 @@ export class Menus {
 
   // 原版：打开状态（Ctrl+S）、宠物（Ctrl+P）、系统（Esc）窗口时 MenuToggleFlag &= JOY_CTRL_I | JOY_CTRL_M，
   // 只留下道具与地图窗口，其他窗口和战斗结果窗口（BattleResultWndFlag）都关掉，所以这三个窗口互斥
-  private closeOthers() { this.statusOpen = false; this.systemOpen = false; this.petWnd.close(); this.result = null; album.open = false; this.quests.open = false; }
+  private closeOthers() { this.statusOpen = false; this.systemOpen = false; this.petWnd.close(); this.ai.close(); this.result = null; album.open = false; this.quests.open = false; }
   /** 画面上方的"任务查询"钮：任务窗口，和状态 / 宠物 / 系统窗口一样互斥 */
   toggleQuests() { const open = !this.quests.open; if (open) this.closeOthers(); this.quests.toggle(); }
   // 相簿（Ctrl+A / 任务栏）：打开时关掉道具与地图以外的窗口（MenuToggleFlag &= JOY_CTRL_I | JOY_CTRL_M）
   toggleAlbum() { const open = !album.open; if (open) this.closeOthers(); album.open = open; }
   toggleStatus() { const open = !this.statusOpen; if (open) this.closeOthers(); this.statusOpen = open; this.statusPage = 0; }
   togglePets() { const open = !this.petWnd.open; if (open) this.closeOthers(); this.petWnd.toggle(); }
-  toggleMap() { this.mapOpen = !this.mapOpen; if (this.mapOpen) { this.mapWnd.reset(); if (this.items.open) this.items.toggle(); } }
+  toggleMap() { this.mapOpen = !this.mapOpen; if (this.mapOpen) { this.mapWnd.reset(); if (this.items.open) this.items.toggle(); } else this.mapWnd.syncVisibility(false); }
   toggleSystem() { const open = !this.systemOpen; if (open) this.closeOthers(); this.systemOpen = open; this.go("main"); }
 
   /** 离开地图画面（进战斗、登出）：拿掉宠物改名的 DOM 输入框 */
-  leave() { this.petWnd.leave(); this.gm.leave(); this.vendor.close(false); this.removeAccountBoxes(); }
+  leave() { this.mapWnd.syncVisibility(false); this.ai.close(); this.petWnd.leave(); this.gm.leave(); this.vendor.close(false); this.removeAccountBoxes(); }
 
   /** 战斗胜利后的结果窗口（menu.cpp BattleResultWndFlag），RESULT_WND_CLOSE_TIME 300 帧后自动关闭 */
   showResult(name: string, exp: number, lvUp: boolean, items: string[], pets: ResultPet[] = [], gold = 0) {
@@ -287,6 +288,7 @@ export class Menus {
   }
 
   frame() {
+    this.mapWnd.syncVisibility(this.mapOpen && !this.trade.open && !this.gm.open);
     this.rects = [];
     if (this.trade.open) { this.trade.frame(this.rects); return; } // 交易中只有交易窗口（MenuToggleFlag = JOY_CTRL_T）
     this.taskBar();

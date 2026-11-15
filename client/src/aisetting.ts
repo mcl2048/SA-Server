@@ -8,10 +8,11 @@
 
 import type { InvItem, PetSkill } from "./proto.gen.ts";
 import { AUTO, TARGET_LABEL, defaultAi, loadAi, saveAi, type AiAction, type AiSettings, type AiTarget } from "./ai.ts";
-import { FONT, measure, type Ui } from "./ui.ts";
+import { FONT, measure, InputBox, type Ui } from "./ui.ts";
 
 export interface AiHost {
   ui: Ui;
+  canvas: HTMLCanvasElement;
   inv(): InvItem[];
   petSkills(): PetSkill[] | null; // 出战宠物的技能（没有出战宠物为 null）
   autoBattle(): boolean;   // settings.autoBattle（原版 AI_SELECT）
@@ -72,11 +73,13 @@ export class AiWindow {
   private s: AiSettings = defaultAi();
   private name = "";
   private host: AiHost;
+  private dropInput?: InputBox;
 
   constructor(host: AiHost) { this.host = host; }
 
-  show(name: string) { this.name = name; this.s = loadAi(name); this.open = true; }
-  close() { this.open = false; }
+  show(name: string) { this.removeDropInput(); this.name = name; this.s = loadAi(name); this.open = true; }
+  close() { this.open = false; this.removeDropInput(); }
+  private removeDropInput() { this.dropInput?.remove(); this.dropInput = undefined; }
   private save() { saveAi(this.name, this.s); }
 
   frame(rects: [number, number, number, number][], esc: boolean) {
@@ -98,6 +101,7 @@ export class AiWindow {
       tx += measure(t) + 28;
     }
     ui.box(x + 24, y + 64, x + W * 64 - 24, y + 65, "rgba(255,255,255,0.25)", true);
+    if (this.tab !== "基本" || !this.s.autoDrop) this.removeDropInput();
     switch (this.tab) {
       case "基本": this.basicTab(x, y + 74); break;
       case "人物": this.actorTab(x, y + 74, false); break;
@@ -111,11 +115,11 @@ export class AiWindow {
 
   /** 一行：项目名、值（◀ ▶ 切换，点值往下切）、灰字说明（折行）。回传这一行占的高度。 */
   private row(x: number, ry: number, id: string, label: string, value: string, desc: string,
-    step: ((dir: number) => void) | null, opts: { dim?: boolean; color?: string } = {}): number {
+    step: ((dir: number) => void) | null, opts: { dim?: boolean; color?: string; compact?: boolean } = {}): number {
     const ui = this.host.ui;
     const lx = x + 28, vx = x + 150;
-    const lines = wrapPx(desc, INNER);
-    const h = 20 + lines.length * 17 + 5;
+    const lines = wrapPx(desc, INNER, opts.compact ? 1 : 2);
+    const h = opts.compact ? 36 : 20 + lines.length * 17 + 5;
     if (ui.hitBox(x + 24, ry - 4, x + W * 64 - 24, ry + h - 6, `${id}-row`, false)) ui.bottomLine = desc;
     ui.text(lx, ry, label, opts.dim ? FONT.GRAY : FONT.WHITE);
     const vc = opts.dim ? FONT.GRAY : opts.color ?? FONT.YELLOW;
@@ -129,8 +133,8 @@ export class AiWindow {
     return h;
   }
 
-  private toggleRow(x: number, ry: number, id: string, label: string, on: boolean, desc: string, flip: () => void): number {
-    return this.row(x, ry, id, label, on ? "开启" : "关闭", desc, () => flip(), { color: on ? FONT.GREEN : FONT.WHITE });
+  private toggleRow(x: number, ry: number, id: string, label: string, on: boolean, desc: string, flip: () => void, compact = false): number {
+    return this.row(x, ry, id, label, on ? "开启" : "关闭", desc, () => flip(), { color: on ? FONT.GREEN : FONT.WHITE, compact });
   }
 
   // ---------------- 基本 ----------------
@@ -139,16 +143,36 @@ export class AiWindow {
     const s = this.s;
     let ry = y;
     ry += this.toggleRow(x, ry, "ai-auto", "自动战斗", this.host.autoBattle(),
-      "战斗时照这里的设定自动下指令；地图上按 PageUp / PageDown 也能切换。", () => this.host.toggleAuto());
+      "战斗时自动下指令；PageUp / PageDown 切换。", () => this.host.toggleAuto(), true);
     ry += this.toggleRow(x, ry, "ai-quick", "快速战斗", this.host.quickBattle(),
-      "遇敌不进战斗画面、不播动画，照这里的设定自动打完直接回地图（经验写在聊天栏）。", () => this.host.toggleQuick());
+      "留在地图自动完成战斗，战后继续自动导航。", () => this.host.toggleQuick(), true);
+    ry += this.toggleRow(x, ry, "ai-auto-escape", "自动逃跑", s.autoEscape,
+      "优先逃跑，失败三次恢复战斗策略；任务／决斗除外。", () => { s.autoEscape = !s.autoEscape; this.save(); }, true);
     ry += this.toggleRow(x, ry, "ai-enc", "自动遇敌", this.host.autoEncount(),
-      "在站的格子与旁边一格之间来回走引来敌人；手动移动、换地图或耐久力太低就停。", () => this.host.setAutoEncount(!this.host.autoEncount()));
-    ry += this.row(x, ry, "ai-heal", "补血时机", `耐久力低于 ${s.healAt}％`,
-      "HP低于比例先恢复：优先可用的恢复精灵，再用肉等恢复道具；气力不足时用气力恢复道具。",
-      (d) => { s.healAt = Math.max(0, Math.min(100, s.healAt + 5 * d)); this.save(); });
+      "来回走动遇敌；手动移动、换地图或濒危时停止。", () => this.host.setAutoEncount(!this.host.autoEncount()), true);
+    ry += this.toggleRow(x, ry, "ai-drop", "自动丢弃", s.autoDrop,
+      "日常／战后丢弃匹配名字的背包物品，无需确认。", () => { s.autoDrop = !s.autoDrop; this.save(); }, true);
+    if (s.autoDrop) {
+      const ix = x + 150, iw = W * 64 - 180;
+      this.host.ui.text(x + 28, ry + 4, "丢弃关键字", FONT.WHITE);
+      this.host.ui.box(ix - 3, ry, ix + iw + 3, ry + 23, "rgba(255,255,255,0.35)", false);
+      if (!this.dropInput) {
+        const input = new InputBox(this.host.canvas, ix, ry + 3, iw, 19, {maxLength: 512});
+        input.value = s.dropKeywords; input.el.dataset.inputLabel = "自动丢弃关键字";
+        input.el.setAttribute("aria-label", "自动丢弃关键字"); input.el.placeholder = "石龟 | 蕨";
+        input.el.addEventListener("input", () => { this.s.dropKeywords = input.value; this.save(); });
+        // IME Enter remains an editing action; it must not reach map/chat keys.
+        input.el.addEventListener("keydown", e => { e.stopPropagation(); });
+        this.dropInput = input;
+      }
+      this.host.ui.text(x + 28, ry + 27, "用 | 分隔，包含任一关键字即丢弃。", FONT.GRAY);
+      ry += 47;
+    } else this.removeDropInput();
+    ry += this.row(x, ry, "ai-heal", "恢复比例", `耐久力／气力低于 ${s.healAt}％`,
+      "低于比例先恢复：肉优先，其次药物，再用恢复精灵。",
+      (d) => { s.healAt = Math.max(0, Math.min(100, s.healAt + 5 * d)); this.save(); }, {compact: true});
     ry += this.toggleRow(x, ry, "ai-esc", "打不过就逃跑", s.escape,
-      "自己会被打死又补不了血、或两回合内打不完对方时逃跑（头目、任务战斗、决斗不逃）。", () => { s.escape = !s.escape; this.save(); });
+      "濒危且无法恢复时逃跑；头目、任务、决斗除外。", () => { s.escape = !s.escape; this.save(); }, true);
   }
 
   // ---------------- 人物 / 宠物的行动 ----------------
@@ -236,8 +260,8 @@ export class AiWindow {
     ry += 10;
     const lines = [
       "智能战斗每回合：",
-      "· 耐久力低于补血比例时，优先可用的恢复精灵，再用肉等恢复道具",
-      "· 复活队友与宠物、解除状态；气力不足施放恢复精灵时用气力恢复道具",
+      "· 耐久力／气力低于恢复比例时，先用肉、再用药物、最后恢复精灵",
+      "· 复活队友与宠物、解除状态；气力不足施放恢复精灵时也会补气",
       "· 没有紧急的事就做\"人物 / 宠物\"页设定的行动；设成智能判断时，",
       "　对每个敌人、每个攻击精灵的范围各估一个值，挑最划算的打",
       "· 会记住每种敌人与每个技能的实际伤害（存在浏览器），越打越准",

@@ -1,0 +1,10 @@
+{
+  "cameraSlot": -1,
+  "firstCoattackActor": 10,
+  "focus": {
+    "x": 677,
+    "y": 456,
+    "label": "f0"
+  },
+  "expectedFollowActor": "an active member of the attacking group"
+}

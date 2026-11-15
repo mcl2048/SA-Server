@@ -1,0 +1,21 @@
+✔ new automation switches default off and remain isolated per character (4.924321ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (3.827943ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (3.414195ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (0.701925ms)
+✔ self-only meat is not selected for an injured teammate (3.69312ms)
+✔ mixed HP-first descriptions cannot masquerade as an MP recovery item (0.483333ms)
+✔ medicine precedes a whole-party healing spirit when multiple allies are low (1.699893ms)
+(node:1053221) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ coattack members advance and strike together while authoritative HP stays ordered (88.678838ms)
+✔ quick coattack finishes with the final server HP and no stuck movement (2.238949ms)
+✔ escape failures come from own failed events and reset with a new battle (2.723818ms)
+✔ enemy coattack focuses the follow camera before its approach (1.395449ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1115.137952

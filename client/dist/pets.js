@@ -13,12 +13,12 @@
 // （档次、成长率、预计 / 实际每级成长、1 级推算值、抗性等，算法见 server/internal/world/petext.go）。
 
 
-import { ANIM, findAction } from "./assets.js?v=8a026288d656cdb2";
-import { petForSprite } from "./pet-catalog.js?v=8a026288d656cdb2";
-import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=8a026288d656cdb2";
-import { isImmersive } from "./mobile-view.js?v=8a026288d656cdb2";
-import { PRIMAL_CROSS_FUNC } from "./battle-targets.js?v=8a026288d656cdb2";
-import { SkillMemoPages } from "./skill-memo.js?v=8a026288d656cdb2";
+import { ANIM, findAction } from "./assets.js?v=08f6b4cf8a3cf7f0";
+import { petForSprite } from "./pet-catalog.js?v=08f6b4cf8a3cf7f0";
+import { FONT, FONT_SIZE, SYS, InputBox, boxColor, measure,         } from "./ui.js?v=08f6b4cf8a3cf7f0";
+import { isImmersive } from "./mobile-view.js?v=08f6b4cf8a3cf7f0";
+import { PRIMAL_CROSS_FUNC } from "./battle-targets.js?v=08f6b4cf8a3cf7f0";
+import { SkillMemoPages } from "./skill-memo.js?v=08f6b4cf8a3cf7f0";
 
 const CG = {
   PET_WND_VIEW: 26044, PET_WND_DETAIL: 26045, NAME_CHANGE_WND: 26049, PET_WAZA_WND: 26130, PET_WAZA_BAR_1: 26131,

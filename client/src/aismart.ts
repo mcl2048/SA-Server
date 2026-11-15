@@ -6,7 +6,7 @@
 // 每回合把能做的事都列出来、各自估一个"值"，挑最大的，而不是照固定顺序：
 //   1. 估计这回合每个我方的人会挨多少：每个能动的敌人的威胁（学到的平均伤害，没学到时按等级估）平均分到我方，
 //      再加上最凶的那个的一半（可能集中打一个人）。会被打死、或 HP 低于"补血"设定的百分比的，按缺多少与身份（自己 > 队友 > 宠物）排先后。
-//   2. 补血：两个人以上要补而且有补全体的精灵就补全体；否则挑够补满的最小的那个（精灵按 option 的回复量、道具按说明里的数字，肉优先）。
+//   2. 补血：先用可对该目标使用的肉，再用药物，最后用单体／全体恢复精灵。
 //   3. 复活倒下的队友 / 宠物；解掉队友 / 宠物不能动的状态（麻、眠、石、障）或快被毒死的毒（精灵的 option 对得上状态才用）。
 //   4. MP 不够放最便宜的补血精灵时，有回复气力的道具就喝。
 //   5. 打不过（逃得掉的战斗）：自己会被打死又补不了血、或敌人两回合的伤害超过我方剩下的 HP 而我方两回合打不完，就逃跑。
@@ -24,6 +24,7 @@ import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.ts";
 export interface SmartFighter {
   slot: number; name: string; hp: number; maxHp: number; mp: number; level: number; status: number; gone: boolean;
   rideHp?: number; rideMaxHp?: number; // 骑着的宠物（没骑为 0）：补血时连它一起算（回复会按缺的比例分给骑宠）
+  maxMp?: number;
   defenseBoost?: number; defenseTurns?: number;
 }
 
@@ -38,6 +39,7 @@ export interface SmartContext {
   noEscape: boolean; // 头目 / 事件 / 决斗：原版的逃跑多半没用，不考虑逃跑
   mem: AiMemory;
   pvp?: boolean; // supplied by battle UI; never infer PvP from noEscape (also used by bosses)
+  escapeFailures?: number; // 本场服务端已经确认的失败次数，不按提交次数推算
 }
 
 const DISABLED = new Set([2, 3, 4, 9]); // 麻、眠、石、障：不能行动
@@ -139,6 +141,9 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
   // A final KO can arrive before BattleEnd. Do not manufacture an attack with
   // target=-1 while the authoritative battle is finishing.
   if (enemies.length === 0) { out.kind = "guard"; return out; }
+  if (s.autoEscape && !c.noEscape && !c.pvp && (c.escapeFailures ?? 0) < 3) {
+    out.kind = "escape"; out.label = "自动逃跑"; return out;
+  }
 
   // 威胁：学到的平均伤害，没学到时按等级估；不能动的敌人这回合没有威胁
   const threat = (e: SmartFighter) => DISABLED.has(e.status) ? 0 : c.mem.threat(e.name, e.level * 2.5 + 10);
@@ -164,19 +169,21 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
 
   // 补血
   if (!done && needs.length) {
+    const itemTarget = (it: InvItem) => it.target % 100 !== 0 || needs[0].x.slot === me;
+    const healItems = items.filter(it => itemTarget(it) && /回复|恢复/.test(it.memo) && /耐久力|耐力/.test(it.memo) && !it.memo.includes("气绝"));
+    const meat = healItems.find(it => it.name.includes("肉"));
     const heals = spells.filter((m) => HEAL_MAGIC.has(m.magicFunc));
     const group = heals.filter((m) => m.magicTarget === 2 || m.magicTarget === 8).sort((a, b) => Number(b.magicOption) - Number(a.magicOption))[0];
-    if (needs.length >= 2 && group) send("magic", side, group.slot, `全体补血：${group.magic}`);
+    if (meat) send("item", needs[0].x.slot, meat.slot, `补血：${needs[0].x.name}（${meat.name}）`);
+    else if (needs.length >= 2 && group && healItems.length === 0) send("magic", side, group.slot, `全体补血：${group.magic}`);
     else {
       const t = needs[0].x, deficit = needs[0].deficit;
       const single = heals.filter((m) => m.magicTarget === 1 || (m.magicTarget === 0 && t.slot === me));
-      const meat = items.find((it) => it.name.includes("肉") && it.memo.includes("耐久力"));
-      const healItems = items.filter((it) => it.memo.includes("耐久力") && it.memo.includes("回复"));
       const pick = <T,>(list: T[], amount: (x: T) => number) =>
         [...list].sort((a, b) => amount(a) - amount(b)).find((x) => amount(x) >= deficit) ?? [...list].sort((a, b) => amount(b) - amount(a))[0];
-      const m = pick(single, (x) => Number(x.magicOption) || 0), it = meat ?? pick(healItems, healAmount);
-      if (m) send("magic", t.slot, m.slot, `补血：${t.name}`);
-      else if (it) send("item", t.slot, it.slot, `补血：${t.name}（${it.name}）`);
+      const m = pick(single, (x) => Number(x.magicOption) || 0), it = pick(healItems, healAmount);
+      if (it) send("item", t.slot, it.slot, `补血：${t.name}（${it.name}）`);
+      else if (m) send("magic", t.slot, m.slot, `补血：${t.name}`);
       else if (group) send("magic", side, group.slot, `全体补血：${group.magic}`);
       else out.chat.push("智能战斗：有人耐久力低于补血时机，但身上没有补血的精灵或道具");
     }
@@ -211,8 +218,9 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
     const cheapest = Math.min(...allHeals.map((m) => m.magicMp));
     // The wire catalogue exposes descriptions rather than item use functions.
     // Require the MP resource name; “气绝回复” denotes revival, never MP.
-    const mpItem = items.find((it) => /气力/.test(it.memo) && /回复|恢复/.test(it.memo) && !/耐久力|耐力|气绝/.test(it.memo));
-    if (allHeals.length && meF.mp < cheapest && mpItem) send("item", me, mpItem.slot, "补气");
+    const mpItems = items.filter((it) => /气力/.test(it.memo) && /回复|恢复/.test(it.memo) && !/耐久力|耐力|气绝/.test(it.memo));
+    const mpItem = mpItems.find(it => it.name.includes("肉")) ?? mpItems[0];
+    if ((meF.mp < (meF.maxMp ?? 0) * limit || allHeals.length > 0 && meF.mp < cheapest) && mpItem) send("item", me, mpItem.slot, `补气（${mpItem.name}）`);
   }
 
   // 进攻的候选：普通攻击与攻击精灵
@@ -252,7 +260,8 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
   }
 
   // 逃跑：打不过而且逃得掉（"打不过就逃跑"关掉就不逃）
-  if (!done && !c.noEscape && s.escape) {
+  const escapeFallback = s.autoEscape && (c.escapeFailures ?? 0) >= 3;
+  if (!done && !c.noEscape && !escapeFallback && s.escape) {
     const myHp = aliveAllies.reduce((a, x) => a + x.hp, 0), best = Math.max(0, ...plans.map((p) => [...p.hits.values()].reduce((a, b) => a + b, 0)));
     const enemyHp = enemies.reduce((a, e) => a + e.hp, 0);
     const lost = needs.some((n) => n.lethal && n.x.slot === me) || (totalThreat * 2 > myHp && best * 2 * aliveAllies.length < enemyHp);
@@ -261,7 +270,7 @@ export function smartChoose(s: AiSettings, c: SmartContext): AiCommand & { key: 
 
   // 抓宠：只抓 1 级的（原版的规则），没有就逃
   if (!done && captureTarget) send("capture", captureTarget.slot, -1, `抓宠：${captureTarget.name}`);
-  else if (!done && s.capture && c.capturePlace && !c.noEscape) { send("escape", -1, -1, "没有 1 级的，逃跑"); return out; }
+  else if (!done && s.capture && c.capturePlace && !c.noEscape && !escapeFallback) { send("escape", -1, -1, "没有 1 级的，逃跑"); return out; }
 
   // 固定的行动（设定的第一回合 / 之后每回合）：没有紧急的事时照做
   const bestEnemy = () => { const p = plans.filter((p) => p.kind === "attack").sort((a, b) => b.value - a.value)[0]; return p ? p.target : enemies[0]?.slot ?? -1; };

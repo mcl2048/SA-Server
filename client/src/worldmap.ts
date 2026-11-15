@@ -12,7 +12,7 @@
 
 import type { Assets } from "./assets.ts";
 import type { Field, FloorView } from "./field.ts";
-import { FONT, measure, type Ui } from "./ui.ts";
+import { FONT, InputBox, measure, type Ui } from "./ui.ts";
 import { settings, saveSettings } from "./menus.ts";
 
 type Rgb = [number, number, number] | null;
@@ -123,10 +123,13 @@ function average(page: ImageData, x0: number, y0: number, w: number, h: number, 
 
 export interface MapHost {
   ui: Ui;
+  canvas: HTMLCanvasElement;
   assets: Assets;
   root: string;
   field(): Field | null;
   walkTo(x: number, y: number): void; // 点地图上的格子：自动寻路走过去（Field.target）
+  openMap?(): void;
+  closeMap?(): void;
 }
 
 const ZOOMS = [2, 3, 4, 6, 8, 12, 16]; // 一格的半宽（像素）；格子菱形半高是它的 3/4（画面 64×48 的比例）
@@ -134,7 +137,7 @@ const W = 10, H = 10;                   // 窗口 640×480
 const X = (800 - W * 64) / 2, Y = 40;
 const LIST_W = 150, LIST_ROWS = 14, LIST_ROW_H = 20;
 const MAP_X = X + 26 + LIST_W + 8, MAP_Y = Y + 66;
-const MAP_W = W * 64 - (26 + LIST_W + 8) - 26, MAP_H = H * 48 - 66 - 58;
+const MAP_W = W * 64 - (26 + LIST_W + 8) - 26, MAP_H = H * 48 - 66 - 90;
 const BG = "#0a0f1c";
 const MINI_W = 160, MINI_H = 112, MINI_ZOOM = 1; // 右上角小地图：160×112，一格 3 像素
 
@@ -154,7 +157,11 @@ export class MapWindow {
   private mini: HTMLCanvasElement;      // 右上角小地图的底图
   private drawnMini = "";
   private pressInside = false;          // 地图上按下了（放开时没拖动就算点格子）
+  private openingPointer = false;
   private seenCache = new Map<number, { version: number; count: number; bounds: [number, number, number, number] | null }>();
+  private destinationX: InputBox | null = null;
+  private destinationY: InputBox | null = null;
+  private coordinateFloor = -1;
 
   constructor(host: MapHost) {
     this.host = host;
@@ -165,7 +172,41 @@ export class MapWindow {
   }
 
   /** 打开时回到自己那一层、跟着自己 */
-  reset() { this.floor = -1; this.follow = true; this.cancelPointer(); }
+  reset() { this.floor = -1; this.follow = true; this.cancelPointer(); this.openingPointer = true; }
+
+  /** These are the original InputBox nodes, so the mobile shell can adopt
+   * them with IME/focus preserved. Never leave invisible inputs over the field. */
+  syncVisibility(visible: boolean) {
+    const f = this.host.field();
+    if (!visible || !f?.self || f.floor < 0 || !this.host.canvas) {
+      this.destinationX?.remove(); this.destinationY?.remove();
+      this.destinationX = this.destinationY = null; this.coordinateFloor = -1;
+      return;
+    }
+    if (this.destinationX && this.coordinateFloor === f.floor) return;
+    this.syncVisibility(false);
+    this.coordinateFloor = f.floor;
+    this.destinationX = new InputBox(this.host.canvas, MAP_X + 24, Y + H * 48 - 75, 68, 22, { maxLength: 7 });
+    this.destinationY = new InputBox(this.host.canvas, MAP_X + 132, Y + H * 48 - 75, 68, 22, { maxLength: 7 });
+    for (const [box, label, value] of [[this.destinationX, "目的地东坐标 X", f.self.x], [this.destinationY, "目的地南坐标 Y", f.self.y]] as const) {
+      box.value = String(value); box.el.inputMode = "numeric";
+      box.el.dataset.inputLabel = label; box.el.setAttribute("aria-label", label);
+      box.el.addEventListener("keydown", event => {
+        event.stopPropagation();
+        if (event.key === "Enter") { event.preventDefault(); this.submitCoordinates(); }
+      });
+    }
+  }
+
+  private submitCoordinates() {
+    const f = this.host.field();
+    if (!f || !this.destinationX || !this.destinationY) return;
+    if (f.floor !== this.coordinateFloor) { f.navigationStatus = "地图已改变，请重新输入目的地"; return; }
+    const x = this.destinationX.value.trim(), y = this.destinationY.value.trim();
+    if (!/^-?\d+$/.test(x) || !/^-?\d+$/.test(y)) { f.navigationStatus = "请输入有效的整数坐标"; return; }
+    f.navigateTo(Number(x), Number(y));
+    if (f.target) { this.host.closeMap?.(); this.syncVisibility(false); }
+  }
 
   /** Release native gesture bookkeeping without moving its view or inventing
    * an up/click. Used by touch cancellation, context changes and window reopen. */
@@ -180,6 +221,7 @@ export class MapWindow {
     const resolve = () => f && f.floor >= 0 ? (this.floor < 0 || this.floor === f.floor ? f.floorView(f.floor) : f.floorView(this.floor)) : null;
     let view = resolve();
     let current = !!view && !!f && view.floor === f.floor;
+    this.syncVisibility(true);
     // 标题列
     if (view) {
       const head = `${view.name}　${view.floor}`;
@@ -244,6 +286,13 @@ export class MapWindow {
       ui.pic(this.marks, MAP_X, MAP_Y);
       ui.hitBox(MAP_X, MAP_Y, MAP_X + MAP_W, MAP_Y + MAP_H, "map-area", false);
     }
+    for (const box of [this.destinationX, this.destinationY]) if (box) box.el.style.display = current ? "" : "none";
+    if (current) {
+      const cy = y + H * 48 - 75;
+      ui.text(MAP_X, cy + 3, "东", FONT.AQUA); ui.text(MAP_X + 108, cy + 3, "南", FONT.AQUA);
+      for (const ix of [MAP_X + 24, MAP_X + 132]) ui.box(ix - 3, cy - 2, ix + 71, cy + 24, "rgba(255,255,255,0.35)", false);
+      if (ui.textButton(MAP_X + 218, cy + 3, "到目的地", FONT.YELLOW, "map-go")) this.submitCoordinates();
+    }
     ui.text(x + 28, y + H * 48 - 36, f?.navigationStatus || (this.hoverNpc ? `NPC：${this.hoverNpc}` : "点格子走过去　拖动平移　青：传送点　白：玩家　黄：NPC（停上去看名字）　框：画面范围"), this.hoverNpc ? FONT.YELLOW : FONT.GRAY);
     if (ui.text(x + W * 64 - 28 - measure("关　闭"), y + H * 48 - 36, "关　闭", FONT.AQUA, "map-close")) close();
   }
@@ -253,6 +302,12 @@ export class MapWindow {
   /** 按住拖动：像素位移换成格子位移（px = (X+Y)s、py = (Y−X)·0.75s 的反算） */
   private pan(ui: Ui, view: FloorView) {
     const m = ui.mouse;
+    // The minimap coordinate button lies inside the newly opened map bounds.
+    // Wait for a neutral pointer frame so that opening it cannot also walk.
+    if (this.openingPointer) {
+      if (!m.down && !m.clicked) this.openingPointer = false;
+      return;
+    }
     const inside = m.x >= MAP_X && m.x < MAP_X + MAP_W && m.y >= MAP_Y && m.y < MAP_Y + MAP_H;
     if (m.clicked && inside) this.pressInside = true; // clicked 在按下的那一帧为真（按下与放开可能在同一帧内，看 down 会漏掉）
     if (!m.down && this.pressInside) { // 放开：没拖动过就是点格子 → 走过去（只对自己这一层）
@@ -338,7 +393,8 @@ export class MapWindow {
       const s = ZOOMS[MINI_ZOOM], a = (ui.mouse.x-x-MINI_W/2)/s, b=(ui.mouse.y-y-MINI_H/2)/(s*0.75);
       f.navigateTo(Math.round(me.x+(a-b)/2), Math.round(me.y+(a+b)/2));
     }
-    if (f.navigationStatus) ui.text(x, y + MINI_H + 4, f.navigationStatus, FONT.YELLOW);
+    if (ui.textButton(x + 16, y + MINI_H + 4, "输入坐标", FONT.AQUA, "mini-coordinates")) this.host.openMap?.();
+    if (f.navigationStatus) ui.text(x, y + MINI_H + 26, f.navigationStatus, FONT.YELLOW);
     ui.box(x - 1, y - 1, x + MINI_W + 1, y + MINI_H + 1, "rgba(255,255,255,0.35)", false);
     const s = ZOOMS[MINI_ZOOM];
     for (const a of f.actors.values()) { // 玩家白点、NPC 黄点（自己不在 actors 里，另画）

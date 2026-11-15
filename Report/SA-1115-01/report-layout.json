@@ -1,0 +1,36 @@
+{
+  "checks": [
+    {
+      "device": "desktop",
+      "viewport": {
+        "width": 1360,
+        "height": 1000
+      },
+      "no_page_overflow": true,
+      "local_links_exist": true,
+      "images_loaded": true,
+      "case_filter": {
+        "all": 29,
+        "desktop": 15,
+        "mobile": 14
+      }
+    },
+    {
+      "device": "mobile-emulation",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "no_page_overflow": true,
+      "local_links_exist": true,
+      "images_loaded": true,
+      "case_filter": {
+        "all": 29,
+        "desktop": 15,
+        "mobile": 14
+      }
+    }
+  ],
+  "errors": [],
+  "success": true
+}

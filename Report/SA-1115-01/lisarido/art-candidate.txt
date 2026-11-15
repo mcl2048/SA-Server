@@ -1,0 +1,16 @@
+..F.
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 58, in test_complete_right_arm_is_removed_before_it_is_reposed
+    self.assertLess(np.count_nonzero(mask & brown(removed.astype(int))), 8,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'the original lowered gun survives behind the raised one')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: np.int64(26) not less than 8 : the original lowered gun survives behind the raised one
+
+----------------------------------------------------------------------
+Ran 4 tests in 21.229s
+
+FAILED (failures=1)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Offline integration tests; creates only a verified /tmp fixture directory.
+# Offline v1/v2 -> v3 integration tests; creates only a verified /tmp fixture directory.
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
@@ -12,7 +12,7 @@ repo=Path(sys.argv[1]).resolve()
 fixture=Path(tempfile.mkdtemp(prefix='sa-ai-assets-test-',dir='/tmp')).resolve()
 assert fixture.parent==Path('/tmp') and fixture.name.startswith('sa-ai-assets-test-')
 installer=repo/'update/install-lisarido.sh'
-prefix='extensions/lisarido-v2'
+prefix='extensions/lisarido-v3'
 known=['manifest.json']+['pages/%05d.png'%i for i in range(2)]+['anim/%d.json'%i for i in (199300,199301)]
 legacy_prefix='extensions/lisarido-v1'
 legacy_data={legacy_prefix+'/'+name:('old-v1-'+name).encode() for name in known}
@@ -44,9 +44,9 @@ def pack(update, *, additions=(), omit=None, corrupt_file=None, duplicate=None):
         if duplicate:
             data=base_data[duplicate];item=tarfile.TarInfo(duplicate);item.size=len(data);tar.addfile(item,io.BytesIO(data))
     archive=gzip.compress(buf.getvalue(),mtime=0)
-    (update/'lisarido-v2-assets.tar.gz').write_bytes(archive)
-    manifest={'schemaVersion':1,'packageId':'lisarido-v2','targetRoot':'assets/'+prefix,'installPrefix':prefix,'archive':{'name':'lisarido-v2-assets.tar.gz','size':len(archive),'sha256':hashlib.sha256(archive).hexdigest()},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(base_data.items())]}
-    (update/'lisarido-v2-assets.manifest.json').write_text(json.dumps(manifest))
+    (update/'lisarido-v3-assets.tar.gz').write_bytes(archive)
+    manifest={'schemaVersion':1,'packageId':'lisarido-v3','targetRoot':'assets/'+prefix,'installPrefix':prefix,'archive':{'name':'lisarido-v3-assets.tar.gz','size':len(archive),'sha256':hashlib.sha256(archive).hexdigest()},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(base_data.items())]}
+    (update/'lisarido-v3-assets.manifest.json').write_text(json.dumps(manifest))
     if os.environ.get('SA_LISARIDO_BASELINE'):
         (update/'lilith-v1-assets.manifest.json').write_text(json.dumps(manifest))
     return manifest
@@ -58,8 +58,9 @@ def run(update,*args,ok=True,cwd=None):
 
 def untouched(assets):
     assert (assets/'original.webp').read_bytes()==b'original-do-not-touch'
-    assert not list(assets.glob('extensions/.lisarido-v2-stage-*'))
+    assert not list(assets.glob('extensions/.lisarido-v3-stage-*'))
     assert not list(assets.glob('extensions/.lisarido-v1-retired-*'))
+    assert not list(assets.glob('extensions/.lisarido-v2-retired-*'))
 
 try:
     def old_pack(assets):
@@ -67,14 +68,31 @@ try:
             target=assets/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
         return assets/legacy_prefix
 
-    path,update,assets=case('v1-to-v2');pack(update);old=old_pack(assets)
+    path,update,assets=case('v1-to-v3');pack(update);old=old_pack(assets)
     other=assets/'extensions/other-pet-v1/keep';other.parent.mkdir();other.write_bytes(b'other-pet')
     run(update);assert not old.exists(),'obsolete v1 still active'
-    assert other.read_bytes()==b'other-pet';untouched(assets);passed.append('new v2 verified before old v1 removal; other extension preserved')
+    assert other.read_bytes()==b'other-pet';untouched(assets);passed.append('new v3 verified before old v1 removal; other extension preserved')
     mtimes={p:p.stat().st_mtime_ns for p in (assets/prefix).rglob('*')}
     old=old_pack(assets);run(update);assert not old.exists()
     assert all(p.stat().st_mtime_ns==stamp for p,stamp in mtimes.items());untouched(assets)
-    passed.append('already-installed v2 still retires v1 without rewriting v2')
+    passed.append('already-installed v3 still retires v1 without rewriting v3')
+
+    for old_id in ('lisarido-v2',):
+        path,update,assets=case(old_id+'-to-v3');pack(update)
+        old_prefix='extensions/'+old_id
+        old_data={old_prefix+'/'+name:('old-'+old_id+'-'+name).encode() for name in known}
+        old_manifest={'schemaVersion':1,'packageId':old_id,'targetRoot':'assets/'+old_prefix,'installPrefix':old_prefix,'archive':{'name':old_id+'-assets.tar.gz','size':1,'sha256':'0'*64},'entries':[{'path':k,'size':len(v),'sha256':hashlib.sha256(v).hexdigest()} for k,v in sorted(old_data.items())]}
+        (update/(old_id+'-assets.manifest.json')).write_text(json.dumps(old_manifest))
+        for name,data in old_data.items():
+            target=assets/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+        old_pack(assets)
+        run(update);assert not (assets/old_prefix).exists() and not (assets/legacy_prefix).exists()
+        mtimes={p:p.stat().st_mtime_ns for p in (assets/prefix).rglob('*')}
+        for name,data in old_data.items():
+            target=assets/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+        run(update);assert not (assets/old_prefix).exists()
+        assert all(p.stat().st_mtime_ns==stamp for p,stamp in mtimes.items());untouched(assets)
+        passed.append(old_id+' and v1 retired only after new v3 verification; repeated upgrade keeps v3 mtimes')
 
     path,update,assets=case('partial-v1');pack(update);old=old_pack(assets)
     (old/'pages/00001.png').unlink();run(update);assert not old.exists();untouched(assets)
@@ -192,25 +210,25 @@ try:
         path,update,assets=case(label);pack(update,**kwargs);run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append(label+' rejected before mutation')
 
     path,update,assets=case('archive-sha');pack(update)
-    archive=update/'lisarido-v2-assets.tar.gz';archive.write_bytes(archive.read_bytes()+b'X')
+    archive=update/'lisarido-v3-assets.tar.gz';archive.write_bytes(archive.read_bytes()+b'X')
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('archive tampering rejected')
 
     path,update,assets=case('entry-sha');manifest=pack(update)
-    manifest['entries'][0]['sha256']='0'*64;(update/'lisarido-v2-assets.manifest.json').write_text(json.dumps(manifest))
+    manifest['entries'][0]['sha256']='0'*64;(update/'lisarido-v3-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('per-file digest mismatch rejected')
 
     path,update,assets=case('manifest-escape');manifest=pack(update)
-    manifest['entries'][0]['path']='../base.png';(update/'lisarido-v2-assets.manifest.json').write_text(json.dumps(manifest))
+    manifest['entries'][0]['path']='../base.png';(update/'lisarido-v3-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('manifest traversal rejected')
 
     path,update,assets=case('package-link');pack(update)
-    package=update/'lisarido-v2-assets.tar.gz';safe=fixture/'safe-package.tar.gz';package.rename(safe);package.symlink_to(safe)
+    package=update/'lisarido-v3-assets.tar.gz';safe=fixture/'safe-package.tar.gz';package.rename(safe);package.symlink_to(safe)
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('package symlink rejected')
 
     path,update,assets=case('decompression-limit');manifest=pack(update)
     archive=gzip.compress(b'\0'*200000,mtime=0)
     manifest['archive']['size']=len(archive);manifest['archive']['sha256']=hashlib.sha256(archive).hexdigest()
-    (update/'lisarido-v2-assets.tar.gz').write_bytes(archive);(update/'lisarido-v2-assets.manifest.json').write_text(json.dumps(manifest))
+    (update/'lisarido-v3-assets.tar.gz').write_bytes(archive);(update/'lisarido-v3-assets.manifest.json').write_text(json.dumps(manifest))
     run(update,ok=False);assert not (assets/'extensions').exists();untouched(assets);passed.append('expanded tar size bounded before metadata parsing')
 
     path,update,assets=case('incomplete-installed');pack(update);target=assets/prefix;target.mkdir(parents=True);(target/'manifest.json').write_bytes(base_data[prefix+'/manifest.json'])

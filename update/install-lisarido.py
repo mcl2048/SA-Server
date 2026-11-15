@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install verified v2 art before retiring the known v1 extension."""
+"""Install verified v3 cannon-arm art before retiring known v1/v2 extensions."""
 import argparse
 import fcntl
 import gzip
@@ -14,10 +14,10 @@ import sys
 import tarfile
 import tempfile
 
-PACKAGE_ID = "lisarido-v2"
+PACKAGE_ID = "lisarido-v3"
 PREFIX = "extensions/" + PACKAGE_ID
 ARCHIVE = PACKAGE_ID + "-assets.tar.gz"
-LEGACY_IDS = ("lisarido-v1",)
+LEGACY_IDS = ("lisarido-v1", "lisarido-v2")
 MAX_ARCHIVE = 100 * 1024 * 1024
 MAX_UNPACKED = 100 * 1024 * 1024
 EXPECTED = {PREFIX + "/manifest.json"}
@@ -69,7 +69,7 @@ def sync_directory(path):
 
 
 def read_manifest(script_dir, package_id):
-    # Both revisions use the same seven relative files. The old checksum list
+    # All three revisions use the same five relative files. The old checksum list
     # identifies what may be deleted; it never supplies arbitrary cleanup paths.
     prefix = "extensions/" + package_id
     allowed = {prefix + name.removeprefix(PREFIX) for name in EXPECTED}
@@ -212,7 +212,7 @@ def install(assets, expected, payloads, script_dir):
             print("新版已安装且5个文件校验一致，无需重写: " + str(destination))
         else:
             extensions.mkdir(mode=0o755, exist_ok=True)
-            stage = Path(tempfile.mkdtemp(prefix=".lisarido-v2-stage-", dir=extensions))
+            stage = Path(tempfile.mkdtemp(prefix=".lisarido-v3-stage-", dir=extensions))
             try:
                 os.chmod(stage, 0o755)
                 for name in sorted(payloads):
@@ -234,11 +234,11 @@ def install(assets, expected, payloads, script_dir):
                 print("安装完成，5个文件校验通过: " + str(destination))
             finally:
                 if stage.exists():
-                    require(stage.parent == extensions and stage.name.startswith(".lisarido-v2-stage-")
+                    require(stage.parent == extensions and stage.name.startswith(".lisarido-v3-stage-")
                             and not stage.is_symlink(), "临时目录异常，拒绝清理")
                     shutil.rmtree(stage)
-        # No early return for an existing v2: a repeat invocation must still
-        # retire a known v1 directory that has been restored beside the new art.
+        # No early return for an existing v3: a repeat invocation must still
+        # retire a known v1/v2 directory that has been restored beside the new art.
         verify_existing(destination, expected)
         parent_fd = os.open(extensions, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
         try:
@@ -248,7 +248,7 @@ def install(assets, expected, payloads, script_dir):
                 os.fsync(parent_fd)
         finally:
             os.close(parent_fd)
-        print("v0.2.18客户端加载v2；官方基础素材与其他宠物扩展保持不变。")
+        print("v0.2.19客户端加载v3；官方基础素材与其他宠物扩展保持不变。")
         print("从旧版升级须同时更新匹配bin/saserver，正常存档停服后重启并刷新网页；本脚本不停止服务。")
     finally:
         os.close(lock)

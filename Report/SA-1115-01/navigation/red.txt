@@ -1,0 +1,84 @@
+(node:1035133) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ quick battle pauses movement then resumes the same minimap destination (22.871501ms)
+✖ normal battle cancels navigation, including a switch out of quick battle (6.512213ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (3.825805ms)
+✔ quick battle cannot revive a route after a floor change (3.472785ms)
+✖ exact destinations reject fractional and non-finite coordinates (4.831976ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 2
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2019.084626
+
+✖ failing tests:
+
+test at client/test/navigation-battle.test.ts:22:1
+✖ quick battle pauses movement then resumes the same minimap destination (22.871501ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+  +   9,
+  +   9
+  -   2,
+  -   2
+    ]
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-battle.test.ts:31:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 9, 9 ],
+    expected: [ 2, 2 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/navigation-battle.test.ts:40:1
+✖ normal battle cancels navigation, including a switch out of quick battle (6.512213ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + [
+  +   9,
+  +   9
+  + ]
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-battle.test.ts:44:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 9, 9 ],
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/navigation-battle.test.ts:63:1
+✖ exact destinations reject fractional and non-finite coordinates (4.831976ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + [
+  +   1.5,
+  +   5
+  + ]
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-battle.test.ts:67:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 1.5, 5 ],
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -295,6 +295,7 @@ export class BattleScreen {
   private turns = 0;
   // 自动战斗：这场的第一回合（AI_First）、决定的事（AI_Choosen，播放时显示）、宠物的指令
   private aiFirst = true;
+  private escapeFailures = 0;
   private aiLabel = "";
   private aiPet: [number, number] = [-1, -1];
   private end: S2CBattleEnd | null = null;
@@ -492,6 +493,7 @@ export class BattleScreen {
   onTurn(m: S2CBattleTurn) {
     this.menuAt = 0; this.petMenuAt = 0; this.selecting = false; this.turns++;
     const ev = m.events;
+    this.escapeFailures += ev.filter(e => e.actor === this.me && e.kind === "escape" && !e.ok).length;
     // 智能战斗：看这回合的结果学习（敌人一次打我方多少、自己与宠物这回合的行动打掉多少）；观战不学
     if (!this.watch) {
       const mem = this.host.aiMemory(), mySide = (s: number) => (s < 10) === (this.me < 10);
@@ -504,6 +506,14 @@ export class BattleScreen {
         // 战场属性的回合数到了，回到无属性
         if (ev[i].kind === "field") this.queue.push(this.waitStep(1, () => { this.fieldAttr = 0; }));
         continue;
+      }
+      // Coattack is a group of different actors; combo remains one actor's
+      // multi-hit chain. Keep their boundaries distinct on the wire and here.
+      if (ev[i].coattack > 0 && ev[i].kind === "attack") {
+        let end = i + 1;
+        while (end < ev.length && ev[end].coattack === ev[i].coattack && ev[end].kind === "attack") end++;
+        this.queue.push(...this.coattackSteps(ev.slice(i, end)));
+        i = end - 1; continue;
       }
       // 同一个人的连击合成一组：只在第一下前走过去、最后一下后走回来
       let j = i;
@@ -1114,6 +1124,52 @@ export class BattleScreen {
       if (!checked) { checked = true; skip = a.dead || a.gone || t0.dead || t0.gone || t0.hidden; }
       return skip || step(now);
     });
+  }
+
+  /** All members approach, share one strike stage, and return together.
+   * Settle in server order after every animation reaches its hit marker, so
+   * different sprite timing can never restore a victim's earlier HP snapshot.
+   */
+  private coattackSteps(events: BattleEvent[]): Step[] {
+    const members = events.flatMap(e => {
+      const a = this.fighters.get(e.actor), t = this.fighters.get(e.target);
+      return a && t && !a.gone ? [{e, a, t}] : [];
+    });
+    if (!members.length) return [];
+    const parallel = (steps: Step[]): Step => {
+      const pending = new Set(steps);
+      return now => { for (const step of pending) if (step(now)) pending.delete(step); return pending.size === 0; };
+    };
+    const approach = members.map(({a, t}) => this.walkStep(a, () => {
+      const dx = a.homeX - t.homeX, dy = a.homeY - t.homeY, len = Math.hypot(dx, dy) || 1;
+      return [t.homeX + dx / len * 64, t.homeY + dy / len * 64];
+    }));
+    let started = 0, settled = false, ended = 0;
+    const ready = new Set<number>();
+    const strike: Step = now => {
+      if (!started) {
+        started = now; this.showSkill("合击", now);
+        for (const {a, t} of members) {
+          a.dir = dirToward(t.x - a.x, t.y - a.y);
+          a.play(ANIM.ATTACK, now, false, () => ready.add(a.f.slot));
+        }
+      }
+      if (!settled && (ready.size === members.length || now - started > 2500)) {
+        settled = true;
+        for (const {e, a, t} of members) {
+          const receiver = e.guardian >= 0 ? this.fighters.get(e.guardian) ?? t : t;
+          this.applyHit(e, receiver, a, now);
+          if (e.damage > 0) a.freeze(now, 8 * FRAME);
+        }
+      }
+      if (!settled) return false;
+      if (!ended && (members.every(({a}) => a.idle(this.host.assets, now)) || now - started > 4000)) ended = now;
+      return ended > 0 && now - ended >= 20 * FRAME;
+    };
+    const advance = parallel(approach);
+    return [now => { this.cameraSlot = members[0].a.f.slot; return advance(now); }, strike,
+      parallel(members.map(({a}) => this.walkStep(a, () => [a.homeX, a.homeY]))),
+      this.waitStep(1, () => { for (const {a} of members) a.dir = a.homeDir(); })];
   }
 
   /**
@@ -1949,13 +2005,13 @@ export class BattleScreen {
     const s = this.host.aiSettings(), capturePlace = floor !== 500 || (gx >= 250 && gy >= 360);
     const sf = new Map<number, SmartFighter>();
     for (const [slot, a] of this.fighters) {
-      sf.set(slot, { slot, name: a.f.name, hp: a.dead ? 0 : a.hp, maxHp: a.f.maxHp, mp: a.mp, level: a.f.level, status: a.status, gone: a.gone || a.hidden,
+      sf.set(slot, { slot, name: a.f.name, hp: a.dead ? 0 : a.hp, maxHp: a.f.maxHp, mp: a.mp, maxMp: a.f.maxMp, level: a.f.level, status: a.status, gone: a.gone || a.hidden,
         rideHp: a.rideHp, rideMaxHp: a.f.rideMaxHp, defenseBoost: a.defenseBoost, defenseTurns: a.defenseTurns });
     }
     const cmd = smartChoose(s, {
       me: this.me, first: this.aiFirst, fighters: sf, inv: this.host.inventory().items, myAtk: this.host.myAtk(),
       pet: pet ? { name: pet.info.freeName || pet.info.name, atk: pet.info.atk, skills: pet.info.skills } : null,
-      capturePlace, pvp: this.pvp, noEscape: this.pvp || this.event, mem: this.host.aiMemory(),
+      capturePlace, pvp: this.pvp, noEscape: this.pvp || this.event, escapeFailures: this.escapeFailures, mem: this.host.aiMemory(),
     });
     this.aiKey = cmd.key; this.aiPetKey = cmd.petKey;
     this.aiFirst = false;

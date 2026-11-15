@@ -1,0 +1,241 @@
+FFFFFFFFFFFFFFFFFF
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle (__main__.CannonAttack.test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle) (direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 31, in test_all_eight_views_raise_the_gun_hand_and_aim_the_actual_muzzle
+    rest, aim = self.pose(direction, 0), self.pose(direction, 1)
+                ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_attack_returns_to_rest_without_moving_feet_or_floor (__main__.CannonAttack.test_attack_returns_to_rest_without_moving_feet_or_floor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 66, in test_attack_returns_to_rest_without_moving_feet_or_floor
+    self.assertTrue(np.array_equal(np.asarray(rest)[114:], np.asarray(returned)[114:]),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack return changed planted feet or fixed shadow')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack return changed planted feet or fixed shadow
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_complete_right_arm_is_removed_before_it_is_reposed (__main__.CannonAttack.test_complete_right_arm_is_removed_before_it_is_reposed) (direction=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 46, in test_complete_right_arm_is_removed_before_it_is_reposed
+    rest = self.pose(direction, 0)
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 22, in pose
+    self.assertTrue(callable(getattr(art, 'pose_cannon', None)),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'attack must raise the complete right cannon arm around its shoulder')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : attack must raise the complete right cannon arm around its shoulder
+
+======================================================================
+FAIL: test_hit_flash_waits_until_after_the_aim_pose (__main__.CannonAttack.test_hit_flash_waits_until_after_the_aim_pose)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/coder/saserver/scripts/lisarido-art.test.py", line 82, in test_hit_flash_waits_until_after_the_aim_pose
+    self.assertLess(counts[1], 8, f'dir{direction}: flame obscures the raised aim pose')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 249 not less than 8 : dir0: flame obscures the raised aim pose
+
+----------------------------------------------------------------------
+Ran 4 tests in 6.061s
+
+FAILED (failures=18)

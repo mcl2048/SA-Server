@@ -1,0 +1,5 @@
+--- FAIL: TestCoattackOrdinaryPlayerAndPetSameTarget (0.00s)
+    coattack_test.go:38: ordinary adjacent actors must sometimes coattack, not always: groups=0
+FAIL
+FAIL	sa/server/internal/battle	0.034s
+FAIL

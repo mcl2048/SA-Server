@@ -1,0 +1,39 @@
+(node:1039996) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ quick battle pauses movement then resumes the same minimap destination (45.414066ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (7.107806ms)
+✖ passive mobile input cleanup preserves map navigation but manual directions override it (7.163874ms)
+✔ quick battle cannot revive a route after a floor change (12.250403ms)
+✔ exact destinations reject fractional and non-finite coordinates (4.391832ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2260.254945
+
+✖ failing tests:
+
+test at client/test/navigation-battle.test.ts:48:1
+✖ passive mobile input cleanup preserves map navigation but manual directions override it (7.163874ms)
+  AssertionError [ERR_ASSERTION]: manual direction must cancel the earlier destination
+  + actual - expected
+
+  + [
+  +   9,
+  +   9
+  + ]
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-battle.test.ts:54:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 9, 9 ],
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

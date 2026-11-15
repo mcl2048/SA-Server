@@ -1,0 +1,326 @@
+✔ new automation switches default off and remain isolated per character (13.980385ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (16.898919ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (11.984338ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (6.088762ms)
+(node:1036596) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ AI uses the server-reported spell cost without applying another discount (77.509821ms)
+✔ capture protects its target even when the pet has a fixed attack plan (23.142659ms)
+✔ AI does not submit map-only recovery items in battle (23.075837ms)
+✔ group resurrection sends the side target accepted by the command boundary (6.917963ms)
+✔ MP recovery supports both native healing spell functions before emergency fallback attacks (36.034542ms)
+✔ resurrection items cannot masquerade as MP recovery by mentioning 气绝回复 (3.731593ms)
+✔ AI has no offensive intent when every enemy is knocked out or absent (8.83514ms)
+(node:1036602) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ dead-owner auto chooses living pets independently including zero MP and low health (27.799482ms)
+✔ alive to dead transition, party pets and PvP negative control (5.277427ms)
+✔ dead or absent pets and defeated enemies do not get offensive commands (3.758433ms)
+✔ surviving Lilith uses 75 percent Ghost Storm against multiple living enemies (5.640784ms)
+✔ incapacitated or absent enemies cannot inflate the Ghost Storm damage estimate (3.459081ms)
+✔ an explicit Ghost Storm plan still uses the native all-enemy target (1.505993ms)
+✔ cannon uses its five-round total prior and stays available to a surviving ownerless pet (6.463121ms)
+✔ random cannon cannot endanger a capture target even through an explicit surviving-pet plan (0.658383ms)
+✔ four stable catalogue identities and stories match the server's single source (7.349994ms)
+✔ catalogue regeneration is byte stable and needs no browser server-file fetch (1.688638ms)
+✔ surviving pet chooses the most populated actual cross without counting row wraps (26.431326ms)
+✔ living-owner AI scores the shared skill over each independent native neighbor group (30.919671ms)
+✔ surviving pet fixed and automatic cross commands keep all protected level-one neighbors safe (0.870524ms)
+✔ a fixed living-owner cross plan chooses a legal populated center without wrapping or sacrificing capture neighbors (17.806703ms)
+✔ cross defense utility is available once and vanishes when an authoritative buff is already active (14.535113ms)
+✔ desktop and mobile native settings show the authoritative recovery policy and persist the same threshold (43.569619ms)
+✔ old 570-slot save survives four appended seen/snap entries and account reload (14.610577ms)
+✔ legacy seen and snapshot IDs and portraits retain their original mapping (1.371453ms)
+✔ all appended slots fit the existing last page and render raw animation portraits plus canonical stories (14.922242ms)
+✔ missing portrait decoding retries later, uses raw fallback frames, and caches success (30.855108ms)
+✔ new-pet brief descriptions fit the existing stat extension panel without changing old pets (5.131131ms)
+✔ retaking a renamed pet updates its snapshot without overwriting adjacent original slots (0.677206ms)
+✔ pet details and album retain a stable native model for the fullscreen game window (2.614362ms)
+✔ Lilith appends slot 575 after all four mechanical pets and persists her native portrait (1.583644ms)
+✔ Lisarido persists slot 576 while every existing pet identity and photograph stays in place (2.098325ms)
+✔ two claw pets persist in new slots577/578 on page73 while previous photographs remain unchanged (3.946722ms)
+✔ overlay registers independent RGBA image IDs and animations without changing SAIX or core pages (356.673331ms)
+✔ Lilith and mechanical extensions keep independent images, GPU pages and eviction reload URLs (49.740073ms)
+✔ a malformed Lilith frame cannot claim another pack's images or roll back mechanical pets (22.781914ms)
+✔ Lisarido owns independent set4 pages and reloads them after eviction without replacing Lilith (22.06507ms)
+✔ an invalid Lisarido frame cannot borrow Lilith images or suppress the other independent packs (44.0089ms)
+✔ a missing optional pack silently uses existing mechanical animations and never requests extension sprite JSON repeatedly (21.496058ms)
+✔ missing-pack fallbacks resolve actual frame images in the original local asset index when available (775.413269ms)
+✔ the generated four-pet pack resolves every real atlas frame when installed (850.356884ms)
+✔ JSON fallback mode also supports the overlay and deduplicates missing-pack original animation requests (13.08046ms)
+✔ a complete overlay loads independently when the original binary index is unavailable (7.971049ms)
+✔ invalid image bounds, foreign IDs and unsafe relative paths reject atomically before loading any extension texture (40.39472ms)
+✔ malformed frames, duplicate actions and original sprite collisions preserve all original resources (24.375073ms)
+✔ failed atlas decoding rolls back successfully decoded sibling textures before falling back (15.207366ms)
+✔ a page with unexpected decoded dimensions is disposed and cannot partially register sprites (12.826711ms)
+✔ extension textures follow the GPU eviction budget and reload from their own PNG paths (18.309687ms)
+✔ extension deadline disposes decoded textures immediately and also disposes late arrivals (19.361279ms)
+✔ imageCanvas rawIndex decodes a small animation frame while default calls retain map-number conversion (17.514732ms)
+✔ imageCanvas decodes high extension IDs with RGBA transparency and anchors without palette lookup (12.484159ms)
+✔ primal pets and claw effects own independent set5 pages that reload after eviction (13.023954ms)
+✔ invalid primal frames cannot borrow a previous extension's images (12.610026ms)
+(node:1036672) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual AI quick and auto clicks send immediately and survive an older paused lease ACK (13.473268ms)
+✔ an old ACK between actual menu click and next frame cannot overwrite unsent intent (2.064087ms)
+✔ two real quick clicks before either ACK retain the newest intent, including a return to the original value (6.353734ms)
+✔ authoritative encounter-only and safety stops preserve actual flags and stale ACKs cannot re-enable stopped modes (1.536852ms)
+✔ pending auto enable never hands the turn to legacy client AI, and disable waits for its server ACK (6.212094ms)
+✔ the shared quick-field control is a reachable real Ui action and sends quick off without opening world menus (1.540646ms)
+(node:1036679) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ self and enemy camera preferences use native battle positions without submitting commands (15.274049ms)
+✔ automatic camera follows the actual actor and switches to a visible damage target (5.903645ms)
+✔ mobile battle status reports current playback HP/MP rather than the entry snapshot (1.035889ms)
+✔ enemy camera prefers a live opponent and falls back to corpses after the last defeat (0.941674ms)
+✔ idle self framing keeps the real player and wide deployed pet inside a portrait crop (1.704734ms)
+✔ companion framing never pulls the camera away from an actor during playback (1.103147ms)
+✔ idle party framing excludes enemy records whose absent owner defaults to slot zero (2.11009ms)
+✔ a party wider than the portrait window keeps the selected player inside the safe crop (0.798177ms)
+(node:1036691) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ coattack members advance and strike together while authoritative HP stays ordered (107.663876ms)
+✔ quick coattack finishes with the final server HP and no stuck movement (3.788298ms)
+✖ escape failures come from own failed events and reset with a new battle (2.130051ms)
+(node:1036717) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ dead PvE owner emits no character action and live pets choose their own distinct skill slots (82.485796ms)
+✔ manual and PvP dead owners preserve fallback pet commands (6.92505ms)
+✔ dead owner advances every pet from first-turn policy to subsequent-turn policy (3.011515ms)
+(node:1036725) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ five cannon rounds cast in place and render one target explosion before each separate HP settlement (122.021454ms)
+✔ cannon preserves reflection and guardian damage instead of applying physical HP to the original victim (11.646357ms)
+✔ a forced live departure completes before later rounds and a stale slot never gets another explosion (15.07873ms)
+✔ quick cannon settles ordered damage, paralysis and departure without moving the caster (2.568469ms)
+(node:1036733) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ghost Storm casts with both hands in place and plays one native effect at the complete target half (20.144913ms)
+✔ Ghost Storm preserves physical reflection, absorption, barrier and dodge results (3.167335ms)
+✔ quick Ghost Storm settles all authoritative HP and petrification without moving its caster (1.999552ms)
+✔ ordinary recovery magic retains its original standing cast and per-target native effect (1.693792ms)
+✔ Ghost Storm applies guardian damage and petrification to the actual protector only (1.263491ms)
+(node:1036761) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ wire HP0 from fatal poison marks either side's player/pet dead without a fly event (11.164891ms)
+✔ reviving a knocked-down fighter clears death choreography and restores target eligibility (1.746879ms)
+✔ an already flown target cannot receive a second hit or damage popup (3.711492ms)
+✔ native enemy support cannot revive an already flown or absent target during playback (4.019365ms)
+(node:1036778) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ each owned live pet uses its bag skills and sends one independent action (26.685685ms)
+✔ pet tabs select another pending pet without borrowing another owner's pet (3.235663ms)
+✔ server automation prevents normal, quick and reconnect duplicate client commands (17.038115ms)
+✔ resume restores turn, submitted pets, status and positions without an intro or first-turn AI (5.484268ms)
+✔ turn resolution clears previous pending menus and opens fresh per-pet submissions (2.251853ms)
+✔ resetPets atomically removes old pets and updates full layout without a new intro (3.501187ms)
+✔ pet layout movement preserves submissions and selected skills by bag identity (1.317004ms)
+✔ PetOut uses event bag and owner while the Pets snapshot still names another primary (5.975929ms)
+✔ quick display never restarts client automation after both live auto switches are off (4.470884ms)
+✔ quick display switches preserve the same fighters, queued work, turn and submissions and load the background once (125.339078ms)
+✔ leaving fast playback preserves the remaining real command time on its advanced animation clock (1.703207ms)
+✔ watch mode and dead pets never expose a command slot (5.645974ms)
+✔ cross target preview follows the native two-by-five edge and submits the original center (95.853898ms)
+✔ ordinary attack keeps its native single-target preview and adult skill windows use only their wire skills (2.272203ms)
+✔ each claw pet runs to its target, strikes on its hit frame with a red claw atlas, and returns home (73.374608ms)
+✔ defense percentages and remaining turns come from wire events and reconnect snapshots (16.193789ms)
+✔ shared melee keeps guardians, reflection and prior departures authoritative (21.825706ms)
+✔ cross only offers opponent centers because the authoritative skill rejects same-side targets (1.051834ms)
+✔ native run directions match all eight S/SW/W/NW/N/NE/E/SE artwork rows (4.769674ms)
+✔ cross lifesteal displays one authoritative self-heal after all hits without adding a second claw attack (7.244033ms)
+(node:1036808) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compact HP/MP rows clamp values and horizontal bounds on both viewports (3.793355ms)
+✔ five enemy damage labels remain inside every stage edge throughout the bounce (5.596191ms)
+✔ HP/MP rows lie below actual model bounds including tall pets and riding HP (2.197807ms)
+✔ absent legacy event metadata never creates NaN labels or invalid skill icons (5.410475ms)
+✔ snapshot dead players and pets on both sides choose genuine DEAD pose and revive (18.659779ms)
+✔ crowded real battle formation keeps every full HP/MP/riding row disjoint and inside the stage (30.025086ms)
+✔ fullscreen inventory exposes explicit equipment/use actions, images and authoritative categories (17.022465ms)
+✔ primary actions revalidate live item availability, preserve self use and explicit unequip (1.73945ms)
+✔ classic and desktop retain their existing pickup and double-click behavior (6.592835ms)
+✔ explicit fullscreen actions and slot pickup both remain reachable in the actual native hit stack (7.905963ms)
+✔ Lilith's browser biography and habitat match the independent authoritative server definition (7.366052ms)
+✔ Lilith biography regeneration is byte stable and needs no runtime server-data fetch (2.112721ms)
+✔ Lisarido appends an independent biography matching the authoritative cave registry (4.779065ms)
+✔ Lisarido catalogue regeneration is byte stable (5.253192ms)
+(node:1036833) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ coordinate form routes to exact integers and removes native inputs on close (7.389374ms)
+✔ coordinate form rejects decimals and incomplete numbers without partial parsing (0.911818ms)
+✔ a floor transition invalidates an old coordinate form before it can move the player (0.587074ms)
+(node:1036844) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+minimap navigation integration passed
+✔ client/test/minimap-navigation.test.ts (2060.85116ms)
+✔ portrait immersive scene fills the viewport at native scale or larger without stretching (2.848653ms)
+✔ landscape immersive scene keeps native character pixels and crops vertically (0.529614ms)
+✔ focusing edge targets never reveals empty space outside the original scene (0.921807ms)
+✔ invalid or shrunken inputs cannot create NaN geometry or shrink immersive character scale (0.536425ms)
+✔ portrait fills the full width and keeps 4:3 without borrowing control height (2.503181ms)
+✔ landscape fills height where possible, stays centered and preserves independent rails (0.769498ms)
+✔ dragged controls stay within the browser after large moves and rotation (1.73938ms)
+✔ reflowed map taps preserve the destination rather than clicking the native map center (3.841142ms)
+✔ stale, outside and nonfinite map points cannot become ground clicks (0.585196ms)
+✔ map drags retain the start and final move across frames without queuing unbounded pointer traffic (1.758463ms)
+✔ cancelled, replaced and resized native map drags cannot resume or become clicks (0.948265ms)
+(node:1036885) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ reflowed pointer traffic pans the existing native MapWindow and never starts navigation (6.112657ms)
+✔ native pan cancellation clears any retained press before the next map frame (0.571618ms)
+✔ fullscreen skin reuses native nine-slice art and caches decoded icons across frames (11.742914ms)
+✔ unavailable optional native art leaves controls operational and retries bounded (0.91077ms)
+✔ overlapping native frames coalesce into one decoder and still skin newly added controls (22.666837ms)
+✔ selected native model is bounded, cached and cannot overwrite a newer pet selection (3.14215ms)
+✔ native inventory art follows a reused slot and clears when the slot becomes empty (1.499305ms)
+✔ native pet portrait advances at native ticks without decoding or restarting unchanged metadata (17.062171ms)
+✔ reduced motion, hidden documents and a cleared selection stop portrait playback (5.160857ms)
+✔ an animation decoding during selection change cannot install the previous pet (3.884612ms)
+✔ long native animations have a bounded decoded frame budget and evict old models (23.289591ms)
+✔ repeated native frames reuse one decoded crop while retaining each frame offset (6.270128ms)
+✔ immersive pet list stays basic on hover and the native name opens animated details (46.200383ms)
+✔ status exposes the original face and adjacent attributes with only live native point actions (19.198804ms)
+✔ native party status shows current party rows without carrying a character portrait or allocation controls (10.694737ms)
+✔ preview caps high-DPR copies, composites overlay and throttles to 15fps (18.199585ms)
+✔ hidden sheets, CSS-hidden previews and desktop mode do not copy frames (0.800775ms)
+✔ desktop shell stays hidden; original inputs retain identity, focus and edits across mobile frames (29.426515ms)
+✔ unchanged presentation skips DOM synchronization but same-position replacement inputs are adopted (8.052356ms)
+✔ only reachable controls render; removed controls cannot dispatch stale queued actions (11.481725ms)
+✔ joystick uses eight original directions, center dead zone and all cancellation paths (5.387479ms)
+✔ navigation and mouse controls dispatch semantic hooks without clearing cursor (5.387251ms)
+✔ selection labels resolve native IDs and layout events never interrupt unchanged holds (1.872909ms)
+✔ battle commands and targets remain human readable in a bounded sheet (4.614218ms)
+✔ quick battle over the field renders its two live toggles as visible DOM actions with movement controls hidden (5.498075ms)
+✔ native panels hide background controls and actor names, and accept contextual labels (4.638865ms)
+✔ chat panel keeps real chat input visible and dispatches send-chat (7.442404ms)
+✔ movement precedes long option panels and encounter uses server capability and ack (7.764519ms)
+✔ native column registration is presented in visual row order and keeps action identity (4.088824ms)
+✔ immersive scene exposes a cancellable menu tray and restores classic panels (3.948073ms)
+✔ immersive battle camera stays a view command and native targets keep their real IDs (3.513326ms)
+✔ switching to desktop during browser fullscreen retains the explicit exit control (0.852155ms)
+✔ quick battle preserves its field context and native battle panels restore the complete layout (3.963998ms)
+✔ immersive battle starts with clear actors and native toggles, then exposes and closes commands (12.915844ms)
+✔ immersive field tray exposes reachable native social controls without duplicating toolbar menus (3.484475ms)
+✔ immersive native panels remain in the game viewport and hide movement behind the dialog (2.145784ms)
+✔ fullscreen map paints native map layers and maps taps back to the original hit coordinates (5.602343ms)
+✔ immersive native collections keep slot art, details and real controls together without duplicate summaries (4.798715ms)
+✔ fullscreen map drags emit native pointer phases and cancellation never emits a route tap (5.415647ms)
+✔ native pet detail replaces whole-list summaries and changing game windows resets retained scroll (3.999431ms)
+✔ fullscreen cards keep native art and put an explicit live primary action below the item (3.153286ms)
+✔ status attributes retain adjacent native +1 controls and remove exhausted point actions (4.592188ms)
+✔ narrow desktop remains desktop; modes move and restore the original stage (7.456829ms)
+✔ IME confirmation never reaches native submit handlers or prevents composition (2.385865ms)
+✔ mobile taps release once; drag, multitouch, cancel, lost capture and blur never click (9.351644ms)
+✔ two-finger scene pinch cancels game hold, clamps zoom and resets view (4.462102ms)
+✔ mobile action snapshots respect topmost modal blockers and retain non-highlight actions (5.379737ms)
+✔ mobile backing budgets and managed input layout do not change desktop sizing (3.807694ms)
+✔ a new immersive scene immediately reveals its intended focus and recenters the field (1.991386ms)
+✔ immersive dialogs retain the full device viewport in portrait, landscape and keyboard resize (2.746271ms)
+✔ native model metadata is mobile-only and resets with the normal UI frame (2.106605ms)
+✔ immersive field and battle ignore two-finger zoom while retaining button zoom and cancelling game holds (1.935551ms)
+✔ a new portrait battle focus is visible immediately instead of waiting for camera easing (2.182296ms)
+✔ landscape-to-portrait rotation focuses the latest native model before the first resized frame (7.311753ms)
+(node:1037008) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ quick battle pauses movement then resumes the same minimap destination (91.741489ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (17.462591ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (13.742133ms)
+✔ quick battle cannot revive a route after a floor change (6.7149ms)
+✔ exact destinations reject fractional and non-finite coordinates (17.773504ms)
+(node:1037032) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ready waits for Hello and permits password login only after no-token handshake (188.122197ms)
+✔ token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer (8.545361ms)
+✔ debug logs redact authentication credentials without modifying wire messages (14.295464ms)
+✔ recoveredSession identifies a resumed lobby and resets on explicit logout (1.741903ms)
+✔ Hello and Session deadlines replace stale sockets while preserving one ready promise (3.180769ms)
+✔ waking an OPEN half-dead connection requires matching Pong within five seconds (2.444819ms)
+✔ returning from a frozen tab immediately resumes a live socket and discards queued world history (4.204263ms)
+✔ lifecycle freeze without visibility changes discards old turns and resumes once when active (1.805559ms)
+✔ restoring from back-forward cache requests a snapshot even without a visibility event (1.516448ms)
+✔ a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot (1.615543ms)
+✔ terminal replacement stops reconnecting without clearing another tab's bearer (1.241526ms)
+✔ failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token (1.861155ms)
+✔ initial connection has a thirty-second total limit and retains resumable credentials (1.179187ms)
+✔ manual close rejects pending readiness and detaches all timers without clearing credentials (1.012989ms)
+✔ no-token Hello timeout fails once and late messages cannot restore abandoned UI (0.996862ms)
+✔ separate tabs do not inherit or overwrite another tab's actor credential (1.585512ms)
+✔ legacy shared localStorage credential is discarded without implicit takeover (2.327331ms)
+✔ repeated character switching releases Field handlers and ignores disposed actors (55.743751ms)
+✔ unsubscribe preserves duplicate registrations and once removes its listener (2.132454ms)
+pathfinding: all checks passed
+✔ client/test/pathfinding.test.ts (470.946676ms)
+(node:1037048) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ GM previews Lilith with her native idle animation while keeping effect sprites out of pet previews (7.51861ms)
+✔ GM previews Lisarido's native idle while treating the cannon explosion as an effect (0.980824ms)
+✔ status buttons select one primary and all four remaining pets for battle (13.770149ms)
+✔ a fifth selection becomes the primary when four pets are already standby (0.824116ms)
+✔ mail selection stays available separately and never consumes the fifth combat selection (1.128098ms)
+✔ mail, riding and zero-HP pets retain their state protections (1.451974ms)
+(node:1037079) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both primal claw pets join the native catalogue after every saved extension identity (4.966903ms)
+✔ native GM previews animate both new pets and keep the shared claw effect outside the pet catalogue (4.580539ms)
+✔ long claw skill description stays above return controls and every later line is reachable through native pagination (6.661716ms)
+✔ battle claw memo uses the same bounded native pages without selecting or submitting a skill (62.659296ms)
+✓ dirTo 与 MOVE 表一致
+✓ 到达 (6,2)，路线 556565
+✓ 步数等于切比雪夫距离
+✓ 只用目标方向及其相邻方向
+✓ 斜步与直步交错分布（不是先斜走完再直走），路线 55556565655656556565
+✓ 一侧被挡仍能到达，路线 7566
+✓ 正前方是墙时原版路线为空
+✓ 停在目标前一格并朝向目标（lastDir=5）
+全部通过
+✔ client/test/route.test.ts (532.366342ms)
+ℹ tests 229
+ℹ suites 0
+ℹ pass 227
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12747.897731
+
+✖ failing tests:
+
+test at client/test/battle-coattack.test.ts:16:1
+✖ coattack members advance and strike together while authoritative HP stays ordered (107.663876ms)
+  AssertionError [ERR_ASSERTION]: members must approach before either returns home
+
+  false !== true
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-coattack.test.ts:27:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/battle-coattack.test.ts:38:1
+✖ escape failures come from own failed events and reset with a new battle (2.130051ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  undefined !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/battle-coattack.test.ts:40:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

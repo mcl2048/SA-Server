@@ -1,0 +1,9 @@
+--- FAIL: TestAutomationMeatBeforePotionAndSpirit (2.58s)
+    automation_consumables_test.go:28: native meat must precede spirit/potion: {Kind:magic Target:0 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:1 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationLowMPUsesPotionWithoutHealingSpirit (0.21s)
+    automation_consumables_test.go:53: low MP must use potion without requiring equipped spirit: {Kind:guard Target:-1 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:0 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>}
+--- FAIL: TestAutomationKeywordDiscardIndependentOfBattleMode (0.31s)
+    automation_consumables_test.go:81: literal keyword discard must affect only matching bag items: equip=true meat=true potion=true
+FAIL
+FAIL	sa/server/internal/world	3.223s
+FAIL

@@ -1,0 +1,5 @@
+--- FAIL: TestCoattackDisobedientPetCannotLeavePhantomParticipant (0.00s)
+    coattack_test.go:180: disobedience killed another participant but left singleton joint action: seed=39
+FAIL
+FAIL	sa/server/internal/battle	0.011s
+FAIL

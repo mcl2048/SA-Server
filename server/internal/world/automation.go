@@ -22,6 +22,9 @@ type autoPlayState struct {
 	lastTurn                             int
 	direction                            int
 	floor                                int
+	nextDiscard                          time.Time
+	escapeRoom                           *battleRoom
+	escapeFailures                       int
 }
 type autoAction struct {
 	Kind   string `json:"kind"`
@@ -29,16 +32,19 @@ type autoAction struct {
 	Target string `json:"target"`
 }
 type autoSettings struct {
-	V        int        `json:"v"`
-	HealAt   int        `json:"healAt"`
-	Escape   bool       `json:"escape"`
-	Magic    bool       `json:"magic"`
-	Capture  bool       `json:"capture"`
-	Meat     bool       `json:"meat"`
-	First    autoAction `json:"first"`
-	Then     autoAction `json:"then"`
-	PetFirst autoAction `json:"petFirst"`
-	PetThen  autoAction `json:"petThen"`
+	V            int        `json:"v"`
+	HealAt       int        `json:"healAt"`
+	Escape       bool       `json:"escape"`
+	Magic        bool       `json:"magic"`
+	Capture      bool       `json:"capture"`
+	Meat         bool       `json:"meat"`
+	AutoEscape   bool       `json:"autoEscape"`
+	AutoDrop     bool       `json:"autoDrop"`
+	DropKeywords string     `json:"dropKeywords"`
+	First        autoAction `json:"first"`
+	Then         autoAction `json:"then"`
+	PetFirst     autoAction `json:"petFirst"`
+	PetThen      autoAction `json:"petThen"`
 }
 
 func defaultAutoSettings() autoSettings {
@@ -52,7 +58,7 @@ func parseAutoSettings(raw string) (autoSettings, bool) {
 	if raw != "" && json.Unmarshal([]byte(raw), &s) != nil {
 		return s, false
 	}
-	if s.V != 2 || s.HealAt < 0 || s.HealAt > 100 {
+	if s.V != 2 || s.HealAt < 0 || s.HealAt > 100 || len(s.DropKeywords) > 2048 {
 		return s, false
 	}
 	for _, a := range []autoAction{s.First, s.Then, s.PetFirst, s.PetThen} {
@@ -145,12 +151,22 @@ func (w *World) automationTick(now time.Time) {
 			}
 			continue
 		}
+		// Finished rooms hold all fighters/members; release the per-battle
+		// escape state once the character is back in the field.
+		a.escapeRoom, a.escapeFailures = nil, 0
 		if a.lastRoom != nil {
 			a.lastRoom = nil
 			a.nextMove = now.Add(time.Second)
 			if a.settings.Meat {
 				w.automationDiscardMeat(e)
 			}
+		}
+		// Discard runs independently of auto encounter/combat. Never mutate a
+		// bag reserved by a trade/shop or a live battle; scan at most once/sec.
+		editing := a.paused && e.connected && now.Sub(a.lastUpdate) < 2*time.Second
+		if a.settings.AutoDrop && !editing && !now.Before(a.nextDiscard) && !e.busy() && e.window == nil {
+			a.nextDiscard = now.Add(time.Second)
+			w.automationDiscardKeywords(e, a.settings.DropKeywords)
 		}
 		if !a.encounter || now.Before(a.nextMove) {
 			continue
@@ -293,6 +309,38 @@ func (w *World) automationDiscardMeat(e *entity) {
 	}
 }
 
+// Keywords are literal name fragments, not regular expressions. Empty fields
+// cannot mean match-all. Only bag slots are eligible, including entire stacks.
+func (w *World) automationDiscardKeywords(e *entity, raw string) {
+	keywords := strings.FieldsFunc(raw, func(r rune) bool { return r == '|' })
+	for i := range keywords {
+		keywords[i] = strings.TrimSpace(keywords[i])
+	}
+	changed := false
+	for slot := data.EquipSlots; slot < data.ItemSlots; slot++ {
+		it := e.inv[slot]
+		if it == nil {
+			continue
+		}
+		def := w.game.Items[it.ID]
+		if def == nil {
+			continue
+		}
+		name := def.Name
+		if it.Name != "" {
+			name = it.Name
+		}
+		if slices.ContainsFunc(keywords, func(word string) bool { return word != "" && strings.Contains(name, word) }) {
+			e.inv[slot] = nil
+			changed = true
+		}
+	}
+	if changed {
+		w.itemsChanged(e)
+		w.saveProgress(e)
+	}
+}
+
 // The server strategy shares the v2 action plans and emergency rules with the
 // browser AI, but deliberately uses current authoritative stats instead of a
 // browser's local learned damage history.
@@ -301,12 +349,20 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 	me := ft.b.F[ft.slot]
 	pet := ft.b.F[ft.slot+5]
 	s := a.settings
+	if a.escapeRoom != ft.room {
+		a.escapeRoom, a.escapeFailures = ft.room, 0
+	}
 	// A dead owner has no action this round. Do not manufacture an escape
 	// intent from HP=0: pets still own independent turns and must keep fighting.
 	if !me.Alive() && petCanActWithoutOwner(ft) {
 		cmd := battle.Command{Kind: battle.Guard, Target: -1}
 		skill, target := w.chooseAutomationPet(e, a, ft.slot+5, cmd)
 		return cmd, skill, target
+	}
+	// Explicit auto-escape takes precedence over recovery/capture. Count only
+	// actual failed Escape events (afterMemberTurn), never selected intents.
+	if s.AutoEscape && a.escapeFailures < 3 && roomCanEscape(w, e) {
+		return battle.Command{Kind: battle.Escape, Target: -1}, -1, -1
 	}
 	protected, myCapture := w.automationCapturePlan(e, a)
 	enemies, allies := []*battle.Fighter{}, []*battle.Fighter{}
@@ -393,11 +449,11 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			}
 		}
 	}
-	if c, ok := w.automationMP(e, me, needs...); ok {
+	if c, ok := w.automationMPAt(e, me, s.HealAt, needs...); ok {
 		cmd = c
 		goto petChoice
 	}
-	if s.Escape && roomCanEscape(w, e) && (me.HP*5 < me.MaxHP || threat*2 > hpSum && threat > me.Atk*2) {
+	if s.Escape && !(s.AutoEscape && a.escapeFailures >= 3) && roomCanEscape(w, e) && (me.HP*5 < me.MaxHP || threat*2 > hpSum && threat > me.Atk*2) {
 		cmd = battle.Command{Kind: battle.Escape, Target: -1}
 		goto petChoice
 	}
@@ -410,7 +466,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			cmd = battle.Command{Kind: battle.Guard, Target: -1}
 			goto petChoice
 		}
-		if roomCanEscape(w, e) {
+		if !(s.AutoEscape && a.escapeFailures >= 3) && roomCanEscape(w, e) {
 			cmd = battle.Command{Kind: battle.Escape, Target: -1}
 			goto petChoice
 		}
@@ -722,6 +778,13 @@ func (w *World) automationRecovery(e *entity, target *battle.Fighter, revive boo
 	if target.Ride != nil && target.Ride.HP > 0 && !target.Ride.Fell {
 		deficit += max(0, target.Ride.MaxHP-target.Ride.HP)
 	}
+	// Consume bag recovery before spending MP. Native meats have priority over
+	// medicines regardless of bag order, so battle loot does not fill the bag.
+	if !revive {
+		if slot := w.automationRecoveryItem(e, target, false, deficit); slot >= 0 {
+			return battle.Command{Kind: battle.UseItem, Target: target.Slot, ItemSlot: slot}, true
+		}
+	}
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
 		if m == nil || m.Field == 2 || mp > me.MP || me.Status() == battle.StNocast {
@@ -791,13 +854,14 @@ func (w *World) automationCure(e *entity, target *battle.Fighter) (battle.Comman
 	return battle.Command{}, false
 }
 func (w *World) automationMP(e *entity, me *battle.Fighter, needs ...*battle.Fighter) (battle.Command, bool) {
-	if me.Status() == battle.StNocast {
-		return battle.Command{}, false
-	}
+	return w.automationMPAt(e, me, defaultAutoSettings().HealAt, needs...)
+}
+
+func (w *World) automationMPAt(e *entity, me *battle.Fighter, threshold int, needs ...*battle.Fighter) (battle.Command, bool) {
 	cheapest := int(^uint(0) >> 1)
 	for slot := 0; slot < data.EquipSlots; slot++ {
 		m, mp := w.equipMagic(e, slot)
-		if m != nil && m.Field != 2 && data.Atoi(m.Option) > 0 && mp <= me.MaxMP && (m.Func == "MAGIC_Recovery" || m.Func == "MAGIC_OtherRecovery") {
+		if me.Status() != battle.StNocast && m != nil && m.Field != 2 && data.Atoi(m.Option) > 0 && mp <= me.MaxMP && (m.Func == "MAGIC_Recovery" || m.Func == "MAGIC_OtherRecovery") {
 			// A cheap self-only spirit cannot restore an injured pet. Reserve MP
 			// for a spirit that can reach at least one current recovery candidate.
 			if len(needs) > 0 && !slices.ContainsFunc(needs, func(f *battle.Fighter) bool {
@@ -808,18 +872,44 @@ func (w *World) automationMP(e *entity, me *battle.Fighter, needs ...*battle.Fig
 			cheapest = min(cheapest, mp)
 		}
 	}
-	if cheapest == int(^uint(0)>>1) || me.MP >= cheapest || me.MP >= me.MaxMP {
+	low := me.MP*100 < me.MaxMP*threshold
+	reserveHeal := cheapest != int(^uint(0)>>1) && me.MP < cheapest
+	if (!low && !reserveHeal) || me.MP >= me.MaxMP {
 		return battle.Command{}, false
 	}
+	if slot := w.automationRecoveryItem(e, me, true, me.MaxMP-me.MP); slot >= 0 {
+		return battle.Command{Kind: battle.UseItem, Target: me.Slot, ItemSlot: slot}, true
+	}
+	return battle.Command{}, false
+}
+
+func (w *World) automationRecoveryItem(e *entity, target *battle.Fighter, mp bool, deficit int) int {
+	best, bestAmount, bestMeat := -1, 0, false
+	me := e.fight.b.F[e.fight.slot]
 	for slot := data.EquipSlots; slot < data.ItemSlots; slot++ {
 		it := e.inv[slot]
 		if it == nil {
 			continue
 		}
 		d := w.game.Items[it.ID]
-		if d != nil && d.Field != 2 && automationItemRecovers(d, true) && itemTargetValid(d, me.Slot, me.Slot) {
-			return battle.Command{Kind: battle.UseItem, Target: me.Slot, ItemSlot: slot}, true
+		if d == nil || d.Field == 2 || !automationItemRecovers(d, mp) || !itemTargetValid(d, target.Slot, me.Slot) {
+			continue
+		}
+		key := "体"
+		if mp {
+			key = "气"
+		}
+		_, tail, _ := strings.Cut(d.Argument, key)
+		amount := data.Atoi(tail)
+		if amount == -1 {
+			amount = deficit
+		}
+		meat := d.Image >= 24000 && d.Image <= 24044
+		better := best < 0 || meat && !bestMeat || meat == bestMeat && (amount >= deficit && (bestAmount < deficit || amount < bestAmount) ||
+			amount < deficit && bestAmount < deficit && amount > bestAmount)
+		if better {
+			best, bestAmount, bestMeat = slot, amount, meat
 		}
 	}
-	return battle.Command{}, false
+	return best
 }

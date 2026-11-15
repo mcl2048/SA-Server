@@ -28,3 +28,10 @@ test("native pan cancellation clears any retained press before the next map fram
  h.map.pressInside=true;h.map.cancelPointer();h.input.clear();Object.assign(h.mouse,{x:-1,y:-1,down:false,clicked:false});h.step();
  assert.equal(h.map.drag,null);assert.equal(h.map.pressInside,false);assert.deepEqual(h.routes,[]);
 });
+test("opening the coordinate map cannot reuse its opening click as a map destination",()=>{
+ const h=setup();h.map.reset();
+ Object.assign(h.mouse,{x:500,y:200,clicked:true,down:false});
+ h.map.pan({mouse:h.mouse},{floor:1,w:100,h:100});
+ h.mouse.clicked=false;h.map.pan({mouse:h.mouse},{floor:1,w:100,h:100});
+ assert.deepEqual(h.routes,[],"the old minimap-entry hit must not turn into a new map-area tap");
+});

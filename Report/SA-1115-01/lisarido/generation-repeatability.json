@@ -1,0 +1,10 @@
+{
+  "five_files_byte_identical": true,
+  "sha256": {
+    "anim/199300.json": "407b494fea0c891c79c1d33de5d6924df740be74fdafd9549d3159c7c34ae5f2",
+    "anim/199301.json": "2cb9eed87915022f63d5c0a0855bf7bc44baa5970610511417df8d6e42d91c89",
+    "manifest.json": "6530c1ba81bfd3c84fabf731d3d71050e7741215f022e10e6aa6b31e528e12ad",
+    "pages/00000.png": "95642acbc87fb5542a28fc24339c76e68739408777b6cfa2481a80a686cce2da",
+    "pages/00001.png": "d83ec5fb670a7714453b208bc68b1bb39044a31721279a0f215a6fa794d1754d"
+  }
+}

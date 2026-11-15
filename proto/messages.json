@@ -20,7 +20,7 @@
       ["flags", "int"], ["alch", "string"], ["merged", "bool"], ["jigsaw", "string"]],
     "BattleEvent": [["actor", "int"], ["kind", "string"], ["target", "int"], ["result", "string"],
       ["damage", "int"], ["hp", "int"], ["dead", "bool"], ["ok", "bool"], ["skill", "string"], ["status", "int"],
-      ["guardian", "int"], ["combo", "bool"], ["actorHp", "int"], ["mpDamage", "int"], ["guarded", "bool"],
+      ["guardian", "int"], ["combo", "bool"], ["coattack", "int"], ["actorHp", "int"], ["mpDamage", "int"], ["guarded", "bool"],
       ["petDamage", "int"], ["rideHp", "int"], ["fall", "bool"], ["effect", "int"], ["actorMp", "int"], ["shoot", "int"], ["fly", "int"],
       ["name", "string"], ["sprite", "int"], ["level", "int"], ["maxHp", "int"], ["att", "string"], ["ownerSlot", "int"], ["bagSlot", "int"], ["stat", "int"], ["statVal", "int"], ["statTurns", "int"]],
     "ShopItem": [["name", "string"], ["level", "int"], ["price", "int"], ["image", "int"], ["info", "string"],

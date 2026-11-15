@@ -53,3 +53,14 @@
 | ✅ 发行交付 | v0.2.12-LYNX静态Linux AMD64、匹配44JS与HTML/封面；4358文件新ZIP已核验并替换旧版，无新增Assets |
 
 最终151项客户端/构建回归、全部Go测试与race、TypeScript/vet通过；实际发行ELF和Chromium完成62项桌面/手机矩阵及4项自动/快速死亡回归，页面错误0，SIGTERM退出0且人物存档匹配。两次二进制构建SHA一致，46个内嵌文件与源码构建输出逐字节一致。完整证据与中间失败保留在 [验收](Report/SA-1114-01/ACCEPTANCE.md)，产物摘要见 [release.json](Report/SA-1114-01/release.json)。手机验证使用触屏视口模拟与软件GPU，未冒充实体Android/iOS或Safari认证；当前宠物详情预览为稳定静态姿态。维护约定已写入README。
+
+
+---
+
+## v0.2.19-LYNX · SA-1115-01
+
+✅ 六项任务完成：快速战斗导航续行与准确坐标；HP/MP按比例肉优先恢复；默认关闭的自动逃跑（三次实际失败回退）与关键词自动丢弃；原作普通近战人宠／多人合击；雷萨利朵肩关节举起右炮臂开炮。
+
+244项客户端／构建、完整Go test／race／vet、TypeScript、42项安装器和艺术检查通过。匹配最终Linux ELF上的真实Chromium桌面／移动29项通过、页面错误0；导航两端各6场快速战斗后抵达，战斗期零Move。57个HTTP文件逐字节一致，两次构建二进制摘要一致；三组隔离实例正常SIGTERM存档退出。完整替换ZIP、v3增量包与stoneage经验一并交付。
+
+[可视报告](Report/SA-1115-01/index.html) · [验收依据与限制](Report/SA-1115-01/ACCEPTANCE.md) · [发行摘要](Report/SA-1115-01/release.json) · [发布说明](docs/v0.2.19-LYNX.md)。移动属于触屏／视口模拟，未认证实体Android/iOS/Safari；未部署或重启生产实例。相簿旧脚本等中间失败保留，不混入最终通过证据。

@@ -1,4 +1,4 @@
-import { isMobile, getMobileDisplayMode } from "./mobile-view.js?v=8a026288d656cdb2";
+import { isMobile, getMobileDisplayMode } from "./mobile-view.js?v=08f6b4cf8a3cf7f0";
 
 const STORAGE = "sa-control-positions-v1";
 

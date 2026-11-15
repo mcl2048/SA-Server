@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://developer.chrome.com/blog/new-in-chrome-142",
+    "status": 200,
+    "title": "New in Chrome 142 &nbsp;|&nbsp; Blog &nbsp;|&nbsp; Chrome for Developers",
+    "accessed": "2026-11-15",
+    "retrieved_text_sha256": "3d7f60337977619e620bb21de579d9b70b93522b8f7bd586b521b0fed157860a"
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text",
+    "status": 200,
+    "title": "&lt;input type=&quot;text&quot;&gt; HTML attribute value - HTML | MDN",
+    "accessed": "2026-11-15",
+    "retrieved_text_sha256": "d6586e98b73f94b6286efa5522270bb27c8a317edda25d258cc5b52d32917946"
+  },
+  {
+    "url": "https://web.dev/learn/forms/auto",
+    "status": 200,
+    "title": "Help users avoid re-entering data in forms &nbsp;|&nbsp; web.dev",
+    "accessed": "2026-11-15",
+    "retrieved_text_sha256": "b1eaaffb1b91fe4903932a0d358a7aec50b25acea44d3c5a2710e0926e9d7315"
+  },
+  {
+    "url": "https://developer.chrome.com/docs/devtools/performance/reference",
+    "status": 200,
+    "title": "Performance features reference &nbsp;|&nbsp; Chrome DevTools &nbsp;|&nbsp; Chrome for Developers",
+    "accessed": "2026-11-15",
+    "retrieved_text_sha256": "6545e1df45fd592c55aaa597281741696254a313517d450e91517b0c17507f67"
+  }
+]

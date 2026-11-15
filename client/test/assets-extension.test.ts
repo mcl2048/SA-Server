@@ -43,8 +43,8 @@ function setup(t: any, options: SetupOptions = {}) {
     if (url === root + "extensions/primal-claws-v3/manifest.json") return options.primal ? Response.json({format:1,id:"primal-claws-v3",pages:[{file:"pages/00000.png",width:64,height:64}],images:[0,1,2].map(i=>[9300000+i,0,(i%2)*32,Math.floor(i/2)*32,32,32,-16,-30]),animations:[199400,199401,199402].map(id=>({id,file:`anim/${id}.json`}))}) : new Response(null,{status:404});
     const primal = /^\/assets\/extensions\/primal-claws-v3\/anim\/(19940[012])\.json$/.exec(url);
     if (primal) return Response.json({id:Number(primal[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badPrimal?9200000:9300000+Number(primal[1])-199400,0,0,0]]}]});
-    if (url === root + "extensions/lisarido-v2/manifest.json") return options.lisarido ? Response.json({ format: 1, id: "lisarido-v2", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9200000,0,0,0,32,32,-16,-30],[9200001,0,32,0,32,32,-16,-30]], animations: [199300,199301].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
-    const lisarido = /^\/assets\/extensions\/lisarido-v2\/anim\/(19930[01])\.json$/.exec(url);
+    if (url === root + "extensions/lisarido-v3/manifest.json") return options.lisarido ? Response.json({ format: 1, id: "lisarido-v3", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9200000,0,0,0,32,32,-16,-30],[9200001,0,32,0,32,32,-16,-30]], animations: [199300,199301].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
+    const lisarido = /^\/assets\/extensions\/lisarido-v3\/anim\/(19930[01])\.json$/.exec(url);
     if (lisarido) return Response.json({id:Number(lisarido[1]),pages:[],actions:[{dir:0,type:3,ticks:3,frames:[[options.badLisarido ? 9100000 : 9200000 + Number(lisarido[1])-199300,0,0,0]]}]});
     if (url === root + "extensions/lilith-v2/manifest.json") return options.lilith ? Response.json({ format: 1, id: "lilith-v2", pages: [{file:"pages/00000.png",width:64,height:64}], images: [[9100000,0,0,0,32,32,-16,-30],[9100001,0,32,0,32,32,-16,-30]], animations: [199200,199201].map(id=>({id,file:`anim/${id}.json`})) }) : new Response(null,{status:404});
     const lilith = /^\/assets\/extensions\/lilith-v2\/anim\/(19920[01])\.json$/.exec(url);
@@ -112,7 +112,7 @@ test("Lisarido owns independent set4 pages and reloads them after eviction witho
   assert.equal(assets.image(9200000)?.set,4);assert.equal(assets.image(9100000)?.set,3);assert.equal(assets.image(9000000)?.set,2);
   assets.gpuBudget=1;for(let i=0;i<150;i++)assets.tick();assert.equal(assets.gpuBytes,0);
   assets.anim(199300);await pending(assets);
-  assert.equal(loaded.filter(x=>x.url===root+"extensions/lisarido-v2/pages/00000.png").length,2);
+  assert.equal(loaded.filter(x=>x.url===root+"extensions/lisarido-v3/pages/00000.png").length,2);
   assert.equal(loaded.filter(x=>x.url===root+"extensions/lilith-v2/pages/00000.png").length,1);
 });
 
@@ -324,7 +324,7 @@ test("imageCanvas decodes high extension IDs with RGBA transparency and anchors 
  assets.gpuBudget=1;for(let i=0;i<150;i++)assets.tick();assert.equal(assets.gpuBytes,0);
  assets.anim(199401);await pending(assets);
  assert.equal(loaded.filter(p=>p.url===root+"extensions/primal-claws-v3/pages/00000.png").length,2);
- assert.equal(loaded.filter(p=>p.url===root+"extensions/lisarido-v2/pages/00000.png").length,1);
+ assert.equal(loaded.filter(p=>p.url===root+"extensions/lisarido-v3/pages/00000.png").length,1);
  });
  test("invalid primal frames cannot borrow a previous extension's images",async t=>{
  const {assets,warnings}=setup(t,{lisarido:true,primal:true,badPrimal:true});await assets.init();

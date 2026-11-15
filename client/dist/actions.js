@@ -4,7 +4,7 @@
 //   快捷键（actionShortCutKeyProc，站着不动时才有效）：Ctrl+1 坐下 2 挥手 3 点头 4 高兴 5 生气 6 悲伤 7 站立 8 走动 9 晕倒 0 攻击，
 //   Ctrl+- 防御、Ctrl+= 受伤、Ctrl+\ 投掷。
 
-import { FONT, boxColor,         } from "./ui.js?v=8a026288d656cdb2";
+import { FONT, boxColor,         } from "./ui.js?v=08f6b4cf8a3cf7f0";
 
 const LABELS = [" 坐  下 ", " 站  立 ", " 挥  手 ", " 走  动 ", " 点  头 ", " 晕  倒 ", " 高  兴 ", " 攻  击 ", " 生  气 ", " 防  御 ",
   " 悲  伤 ", " 受  伤 ", " 投  掷 ", " 打  呼 ", " 冷  场 "];

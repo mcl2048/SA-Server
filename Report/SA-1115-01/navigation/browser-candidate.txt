@@ -1,0 +1,16 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+{"navigation":"desktop","stage":"context"}
+{"navigation":"desktop","stage":"entered"}
+{"navigation":"desktop","stage":"setup"}
+{"navigation":"desktop","stage":"map"}
+{"navigation":"desktop","stage":"quick"}
+{"navigation":"desktop","stage":"normal"}
+{"navigation":"mobile","stage":"context"}
+{"navigation":"mobile","stage":"entered"}
+{"navigation":"mobile","stage":"setup"}
+{"navigation":"mobile","stage":"map"}
+{"navigation":"mobile","stage":"quick"}
+{"navigation":"mobile","stage":"normal"}
+{"variant":"candidate","stage":"scenario-finished"}
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-01/navigation/candidate-navigation.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":370,"y":182},"stored_position":{"floor":300,"x":370,"y":182},"position_matches":true}}

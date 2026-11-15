@@ -20,6 +20,9 @@ export const TARGET_LABEL                           = {
 
                                                         
                                 
+                                              
+                                             
+                                                    
                                         
                                              
                                    
@@ -32,7 +35,7 @@ export const TARGET_LABEL                           = {
 export const AUTO           = { kind: "auto", name: "", target: "auto" };
 
 export function defaultAi()             {
-  return { v: 2, healAt: 30, escape: true, magic: true, capture: false, meat: false,
+  return { v: 2, healAt: 30, escape: true, autoEscape: false, autoDrop: false, dropKeywords: "", magic: true, capture: false, meat: false,
     first: { ...AUTO }, then: { ...AUTO }, petFirst: { ...AUTO }, petThen: { ...AUTO } };
 }
 
@@ -52,6 +55,7 @@ export function loadAi(name        )             {
       const n = (v         , def        ) => typeof v === "number" && v >= 0 && v <= 100 ? Math.round(v / 5) * 5 : def;
       const b = (v         , def         ) => typeof v === "boolean" ? v : def;
       return { v: 2, healAt: n(s.healAt, d.healAt), escape: b(s.escape, d.escape), magic: b(s.magic, d.magic), capture: b(s.capture, d.capture),
+        autoEscape: b(s.autoEscape, d.autoEscape), autoDrop: b(s.autoDrop, d.autoDrop), dropKeywords: typeof s.dropKeywords === "string" ? s.dropKeywords.slice(0, 512) : "",
         meat: b(s.meat, d.meat), first: action(s.first), then: action(s.then), petFirst: action(s.petFirst), petThen: action(s.petThen) };
     }
     // 旧格式（原版的 method / target / limit / other）：留下数值与开关，行动计划用预设

@@ -1,0 +1,108 @@
+{
+  "success": true,
+  "version": "v0.2.19-LYNX",
+  "binary_sha256": "c9118a90071366a2aedf38ef28cda70faa2e122792811a81d1be0caeb96aa8f4",
+  "linux_amd64_static": true,
+  "source_files": 301,
+  "test_only_updates_after_build": {
+    "scripts/update-lisarido.test.sh": {
+      "original_sha256": "238f82838eee31682265006281aa26db595bf28bc01db894bf2293b0cf2df648",
+      "sha256": "c3cd4d6c1193c7236b24fd9ed60e7036dcc80296c45001aa225e5aedc0284871",
+      "evidence": "lisarido/installer-final.json",
+      "reason": "Installer test suite finalized after build; not read by build-linux.sh or Go embedding. Full 42 cases rerun successfully; production inputs unchanged.",
+      "changes": [
+        "Assert no v2 retired-stage residue remains",
+        "Rename v1-to-v2 fixture label to v1-to-v3"
+      ],
+      "original_reconstructed_and_verified": true
+    }
+  },
+  "client_tests": 244,
+  "go_all_and_vet": true,
+  "http_files": 57,
+  "art_installer_cases": 42,
+  "browser": {
+    "navigation": {
+      "checks": 3,
+      "browser": "156.0.8078.4",
+      "binary_sha256": "c9118a90071366a2aedf38ef28cda70faa2e122792811a81d1be0caeb96aa8f4",
+      "shutdown": {
+        "started": true,
+        "sigterm_sent": true,
+        "exit_code": 0,
+        "signal": null,
+        "timed_out": false,
+        "expected_position": {
+          "id": 1,
+          "floor": 300,
+          "x": 370,
+          "y": 182
+        },
+        "stored_position": {
+          "floor": 300,
+          "x": 370,
+          "y": 182
+        },
+        "position_matches": true
+      }
+    },
+    "automation": {
+      "checks": 20,
+      "browser": "156.0.8078.4",
+      "binary_sha256": "c9118a90071366a2aedf38ef28cda70faa2e122792811a81d1be0caeb96aa8f4",
+      "shutdown": {
+        "started": true,
+        "sigterm_sent": true,
+        "exit_code": 0,
+        "signal": null,
+        "timed_out": false,
+        "expected_position": {
+          "id": 1,
+          "floor": 300,
+          "x": 379,
+          "y": 186
+        },
+        "stored_position": {
+          "floor": 300,
+          "x": 379,
+          "y": 186
+        },
+        "position_matches": true
+      }
+    },
+    "lisarido": {
+      "checks": 6,
+      "browser": "156.0.8078.4",
+      "binary_sha256": "c9118a90071366a2aedf38ef28cda70faa2e122792811a81d1be0caeb96aa8f4",
+      "shutdown": {
+        "started": true,
+        "sigterm_sent": true,
+        "exit_code": 0,
+        "signal": null,
+        "timed_out": false,
+        "expected_position": {
+          "id": 1,
+          "floor": 300,
+          "x": 371,
+          "y": 183
+        },
+        "stored_position": {
+          "floor": 300,
+          "x": 371,
+          "y": 183
+        },
+        "position_matches": true
+      }
+    }
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.19-LYNX-linux-amd64.zip",
+    "bytes": 42197789,
+    "sha256": "8349b51112aee7657962230fcb2c1d980bb53393dbd9e67510479868daf2ecf6"
+  },
+  "art_package_sha256": "420b024dddea2d6c9f0dd8f530cb19dd9e2f64c0394df639d6ef24bf8c798750",
+  "limitations": [
+    "Chromium viewport/touch emulation; no physical Android/iOS/Safari certification",
+    "Isolated fixtures; production was not restarted"
+  ]
+}

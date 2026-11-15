@@ -1,0 +1,9 @@
+# Client integration review
+
+Read-only review of the SA-1115-01 diffs in aisetting.ts, aismart.ts and battle.ts, with ordinary event/menu lifecycles traced in menus.ts/main.ts.
+
+1. **Confirmed new DOM lifecycle gap:** AiWindow.dropInput survives Menus.leave and the quick BattleStart path. While settings stay open, a genuine encounter can leave the keyword input over a battle and keep mobile input-panel state active. Reported to integration owner before any shared-file edit; owner reproduced it with an actual AiWindow + Menus.leave test and repaired leave/closeOthers/BattleStart.
+2. **Confirmed camera integration gap:** the onTurn coattack branch queues and continues before the normal first-step cameraSlot decorator. An enemy coattack therefore leaves follow camera on the previous actor during approach. The production-class probe in `review-coattack-probe.mjs` records cameraSlot=-1 after the enemy group starts (`review-coattack-camera-before.json`). Reported to owner; owner repaired coattack first-step focus. Re-running the same probe records cameraSlot=10 / focus label f10 (`review-coattack-camera-after.json`). No shared file changed by this reviewer.
+3. **Policy wording mismatch:** when no meat is available and at least two allies need healing, the retained group-spell branch precedes HP medicine. This contradicts the new UI's unconditional meat → medicine → spirit order, though meat's highest priority is correctly implemented. Reported to owner; owner aligned the retained group-spell branch so it runs before the single-target path only when no valid HP medicine is available. Meat, then medicine, then spirit priority now matches the UI.
+
+No further clear new movement-input or animation-order regression found in this scoped pass. Final binary evidence remains necessary after integration repairs; mobile Chromium emulation is not physical-device certification.

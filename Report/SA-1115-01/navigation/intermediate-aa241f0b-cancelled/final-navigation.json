@@ -1,0 +1,31 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "aa241f0b1aa1461ea9dfd54fe6b1fba841dce2a385df660fe777ce698eabb93c",
+  "binary_version": "v0.2.19-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T02:17:17.493Z"
+    }
+  ],
+  "checks": [],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": null,
+    "stored_position": null,
+    "position_matches": false
+  },
+  "client_version": "08f6b4cf8a3cf7f0",
+  "browser": "156.0.8078.4",
+  "events": [],
+  "failure": "interrupted by SIGTERM",
+  "failure_stack": "Error: interrupted by SIGTERM\n    at onInterrupt (file:///home/coder/saserver/Report/SA-1115-01/navigation/real-game.mjs:38:57)\n    at process.sigterm (file:///home/coder/saserver/Report/SA-1115-01/navigation/real-game.mjs:39:52)\n    at process.emit (node:events:526:24)"
+}

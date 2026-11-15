@@ -1,0 +1,1 @@
+Integration owner requested this run stop before scenario execution because a final server presentation fix required another ELF. Sent SIGTERM only to the owned browser runner; its private server exited 0 without timeout and its runtime lock was removed. This is intentionally incomplete historical evidence, not final acceptance.

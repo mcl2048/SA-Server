@@ -1,0 +1,5 @@
+--- FAIL: TestAutomationAutoEscapeResetAndNoEscapeFloor (0.10s)
+    automation_escape_test.go:70: new room must reset failures: {Kind:attack Target:15 Skill:<nil> Automatic:false ItemFunc: ItemArg: ItemName: ItemSlot:-1 ItemMagic:<nil> FromItem:false Magic:<nil> MP:0 Swap:<nil>} / 0
+FAIL
+FAIL	sa/server/internal/world	2.506s
+FAIL

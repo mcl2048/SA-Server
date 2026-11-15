@@ -1,0 +1,1474 @@
+{
+  "variant": "candidate",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "184beb024081eab3f5d00b0505cc2d62c1fd256ebbaa4ff880ce18364fcc951b",
+  "binary_version": "v0.2.19-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T02:07:33.832Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T02:08:04.967Z"
+    }
+  ],
+  "checks": [
+    {
+      "case": "desktop settings defaults, native input, persistence and hide",
+      "passed": true,
+      "evidence": {
+        "policy": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "autoEscape": false,
+          "autoDrop": false,
+          "dropKeywords": "石龟 | 蕨",
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    },
+    {
+      "case": "desktop daily literal keyword discard without confirmation",
+      "passed": true,
+      "evidence": {
+        "keywords": " | 小块肉 | 蕨 | ",
+        "remaining": [
+          {
+            "id": 1500,
+            "slot": 10,
+            "name": "耐久力回复药",
+            "pile": 1,
+            "equip": -1,
+            "magic": ""
+          }
+        ]
+      }
+    },
+    {
+      "case": "desktop disabled discard retains matching item",
+      "passed": true,
+      "evidence": {}
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 379,
+      "y": 186
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 379,
+      "y": 186
+    },
+    "position_matches": true
+  },
+  "client_version": "b825063c283ebea3",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 140,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 100,
+          "hp": 1,
+          "maxHp": 1100,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureRecoveryGuard",
+          "sprite": 100250,
+          "level": 1,
+          "hp": 123,
+          "maxHp": 123,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "item",
+          "target": 0,
+          "damage": 21,
+          "hp": 22,
+          "actorHp": 1,
+          "actorMp": 100,
+          "skill": "小块肉",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 123,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 2,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "item",
+          "target": 0,
+          "damage": 92,
+          "hp": 114,
+          "actorHp": 22,
+          "actorMp": 100,
+          "skill": "耐久力回复药",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 123,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 3,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "escape",
+          "target": -1,
+          "damage": 0,
+          "hp": 114,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": true,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "escape",
+      "exp": 0,
+      "gold": 0,
+      "levelUp": 0
+    }
+  ],
+  "automation": [
+    {
+      "device": "desktop",
+      "name": "settings defaults, native input, persistence and hide",
+      "evidence": {
+        "policy": {
+          "v": 2,
+          "healAt": 30,
+          "escape": true,
+          "autoEscape": false,
+          "autoDrop": false,
+          "dropKeywords": "石龟 | 蕨",
+          "magic": true,
+          "capture": false,
+          "meat": false,
+          "first": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "then": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petFirst": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          },
+          "petThen": {
+            "kind": "auto",
+            "name": "",
+            "target": "auto"
+          }
+        }
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "daily literal keyword discard without confirmation",
+      "evidence": {
+        "keywords": " | 小块肉 | 蕨 | ",
+        "remaining": [
+          {
+            "id": 1500,
+            "slot": 10,
+            "name": "耐久力回复药",
+            "pile": 1,
+            "equip": -1,
+            "magic": ""
+          }
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "disabled discard retains matching item",
+      "evidence": {}
+    }
+  ],
+  "failure": "expected recovery battle win",
+  "failure_stack": "Error: expected recovery battle win\n    at assert (file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:4:42)\n    at file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:60:64\n    at encounter (file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:32:4)\n    at async Module.run (file:///home/coder/saserver/Report/SA-1115-01/browser/automation-cases.mjs:60:5)\n    at async work (file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:244:5)\n    at async file:///home/coder/saserver/Report/SA-1115-01/browser/real-game.mjs:262:5",
+  "failure_state": {
+    "screen": "Object",
+    "field": true,
+    "battle": true,
+    "actions": [
+      {
+        "id": "battle-auto-toggle",
+        "label": "自动：开",
+        "x1": 18,
+        "y1": 18,
+        "x2": 78,
+        "y2": 36
+      },
+      {
+        "id": "battle-quick-toggle",
+        "label": "快速：关",
+        "x1": 148,
+        "y1": 18,
+        "x2": 208,
+        "y2": 36
+      }
+    ]
+  }
+}

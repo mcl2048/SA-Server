@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "packageId": "lisarido-v3",
+  "targetRoot": "assets/extensions/lisarido-v3",
+  "installPrefix": "extensions/lisarido-v3",
+  "source": "Reference-derived Lisarido bitmap and electromagnetic burst extension; official base asset archive is excluded.",
+  "archive": {
+    "name": "lisarido-v3-assets.tar.gz",
+    "size": 2435124,
+    "sha256": "420b024dddea2d6c9f0dd8f530cb19dd9e2f64c0394df639d6ef24bf8c798750"
+  },
+  "entries": [
+    {
+      "path": "extensions/lisarido-v3/anim/199300.json",
+      "size": 6340,
+      "sha256": "407b494fea0c891c79c1d33de5d6924df740be74fdafd9549d3159c7c34ae5f2"
+    },
+    {
+      "path": "extensions/lisarido-v3/anim/199301.json",
+      "size": 476,
+      "sha256": "2cb9eed87915022f63d5c0a0855bf7bc44baa5970610511417df8d6e42d91c89"
+    },
+    {
+      "path": "extensions/lisarido-v3/manifest.json",
+      "size": 9920,
+      "sha256": "6530c1ba81bfd3c84fabf731d3d71050e7741215f022e10e6aa6b31e528e12ad"
+    },
+    {
+      "path": "extensions/lisarido-v3/pages/00000.png",
+      "size": 1486965,
+      "sha256": "95642acbc87fb5542a28fc24339c76e68739408777b6cfa2481a80a686cce2da"
+    },
+    {
+      "path": "extensions/lisarido-v3/pages/00001.png",
+      "size": 991136,
+      "sha256": "d83ec5fb670a7714453b208bc68b1bb39044a31721279a0f215a6fa794d1754d"
+    }
+  ]
+}

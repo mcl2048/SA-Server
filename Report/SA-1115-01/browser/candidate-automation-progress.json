@@ -1,0 +1,61 @@
+[
+  {
+    "device": "desktop",
+    "name": "settings defaults, native input, persistence and hide",
+    "evidence": {
+      "policy": {
+        "v": 2,
+        "healAt": 30,
+        "escape": true,
+        "autoEscape": false,
+        "autoDrop": false,
+        "dropKeywords": "石龟 | 蕨",
+        "magic": true,
+        "capture": false,
+        "meat": false,
+        "first": {
+          "kind": "auto",
+          "name": "",
+          "target": "auto"
+        },
+        "then": {
+          "kind": "auto",
+          "name": "",
+          "target": "auto"
+        },
+        "petFirst": {
+          "kind": "auto",
+          "name": "",
+          "target": "auto"
+        },
+        "petThen": {
+          "kind": "auto",
+          "name": "",
+          "target": "auto"
+        }
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "daily literal keyword discard without confirmation",
+    "evidence": {
+      "keywords": " | 小块肉 | 蕨 | ",
+      "remaining": [
+        {
+          "id": 1500,
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "equip": -1,
+          "magic": ""
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "disabled discard retains matching item",
+    "evidence": {}
+  }
+]

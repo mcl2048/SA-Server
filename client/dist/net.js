@@ -1,5 +1,5 @@
 // WebSocket transport and opaque browser-session recovery. Passwords are never stored.
-import { fillDefaults,                                  } from "./proto.gen.js?v=8a026288d656cdb2";
+import { fillDefaults,                                  } from "./proto.gen.js?v=08f6b4cf8a3cf7f0";
 
 function redactCredentials(message        )         {
   const safe = { ...message }                           ;

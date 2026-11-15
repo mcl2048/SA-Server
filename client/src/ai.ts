@@ -20,6 +20,9 @@ export interface AiSettings {
   v: 2;
   healAt: number;      // 补血时机：HP 低于这个百分比就补（0..100，5 一格）
   escape: boolean;     // 打不过就逃跑
+  autoEscape: boolean; // 优先逃跑；同场实际失败三次后恢复通常策略
+  autoDrop: boolean;   // 日常／战后按名字关键字自动丢弃背包物品
+  dropKeywords: string; // | 分隔的字面关键字；服务端负责最终丢弃与占用检查
   magic: boolean;      // 智能判断时攻击精灵也算进候选
   capture: boolean;    // 自动抓宠（只抓 1 级的，没有就逃跑）
   meat: boolean;       // 战斗结束时把肉丢掉
@@ -32,7 +35,7 @@ export interface AiSettings {
 export const AUTO: AiAction = { kind: "auto", name: "", target: "auto" };
 
 export function defaultAi(): AiSettings {
-  return { v: 2, healAt: 30, escape: true, magic: true, capture: false, meat: false,
+  return { v: 2, healAt: 30, escape: true, autoEscape: false, autoDrop: false, dropKeywords: "", magic: true, capture: false, meat: false,
     first: { ...AUTO }, then: { ...AUTO }, petFirst: { ...AUTO }, petThen: { ...AUTO } };
 }
 
@@ -52,6 +55,7 @@ export function loadAi(name: string): AiSettings {
       const n = (v: unknown, def: number) => typeof v === "number" && v >= 0 && v <= 100 ? Math.round(v / 5) * 5 : def;
       const b = (v: unknown, def: boolean) => typeof v === "boolean" ? v : def;
       return { v: 2, healAt: n(s.healAt, d.healAt), escape: b(s.escape, d.escape), magic: b(s.magic, d.magic), capture: b(s.capture, d.capture),
+        autoEscape: b(s.autoEscape, d.autoEscape), autoDrop: b(s.autoDrop, d.autoDrop), dropKeywords: typeof s.dropKeywords === "string" ? s.dropKeywords.slice(0, 512) : "",
         meat: b(s.meat, d.meat), first: action(s.first), then: action(s.then), petFirst: action(s.petFirst), petThen: action(s.petThen) };
     }
     // 旧格式（原版的 method / target / limit / other）：留下数值与开关，行动计划用预设

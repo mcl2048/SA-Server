@@ -333,6 +333,7 @@ type Event struct {
 	Status   int    // 目标（无目标时为本人）行动后的异常状态
 	Guardian int    // 替目标挡下攻击的守护者位置，-1 为无
 	Combo    bool   // 同一个人接下来还有一下（连击），不用走回原位
+	Coattack int    // 同回合的多人合击组号；0 为独立行动，不与单人连击 Combo 混用
 	ActorHP  int    // 行动者行动后的 HP（吸血）
 	MPDamage int
 	Guarded  bool // 目标处于防御（客户端的命中特效用蓝色）
@@ -568,12 +569,14 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 		f.applyPrimalDefense()
 	}
 	// 行动顺序：(速度 + 20) − RAND(0, 10%)，大的先动
-	type ord struct {
-		slot, dex int
-		f         *Fighter // 下指令的人（换宠物后同一个位置换了人，新来的这回合不行动）
-	}
-	var order []ord
-	for i, c := range all {
+	var order []battleOrder
+	// Stable slot iteration makes seeded combat reproducible; map iteration
+	// must not assign a different random initiative roll on each execution.
+	for i := range b.F {
+		c, present := all[i]
+		if !present {
+			continue
+		}
 		w := b.F[i].rideQuick() + 20
 		dex := w - b.rand(0, w*0.1)
 		if c.Kind == UseItem {
@@ -587,7 +590,7 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 				dex = w * 1.2
 			}
 		}
-		order = append(order, ord{i, int(dex), b.F[i]})
+		order = append(order, battleOrder{i, int(dex), b.F[i]})
 	}
 	sort.Slice(order, func(i, j int) bool {
 		if order[i].dex != order[j].dex {
@@ -596,34 +599,71 @@ func (b *Battle) Resolve(cmds map[int]Command) []Event {
 		return order[i].slot < order[j].slot
 	})
 
+	groups := b.coattackGroups(order, all, avoidTargets)
 	var ev []Event
-	for _, o := range order {
-		f := b.F[o.slot]
-		if f != o.f || !f.Alive() {
-			continue
-		}
+	for i := 0; i < len(order); i++ {
+		o := order[i]
 		if done, _ := b.Over(); done {
 			break
 		}
-		b.autoAvoidTargets = avoidTargets[o.slot]
-		c, ok := b.statusSeq(f, all[o.slot], &ev)
-		if !ok || !f.Alive() {
+		if group := groups[o.slot]; group > 0 {
+			var ready []coattackActor
+			last := i
+			for last < len(order) && groups[order[last].slot] == group {
+				last++
+			}
+			for _, member := range order[i:last] {
+				f := b.F[member.slot]
+				b.autoAvoidTargets = avoidTargets[member.slot]
+				before := len(ev)
+				c, ok := b.prepareAction(member, all[member.slot], &ev)
+				if !ok {
+					continue
+				}
+				disobeyed := false
+				for _, event := range ev[before:] {
+					disobeyed = disobeyed || event.Kind == Disobey
+				}
+				if !disobeyed && c.Target == all[o.slot].Target && b.coattackEligible(f, c, avoidTargets[member.slot]) {
+					ready = append(ready, coattackActor{f, c, avoidTargets[member.slot]})
+				} else {
+					// Loyalty or confusion can replace the command. It keeps its
+					// independent action and never joins the synchronized group.
+					b.act(f, c, &ev)
+					b.afterAct(f, &ev)
+				}
+			}
+			// A disobedient pet may have attacked and killed its owner while
+			// commands were checked. Revoke those participants before deciding
+			// whether this remains a group; do not publish phantom members.
+			active := ready[:0]
+			for _, member := range ready {
+				if member.f.Alive() && b.F[member.f.Slot] == member.f {
+					active = append(active, member)
+				}
+			}
+			ready = active
+			if len(ready) >= 2 && b.F[ready[0].command.Target].Alive() {
+				b.coattackSeq(ready, group, &ev)
+			} else {
+				for _, member := range ready {
+					b.autoAvoidTargets = member.avoid
+					b.act(member.f, member.command, &ev)
+				}
+			}
+			for _, member := range ready {
+				b.afterAct(member.f, &ev)
+			}
 			b.autoAvoidTargets = 0
+			i = last - 1
 			continue
 		}
-		if f.Pet && !(b.Turn == 1 && b.Surprised == 1-f.Side()) { // 偷袭成功的那一方第一回合不判定（BSIDE_FLG_SURPRISE）
-			if c, ok = b.loyalCheck(f, c, &ev); !ok {
-				b.autoAvoidTargets = 0
-				continue
-			}
+		b.autoAvoidTargets = avoidTargets[o.slot]
+		c, ok := b.prepareAction(o, all[o.slot], &ev)
+		if ok {
+			b.act(b.F[o.slot], c, &ev)
+			b.afterAct(b.F[o.slot], &ev)
 		}
-		if c.Kind == Capture {
-			// Status or loyalty may have replaced the capture with an attack.
-			// Only the capture that survives those checks may reach its target.
-			b.autoAvoidTargets = 0
-		}
-		b.act(f, c, &ev)
-		b.afterAct(f, &ev)
 		b.autoAvoidTargets = 0
 	}
 	b.tickMagicStatus()
@@ -816,6 +856,7 @@ type attackOpts struct {
 	roar               bool    // 狂狮怒吼（客户端画 CG_ICON_ROAR）
 	primalCross        bool    // exact 80% accuracy and recipient-based cross-claw rules
 	ignoreStoneDefense bool    // bypass only petrification's extra defense, not its status
+	coattack           bool    // native joint strike: cannot dodge or intercept, no counters
 }
 
 // icon 是攻击者头上要画的技能图示（Event.Icon）。
@@ -930,11 +971,11 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 	if d.Pet && b.PetOwner(d) == a.Slot {
 		d.AIDelta += aiFixSekkan // 主人打自己的宠物
 	}
-	if !o.primalCross && b.duck(a, d, o.duckMod) {
+	if !o.primalCross && !o.coattack && b.duck(a, d, o.duckMod) {
 		e.Result, e.HP, e.Status, e.ActorHP = Dodge, d.HP, d.Status(), a.HP
 		return e, cont
 	}
-	if !isCounter {
+	if !isCounter && !o.coattack {
 		if g, ok := b.guardian[d.Slot]; ok {
 			gf := b.F[g]
 			if g != d.Slot && gf.Alive() && gf.canMove() && gf.status[StConfusion] <= 0 && gf != a {
@@ -1038,6 +1079,12 @@ func (b *Battle) attackOnce(a, d *Fighter, o attackOpts, isCounter bool) (Event,
 	}
 	if o.div > 1 && dmg > 0 {
 		dmg = max(1, int(float64(dmg)/o.div))
+	}
+	// Native BATTLE_Combo clamps each contribution to at least one before
+	// applying barriers; its guarantee must not leak into normal attacks.
+	if o.coattack && dmg <= 0 {
+		dmg = 1
+		e.Result = Normal
 	}
 	barrier := d.Vanish > 0 || d.Absorb > 0 || d.Reflect > 0
 	if o.tear > 0 && d.Side() != a.Side() && !barrier {

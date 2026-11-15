@@ -1,27 +1,27 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=8a026288d656cdb2";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=8a026288d656cdb2";
-import { Sound, setSfx } from "./audio.js?v=8a026288d656cdb2";
-import { MAP_BGM } from "./soundtable.js?v=8a026288d656cdb2";
-import { Connection, trafficRates } from "./net.js?v=8a026288d656cdb2";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=8a026288d656cdb2";
-import { Renderer,              } from "./renderer.js?v=8a026288d656cdb2";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=8a026288d656cdb2";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=8a026288d656cdb2";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=8a026288d656cdb2";
-import { ACTION_KEYS } from "./actions.js?v=8a026288d656cdb2";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=8a026288d656cdb2";
-import { BattleScreen } from "./battle.js?v=8a026288d656cdb2";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=8a026288d656cdb2";
-import { Shop } from "./shop.js?v=8a026288d656cdb2";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=8a026288d656cdb2";
-import { loadAi } from "./ai.js?v=8a026288d656cdb2";
-import { AiMemory } from "./aismart.js?v=8a026288d656cdb2";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.js?v=8a026288d656cdb2";
-import { MobileShell } from "./mobile-shell.js?v=8a026288d656cdb2";
-import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=8a026288d656cdb2";
-import { installControlPositions } from "./mobile-position.js?v=8a026288d656cdb2";
+import { Assets } from "./assets.js?v=08f6b4cf8a3cf7f0";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=08f6b4cf8a3cf7f0";
+import { Sound, setSfx } from "./audio.js?v=08f6b4cf8a3cf7f0";
+import { MAP_BGM } from "./soundtable.js?v=08f6b4cf8a3cf7f0";
+import { Connection, trafficRates } from "./net.js?v=08f6b4cf8a3cf7f0";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=08f6b4cf8a3cf7f0";
+import { Renderer,              } from "./renderer.js?v=08f6b4cf8a3cf7f0";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=08f6b4cf8a3cf7f0";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=08f6b4cf8a3cf7f0";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=08f6b4cf8a3cf7f0";
+import { ACTION_KEYS } from "./actions.js?v=08f6b4cf8a3cf7f0";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=08f6b4cf8a3cf7f0";
+import { BattleScreen } from "./battle.js?v=08f6b4cf8a3cf7f0";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=08f6b4cf8a3cf7f0";
+import { Shop } from "./shop.js?v=08f6b4cf8a3cf7f0";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=08f6b4cf8a3cf7f0";
+import { loadAi } from "./ai.js?v=08f6b4cf8a3cf7f0";
+import { AiMemory } from "./aismart.js?v=08f6b4cf8a3cf7f0";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.js?v=08f6b4cf8a3cf7f0";
+import { MobileShell } from "./mobile-shell.js?v=08f6b4cf8a3cf7f0";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=08f6b4cf8a3cf7f0";
+import { installControlPositions } from "./mobile-position.js?v=08f6b4cf8a3cf7f0";
 
 
 const params = new URLSearchParams(location.search);
@@ -395,9 +395,11 @@ const app      = {
       if (!(screen instanceof FieldScreen) || !field) return;
       const back = screen;
       battleAllowsAuto = !m.watch && !m.pvp;
-      field.target = null;
       // 快速战斗：留在地图画面、音乐不换，BattleScreen 只在背后跑（quickFrame）
       let quick = settings.quickBattle && !m.watch && !m.pvp; // 观战一定看画面；玩家决斗（PK）也一定看画面，不走快速战斗
+      field.beginBattle(quick);
+      back.menus.mapWnd.syncVisibility(false);
+      back.menus.ai.close(); // Quick battle retains FieldScreen, so leave() is not called.
       // 遇敌：SE 215，地图音乐马上停（不淡出），记下来打完再从头播；环境音停掉
       const fieldBgm = audio.currentBgm, bgm = battleBgm(m.pvp || m.event, field.floor, fieldBgm);
       if (!quick) {
@@ -424,6 +426,7 @@ const app      = {
         myAtk: () => selfStatus?.atk ?? 10,
         place: () => [field?.floor ?? -1, field?.self?.x ?? 0, field?.self?.y ?? 0],
         finish: (end) => {
+          field?.endBattle();
           battle = null; changeBattleQuick = null; battleAllowsAuto = false;
           // 战斗结束淡出，回到地图后原来的地图音乐从头播（之后照地图记号）
           if (!quick) audio.fadeOutBgm(() => audio.playBgm(fieldBgm));
@@ -446,6 +449,7 @@ const app      = {
         on = on && !m.watch && !m.pvp;
         if (battle !== b || quick === on) return;
         quick = on; b.setQuick(on);
+        if (!on) field?.beginBattle(false);
         if (on) { audio.playBgm(fieldBgm); app.go(back); }
         else { audio.ambientFrame([], 0); audio.playBgm(bgm); app.go(battleView); }
       };
@@ -980,7 +984,7 @@ class FieldScreen                   {
     if (s && !this.menus.items.open && !this.menus.mapOpen && !this.menus.actions.open && !this.menus.vendor.open) {
       ui.text(792 - measure(`${f.floorName}  ${s.x},${s.y}`), 68, `${f.floorName}  ${s.x},${s.y}`, FONT.WHITE);
       if (settings.minimap && !this.menus.windowOpen() && !modal) this.menus.mapWnd.miniFrame(792 - 160, 88); // 右上角小地图（地图窗口里开关）
-      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 26 : 88); // 追踪中的任务
+      if (!this.menus.windowOpen() && !modal) this.menus.quests.hud(ui, settings.minimap ? 88 + 112 + 52 : 88); // 追踪中的任务
     }
     ui.bottomLineY = 558; // 任务栏常驻在 576..600
     if (battle?.quick) {
@@ -1030,10 +1034,11 @@ class FieldScreen                   {
     chat,
   });
 
-  /** Cancel both held movement and an earlier click-to-walk/talk intent. */
+  /** Release held/manual input when mobile chrome changes; explicit map
+   * navigation remains armed across quick combat and layout transitions. */
   cancelMobileMotion() {
     this.talkTarget = null;
-    if (field) { field.wantDir = -1; field.target = null; }
+    field?.cancelManualMotion();
   }
 
   /** Mobile chrome invokes the same menu/state transitions as desktop shortcuts. */

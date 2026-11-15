@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "img/lisarido.jpg"
-PACK, CHAR, EFFECT, IMAGE_BASE = "lisarido-v2", 199300, 199301, 9200000
+PACK, CHAR, EFFECT, IMAGE_BASE = "lisarido-v3", 199300, 199301, 9200000
 CELL, EFFECT_SIZE, EFFECT_FRAMES = 160, 240, 24
 # Native directions run SW, W, NW, N, NE, E, SE, S. These are eight distinct
 # source views; mirroring would move the cannon to her left hand.
@@ -131,32 +131,155 @@ def source_frames() -> list[Image.Image]:
     return [views[n] for n in SOURCE_ORDER]
 
 
-def cannon_layer(base: Image.Image) -> tuple[Image.Image, tuple[int, int]]:
-    a = np.asarray(base)
-    y, x = np.mgrid[:CELL, :CELL]
-    r, g, b, alpha = (a[:, :, i].astype(np.int16) for i in range(4))
-    brown = (y >= 57) & (y <= 102) & (alpha > 100) & (r > b+9) & (g > b+4) & (r < 181) & (g < 166) & (b < 145)
-    candidate = np.asarray(Image.fromarray(np.uint8(brown)*255).filter(ImageFilter.MaxFilter(3))) > 0
-    seen = np.zeros(candidate.shape, dtype=bool); components = []
-    for yy, xx in zip(*np.nonzero(candidate)):
-        if seen[yy, xx]: continue
-        q = deque([(int(xx), int(yy))]); seen[yy, xx] = True; points = []
-        while q:
-            px, py = q.popleft(); points.append((px, py))
-            for nx, ny in ((px-1,py),(px+1,py),(px,py-1),(px,py+1)):
-                if 0 <= nx < CELL and 0 <= ny < CELL and candidate[ny,nx] and not seen[ny,nx]:
-                    seen[ny,nx] = True; q.append((nx,ny))
+# Each rig belongs to the right cannon arm in its own supplied view.
+# Shoulder/grip/muzzle points, weapon regions and torso repair boundaries
+# prevent colour-keyed hair, dress trim and feet from becoming weapon pixels.
+CANNON_RIG = (
+    {"shoulder": (73, 55), "hand": (69, 66), "breech": (67, 68), "muzzle": (47, 84),
+     "torso": ((72,54),(87,56),(96,82),(65,82)), "donor": 13},
+    {"shoulder": (73, 55), "hand": (68, 68), "breech": (65, 72), "muzzle": (52, 82),
+     "torso": ((71,55),(80,56),(88,84),(64,82)), "donor": 13},
+    {"shoulder": (96, 57), "hand": (101, 70), "breech": (103, 73), "muzzle": (110, 85),
+     "torso": ((75,55),(89,55),(89,83),(70,85)), "donor": -17},
+    {"shoulder": (96, 57), "hand": (102, 70), "breech": (104, 73), "muzzle": (111, 85),
+     "torso": ((75,55),(89,55),(89,83),(70,85)), "donor": -17},
+    {"shoulder": (80, 54), "hand": (85, 69), "breech": (88, 72), "muzzle": (115, 82),
+     "torso": ((65,57),(81,56),(87,81),(63,85)), "donor": -15},
+    {"shoulder": (70, 54), "hand": (74, 68), "breech": (78, 71), "muzzle": (112, 86),
+     "torso": ((68,56),(80,57),(88,84),(62,84)), "donor": -12},
+    {"shoulder": (71, 56), "hand": (67, 67), "breech": (64, 70), "muzzle": (45, 85),
+     "torso": ((73,55),(86,57),(95,83),(67,84)), "donor": 15},
+    {"shoulder": (71, 55), "hand": (67, 68), "breech": (64, 71), "muzzle": (44, 86),
+     "torso": ((73,55),(86,57),(96,83),(66,84)), "donor": 16},
+)
+# These projected directions agree with the native eight-way battle heading.
+# Front/rear views retain their own original right-arm texture, never a mirror.
+CANNON_FACING = ((-.85,.4),(-1,0),(-.8,-.45),(0,-1),(.8,-.45),(1,0),(.85,.4),(0,1))
+
+
+def pose_cannon(base: Image.Image, direction: int, amount: float, recoil: float = 0) -> dict:
+    """Raise a complete weapon arm from its shoulder, with a physical muzzle.
+
+    The local transform is shared by image pixels, hand and muzzle. Recoil
+    bends the forearm slightly back at the fixed shoulder; it must not detach
+    the whole limb by translating its socket. The weapon/body keep native
+    size and grounded feet; no world-space attack travel is baked here.
+    """
+    rig = CANNON_RIG[direction]
+    src = np.asarray(base).copy()
+    # Authored ownership restricts the colour segmentation to the weapon;
+    # in the old colour-only pass the rear hair and even feet were selected.
+    boxes = ((38,57,78,95),(46,62,76,92),(91,60,125,94),(91,60,125,94),
+             (79,61,126,94),(70,64,121,96),(37,57,78,97),(36,56,78,97))
+    x0,y0,x1,y1 = boxes[direction]
+    colors = src.astype(int)
+    brown = ((colors[:,:,0]>colors[:,:,2]+9) & (colors[:,:,1]>colors[:,:,2]+4) &
+             (colors[:,:,0]<181) & (colors[:,:,1]<166) & (colors[:,:,2]<145) & (colors[:,:,3]>100))
+    region = np.zeros((CELL,CELL),bool);region[y0:y1,x0:x1] = True
+    candidate = brown & region
+    seen = np.zeros(candidate.shape,bool);components = []
+    for cy,cx in zip(*np.nonzero(candidate)):
+        if seen[cy,cx]: continue
+        queue = deque([(int(cx),int(cy))]);seen[cy,cx]=True;points=[]
+        while queue:
+            px,py=queue.popleft();points.append((px,py))
+            for nx,ny in ((px-1,py),(px+1,py),(px,py-1),(px,py+1)):
+                if 0<=nx<CELL and 0<=ny<CELL and candidate[ny,nx] and not seen[ny,nx]:
+                    seen[ny,nx]=True;queue.append((nx,ny))
         components.append(points)
-    # Gold embroidery and warm fur are smaller disconnected colour islands.
-    # Moving every brown pixel would tear those parts away with the cannon.
-    mask = Image.new('L', base.size); mp = mask.load()
-    for px, py in max(components,key=len): mp[px,py]=255
-    mask = fill_holes(mask).filter(ImageFilter.MaxFilter(3))
-    # Keep the mask inside the reference's alpha, preserving the cutout edge.
-    mask = Image.fromarray(np.minimum(np.asarray(mask), a[:, :, 3]))
-    box = mask.getbbox(); assert box, "right-hand cannon could not be isolated"
-    layer = base.copy(); layer.putalpha(mask)
-    return layer, ((box[0]+box[2])//2, (box[1]+box[3])//2)
+    gun_mask = Image.new('L',base.size);gp=gun_mask.load()
+    for px,py in max(components,key=len):gp[px,py]=255
+    gun_mask = fill_holes(gun_mask.filter(ImageFilter.MaxFilter(3))).filter(ImageFilter.MaxFilter(3))
+    # The tiny fur cuff is part of the gripping hand, while the original
+    # skirt hem and resting other arm are independent foreground objects.
+    upper = Image.new('L',base.size);ud=ImageDraw.Draw(upper)
+    ud.line((*rig['shoulder'],*rig['hand']),fill=255,width=7)
+    gun_pixels=np.asarray(gun_mask).copy()
+    gy,gx=np.mgrid[:CELL,:CELL]
+    if direction==5:gun_pixels[(gy>85)&(gx<96)&~brown]=0
+    if direction==5:gun_pixels[(gy>89)&(gx<91)]=0
+    if direction==6:gun_pixels[(gy>84)&(gx>64)&~brown]=0
+    if direction==4:gun_pixels[(gy>83)&(gx<94)&~brown]=0
+    if direction in (0,7):gun_pixels[(gy>84)&(gx>64)&~brown]=0
+    if direction==1:gun_pixels[(gy>83)&(gx>64)&~brown]=0
+    if direction in (0,6,7):gun_pixels[(gy>=87)&(gx>=63)]=0
+    if direction==1:gun_pixels[(gy>=86)&(gx>=62)]=0
+    if direction==4:gun_pixels[(gy>=87)&(gx<=102)]=0
+    if direction==5:gun_pixels[(gy>=88)&(gx<=96)]=0
+    gun_mask=Image.fromarray(gun_pixels)
+    owned = Image.fromarray(np.maximum(np.asarray(upper),gun_pixels))
+    mask = np.minimum(np.asarray(owned), src[:, :, 3])
+    repaired = src.copy(); repaired[mask > 0] = 0
+    # The hidden torso is reconstructed from adjacent same-row dress texels.
+    # No opposite arm, legs or hair is reflected into the exposed gun cavity.
+    torso = Image.new('L', base.size)
+    ImageDraw.Draw(torso).polygon(rig['torso'], fill=255)
+    # Only restore the actual torso envelope, not a rectangle reaching into
+    # the old barrel cavity. Its boundaries are authored in the source view.
+    yy, xx = np.nonzero((mask > 0) & (np.asarray(torso) > 0))
+    for y, x in zip(yy, xx):
+        row = src[y].astype(int)
+        purple = (row[:,2] > row[:,0]*1.04) & (row[:,2] > row[:,1]*1.15)
+        candidates = np.flatnonzero(purple & (row[:,3] > 235) & (mask[y] == 0))
+        if len(candidates):
+            donor = candidates[np.argmin(abs(candidates - (x + rig['donor'])))]
+            repaired[y,x] = src[y,donor]
+        elif y < 60:
+            donor = int(np.clip(x + rig['donor'], 0, CELL - 1))
+            repaired[y,x] = src[y,donor]
+    # The original barrel overlaps the skirt edge in these two side views.
+    # Its lower opaque silhouette extends beyond the connected colour island;
+    # remove that known barrel-only strip without transporting the feet.
+    if direction==4: repaired[87:95,90:124]=0
+    if direction==5: repaired[88:97,90:121]=0
+    body = Image.fromarray(repaired)
+    shoulder = np.array(rig['shoulder'], dtype=float)
+    hand = np.array(rig['hand'], dtype=float)
+    breech, muzzle = np.array(rig['breech'], dtype=float), np.array(rig['muzzle'], dtype=float)
+    facing = np.array(CANNON_FACING[direction], dtype=float)
+    original = muzzle - breech
+    angle = (math.atan2(facing[1],facing[0]) - math.atan2(original[1],original[0]) + math.pi) % math.tau - math.pi
+    angle = angle * amount + recoil * (-1 if facing[0] < 0 else 1)
+    rotation = np.array(((math.cos(angle),-math.sin(angle)),(math.sin(angle),math.cos(angle))))
+    # Two joints: the shoulder raises the upper arm, while the hand levels
+    # the barrel. Rotating the entire assembly alone cannot both raise the
+    # hand and aim the weapon, especially in the front/back projections.
+    raised_hand = shoulder + ((-35,-1) if direction==2 else (12*facing[0], 2*facing[1]))
+    target_hand = hand*(1-amount) + raised_hand*amount
+    def posed(point):
+        return tuple(target_hand + rotation @ (np.array(point)-hand))
+    def transform(layer, matrix, src_pivot, dst_pivot):
+        inverse = np.linalg.inv(matrix)
+        offset = dst_pivot - matrix @ src_pivot
+        sample_offset = -inverse @ offset
+        coeff = (*inverse[0],sample_offset[0],*inverse[1],sample_offset[1])
+        return layer.transform(base.size,Image.Transform.AFFINE,coeff,Image.Resampling.BICUBIC)
+    # An overlapping cuff seam keeps the raster pieces connected. The upper
+    # arm keeps its shoulder socket; the cannon and gripping hand remain a
+    # rigid piece with unchanged proportions and texture.
+    y, x = np.mgrid[:CELL,:CELL]
+    along = ((x-shoulder[0])*(hand[0]-shoulder[0]) + (y-shoulder[1])*(hand[1]-shoulder[1])) / np.dot(hand-shoulder,hand-shoulder)
+    gm = np.asarray(gun_mask)
+    upper_alpha = np.where((along < 1.13) & (gm<128),mask,0).astype(np.uint8)
+    gun_alpha = np.where((gm>0) | ((along>.78)&(along<1.12)),mask,0).astype(np.uint8)
+    upper = base.copy();upper.putalpha(Image.fromarray(upper_alpha))
+    gun = base.copy();gun.putalpha(Image.fromarray(gun_alpha))
+    old_arm, new_arm = hand-shoulder,target_hand-shoulder
+    upper_angle = math.atan2(new_arm[1],new_arm[0])-math.atan2(old_arm[1],old_arm[0])
+    scale = np.linalg.norm(new_arm)/np.linalg.norm(old_arm)
+    upper_matrix = np.array(((math.cos(upper_angle),-math.sin(upper_angle)),(math.sin(upper_angle),math.cos(upper_angle))))*scale
+    upper = transform(upper,upper_matrix,shoulder,shoulder)
+    gun = transform(gun,rotation,hand,target_hand)
+    arm = Image.alpha_composite(upper,gun)
+    if direction == 1:
+        foreground_mask=Image.new('L',base.size)
+        ImageDraw.Draw(foreground_mask).polygon(((74,51),(80,54),(79,63),(75,71),(71,78),(65,79),(65,73),(69,66),(70,57)),fill=255)
+        foreground=base.copy();foreground.putalpha(Image.fromarray(np.minimum(np.asarray(foreground_mask),src[:,:,3])))
+        # Occlusion belongs to the same independently authored view. The
+        # near left arm does not move when the far right cannon arm is raised.
+        body=Image.alpha_composite(body,foreground)
+    return {'body':body,'arm':arm,'shoulder':tuple(shoulder),
+            'hand':tuple(target_hand),'breech':posed(breech),'muzzle':posed(muzzle)}
 
 
 def character_frame(base: Image.Image, action: str, frame: int, direction: int) -> Image.Image:
@@ -171,37 +294,23 @@ def character_frame(base: Image.Image, action: str, frame: int, direction: int) 
             mesh.append(((x, y, x+8, y+8), (*point(x,y), *point(x,y+8), *point(x+8,y+8), *point(x+8,y))))
     body = base.transform(base.size, Image.Transform.MESH, mesh, Image.Resampling.BICUBIC)
     active = action in ("attack", "hand", "throw")
-    envelope = (0, .35, .85, 1, .65, .1)[frame] if action in ("attack", "hand") else .5
-    if active:
-        gun, center = cannon_layer(body)
-        # Restore the part behind the moving gun with the opposite sleeve/dress
-        # colour. Only pixels belonging to the cannon layer are replaced.
-        pixels = np.array(body); gun_mask = np.asarray(gun)[:, :, 3] > 180
-        mirrored = pixels[:, ::-1].copy()
-        pixels[gun_mask] = mirrored[gun_mask]
-        body = Image.fromarray(pixels)
-        facing_left = direction in (0, 1, 2)
-        angle = (-13 if facing_left else 13)*envelope
-        gun = gun.rotate(angle, Image.Resampling.BICUBIC, center=center)
-        raised = Image.new("RGBA", base.size)
-        recoil = round(3*envelope) if frame in (3, 4) else 0
-        raised.alpha_composite(gun, ((1 if facing_left else -1)*recoil, -round(5*envelope)))
-        body = Image.alpha_composite(body, raised)
-        if envelope >= .6:
-            # Native normal attack carries a short-range muzzle explosion in
-            # this same atlas; the ranged skill also has a separate target FX.
-            vx, vy = ((-1, .15), (-1, -.08), (-.7, -.55), (0, -.75), (.7, -.55), (1, -.08), (1, .15), (-.25, .65))[direction]
-            cx, cy = center[0]+vx*20, center[1]+vy*16-5
+    envelope = (0, .45, 1, 1, .65, 0)[frame] if action in ("attack", "hand") else .5
+    if active and envelope:
+        pose = pose_cannon(body, direction, envelope, recoil=.075 if frame == 4 else 0)
+        body = Image.alpha_composite(pose['arm'], pose['body']) if direction in (1,2,3) else Image.alpha_composite(pose['body'], pose['arm'])
+        if frame in (3, 4):
+            # Derive the flash from the exact transformed muzzle. The aim
+            # frame remains clear, so the lifted right arm is readable first.
+            cx, cy = pose['muzzle']
             burst = Image.new("RGBA", base.size); d = ImageDraw.Draw(burst)
-            radius = 5+8*envelope
-            for i in range(16):
-                angle = i*math.tau/16+phase*.12
-                rr = radius*(1 if i % 2 else 1.5)
-                px, py = cx+math.cos(angle)*rr, cy+math.sin(angle)*rr
-                d.line((cx, cy, px, py), fill=(255, 188, 66, 210), width=2)
-            d.ellipse((cx-radius, cy-radius*.8, cx+radius, cy+radius*.8), fill=(255, 116, 31, 145))
-            d.ellipse((cx-radius*.5, cy-radius*.5, cx+radius*.5, cy+radius*.5), fill=(220, 253, 255, 255))
-            body = Image.alpha_composite(body, burst.filter(ImageFilter.GaussianBlur(2)))
+            radius = 8 if frame == 3 else 5
+            for i in range(12):
+                a = i*math.tau/12
+                rr = radius*(1 if i % 2 else 1.45)
+                d.line((cx, cy, cx+math.cos(a)*rr, cy+math.sin(a)*rr), fill=(255,188,66,220), width=2)
+            d.ellipse((cx-radius,cy-radius*.75,cx+radius,cy+radius*.75), fill=(255,116,31,160))
+            d.ellipse((cx-radius*.45,cy-radius*.45,cx+radius*.45,cy+radius*.45), fill=(220,253,255,255))
+            body = Image.alpha_composite(body, burst.filter(ImageFilter.GaussianBlur(1.2)))
             body = Image.alpha_composite(body, burst)
     # Keep ground contact explicit: v1 placed feet ~20px above its floor ring
     # and bobbed the entire standing body. Ears and cannon still animate, while
@@ -290,5 +399,5 @@ def generate(out: Path, report: Path | None = None) -> dict:
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output',type=Path,default=Path('/tmp/sa-lisarido-build/extensions/lisarido-v2'))
+    parser.add_argument('--output',type=Path,default=Path('/tmp/sa-lisarido-build/extensions/lisarido-v3'))
     parser.add_argument('--report',type=Path);args=parser.parse_args();generate(args.output.resolve(),args.report)

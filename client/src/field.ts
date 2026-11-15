@@ -222,6 +222,7 @@ export class Field {
   minimapReveal = false;
   navigationStatus = "";
   private mapNavigation = false;
+  private battlePaused = false;
   private revealCursor = 0;
   private wholeReady = false;
   private seenPosition = "";
@@ -229,11 +230,37 @@ export class Field {
   navigateTo(x: number, y: number) {
     this.path = []; this.pathGoal = ""; this.navigationAttempt = ""; this.wantDir = -1;
     this.target = null; this.mapNavigation = false;
-    if (!this.self || this.locked || this.follower) { this.navigationStatus = "当前无法自动移动"; return; }
+    if (!this.self || this.locked || this.follower || this.battlePaused) { this.navigationStatus = "当前无法自动移动"; return; }
+    if (!Number.isInteger(x) || !Number.isInteger(y)) { this.navigationStatus = "请输入有效的整数坐标"; return; }
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) { this.navigationStatus = "目标在地图范围外"; return; }
     if (this.walk[y * this.width + x] === 1) { this.navigationStatus = "目标不可达：目标格为墙体或障碍"; return; }
     this.target = [x,y]; this.mapNavigation = true;
     this.navigationStatus = "正在加载地图并规划路线…";
+  }
+
+  /** Quick encounters suspend the existing intent. Do not emit Move while the
+   * server owns a battle: its PosCorrect response would otherwise erase it. */
+  beginBattle(quick: boolean) {
+    this.battlePaused = true;
+    this.wantDir = -1;
+    if (!quick) {
+      this.target = null; this.path = []; this.pathGoal = "";
+      this.mapNavigation = false; this.navigationStatus = "";
+    }
+  }
+
+  endBattle() {
+    this.battlePaused = false;
+    // Recompute from the current authoritative/predicted cell. Floor changes,
+    // death warps and PosCorrect have already cancelled stale destinations.
+    this.path = []; this.pathGoal = ""; this.navigationAttempt = "";
+  }
+
+  /** Mobile layout/focus cleanup releases manual input, not an explicitly
+   * chosen map destination. Direction buttons still override navigation. */
+  cancelManualMotion() {
+    this.wantDir = -1;
+    if (!this.mapNavigation && !this.battlePaused) this.target = null;
   }
   // One background chunk in flight at a time; view requests share a two-request cap.
   private requestWholeFloor(): boolean {
@@ -585,9 +612,13 @@ export class Field {
     const requestNow = performance.now();
     for (const [key, at] of this.pending) if (requestNow - at >= 10_000) this.pending.delete(key);
     if (this.minimapReveal || this.mapNavigation) this.requestWholeFloor();
-    if (this.wantDir >= 0) { this.mapNavigation = false; this.navigationStatus = ""; }
+    if (this.wantDir >= 0) {
+      this.mapNavigation = false; this.navigationStatus = "";
+      this.target = null; this.path = []; this.pathGoal = "";
+    }
 
     const s = this.self;
+    if (this.battlePaused) { this.requestView(); return; }
     if (!s || this.floor < 0 || this.waitingWarp || s.moving(now)) { this.requestView(); return; }
     if (this.locked) {
       this.target = null;
