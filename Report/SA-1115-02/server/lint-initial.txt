@@ -1,0 +1,5 @@
+internal/world/petshop.go:284:3: QF1003: could use tagged switch on button (staticcheck)
+		if button == BtnCancel {
+		^
+1 issues:
+* staticcheck: 1

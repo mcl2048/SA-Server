@@ -1,0 +1,82 @@
+=== RUN   TestPetLevelUp
+--- PASS: TestPetLevelUp (5.93s)
+=== RUN   TestPetCareCapacity500AndPageBounds
+--- PASS: TestPetCareCapacity500AndPageBounds (0.68s)
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/previous-on-first
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/far-row
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/negative-row
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/malformed-row
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/unexpected-button
+=== RUN   TestPetCareRejectsForgedPageRowsAndButtons/combined-buttons
+--- PASS: TestPetCareRejectsForgedPageRowsAndButtons (3.36s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/previous-on-first (0.64s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/far-row (0.57s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/negative-row (0.53s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/malformed-row (0.52s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/unexpected-button (0.57s)
+    --- PASS: TestPetCareRejectsForgedPageRowsAndButtons/combined-buttons (0.52s)
+=== RUN   TestPetCareTrainingEveryShopFeePersistenceAndDraw
+=== RUN   TestPetCareTrainingEveryShopFeePersistenceAndDraw/true
+=== RUN   TestPetCareTrainingEveryShopFeePersistenceAndDraw/false
+--- PASS: TestPetCareTrainingEveryShopFeePersistenceAndDraw (1.04s)
+    --- PASS: TestPetCareTrainingEveryShopFeePersistenceAndDraw/true (0.52s)
+    --- PASS: TestPetCareTrainingEveryShopFeePersistenceAndDraw/false (0.52s)
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence/win
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence/lose
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence/dead
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence/escaped
+=== RUN   TestPetCareBattleExperienceAndNoActivePetPersistence/pvp
+--- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence (2.88s)
+    --- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence/win (0.59s)
+    --- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence/lose (0.59s)
+    --- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence/dead (0.60s)
+    --- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence/escaped (0.57s)
+    --- PASS: TestPetCareBattleExperienceAndNoActivePetPersistence/pvp (0.54s)
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/poor
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/riding
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/mail
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/guard
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/full
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/fight
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/trade
+=== RUN   TestPetCareTrainingLiveGuardsAreAtomic/stall
+--- PASS: TestPetCareTrainingLiveGuardsAreAtomic (1.00s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/poor (0.11s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/riding (0.06s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/mail (0.05s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/guard (0.05s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/full (0.05s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/fight (0.07s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/trade (0.07s)
+    --- PASS: TestPetCareTrainingLiveGuardsAreAtomic/stall (0.05s)
+=== RUN   TestPetCareConfirmationBindsObjectAndRequotesChangedFee
+--- PASS: TestPetCareConfirmationBindsObjectAndRequotesChangedFee (0.51s)
+=== RUN   TestPetCareAllPetsUseFullBoostedTeamBattleAward
+=== RUN   TestPetCareAllPetsUseFullBoostedTeamBattleAward/false
+=== RUN   TestPetCareAllPetsUseFullBoostedTeamBattleAward/true
+--- PASS: TestPetCareAllPetsUseFullBoostedTeamBattleAward (1.27s)
+    --- PASS: TestPetCareAllPetsUseFullBoostedTeamBattleAward/false (0.60s)
+    --- PASS: TestPetCareAllPetsUseFullBoostedTeamBattleAward/true (0.66s)
+=== RUN   TestPetCareAutomationAndDetachedSettlementExactlyOnce
+=== RUN   TestPetCareAutomationAndDetachedSettlementExactlyOnce/auto
+=== RUN   TestPetCareAutomationAndDetachedSettlementExactlyOnce/quick
+=== RUN   TestPetCareAutomationAndDetachedSettlementExactlyOnce/background
+--- PASS: TestPetCareAutomationAndDetachedSettlementExactlyOnce (1.76s)
+    --- PASS: TestPetCareAutomationAndDetachedSettlementExactlyOnce/auto (0.58s)
+    --- PASS: TestPetCareAutomationAndDetachedSettlementExactlyOnce/quick (0.64s)
+    --- PASS: TestPetCareAutomationAndDetachedSettlementExactlyOnce/background (0.54s)
+=== RUN   TestPetCareNonBattleExperienceAndLevelCeiling
+--- PASS: TestPetCareNonBattleExperienceAndLevelCeiling (0.60s)
+=== RUN   TestPetCareExistingGoldOverflowSaleStillConfirms
+--- PASS: TestPetCareExistingGoldOverflowSaleStillConfirms (0.71s)
+=== RUN   TestPetShopSell
+--- PASS: TestPetShopSell (0.66s)
+=== RUN   TestPetShopPool
+--- PASS: TestPetShopPool (0.55s)
+=== RUN   TestPetShopRejectsAwayPet
+--- PASS: TestPetShopRejectsAwayPet (0.57s)
+PASS
+ok  	sa/server/internal/world	22.774s

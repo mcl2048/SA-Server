@@ -1,0 +1,765 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "e94e92bbf3de970ccf9e71ae7036ef1110fa57e3c2a63dfa77c6b9987b33d068",
+  "binary_version": "v0.2.20-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T04:21:40.465Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T04:22:38.615Z"
+    }
+  ],
+  "checks": [],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 1003,
+      "x": 12,
+      "y": 14
+    },
+    "stored_position": {
+      "floor": 1003,
+      "x": 12,
+      "y": 14
+    },
+    "position_matches": true
+  },
+  "client_version": "08f6b4cf8a3cf7f0",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Status",
+      "level": 50,
+      "exp": 0,
+      "nextExp": 51520,
+      "hp": 4001,
+      "maxHp": 4001,
+      "mp": -1,
+      "maxMp": 100
+    },
+    {
+      "t": "Inventory",
+      "gold": 100000,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 1006,
+      "name": "萨姆吉尔的村长家",
+      "x": 15,
+      "y": 22,
+      "width": 30,
+      "height": 40
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 1003,
+      "name": "萨姆吉尔的宠物店",
+      "x": 12,
+      "y": 14,
+      "width": 30,
+      "height": 30
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 50,
+      "exp": 0,
+      "nextExp": 51520,
+      "hp": 4001,
+      "maxHp": 4001,
+      "mp": -1,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 50,
+      "exp": 0,
+      "nextExp": 51520,
+      "hp": 1600,
+      "maxHp": 1600,
+      "mp": -1,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 50,
+      "exp": 0,
+      "nextExp": 51520,
+      "hp": 1600,
+      "maxHp": 1600,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 1,
+          "exp": 0,
+          "nextExp": 2,
+          "hp": 15,
+          "maxHp": 15,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "培养对象一二三四",
+          "sprite": 100250,
+          "level": 1,
+          "exp": 0,
+          "nextExp": 2,
+          "hp": 15,
+          "maxHp": 15,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 100000,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Status",
+      "level": 50,
+      "exp": 0,
+      "nextExp": 51520,
+      "hp": 1600,
+      "maxHp": 1600,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "NpcWindow",
+      "id": 1000447,
+      "seq": 261,
+      "kind": "select",
+      "text": "2\n　　　　☆宠物商店☆\n　寄放、领取与培养宠物\n　　　《 寄放宠物 》\n　　　《 领取宠物 》\n　　　《 卖掉宠物 》\n　　　《 培养宠物 》\n　　　《 离开 》"
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    }
+  ],
+  "petcare": [],
+  "failure": "all five native shop options must be reachable",
+  "failure_stack": "Error: all five native shop options must be reachable\n    at assert (file:///home/coder/saserver/Report/SA-1115-02/browser/petcare-cases.mjs:4:42)\n    at Module.run (file:///home/coder/saserver/Report/SA-1115-02/browser/petcare-cases.mjs:44:4)\n    at async work (file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:258:5)\n    at async file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:276:5",
+  "failure_state": {
+    "screen": "FieldScreen",
+    "field": true,
+    "battle": false,
+    "actions": [
+      {
+        "id": "chat-all",
+        "label": "◆",
+        "x1": 776,
+        "y1": 471,
+        "x2": 788.421875,
+        "y2": 489
+      },
+      {
+        "id": "chat-up",
+        "label": "▲",
+        "x1": 776,
+        "y1": 496,
+        "x2": 788.421875,
+        "y2": 514
+      },
+      {
+        "id": "chat-down",
+        "label": "▼",
+        "x1": 776,
+        "y1": 521,
+        "x2": 788.421875,
+        "y2": 539
+      },
+      {
+        "id": "tb-map",
+        "x1": 0,
+        "y1": 576,
+        "x2": 92,
+        "y2": 600
+      },
+      {
+        "id": "tb-status",
+        "x1": 116,
+        "y1": 576,
+        "x2": 208,
+        "y2": 600
+      },
+      {
+        "id": "tb-pet",
+        "x1": 232,
+        "y1": 576,
+        "x2": 324,
+        "y2": 600
+      },
+      {
+        "id": "tb-item",
+        "x1": 348,
+        "y1": 576,
+        "x2": 440,
+        "y2": 600
+      },
+      {
+        "id": "tb-mail",
+        "x1": 463,
+        "y1": 576,
+        "x2": 555,
+        "y2": 600
+      },
+      {
+        "id": "tb-album",
+        "x1": 578,
+        "y1": 576,
+        "x2": 670,
+        "y2": 600
+      },
+      {
+        "id": "tb-system",
+        "x1": 692,
+        "y1": 576,
+        "x2": 780,
+        "y2": 600
+      },
+      {
+        "id": "fp-menu",
+        "x1": 5,
+        "y1": 4,
+        "x2": 34,
+        "y2": 34
+      },
+      {
+        "id": "fp-card",
+        "x1": 36,
+        "y1": 4,
+        "x2": 65,
+        "y2": 34
+      },
+      {
+        "id": "fp-party",
+        "x1": 67,
+        "y1": 4,
+        "x2": 97,
+        "y2": 34
+      },
+      {
+        "id": "fp-trade",
+        "x1": 99,
+        "y1": 4,
+        "x2": 128,
+        "y2": 34
+      },
+      {
+        "id": "fp-family",
+        "x1": 130,
+        "y1": 4,
+        "x2": 160,
+        "y2": 34
+      },
+      {
+        "id": "fp-vendor",
+        "x1": 159,
+        "y1": 4,
+        "x2": 191,
+        "y2": 34
+      },
+      {
+        "id": "fp-join",
+        "x1": 648,
+        "y1": 5,
+        "x2": 675,
+        "y2": 33
+      },
+      {
+        "id": "fp-duel",
+        "x1": 679,
+        "y1": 5,
+        "x2": 706,
+        "y2": 33
+      },
+      {
+        "id": "fp-help",
+        "x1": 710,
+        "y1": 5,
+        "x2": 737,
+        "y2": 33
+      },
+      {
+        "id": "fp-act",
+        "x1": 743,
+        "y1": 42,
+        "x2": 796,
+        "y2": 56
+      }
+    ]
+  }
+}

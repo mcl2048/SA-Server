@@ -1,0 +1,31 @@
+{
+  "complete": true,
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 42.404,
+      "log": "go-test-final.txt"
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 3.53,
+      "log": "go-vet-final.txt"
+    }
+  ],
+  "success": true,
+  "source_stable": true
+}

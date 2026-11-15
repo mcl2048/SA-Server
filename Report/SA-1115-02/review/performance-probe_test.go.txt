@@ -1,0 +1,59 @@
+package world
+
+import (
+ "testing"
+ "time"
+)
+
+// Copy to server/internal/world/z_petcare_review_test.go, then run
+// go test ./internal/world -run '^TestPetCareReview500Probe$' -count=1 -v.
+// This review probe buffers family jobs without executing them. It measures
+// actual queue submissions and growth CPU time, not SQLite throughput or a
+// production capacity guarantee. Its fixture remains inside one World.Do.
+func TestPetCareReview500Probe(t *testing.T) {
+ w, db, g := setup(t)
+ c, _ := petOwner(t, w, db, "review500", 100, 100)
+ id := int(c.ID)
+ givePet(t, w, id, petEnemy(t,g,1), 70)
+ w.Do(func() {
+  e := w.players[id]
+  seed := *e.pets.Pets[0]
+  seed.Exp = w.game.Battle.NextLevelExp(seed.Level)-1
+  seed.Training = true
+  originalFamilies := w.fam
+  defer func(){w.fam = originalFamilies}()
+  member := &fmMember{ID:e.char.ID,Name:e.name,Level:e.char.Level,Duty:fmDutyMember}
+  fm := &family{ID:1,Name:"Review500"}
+  fm.Members[0] = member
+  newFamilies := func()*Families{return &Families{byChar:map[int64]*family{e.char.ID:fm},saves:make(chan func(),4096)}}
+  seedPets := func(){
+   e.pets.Pool = make([]*Pet,500)
+   for i:=range e.pets.Pool { p:=seed; e.pets.Pool[i]=&p }
+   e.char.Fame = 0
+   e.fmc.Momentum = 0
+   fm.Feed = 0
+  }
+  w.fam = newFamilies()
+  seedPets()
+  started := time.Now()
+  // This reconstructs the pre-aggregation caller shape using the current
+  // unchanged per-pet reward semantics, for an equal-behavior comparison.
+  for _,p := range e.pets.Pool {w.petGainExp(e,p,80)}
+  sequentialDuration := time.Since(started)
+  sequentialJobs,sequentialFame,sequentialFeed := len(w.fam.saves),e.char.Fame,fm.Feed
+  if sequentialJobs != 1000 {t.Errorf("comparison fixture expected 1000 family snapshots, got %d",sequentialJobs);return}
+  w.fam = newFamilies()
+  seedPets()
+  started = time.Now()
+  changed := w.trainPoolPets(e,100)
+  batchedDuration := time.Since(started)
+  batchedJobs := len(w.fam.saves)
+  if !changed || batchedJobs != 2 {t.Errorf("500-pet batch must submit 2 aggregate family snapshots, changed=%v jobs=%d",changed,batchedJobs)}
+  if e.char.Fame != sequentialFame || fm.Feed != sequentialFeed {t.Errorf("batch changed per-level fame: got personal=%d family=%d want personal=%d family=%d",e.char.Fame,fm.Feed,sequentialFame,sequentialFeed)}
+  for i,p := range e.pets.Pool {
+   if p.Level != seed.Level+1 || p.Exp != 79 {t.Errorf("pet %d did not independently receive full 80%% and grow: lv=%d exp=%d",i,p.Level,p.Exp);break}
+  }
+  serializedBytes := len(e.pets.String())
+  t.Logf("pets=500 owner_exp=100 each_exp=80 each_levelup=1 sequential_family_jobs=%d batched_family_jobs=%d personal_fame=%d family_feed=%d sequential_growth=%s batched_growth=%s serialized_bytes=%d",sequentialJobs,batchedJobs,e.char.Fame,fm.Feed,sequentialDuration,batchedDuration,serializedBytes)
+ })
+}

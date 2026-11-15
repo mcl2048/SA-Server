@@ -1,0 +1,27 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop native menu preserves all five reachable options
+desktop training quote and cancellation
+desktop insufficient funds preserves carried pet and balance
+desktop paid training occupies slot 500 and removes carried pet
+desktop shared pool first/middle/last pagination with 500 pets
+desktop full shared pool refuses a 501st pet
+desktop GM character experience does not train deposited pets
+desktop ordinary auto battle grants exactly 80% and persists automatic levels
+desktop quick battle grants exactly 80% and persists automatic levels
+desktop page100 withdrawal returns correct grown pet and clears training state
+desktop ordinary deposit and page100 retrieval preserve fee and disable training
+mobile native menu preserves all five reachable options
+mobile training quote and cancellation
+mobile insufficient funds preserves carried pet and balance
+mobile paid training occupies slot 500 and removes carried pet
+mobile mobile portrait pool controls have reachable touch targets
+mobile shared pool first/middle/last pagination with 500 pets
+mobile full shared pool refuses a 501st pet
+mobile GM character experience does not train deposited pets
+mobile ordinary auto battle grants exactly 80% and persists automatic levels
+mobile quick battle grants exactly 80% and persists automatic levels
+mobile page100 withdrawal returns correct grown pet and clears training state
+mobile ordinary deposit and page100 retrieval preserve fee and disable training
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-02/browser/final-petcare.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":1003,"x":12,"y":14},"stored_position":{"floor":1003,"x":12,"y":14},"position_matches":true}}

@@ -41,6 +41,7 @@ type npcWindow struct {
 	cost, event int
 	slot, pet   int   // 道具开的窗口（npc 为 0）：道具栏格位、宠物栏格位
 	ids         []int // 选人的窗口（选队伍、选要加入的战斗）列出的玩家
+	petRef      *Pet  // 宠物店确认绑定对象，防止窗口打开期间换格后操作另一只宠物
 }
 
 func (w *World) sendWindow(p, n *entity, kind string, buttons, seq int, text string) {

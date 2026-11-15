@@ -1,0 +1,9 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+Error: native landscape NPC response missing
+    at wait (file:///home/coder/saserver/Report/SA-1115-02/browser/landscape-cases.mjs:9:154)
+    at async nextNpc (file:///home/coder/saserver/Report/SA-1115-02/browser/landscape-cases.mjs:10:72)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1115-02/browser/landscape-cases.mjs:15:56)
+    at async work (file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:277:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-02/browser/final-petcare.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":1006,"x":15,"y":22},"stored_position":{"floor":1006,"x":15,"y":22},"position_matches":true}}

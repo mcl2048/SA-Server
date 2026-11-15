@@ -754,12 +754,14 @@ func (w *World) endMember(e *entity, win int) string {
 		c.HP = 1 // 原版：战斗结束时倒下的角色复活为 HP 1
 	}
 	res.Pets = []proto.PetResult{}
+	trainingChanged := false
 	if res.Result == "win" && !pvp { // PvP 没有经验、石币与道具（dpbattle：改算 DP）
 		// 战斗结束时还活着的才拿得到经验（三份怎么算见 battleExp）
 		charExp, petExp, rideExp := w.battleExp(e, ft)
 		if p.HP > 0 {
 			res.Exp = charExp
 			res.LevelUp = w.gainExp(e, res.Exp)
+			trainingChanged = w.trainPoolPets(e, res.Exp)
 			res.Items = w.giveDrops(e, ft.b)
 			res.Gold = w.giveBattleGold(e, ft.b)
 		}
@@ -799,6 +801,10 @@ func (w *World) endMember(e *entity, win int) string {
 	if len(ft.petSlots()) > 0 || len(ft.retiredPets) > 0 || p.Ride != nil {
 		e.char.Pets = e.pets.String()
 		w.sendPets(e)
+	} else if trainingChanged {
+		// Care must persist even when every pet is deposited and the owner
+		// battles alone. Pool pets have no carried-Pets packet to send.
+		e.char.Pets = e.pets.String()
 	}
 	w.saveProgress(e)
 	return res.Result

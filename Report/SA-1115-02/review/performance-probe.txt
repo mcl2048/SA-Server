@@ -1,0 +1,5 @@
+=== RUN   TestPetCareReview500Probe
+    z_petcare_review_test.go:57: pets=500 owner_exp=100 each_exp=80 each_levelup=1 sequential_family_jobs=1000 batched_family_jobs=2 personal_fame=4500 family_feed=4500 sequential_growth=6.782424ms batched_growth=167.665µs serialized_bytes=175923
+--- PASS: TestPetCareReview500Probe (1.37s)
+PASS
+ok  	sa/server/internal/world	1.419s

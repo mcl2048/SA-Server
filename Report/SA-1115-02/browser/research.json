@@ -1,0 +1,18 @@
+[
+  {
+    "source": "Playwright emulation",
+    "url": "https://playwright.dev/docs/emulation",
+    "read_utc": "2026-11-15",
+    "http_status": 200,
+    "title": "Emulation | Playwright",
+    "application": "Separate actual Chromium/touch viewport emulation from physical-device certification; inspect real mobile native control reachability and bounding boxes."
+  },
+  {
+    "source": "WCAG 2.2 Target Size Minimum",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+    "read_utc": "2026-11-15",
+    "http_status": 200,
+    "title": "Understanding Success Criterion 2.5.8: Target Size (Minimum) | WAI | W3C",
+    "application": "Separate actual Chromium/touch viewport emulation from physical-device certification; inspect real mobile native control reachability and bounding boxes."
+  }
+]

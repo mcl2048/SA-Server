@@ -1,0 +1,817 @@
+[
+  {
+    "device": "desktop",
+    "name": "native menu preserves all five reachable options",
+    "passed": true,
+    "evidence": {
+      "menu": "2\n　　　　☆宠物商店☆\n　寄放、领取与培养宠物\n　　　《 寄放宠物 》\n　　　《 领取宠物 》\n　　　《 卖掉宠物 》\n　　　《 培养宠物 》\n　　　《 离开 》",
+      "hits": [
+        {
+          "id": "npc-sel2",
+          "label": "《 寄放宠物 》",
+          "x1": 217,
+          "y1": 240,
+          "x2": 583,
+          "y2": 260
+        },
+        {
+          "id": "npc-sel3",
+          "label": "《 领取宠物 》",
+          "x1": 217,
+          "y1": 261,
+          "x2": 583,
+          "y2": 281
+        },
+        {
+          "id": "npc-sel4",
+          "label": "《 卖掉宠物 》",
+          "x1": 217,
+          "y1": 282,
+          "x2": 583,
+          "y2": 302
+        },
+        {
+          "id": "npc-sel5",
+          "label": "《 培养宠物 》",
+          "x1": 217,
+          "y1": 303,
+          "x2": 583,
+          "y2": 323
+        },
+        {
+          "id": "npc-sel6",
+          "label": "《 离开 》",
+          "x1": 217,
+          "y1": 324,
+          "x2": 583,
+          "y2": 344
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "training quote and cancellation",
+    "passed": true,
+    "evidence": {
+      "characterLevel": 50,
+      "petLevel": 1,
+      "quote": 5100,
+      "poolCount": 499
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "insufficient funds preserves carried pet and balance",
+    "passed": true,
+    "evidence": {
+      "level": 50,
+      "exp": 0,
+      "gold": 0,
+      "poolCount": 499,
+      "pool": [
+        {
+          "name": "奥普埃",
+          "free": "寄放001",
+          "lv": 41,
+          "exp": 0,
+          "training": false,
+          "vit": 8638,
+          "str": 6227,
+          "tgh": 8648,
+          "dex": 8026
+        },
+        {
+          "name": "奥普埃",
+          "free": "已有培养",
+          "lv": 41,
+          "exp": 0,
+          "training": true,
+          "vit": 8638,
+          "str": 6227,
+          "tgh": 8648,
+          "dex": 8026
+        }
+      ],
+      "pets": [
+        {
+          "name": "乌力",
+          "free": "培养对象一二三四",
+          "lv": 1,
+          "exp": 0,
+          "training": false,
+          "vit": 230,
+          "str": 120,
+          "tgh": 190,
+          "dex": 300
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "paid training occupies slot 500 and removes carried pet",
+    "passed": true,
+    "evidence": {
+      "cost": 5100,
+      "stored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 1,
+        "exp": 0,
+        "training": true,
+        "vit": 230,
+        "str": 120,
+        "tgh": 190,
+        "dex": 300
+      },
+      "poolCount": 500,
+      "gold": 94900
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "shared pool first/middle/last pagination with 500 pets",
+    "passed": true,
+    "evidence": {
+      "page": 100,
+      "buttons": 18,
+      "lastRows": [
+        {
+          "id": "npc-sel2",
+          "label": "[寄放]LV. 41 寄放496",
+          "x1": 217,
+          "y1": 240,
+          "x2": 583,
+          "y2": 260
+        },
+        {
+          "id": "npc-sel3",
+          "label": "[寄放]LV. 41 寄放497",
+          "x1": 217,
+          "y1": 261,
+          "x2": 583,
+          "y2": 281
+        },
+        {
+          "id": "npc-sel4",
+          "label": "[寄放]LV. 41 寄放498",
+          "x1": 217,
+          "y1": 282,
+          "x2": 583,
+          "y2": 302
+        },
+        {
+          "id": "npc-sel5",
+          "label": "[培养]LV. 41 已有培养",
+          "x1": 217,
+          "y1": 303,
+          "x2": 583,
+          "y2": 323
+        },
+        {
+          "id": "npc-sel6",
+          "label": "[培养]LV.  1 培养对象一二三四",
+          "x1": 217,
+          "y1": 324,
+          "x2": 583,
+          "y2": 344
+        }
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "full shared pool refuses a 501st pet",
+    "passed": true,
+    "evidence": {
+      "poolCount": 500
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "GM character experience does not train deposited pets",
+    "passed": true,
+    "evidence": {
+      "stored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 1,
+        "exp": 0,
+        "training": true,
+        "vit": 230,
+        "str": 120,
+        "tgh": 190,
+        "dex": 300
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "ordinary auto battle grants exactly 80% and persists automatic levels",
+    "passed": true,
+    "evidence": {
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 875,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "before": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 1,
+        "exp": 0,
+        "training": true,
+        "vit": 230,
+        "str": 120,
+        "tgh": 190,
+        "dex": 300
+      },
+      "after": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 9,
+        "exp": 44,
+        "training": true,
+        "vit": 1267,
+        "str": 726,
+        "tgh": 1031,
+        "dex": 1663
+      },
+      "actual": 700,
+      "expected": 700,
+      "independent": [
+        {
+          "name": "已有培养",
+          "before": 282576,
+          "after": 283276,
+          "gain": 700
+        },
+        {
+          "name": "培养对象一二三四",
+          "before": 0,
+          "after": 700,
+          "gain": 700
+        }
+      ],
+      "ordinary": {
+        "name": "奥普埃",
+        "free": "寄放001",
+        "lv": 41,
+        "exp": 0,
+        "training": false,
+        "vit": 8638,
+        "str": 6227,
+        "tgh": 8648,
+        "dex": 8026
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "quick battle grants exactly 80% and persists automatic levels",
+    "passed": true,
+    "evidence": {
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 875,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "before": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 9,
+        "exp": 44,
+        "training": true,
+        "vit": 1267,
+        "str": 726,
+        "tgh": 1031,
+        "dex": 1663
+      },
+      "after": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": true,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      },
+      "actual": 700,
+      "expected": 700,
+      "independent": [
+        {
+          "name": "已有培养",
+          "before": 283276,
+          "after": 283976,
+          "gain": 700
+        },
+        {
+          "name": "培养对象一二三四",
+          "before": 700,
+          "after": 1400,
+          "gain": 700
+        }
+      ],
+      "ordinary": {
+        "name": "奥普埃",
+        "free": "寄放001",
+        "lv": 41,
+        "exp": 0,
+        "training": false,
+        "vit": 8638,
+        "str": 6227,
+        "tgh": 8648,
+        "dex": 8026
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "page100 withdrawal returns correct grown pet and clears training state",
+    "passed": true,
+    "evidence": {
+      "restored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": false,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      },
+      "poolCount": 499
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "ordinary deposit and page100 retrieval preserve fee and disable training",
+    "passed": true,
+    "evidence": {
+      "fee": 250,
+      "ordinary": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": false,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      },
+      "restored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": false,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "native menu preserves all five reachable options",
+    "passed": true,
+    "evidence": {
+      "menu": "2\n　　　　☆宠物商店☆\n　寄放、领取与培养宠物\n　　　《 寄放宠物 》\n　　　《 领取宠物 》\n　　　《 卖掉宠物 》\n　　　《 培养宠物 》\n　　　《 离开 》",
+      "hits": [
+        {
+          "id": "npc-sel2",
+          "label": "《 寄放宠物 》",
+          "x1": 217,
+          "y1": 240,
+          "x2": 583,
+          "y2": 260
+        },
+        {
+          "id": "npc-sel3",
+          "label": "《 领取宠物 》",
+          "x1": 217,
+          "y1": 261,
+          "x2": 583,
+          "y2": 281
+        },
+        {
+          "id": "npc-sel4",
+          "label": "《 卖掉宠物 》",
+          "x1": 217,
+          "y1": 282,
+          "x2": 583,
+          "y2": 302
+        },
+        {
+          "id": "npc-sel5",
+          "label": "《 培养宠物 》",
+          "x1": 217,
+          "y1": 303,
+          "x2": 583,
+          "y2": 323
+        },
+        {
+          "id": "npc-sel6",
+          "label": "《 离开 》",
+          "x1": 217,
+          "y1": 324,
+          "x2": 583,
+          "y2": 344
+        }
+      ]
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "training quote and cancellation",
+    "passed": true,
+    "evidence": {
+      "characterLevel": 50,
+      "petLevel": 10,
+      "quote": 6000,
+      "poolCount": 499
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "insufficient funds preserves carried pet and balance",
+    "passed": true,
+    "evidence": {
+      "level": 50,
+      "exp": 0,
+      "gold": 0,
+      "poolCount": 499,
+      "pool": [
+        {
+          "name": "奥普埃",
+          "free": "寄放001",
+          "lv": 41,
+          "exp": 0,
+          "training": false,
+          "vit": 8638,
+          "str": 6227,
+          "tgh": 8648,
+          "dex": 8026
+        },
+        {
+          "name": "奥普埃",
+          "free": "已有培养",
+          "lv": 41,
+          "exp": 1400,
+          "training": true,
+          "vit": 8638,
+          "str": 6227,
+          "tgh": 8648,
+          "dex": 8026
+        }
+      ],
+      "pets": [
+        {
+          "name": "乌力",
+          "free": "培养对象一二三四",
+          "lv": 10,
+          "exp": 400,
+          "training": false,
+          "vit": 1388,
+          "str": 808,
+          "tgh": 1135,
+          "dex": 1817
+        }
+      ]
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "paid training occupies slot 500 and removes carried pet",
+    "passed": true,
+    "evidence": {
+      "cost": 6000,
+      "stored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": true,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      },
+      "poolCount": 500,
+      "gold": 94000
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "mobile portrait pool controls have reachable touch targets",
+    "passed": true,
+    "evidence": {
+      "buttons": [
+        {
+          "id": "npc-sel2",
+          "label": "[寄放]LV. 41 寄放496",
+          "width": 306,
+          "height": 48
+        },
+        {
+          "id": "npc-sel3",
+          "label": "[寄放]LV. 41 寄放497",
+          "width": 306,
+          "height": 48
+        },
+        {
+          "id": "npc-sel4",
+          "label": "[寄放]LV. 41 寄放498",
+          "width": 306,
+          "height": 48
+        },
+        {
+          "id": "npc-sel5",
+          "label": "[培养]LV. 41 已有培养",
+          "width": 306,
+          "height": 48
+        },
+        {
+          "id": "npc-sel6",
+          "label": "[培养]LV. 10 培养对象一二三四",
+          "width": 306,
+          "height": 48
+        },
+        {
+          "id": "npc-btn1",
+          "label": "取 消",
+          "width": 149,
+          "height": 48
+        },
+        {
+          "id": "npc-btn4",
+          "label": "上一页",
+          "width": 149,
+          "height": 48
+        }
+      ]
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "shared pool first/middle/last pagination with 500 pets",
+    "passed": true,
+    "evidence": {
+      "page": 100,
+      "buttons": 18,
+      "lastRows": [
+        {
+          "id": "npc-sel2",
+          "label": "[寄放]LV. 41 寄放496",
+          "x1": 217,
+          "y1": 240,
+          "x2": 583,
+          "y2": 260
+        },
+        {
+          "id": "npc-sel3",
+          "label": "[寄放]LV. 41 寄放497",
+          "x1": 217,
+          "y1": 261,
+          "x2": 583,
+          "y2": 281
+        },
+        {
+          "id": "npc-sel4",
+          "label": "[寄放]LV. 41 寄放498",
+          "x1": 217,
+          "y1": 282,
+          "x2": 583,
+          "y2": 302
+        },
+        {
+          "id": "npc-sel5",
+          "label": "[培养]LV. 41 已有培养",
+          "x1": 217,
+          "y1": 303,
+          "x2": 583,
+          "y2": 323
+        },
+        {
+          "id": "npc-sel6",
+          "label": "[培养]LV. 10 培养对象一二三四",
+          "x1": 217,
+          "y1": 324,
+          "x2": 583,
+          "y2": 344
+        }
+      ]
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "full shared pool refuses a 501st pet",
+    "passed": true,
+    "evidence": {
+      "poolCount": 500
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "GM character experience does not train deposited pets",
+    "passed": true,
+    "evidence": {
+      "stored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": true,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "ordinary auto battle grants exactly 80% and persists automatic levels",
+    "passed": true,
+    "evidence": {
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 875,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "before": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 10,
+        "exp": 400,
+        "training": true,
+        "vit": 1388,
+        "str": 808,
+        "tgh": 1135,
+        "dex": 1817
+      },
+      "after": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 26,
+        "training": true,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      },
+      "actual": 700,
+      "expected": 700,
+      "independent": [
+        {
+          "name": "已有培养",
+          "before": 283976,
+          "after": 284676,
+          "gain": 700
+        },
+        {
+          "name": "培养对象一二三四",
+          "before": 1400,
+          "after": 2100,
+          "gain": 700
+        }
+      ],
+      "ordinary": {
+        "name": "奥普埃",
+        "free": "寄放001",
+        "lv": 41,
+        "exp": 0,
+        "training": false,
+        "vit": 8638,
+        "str": 6227,
+        "tgh": 8648,
+        "dex": 8026
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "quick battle grants exactly 80% and persists automatic levels",
+    "passed": true,
+    "evidence": {
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 875,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "before": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 26,
+        "training": true,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      },
+      "after": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 726,
+        "training": true,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      },
+      "actual": 700,
+      "expected": 700,
+      "independent": [
+        {
+          "name": "已有培养",
+          "before": 284676,
+          "after": 285376,
+          "gain": 700
+        },
+        {
+          "name": "培养对象一二三四",
+          "before": 2100,
+          "after": 2800,
+          "gain": 700
+        }
+      ],
+      "ordinary": {
+        "name": "奥普埃",
+        "free": "寄放001",
+        "lv": 41,
+        "exp": 0,
+        "training": false,
+        "vit": 8638,
+        "str": 6227,
+        "tgh": 8648,
+        "dex": 8026
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "page100 withdrawal returns correct grown pet and clears training state",
+    "passed": true,
+    "evidence": {
+      "restored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 726,
+        "training": false,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      },
+      "poolCount": 499
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "ordinary deposit and page100 retrieval preserve fee and disable training",
+    "passed": true,
+    "evidence": {
+      "fee": 250,
+      "ordinary": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 726,
+        "training": false,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      },
+      "restored": {
+        "name": "乌力",
+        "free": "培养对象一二三四",
+        "lv": 12,
+        "exp": 726,
+        "training": false,
+        "vit": 1631,
+        "str": 960,
+        "tgh": 1344,
+        "dex": 2163
+      }
+    }
+  }
+]

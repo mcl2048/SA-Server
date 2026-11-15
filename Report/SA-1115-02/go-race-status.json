@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 222.241,
+      "log": "go-race.txt"
+    }
+  ],
+  "success": true,
+  "source_stable": true
+}

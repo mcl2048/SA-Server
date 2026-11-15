@@ -1,0 +1,22 @@
+{
+  "baseline": "4751c2b",
+  "scope": "SA-1115-02 independent source review",
+  "files": {
+    "server/internal/world/petshop.go": "ad17b711bfbdaeba530ca74afd8b514156a385380c6caa18349d024f2518d144",
+    "server/internal/world/pet.go": "f04168ca538d7f04629af5d4c2bdf536a5f8efb2947c77f3772577dc05e01a11",
+    "server/internal/world/fight.go": "c742fd14b9ed28a83509fb6a590d0619f34e16f76338d63d2496044756a240e5",
+    "server/internal/world/npcwindow.go": "d2d7fcf5db87632393a9890b2d224441deea1d692bba23aedff9da1fdf2bb308"
+  },
+  "independent_http_shutdown": "passed; review/http-shutdown-tests.txt",
+  "independent_500_pet_probe": "passed; review/performance-probe.txt",
+  "duplicate_final_target_suite": "cancelled while compiling to reduce memory pressure; root final complete suite includes TestPetCare",
+  "equivalent_lint_followup": {
+    "file": "server/internal/world/petshop.go",
+    "previous_sha256": "0041d4e95d3eafd8306817ac9fb6df57dbfaba4ef168a8654e0f7f3a12f8703a",
+    "final_sha256": "ad17b711bfbdaeba530ca74afd8b514156a385380c6caa18349d024f2518d144",
+    "scope": "seqPetShopTrainSelect: if/else-if replaced by switch(button)",
+    "reconstructed_previous_sha256_matches": true,
+    "semantics": "BtnCancel returns to menu, button 0 selects the quoted pet, every other button performs neither action; shared earlier validation unchanged",
+    "validation": "read-only diff and exact SHA reconstruction; no tests or build launched by reviewer"
+  }
+}

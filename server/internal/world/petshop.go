@@ -13,21 +13,23 @@ import (
 
 // 窗口编号（CHAR_WINDOWTYPE_WINDOWPETSHOP_*）
 const (
-	seqPetShopStart      = 261
-	seqPetShopPetSelect  = 262
-	seqPetShopMain       = 263
-	seqPetShopGoldOver   = 264
-	seqPetShopPetSelect2 = 265
-	seqPetShopMain2      = 266
-	seqPetShopDrawSelect = 267
-	seqPetShopAskDraw    = 268
-	seqPetShopEnd        = 269
+	seqPetShopStart       = 261
+	seqPetShopPetSelect   = 262
+	seqPetShopMain        = 263
+	seqPetShopGoldOver    = 264
+	seqPetShopPetSelect2  = 265
+	seqPetShopMain2       = 266
+	seqPetShopDrawSelect  = 267
+	seqPetShopAskDraw     = 268
+	seqPetShopEnd         = 269
+	seqPetShopTrainSelect = 270
+	seqPetShopTrainAsk    = 271
 )
 
 const (
-	PoolPetMax  = 15 // CHAR_MAXPOOLPETHAVE（_ADD_POOL_ITEM）
-	petCostPer  = 10 // PETCOST
-	poolPerPage = 5  // NPC_getDrawPet 的 LINENUM
+	PoolPetMax  = 500 // 普通寄放与付费培养共用的角色级容量，与转生次数无关。
+	petCostPer  = 10  // PETCOST
+	poolPerPage = 5   // NPC_getDrawPet 的 LINENUM
 )
 
 // petShopMsgs 是 shopmsg[]：参数里没写时的预设文字。
@@ -45,8 +47,8 @@ func petShopMsg(n *entity, key string) string {
 	return "\n\n" + npcText(s)
 }
 
-// poolLimit：能寄放的数量是 转生次数×2 + 5（NPC_getDrawPet）。
-func poolLimit(e *entity) int { return min(PoolPetMax, e.char.Trans*2+5) }
+// poolLimit applies the same capacity to every character, including new ones.
+func poolLimit(_ *entity) int { return PoolPetMax }
 
 // poolFree 是 CHAR_getCharPoolPetElement：寄放栏的第一个空位，满了回 -1。
 func poolFree(e *entity) int {
@@ -75,11 +77,13 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 	cost := 0
 	switch num {
 	case 0: // 选单
-		text := "4\n　　　　　　☆宠物商店☆" + petShopMsg(n, "main_msg")
+		// Two fixed header lines keep all five actions above the native footer.
+		// Old custom greetings may wrap and change every row's selection index.
+		text := "2\n　　　　☆宠物商店☆\n　寄放、领取与培养宠物\n"
 		if pool {
-			text += "\n            《 寄放宠物 》\n            《 领取宠物 》\n　　　　　　《 卖掉宠物 》\n              《 离开 》"
+			text += "　　　《 寄放宠物 》\n　　　《 领取宠物 》\n　　　《 卖掉宠物 》\n　　　《 培养宠物 》\n　　　《 离开 》"
 		} else {
-			text += "\n\n　　　　　 《 卖掉宠物 》\n\n             《 离开 》"
+			text += "　　　《 领取宠物 》\n　　　《 卖掉宠物 》\n　　　《 培养宠物 》\n　　　《 离开 》"
 		}
 		w.sendWindow(p, n, "select", 0, seqPetShopStart, text)
 		return
@@ -94,6 +98,7 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 		cost = w.petSellCost(p, n, pet)
 		text := fmt.Sprintf("\n是[%s]没错吧？%s\n\n    买卖价格         %d STONE\n", pet.displayName(), petShopMsg(n, "realy_msg"), cost)
 		w.sendWindow(p, n, "message", BtnYesNo, seqPetShopMain, text)
+		p.window.petRef = pet
 		rel = sel
 	case 3: // 卖：超过持有上限时先问
 		pet := w.petAt(p, rel-1)
@@ -102,6 +107,7 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 		}
 		if p.char.Gold+w.petSellCost(p, n, pet) > maxGold(p.char.Trans) {
 			w.sendWindow(p, n, "message", BtnYesNo, seqPetShopGoldOver, petShopMsg(n, "over_msg"))
+			p.window.petRef = pet
 			break
 		}
 		w.sendWindow(p, n, "message", BtnOK, seqPetShopEnd, w.petSell(p, n, rel-1))
@@ -124,6 +130,8 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 		}
 		text := fmt.Sprintf("\n寄放[%s]\n\n    寄放价格            %d stone\n", pet.displayName(), petPoolCost(p))
 		w.sendWindow(p, n, "message", BtnYesNo, seqPetShopMain2, text)
+		p.window.petRef = pet
+		cost = petPoolCost(p)
 		rel = sel
 	case 7: // NPC_PetDel2：寄放
 		if !pool {
@@ -137,27 +145,40 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 	case 8:
 		w.sendWindow(p, n, "message", BtnOK, seqPetShopEnd, petShopMsg(n, "poolfull_msg"))
 	case 9: // NPC_getDrawPet：寄放中的宠物，一页 5 只
-		if !pool {
-			return
-		}
 		page := rel + sel
+		page = max(0, min(page, max(0, (len(p.pets.Pool)-1)/poolPerPage)))
 		buttons, text := w.drawPetList(p, page)
 		w.sendWindow(p, n, "select", buttons, seqPetShopDrawSelect, text)
 		rel = page
 	case 10: // NPC_PetDate3：领回哪一只
 		idx := rel*poolPerPage + sel - 1
-		if idx < 0 || idx >= len(p.pets.Pool) {
+		if sel < 1 || sel > poolPerPage || idx < 0 || idx >= len(p.pets.Pool) || p.pets.Pool[idx] == nil {
 			return
 		}
 		w.sendWindow(p, n, "message", BtnYesNo, seqPetShopAskDraw, fmt.Sprintf("\n领回[%s]", p.pets.Pool[idx].displayName()))
+		p.window.petRef = p.pets.Pool[idx]
 		rel = idx
 	case 11: // NPC_PetDel3：领回
-		if !pool {
-			return
-		}
 		w.sendWindow(p, n, "message", BtnOK, seqPetShopEnd, w.petDraw(p, n, rel))
 	case 12:
 		w.sendWindow(p, n, "message", BtnOK, seqPetShopEnd, petShopMsg(n, "getfull_msg"))
+	case 13: // All pet shops offer paid care, even without ordinary storage.
+		if poolFree(p) < 0 {
+			w.petShopWindow(p, n, 8, -1, 0)
+			return
+		}
+		w.sendWindow(p, n, "petselect", BtnCancel, seqPetShopTrainSelect, "")
+		return
+	case 14:
+		pet := w.petAt(p, sel-1)
+		if pet == nil {
+			return
+		}
+		cost = petTrainingCost(p, pet)
+		text := fmt.Sprintf("培养[%s]\n培养价格 %d stone\n(人物等级+宠物等级)×100\n战后获得人物经验的80%%\n自动升级；领取后停止培养", pet.displayName(), cost)
+		w.sendWindow(p, n, "message", BtnYesNo, seqPetShopTrainAsk, text)
+		p.window.petRef = pet
+		rel = sel
 	}
 	if p.window != nil {
 		p.window.event, p.window.cost = rel, cost
@@ -166,10 +187,21 @@ func (w *World) petShopWindow(p, n *entity, num, sel, rel int) {
 
 // petShopReply 是 NPC_PetShopWindowTalked。
 func (w *World) petShopReply(p, n *entity, win *npcWindow, button int, text string) {
-	sel := data.Atoi(text)
+	// Select and petselect do not have global button validation. In particular,
+	// a forged Prev on page zero must never reach a negative slice index.
+	if button != 0 && (button&(button-1) != 0 || button&win.buttons == 0) {
+		return
+	}
+	sel, err := strconv.Atoi(strings.TrimSpace(text))
+	if button == 0 && err != nil {
+		return
+	}
 	pool := petShopPoolFlag(n)
 	switch win.seq {
 	case seqPetShopStart:
+		if button != 0 {
+			return
+		}
 		switch {
 		case sel == 3 && pool || sel == 2 && !pool: // 卖掉宠物
 			w.petShopWindow(p, n, 1, -1, 0)
@@ -179,48 +211,54 @@ func (w *World) petShopReply(p, n *entity, win *npcWindow, button int, text stri
 			} else {
 				w.petShopWindow(p, n, 8, -1, 0)
 			}
-		case sel == 2 && pool: // 领取宠物
+		case sel == 2 && pool || sel == 1 && !pool: // 领取普通寄放和培养宠物
 			if p.pets.free() >= 0 {
 				w.petShopWindow(p, n, 9, 0, 0)
 			} else {
 				w.petShopWindow(p, n, 12, -1, 0)
 			}
+		case sel == 4 && pool || sel == 3 && !pool:
+			w.petShopWindow(p, n, 13, -1, 0)
 		}
 	case seqPetShopPetSelect:
 		if button == BtnCancel {
 			w.petShopWindow(p, n, 0, -1, 0)
-		} else {
+		} else if button == 0 {
 			w.petShopWindow(p, n, 2, sel, 0)
 		}
 	case seqPetShopPetSelect2:
 		if button == BtnCancel {
 			w.petShopWindow(p, n, 0, -1, 0)
-		} else {
+		} else if button == 0 {
 			w.petShopWindow(p, n, 6, sel, 0)
 		}
 	case seqPetShopMain:
-		if button == BtnYes {
+		if button == BtnYes && w.petAt(p, win.event-1) == win.petRef {
 			w.petShopWindow(p, n, 3, -1, win.event)
 		} else {
 			w.petShopWindow(p, n, 1, -1, 0)
 		}
 	case seqPetShopMain2:
-		if button == BtnYes {
-			w.petShopWindow(p, n, 7, -1, win.event)
+		if button == BtnYes && win.petRef != nil && w.petAt(p, win.event-1) == win.petRef {
+			if petPoolCost(p) != win.cost {
+				w.petShopWindow(p, n, 6, win.event, 0)
+			} else {
+				w.petShopWindow(p, n, 7, -1, win.event)
+			}
 		} else {
 			w.petShopWindow(p, n, 5, -1, 0)
 		}
 	case seqPetShopAskDraw:
 		switch {
-		case button != BtnYes:
-			w.petShopWindow(p, n, 9, 0, 0)
+		case button != BtnYes || win.event < 0 || win.event >= len(p.pets.Pool) || p.pets.Pool[win.event] != win.petRef:
+			w.petShopWindow(p, n, 9, 0, max(0, win.event/poolPerPage))
 		case p.pets.free() >= 0:
 			w.petShopWindow(p, n, 11, -1, win.event)
 		default:
 			w.petShopWindow(p, n, 12, -1, 0)
 		}
 	case seqPetShopGoldOver:
-		if button == BtnYes {
+		if button == BtnYes && win.petRef != nil && w.petAt(p, win.event-1) == win.petRef {
 			w.petShopWindow(p, n, 4, -1, win.event)
 		} else {
 			w.petShopWindow(p, n, 0, -1, 0)
@@ -233,14 +271,31 @@ func (w *World) petShopReply(p, n *entity, win *npcWindow, button int, text stri
 			w.petShopWindow(p, n, 9, 1, win.event)
 		case button == BtnCancel:
 			w.petShopWindow(p, n, 0, -1, 0)
-		case p.pets.free() >= 0:
+		case button == 0 && sel >= 1 && sel <= poolPerPage && p.pets.free() >= 0:
 			w.petShopWindow(p, n, 10, sel, win.event)
-		default:
+		case button == 0 && sel >= 1 && sel <= poolPerPage:
 			w.petShopWindow(p, n, 12, -1, 0)
 		}
 	case seqPetShopEnd:
 		if button == BtnOK {
 			w.petShopWindow(p, n, 0, -1, 0)
+		}
+	case seqPetShopTrainSelect:
+		switch button {
+		case BtnCancel:
+			w.petShopWindow(p, n, 0, -1, 0)
+		case 0:
+			w.petShopWindow(p, n, 14, sel, 0)
+		}
+	case seqPetShopTrainAsk:
+		if button == BtnYes && win.petRef != nil && w.petAt(p, win.event-1) == win.petRef {
+			if petTrainingCost(p, win.petRef) != win.cost {
+				w.petShopWindow(p, n, 14, win.event, 0)
+				return
+			}
+			w.sendWindow(p, n, "message", BtnOK, seqPetShopEnd, w.petStore(p, n, win.event-1, true))
+		} else {
+			w.petShopWindow(p, n, 13, -1, 0)
 		}
 	}
 }
@@ -255,6 +310,9 @@ func (w *World) petAt(e *entity, i int) *Pet {
 
 // petPoolCost 是 NPC_GETPOOLCOST：寄放一只要 50 + 等级 × 4（参数的 pool_cost 原版没有用到）。
 func petPoolCost(e *entity) int { return 50 + e.char.Level*4 }
+
+// petTrainingCost is a one-time deposit fee, recalculated on confirmation.
+func petTrainingCost(e *entity, pet *Pet) int { return (e.char.Level + pet.Level) * 100 }
 
 // petSellCost 是 NPC_GetCost：((等级² − 捕获时等级²) × 10 + 等级 × 10) × 稀有度倍率（0→1、1→5、2→8），
 // 转生过的宠物捕获等级那一项固定为 10；再乘店的倍率（special_pet 列出的形象用 special_rate），
@@ -341,9 +399,19 @@ func (w *World) petSell(e *entity, n *entity, i int) string {
 
 // petPool 是 NPC_PetDel2：把第 i 格的宠物寄放，收 poolCost。
 func (w *World) petPool(e *entity, n *entity, i int) string {
+	return w.petStore(e, n, i, false)
+}
+
+// petStore checks every live constraint before moving the object and wallet in
+// the world's single owner goroutine. petsChanged saves both in one character
+// update; there is no temporary second pet or independently persisted debit.
+func (w *World) petStore(e *entity, n *entity, i int, training bool) string {
 	pet := w.petAt(e, i)
-	if pet == nil || poolFree(e) < 0 {
+	if pet == nil || e.fight != nil || e.trade != nil || e.stall != nil {
 		return ""
+	}
+	if poolFree(e) < 0 {
+		return petShopMsg(n, "poolfull_msg")
 	}
 	if e.pets.Ride == i {
 		return "\n\n骑乘中的宠物无法寄放喔！"
@@ -354,9 +422,20 @@ func (w *World) petPool(e *entity, n *entity, i int) string {
 	if pet.Guard {
 		return "\n\n家族守护兽无法存入仓库喔！"
 	}
+	if !training && !petShopPoolFlag(n) {
+		return ""
+	}
+	cost := petPoolCost(e)
+	if training {
+		cost = petTrainingCost(e, pet)
+	}
+	if cost < 0 || e.char.Gold < cost {
+		return petShopMsg(n, "cost_msg")
+	}
 	w.removePet(e, i)
+	pet.Training = training
 	e.pets.Pool = append(e.pets.Pool, pet)
-	e.char.Gold -= petPoolCost(e)
+	e.char.Gold -= cost
 	w.petsChanged(e)
 	w.sendInventory(e)
 	return petShopMsg(n, "pooltanks_msg")
@@ -364,11 +443,15 @@ func (w *World) petPool(e *entity, n *entity, i int) string {
 
 // petDraw 是 NPC_PetDel3：领回寄放的第 idx 只，后面的往前补。
 func (w *World) petDraw(e *entity, n *entity, idx int) string {
-	if idx < 0 || idx >= len(e.pets.Pool) || e.pets.free() < 0 {
+	if e.fight != nil || e.trade != nil || e.stall != nil || idx < 0 || idx >= len(e.pets.Pool) || e.pets.Pool[idx] == nil || e.pets.free() < 0 {
 		return ""
 	}
-	w.addPet(e, e.pets.Pool[idx])
-	e.pets.Pool = append(e.pets.Pool[:idx], e.pets.Pool[idx+1:]...)
+	pet := e.pets.Pool[idx]
+	pet.Training = false
+	w.addPet(e, pet)
+	copy(e.pets.Pool[idx:], e.pets.Pool[idx+1:])
+	e.pets.Pool[len(e.pets.Pool)-1] = nil // release the removed pointer in the backing array
+	e.pets.Pool = e.pets.Pool[:len(e.pets.Pool)-1]
 	w.petsChanged(e)
 	return petShopMsg(n, "pooltanks_msg")
 }
@@ -384,34 +467,32 @@ func (w *World) removePet(e *entity, i int) {
 
 // drawPetList 是 NPC_getDrawPet：第 page 页的寄放宠物（LV、MaxHP、名字），按钮按页数加上一页 / 下一页。
 func (w *World) drawPetList(e *entity, page int) (int, string) {
-	limit := poolLimit(e)
-	end := (page + 1) * poolPerPage
-	start := end - poolPerPage
+	pages := max(1, (len(e.pets.Pool)+poolPerPage-1)/poolPerPage)
+	page = max(0, min(page, pages-1))
+	start := page * poolPerPage
+	end := min(start+poolPerPage, len(e.pets.Pool))
 	buttons := BtnCancel
-	switch {
-	case end >= limit:
-		end = limit
-		if page != 0 {
-			buttons |= BtnPrev
-		}
-	case end <= poolPerPage:
-		end = poolPerPage
+	if page > 0 {
+		buttons |= BtnPrev
+	}
+	if page+1 < pages {
 		buttons |= BtnNext
-	default:
-		buttons |= BtnPrev | BtnNext
 	}
 	var sb strings.Builder
-	sb.WriteString("2\n　　　　请选择宠物　　　　\n\n")
+	fmt.Fprintf(&sb, "2\n请选择宠物 第%d/%d页\n已寄放 %d/%d（培养共享）\n", page+1, pages, len(e.pets.Pool), poolLimit(e))
 	for i := start; i < end; i++ {
-		if i < len(e.pets.Pool) {
-			p := e.pets.Pool[i]
-			fmt.Fprintf(&sb, "LV.%3d MaxHP %3d %s\n", p.Level, w.petMaxHP(p), p.displayName())
-		} else {
-			sb.WriteString("\n")
+		p := e.pets.Pool[i]
+		if p == nil {
+			sb.WriteString("（空）\n")
+			continue
 		}
-	}
-	if end != limit && end >= len(e.pets.Pool) {
-		buttons &^= BtnNext // 下一页没有宠物就不给"下一页"
+		kind := "寄放"
+		if p.Training {
+			kind = "培养"
+		}
+		// Keep even a full 16-byte pet name on one native 40-column row.
+		// Wrapped rows change selection numbering in both desktop/mobile UIs.
+		fmt.Fprintf(&sb, "[%s]LV.%3d %s\n", kind, p.Level, p.displayName())
 	}
 	return buttons, sb.String()
 }

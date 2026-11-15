@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "complete": true,
+  "source_stable": true,
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 42.404,
+      "log": "go-test-final.txt"
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 3.53,
+      "log": "go-vet-final.txt"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 222.241,
+      "log": "go-race.txt"
+    }
+  ],
+  "detached_supervisor": true
+}

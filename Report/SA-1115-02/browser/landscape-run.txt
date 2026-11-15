@@ -1,0 +1,7 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+mobile landscape real touch cultivation removes carried pet and fills shared slot500
+mobile landscape real touch next/previous reaches page100 and honors last-page boundary
+mobile landscape landscape scroll reveals last row and real touch retrieves correct pet
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-02/browser/final-petcare.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":1003,"x":12,"y":14},"stored_position":{"floor":1003,"x":12,"y":14},"position_matches":true}}

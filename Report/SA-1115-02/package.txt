@@ -1,0 +1,2 @@
+saserver-v0.2.20-LYNX-linux-amd64.zip: 42201904 bytes, 4380 files
+SHA256 257b77e5923c931673402fdcccafae93a987fa2185e750288c8bea2a60223770

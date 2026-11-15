@@ -1,0 +1,16 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop native menu preserves all five reachable options
+desktop training quote and cancellation
+desktop insufficient funds preserves carried pet and balance
+desktop paid training occupies slot 500 and removes carried pet
+desktop shared pool first/middle/last pagination with 500 pets
+desktop full shared pool refuses a 501st pet
+desktop GM character experience does not train deposited pets
+page.waitForFunction: Timeout 30000ms exceeded.
+    at GameUI.toolbar (/home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:103:19)
+    at GameUI.flag (/home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:220:39)
+    at async Module.run (/home/coder/saserver/Report/SA-1115-02/browser/petcare-cases.mjs:91:5)
+    at async work (/home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:258:5)
+    at async file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:276:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-02/browser/final-petcare.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":1003,"x":12,"y":14},"stored_position":{"floor":1003,"x":12,"y":14},"position_matches":true}}

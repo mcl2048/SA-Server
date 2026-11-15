@@ -1,0 +1,8 @@
+{"variant":"baseline","stage":"server-ready"}
+{"variant":"baseline","stage":"authenticated-real-field"}
+Error: 培养 option absent
+    at assert (file:///home/coder/saserver/Report/SA-1115-02/browser/petcare-cases.mjs:4:42)
+    at Module.run (file:///home/coder/saserver/Report/SA-1115-02/browser/petcare-cases.mjs:42:17)
+    at async work (file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:258:5)
+    at async file:///home/coder/saserver/Report/SA-1115-02/browser/real-game.mjs:276:5
+{"variant":"baseline","probe":false,"result":"/home/coder/saserver/Report/SA-1115-02/browser/baseline-petcare.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":null,"stored_position":null,"position_matches":false}}

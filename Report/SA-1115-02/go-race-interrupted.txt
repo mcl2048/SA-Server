@@ -1,0 +1,6 @@
+ok  	sa/server/cmd/saserver	72.222s
+ok  	sa/server/internal/battle	5.240s
+ok  	sa/server/internal/data	259.559s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	182.447s
+ok  	sa/server/internal/store	(cached)

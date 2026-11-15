@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "version": "v0.2.20-LYNX",
+  "binary_sha256": "35afa759b119be759a83a1f9bf195037545a2daa9dc27242767331db102f2270",
+  "binary_bytes": 16679072,
+  "linux_amd64_static": true,
+  "production_inputs": 173,
+  "repeated_build_identical": true,
+  "client_tests": 244,
+  "go_test_race_vet": true,
+  "http_files": 78,
+  "browser": {
+    "checks": 26,
+    "browser": "156.0.8078.4",
+    "shutdown": {
+      "started": true,
+      "sigterm_sent": true,
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "expected_position": {
+        "id": 1,
+        "floor": 1003,
+        "x": 12,
+        "y": 14
+      },
+      "stored_position": {
+        "floor": 1003,
+        "x": 12,
+        "y": 14
+      },
+      "position_matches": true
+    }
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.20-LYNX-linux-amd64.zip",
+    "bytes": 42201904,
+    "files": 4380,
+    "sha256": "257b77e5923c931673402fdcccafae93a987fa2185e750288c8bea2a60223770"
+  },
+  "limitations": [
+    "Chromium viewport/touch emulation; no physical Android/iOS/Safari certification",
+    "Isolated fixtures; production was not restarted"
+  ]
+}

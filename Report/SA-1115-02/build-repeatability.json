@@ -1,0 +1,9 @@
+{
+  "identical": true,
+  "binary_sha256": "35afa759b119be759a83a1f9bf195037545a2daa9dc27242767331db102f2270",
+  "version": "v0.2.20-LYNX",
+  "production_inputs_stable": true,
+  "inputs": 173,
+  "node": "v26.13.1",
+  "go": "go version go1.27.3 linux/amd64"
+}

@@ -61,6 +61,9 @@ type Pet struct {
 	MailItem *Item `json:"mailItem,omitempty"`
 	// Guard 是家族守护兽（CHAR_PETFAMILY）
 	Guard bool `json:"guard,omitempty"`
+	// Training is meaningful only in petBag.Pool. Normal deposits remain false;
+	// retrieval clears it, so carrying or re-depositing never grants free care.
+	Training bool `json:"training,omitempty"`
 	// Born 是捕获时的体腕耐敏（扩展资料算实际成长用，petext.go）；旧存档没有
 	Born *[4]int `json:"born,omitempty"`
 }
@@ -243,8 +246,15 @@ func (w *World) petMaxLevel(p *Pet) int {
 // petGainExp 加经验并升级，返回升了几级（CHAR_LevelUpCheck + CHAR_HandleExp：经验按级累计、升级扣掉；每级 CHAR_PetLevelUp 与 AI_FIX_PETLEVELUP）。
 // 31 级起每升一级主人得到 上一级所需经验/20000 的声望，正式族人另外加到家族的饲育（CHAR_PetLevelUp 的 CoolFish 饲育家族声望，FM_FIX_FMFEED）。
 func (w *World) petGainExp(e *entity, p *Pet, exp int) int {
+	ups, feed := w.petApplyExp(p, exp)
+	w.petFeedFame(e, feed)
+	return ups
+}
+
+// petApplyExp keeps growth independent of character/family persistence. Paid
+// care can grow up to 500 pets and aggregate their existing per-level rewards.
+func (w *World) petApplyExp(p *Pet, exp int) (ups, feed int) {
 	p.Exp += exp
-	ups, feed := 0, 0
 	for p.Level < w.petMaxLevel(p) {
 		next := w.game.Battle.NextLevelExp(p.Level)
 		if next <= 0 || p.Exp < next {
@@ -259,11 +269,38 @@ func (w *World) petGainExp(e *entity, p *Pet, exp int) int {
 			feed += max(0, w.game.Battle.NextLevelExp(p.Level-2)) / 20000 // exp2 = CHAR_GetLevelExp(level - 1)
 		}
 	}
+	return ups, feed
+}
+
+func (w *World) petFeedFame(e *entity, feed int) {
 	if feed > 0 && e != nil {
 		w.earnFame(e, feed)
 		w.famFame(e, 0, feed)
 	}
-	return ups
+}
+
+// trainPoolPets is called only from a successful non-PvP battle settlement,
+// using the exact awarded character experience (after boosts and sharing).
+// Integer division floors 80% without multiplying a potentially large XP.
+func (w *World) trainPoolPets(e *entity, charExp int) bool {
+	if charExp <= 0 {
+		return false
+	}
+	exp := (charExp/5)*4 + (charExp%5)*4/5
+	if exp == 0 {
+		return false
+	}
+	changed, feed := false, 0
+	for _, pet := range e.pets.Pool {
+		if pet == nil || !pet.Training {
+			continue
+		}
+		_, reward := w.petApplyExp(pet, exp)
+		feed += reward
+		changed = true
+	}
+	w.petFeedFame(e, feed)
+	return changed
 }
 
 // rankRand 是 CHAR_PetLevelUp 的 RankRandTbl：按档次决定成长倍率的范围（÷100）。
