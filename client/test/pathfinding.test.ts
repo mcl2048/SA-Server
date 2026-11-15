@@ -24,4 +24,29 @@ for(let start=0;start<w*h;start++) for(let goal=0;goal<w*h;goal++) {
  const result=gridPath(w,h,walk,start%w,Math.floor(start/w),goal%w,Math.floor(goal/w));
  assert.equal(result?.length,dist.get(goal));
 }
-console.log("pathfinding: all checks passed");
+// A wide entrance may have a wall-facing edge. Choose any legal entry using
+// the same shortest-path search instead of repeatedly trying a guessed center.
+assert.deepEqual(gridPath(5,3,Uint8Array.from([2,2,2,2,2,2,1,1,1,3,2,2,2,2,3]),0,0,4,2,[[4,1]]),[5,5,5,5,7]);
+assert.equal(gridPath(2,2,new Uint8Array(1),0,0,1,1),null,"malformed dimensions cannot produce a path");
+assert.deepEqual(gridPath(5,3,new Uint8Array(15).fill(2),0,1,4,1),[5,5,5,5],"equally short open routes should follow the direct line without a zigzag");
+// Deterministic independent BFS oracle over walls, unknown tiles, non-target
+// warps and doorways. It checks actual shortest costs and reconstructed moves.
+let seed=0x111503;
+const random=(n:number)=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;};
+for(let sample=0;sample<300;sample++) {
+ const w=8,h=8,walk=Uint8Array.from({length:w*h},()=>[0,1,2,2,2,3][random(6)]);
+ const start=random(w*h),goals=[random(w*h),random(w*h),random(w*h)];walk[start]=2;
+ const targets=new Set(goals.filter(k=>walk[k]>=2)),queue=[start],distance=new Map([[start,0]]);
+ const enter=(x:number,y:number)=>x>=0&&y>=0&&x<w&&y<h&&walk[y*w+x]>=2;
+ let expected:number|null=null;
+ for(let i=0;i<queue.length;i++) {
+  const k=queue[i],x=k%w,y=Math.floor(k/w),g=distance.get(k)!;
+  if(targets.has(k)){expected=g;break;}
+  if(k!==start&&walk[k]===3)continue;
+  for(const [dx,dy]of PATH_MOVE){const nx=x+dx,ny=y+dy,nk=ny*w+nx;if(!enter(nx,ny)||distance.has(nk)||dx&&dy&&(!enter(x+dx,y)||!enter(x,y+dy)))continue;distance.set(nk,g+1);queue.push(nk);}
+ }
+ const path=gridPath(w,h,walk,start%w,Math.floor(start/w),goals[0]%w,Math.floor(goals[0]/w),goals.slice(1).map(k=>[k%w,Math.floor(k/w)]));
+ assert.equal(path?.length??null,expected,`BFS shortest multi-entrance cost, sample ${sample}`);
+ if(path){let x=start%w,y=Math.floor(start/w);for(let i=0;i<path.length;i++){const [dx,dy]=PATH_MOVE[path[i]];assert.ok(enter(x+dx,y+dy));if(dx&&dy)assert.ok(enter(x+dx,y)&&enter(x,y+dy));x+=dx;y+=dy;if(i<path.length-1)assert.notEqual(walk[y*w+x],3);}assert.ok(targets.has(y*w+x));}
+}
+console.log("pathfinding: all checks and 300 mixed-grid BFS comparisons passed");

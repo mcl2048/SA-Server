@@ -1,0 +1,15 @@
+goos: linux
+goarch: amd64
+pkg: sa/server/internal/world
+cpu: Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+BenchmarkAutomationDecision-2       	   53962	      5339 ns/op	     448 B/op	       5 allocs/op
+BenchmarkAutomationDecision-2       	   61339	      3556 ns/op	     448 B/op	       5 allocs/op
+BenchmarkAutomationDecision-2       	   54903	      4932 ns/op	     448 B/op	       5 allocs/op
+BenchmarkBackgroundPresentation/Attached-2         	    1287	    221542 ns/op	   88145 B/op	    1064 allocs/op
+BenchmarkBackgroundPresentation/Attached-2         	    1411	    206019 ns/op	   88144 B/op	    1064 allocs/op
+BenchmarkBackgroundPresentation/Attached-2         	    1298	    192612 ns/op	   88144 B/op	    1064 allocs/op
+BenchmarkBackgroundPresentation/Detached-2         	     954	    321185 ns/op	   88144 B/op	    1064 allocs/op
+BenchmarkBackgroundPresentation/Detached-2         	    1371	    189741 ns/op	   88144 B/op	    1064 allocs/op
+BenchmarkBackgroundPresentation/Detached-2         	    1344	    190473 ns/op	   88144 B/op	    1064 allocs/op
+PASS
+ok  	sa/server/internal/world	19.685s

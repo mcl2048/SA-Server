@@ -149,7 +149,7 @@ export class AiWindow {
     ry += this.toggleRow(x, ry, "ai-auto-escape", "自动逃跑", s.autoEscape,
       "优先逃跑，失败三次恢复战斗策略；任务／决斗除外。", () => { s.autoEscape = !s.autoEscape; this.save(); }, true);
     ry += this.toggleRow(x, ry, "ai-enc", "自动遇敌", this.host.autoEncount(),
-      "来回走动遇敌；手动移动、换地图或濒危时停止。", () => this.host.setAutoEncount(!this.host.autoEncount()), true);
+      "来回遇敌，按补血时机用背包补给整备；缺补给濒危时停止。", () => this.host.setAutoEncount(!this.host.autoEncount()), true);
     ry += this.toggleRow(x, ry, "ai-drop", "自动丢弃", s.autoDrop,
       "日常／战后丢弃匹配名字的背包物品，无需确认。", () => { s.autoDrop = !s.autoDrop; this.save(); }, true);
     if (s.autoDrop) {

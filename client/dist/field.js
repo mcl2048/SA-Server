@@ -3,13 +3,13 @@
 //   屏幕 x = (gx + gy) × 32，屏幕 y = (gy − gx) × 24
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
-import { album } from "./album.js?v=08f6b4cf8a3cf7f0";
-import { gridPath } from "./pathfinding.js?v=08f6b4cf8a3cf7f0";
-import { ANIM, findAction,                              } from "./assets.js?v=08f6b4cf8a3cf7f0";
-import { sfx } from "./audio.js?v=08f6b4cf8a3cf7f0";
+import { album } from "./album.js?v=5e4867fa738c689d";
+import { gridPath } from "./pathfinding.js?v=5e4867fa738c689d";
+import { ANIM, findAction,                              } from "./assets.js?v=5e4867fa738c689d";
+import { sfx } from "./audio.js?v=5e4867fa738c689d";
 
 
-import { loadFloor, saveFloor,                } from "./mapcache.js?v=08f6b4cf8a3cf7f0";
+import { loadFloor, saveFloor,                } from "./mapcache.js?v=5e4867fa738c689d";
 
 
 export const MOVE                     = [[-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1]];
@@ -226,16 +226,55 @@ export class Field {
           revealCursor = 0;
           wholeReady = false;
           seenPosition = "";
+          navigationEntrances                     = [];
+          navigationChunks           = [];
+          navigationChunkAt = 0;
   setMinimapReveal(enabled         ) { this.minimapReveal = enabled; this.mapVersion++; this.seenVersion++; }
   navigateTo(x        , y        ) {
     this.path = []; this.pathGoal = ""; this.navigationAttempt = ""; this.wantDir = -1;
     this.target = null; this.mapNavigation = false;
+    this.navigationEntrances = []; this.navigationChunks = []; this.navigationChunkAt = 0;
     if (!this.self || this.locked || this.follower || this.battlePaused) { this.navigationStatus = "当前无法自动移动"; return; }
     if (!Number.isInteger(x) || !Number.isInteger(y)) { this.navigationStatus = "请输入有效的整数坐标"; return; }
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) { this.navigationStatus = "目标在地图范围外"; return; }
     if (this.walk[y * this.width + x] === 1) { this.navigationStatus = "目标不可达：目标格为墙体或障碍"; return; }
     this.target = [x,y]; this.mapNavigation = true;
+    this.prioritizeNavigationChunks(x,y);
     this.navigationStatus = "正在加载地图并规划路线…";
+  }
+
+  /** Only the current server-provided catalogue can start a location route.
+   * Conditions/quest gates still execute on the server when the warp is entered. */
+  navigatePlace(floor        , place          ) {
+    if (floor !== this.floor || !this.placeLists.get(floor)?.includes(place)) return;
+    const s=this.self;
+    if (!s || !place.entrances.length) return;
+    const entries=place.entrances.filter(p => Number.isInteger(p.x) && Number.isInteger(p.y)
+      && p.x>=0 && p.y>=0 && p.x<this.width && p.y<this.height && this.walk[p.y*this.width+p.x]!==1)
+      .sort((a,b)=>Math.max(Math.abs(a.x-s.x),Math.abs(a.y-s.y))-Math.max(Math.abs(b.x-s.x),Math.abs(b.y-s.y)));
+    if (!entries.length) { this.navigateTo(place.entrances[0].x,place.entrances[0].y); return; }
+    this.navigateTo(entries[0].x,entries[0].y);
+    if (this.target) this.navigationEntrances=entries.slice(1).map(p=>[p.x,p.y]);
+  }
+
+  /** Load the target first (an unknown wall can reject immediately), then the
+   * start-to-target corridor, then progressively wider detours. This changes
+   * request order only: unknown cells never become walkable and every chunk
+   * remains in the fallback order for a genuinely unreachable destination. */
+          prioritizeNavigationChunks(tx        , ty        ) {
+    const s=this.self;
+    if (!s) return;
+    const cols=Math.ceil(this.width/32),rows=Math.ceil(this.height/32);
+    const dx=tx-s.x,dy=ty-s.y,length=dx*dx+dy*dy;
+    const goal=Math.floor(ty/32)*cols+Math.floor(tx/32);
+    const chunks=Array.from({length:cols*rows},(_,i)=>{
+      const x=Math.min(this.width-1,i%cols*32+16),y=Math.min(this.height-1,Math.floor(i/cols)*32+16);
+      const along=length?Math.max(0,Math.min(1,((x-s.x)*dx+(y-s.y)*dy)/length)):0;
+      const distance=Math.max(0,Math.hypot(x-s.x-along*dx,y-s.y-along*dy)-23);
+      return {i,distance,along};
+    });
+    chunks.sort((a,b)=>a.i===goal?-1:b.i===goal?1:a.distance-b.distance||a.along-b.along||a.i-b.i);
+    this.navigationChunks=chunks.map(c=>c.i);this.navigationChunkAt=0;
   }
 
   /** Quick encounters suspend the existing intent. Do not emit Move while the
@@ -267,13 +306,15 @@ export class Field {
     if (this.wholeReady) return true;
     if (this.cacheWait > performance.now()) return false;
     const cols = Math.ceil(this.width / 32), rows = Math.ceil(this.height / 32), count = cols * rows;
+    const prioritized=this.mapNavigation && this.navigationChunks.length===count;
     for (let i = 0; i < count; i++) {
-      const index = (this.revealCursor + i) % count;
+      if (prioritized && this.navigationChunkAt>=count) break;
+      const index = prioritized ? this.navigationChunks[this.navigationChunkAt] : (this.revealCursor + i) % count;
       const bx = index % cols * 32, by = Math.floor(index / cols) * 32;
       const ex = Math.min(this.width,bx+32), ey = Math.min(this.height,by+32);
       let missing = false;
       for (let y=by;y<ey && !missing;y++) for(let x=bx;x<ex;x++) if(!this.walk[y*this.width+x]) { missing=true; break; }
-      if (!missing) continue;
+      if (!missing) { if (prioritized) this.navigationChunkAt++; continue; }
       this.revealCursor = index;
       if (this.pending.size === 0) {
         const key = `${this.floor},${bx},${by},${ex},${ey}`;
@@ -309,7 +350,7 @@ export class Field {
     on("Self", (m) => { this.self = new Actor({ id: m.id, kind: "player", name: m.name, sprite: m.sprite, x: 0, y: 0, dir: 0 }); });
     on("EnterFloor", (m) => this.enterFloor(m));
     on("MapData", (m) => this.mapData(m));
-    on("NpcList", (m) => { this.npcLists.set(m.floor, m.npcs); this.npcPending.delete(m.floor); });
+    on("NpcList", (m) => { this.npcLists.set(m.floor, m.npcs); this.placeLists.set(m.floor,m.places??[]); this.npcPending.delete(m.floor); });
     on("PosCorrect", (m) => { this.corrections++; if (this.mapNavigation) this.navigationStatus = "移动被服务端阻止，请重新选择目标"; this.mapNavigation = false; this.path = []; this.pathGoal = ""; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
     on("ObjAppear", (m) => { for (const o of m.objs) { this.actors.set(o.id, new Actor(o)); album.seen(o.sprite); } }); // 相簿的"看到"（CheckNewPet）
     on("ObjDisappear", (m) => { for (const id of m.ids) this.actors.delete(id); });
@@ -350,7 +391,7 @@ export class Field {
     this.subscriptions = [];
     this.floor = -1;
     this.self = null;
-    this.actors.clear(); this.cache.clear(); this.npcLists.clear();
+    this.actors.clear(); this.cache.clear(); this.npcLists.clear(); this.placeLists.clear();
     this.pending.clear(); this.npcPending.clear();
     this.target = null; this.path = []; this.followSteps = [];
   }
@@ -379,6 +420,7 @@ export class Field {
     }
     this.pending.clear();
     this.revealCursor = 0; this.wholeReady = false; this.seenPosition = ""; this.mapNavigation = false; this.navigationStatus = "";
+    this.navigationEntrances = []; this.navigationChunks = []; this.navigationChunkAt = 0;
     this.actors.clear();
     this.target = null;
     this.waitingWarp = false;
@@ -521,15 +563,21 @@ export class Field {
 
   /** 世界地图用：一层楼全部 NPC 的位置（NpcListReq → NpcList），没有就先向服务端要、这次回 null */
           npcLists = new Map                  ();
-          npcPending = new Set        ();
+          placeLists = new Map                    ();
+          npcPending = new Map               ();
   npcList(floor        )                  {
     const l = this.npcLists.get(floor);
     if (l) return l;
-    if (!this.npcPending.has(floor)) { this.npcPending.add(floor); this.net.send({ t: "NpcListReq", floor }); }
+    const now=performance.now(),pending=this.npcPending.get(floor);
+    if (pending===undefined || now-pending>=10_000) { this.npcPending.set(floor,now); this.net.send({ t: "NpcListReq", floor }); }
     return null;
   }
+  mapPlaces(floor        )                    {
+    this.npcList(floor);
+    return this.placeLists.get(floor)??null;
+  }
   /** 换了楼层就把那一层的清单作废（巴士会动、按时间出现的人会变） */
-  forgetNpcs(floor        ) { this.npcLists.delete(floor); }
+  forgetNpcs(floor        ) { this.npcLists.delete(floor); this.placeLists.delete(floor); this.npcPending.delete(floor); }
 
   /** 地图资料每到一批加一，自动地图据此重画 */
   mapVersion = 0;
@@ -611,7 +659,7 @@ export class Field {
     // ten seconds keeps the same small concurrency cap, including slow links.
     const requestNow = performance.now();
     for (const [key, at] of this.pending) if (requestNow - at >= 10_000) this.pending.delete(key);
-    if (this.minimapReveal || this.mapNavigation) this.requestWholeFloor();
+    if (this.minimapReveal || this.mapNavigation && !this.pathGoal) this.requestWholeFloor();
     if (this.wantDir >= 0) {
       this.mapNavigation = false; this.navigationStatus = "";
       this.target = null; this.path = []; this.pathGoal = "";
@@ -647,7 +695,7 @@ export class Field {
       if (this.pathGoal !== `${this.target}`) {
         const [tx, ty] = this.target;
         if (this.mapNavigation) {
-          if (this.walk[ty * this.width + tx] === 1) {
+          if (this.walk[ty * this.width + tx] === 1 && !this.navigationEntrances.some(([x,y])=>this.walk[y*this.width+x]!==1)) {
             this.navigationStatus = "目标不可达：目标格为墙体或障碍";
             this.target = null; this.mapNavigation = false; return;
           }
@@ -656,12 +704,16 @@ export class Field {
           const attempt = `${this.floor},${s.x},${s.y},${tx},${ty},${this.mapVersion},${this.wholeReady}`;
           if (this.navigationAttempt === attempt) { this.requestView(); return; }
           this.navigationAttempt = attempt;
-          const path = gridPath(this.width,this.height,this.walk,s.x,s.y,tx,ty);
+          const path = gridPath(this.width,this.height,this.walk,s.x,s.y,tx,ty,this.navigationEntrances);
           if (path === null) {
             if (!this.wholeReady) { this.requestView(); return; }
             this.navigationStatus = "目标不可达：被障碍阻挡或需要经过传送点"; this.target = null; this.mapNavigation = false; return;
           }
-          this.path = path; this.finalDir = -1; this.pathGoal = `${this.target}`;
+          this.path = path; this.finalDir = -1;
+          // The selected doorway edge may differ from the catalogue's first
+          // coordinate. Keep the displayed target and resume intent accurate.
+          this.target=path.reduce                 (([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
+          this.pathGoal = `${this.target}`;
           this.navigationStatus = path.length ? "自动寻路中…" : "已到达目标";
         } else {
         const r = routeTo(s.x, s.y, tx, ty, (x, y) => !this.canEnter(x, y));

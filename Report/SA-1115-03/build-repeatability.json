@@ -1,0 +1,7 @@
+{
+  "binary_sha256": "6bbafe1e8812f04252630ceb12f6a1c182bec841e567b70557929a677ee4e731",
+  "identical": true,
+  "production_inputs_stable": true,
+  "changed": [],
+  "config_update_after_build": "configuration-update.json"
+}

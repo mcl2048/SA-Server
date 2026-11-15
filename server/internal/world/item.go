@@ -155,6 +155,11 @@ func (w *World) weapon(inv *inventory) *data.ItemDef {
 }
 
 func (w *World) sendInventory(e *entity) {
+	// Inventory/quest messages are projections only. itemsChanged and battle
+	// settlement serialize and save independently; Attach sends a fresh view.
+	if !e.attached() {
+		return
+	}
 	msg := &proto.Inventory{Gold: e.char.Gold, Items: []proto.InvItem{}}
 	for i, it := range e.inv {
 		if it == nil {

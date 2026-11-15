@@ -1,0 +1,9 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: five pets selected through native controls
+Error: actual battle did not deploy five pets
+    at assert (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:5:42)
+    at Module.run (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:50:4)
+    at async work (file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/final-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":379,"y":186},"stored_position":{"floor":300,"x":379,"y":186},"position_matches":true}}

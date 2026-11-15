@@ -1,0 +1,6 @@
+{
+  "reason": "User explicitly requested the concurrently edited config.yaml be committed and packaged",
+  "previous_sha256": "ce059872dc4869ff8dbbe5fb07f40fe6531e6453a72d3e2bf9a0d8ef495e5552",
+  "final_sha256": "74323dc9242c44201273c33941bd7760fee28a3d307f2a07a0181763060a47e4",
+  "embedded_compilation_inputs_changed": false
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "device": "desktop",
+    "name": "five pets selected through native controls",
+    "passed": true,
+    "evidence": {
+      "pets": [
+        {
+          "slot": 0,
+          "state": "battle"
+        },
+        {
+          "slot": 1,
+          "state": "standby"
+        },
+        {
+          "slot": 2,
+          "state": "standby"
+        },
+        {
+          "slot": 3,
+          "state": "standby"
+        },
+        {
+          "slot": 4,
+          "state": "standby"
+        }
+      ]
+    }
+  }
+]

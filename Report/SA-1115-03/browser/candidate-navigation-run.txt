@@ -1,0 +1,14 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: native map drag pans without click-through or movement
+desktop: native coordinate validation and input lifecycle
+mobile: complete current-world village/cave catalogue and native pagination
+mobile: native village location click walks and enters destination
+mobile: native cave location click walks and enters destination
+mobile: native map drag pans without click-through or movement
+mobile: native coordinate validation and input lifecycle
+{"variant":"candidate","stage":"scenario-finished"}
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/candidate-automation.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":100,"x":633,"y":491},"stored_position":{"floor":100,"x":633,"y":491},"position_matches":true}}

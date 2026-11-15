@@ -244,9 +244,12 @@ func (w *World) partyUpdate(e *entity) {
 	}
 	for i, m := range p.slots {
 		if m == e {
-			msg := w.partyMember(p, i)
+			var msg *proto.PartyMember
 			for _, o := range p.slots {
-				if o != nil && o != e {
+				if o != nil && o != e && o.attached() {
+					if msg == nil {
+						msg = w.partyMember(p, i)
+					}
 					o.client.Send(msg)
 				}
 			}
@@ -256,7 +259,9 @@ func (w *World) partyUpdate(e *entity) {
 
 // sendStatus 送 e 自己的状态，顺便更新队员看到的 HP、MP。
 func (w *World) sendStatus(e *entity) {
-	e.client.Send(w.statusOf(e))
+	if e.attached() {
+		e.client.Send(w.statusOf(e))
+	}
 	w.partyUpdate(e)
 }
 

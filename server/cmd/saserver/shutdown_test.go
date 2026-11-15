@@ -48,18 +48,22 @@ func TestShutdownServerHelper(t *testing.T) {
 }
 
 func TestSIGTERMSavesOnlinePosition(t *testing.T) {
-	testSIGTERMSavesOnlinePositions(t, 1, false, false)
+	testSIGTERMSavesOnlinePositions(t, 1, false, false, false)
+}
+
+func TestSIGTERMSavesDetachedPosition(t *testing.T) {
+	testSIGTERMSavesOnlinePositions(t, 1, false, false, true)
 }
 
 func TestSIGTERMWaitsForSlowSaveQueue(t *testing.T) {
-	testSIGTERMSavesOnlinePositions(t, 4, true, false)
+	testSIGTERMSavesOnlinePositions(t, 4, true, false, false)
 }
 
 func TestSIGTERMWaitsForSharedFamilySaveQueue(t *testing.T) {
-	testSIGTERMSavesOnlinePositions(t, 1, false, true)
+	testSIGTERMSavesOnlinePositions(t, 1, false, true, false)
 }
 
-func testSIGTERMSavesOnlinePositions(t *testing.T, players int, slow, slowFamily bool) {
+func testSIGTERMSavesOnlinePositions(t *testing.T, players int, slow, slowFamily, detached bool) {
 	t.Helper()
 	if runtime.GOOS == "windows" {
 		t.Skip("SIGTERM integration requires POSIX signals")
@@ -249,6 +253,43 @@ func testSIGTERMSavesOnlinePositions(t *testing.T, players int, slow, slowFamily
 		if !strings.Contains(reply["text"].(string), "传送到") {
 			t.Fatalf("warp failed: %v", reply)
 		}
+		if detached {
+			// A lost transport must retain the in-memory actor, not perform
+			// a normal Leave/save. A second WebSocket client observes background=true
+			// before SIGTERM; the SQLite assertion below proves shutdown saves it.
+			if err := connection.CloseNow(); err != nil {
+				t.Fatal(err)
+			}
+			connection, _, err = websocket.Dial(ctx, "ws://"+cfg.Addr+"/ws", nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			read("Hello")
+			send(&proto.Login{Account: cfg.GMs[i], Password: password})
+			if result := read("AuthResult"); result["ok"] != true {
+				t.Fatalf("background inspection login: %v", result)
+			}
+			read("ServerList")
+			send(&proto.SelectLine{ID: 1})
+			read("LineSelected")
+			for {
+				send(&proto.CharList{})
+				listing := read("CharListResult")
+				chars, ok := listing["chars"].([]any)
+				if !ok || len(chars) != 1 {
+					t.Fatalf("detached character missing from lobby: %v", listing)
+				}
+				entry := chars[0].(map[string]any)
+				if entry["online"] == true && entry["background"] == true {
+					break
+				}
+				select {
+				case <-ticker.C:
+				case <-ctx.Done():
+					t.Fatal("character never became a retained background actor")
+				}
+			}
+		}
 		if slowFamily {
 			// Queue enough independent family saves that final character writes
 			// cannot incidentally drain them just by sharing SQLite's connection.
@@ -309,7 +350,7 @@ func testSIGTERMSavesOnlinePositions(t *testing.T, players int, slow, slowFamily
 	case <-ctx.Done():
 		t.Fatal("SIGTERM did not stop and drain the server")
 	}
-	t.Logf("SIGTERM completed after %s for %d online players (slow=%t, slowFamily=%t)", time.Since(shutdownAt), players, slow, slowFamily)
+	t.Logf("SIGTERM completed after %s for %d retained players (slow=%t, slowFamily=%t, detached=%t)", time.Since(shutdownAt), players, slow, slowFamily, detached)
 	if !strings.Contains(log.String(), "已退出，在线角色存档队列已排空") {
 		t.Fatalf("missing graceful exit: %s", log.String())
 	}

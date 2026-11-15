@@ -19,7 +19,7 @@
 
 
 
-import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=08f6b4cf8a3cf7f0";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=5e4867fa738c689d";
 
 
 
@@ -142,7 +142,10 @@ export function smartChoose(s            , c              )                     
   // target=-1 while the authoritative battle is finishing.
   if (enemies.length === 0) { out.kind = "guard"; return out; }
   if (s.autoEscape && !c.noEscape && !c.pvp && (c.escapeFailures ?? 0) < 3) {
-    out.kind = "escape"; out.label = "自动逃跑"; return out;
+    out.kind = "escape"; out.label = "自动逃跑";
+    const guard = c.pet?.skills.find(sk => (sk.field === 0 || sk.field === 1) && (sk.id === 2 || sk.func === "PETSKILL_NormalGuard"));
+    if (guard && (f(pet)?.hp ?? 0) > 0) out.pet = [guard.slot, pet];
+    return out;
   }
 
   // 威胁：学到的平均伤害，没学到时按等级估；不能动的敌人这回合没有威胁
@@ -260,7 +263,9 @@ export function smartChoose(s            , c              )                     
   }
 
   // 逃跑：打不过而且逃得掉（"打不过就逃跑"关掉就不逃）
-  const escapeFallback = s.autoEscape && (c.escapeFailures ?? 0) >= 3;
+  // Every automatic escape path shares the same actual-failure bound,
+  // including danger and capture-without-target when autoEscape is disabled.
+  const escapeFallback = (c.escapeFailures ?? 0) >= 3;
   if (!done && !c.noEscape && !escapeFallback && s.escape) {
     const myHp = aliveAllies.reduce((a, x) => a + x.hp, 0), best = Math.max(0, ...plans.map((p) => [...p.hits.values()].reduce((a, b) => a + b, 0)));
     const enemyHp = enemies.reduce((a, e) => a + e.hp, 0);

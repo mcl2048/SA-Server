@@ -1,0 +1,48 @@
+{
+  "complete": true,
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-p",
+        "1",
+        "./...",
+        "-count=1",
+        "-timeout=180s"
+      ],
+      "exit_code": 0,
+      "seconds": 224.312,
+      "log": "go-test-final.txt"
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "-p",
+        "1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 24.104,
+      "log": "go-vet-final.txt"
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-p",
+        "1",
+        "./...",
+        "-count=1",
+        "-timeout=240s"
+      ],
+      "exit_code": 0,
+      "seconds": 671.744,
+      "log": "go-race.txt"
+    }
+  ],
+  "success": true,
+  "source_stable": true
+}

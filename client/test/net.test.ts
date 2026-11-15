@@ -265,3 +265,22 @@ test("unsubscribe preserves duplicate registrations and once removes its listene
  const result=connection.once("Self");first.message({t:"Self",id:3,name:"three",sprite:100000});
  assert.equal((await result).id,3);assert.equal(handlers.has("Self"),false);
 });
+
+test("wire-level location entries restore omitted zero coordinates before actual navigation",async t=>{
+ const {connection,first}=environment(t);hello(first);await connection.ready();
+ const field=new Field({} as Assets,connection);t.after(()=>field.dispose());
+ first.message({t:"Self",id:1,name:"edge",sprite:100000});
+ first.message({t:"EnterFloor",floor:1,name:"edge",width:10,height:10,x:1,y:8,mapVer:"zero-edge",step:260});
+ await new Promise(resolve=>setImmediate(resolve));
+ first.message({t:"MapData",floor:1,x1:0,y1:0,x2:10,y2:10,tiles:Array(100).fill(100),objs:Array(100).fill(0),walk:"1".repeat(100),ver:"zero-edge"});
+ // Exactly the Go omitempty wire shape: x=0 and conditional=false are absent.
+ first.message({t:"NpcList",floor:1,places:[{name:"边界洞窟",floor:2,entrances:[{y:8}]}]});
+ const place=field.mapPlaces(1)![0];
+ assert.deepEqual(place.entrances[0],{x:0,y:8},"nested zero values must be restored by the real Connection decoder");
+ assert.equal(place.conditional,false);
+ field.navigatePlace(1,place);assert.deepEqual(field.target,[0,8]);
+ field.update(performance.now());
+ assert.ok(first.sent.some(m=>m.t==="Move"&&m.x===1&&m.y===8&&m.dir===1),"zero-coordinate doorway must cause a real legal Move");
+ first.message({t:"NpcList",floor:1});
+ assert.deepEqual(field.mapPlaces(1),[],"legacy servers without the new array remain compatible");
+});

@@ -854,7 +854,7 @@ func (w *World) NpcList(charID, floor int) {
 		if e == nil || w.game.Floors[floor] == nil {
 			return
 		}
-		m := &proto.NpcList{Floor: floor, Npcs: []proto.NpcPos{}}
+		m := &proto.NpcList{Floor: floor, Npcs: []proto.NpcPos{}, Places: mapPlaces(w.game, floor)}
 		for _, o := range w.floors[floor] {
 			if o.kind == "npc" && o.name != "" && !o.hidden() {
 				m.Npcs = append(m.Npcs, proto.NpcPos{Name: o.name, X: o.x, Y: o.y})

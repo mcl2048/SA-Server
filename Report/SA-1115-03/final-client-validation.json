@@ -1,0 +1,20 @@
+{
+  "node": "v26.13.1",
+  "checks": [
+    {
+      "name": "complete client and build tests",
+      "command": "node --test client/test/*.test.* scripts/build-client.test.mjs",
+      "exit_code": 0,
+      "tests": 252,
+      "passed": 252,
+      "failed": 0,
+      "evidence": "final-client-tests.txt"
+    },
+    {
+      "name": "all client TypeScript sources",
+      "command": "node typescript/bin/tsc --noEmit --target ES2022 --module ESNext --moduleResolution bundler --allowImportingTsExtensions --lib ES2022,DOM,DOM.Iterable client/src/*.ts",
+      "exit_code": 0,
+      "evidence": "final-typescript-all.txt"
+    }
+  ]
+}

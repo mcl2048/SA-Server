@@ -1,0 +1,40 @@
+=== RUN   TestNpcListIncludesAllPlayableWarpEntrances
+    mapplaces_test.go:79: catalogue coverage: 4965 entrances in 3281 places across 1205 floors
+--- PASS: TestNpcListIncludesAllPlayableWarpEntrances (6.01s)
+=== RUN   TestMapPlacesGroupsOnlyAdjacentEntriesWithSameDestination
+--- PASS: TestMapPlacesGroupsOnlyAdjacentEntriesWithSameDestination (0.00s)
+=== RUN   TestMapPlacesWorldFloorSummary
+    mapplaces_test.go:114: world floor 100 萨伊那斯: 21 places
+    mapplaces_test.go:117:   卡坦村 -> 1400 (258,170), 3 entry tiles, conditional=false
+    mapplaces_test.go:117:   奇努伊的海底通路 -> 31401 (666,235), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   岬之家 -> 121 (643,676), 2 entry tiles, conditional=false
+    mapplaces_test.go:117:   往柯尔克的道路１楼 -> 10101 (318,428), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   柯奥山的小洞窟１楼 -> 11001 (328,633), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   柯奥村 -> 1100 (470,631), 5 entry tiles, conditional=false
+    mapplaces_test.go:117:   柯尔克的大坑道１楼 -> 10901 (237,445), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   玛丽娜丝渔村 -> 2000 (78,614), 4 entry tiles, conditional=false
+    mapplaces_test.go:117:   玛丽娜丝渔村 -> 2000 (113,660), 4 entry tiles, conditional=false
+    mapplaces_test.go:117:   玛丽娜丝的庄园 -> 2030 (72,586), 7 entry tiles, conditional=false
+    mapplaces_test.go:117:   白狼勇士公会 -> 8216 (653,608), 3 entry tiles, conditional=false
+    mapplaces_test.go:117:   盗贼的洞窟地下１楼 -> 10701 (132,421), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   英雄战场 -> 8200 (396,186), 2 entry tiles, conditional=false
+    mapplaces_test.go:117:   萨姆吉尔庄园 -> 1040 (607,561), 5 entry tiles, conditional=false
+    mapplaces_test.go:117:   萨姆吉尔村 -> 1000 (706,487), 5 entry tiles, conditional=false
+    mapplaces_test.go:117:   萨姆吉尔村 -> 1000 (638,491), 4 entry tiles, conditional=false
+    mapplaces_test.go:117:   阿布的洞窟地下１楼 -> 10001 (191,365), 1 entry tiles, conditional=false
+    mapplaces_test.go:117:   阿布的独栋房屋 -> 101 (184,339), 2 entry tiles, conditional=false
+    mapplaces_test.go:117:   霍特尔村 -> 1300 (622,190), 8 entry tiles, conditional=false
+    mapplaces_test.go:117:   靠近水田的家 -> 120 (549,637), 2 entry tiles, conditional=false
+    mapplaces_test.go:117:   ＰＣ团本部１楼 -> 11301 (601,127), 1 entry tiles, conditional=false
+    mapplaces_test.go:114: world floor 200 加鲁卡: 29 places
+    mapplaces_test.go:114: world floor 300 吉鲁岛: 31 places
+    mapplaces_test.go:114: world floor 400 沙姆岛: 6 places
+    mapplaces_test.go:114: world floor 700 伊甸园区: 10 places
+    mapplaces_test.go:114: world floor 701 伊甸大陆西方: 4 places
+    mapplaces_test.go:114: world floor 702 尼克斯城区: 6 places
+    mapplaces_test.go:114: world floor 703 伊甸大陆南方: 10 places
+    mapplaces_test.go:114: world floor 704 亚伊欧城区: 9 places
+    mapplaces_test.go:114: world floor 705 伊甸大陆东方: 8 places
+--- PASS: TestMapPlacesWorldFloorSummary (0.17s)
+PASS
+ok  	sa/server/internal/world	6.307s

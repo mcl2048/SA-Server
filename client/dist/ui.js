@@ -4,7 +4,7 @@
 
 
 
-import { isMobile } from "./mobile-view.js?v=08f6b4cf8a3cf7f0";
+import { isMobile } from "./mobile-view.js?v=5e4867fa738c689d";
 
 export const OFFSET_640                   = [80, 60];
 
@@ -184,7 +184,7 @@ export class Ui {
         // Use the text's vertical center; padding must not merge a neighboring menu row.
         const nearby = this.texts.filter(t => t.x >= h.x1 - 3 && t.x <= h.x2 + 3
           && t.y + (t.size ?? FONT_SIZE) / 2 >= h.y1 && t.y + (t.size ?? FONT_SIZE) / 2 < h.y2);
-        return { ...h, label: nearby.map(t => t.text.trim()).filter(Boolean).join(" ") || undefined };
+        return { ...h, label: h.label ?? (nearby.map(t => t.text.trim()).filter(Boolean).join(" ") || undefined) };
       });
   }
 
@@ -246,8 +246,8 @@ export class Ui {
   }
 
   /** MakeHitBox：矩形热区，悬停时画原版的闪烁框 */
-  hitBox(x1        , y1        , x2        , y2        , id        , highlight = true)          {
-    this.hits.push({ id, x1, y1, x2, y2 });
+  hitBox(x1        , y1        , x2        , y2        , id        , highlight = true, label         )          {
+    this.hits.push({ id, x1, y1, x2, y2, label });
     if (highlight) this.interactive.add(id);
     const on = this.hovered(id);
     if (on && highlight) this.box(x1, y1, x2, y2, boxColor(), false);

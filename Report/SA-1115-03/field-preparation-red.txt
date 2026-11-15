@@ -1,0 +1,7 @@
+--- FAIL: TestAutomationFarmRecoversBeforeDiscardAndSafetyStop (1.39s)
+    automation_release_test.go:145: farm failed to heal with meat before discard/stop: hp=1 meat=false medicine=true encounter=true
+--- FAIL: TestAutomationPostBattleMeatWaitsForInventoryTransaction (0.08s)
+    automation_release_test.go:168: post-battle discard mutated an open inventory transaction
+FAIL
+FAIL	sa/server/internal/world	1.525s
+FAIL

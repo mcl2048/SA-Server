@@ -1,0 +1,7 @@
+--- FAIL: TestAutomationReusedPrimaryPetStillGuardsOnFailedEscape (1.34s)
+    automation_release_test.go:245: primary pet lost defensive action during automatic escape
+--- FAIL: TestAutomationChangedFloorStopsBeforeUsingSupplies (0.07s)
+    automation_release_test.go:258: changed-floor farm consumed supplies before stopping: hp=22 retained=false active=true reason=
+FAIL
+FAIL	sa/server/internal/world	1.470s
+FAIL

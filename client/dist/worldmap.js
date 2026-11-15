@@ -12,8 +12,8 @@
 
 
 
-import { FONT, InputBox, measure,         } from "./ui.js?v=08f6b4cf8a3cf7f0";
-import { settings, saveSettings } from "./menus.js?v=08f6b4cf8a3cf7f0";
+import { FONT, InputBox, measure,         } from "./ui.js?v=5e4867fa738c689d";
+import { settings, saveSettings } from "./menus.js?v=5e4867fa738c689d";
 
 
 
@@ -136,6 +136,7 @@ const ZOOMS = [2, 3, 4, 6, 8, 12, 16]; // 一格的半宽（像素）；格子�
 const W = 10, H = 10;                   // 窗口 640×480
 const X = (800 - W * 64) / 2, Y = 40;
 const LIST_W = 150, LIST_ROWS = 14, LIST_ROW_H = 20;
+const PLACE_ROWS = 9, PLACE_ROW_H = 34;
 const MAP_X = X + 26 + LIST_W + 8, MAP_Y = Y + 66;
 const MAP_W = W * 64 - (26 + LIST_W + 8) - 26, MAP_H = H * 48 - 66 - 90;
 const BG = "#0a0f1c";
@@ -151,6 +152,9 @@ export class MapWindow {
           drag                                  = null;
           dragged = false;
           listTop = 0;
+          listMode                      = "places";
+          placeTop = 0;
+          placeFloor = -1;
           base                   ;
           marks                   ;
           drawn = "";
@@ -172,7 +176,7 @@ export class MapWindow {
   }
 
   /** 打开时回到自己那一层、跟着自己 */
-  reset() { this.floor = -1; this.follow = true; this.cancelPointer(); this.openingPointer = true; }
+  reset() { this.floor = -1; this.follow = true; this.listMode = "places"; this.placeTop = 0; this.cancelPointer(); this.openingPointer = true; }
 
   /** These are the original InputBox nodes, so the mobile shell can adopt
    * them with IME/focus preserved. Never leave invisible inputs over the field. */
@@ -253,9 +257,13 @@ export class MapWindow {
     if (ui.hovered("map-mini")) ui.bottomLine = "在画面右上角常显一张跟着自己的小地图。";
     if (ui.hovered("map-fit")) ui.bottomLine = "按看过的范围缩放到整张图。";
     if (ui.hovered("map-me")) ui.bottomLine = "回到自己所在的区域，跟着自己移动；拖动地图就不跟了。";
-    // 左边：去过的区域
-    ui.text(x + 28, y + 40, "去过的区域", FONT.AQUA);
+    // Default to this floor's actual entrances, including unvisited caves and
+    // villages. Historical floor browsing remains a separate native tab.
+    if (ui.textButton(x + 28,y + 40,"本区地点",this.listMode==="places"?FONT.YELLOW:FONT.AQUA,"map-tab-places")) this.listMode="places";
+    if (ui.textButton(x + 112,y + 40,"区域",this.listMode==="floors"?FONT.YELLOW:FONT.AQUA,"map-tab-floors")) this.listMode="floors";
     ui.box(x + 26, y + 60, x + 26 + LIST_W, y + 61, "rgba(255,255,255,0.25)", true);
+    if (this.listMode==="places") this.placeList(f);
+    else {
     const floors = f ? f.exploredFloors() : [];
     const maxTop = Math.max(0, floors.length - LIST_ROWS);
     this.listTop = Math.min(this.listTop, maxTop);
@@ -270,6 +278,7 @@ export class MapWindow {
     });
     if (this.listTop > 0 && ui.text(x + 30, y + 68 + LIST_ROWS * LIST_ROW_H, "▲", FONT.AQUA, "map-lu")) this.listTop--;
     if (this.listTop < maxTop && ui.text(x + 26 + LIST_W - 30, y + 68 + LIST_ROWS * LIST_ROW_H, "▼", FONT.AQUA, "map-ld")) this.listTop++;
+    }
     // 地图（列表这一帧点了别层就换成那一层，"全图"才算对层）
     if (view && this.floor >= 0 && this.floor !== view.floor) { view = resolve(); current = !!view && !!f && view.floor === f.floor; }
     ui.box(MAP_X - 1, MAP_Y - 1, MAP_X + MAP_W + 1, MAP_Y + MAP_H + 1, "rgba(255,255,255,0.3)", false);
@@ -298,6 +307,35 @@ export class MapWindow {
   }
 
           fitLater = false;
+
+          placeList(f              ) {
+    if (!f || f.floor<0) return;
+    const ui=this.host.ui;
+    if (this.placeFloor!==f.floor) { this.placeFloor=f.floor;this.placeTop=0; }
+    const places=f.mapPlaces(f.floor);
+    if (places===null) { ui.text(X+32,Y+68,"正在加载地点…",FONT.GRAY);return; }
+    if (!places.length) { ui.text(X+32,Y+68,"本区没有跨区入口",FONT.GRAY);return; }
+    this.placeTop=Math.min(this.placeTop,Math.floor((places.length-1)/PLACE_ROWS)*PLACE_ROWS);
+    places.slice(this.placeTop,this.placeTop+PLACE_ROWS).forEach((place,i)=>{
+      const entry=place.entrances[0];
+      if (!entry) return;
+      const ry=Y+68+i*PLACE_ROW_H;
+      const id=`map-place-${f.floor}-${place.floor}-${entry.x}-${entry.y}`;
+      const label=`${place.name}（东 ${entry.x} 南 ${entry.y}${place.conditional?"，条件入口":""}）`;
+      if (ui.hitBox(X+26,ry-2,X+26+LIST_W,ry+PLACE_ROW_H-3,id,false,label)) ui.box(X+26,ry-2,X+26+LIST_W,ry+PLACE_ROW_H-3,"rgba(255,255,255,0.1)",true);
+      ui.text(X+32,ry,clip((place.conditional?"※ ":"")+place.name,LIST_W-16),FONT.WHITE);
+      ui.text(X+32,ry+16,`东 ${entry.x}　南 ${entry.y}`,FONT.GRAY,undefined,12);
+      if (ui.hovered(id)) ui.bottomLine=label+`　区域 ${place.floor}`;
+      if (ui.clicked(id)) {
+        f.navigatePlace(f.floor,place);
+        if (f.target) { this.host.closeMap?.();this.syncVisibility(false); }
+      }
+    });
+    const py=Y+68+PLACE_ROWS*PLACE_ROW_H;
+    if (this.placeTop>0 && ui.textButton(X+30,py,"上一页",FONT.AQUA,"map-places-prev")) this.placeTop=Math.max(0,this.placeTop-PLACE_ROWS);
+    if (this.placeTop+PLACE_ROWS<places.length && ui.textButton(X+108,py,"下一页",FONT.AQUA,"map-places-next")) this.placeTop+=PLACE_ROWS;
+    ui.text(X+32,py+24,`${places.length} 处地点　${Math.floor(this.placeTop/PLACE_ROWS)+1}/${Math.ceil(places.length/PLACE_ROWS)}`,FONT.GRAY,undefined,12);
+  }
 
   /** 按住拖动：像素位移换成格子位移（px = (X+Y)s、py = (Y−X)·0.75s 的反算） */
           pan(ui    , view           ) {

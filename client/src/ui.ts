@@ -28,7 +28,7 @@ export function boxColor(now = performance.now()): string {
 }
 
 export interface Text { x: number; y: number; text: string; color: string; size?: number; align?: CanvasTextAlign; }
-interface Hit { id: string; x1: number; y1: number; x2: number; y2: number; }
+interface Hit { id: string; x1: number; y1: number; x2: number; y2: number; label?: string; }
 export interface MobileHit extends Hit { label?: string; }
 export interface Box { x1: number; y1: number; x2: number; y2: number; color: string; fill: boolean; }
 /** 直接画在 2D 覆盖层上的小画布（自动地图这种逐像素画的东西），在方框与文字之前 */
@@ -184,7 +184,7 @@ export class Ui {
         // Use the text's vertical center; padding must not merge a neighboring menu row.
         const nearby = this.texts.filter(t => t.x >= h.x1 - 3 && t.x <= h.x2 + 3
           && t.y + (t.size ?? FONT_SIZE) / 2 >= h.y1 && t.y + (t.size ?? FONT_SIZE) / 2 < h.y2);
-        return { ...h, label: nearby.map(t => t.text.trim()).filter(Boolean).join(" ") || undefined };
+        return { ...h, label: h.label ?? (nearby.map(t => t.text.trim()).filter(Boolean).join(" ") || undefined) };
       });
   }
 
@@ -246,8 +246,8 @@ export class Ui {
   }
 
   /** MakeHitBox：矩形热区，悬停时画原版的闪烁框 */
-  hitBox(x1: number, y1: number, x2: number, y2: number, id: string, highlight = true): boolean {
-    this.hits.push({ id, x1, y1, x2, y2 });
+  hitBox(x1: number, y1: number, x2: number, y2: number, id: string, highlight = true, label?: string): boolean {
+    this.hits.push({ id, x1, y1, x2, y2, label });
     if (highlight) this.interactive.add(id);
     const on = this.hovered(id);
     if (on && highlight) this.box(x1, y1, x2, y2, boxColor(), false);

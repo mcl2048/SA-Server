@@ -1,0 +1,19 @@
+--- FAIL: TestAutomationImplicitEscapeThreeActualFailuresThenFight (1.50s)
+    --- FAIL: TestAutomationImplicitEscapeThreeActualFailuresThenFight/danger (1.42s)
+        automation_release_test.go:40: automatic escape was not bounded: fight=true failures=0
+        automation_release_test.go:54: must fight after three confirmed failures: [escape escape escape escape]
+    --- FAIL: TestAutomationImplicitEscapeThreeActualFailuresThenFight/capture-without-target (0.08s)
+        automation_release_test.go:40: automatic escape was not bounded: fight=true failures=0
+        automation_release_test.go:54: must fight after three confirmed failures: [escape escape escape escape]
+--- FAIL: TestDetachedPresentationSkipsButReattachRestoresAuthoritativeState (0.13s)
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.Inventory
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.Status
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.Pets
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.Status
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.QuestLog
+    automation_release_test.go:83: detached actor built a discarded presentation: *proto.BattleStart
+--- FAIL: TestDetachedStatusStillUpdatesAttachedPartyMember (0.14s)
+    automation_release_test.go:126: detached actor built its own status
+FAIL
+FAIL	sa/server/internal/world	1.885s
+FAIL

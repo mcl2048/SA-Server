@@ -1,0 +1,18 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: five pets selected through native controls
+desktop: normal automatic five-pet battle
+desktop: quick automatic five-pet battle
+desktop: paused editing then native meat preparation
+desktop: server rewards progress while Chromium page is frozen
+desktop: two repeated offline reward settlements with every page closed
+desktop: native login takes over current actor and restores rewards/pets
+mobile: five pets selected through native controls
+mobile: normal automatic five-pet battle
+mobile: quick automatic five-pet battle
+mobile: paused editing then native meat preparation
+mobile: server rewards progress while Chromium page is frozen
+mobile: two repeated offline reward settlements with every page closed
+mobile: native login takes over current actor and restores rewards/pets
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/final-automation.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":374,"y":180},"stored_position":{"floor":300,"x":374,"y":180},"position_matches":true}}

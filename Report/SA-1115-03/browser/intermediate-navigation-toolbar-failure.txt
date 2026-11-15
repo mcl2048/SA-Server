@@ -1,0 +1,32 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: native map drag pans without click-through or movement
+desktop: native coordinate validation and input lifecycle
+mobile: complete current-world village/cave catalogue and native pagination
+locator.scrollIntoViewIfNeeded: Timeout 29935.834000000003ms exceeded.
+Call log:
+[2m  - attempting scroll into view action[22m
+[2m    2 × waiting for element to be stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying scroll into view action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be stable[22m
+[2m      - element is not visible[22m
+[2m    - retrying scroll into view action[22m
+[2m      - waiting 100ms[22m
+[2m    40 × waiting for element to be stable[22m
+[2m       - element is not visible[22m
+[2m     - retrying scroll into view action[22m
+[2m       - waiting 500ms[22m
+[2m    - waiting for element to be stable[22m
+
+    at GameUI.toolbar (/home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:112:11)
+    at async openMap (/home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:21:50)
+    at async approach (/home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:29:93)
+    at async Module.run (/home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:55:74)
+    at async work (/home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/candidate-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":100,"x":633,"y":491},"stored_position":{"floor":100,"x":633,"y":491},"position_matches":true}}

@@ -1,0 +1,39 @@
+✔ new automation switches default off and remain isolated per character (4.940909ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (3.962498ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (1.15157ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (0.859824ms)
+✔ self-only meat is not selected for an injured teammate (0.729192ms)
+✔ mixed HP-first descriptions cannot masquerade as an MP recovery item (0.575925ms)
+✔ medicine precedes a whole-party healing spirit when multiple allies are low (1.325966ms)
+✖ danger and no-target capture stop escaping after three confirmed failures (2.505134ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 385.6617
+
+✖ failing tests:
+
+test at client/test/ai-automation.test.ts:60:1
+✖ danger and no-target capture stop escaping after three confirmed failures (2.505134ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  'escape' !== 'attack'
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/ai-automation.test.ts:65:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'escape',
+    expected: 'attack',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

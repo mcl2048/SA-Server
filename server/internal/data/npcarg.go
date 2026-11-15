@@ -69,6 +69,29 @@ func Atoi(s string) int {
 	return n
 }
 
+// FreeWarpPoints reads one FREEMORE/OVER segment using the same TO grammar as
+// NPC_WarpWarpCharacter. Keep the native ten-choice limit and stop at the first
+// incomplete tuple. Both actual warps and the map catalogue use this parser;
+// it only reads coordinates and never evaluates or grants the FREE condition.
+func FreeWarpPoints(segment string) [][3]int {
+	to, ok := ArgField(segment, "TO")
+	if !ok {
+		return nil
+	}
+	var points [][3]int
+	for _, entry := range strings.Split(to, "&") {
+		v := strings.Split(entry, ",")
+		if len(v) < 3 {
+			break
+		}
+		points = append(points, [3]int{Atoi(v[0]), Atoi(v[1]), Atoi(v[2])})
+		if len(points) >= 10 {
+			break
+		}
+	}
+	return points
+}
+
 // ---------------- 万事通（npc_windowman.c）的窗口设定档 ----------------
 
 // 万事通窗口的按钮处理位置：ok, cancel, yes, no, prev, next，之后是选单的第 1..7 个 selected（buttonproc[13]）。

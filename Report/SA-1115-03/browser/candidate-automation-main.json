@@ -1,0 +1,3818 @@
+{
+  "variant": "candidate",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "9e6efba25ea56968ff2179cc5e65062f36274432affc5337ef8cb329dcdb79c0",
+  "binary_version": "v0.2.21-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T08:55:18.237Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T08:55:30.177Z"
+    }
+  ],
+  "checks": [
+    {
+      "device": "desktop",
+      "name": "five pets selected through native controls",
+      "passed": true,
+      "evidence": {
+        "pets": [
+          {
+            "slot": 0,
+            "state": "battle"
+          },
+          {
+            "slot": 1,
+            "state": "standby"
+          },
+          {
+            "slot": 2,
+            "state": "standby"
+          },
+          {
+            "slot": 3,
+            "state": "standby"
+          },
+          {
+            "slot": 4,
+            "state": "standby"
+          }
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "normal automatic five-pet battle",
+      "passed": true,
+      "evidence": {
+        "start": {
+          "t": "BattleStart",
+          "field": 140,
+          "mySlot": 0,
+          "turnTime": 300000,
+          "speed": 200,
+          "turn": 0,
+          "pvp": false,
+          "watch": false,
+          "resume": false,
+          "fighters": [
+            {
+              "slot": 0,
+              "name": "Mechabc9",
+              "sprite": 100000,
+              "level": 30,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 1020,
+              "maxHp": 1020,
+              "mp": 100,
+              "maxMp": 100,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 5,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 127,
+              "maxHp": 127,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 6,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 132,
+              "maxHp": 132,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 1,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 7,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 124,
+              "maxHp": 124,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 2,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 8,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 120,
+              "maxHp": 120,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 3,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 9,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 129,
+              "maxHp": 129,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 4,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 15,
+              "name": "FixtureRecoveryGuard",
+              "sprite": 100250,
+              "level": 1,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 122,
+              "maxHp": 122,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            }
+          ]
+        },
+        "end": {
+          "t": "BattleEnd",
+          "result": "win",
+          "exp": 1,
+          "gold": 0,
+          "levelUp": 0
+        },
+        "turns": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "quick automatic five-pet battle",
+      "passed": true,
+      "evidence": {
+        "start": {
+          "t": "BattleStart",
+          "field": 140,
+          "mySlot": 0,
+          "turnTime": 300000,
+          "speed": 200,
+          "turn": 0,
+          "pvp": false,
+          "watch": false,
+          "resume": false,
+          "fighters": [
+            {
+              "slot": 0,
+              "name": "Mechabc9",
+              "sprite": 100000,
+              "level": 30,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 1020,
+              "maxHp": 1020,
+              "mp": 100,
+              "maxMp": 100,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 5,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 127,
+              "maxHp": 127,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 6,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 132,
+              "maxHp": 132,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 1,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 7,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 124,
+              "maxHp": 124,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 2,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 8,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 120,
+              "maxHp": 120,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 3,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 9,
+              "name": "乌力",
+              "sprite": 100250,
+              "level": 20,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 129,
+              "maxHp": 129,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 4,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            },
+            {
+              "slot": 15,
+              "name": "FixtureRecoveryGuard",
+              "sprite": 100250,
+              "level": 1,
+              "exp": 0,
+              "nextExp": 0,
+              "hp": 121,
+              "maxHp": 121,
+              "mp": 0,
+              "maxMp": 0,
+              "ownerSlot": 0,
+              "bagSlot": 0,
+              "status": 0,
+              "defenseBoost": 0,
+              "defenseTurns": 0
+            }
+          ]
+        },
+        "end": {
+          "t": "BattleEnd",
+          "result": "win",
+          "exp": 1,
+          "gold": 0,
+          "levelUp": 0
+        },
+        "turns": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "paused editing then native meat preparation",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "status": {
+            "hp": 1,
+            "maxHp": 1020,
+            "mp": 100,
+            "maxMp": 100,
+            "gold": 1730
+          },
+          "policy": null,
+          "items": [
+            {
+              "id": 1234,
+              "slot": 9,
+              "pile": 1,
+              "name": "小块肉"
+            },
+            {
+              "id": 1500,
+              "slot": 10,
+              "pile": 1,
+              "name": "耐久力回复药"
+            }
+          ],
+          "pets": [
+            {
+              "slot": 0,
+              "state": "battle",
+              "hp": 127
+            },
+            {
+              "slot": 1,
+              "state": "standby",
+              "hp": 132
+            },
+            {
+              "slot": 2,
+              "state": "standby",
+              "hp": 124
+            },
+            {
+              "slot": 3,
+              "state": "standby",
+              "hp": 120
+            },
+            {
+              "slot": 4,
+              "state": "standby",
+              "hp": 129
+            }
+          ]
+        },
+        "editing": {
+          "status": {
+            "hp": 1,
+            "maxHp": 1020,
+            "mp": 100,
+            "maxMp": 100,
+            "gold": 1730
+          },
+          "policy": null,
+          "items": [
+            {
+              "id": 1234,
+              "slot": 9,
+              "pile": 1,
+              "name": "小块肉"
+            },
+            {
+              "id": 1500,
+              "slot": 10,
+              "pile": 1,
+              "name": "耐久力回复药"
+            }
+          ],
+          "pets": [
+            {
+              "slot": 0,
+              "state": "battle",
+              "hp": 127
+            },
+            {
+              "slot": 1,
+              "state": "standby",
+              "hp": 132
+            },
+            {
+              "slot": 2,
+              "state": "standby",
+              "hp": 124
+            },
+            {
+              "slot": 3,
+              "state": "standby",
+              "hp": 120
+            },
+            {
+              "slot": 4,
+              "state": "standby",
+              "hp": 129
+            }
+          ]
+        },
+        "prepared": {
+          "status": {
+            "hp": 23,
+            "maxHp": 1020,
+            "mp": 100,
+            "maxMp": 100,
+            "gold": 1730
+          },
+          "policy": null,
+          "items": [
+            {
+              "id": 1500,
+              "slot": 10,
+              "pile": 1,
+              "name": "耐久力回复药"
+            }
+          ],
+          "pets": [
+            {
+              "slot": 0,
+              "state": "battle",
+              "hp": 127
+            },
+            {
+              "slot": 1,
+              "state": "standby",
+              "hp": 132
+            },
+            {
+              "slot": 2,
+              "state": "standby",
+              "hp": 124
+            },
+            {
+              "slot": 3,
+              "state": "standby",
+              "hp": 120
+            },
+            {
+              "slot": 4,
+              "state": "standby",
+              "hp": 129
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 300,
+      "x": 450,
+      "y": 230
+    },
+    "stored_position": {
+      "floor": 300,
+      "x": 450,
+      "y": 230
+    },
+    "position_matches": true
+  },
+  "client_version": "36857c1776993a75",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 1,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 128,
+          "maxHp": 128,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 379,
+      "y": 186,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 0,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 0,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 0,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 0,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 128,
+          "maxHp": 128,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 128,
+          "maxHp": 128,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": []
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "rest",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 140,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 30,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 1020,
+          "maxHp": 1020,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 5,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 127,
+          "maxHp": 127,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 6,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 132,
+          "maxHp": 132,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 7,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 124,
+          "maxHp": 124,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 8,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 120,
+          "maxHp": 120,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 129,
+          "maxHp": 129,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureRecoveryGuard",
+          "sprite": 100250,
+          "level": 1,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 122,
+          "maxHp": 122,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 15,
+          "damage": 216,
+          "hp": 0,
+          "actorHp": 1020,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 2
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "exp": 1,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 1,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 1,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "BattleStart",
+      "field": 140,
+      "mySlot": 0,
+      "turnTime": 300000,
+      "speed": 200,
+      "turn": 0,
+      "pvp": false,
+      "watch": false,
+      "resume": false,
+      "fighters": [
+        {
+          "slot": 0,
+          "name": "Mechabc9",
+          "sprite": 100000,
+          "level": 30,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 1020,
+          "maxHp": 1020,
+          "mp": 100,
+          "maxMp": 100,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 5,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 127,
+          "maxHp": 127,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 6,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 132,
+          "maxHp": 132,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 1,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 7,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 124,
+          "maxHp": 124,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 2,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 8,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 120,
+          "maxHp": 120,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 3,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 9,
+          "name": "乌力",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 129,
+          "maxHp": 129,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 4,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        },
+        {
+          "slot": 15,
+          "name": "FixtureRecoveryGuard",
+          "sprite": 100250,
+          "level": 1,
+          "exp": 0,
+          "nextExp": 0,
+          "hp": 121,
+          "maxHp": 121,
+          "mp": 0,
+          "maxMp": 0,
+          "ownerSlot": 0,
+          "bagSlot": 0,
+          "status": 0,
+          "defenseBoost": 0,
+          "defenseTurns": 0
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "BattleTurn",
+      "turn": 1,
+      "events": [
+        {
+          "actor": 0,
+          "kind": "attack",
+          "target": 15,
+          "damage": 107,
+          "hp": 14,
+          "actorHp": 1020,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 15,
+          "kind": "guard",
+          "target": -1,
+          "damage": 0,
+          "hp": 14,
+          "actorHp": 0,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 6,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1,
+          "hp": 13,
+          "actorHp": 132,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 7,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1,
+          "hp": 12,
+          "actorHp": 124,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 8,
+          "kind": "attack",
+          "target": 15,
+          "damage": 21,
+          "hp": 12,
+          "actorHp": 120,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 5,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1,
+          "hp": 12,
+          "actorHp": 127,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": false,
+          "ok": false,
+          "fly": 0
+        },
+        {
+          "actor": 9,
+          "kind": "attack",
+          "target": 15,
+          "damage": 1,
+          "hp": 0,
+          "actorHp": 129,
+          "actorMp": 0,
+          "skill": "",
+          "status": 0,
+          "dead": true,
+          "ok": false,
+          "fly": 0
+        }
+      ]
+    },
+    {
+      "t": "BattleEnd",
+      "result": "win",
+      "exp": 1,
+      "gold": 0,
+      "levelUp": 0
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 2,
+          "nextExp": 3448,
+          "hp": 127,
+          "maxHp": 127,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 2,
+          "nextExp": 3448,
+          "hp": 132,
+          "maxHp": 132,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 2,
+          "nextExp": 3448,
+          "hp": 124,
+          "maxHp": 124,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 2,
+          "nextExp": 3448,
+          "hp": 120,
+          "maxHp": 120,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 20,
+          "exp": 2,
+          "nextExp": 3448,
+          "hp": 129,
+          "maxHp": 129,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": true,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 450,
+      "y": 230,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "小块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 10,
+          "name": "耐久力回复药",
+          "pile": 1,
+          "type": 16,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 23,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": []
+    },
+    {
+      "t": "Status",
+      "level": 30,
+      "exp": 2,
+      "nextExp": 11352,
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 300,
+      "name": "吉鲁岛",
+      "x": 450,
+      "y": 230,
+      "width": 600,
+      "height": 600
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": true,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": "附近没有可安全往返的格子，已停止自动遇敌。"
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": true,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": true,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "failure": "desktop: frozen page stopped server farming",
+  "failure_stack": "Error: desktop: frozen page stopped server farming\n    at wait (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:21:183)\n    at async Module.run (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:81:15)\n    at async work (file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)\n    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5",
+  "failure_state": {
+    "screen": "FieldScreen",
+    "field": true,
+    "battle": false,
+    "actions": [
+      {
+        "id": "chat-all",
+        "label": "◆",
+        "x1": 776,
+        "y1": 471,
+        "x2": 788.421875,
+        "y2": 489
+      },
+      {
+        "id": "chat-up",
+        "label": "▲",
+        "x1": 776,
+        "y1": 496,
+        "x2": 788.421875,
+        "y2": 514
+      },
+      {
+        "id": "chat-down",
+        "label": "▼",
+        "x1": 776,
+        "y1": 521,
+        "x2": 788.421875,
+        "y2": 539
+      },
+      {
+        "id": "tb-map",
+        "x1": 0,
+        "y1": 576,
+        "x2": 92,
+        "y2": 600
+      },
+      {
+        "id": "tb-status",
+        "x1": 116,
+        "y1": 576,
+        "x2": 208,
+        "y2": 600
+      },
+      {
+        "id": "tb-pet",
+        "x1": 232,
+        "y1": 576,
+        "x2": 324,
+        "y2": 600
+      },
+      {
+        "id": "tb-item",
+        "x1": 348,
+        "y1": 576,
+        "x2": 440,
+        "y2": 600
+      },
+      {
+        "id": "tb-mail",
+        "x1": 463,
+        "y1": 576,
+        "x2": 555,
+        "y2": 600
+      },
+      {
+        "id": "tb-album",
+        "x1": 578,
+        "y1": 576,
+        "x2": 670,
+        "y2": 600
+      },
+      {
+        "id": "tb-system",
+        "x1": 692,
+        "y1": 576,
+        "x2": 780,
+        "y2": 600
+      },
+      {
+        "id": "fp-menu",
+        "x1": 5,
+        "y1": 4,
+        "x2": 34,
+        "y2": 34
+      },
+      {
+        "id": "fp-card",
+        "x1": 36,
+        "y1": 4,
+        "x2": 65,
+        "y2": 34
+      },
+      {
+        "id": "fp-party",
+        "x1": 67,
+        "y1": 4,
+        "x2": 97,
+        "y2": 34
+      },
+      {
+        "id": "fp-trade",
+        "x1": 99,
+        "y1": 4,
+        "x2": 128,
+        "y2": 34
+      },
+      {
+        "id": "fp-family",
+        "x1": 130,
+        "y1": 4,
+        "x2": 160,
+        "y2": 34
+      },
+      {
+        "id": "fp-vendor",
+        "x1": 159,
+        "y1": 4,
+        "x2": 191,
+        "y2": 34
+      },
+      {
+        "id": "fp-join",
+        "x1": 648,
+        "y1": 5,
+        "x2": 675,
+        "y2": 33
+      },
+      {
+        "id": "fp-duel",
+        "x1": 679,
+        "y1": 5,
+        "x2": 706,
+        "y2": 33
+      },
+      {
+        "id": "fp-help",
+        "x1": 710,
+        "y1": 5,
+        "x2": 737,
+        "y2": 33
+      },
+      {
+        "id": "fp-act",
+        "x1": 743,
+        "y1": 42,
+        "x2": 796,
+        "y2": 56
+      }
+    ]
+  }
+}

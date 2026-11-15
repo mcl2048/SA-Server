@@ -1,0 +1,17 @@
+✔ new automation switches default off and remain isolated per character (3.843373ms)
+✔ meat recovery takes priority over both equipped healing magic and medicine (4.217279ms)
+✔ MP threshold recovery works without a healing spell and prefers MP meat (1.328562ms)
+✔ automatic escape precedes healing, caps real failures at three and excludes forbidden fights (5.53563ms)
+✔ self-only meat is not selected for an injured teammate (2.921653ms)
+✔ mixed HP-first descriptions cannot masquerade as an MP recovery item (0.985141ms)
+✔ medicine precedes a whole-party healing spirit when multiple allies are low (2.129632ms)
+✔ danger and no-target capture stop escaping after three confirmed failures (2.536909ms)
+✔ automatic escape keeps the surviving primary pet guarding (8.465804ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1027.112653

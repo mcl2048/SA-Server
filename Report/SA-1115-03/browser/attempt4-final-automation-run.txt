@@ -1,0 +1,13 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: five pets selected through native controls
+desktop: normal automatic five-pet battle
+desktop: quick automatic five-pet battle
+desktop: paused editing then native meat preparation
+desktop: server rewards progress while Chromium page is frozen
+Error: desktop: closed browser stopped first offline reward
+    at wait (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:21:183)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:100:14)
+    at async work (file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/final-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":373,"y":181},"stored_position":{"floor":300,"x":373,"y":181},"position_matches":true}}

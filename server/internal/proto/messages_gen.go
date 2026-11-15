@@ -63,6 +63,18 @@ type NpcPos struct {
 	Y    int    `json:"y,omitempty"`
 }
 
+type MapPoint struct {
+	X int `json:"x,omitempty"`
+	Y int `json:"y,omitempty"`
+}
+
+type MapPlace struct {
+	Name        string     `json:"name,omitempty"`
+	Floor       int        `json:"floor,omitempty"`
+	Entrances   []MapPoint `json:"entrances,omitempty"`
+	Conditional bool       `json:"conditional,omitempty"`
+}
+
 type VendorEntry struct {
 	Index  int    `json:"index,omitempty"`
 	Kind   int    `json:"kind,omitempty"`
@@ -1061,8 +1073,9 @@ type MapData struct {
 func (*MapData) MsgType() string { return "MapData" }
 
 type NpcList struct {
-	Floor int      `json:"floor,omitempty"`
-	Npcs  []NpcPos `json:"npcs,omitempty"`
+	Floor  int        `json:"floor,omitempty"`
+	Npcs   []NpcPos   `json:"npcs,omitempty"`
+	Places []MapPlace `json:"places,omitempty"`
 }
 
 func (*NpcList) MsgType() string { return "NpcList" }

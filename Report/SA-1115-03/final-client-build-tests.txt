@@ -1,0 +1,18 @@
+✔ Lisarido biography changes regenerate its independent catalogue and invalidate the release (1386.846375ms)
+✔ shared pet stories regenerate the catalogue and invalidate the client version (1399.076076ms)
+✔ artwork changes invalidate build versions and only the login PNG is staged (1049.389256ms)
+✔ builder and stager reject source artwork symlinks before replacing releases (695.021741ms)
+✔ stager rejects symlinks inside its exact artwork allowlist (681.57265ms)
+✔ repeated builds match, removed imports and retired JS cannot enter the release (1422.527619ms)
+✔ staging refuses unrelated embedded data before changing the previous client (542.922481ms)
+✔ failed TypeScript parsing preserves prior output and entry version (913.119311ms)
+✔ builder and stager reject output symlinks without modifying the target (950.573231ms)
+✔ primal biographies regenerate together and invalidate cache without allowing identity collisions (958.183642ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10273.537373

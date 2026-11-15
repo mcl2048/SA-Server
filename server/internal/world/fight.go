@@ -195,6 +195,9 @@ func (w *World) joinRoom(room *battleRoom, m *entity, slot int, deferPets ...boo
 
 // sendBattleStart 送 m 这场战斗的全部人（BATTLE_CharSendOne 的 B| 字串开头）。
 func (w *World) sendBattleStart(m *entity, field, surprise int) {
+	if !m.attached() {
+		return // A future Attach rebuilds the current roster, never old turns.
+	}
 	b := m.fight.b
 	msg := &proto.BattleStart{Field: field, MySlot: m.fight.slot, TurnTime: int(w.Rules.TurnTime / time.Millisecond), Surprise: surprise, Pvp: m.fight.room.pvp,
 		Event: m.fight.room.npc != nil, // eventEnemyFlag：NPC 开的战斗（客户端放头目的战斗音乐）
@@ -671,7 +674,7 @@ func (r *battleRoom) removeMember(m *entity) {
 // afterMemberTurn 是一回合结算后 m 自己的部分：宠物栏、装备磨损、道具消耗。
 func (w *World) afterMemberTurn(e *entity, ev []battle.Event) {
 	ft := e.fight
-	if a := e.automation; a != nil && a.settings.AutoEscape && a.escapeRoom == ft.room && ft.cmd != nil && ft.cmd.Automatic && ft.cmd.Kind == battle.Escape {
+	if a := e.automation; a != nil && a.escapeRoom == ft.room && ft.cmd != nil && ft.cmd.Automatic && ft.cmd.Kind == battle.Escape {
 		for _, x := range ev {
 			if x.Actor == ft.slot && x.Kind == battle.Escape && !x.OK {
 				a.escapeFailures++

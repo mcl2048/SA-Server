@@ -23,6 +23,8 @@ type autoPlayState struct {
 	direction                            int
 	floor                                int
 	nextDiscard                          time.Time
+	nextRecovery                         time.Time
+	discardMeat                          bool
 	escapeRoom                           *battleRoom
 	escapeFailures                       int
 }
@@ -104,7 +106,7 @@ func (w *World) SetAutoPlay(charID int, encounter, autoBattle, quick, paused boo
 	})
 }
 func (w *World) sendAutoPlay(e *entity) {
-	if e == nil || e.client == nil {
+	if e == nil || !e.attached() {
 		return
 	}
 	a := e.automation
@@ -157,13 +159,35 @@ func (w *World) automationTick(now time.Time) {
 		if a.lastRoom != nil {
 			a.lastRoom = nil
 			a.nextMove = now.Add(time.Second)
-			if a.settings.Meat {
-				w.automationDiscardMeat(e)
-			}
+			a.discardMeat = a.settings.Meat
+		}
+		// A map change revokes farm intent before any consumable preparation.
+		// Discard policies below remain independent of encounter/combat flags.
+		if a.encounter && e.floor != a.floor {
+			a.encounter = false
+			a.reason = "地图已改变，已停止自动遇敌。"
+			w.sendAutoPlay(e)
 		}
 		// Discard runs independently of auto encounter/combat. Never mutate a
 		// bag reserved by a trade/shop or a live battle; scan at most once/sec.
 		editing := a.paused && e.connected && now.Sub(a.lastUpdate) < 2*time.Second
+		idle := !editing && !e.busy() && e.window == nil
+		// Farm preparation precedes discarding recovered loot and the 20% HP
+		// safety stop. Use at most one native field item per second; no browser
+		// timer, new goroutine, or separate reward/simulation path is involved.
+		if idle && a.encounter && (a.autoBattle || a.quick) && !now.Before(a.nextRecovery) {
+			a.nextRecovery = now.Add(time.Second)
+			if w.automationFieldRecovery(e, a.settings.HealAt) {
+				a.nextMove = now.Add(time.Second)
+				continue
+			}
+		}
+		if a.discardMeat && idle {
+			a.discardMeat = false
+			if a.settings.Meat {
+				w.automationDiscardMeat(e)
+			}
+		}
 		if a.settings.AutoDrop && !editing && !now.Before(a.nextDiscard) && !e.busy() && e.window == nil {
 			a.nextDiscard = now.Add(time.Second)
 			w.automationDiscardKeywords(e, a.settings.DropKeywords)
@@ -190,12 +214,6 @@ func (w *World) automationTick(now time.Time) {
 		if hp*100 <= maxHP*20 {
 			a.encounter = false
 			a.reason = "耐久力不足20%，已停止自动遇敌。"
-			w.sendAutoPlay(e)
-			continue
-		}
-		if e.floor != a.floor {
-			a.encounter = false
-			a.reason = "地图已改变，已停止自动遇敌。"
 			w.sendAutoPlay(e)
 			continue
 		}
@@ -269,15 +287,24 @@ func (w *World) automationBattle(e *entity, a *autoPlayState, now time.Time) {
 	// Arm both intents before either validated submission can resolve the room.
 	// Commands already submitted manually before enabling auto are left untouched.
 	turn := room.turn
-	player, _, _ := w.chooseAutomation(e, a)
+	var player battle.Command
+	primarySkill, primaryTarget := -1, -1
 	if ft.cmd != nil {
 		player = *ft.cmd
+	} else {
+		player, primarySkill, primaryTarget = w.chooseAutomation(e, a)
 	} // pets must honor a pre-existing manual capture/escape too
 	for _, slot := range ft.petSlots() {
-		if !ft.b.F[slot].Alive() {
+		if !ft.b.F[slot].Alive() || ft.petCommand(slot) != nil {
 			continue
 		}
-		skill, target := w.chooseAutomationPet(e, a, slot, player)
+		// chooseAutomation already selected the primary pet. Reuse it only
+		// for a newly chosen owner command; queued manual intent needs its
+		// own pet decision (especially capture/escape protection).
+		skill, target := primarySkill, primaryTarget
+		if slot != ft.slot+5 || ft.cmd != nil {
+			skill, target = w.chooseAutomationPet(e, a, slot, player)
+		}
 		w.submitBattlePetCommand(e, skill, target, true, slot)
 		if e.fight != ft || room.turn != turn {
 			return
@@ -362,10 +389,15 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 	// Explicit auto-escape takes precedence over recovery/capture. Count only
 	// actual failed Escape events (afterMemberTurn), never selected intents.
 	if s.AutoEscape && a.escapeFailures < 3 && roomCanEscape(w, e) {
-		return battle.Command{Kind: battle.Escape, Target: -1}, -1, -1
+		cmd := battle.Command{Kind: battle.Escape, Target: -1}
+		skill, target := w.chooseAutomationPet(e, a, ft.slot+5, cmd)
+		return cmd, skill, target
 	}
 	protected, myCapture := w.automationCapturePlan(e, a)
-	enemies, allies := []*battle.Fighter{}, []*battle.Fighter{}
+	// A battle has exactly 20 slots. Keep transient candidate lists on the
+	// stack, while rebuilding them from live state for every decision.
+	var enemyBuffer, allyBuffer, needBuffer [battle.Slots]*battle.Fighter
+	enemies, allies := enemyBuffer[:0], allyBuffer[:0]
 	for _, f := range ft.b.F {
 		// Fallen allies remain resurrection candidates; flown allies have left
 		// this battle and must not consume every automatic turn on a futile revive.
@@ -408,7 +440,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			hpSum += f.HP
 		}
 	}
-	var needs []*battle.Fighter
+	needs := needBuffer[:0]
 	for _, f := range allies {
 		if f.Alive() && (f.HP*100 < f.MaxHP*s.HealAt ||
 			f.Ride != nil && f.Ride.HP > 0 && !f.Ride.Fell && f.Ride.HP*100 < f.Ride.MaxHP*s.HealAt) {
@@ -453,7 +485,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 		cmd = c
 		goto petChoice
 	}
-	if s.Escape && !(s.AutoEscape && a.escapeFailures >= 3) && roomCanEscape(w, e) && (me.HP*5 < me.MaxHP || threat*2 > hpSum && threat > me.Atk*2) {
+	if s.Escape && a.escapeFailures < 3 && roomCanEscape(w, e) && (me.HP*5 < me.MaxHP || threat*2 > hpSum && threat > me.Atk*2) {
 		cmd = battle.Command{Kind: battle.Escape, Target: -1}
 		goto petChoice
 	}
@@ -466,7 +498,7 @@ func (w *World) chooseAutomation(e *entity, a *autoPlayState) (battle.Command, i
 			cmd = battle.Command{Kind: battle.Guard, Target: -1}
 			goto petChoice
 		}
-		if !(s.AutoEscape && a.escapeFailures >= 3) && roomCanEscape(w, e) {
+		if a.escapeFailures < 3 && roomCanEscape(w, e) {
 			cmd = battle.Command{Kind: battle.Escape, Target: -1}
 			goto petChoice
 		}
@@ -524,7 +556,8 @@ func (w *World) chooseAutomationPet(e *entity, a *autoPlayState, slot int, cmd b
 	s := a.settings
 	side, other := 20+me.Side(), 21-me.Side()
 	protected, _ := w.automationCapturePlan(e, a)
-	enemies := []*battle.Fighter{}
+	var enemyBuffer [battle.Slots]*battle.Fighter
+	enemies := enemyBuffer[:0]
 	target := -1
 	for _, f := range ft.b.F {
 		if f != nil && f.Alive() && f.Side() != me.Side() && protected&(1<<f.Slot) == 0 {

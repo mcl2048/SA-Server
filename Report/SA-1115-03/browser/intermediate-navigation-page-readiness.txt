@@ -1,0 +1,12 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+Error: location was not reachable through native pages: 萨姆吉尔村
+    at findAction (file:///home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:36:10)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9)
+    at async approach (file:///home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:53:36)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1115-03/browser/navigation-cases.mjs:65:74)
+    at async work (file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/candidate-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":100,"x":632,"y":497},"stored_position":{"floor":100,"x":632,"y":497},"position_matches":true}}

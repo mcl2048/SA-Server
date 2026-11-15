@@ -1,0 +1,12 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+desktop: five pets selected through native controls
+desktop: normal automatic five-pet battle
+desktop: quick automatic five-pet battle
+desktop: paused editing then native meat preparation
+Error: desktop: frozen page stopped server farming
+    at wait (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:21:183)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1115-03/browser/automation-cases.mjs:81:15)
+    at async work (file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-03/browser/real-game.mjs:277:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-03/browser/candidate-automation-main.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":300,"x":450,"y":230},"stored_position":{"floor":300,"x":450,"y":230},"position_matches":true}}

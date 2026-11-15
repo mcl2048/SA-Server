@@ -1,0 +1,39 @@
+(node:1155950) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (42.211477ms)
+✔ an explicit native hit label preserves full mobile text without changing desktop geometry (6.858141ms)
+(node:1155951) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ distant navigation requests the destination chunk before unrelated world corners (47.875667ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (17.97238ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (27.834878ms)
+(node:1155957) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ready waits for Hello and permits password login only after no-token handshake (174.739536ms)
+✔ token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer (12.699665ms)
+✔ debug logs redact authentication credentials without modifying wire messages (5.091774ms)
+✔ recoveredSession identifies a resumed lobby and resets on explicit logout (3.078001ms)
+✔ Hello and Session deadlines replace stale sockets while preserving one ready promise (6.213665ms)
+✔ waking an OPEN half-dead connection requires matching Pong within five seconds (3.061517ms)
+✔ returning from a frozen tab immediately resumes a live socket and discards queued world history (3.923847ms)
+✔ lifecycle freeze without visibility changes discards old turns and resumes once when active (3.001257ms)
+✔ restoring from back-forward cache requests a snapshot even without a visibility event (2.933757ms)
+✔ a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot (2.285193ms)
+✔ terminal replacement stops reconnecting without clearing another tab's bearer (1.183986ms)
+✔ failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token (3.814029ms)
+✔ initial connection has a thirty-second total limit and retains resumable credentials (1.489185ms)
+✔ manual close rejects pending readiness and detaches all timers without clearing credentials (1.726091ms)
+✔ no-token Hello timeout fails once and late messages cannot restore abandoned UI (1.143711ms)
+✔ separate tabs do not inherit or overwrite another tab's actor credential (1.847613ms)
+✔ legacy shared localStorage credential is discarded without implicit takeover (2.273205ms)
+✔ repeated character switching releases Field handlers and ignores disposed actors (26.19106ms)
+✔ unsubscribe preserves duplicate registrations and once removes its listener (1.364667ms)
+✔ wire-level location entries restore omitted zero coordinates before actual navigation (76.840025ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2824.16255

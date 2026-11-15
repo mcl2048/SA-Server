@@ -1,0 +1,55 @@
+✖ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (13.864542ms)
+✖ an explicit native hit label preserves full mobile text without changing desktop geometry (4.020368ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 882.886161
+
+✖ failing tests:
+
+test at client/test/map-place-sidebar.test.ts:19:1
+✖ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (13.864542ms)
+  AssertionError [ERR_ASSERTION]: default sidebar lists current places even if never visited
+
+  0 !== 9
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-place-sidebar.test.ts:22:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 9,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/map-place-sidebar.test.ts:32:1
+✖ an explicit native hit label preserves full mobile text without changing desktop geometry (4.020368ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '完整的村…'
+  - '完整的村庄与洞窟名称 东 400 南 300'
+         ^
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-place-sidebar.test.ts:37:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '完整的村…',
+    expected: '完整的村庄与洞窟名称 东 400 南 300',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

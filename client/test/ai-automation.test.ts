@@ -56,3 +56,20 @@ test("medicine precedes a whole-party healing spirit when multiple allies are lo
  c.inv=[item(9,"耐久药","回复耐久力500"),{...item(0,"装备",""),magic:"全体精灵",magicFunc:"MAGIC_Recovery",magicMp:1,magicTarget:2,magicField:0,magicOption:"500"}];
  const cmd=smartChoose(defaultAi(),c);assert.equal(cmd.kind,"item");assert.equal(cmd.item,9);
 });
+
+test("danger and no-target capture stop escaping after three confirmed failures",()=>{
+ for(const capture of [false,true]){
+  const c=context();c.fighters.get(15)!.level=1000;c.escapeFailures=3;
+  const s={...defaultAi(),autoEscape:false,capture,escape:!capture};
+  c.capturePlace=capture;
+  assert.equal(smartChoose(s,c).kind,"attack");
+  c.escapeFailures=2;assert.equal(smartChoose(s,c).kind,"escape");
+ }
+});
+
+test("automatic escape keeps the surviving primary pet guarding",()=>{
+ const c=context();c.fighters.set(5,{...c.fighters.get(0)!,slot:5});
+ c.pet={name:"pet",atk:100,skills:[{slot:0,id:2,field:1,func:"PETSKILL_NormalGuard",target:0} as any]};
+ const cmd=smartChoose({...defaultAi(),autoEscape:true},c);
+ assert.equal(cmd.kind,"escape");assert.deepEqual(cmd.pet,[0,5]);
+});

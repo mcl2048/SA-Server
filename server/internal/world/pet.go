@@ -396,6 +396,9 @@ func (w *World) petInfo(e *entity, i int) proto.PetInfo {
 }
 
 func (w *World) sendPets(e *entity) {
+	if !e.attached() {
+		return // Keep petsChanged serialization/persistence for detached actors.
+	}
 	msg := &proto.Pets{Battle: e.pets.Battle, Ride: e.pets.Ride, Pets: []proto.PetInfo{}}
 	for i, p := range e.pets.Pets {
 		if p != nil {

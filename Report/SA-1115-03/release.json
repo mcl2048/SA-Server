@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "version": "v0.2.21-LYNX",
+  "binary_sha256": "6bbafe1e8812f04252630ceb12f6a1c182bec841e567b70557929a677ee4e731",
+  "binary_bytes": 16736416,
+  "linux_amd64_static": true,
+  "production_inputs": 4691,
+  "repeated_build_identical": true,
+  "client_tests": 252,
+  "go_test_race_vet": true,
+  "http_files": 78,
+  "browser": {
+    "automation": {
+      "checks": 14,
+      "browser": "156.0.8078.4",
+      "shutdown": {
+        "started": true,
+        "sigterm_sent": true,
+        "exit_code": 0,
+        "signal": null,
+        "timed_out": false,
+        "expected_position": {
+          "id": 1,
+          "floor": 300,
+          "x": 374,
+          "y": 180
+        },
+        "stored_position": {
+          "floor": 300,
+          "x": 374,
+          "y": 180
+        },
+        "position_matches": true
+      }
+    },
+    "navigation": {
+      "checks": 14,
+      "browser": "156.0.8078.4",
+      "shutdown": {
+        "started": true,
+        "sigterm_sent": true,
+        "exit_code": 0,
+        "signal": null,
+        "timed_out": false,
+        "expected_position": {
+          "id": 1,
+          "floor": 100,
+          "x": 633,
+          "y": 491
+        },
+        "stored_position": {
+          "floor": 100,
+          "x": 633,
+          "y": 491
+        },
+        "position_matches": true
+      }
+    }
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.21-LYNX-linux-amd64.zip",
+    "bytes": 42222262,
+    "files": 4380,
+    "sha256": "3255510b5067289f95c621447f45ba1e69b1e2b588f87554a1714eb9e57892fa"
+  },
+  "limitations": [
+    "Chromium viewport/touch emulation; no physical Android/iOS/Safari certification",
+    "Isolated fixtures; production was not restarted"
+  ]
+}

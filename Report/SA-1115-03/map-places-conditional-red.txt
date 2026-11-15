@@ -1,0 +1,9 @@
+=== RUN   TestMapPlacesIncludesEffectiveConditionalBranchDestinations
+    mapplaces_test.go:142: both native FREE/TO branches must be listed; got map[]
+--- FAIL: TestMapPlacesIncludesEffectiveConditionalBranchDestinations (1.32s)
+=== RUN   TestMapPlacesConditionalTargetsValidateAndDeduplicateWithoutEvaluatingGates
+    mapplaces_test.go:156: expected two valid destinations, no nonexistent/out-of-bounds/duplicate source rows: []
+--- FAIL: TestMapPlacesConditionalTargetsValidateAndDeduplicateWithoutEvaluatingGates (0.00s)
+FAIL
+FAIL	sa/server/internal/world	1.367s
+FAIL

@@ -53,6 +53,9 @@ func (w *World) questLog(e *entity) []proto.QuestEntry {
 
 // sendQuests 把任务日志送给客户端，并清掉"旗标改过"的记号；记下这份清单的签名（refreshQuests 比对用）。
 func (w *World) sendQuests(e *entity) {
+	if !e.attached() {
+		return // Quest flags persist independently; Attach recomputes the view.
+	}
 	e.questDirty = false
 	q := w.questLog(e)
 	e.questSig = questSig(q)
@@ -364,7 +367,7 @@ func questSig(q []proto.QuestEntry) string {
 
 // refreshQuests：道具栏变了（用道具记进度的任务，如 JOT 的检查证明石）就重算，清单有变才送。sendInventory 调它。
 func (w *World) refreshQuests(e *entity) {
-	if e.client == nil || e.kind != "player" {
+	if !e.attached() || e.kind != "player" {
 		return
 	}
 	if questSig(w.questLog(e)) != e.questSig {

@@ -1,0 +1,53 @@
+(node:1155669) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ ready waits for Hello and permits password login only after no-token handshake (93.854538ms)
+✔ token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer (2.93014ms)
+✔ debug logs redact authentication credentials without modifying wire messages (5.23552ms)
+✔ recoveredSession identifies a resumed lobby and resets on explicit logout (1.940859ms)
+✔ Hello and Session deadlines replace stale sockets while preserving one ready promise (7.690786ms)
+✔ waking an OPEN half-dead connection requires matching Pong within five seconds (3.283248ms)
+✔ returning from a frozen tab immediately resumes a live socket and discards queued world history (4.175155ms)
+✔ lifecycle freeze without visibility changes discards old turns and resumes once when active (1.729976ms)
+✔ restoring from back-forward cache requests a snapshot even without a visibility event (2.140109ms)
+✔ a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot (2.001472ms)
+✔ terminal replacement stops reconnecting without clearing another tab's bearer (1.342251ms)
+✔ failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token (2.297048ms)
+✔ initial connection has a thirty-second total limit and retains resumable credentials (1.205844ms)
+✔ manual close rejects pending readiness and detaches all timers without clearing credentials (1.451151ms)
+✔ no-token Hello timeout fails once and late messages cannot restore abandoned UI (1.033594ms)
+✔ separate tabs do not inherit or overwrite another tab's actor credential (2.461727ms)
+✔ legacy shared localStorage credential is discarded without implicit takeover (2.067289ms)
+✔ repeated character switching releases Field handlers and ignores disposed actors (30.336817ms)
+✔ unsubscribe preserves duplicate registrations and once removes its listener (3.24634ms)
+✖ wire-level location entries restore omitted zero coordinates before actual navigation (83.504657ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1228.552639
+
+✖ failing tests:
+
+test at client/test/net.test.ts:269:1
+✖ wire-level location entries restore omitted zero coordinates before actual navigation (83.504657ms)
+  AssertionError [ERR_ASSERTION]: nested zero values must be restored by the real Connection decoder
+  + actual - expected
+
+    {
+  -   x: 0,
+      y: 8
+    }
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/net.test.ts:279:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { y: 8 },
+    expected: { x: 0, y: 8 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

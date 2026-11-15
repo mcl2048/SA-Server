@@ -369,21 +369,7 @@ func (w *World) freeWarpDest(e *entity, warp data.Warp) (int, int, int) {
 		if !ok || !w.passCheck(e, cond) {
 			continue
 		}
-		to, ok := data.ArgField(seg, "TO")
-		if !ok {
-			continue
-		}
-		var pts [][3]int
-		for _, s := range strings.Split(to, "&") {
-			v := strings.Split(s, ",")
-			if len(v) < 3 {
-				break
-			}
-			pts = append(pts, [3]int{data.Atoi(v[0]), data.Atoi(v[1]), data.Atoi(v[2])})
-			if len(pts) >= 10 {
-				break
-			}
-		}
+		pts := data.FreeWarpPoints(seg)
 		if len(pts) == 0 {
 			continue
 		}

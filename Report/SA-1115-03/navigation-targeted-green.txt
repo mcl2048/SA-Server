@@ -1,0 +1,23 @@
+✔ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (21.375894ms)
+✔ an explicit native hit label preserves full mobile text without changing desktop geometry (2.419456ms)
+✔ distant navigation requests the destination chunk before unrelated world corners (19.477287ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (17.379928ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (8.617027ms)
+✔ reflowed pointer traffic pans the existing native MapWindow and never starts navigation (4.933963ms)
+✔ native pan cancellation clears any retained press before the next map frame (0.496645ms)
+✔ opening the coordinate map cannot reuse its opening click as a map destination (0.545952ms)
+✔ quick battle pauses movement then resumes the same minimap destination (24.690154ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (4.3372ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (3.044188ms)
+✔ quick battle cannot revive a route after a floor change (3.168499ms)
+✔ exact destinations reject fractional and non-finite coordinates (2.924205ms)
+pathfinding: all checks passed
+✔ client/test/pathfinding.test.ts (357.67957ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2982.44497

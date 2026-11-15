@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "checks": [
+    {
+      "device": "desktop",
+      "width": 1360,
+      "height": 1000,
+      "documentOverflow": false,
+      "links": 17,
+      "images": 4,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "documentOverflow": false,
+      "links": 17,
+      "images": 4,
+      "passed": true
+    }
+  ],
+  "errors": []
+}
