@@ -12,8 +12,8 @@
 
 
 
-import { FONT, InputBox, measure,         } from "./ui.js?v=5e4867fa738c689d";
-import { settings, saveSettings } from "./menus.js?v=5e4867fa738c689d";
+import { FONT, InputBox, measure,         } from "./ui.js?v=16aad116d5c399c2";
+import { settings, saveSettings } from "./menus.js?v=16aad116d5c399c2";
 
 
 
@@ -135,8 +135,10 @@ function average(page           , x0        , y0        , w        , h        , 
 const ZOOMS = [2, 3, 4, 6, 8, 12, 16]; // 一格的半宽（像素）；格子菱形半高是它的 3/4（画面 64×48 的比例）
 const W = 10, H = 10;                   // 窗口 640×480
 const X = (800 - W * 64) / 2, Y = 40;
-const LIST_W = 150, LIST_ROWS = 14, LIST_ROW_H = 20;
-const PLACE_ROWS = 9, PLACE_ROW_H = 34;
+const LIST_W = 150;
+const CATALOGUE_H = 306, CATALOGUE_FONT = 12, CATALOGUE_LINE_H = 14;
+
+
 const MAP_X = X + 26 + LIST_W + 8, MAP_Y = Y + 66;
 const MAP_W = W * 64 - (26 + LIST_W + 8) - 26, MAP_H = H * 48 - 66 - 90;
 const BG = "#0a0f1c";
@@ -152,9 +154,11 @@ export class MapWindow {
           drag                                  = null;
           dragged = false;
           listTop = 0;
-          listMode                      = "places";
+          listMode                               = "places";
           placeTop = 0;
+          npcTop = 0;
           placeFloor = -1;
+          catalogueCache = new Map                                                                                                  ();
           base                   ;
           marks                   ;
           drawn = "";
@@ -176,7 +180,7 @@ export class MapWindow {
   }
 
   /** 打开时回到自己那一层、跟着自己 */
-  reset() { this.floor = -1; this.follow = true; this.listMode = "places"; this.placeTop = 0; this.cancelPointer(); this.openingPointer = true; }
+  reset() { this.floor = -1; this.follow = true; this.listMode = "places"; this.placeTop = this.npcTop = 0; this.cancelPointer(); this.openingPointer = true; }
 
   /** These are the original InputBox nodes, so the mobile shell can adopt
    * them with IME/focus preserved. Never leave invisible inputs over the field. */
@@ -259,25 +263,31 @@ export class MapWindow {
     if (ui.hovered("map-me")) ui.bottomLine = "回到自己所在的区域，跟着自己移动；拖动地图就不跟了。";
     // Default to this floor's actual entrances, including unvisited caves and
     // villages. Historical floor browsing remains a separate native tab.
-    if (ui.textButton(x + 28,y + 40,"本区地点",this.listMode==="places"?FONT.YELLOW:FONT.AQUA,"map-tab-places")) this.listMode="places";
-    if (ui.textButton(x + 112,y + 40,"区域",this.listMode==="floors"?FONT.YELLOW:FONT.AQUA,"map-tab-floors")) this.listMode="floors";
+    if (ui.textButton(x + 28,y + 40,"地点",this.listMode==="places"?FONT.YELLOW:FONT.AQUA,"map-tab-places")) this.listMode="places";
+    if (ui.textButton(x + 82,y + 40,"NPC",this.listMode==="npcs"?FONT.YELLOW:FONT.AQUA,"map-tab-npcs")) this.listMode="npcs";
+    if (ui.textButton(x + 130,y + 40,"区域",this.listMode==="floors"?FONT.YELLOW:FONT.AQUA,"map-tab-floors")) this.listMode="floors";
     ui.box(x + 26, y + 60, x + 26 + LIST_W, y + 61, "rgba(255,255,255,0.25)", true);
-    if (this.listMode==="places") this.placeList(f);
+    if (this.listMode!=="floors") this.catalogueList(f,this.listMode==="npcs");
     else {
-    const floors = f ? f.exploredFloors() : [];
-    const maxTop = Math.max(0, floors.length - LIST_ROWS);
-    this.listTop = Math.min(this.listTop, maxTop);
-    floors.slice(this.listTop, this.listTop + LIST_ROWS).forEach((fl, i) => {
-      const ry = y + 68 + i * LIST_ROW_H, id = `map-fl-${fl.floor}`;
-      const sel = view && fl.floor === view.floor;
-      if (ui.hitBox(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, id, false)) ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, "rgba(255,255,255,0.1)", true);
-      if (sel) ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + LIST_ROW_H - 3, "rgba(255,216,74,0.18)", true);
-      const mine = !!f && fl.floor === f.floor;
-      ui.text(x + 32, ry, (mine ? "● " : "") + clip(fl.name || String(fl.floor), LIST_W - 20), sel ? FONT.YELLOW : mine ? FONT.GREEN : FONT.WHITE);
-      if (ui.clicked(id)) { this.floor = fl.floor; this.follow = mine; if (!mine) this.fitLater = true; }
-    });
-    if (this.listTop > 0 && ui.text(x + 30, y + 68 + LIST_ROWS * LIST_ROW_H, "▲", FONT.AQUA, "map-lu")) this.listTop--;
-    if (this.listTop < maxTop && ui.text(x + 26 + LIST_W - 30, y + 68 + LIST_ROWS * LIST_ROW_H, "▼", FONT.AQUA, "map-ld")) this.listTop++;
+      const floors = f ? f.exploredFloors() : [];
+      this.listTop = Math.min(this.listTop, Math.max(0, floors.length - 1));
+      let ry = y + 68, rendered = 0;
+      for (const fl of floors.slice(this.listTop)) {
+        const mine = !!f && fl.floor === f.floor, id = `map-fl-${fl.floor}`;
+        const label = (mine ? "● " : "") + (fl.name || String(fl.floor));
+        const lines = wrapCatalogueName(label), height = Math.max(20, lines.length * CATALOGUE_LINE_H + 6);
+        if (rendered && ry + height > y + 68 + CATALOGUE_H) break;
+        const sel = view && fl.floor === view.floor;
+        if (ui.hitBox(x + 26, ry - 2, x + 26 + LIST_W, ry + height - 3, id, false, label))
+          ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + height - 3, "rgba(255,255,255,0.1)", true);
+        if (sel) ui.box(x + 26, ry - 2, x + 26 + LIST_W, ry + height - 3, "rgba(255,216,74,0.18)", true);
+        lines.forEach((line, i) => ui.text(x + 32, ry + i * CATALOGUE_LINE_H, line, sel ? FONT.YELLOW : mine ? FONT.GREEN : FONT.WHITE, undefined, CATALOGUE_FONT));
+        if (ui.clicked(id)) { this.floor = fl.floor; this.follow = mine; if (!mine) this.fitLater = true; }
+        ry += height; rendered++;
+      }
+      const py = y + 68 + CATALOGUE_H;
+      if (this.listTop > 0 && ui.text(x + 30, py, "▲", FONT.AQUA, "map-lu")) this.listTop--;
+      if (this.listTop + rendered < floors.length && ui.text(x + 26 + LIST_W - 30, py, "▼", FONT.AQUA, "map-ld")) this.listTop++;
     }
     // 地图（列表这一帧点了别层就换成那一层，"全图"才算对层）
     if (view && this.floor >= 0 && this.floor !== view.floor) { view = resolve(); current = !!view && !!f && view.floor === f.floor; }
@@ -308,33 +318,72 @@ export class MapWindow {
 
           fitLater = false;
 
-          placeList(f              ) {
-    if (!f || f.floor<0) return;
-    const ui=this.host.ui;
-    if (this.placeFloor!==f.floor) { this.placeFloor=f.floor;this.placeTop=0; }
-    const places=f.mapPlaces(f.floor);
-    if (places===null) { ui.text(X+32,Y+68,"正在加载地点…",FONT.GRAY);return; }
-    if (!places.length) { ui.text(X+32,Y+68,"本区没有跨区入口",FONT.GRAY);return; }
-    this.placeTop=Math.min(this.placeTop,Math.floor((places.length-1)/PLACE_ROWS)*PLACE_ROWS);
-    places.slice(this.placeTop,this.placeTop+PLACE_ROWS).forEach((place,i)=>{
-      const entry=place.entrances[0];
-      if (!entry) return;
-      const ry=Y+68+i*PLACE_ROW_H;
-      const id=`map-place-${f.floor}-${place.floor}-${entry.x}-${entry.y}`;
-      const label=`${place.name}（东 ${entry.x} 南 ${entry.y}${place.conditional?"，条件入口":""}）`;
-      if (ui.hitBox(X+26,ry-2,X+26+LIST_W,ry+PLACE_ROW_H-3,id,false,label)) ui.box(X+26,ry-2,X+26+LIST_W,ry+PLACE_ROW_H-3,"rgba(255,255,255,0.1)",true);
-      ui.text(X+32,ry,clip((place.conditional?"※ ":"")+place.name,LIST_W-16),FONT.WHITE);
-      ui.text(X+32,ry+16,`东 ${entry.x}　南 ${entry.y}`,FONT.GRAY,undefined,12);
-      if (ui.hovered(id)) ui.bottomLine=label+`　区域 ${place.floor}`;
-      if (ui.clicked(id)) {
-        f.navigatePlace(f.floor,place);
-        if (f.target) { this.host.closeMap?.();this.syncVisibility(false); }
+  /** Both catalogues refer to the player's current floor. Page by rendered
+   * height, not item count: every complete name wraps at a compact 12px and
+   * coordinates never overlap the next hit target. Original labels stay whole
+   * for the native mobile sheet and assistive technology. */
+          catalogueList(f              , npcMode         ) {
+    if (!f || f.floor < 0) return;
+    const ui = this.host.ui, floor = f.floor;
+    if (this.placeFloor !== floor) { this.placeFloor = floor; this.placeTop = this.npcTop = 0; }
+    const npcs = npcMode ? f.npcList(floor) : null;
+    const places = npcMode ? null : f.mapPlaces(floor);
+    const source = npcMode ? npcs : places;
+    let catalogue = this.catalogueCache.get(npcMode);
+    if (!catalogue || catalogue.field !== f || catalogue.floor !== floor || catalogue.source !== source) {
+      const entries = npcMode ? npcs?.map((npc, i) => ({
+        name: npc.name || "未命名NPC", x: npc.x, y: npc.y,
+        id: `map-npc-${floor}-${i}-${npc.x}-${npc.y}`,
+        conditional: false, choose: () => f.navigateNpc(floor, npc),
+      })) : places?.flatMap(place => {
+        const p = place.entrances[0];
+        return p ? [{ name: place.name, x: p.x, y: p.y,
+          id: `map-place-${floor}-${place.floor}-${p.x}-${p.y}`,
+          conditional: place.conditional, choose: () => f.navigatePlace(floor, place),
+        }] : [];
+      });
+      if (!entries) { ui.text(X + 32, Y + 68, npcMode ? "正在加载NPC…" : "正在加载地点…", FONT.GRAY); return; }
+      if (!entries.length) { ui.text(X + 32, Y + 68, npcMode ? "本区暂无可见NPC" : "本区没有跨区入口", FONT.GRAY); return; }
+      const rows = entries.map(entry => {
+        const lines = wrapCatalogueName((entry.conditional ? "※ " : "") + entry.name);
+        return { ...entry, lines, height: Math.max(34, lines.length * CATALOGUE_LINE_H + 17) };
+      });
+      const pages           = [0];
+      let used = 0;
+      rows.forEach((row, i) => {
+        if (used && used + row.height > CATALOGUE_H) { pages.push(i); used = 0; }
+        used += row.height;
+      });
+      // The server replaces catalogue arrays on refresh. Cache text measurement
+      // and page breaks until then; do not re-wrap every name on every frame.
+      catalogue = { field: f, floor, source, rows, pages };
+      this.catalogueCache.set(npcMode, catalogue);
+    }
+    const { rows, pages } = catalogue;
+    const top = npcMode ? this.npcTop : this.placeTop;
+    let page = 0;
+    while (page + 1 < pages.length && pages[page + 1] <= top) page++;
+    const first = pages[page], last = pages[page + 1] ?? rows.length;
+    if (npcMode) this.npcTop = first; else this.placeTop = first;
+    let ry = Y + 68;
+    for (const row of rows.slice(first, last)) {
+      const label = `${row.name}（东 ${row.x} 南 ${row.y}${row.conditional ? "，条件入口" : ""}）`;
+      if (ui.hitBox(X + 26, ry - 2, X + 26 + LIST_W, ry + row.height - 3, row.id, false, label))
+        ui.box(X + 26, ry - 2, X + 26 + LIST_W, ry + row.height - 3, "rgba(255,255,255,0.1)", true);
+      row.lines.forEach((line, i) => ui.text(X + 32, ry + i * CATALOGUE_LINE_H, line, FONT.WHITE, undefined, CATALOGUE_FONT));
+      ui.text(X + 32, ry + row.lines.length * CATALOGUE_LINE_H, `东 ${row.x}　南 ${row.y}`, FONT.GRAY, undefined, 12);
+      if (ui.hovered(row.id)) ui.bottomLine = label;
+      if (ui.clicked(row.id)) {
+        row.choose();
+        if (f.target) { this.host.closeMap?.(); this.syncVisibility(false); }
       }
-    });
-    const py=Y+68+PLACE_ROWS*PLACE_ROW_H;
-    if (this.placeTop>0 && ui.textButton(X+30,py,"上一页",FONT.AQUA,"map-places-prev")) this.placeTop=Math.max(0,this.placeTop-PLACE_ROWS);
-    if (this.placeTop+PLACE_ROWS<places.length && ui.textButton(X+108,py,"下一页",FONT.AQUA,"map-places-next")) this.placeTop+=PLACE_ROWS;
-    ui.text(X+32,py+24,`${places.length} 处地点　${Math.floor(this.placeTop/PLACE_ROWS)+1}/${Math.ceil(places.length/PLACE_ROWS)}`,FONT.GRAY,undefined,12);
+      ry += row.height;
+    }
+    const py = Y + 68 + CATALOGUE_H, prefix = npcMode ? "map-npcs" : "map-places";
+    const setTop = (value        ) => { if (npcMode) this.npcTop = value; else this.placeTop = value; };
+    if (page > 0 && ui.textButton(X + 30, py, "上一页", FONT.AQUA, `${prefix}-prev`)) setTop(pages[page - 1]);
+    if (page + 1 < pages.length && ui.textButton(X + 108, py, "下一页", FONT.AQUA, `${prefix}-next`)) setTop(pages[page + 1]);
+    ui.text(X + 32, py + 24, `${rows.length} ${npcMode ? "位NPC" : "处地点"}　${page + 1}/${pages.length}`, FONT.GRAY, undefined, 12);
   }
 
   /** 按住拖动：像素位移换成格子位移（px = (X+Y)s、py = (Y−X)·0.75s 的反算） */
@@ -547,7 +596,9 @@ export class MapWindow {
     const m = this.host.ui.mouse, mx0 = m.x - MAP_X, my0 = m.y - MAP_Y;
     let hover                                                             = null;
     this.hoverNpc = "";
-    const npcs = f.npcList(view.floor) ?? [];
+    // NPCs are live current-scene data. Historical maps keep terrain history
+    // without requesting or displaying NPCs from other floors.
+    const npcs = view.floor === f.floor ? f.npcList(f.floor) ?? [] : [];
     for (const n of npcs) {
       const [px, py] = this.toPx(view, n.x, n.y);
       if (px < 0 || py < 0 || px > MAP_W || py > MAP_H) continue;
@@ -600,9 +651,14 @@ function toPxAt(x        , y        , cx        , cy        , s        , w      
   return [w / 2 + ((x - cx) + (y - cy)) * s, h / 2 + ((y - cy) - (x - cx)) * s * 0.75];
 }
 
-function clip(text        , maxW        )         {
-  if (measure(text) <= maxW) return text;
-  let out = text;
-  while (out.length > 1 && measure(out + "…") > maxW) out = out.slice(0, -1);
-  return out + "…";
+/** Preserve complete Unicode code points when wrapping actual resource names. */
+function wrapCatalogueName(name        )           {
+  const lines           = [];
+  let line = "";
+  for (const letter of name) {
+    if (line && measure(line + letter, CATALOGUE_FONT) > LIST_W - 16) { lines.push(line); line = ""; }
+    line += letter;
+  }
+  lines.push(line);
+  return lines;
 }

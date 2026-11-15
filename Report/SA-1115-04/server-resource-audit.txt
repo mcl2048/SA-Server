@@ -1,0 +1,13 @@
+=== RUN   TestMapPlacesResourceExclusionAudit
+    mapplaces_test.go:294: resource audit: 1382 loaded floors, 5832 effective physical warp sources, 135 source-blocked; rejected target candidates: same-floor=735 nonexistent=0 out-of-bounds=2
+    mapplaces_test.go:295: catalogue: 4981 unique physical sources, 5002 source/destination pairs; largest JSON catalogue=9725 bytes on floor 3021 (100 places)
+    mapplaces_test.go:315: cave NPC browser candidate: floor=10001 name=查罕族青年 point=(16,4) plain-walkable=true
+    mapplaces_test.go:324:   adjacent approach cell=(15,5)
+    mapplaces_test.go:315: cave NPC browser candidate: floor=10701 name=怪力的小阵 point=(23,51) plain-walkable=true
+    mapplaces_test.go:324:   adjacent approach cell=(22,52)
+    mapplaces_test.go:333: out-of-bounds NPC resource: floor=7200 name=小孩 point=(126,118)
+    mapplaces_test.go:333: out-of-bounds NPC resource: floor=31902 name=采石场的青年 point=(9,67)
+    mapplaces_test.go:338: NPC scene projection: 3062 live NPCs, 3028 named, 3016 currently visible named, 43 moving transports, 2 out-of-bounds
+--- PASS: TestMapPlacesResourceExclusionAudit (2.50s)
+PASS
+ok  	sa/server/internal/world	2.587s

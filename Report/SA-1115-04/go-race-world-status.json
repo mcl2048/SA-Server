@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "command": [
+    "/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/bin/go",
+    "test",
+    "-race",
+    "-p",
+    "1",
+    "./internal/world",
+    "-count=1",
+    "-timeout=600s"
+  ],
+  "exit_code": 0,
+  "seconds": 294.4555208689999
+}

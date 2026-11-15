@@ -376,10 +376,10 @@ test("fullscreen map paints native map layers and maps taps back to the original
   const surface=body.querySelectorAll("canvas").find(el=>el.dataset.mobileMap==="true");
   assert.ok(surface);assert.equal(drawn.length,2);assert.equal(drawn[0][0],base);assert.equal(drawn[1][0],marks);
   surface.getBoundingClientRect=()=>({left:20,top:30,width:215,height:178});
-  fire(surface,"pointerdown",{pointerId:71,isPrimary:true,clientX:127.5,clientY:119});
+  fire(surface,"pointerdown",{button:0,pointerId:71,isPrimary:true,clientX:127.5,clientY:119});
   fire(surface,"pointerup",{pointerId:71,clientX:127.5,clientY:119});
   assert.deepEqual(calls,[["map-area",479,284]]);
-  fire(surface,"pointerdown",{pointerId:72,isPrimary:true,clientX:80,clientY:80});
+  fire(surface,"pointerdown",{button:0,pointerId:72,isPrimary:true,clientX:80,clientY:80});
   fire(surface,"pointerup",{pointerId:72,clientX:120,clientY:80});
   assert.equal(calls.length,1,"scrolling across the map cannot start navigation");
   hits=[];ui.pics=[];frame("field");assert.equal(surface.hidden,true);
@@ -413,13 +413,13 @@ test("fullscreen map drags emit native pointer phases and cancellation never emi
   hits=[{id:"map-area",x1:264,y1:106,x2:694,y2:462}];shell.frame({phase:"field",panel:true,context:"panel"});
   const surface=body.querySelectorAll("canvas").find(el=>el.dataset.mobileMap==="true");
   surface.getBoundingClientRect=()=>({left:20,top:30,width:215,height:178});
-  fire(surface,"pointerdown",{pointerId:81,isPrimary:true,clientX:100,clientY:100});
+  fire(surface,"pointerdown",{button:0,pointerId:81,isPrimary:true,clientX:100,clientY:100});
   fire(surface,"pointermove",{pointerId:81,clientX:130,clientY:110});
   fire(surface,"pointerup",{pointerId:81,clientX:140,clientY:110});
   assert.deepEqual(moves,[["map-area",424,246,"start"],["map-area",484,266,"move"],["map-area",504,266,"move"],["map-area",504,266,"end"]]);
   assert.deepEqual(taps,[]);
   for(const cancel of ["pointercancel","lostpointercapture","context","hidden","gesture","second","blur"]){
-    fire(surface,"pointerdown",{pointerId:82,isPrimary:true,clientX:100,clientY:100});
+    fire(surface,"pointerdown",{button:0,pointerId:82,isPrimary:true,clientX:100,clientY:100});
     fire(surface,"pointermove",{pointerId:82,clientX:130,clientY:110});
     if(cancel==="context"){hits=[];frame("field");}
     else if(cancel==="hidden"){doc.hidden=true;fire(doc,"visibilitychange");doc.hidden=false;}

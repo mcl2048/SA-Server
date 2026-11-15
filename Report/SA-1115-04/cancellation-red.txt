@@ -1,0 +1,58 @@
+(node:1203258) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ distant navigation requests the destination chunk before unrelated world corners (25.885172ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (6.568374ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (10.347604ms)
+✔ manual input cancels a suspended world-size search before it can emit moves (16.742155ms)
+✔ a stalled map load cancels navigation with retry feedback instead of waiting forever (11.068698ms)
+✔ a direct ground click replaces a suspended minimap plan instead of reviving its old goal (9.170271ms)
+✖ locked cancels and releases a suspended minimap search (11.288341ms)
+✖ follower cancels and releases a suspended minimap search (10.729774ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 6
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2103.736382
+
+✖ failing tests:
+
+test at client/test/map-places.test.ts:89:51
+✖ locked cancels and releases a suspended minimap search (11.288341ms)
+  AssertionError [ERR_ASSERTION]: release the cancelled generator and whole-floor buffers
+  + actual - expected
+
+  + Object [Generator] {}
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-places.test.ts:95:41)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Object [Generator] {},
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/map-places.test.ts:89:51
+✖ follower cancels and releases a suspended minimap search (10.729774ms)
+  AssertionError [ERR_ASSERTION]: release the cancelled generator and whole-floor buffers
+  + actual - expected
+
+  + Object [Generator] {}
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-places.test.ts:95:41)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Object [Generator] {},
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

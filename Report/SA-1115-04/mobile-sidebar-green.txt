@@ -1,0 +1,29 @@
+(node:1195006) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ coordinate form routes to exact integers and removes native inputs on close (7.205688ms)
+✔ coordinate form rejects decimals and incomplete numbers without partial parsing (1.026896ms)
+✔ a floor transition invalidates an old coordinate form before it can move the player (0.586663ms)
+(node:1195007) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (36.071223ms)
+✔ an explicit native hit label preserves full mobile text without changing desktop geometry (2.298042ms)
+✔ compact sidebar wraps complete long place names rather than truncating them (1.609141ms)
+✔ NPC tab pages the entire current scene and selects the exact named NPC (19.556046ms)
+✔ historical floor browsing never requests NPCs outside the player's current scene (5.33584ms)
+✔ historical region rows also preserve complete long names at the compact font (4.991995ms)
+(node:1195008) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ reflowed pointer traffic pans the existing native MapWindow and never starts navigation (8.027475ms)
+✔ native pan cancellation clears any retained press before the next map frame (0.578054ms)
+✔ opening the coordinate map cannot reuse its opening click as a map destination (0.489276ms)
+✔ secondary mouse and stylus buttons never become native map destinations or pans (9.804715ms)
+✔ primary touch, pen and mouse taps retain exact native destination coordinates (4.925698ms)
+✔ cancelled native map pointer never routes, while a later primary tap still works (0.792768ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1533.040016

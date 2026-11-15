@@ -1,0 +1,35 @@
+(node:1191799) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (17.187345ms)
+✔ an explicit native hit label preserves full mobile text without changing desktop geometry (2.095815ms)
+✔ compact sidebar wraps complete long place names rather than truncating them (1.698294ms)
+✔ NPC tab pages the entire current scene and selects the exact named NPC (13.19847ms)
+✖ historical floor browsing never requests NPCs outside the player's current scene (3.485515ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 627.471425
+
+✖ failing tests:
+
+test at client/test/map-place-sidebar.test.ts:69:1
+✖ historical floor browsing never requests NPCs outside the player's current scene (3.485515ms)
+  AssertionError [ERR_ASSERTION]: NPC catalogue must stay current-scene only
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-place-sidebar.test.ts:74:39)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

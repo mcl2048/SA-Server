@@ -1,0 +1,25 @@
+(node:1197141) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ distant navigation requests the destination chunk before unrelated world corners (23.909908ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (7.049319ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (10.053751ms)
+✔ manual input cancels a suspended world-size search before it can emit moves (15.746906ms)
+✔ a stalled map load cancels navigation with retry feedback instead of waiting forever (6.37866ms)
+✖ a direct ground click replaces a suspended minimap plan instead of reviving its old goal (8.795062ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1978.240569
+
+✖ failing tests:
+
+test at client/test/map-places.test.ts:79:1
+✖ a direct ground click replaces a suspended minimap plan instead of reviving its old goal (8.795062ms)
+  TypeError [Error]: field.setManualTarget is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-places.test.ts:83:8)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

@@ -2,7 +2,9 @@ package world
 
 import (
 	"strings"
+	"sync"
 	"testing"
+	"time"
 
 	"sa/server/internal/data"
 	"sa/server/internal/proto"
@@ -139,21 +141,35 @@ func TestPetShopRejectsAwayPet(t *testing.T) {
 	})
 }
 
-// 存档队列的合并：同一个 key 连续排 200 笔，只写最新的那一笔（世界协程不会被刷爆的存档卡住）。
+// Pending saves coalesce. Hold the first executing job while producing the
+// remaining revisions: an unconstrained worker may legally finish many jobs
+// during the producer loop, especially under the race detector.
 func TestSaveQueueCoalesces(t *testing.T) {
 	w, _, _ := setup(t)
 	ran := make(chan int, 300)
-	for i := 0; i < 200; i++ {
+	started, release := make(chan struct{}), make(chan struct{})
+	unblock := sync.OnceFunc(func() { close(release) })
+	defer unblock()
+	w.enqueue("test", func() { close(started); <-release; ran <- 0 })
+	select {
+	case <-started:
+	case <-time.After(5 * time.Second):
+		t.Fatal("save worker did not start")
+	}
+	for i := 1; i < 200; i++ {
 		v := i
 		w.enqueue("test", func() { ran <- v })
 	}
-	w.Flush(5e9)
+	unblock()
+	if !w.Flush(5 * time.Second) {
+		t.Fatal("save queue did not flush")
+	}
 	close(ran)
 	var got []int
 	for v := range ran {
 		got = append(got, v)
 	}
-	if len(got) < 1 || len(got) > 2 || got[len(got)-1] != 199 {
+	if len(got) != 2 || got[0] != 0 || got[1] != 199 {
 		t.Fatalf("应只写最新的一笔：%v", got)
 	}
 	_ = proto.Message(nil)

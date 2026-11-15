@@ -44,6 +44,9 @@ export class MobileNativeMap {
     this.content.insertBefore(canvas,this.content.firstChild);
     canvas.addEventListener("pointerdown",event=>{
       if(!event.isPrimary || this.press){this.cancel();return;}
+      // isPrimary identifies a pointer, not its button. A mouse context click
+      // or pen barrel must not become the left-click destination bridge.
+      if(event.button!==0)return;
       const point=this.position(event.clientX,event.clientY,false);if(!point)return;
       this.press={id:event.pointerId,x:event.clientX,y:event.clientY,moved:false,logicalX:point.x,logicalY:point.y};
       canvas.setPointerCapture(event.pointerId);

@@ -10,7 +10,7 @@ await new Promise(resolve=>setTimeout(resolve,0));
 field.setMinimapReveal(true);
 field.navigateTo(90,90);
 let count=0;
-for(let batch=0;batch<100;batch++) {
+for(let batch=0;batch<300;batch++) {
  field.update(performance.now()+batch*300);
  const requests=sent.splice(0).filter(m=>m.t==="MapReq");
  assert.ok(requests.length<=2,"bounded outstanding map requests");

@@ -1,0 +1,10 @@
+=== RUN   TestNpcListRepeatedRequestsKeepStaticWorkBoundedAndNPCsLive
+    mapplaces_test.go:232: reopening floor 100 allocates 143 objects/request; static catalogue work must be bounded (budget 20)
+--- FAIL: TestNpcListRepeatedRequestsKeepStaticWorkBoundedAndNPCsLive (1.34s)
+=== RUN   TestMapPlacesResourceExclusionAudit
+    mapplaces_test.go:291: resource audit: 1382 loaded floors, 5832 effective physical warp sources, 135 source-blocked; rejected target candidates: same-floor=735 nonexistent=0 out-of-bounds=2
+    mapplaces_test.go:292: catalogue: 4981 unique physical sources, 5002 source/destination pairs; largest JSON catalogue=9725 bytes on floor 3021 (100 places)
+--- PASS: TestMapPlacesResourceExclusionAudit (0.10s)
+FAIL
+FAIL	sa/server/internal/world	1.509s
+FAIL

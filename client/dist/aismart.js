@@ -19,7 +19,7 @@
 
 
 
-import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=5e4867fa738c689d";
+import { PRIMAL_CROSS_FUNC, primalCrossSlots } from "./battle-targets.js?v=16aad116d5c399c2";
 
 
 

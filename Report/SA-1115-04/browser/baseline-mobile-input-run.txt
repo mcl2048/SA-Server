@@ -1,0 +1,8 @@
+{"variant":"baseline","stage":"server-ready"}
+{"variant":"baseline","stage":"authenticated-real-field"}
+Error: secondary mouse click changed native mobile-map navigation
+    at assert (file:///home/coder/saserver/Report/SA-1115-04/browser/mobile-input-cases.mjs:2:56)
+    at Module.run (file:///home/coder/saserver/Report/SA-1115-04/browser/mobile-input-cases.mjs:18:2)
+    at async work (file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:277:5
+{"variant":"baseline","probe":false,"result":"/home/coder/saserver/Report/SA-1115-04/browser/baseline-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":100,"x":634,"y":489},"stored_position":{"floor":100,"x":635,"y":483},"position_matches":false}}

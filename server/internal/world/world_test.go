@@ -615,10 +615,12 @@ func TestNegativeDefQuick(t *testing.T) {
 	})
 }
 
-// 世界地图的 NPC 清单（NpcListReq）：一层楼全部有名字的 NPC 与位置，不限楼层；没名字的传送点不列；楼层不存在不回。
+// Scene NPC catalogue is current-floor only; unnamed warp triggers are omitted and nonexistent floors receive no response.
 func TestNpcList(t *testing.T) {
 	w, db, g := setup(t)
 	c, cl := petOwner(t, w, db, "看地图", 10, 60)
+	w.Do(func() { w.warpTo(w.players[int(c.ID)], 1000, 20, 20) })
+	cl.take()
 	w.NpcList(int(c.ID), 1000) // 萨姆吉尔村
 	m, ok := find[*proto.NpcList](cl.take())
 	if !ok || m.Floor != 1000 || len(m.Npcs) == 0 {

@@ -1,0 +1,42 @@
+(node:1194509) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-location sidebar pages every entry, retains full native labels and invokes the selected doorway (16.753889ms)
+✔ an explicit native hit label preserves full mobile text without changing desktop geometry (1.711233ms)
+✔ compact sidebar wraps complete long place names rather than truncating them (1.504648ms)
+✔ NPC tab pages the entire current scene and selects the exact named NPC (11.326242ms)
+✔ historical floor browsing never requests NPCs outside the player's current scene (2.517204ms)
+✖ historical region rows also preserve complete long names at the compact font (3.961095ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 625.164267
+
+✖ failing tests:
+
+test at client/test/map-place-sidebar.test.ts:77:1
+✖ historical region rows also preserve complete long names at the compact font (3.961095ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + '世界地图洞窟村庄地点完整长名称历史…'
+  - '世界地图洞窟村庄地点完整长名称历史楼层'
+                      ^
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/map-place-sidebar.test.ts:82:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '世界地图洞窟村庄地点完整长名称历史…',
+    expected: '世界地图洞窟村庄地点完整长名称历史楼层',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,17 @@
+(node:1193097) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-scene NPC route reaches its exact walkable coordinate (28.600409ms)
+✔ NPC on an obstacle routes to a reachable adjacent interaction cell (7.530694ms)
+✔ unknown NPC terrain can resolve to a wall without abandoning the interaction route (5.956339ms)
+✔ stale floor and replaced NPC snapshots cannot overwrite a current destination (6.459378ms)
+✔ NPC list refresh retains last good snapshot and limits concurrent requests (5.082367ms)
+✔ NPC on a portal stops alongside it without triggering a floor transition (3.189841ms)
+✔ NPC discovery never requests or retains characters from another scene (3.527137ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2048.03341

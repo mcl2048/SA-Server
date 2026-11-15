@@ -1,0 +1,38 @@
+(node:1191947) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ distant navigation requests the destination chunk before unrelated world corners (24.291986ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (11.136676ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (11.65403ms)
+✔ manual input cancels a suspended world-size search before it can emit moves (23.836735ms)
+✔ a stalled map load cancels navigation with retry feedback instead of waiting forever (5.747835ms)
+(node:1191948) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+minimap navigation integration passed
+✔ client/test/minimap-navigation.test.ts (2184.906114ms)
+(node:1191949) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ quick battle pauses movement then resumes the same minimap destination (26.106867ms)
+✔ normal battle cancels navigation, including a switch out of quick battle (6.785876ms)
+✔ passive mobile input cleanup preserves map navigation but manual directions override it (4.873521ms)
+✔ quick battle cannot revive a route after a floor change (5.074061ms)
+✔ exact destinations reject fractional and non-finite coordinates (4.032641ms)
+(node:1191981) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-scene NPC route reaches its exact walkable coordinate (24.988332ms)
+✔ NPC on an obstacle routes to a reachable adjacent interaction cell (4.913644ms)
+✔ unknown NPC terrain can resolve to a wall without abandoning the interaction route (3.950137ms)
+✔ stale floor and replaced NPC snapshots cannot overwrite a current destination (4.175398ms)
+✔ NPC list refresh retains last good snapshot and limits concurrent requests (4.751334ms)
+✔ NPC on a portal stops alongside it without triggering a floor transition (2.588053ms)
+✔ unreachable world search yields so input and rendering can run between bounded expansions (40.245572ms)
+✔ cooperative planner preserves shortest path and obstacle semantics (3.090662ms)
+pathfinding: all checks and 300 mixed-grid BFS comparisons passed
+✔ client/test/pathfinding.test.ts (410.038181ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4204.369454

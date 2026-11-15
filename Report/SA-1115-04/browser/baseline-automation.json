@@ -1,0 +1,744 @@
+{
+  "variant": "baseline",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "6bbafe1e8812f04252630ceb12f6a1c182bec841e567b70557929a677ee4e731",
+  "binary_version": "v0.2.21-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T09:52:59.335Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T09:53:19.334Z"
+    }
+  ],
+  "checks": [],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 100,
+      "x": 634,
+      "y": 489
+    },
+    "stored_position": {
+      "floor": 100,
+      "x": 635,
+      "y": 483
+    },
+    "position_matches": false
+  },
+  "client_version": "5e4867fa738c689d",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Status",
+      "level": 100,
+      "exp": 29628,
+      "nextExp": 1345723,
+      "hp": 1,
+      "maxHp": 4001,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "exp": 1870,
+          "nextExp": 13734,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    }
+  ],
+  "mobileInput": {
+    "before": {
+      "target": null,
+      "status": "",
+      "x": 633,
+      "y": 491,
+      "mapOpen": true
+    },
+    "after": {
+      "target": [
+        638,
+        481
+      ],
+      "status": "自动寻路中…",
+      "x": 633,
+      "y": 490,
+      "mapOpen": true
+    }
+  },
+  "failure": "secondary mouse click changed native mobile-map navigation",
+  "failure_stack": "Error: secondary mouse click changed native mobile-map navigation\n    at assert (file:///home/coder/saserver/Report/SA-1115-04/browser/mobile-input-cases.mjs:2:56)\n    at Module.run (file:///home/coder/saserver/Report/SA-1115-04/browser/mobile-input-cases.mjs:18:2)\n    at async work (file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:259:5)\n    at async file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:277:5",
+  "failure_state": {
+    "screen": "FieldScreen",
+    "field": true,
+    "battle": false,
+    "actions": [
+      {
+        "id": "chat-all",
+        "label": "◆",
+        "x1": 776,
+        "y1": 471,
+        "x2": 788.421875,
+        "y2": 489
+      },
+      {
+        "id": "tb-map",
+        "x1": 0,
+        "y1": 576,
+        "x2": 92,
+        "y2": 600
+      },
+      {
+        "id": "tb-status",
+        "x1": 116,
+        "y1": 576,
+        "x2": 208,
+        "y2": 600
+      },
+      {
+        "id": "tb-pet",
+        "x1": 232,
+        "y1": 576,
+        "x2": 324,
+        "y2": 600
+      },
+      {
+        "id": "tb-item",
+        "x1": 348,
+        "y1": 576,
+        "x2": 440,
+        "y2": 600
+      },
+      {
+        "id": "tb-mail",
+        "x1": 463,
+        "y1": 576,
+        "x2": 555,
+        "y2": 600
+      },
+      {
+        "id": "tb-album",
+        "x1": 578,
+        "y1": 576,
+        "x2": 670,
+        "y2": 600
+      },
+      {
+        "id": "tb-system",
+        "x1": 692,
+        "y1": 576,
+        "x2": 780,
+        "y2": 600
+      },
+      {
+        "id": "map-out",
+        "label": "－",
+        "x1": 264,
+        "y1": 78,
+        "x2": 294,
+        "y2": 98
+      },
+      {
+        "id": "map-in",
+        "label": "＋",
+        "x1": 328.9140625,
+        "y1": 78,
+        "x2": 358.9140625,
+        "y2": 98
+      },
+      {
+        "id": "map-fit",
+        "label": "全图",
+        "x1": 364.9140625,
+        "y1": 78,
+        "x2": 408.9140625,
+        "y2": 98
+      },
+      {
+        "id": "map-me",
+        "label": "回到自己",
+        "x1": 414.9140625,
+        "y1": 78,
+        "x2": 486.9140625,
+        "y2": 98
+      },
+      {
+        "id": "map-mini",
+        "label": "小地图",
+        "x1": 492.9140625,
+        "y1": 78,
+        "x2": 550.9140625,
+        "y2": 98
+      },
+      {
+        "id": "map-art",
+        "label": "实景",
+        "x1": 556.9140625,
+        "y1": 78,
+        "x2": 600.9140625,
+        "y2": 98
+      },
+      {
+        "id": "map-tab-places",
+        "label": "本区地点",
+        "x1": 106,
+        "y1": 78,
+        "x2": 166,
+        "y2": 96
+      },
+      {
+        "id": "map-tab-floors",
+        "label": "区域",
+        "x1": 190,
+        "y1": 78,
+        "x2": 222,
+        "y2": 96
+      },
+      {
+        "id": "map-place-100-1400-258-170",
+        "label": "卡坦村（东 258 南 170）",
+        "x1": 106,
+        "y1": 106,
+        "x2": 256,
+        "y2": 139
+      },
+      {
+        "id": "map-place-100-31401-666-235",
+        "label": "奇努伊的海底通路（东 666 南 235）",
+        "x1": 106,
+        "y1": 140,
+        "x2": 256,
+        "y2": 173
+      },
+      {
+        "id": "map-place-100-121-643-676",
+        "label": "岬之家（东 643 南 676）",
+        "x1": 106,
+        "y1": 174,
+        "x2": 256,
+        "y2": 207
+      },
+      {
+        "id": "map-place-100-10101-318-428",
+        "label": "往柯尔克的道路１楼（东 318 南 428）",
+        "x1": 106,
+        "y1": 208,
+        "x2": 256,
+        "y2": 241
+      },
+      {
+        "id": "map-place-100-11001-328-633",
+        "label": "柯奥山的小洞窟１楼（东 328 南 633）",
+        "x1": 106,
+        "y1": 242,
+        "x2": 256,
+        "y2": 275
+      },
+      {
+        "id": "map-place-100-1100-470-631",
+        "label": "柯奥村（东 470 南 631）",
+        "x1": 106,
+        "y1": 276,
+        "x2": 256,
+        "y2": 309
+      },
+      {
+        "id": "map-place-100-10901-237-445",
+        "label": "柯尔克的大坑道１楼（东 237 南 445）",
+        "x1": 106,
+        "y1": 310,
+        "x2": 256,
+        "y2": 343
+      },
+      {
+        "id": "map-place-100-2000-78-614",
+        "label": "玛丽娜丝渔村（东 78 南 614）",
+        "x1": 106,
+        "y1": 344,
+        "x2": 256,
+        "y2": 377
+      },
+      {
+        "id": "map-place-100-2000-113-660",
+        "label": "玛丽娜丝渔村（东 113 南 660）",
+        "x1": 106,
+        "y1": 378,
+        "x2": 256,
+        "y2": 411
+      },
+      {
+        "id": "map-places-next",
+        "label": "下一页",
+        "x1": 186,
+        "y1": 412,
+        "x2": 232,
+        "y2": 430
+      },
+      {
+        "id": "map-area",
+        "x1": 264,
+        "y1": 106,
+        "x2": 694,
+        "y2": 430
+      },
+      {
+        "id": "map-go",
+        "label": "到目的地",
+        "x1": 480,
+        "y1": 446,
+        "x2": 540,
+        "y2": 464
+      },
+      {
+        "id": "map-close",
+        "label": "关　闭",
+        "x1": 648,
+        "y1": 482,
+        "x2": 694,
+        "y2": 500
+      }
+    ]
+  }
+}

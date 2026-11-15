@@ -193,7 +193,7 @@ export class Menus {
       ui, canvas: host.canvas, send: (t) => host.gmSend(t), list: (k) => host.gmList(k), detail: (k, id) => host.gmDetail(k, id), place: () => host.place(),
       status: () => host.status, pets: () => (this.pets?.pets ?? []).filter((p) => p.slot >= 0 && p.slot < 5).sort((a, b) => a.slot - b.slot),
     });
-    this.mapWnd = new MapWindow({ ui, canvas: host.canvas, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.target = [x, y]; },
+    this.mapWnd = new MapWindow({ ui, canvas: host.canvas, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.setManualTarget([x, y]); },
       openMap: () => { if (!this.mapOpen) this.toggleMap(); }, closeMap: () => { this.mapOpen = false; } });
     this.vendor = new VendorWindow({
       ui, canvas: host.canvas, items: () => this.items.inv.items, pets: () => this.pets?.pets ?? [], ridePet: () => this.pets?.ride ?? -1,

@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: zero-coordinate native cave exit decodes, walks and returns to world
+desktop: current cave NPC list navigates to exact actual NPC coordinate
+desktop: NPC sidebar and requests stay on current scene during historical browsing
+desktop: native conditional world entrances retain both quest branches
+desktop: native map drag pans without click-through or movement

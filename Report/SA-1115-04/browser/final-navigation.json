@@ -1,0 +1,2585 @@
+{
+  "variant": "final",
+  "probe": false,
+  "matrix": false,
+  "binary_sha256": "474c883b4e9d16b542d96dd76ec2be4adb9f50cde191ebfdbccc454b842fd441",
+  "binary_version": "v0.2.22-LYNX",
+  "scope": "actual release ELF, official runtime assets, real Chromium with SwiftShader software GPU, mobile viewport/touch emulation; not physical-device certification",
+  "stages": [
+    {
+      "stage": "server-ready",
+      "time": "2026-11-15T10:18:24.624Z"
+    },
+    {
+      "stage": "authenticated-real-field",
+      "time": "2026-11-15T10:18:41.096Z"
+    },
+    {
+      "stage": "scenario-finished",
+      "time": "2026-11-15T10:26:26.587Z"
+    }
+  ],
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "desktop complete current-world village/cave catalogue and native pagination",
+      "passed": true,
+      "evidence": {
+        "floor": 100,
+        "places": 21,
+        "buttons": 21,
+        "pages": 3,
+        "names": [
+          "卡坦村",
+          "奇努伊的海底通路",
+          "岬之家",
+          "往柯尔克的道路１楼",
+          "柯奥山的小洞窟１楼",
+          "柯奥村",
+          "柯尔克的大坑道１楼",
+          "玛丽娜丝渔村",
+          "玛丽娜丝渔村",
+          "玛丽娜丝的庄园",
+          "白狼勇士公会",
+          "盗贼的洞窟地下１楼",
+          "英雄战场",
+          "萨姆吉尔庄园",
+          "萨姆吉尔村",
+          "萨姆吉尔村",
+          "阿布的洞窟地下１楼",
+          "阿布的独栋房屋",
+          "霍特尔村",
+          "靠近水田的家",
+          "ＰＣ团本部１楼"
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop native village location click walks and enters destination",
+      "passed": true,
+      "evidence": {
+        "name": "萨姆吉尔村",
+        "from": {
+          "x": 632,
+          "y": 497,
+          "steps": 6
+        },
+        "toFloor": 1000,
+        "position": {
+          "x": 50,
+          "y": 116
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop native cave location click walks and enters destination",
+      "passed": true,
+      "evidence": {
+        "name": "柯奥山的小洞窟１楼",
+        "from": {
+          "x": 322,
+          "y": 639,
+          "steps": 6
+        },
+        "toFloor": 11001,
+        "position": {
+          "x": 0,
+          "y": 44
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop zero-coordinate native cave exit decodes, walks and returns to world",
+      "passed": true,
+      "evidence": {
+        "floor": 11001,
+        "entrances": [
+          {
+            "y": 43,
+            "x": 0
+          },
+          {
+            "y": 44,
+            "x": 0
+          }
+        ],
+        "source": {
+          "x": 3,
+          "y": 40,
+          "steps": 6
+        },
+        "moves": 6,
+        "toFloor": 100,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop current cave NPC list navigates to exact actual NPC coordinate",
+      "passed": true,
+      "evidence": {
+        "floor": 10001,
+        "name": "查罕族青年",
+        "npc": {
+          "x": 16,
+          "y": 4
+        },
+        "from": {
+          "x": 9,
+          "y": 11
+        },
+        "to": {
+          "x": 16,
+          "y": 4
+        },
+        "moves": 7,
+        "corrections": 0,
+        "npcs": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop NPC sidebar and requests stay on current scene during historical browsing",
+      "passed": true,
+      "evidence": {
+        "currentFloor": 10001,
+        "viewed": "map-fl-100",
+        "npcRequests": [],
+        "buttons": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop native conditional world entrances retain both quest branches",
+      "passed": true,
+      "evidence": {
+        "floor": 703,
+        "branches": [
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7453,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          },
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7454,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop native map drag pans without click-through or movement",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "cx": 633,
+          "cy": 491
+        },
+        "after": {
+          "cx": 625.0000000000001,
+          "cy": 482.99999999999994
+        },
+        "moves": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "case": "desktop native coordinate validation and input lifecycle",
+      "passed": true,
+      "evidence": {
+        "mobile": false,
+        "inputs": 2,
+        "status": "目标在地图范围外"
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile complete current-world village/cave catalogue and native pagination",
+      "passed": true,
+      "evidence": {
+        "floor": 100,
+        "places": 21,
+        "buttons": 21,
+        "pages": 3,
+        "names": [
+          "卡坦村",
+          "奇努伊的海底通路",
+          "岬之家",
+          "往柯尔克的道路１楼",
+          "柯奥山的小洞窟１楼",
+          "柯奥村",
+          "柯尔克的大坑道１楼",
+          "玛丽娜丝渔村",
+          "玛丽娜丝渔村",
+          "玛丽娜丝的庄园",
+          "白狼勇士公会",
+          "盗贼的洞窟地下１楼",
+          "英雄战场",
+          "萨姆吉尔庄园",
+          "萨姆吉尔村",
+          "萨姆吉尔村",
+          "阿布的洞窟地下１楼",
+          "阿布的独栋房屋",
+          "霍特尔村",
+          "靠近水田的家",
+          "ＰＣ团本部１楼"
+        ]
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile native village location click walks and enters destination",
+      "passed": true,
+      "evidence": {
+        "name": "萨姆吉尔村",
+        "from": {
+          "x": 632,
+          "y": 497,
+          "steps": 6
+        },
+        "toFloor": 1000,
+        "position": {
+          "x": 50,
+          "y": 116
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile native cave location click walks and enters destination",
+      "passed": true,
+      "evidence": {
+        "name": "柯奥山的小洞窟１楼",
+        "from": {
+          "x": 322,
+          "y": 639,
+          "steps": 6
+        },
+        "toFloor": 11001,
+        "position": {
+          "x": 0,
+          "y": 44
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile zero-coordinate native cave exit decodes, walks and returns to world",
+      "passed": true,
+      "evidence": {
+        "floor": 11001,
+        "entrances": [
+          {
+            "y": 43,
+            "x": 0
+          },
+          {
+            "y": 44,
+            "x": 0
+          }
+        ],
+        "source": {
+          "x": 3,
+          "y": 40,
+          "steps": 6
+        },
+        "moves": 6,
+        "toFloor": 100,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile current cave NPC list navigates to exact actual NPC coordinate",
+      "passed": true,
+      "evidence": {
+        "floor": 10001,
+        "name": "查罕族青年",
+        "npc": {
+          "x": 16,
+          "y": 4
+        },
+        "from": {
+          "x": 9,
+          "y": 11
+        },
+        "to": {
+          "x": 16,
+          "y": 4
+        },
+        "moves": 7,
+        "corrections": 0,
+        "npcs": 1
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile NPC sidebar and requests stay on current scene during historical browsing",
+      "passed": true,
+      "evidence": {
+        "currentFloor": 10001,
+        "viewed": "map-fl-100",
+        "npcRequests": [
+          10001
+        ],
+        "buttons": 1
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile native conditional world entrances retain both quest branches",
+      "passed": true,
+      "evidence": {
+        "floor": 703,
+        "branches": [
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7453,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          },
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7454,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile secondary mouse button does not navigate on native mobile map",
+      "passed": true,
+      "evidence": {
+        "position": {
+          "x": 633,
+          "y": 491
+        },
+        "target": null
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile native map drag pans without click-through or movement",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "cx": 633,
+          "cy": 491
+        },
+        "after": {
+          "cx": 616.1372549019607,
+          "cy": 474.1372549019607
+        },
+        "moves": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "case": "mobile native coordinate validation and input lifecycle",
+      "passed": true,
+      "evidence": {
+        "mobile": true,
+        "inputs": 2,
+        "status": "目标在地图范围外"
+      }
+    }
+  ],
+  "errors": [],
+  "shutdown": {
+    "started": true,
+    "sigterm_sent": true,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "expected_position": {
+      "id": 1,
+      "floor": 100,
+      "x": 633,
+      "y": 491
+    },
+    "stored_position": {
+      "floor": 100,
+      "x": 633,
+      "y": 491
+    },
+    "position_matches": true
+  },
+  "client_version": "16aad116d5c399c2",
+  "browser": "156.0.8078.4",
+  "events": [
+    {
+      "t": "Status",
+      "level": 100,
+      "exp": 29628,
+      "nextExp": 1345723,
+      "hp": 1,
+      "maxHp": 4001,
+      "mp": 100,
+      "maxMp": 100
+    },
+    {
+      "t": "Inventory",
+      "gold": 1730,
+      "items": [
+        {
+          "slot": 9,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 10,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 11,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 12,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 13,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 14,
+          "name": "扬奇洛斯的手爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 15,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 16,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 17,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 18,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 19,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 20,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 21,
+          "name": "邦奇诺的脚爪",
+          "pile": 1,
+          "type": 16,
+          "target": 0
+        },
+        {
+          "slot": 22,
+          "name": "大块肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        },
+        {
+          "slot": 23,
+          "name": "扬奇洛斯的肉",
+          "pile": 1,
+          "type": 20,
+          "target": 1
+        }
+      ]
+    },
+    {
+      "t": "Pets",
+      "pets": [
+        {
+          "slot": 0,
+          "name": "奥普埃",
+          "freeName": "",
+          "sprite": 199100,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 574,
+          "maxHp": 574,
+          "state": "battle",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29101,
+              "slot": 2,
+              "name": "观测风标",
+              "target": 2,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 1,
+          "name": "克劳德",
+          "freeName": "",
+          "sprite": 199101,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 655,
+          "maxHp": 655,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29102,
+              "slot": 2,
+              "name": "铜壳修补",
+              "target": 1,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "name": "格鲁克",
+          "freeName": "",
+          "sprite": 199102,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29103,
+              "slot": 2,
+              "name": "狐龙疾行",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 3,
+          "name": "吉米奈",
+          "freeName": "",
+          "sprite": 199103,
+          "level": 41,
+          "exp": 3052,
+          "nextExp": 28594,
+          "hp": 528,
+          "maxHp": 528,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            },
+            {
+              "id": 2,
+              "slot": 1,
+              "name": "防御",
+              "target": 5,
+              "field": 1
+            },
+            {
+              "id": 29104,
+              "slot": 2,
+              "name": "Gemini Overdrive",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        },
+        {
+          "slot": 4,
+          "name": "乌力",
+          "freeName": "",
+          "sprite": 100250,
+          "level": 32,
+          "exp": 1870,
+          "nextExp": 13734,
+          "hp": 196,
+          "maxHp": 196,
+          "state": "standby",
+          "skills": [
+            {
+              "id": 1,
+              "slot": 0,
+              "name": "攻击",
+              "target": 6,
+              "field": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 632,
+      "y": 497,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 1000,
+      "name": "萨姆吉尔村",
+      "x": 50,
+      "y": 116,
+      "width": 160,
+      "height": 160
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 323,
+      "y": 633,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 322,
+      "y": 639,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 11001,
+      "name": "柯奥山的小洞窟１楼",
+      "x": 0,
+      "y": 44,
+      "width": 50,
+      "height": 50
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 11001,
+      "name": "柯奥山的小洞窟１楼",
+      "x": 0,
+      "y": 43,
+      "width": 50,
+      "height": 50
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 11001,
+      "name": "柯奥山的小洞窟１楼",
+      "x": 3,
+      "y": 40,
+      "width": 50,
+      "height": 50
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 328,
+      "y": 633,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 10001,
+      "name": "阿布的洞窟地下１楼",
+      "x": 16,
+      "y": 11,
+      "width": 50,
+      "height": 50
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 10001,
+      "name": "阿布的洞窟地下１楼",
+      "x": 9,
+      "y": 11,
+      "width": 50,
+      "height": 50
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 703,
+      "name": "伊甸大陆南方",
+      "x": 334,
+      "y": 176,
+      "width": 400,
+      "height": 400
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "EnterFloor",
+      "floor": 100,
+      "name": "萨伊那斯",
+      "x": 633,
+      "y": 491,
+      "width": 800,
+      "height": 800
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": true,
+      "reason": ""
+    },
+    {
+      "t": "AutoPlayState",
+      "canEncounter": false,
+      "encounter": false,
+      "autoBattle": false,
+      "quick": false,
+      "paused": false,
+      "reason": ""
+    }
+  ],
+  "navigation": [
+    {
+      "device": "desktop",
+      "name": "complete current-world village/cave catalogue and native pagination",
+      "evidence": {
+        "floor": 100,
+        "places": 21,
+        "buttons": 21,
+        "pages": 3,
+        "names": [
+          "卡坦村",
+          "奇努伊的海底通路",
+          "岬之家",
+          "往柯尔克的道路１楼",
+          "柯奥山的小洞窟１楼",
+          "柯奥村",
+          "柯尔克的大坑道１楼",
+          "玛丽娜丝渔村",
+          "玛丽娜丝渔村",
+          "玛丽娜丝的庄园",
+          "白狼勇士公会",
+          "盗贼的洞窟地下１楼",
+          "英雄战场",
+          "萨姆吉尔庄园",
+          "萨姆吉尔村",
+          "萨姆吉尔村",
+          "阿布的洞窟地下１楼",
+          "阿布的独栋房屋",
+          "霍特尔村",
+          "靠近水田的家",
+          "ＰＣ团本部１楼"
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "native village location click walks and enters destination",
+      "evidence": {
+        "name": "萨姆吉尔村",
+        "from": {
+          "x": 632,
+          "y": 497,
+          "steps": 6
+        },
+        "toFloor": 1000,
+        "position": {
+          "x": 50,
+          "y": 116
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "native cave location click walks and enters destination",
+      "evidence": {
+        "name": "柯奥山的小洞窟１楼",
+        "from": {
+          "x": 322,
+          "y": 639,
+          "steps": 6
+        },
+        "toFloor": 11001,
+        "position": {
+          "x": 0,
+          "y": 44
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "zero-coordinate native cave exit decodes, walks and returns to world",
+      "evidence": {
+        "floor": 11001,
+        "entrances": [
+          {
+            "y": 43,
+            "x": 0
+          },
+          {
+            "y": 44,
+            "x": 0
+          }
+        ],
+        "source": {
+          "x": 3,
+          "y": 40,
+          "steps": 6
+        },
+        "moves": 6,
+        "toFloor": 100,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "current cave NPC list navigates to exact actual NPC coordinate",
+      "evidence": {
+        "floor": 10001,
+        "name": "查罕族青年",
+        "npc": {
+          "x": 16,
+          "y": 4
+        },
+        "from": {
+          "x": 9,
+          "y": 11
+        },
+        "to": {
+          "x": 16,
+          "y": 4
+        },
+        "moves": 7,
+        "corrections": 0,
+        "npcs": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "NPC sidebar and requests stay on current scene during historical browsing",
+      "evidence": {
+        "currentFloor": 10001,
+        "viewed": "map-fl-100",
+        "npcRequests": [],
+        "buttons": 1
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "native conditional world entrances retain both quest branches",
+      "evidence": {
+        "floor": 703,
+        "branches": [
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7453,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          },
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7454,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "native map drag pans without click-through or movement",
+      "evidence": {
+        "before": {
+          "cx": 633,
+          "cy": 491
+        },
+        "after": {
+          "cx": 625.0000000000001,
+          "cy": 482.99999999999994
+        },
+        "moves": 0
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "native coordinate validation and input lifecycle",
+      "evidence": {
+        "mobile": false,
+        "inputs": 2,
+        "status": "目标在地图范围外"
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "complete current-world village/cave catalogue and native pagination",
+      "evidence": {
+        "floor": 100,
+        "places": 21,
+        "buttons": 21,
+        "pages": 3,
+        "names": [
+          "卡坦村",
+          "奇努伊的海底通路",
+          "岬之家",
+          "往柯尔克的道路１楼",
+          "柯奥山的小洞窟１楼",
+          "柯奥村",
+          "柯尔克的大坑道１楼",
+          "玛丽娜丝渔村",
+          "玛丽娜丝渔村",
+          "玛丽娜丝的庄园",
+          "白狼勇士公会",
+          "盗贼的洞窟地下１楼",
+          "英雄战场",
+          "萨姆吉尔庄园",
+          "萨姆吉尔村",
+          "萨姆吉尔村",
+          "阿布的洞窟地下１楼",
+          "阿布的独栋房屋",
+          "霍特尔村",
+          "靠近水田的家",
+          "ＰＣ团本部１楼"
+        ]
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "native village location click walks and enters destination",
+      "evidence": {
+        "name": "萨姆吉尔村",
+        "from": {
+          "x": 632,
+          "y": 497,
+          "steps": 6
+        },
+        "toFloor": 1000,
+        "position": {
+          "x": 50,
+          "y": 116
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "native cave location click walks and enters destination",
+      "evidence": {
+        "name": "柯奥山的小洞窟１楼",
+        "from": {
+          "x": 322,
+          "y": 639,
+          "steps": 6
+        },
+        "toFloor": 11001,
+        "position": {
+          "x": 0,
+          "y": 44
+        },
+        "moves": 6,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "zero-coordinate native cave exit decodes, walks and returns to world",
+      "evidence": {
+        "floor": 11001,
+        "entrances": [
+          {
+            "y": 43,
+            "x": 0
+          },
+          {
+            "y": 44,
+            "x": 0
+          }
+        ],
+        "source": {
+          "x": 3,
+          "y": 40,
+          "steps": 6
+        },
+        "moves": 6,
+        "toFloor": 100,
+        "corrections": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "current cave NPC list navigates to exact actual NPC coordinate",
+      "evidence": {
+        "floor": 10001,
+        "name": "查罕族青年",
+        "npc": {
+          "x": 16,
+          "y": 4
+        },
+        "from": {
+          "x": 9,
+          "y": 11
+        },
+        "to": {
+          "x": 16,
+          "y": 4
+        },
+        "moves": 7,
+        "corrections": 0,
+        "npcs": 1
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "NPC sidebar and requests stay on current scene during historical browsing",
+      "evidence": {
+        "currentFloor": 10001,
+        "viewed": "map-fl-100",
+        "npcRequests": [
+          10001
+        ],
+        "buttons": 1
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "native conditional world entrances retain both quest branches",
+      "evidence": {
+        "floor": 703,
+        "branches": [
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7453,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          },
+          {
+            "name": "伐木工头的房间",
+            "toFloor": 7454,
+            "conditional": true,
+            "entrances": [
+              {
+                "x": 334,
+                "y": 182
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "secondary mouse button does not navigate on native mobile map",
+      "evidence": {
+        "position": {
+          "x": 633,
+          "y": 491
+        },
+        "target": null
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "native map drag pans without click-through or movement",
+      "evidence": {
+        "before": {
+          "cx": 633,
+          "cy": 491
+        },
+        "after": {
+          "cx": 616.1372549019607,
+          "cy": 474.1372549019607
+        },
+        "moves": 0
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "native coordinate validation and input lifecycle",
+      "evidence": {
+        "mobile": true,
+        "inputs": 2,
+        "status": "目标在地图范围外"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+(node:1192645) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current-scene NPC route reaches its exact walkable coordinate (28.568571ms)
+✔ NPC on an obstacle routes to a reachable adjacent interaction cell (4.797836ms)
+✔ unknown NPC terrain can resolve to a wall without abandoning the interaction route (4.159263ms)
+✔ stale floor and replaced NPC snapshots cannot overwrite a current destination (2.787206ms)
+✔ NPC list refresh retains last good snapshot and limits concurrent requests (7.372772ms)
+✔ NPC on a portal stops alongside it without triggering a floor transition (3.404188ms)
+✖ NPC discovery never requests or retains characters from another scene (4.059324ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1993.640154
+
+✖ failing tests:
+
+test at client/test/navigation-npc.test.ts:63:1
+✖ NPC discovery never requests or retains characters from another scene (4.059324ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+
+  null !== []
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:65:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

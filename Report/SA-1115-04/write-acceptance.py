@@ -1,0 +1,49 @@
+"""Write concise acceptance and append the user's development journal."""
+from pathlib import Path
+import json
+OUT=Path(__file__).resolve().parent;ROOT=OUT.parents[1]
+r=json.loads((OUT/'release.json').read_text());assert r['success']
+b=json.loads((OUT/'browser/final-navigation.json').read_text());p=json.loads((OUT/'pathfinding-performance.json').read_text())
+metric=lambda name,variant:next(x for x in p['results'] if x['name']==name and x['variant']==variant)
+u=metric('unreachable','cooperative');base=metric('unreachable','baseline');d=metric('detour','cooperative');db=metric('detour','baseline')
+text=f'''# SA-1115-04 · 最终验收
+
+版本 **{r['version']}**，基线08e2544（v0.2.21-LYNX）。核心任务和用户追加的“当前场景NPC”“左栏完整名称”均已实施并按下述范围核验。未将测试通过等同于所有未来地图／设备100%无故障。
+
+| 交付／验证 | 最终证据 |
+| --- | --- |
+| ✅ 当前地点完整目录 | 1206层／3309地点／4981物理入口／5002入口目的地对应；地图100有21处，详见SERVER-REVIEW.md和server-map-green.txt。 |
+| ✅ 当前场景NPC | 前后端仅角色实时floor，换层清旧和迟到隔离；过滤空名／隐藏／越界；最多实测100位，合并完整响应14030B，洞窟10001仅237B。 |
+| ✅ 精确导航 | 普通可走NPC坐标准确到达；墙／warp占位采用可达相邻普通格，显示实际坐标。真实洞窟查罕族青年(16,4)到达，原生Move及PosCorrect计数有记录。 |
+| ✅ 左栏可读性 | 地点／NPC／历史区域12px完整换行，按内容高度分页；67条长名合成夹具遍历与真实资源全名绘制比对，保留完整原生移动标签。 |
+| ✅ 路径／输入／资源 | 256扩展分片、单修订快照、手动／锁定／跟随／换层取消释放；加载无进展30秒反馈；屏蔽非主按钮误导航，墙角／未知／中间warp规则保留。 |
+| ✅ 客户端与构建 | {r['client_tests']}项通过，0失败；TypeScript全src无诊断；BFS独立差分300混合网格及全对小迷宫最短路通过。 |
+| ✅ 服务端 | 完整go test／vet通过；race所有包最终通过，world整包240秒上限超时后单独600秒上限重跑退出0。首轮其他包与重跑日志分开保留，源码稳定。 |
+| ✅ 真实Chromium | {len(b['checks'])}项全部通过、页面错误0，{b['browser']}；桌面与触屏视口、横屏、完整目录、村庄／洞窟／零坐标出口、NPC准确坐标／当前层隔离、条件入口、输入／拖动与右键。 |
+| ✅ 最终运行与发行 | 78HTTP文件逐字节一致、HEAD／304／私有路径、正常SIGTERM退出0／角色位置存档匹配；两次构建摘要一致；ZIP {r['package']['files']}文件逐文件一致，替换旧ZIP。 |
+| ✅ 文档与Skill | README／CHANGELOG／发布说明／日志／可视页面；本机StoneAge与仓库镜像更新，Skill检查通过。无新增Assets。 |
+
+Linux AMD64静态ELF：`{r['binary_sha256']}`。ZIP：`{r['package']['sha256']}`，{r['package']['bytes']}字节。版本／ELF架构／无动态解释器／源码输入／HTTP／浏览器／ZIP由verify-release.py统一核对，见release.json。
+
+## 性能解释
+
+静态地点按World生命周期按需缓存；真实当前层重复NpcList请求从143次分配降至12次，热静态lookup为0B／0alloc，仅代表该操作，不能推断整服同比下降。动态NPC仍实时投影，地图可见时5秒按需刷新、10秒在途重试；无新后台轮询、无全世界NPC缓存，历史地图不请求人物。
+
+600×600固定网格、交替顺序、1次热身／6样本：不可达基线同步中位{base['median_ms']:.2f}ms；最终协作搜索总CPU中位{u['median_ms']:.2f}ms、{u['slices']}片、样本最长单片{u['max_slice_ms']:.2f}ms。绕障基线{db['median_ms']:.2f}ms，协作总CPU{d['median_ms']:.2f}ms、{d['slices']}片、最长单片{d['max_slice_ms']:.2f}ms。分帧改善输入可响应性，不保证总CPU或完成墙钟时间下降；每帧只推进一片，较大搜索会跨更多帧，操作系统调度／GC／渲染仍可能产生长帧。这不是所有手机的硬实时保证。详见pathfinding-performance.json，路径成本一致。
+
+## 失败与中断保留
+
+- navigation-red、npc-scope-red、manual-target-red、cancellation-red、map-revision-red、移动右键／长名称／当前场景及服务端目录／越界／稳定排序红测为预期复现，不计入最终通过。
+- 初期NPC测试把同代价邻格误写为唯一(3,1)，后改为实际距离／最短步数；原minimap集成100帧的同步预算改为300帧，仍检查真实到达／请求上限。
+- candidate真实NPC已经精确到达(16,4)，旧脚本要求距离恰好1而失败；按用户精确目标要求修正，最终全矩阵重跑。初期浏览器测试里的button缺失夹具已修成真实button=0，并完整重跑。
+- 修复独立复核问题时主动中断旧浏览器；另有前景外壳143中断浏览器／完整race，均保留中间输出，不用作成功证据。最终浏览器与race使用独立supervisor；首轮race只有world累计整包240秒超时，历史同包曾263秒，此轮将world上限改为600秒单独完整重跑，其后重跑发现既有TestSaveQueueCoalesces的调度假设错误，原合法写入序列为[0,99,164,165,166,199]；用执行屏障明确制造积压后再检查合并，保存原失败并重跑全部world race。仅改测试，未改存档生产逻辑或隐藏初始失败。Skill验证初期本机python缺yaml，改用已有venv后检查通过，未改项目依赖。
+
+## 剩余边界
+
+当前目录来自实际有效步入warp；仅对话／脚本传送的目的地不冒充可自动跨图入口。条件资格及随机目的地由服务端判定，选择名称只导航到源入口。移动运输NPC显示最近快照，不预测追踪，也不自动对话。未知格始终阻挡，资源失联超时后由用户重新点选。
+
+浏览器为真实Chromium＋SwiftShader及触屏／视口模拟，未认证实体Android、iOS、Safari、系统IME和长期休眠。此轮未部署、停服或重启生产实例；仅对独立测试子进程发送SIGTERM。SIGKILL、断电、磁盘错误不在正常保存成功声明内。Assets原树、凭据、数据库与私有运行日志不入仓库。
+'''
+(OUT/'ACCEPTANCE.md').write_text(text)
+journal=f'''\n\n---\n\n## {r['version']} · SA-1115-04\n\n✅ 小地图有效地点全量核对：1206层／3309地点／4981物理入口／5002入口目标对应。静态目录按需缓存，当前层重复请求143→12次分配。\n\n✅ 追加当前场景NPC与精准导航：仅角色实际楼层，换层释放、迟到隔离，实时可见／有名／界内人物；不聚合洞窟或世界。可走坐标准确到达，墙／warp占位选择最短可达相邻普通格；移动NPC使用最近快照。地点／NPC／区域12px完整换行和自适应分页，右键误导航修复。\n\n✅ 分帧A*冻结地图修订，手动／锁定／跟随／换层取消释放，加载超时明确反馈；{r['client_tests']}客户端／构建、全src TypeScript、完整Go test／race／vet、最终真实Chromium{len(b['checks'])}项与78HTTP字节核验通过。二进制重复构建一致，4380文件ZIP完整替换旧版。最终ELF `{r['binary_sha256']}`。\n\n[可视报告](Report/SA-1115-04/index.html) · [完整验收](Report/SA-1115-04/ACCEPTANCE.md) · [发行摘要](Report/SA-1115-04/release.json)。StoneAge经验已同步，无新增Assets。移动是触屏／视口模拟，不冒充实体Android/iOS/Safari；未部署生产。所有红测／脚本修正／143中断均保留，最终仅采用匹配ELF且完整退出的证据。\n'''
+p=ROOT/'report.md';s=p.read_text();assert '## v0.2.22-LYNX · SA-1115-04' not in s;p.write_text(s+journal)

@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "browser": "156.0.8078.4",
+  "views": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "scroll": 1280,
+      "cards": 4,
+      "images": 4
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "scroll": 390,
+      "cards": 4,
+      "images": 4
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,99 @@
+ok  	sa/server/cmd/saserver	78.456s
+ok  	sa/server/internal/battle	4.427s
+ok  	sa/server/internal/data	100.955s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	42.365s
+ok  	sa/server/internal/store	10.367s
+panic: test timed out after 4m0s
+	running tests:
+		TestPresenceDetachKeepsPveRoomAndSubmittedTurn (0s)
+
+goroutine 15788 [running]:
+testing.(*M).startAlarm.func1()
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2961 +0x605
+created by time.goFunc
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/time/sleep.go:182 +0x45
+
+goroutine 1 [chan receive]:
+testing.(*T).Run(0xc000184b48, {0x14fd4d2, 0x2e}, 0x1bd7d78)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2268 +0xb3e
+testing.runTests.func1(0xc000184b48)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2744 +0x85
+testing.tRunner(0xc000184b48, 0xc0000d3a40)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2195 +0x21d
+testing.runTests({0x14e08bc, 0x9}, {0x14eb685, 0x18}, 0xc0000160c0, {0x1c3fa80, 0x109, 0x109}, {0xc2b67fcf7340001d, 0x37e1e0a5c5, ...})
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2742 +0x9ea
+testing.(*M).Run(0xc000180320)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2602 +0xf45
+main.main()
+	_testmain.go:588 +0x165
+
+goroutine 15780 [runnable]:
+modernc.org/sqlite/lib.Xsqlite3_strnicmp(0xc005ebbc30?, 0x1510407, 0x150ec30, 0x7)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_000000000001ffff.go:788 +0x153
+modernc.org/sqlite/lib._sqlite3FindTable(0xc005ebbc30, 0x7fb82af90028, 0x1510407, 0x150ec6c)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_0000000000003e80.go:15801 +0xa5d
+modernc.org/sqlite/lib._loadStat4(0xc005ebbc30, 0x7fb82af90028, 0x150ec6c)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_0000000000003fc0.go:4890 +0xb4
+modernc.org/sqlite/lib._sqlite3AnalysisLoad(0xc005ebbc30, 0x7fb82af90028, 0x0)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_0000000000001e80.go:3410 +0xcdf
+modernc.org/sqlite/lib._sqlite3InitOne(0xc005ebbc30, 0x7fb82af90028, 0x0, 0x7fb82afdeed0, 0x3)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_0000000000003e80.go:17347 +0x2285
+modernc.org/sqlite/lib._sqlite3VdbeExec(0xc005ebbc30, 0x7fb82afdee28)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_0000000000000480.go:24164 +0x2579a
+modernc.org/sqlite/lib._sqlite3Step(0xc005ebbc30, 0x7fb82afdee28)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite_g_000000000001deab.go:3968 +0x1ee
+modernc.org/sqlite/lib.Xsqlite3_step(0xc005ebbc30, 0x7fb82afdee28)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/lib/sqlite.go:12110 +0x1cb
+modernc.org/sqlite.(*conn).step(0xc005ed9980, 0x7fb82afdee28)
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/conn.go:435 +0x5e
+modernc.org/sqlite.(*stmt).exec.func2(0xc00748ec90, {0x1c635c0, 0x0, 0x0}, 0xc004c82a78, 0xc0094167dc, {0x1bd6888, 0x1c635c0})
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/stmt.go:145 +0x2af
+modernc.org/sqlite.(*stmt).exec(0xc00748ec90, {0x1bd6888, 0x1c635c0}, {0x1c635c0, 0x0, 0x0})
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/stmt.go:175 +0x29c
+modernc.org/sqlite.(*conn).exec(0xc005ed9980, {0x1bd6888, 0x1c635c0}, {0x1505efa, 0x41}, {0x1c635c0, 0x0, 0x0})
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/conn.go:1167 +0x17a
+modernc.org/sqlite.(*conn).ExecContext(0xc005ed9980, {0x1bd6888, 0x1c635c0}, {0x1505efa, 0x41}, {0x1c635c0, 0x0, 0x0})
+	/home/coder/go/pkg/mod/modernc.org/sqlite@v1.60.1/conn.go:1426 +0x95
+database/sql.ctxDriverExec({0x1bd6888, 0x1c635c0}, {0x7fb82a35f2e0, 0xc005ed9980}, {0x0, 0x0}, {0x1505efa, 0x41}, {0x1c635c0, 0x0, ...})
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/ctxutil.go:31 +0xeb
+database/sql.(*DB).execDC.func2()
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:1718 +0x266
+database/sql.withLock({0x1bd6470, 0xc005ed6500}, 0xc004c83088)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:3621 +0xa3
+database/sql.(*DB).execDC(0x4c0000?, {0x1bd6888, 0x1c635c0}, 0xc005ed6500, 0xc005e3c8c0, {0x1505efa, 0x41}, {0x0, 0x0, 0x0})
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:1713 +0x405
+database/sql.(*Tx).ExecContext(0xc006e02750, {0x1bd6888, 0x1c635c0}, {0x1505efa, 0x41}, {0x0, 0x0, 0x0})
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:2521 +0x129
+database/sql.(*Tx).Exec(...)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:2530
+sa/server/internal/store.migrate(0xc00c830000)
+	/home/coder/saserver/server/internal/store/store.go:264 +0x649
+sa/server/internal/store.OpenSQLite({0xc00944dc70, 0x46})
+	/home/coder/saserver/server/internal/store/store.go:235 +0x4c5
+sa/server/internal/world.setup(0xc00ae8bb08)
+	/home/coder/saserver/server/internal/world/world_test.go:61 +0x20a
+sa/server/internal/world.TestPresenceDetachKeepsPveRoomAndSubmittedTurn(0xc00ae8bb08)
+	/home/coder/saserver/server/internal/world/presence_test.go:70 +0x3f
+testing.tRunner(0xc00ae8bb08, 0x1bd7d78)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2195 +0x21d
+created by testing.(*T).Run in goroutine 1
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/testing/testing.go:2260 +0xb13
+
+goroutine 15781 [select]:
+database/sql.(*DB).connectionOpener(0xc00c830000, {0x1bd69a0, 0xc003a45720})
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:1266 +0xed
+created by database/sql.OpenDB in goroutine 15780
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:846 +0x287
+
+goroutine 15782 [chan receive]:
+database/sql.(*Tx).awaitDone(0xc006e02750)
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:2217 +0x4a
+created by database/sql.(*DB).beginDC in goroutine 15780
+	/tmp/loft-go-mod/golang.org/toolchain@v0.0.1-go1.27.3.linux-amd64/src/database/sql/sql.go:1930 +0x428
+FAIL	sa/server/internal/world	240.286s
+ok  	sa/server/tests	76.149s
+?   	sa/server/tools/assetindex	[no test files]
+?   	sa/server/tools/protogen	[no test files]
+ok  	sa/server/webclient	5.594s
+FAIL

@@ -1,0 +1,108 @@
+(node:1188688) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ current-scene NPC route reaches its exact walkable coordinate (22.159929ms)
+✖ NPC on an obstacle routes to a reachable adjacent interaction cell (8.752771ms)
+✖ unknown NPC terrain can resolve to a wall without abandoning the interaction route (8.257489ms)
+✖ stale floor and replaced NPC snapshots cannot overwrite a current destination (6.471011ms)
+✖ NPC list refresh retains last good snapshot and limits concurrent requests (8.378812ms)
+✖ unreachable world search yields so input and rendering can run between bounded expansions (4.806954ms)
+✖ cooperative planner preserves shortest path and obstacle semantics (0.633771ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 0
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2366.878446
+
+✖ failing tests:
+
+test at client/test/navigation-npc.test.ts:18:1
+✖ current-scene NPC route reaches its exact walkable coordinate (22.159929ms)
+  TypeError [Error]: field.navigateNpc is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:20:8)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at client/test/navigation-npc.test.ts:25:1
+✖ NPC on an obstacle routes to a reachable adjacent interaction cell (8.752771ms)
+  TypeError [Error]: field.navigateNpc is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:27:8)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/test/navigation-npc.test.ts:32:1
+✖ unknown NPC terrain can resolve to a wall without abandoning the interaction route (8.257489ms)
+  TypeError [Error]: field.navigateNpc is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:34:8)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/test/navigation-npc.test.ts:38:1
+✖ stale floor and replaced NPC snapshots cannot overwrite a current destination (6.471011ms)
+  TypeError [Error]: field.navigateNpc is not a function
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:40:8)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/test/navigation-npc.test.ts:45:1
+✖ NPC list refresh retains last good snapshot and limits concurrent requests (8.378812ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-npc.test.ts:49:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/pathfinding-budget.test.ts:5:1
+✖ unreachable world search yields so input and rendering can run between bounded expansions (4.806954ms)
+  AssertionError [ERR_ASSERTION]: cooperative planner is available
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/pathfinding-budget.test.ts:8:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/test/pathfinding-budget.test.ts:15:1
+✖ cooperative planner preserves shortest path and obstacle semantics (0.633771ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/pathfinding-budget.test.ts:16:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

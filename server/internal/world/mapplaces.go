@@ -92,3 +92,21 @@ func mapPlaces(g *data.Game, floor int) []proto.MapPlace {
 	})
 	return out
 }
+
+// placesForFloor lazily reuses only the static resource projection. Game floors,
+// tile rules and effective warps are immutable after data.Load; a new process /
+// World owns a fresh cache on resource reload. Never cache the whole NpcList:
+// live buses, NPC coordinates and time-based visibility are world state.
+// The world loop owns both cache reads and writes; no shared Game mutation or
+// cross-line lock is introduced. Empty catalogues are cached as well.
+func (w *World) placesForFloor(floor int) []proto.MapPlace {
+	if places, ok := w.mapPlaceCache[floor]; ok {
+		return places
+	}
+	places := mapPlaces(w.game, floor)
+	if w.mapPlaceCache == nil {
+		w.mapPlaceCache = map[int][]proto.MapPlace{}
+	}
+	w.mapPlaceCache[floor] = places
+	return places
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "device": "desktop",
+    "name": "complete current-world village/cave catalogue and native pagination",
+    "evidence": {
+      "floor": 100,
+      "places": 21,
+      "buttons": 21,
+      "pages": 3,
+      "names": [
+        "卡坦村",
+        "奇努伊的海底通路",
+        "岬之家",
+        "往柯尔克的道路１楼",
+        "柯奥山的小洞窟１楼",
+        "柯奥村",
+        "柯尔克的大坑道１楼",
+        "玛丽娜丝渔村",
+        "玛丽娜丝渔村",
+        "玛丽娜丝的庄园",
+        "白狼勇士公会",
+        "盗贼的洞窟地下１楼",
+        "英雄战场",
+        "萨姆吉尔庄园",
+        "萨姆吉尔村",
+        "萨姆吉尔村",
+        "阿布的洞窟地下１楼",
+        "阿布的独栋房屋",
+        "霍特尔村",
+        "靠近水田的家",
+        "ＰＣ团本部１楼"
+      ]
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "native village location click walks and enters destination",
+    "evidence": {
+      "name": "萨姆吉尔村",
+      "from": {
+        "x": 632,
+        "y": 497,
+        "steps": 6
+      },
+      "toFloor": 1000,
+      "position": {
+        "x": 50,
+        "y": 116
+      },
+      "moves": 6,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "native cave location click walks and enters destination",
+    "evidence": {
+      "name": "柯奥山的小洞窟１楼",
+      "from": {
+        "x": 322,
+        "y": 639,
+        "steps": 6
+      },
+      "toFloor": 11001,
+      "position": {
+        "x": 0,
+        "y": 44
+      },
+      "moves": 6,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "zero-coordinate native cave exit decodes, walks and returns to world",
+    "evidence": {
+      "floor": 11001,
+      "entrances": [
+        {
+          "y": 43,
+          "x": 0
+        },
+        {
+          "y": 44,
+          "x": 0
+        }
+      ],
+      "source": {
+        "x": 3,
+        "y": 40,
+        "steps": 6
+      },
+      "moves": 6,
+      "toFloor": 100,
+      "corrections": 0
+    }
+  }
+]

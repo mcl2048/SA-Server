@@ -1,0 +1,37 @@
+[
+  {
+    "url": "https://www.redblobgames.com/pathfinding/a-star/implementation.html",
+    "retrieved_utc": "2026-11-15T09:51:36.323234+00:00",
+    "bytes": 214707,
+    "sha256": "454c86570d7afaca952b6ca2877d8874b020fe83a0e749a44a3aca5adf04c5cf",
+    "title": "Implementation of A*"
+  },
+  {
+    "url": "https://movingai.com/benchmarks/grids.html",
+    "retrieved_utc": "2026-11-15T09:51:36.326031+00:00",
+    "bytes": 9755,
+    "sha256": "f94d2e9d02ca15f434accbdce4bc3d02fafebc5500d4b6e0403a1130d5d470e0",
+    "title": "2D Pathfinding Benchmarks"
+  },
+  {
+    "url": "https://www.w3.org/TR/pointerevents3/",
+    "retrieved_utc": "2026-11-15T09:51:36.336684+00:00",
+    "bytes": 595222,
+    "sha256": "552c4d85256fbeb1a54aea79f03d9ae7e1f99bcbbc65fcf35c3b355574deb6e5",
+    "title": "Pointer Events"
+  },
+  {
+    "url": "https://developer.chrome.com/docs/web-platform/long-animation-frames",
+    "retrieved_utc": "2026-11-15T09:51:36.343736+00:00",
+    "bytes": 269711,
+    "sha256": "b874b86444d247c47fe0f167de8b3d2a07640afc0d152e902c90cfbcc077c56b",
+    "title": "Long Animation Frames API &nbsp;|&nbsp; Web Platform &nbsp;|&nbsp; Chrome for Developers"
+  },
+  {
+    "url": "https://www.microsoft.com/en-us/research/publication/d-star-lite/",
+    "retrieved_utc": "2026-11-15T09:51:36.346094+00:00",
+    "bytes": 163757,
+    "sha256": "206215102c47ce883705c292f3374f00351a97bb5ee0588b3386d80b66c856fe",
+    "title": "Page not found - Microsoft Research"
+  }
+]

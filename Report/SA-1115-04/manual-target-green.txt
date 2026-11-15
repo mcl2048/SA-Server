@@ -1,0 +1,16 @@
+(node:1197370) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ distant navigation requests the destination chunk before unrelated world corners (27.447319ms)
+✔ location data arrives with NPCs and a dropped catalogue request retries (9.652073ms)
+✔ a location chooses a reachable doorway edge and manual input cancels it (8.721782ms)
+✔ manual input cancels a suspended world-size search before it can emit moves (27.982518ms)
+✔ a stalled map load cancels navigation with retry feedback instead of waiting forever (10.500608ms)
+✔ a direct ground click replaces a suspended minimap plan instead of reviving its old goal (11.769529ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2032.764842

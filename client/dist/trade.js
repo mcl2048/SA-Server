@@ -6,8 +6,8 @@
 // 没做的：查看对方的窗口（CG_TRADE_VIEWWND，这里对方放的直接列在上面）、交易对话气泡（_TRADETALKWND）。交易中头上有〔交易中〕（ObjMark.trade）。
 
 
-import { FONT, InputBox, boxColor,         } from "./ui.js?v=5e4867fa738c689d";
-import { ANIM, findAction } from "./assets.js?v=5e4867fa738c689d";
+import { FONT, InputBox, boxColor,         } from "./ui.js?v=16aad116d5c399c2";
+import { ANIM, findAction } from "./assets.js?v=16aad116d5c399c2";
 
 const CG = {
   WND: 26328, LOCK_BTN: 26300, OK_BTN: 26093, CANCEL_BTN: 26050, LEFT: 26180, RIGHT: 26182,

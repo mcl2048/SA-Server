@@ -1,0 +1,6 @@
+=== RUN   TestNpcListRemoteFloorRetainsStaticPlacesWithoutEnumeratingActors
+    mapplaces_test.go:452: remote floor must not enumerate NPC actors outside current scene: got 40
+--- FAIL: TestNpcListRemoteFloorRetainsStaticPlacesWithoutEnumeratingActors (1.45s)
+FAIL
+FAIL	sa/server/internal/world	1.496s
+FAIL

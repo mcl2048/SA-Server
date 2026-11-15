@@ -1,0 +1,11 @@
+✔ secondary mouse and stylus buttons never become native map destinations or pans (9.077142ms)
+✔ primary touch, pen and mouse taps retain exact native destination coordinates (3.371983ms)
+✔ cancelled native map pointer never routes, while a later primary tap still works (0.892348ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 342.759002

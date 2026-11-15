@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "version": "v0.2.22-LYNX",
+  "binary_sha256": "474c883b4e9d16b542d96dd76ec2be4adb9f50cde191ebfdbccc454b842fd441",
+  "linux_amd64_static": true,
+  "binary_bytes": 16748704,
+  "production_inputs": 4635,
+  "repeat_identical": true,
+  "client_tests": 274,
+  "go_test_race_vet": true,
+  "race_validation": {
+    "initial_world_package_timeout_seconds": 240,
+    "world_retry_timeout_seconds": 600,
+    "world_retry_seconds": 294.4555208689999,
+    "all_packages_passed_across_attempts": true
+  },
+  "typescript": true,
+  "http_files": 78,
+  "browser": {
+    "checks": 19,
+    "browser": "156.0.8078.4",
+    "shutdown": {
+      "started": true,
+      "sigterm_sent": true,
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "expected_position": {
+        "id": 1,
+        "floor": 100,
+        "x": 633,
+        "y": 491
+      },
+      "stored_position": {
+        "floor": 100,
+        "x": 633,
+        "y": 491
+      },
+      "position_matches": true
+    }
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.22-LYNX-linux-amd64.zip",
+    "bytes": 42228859,
+    "files": 4380,
+    "sha256": "0a2ce2804f850b333532f8f21d0d127729ffdae4dc57369980904600c3edf52f"
+  },
+  "limits": [
+    "Chromium viewport/touch emulation; no physical Android/iOS/Safari certification",
+    "No production restart or deployment",
+    "Moving NPC snapshots refresh while map visible; no predictive pursuit",
+    "Only effective step-in warps are automatic entrances; dialogue/scripts/conditions stay authoritative"
+  ]
+}

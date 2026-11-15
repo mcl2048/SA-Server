@@ -1,0 +1,11 @@
+goos: linux
+goarch: amd64
+pkg: sa/server/internal/world
+cpu: Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+BenchmarkMapPlaceCatalogue/100-4         	    1873	     62343 ns/op	   13968 B/op	     131 allocs/op
+BenchmarkMapPlaceCatalogue/200-4         	    1526	     80538 ns/op	   15512 B/op	     156 allocs/op
+BenchmarkMapPlaceCatalogue/300-4         	    2197	     49902 ns/op	   13352 B/op	     116 allocs/op
+BenchmarkMapPlaceCatalogue/400-4         	   10000	     12447 ns/op	    2480 B/op	      30 allocs/op
+BenchmarkMapPlaceCatalogue/703-4         	    2647	     42852 ns/op	    9008 B/op	      90 allocs/op
+PASS
+ok  	sa/server/internal/world	3.621s

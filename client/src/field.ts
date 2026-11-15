@@ -4,7 +4,7 @@
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
 import { album } from "./album.ts";
-import { gridPath } from "./pathfinding.ts";
+import { gridPathSteps } from "./pathfinding.ts";
 import { ANIM, findAction, type AnimAction, type Assets } from "./assets.ts";
 import { sfx } from "./audio.ts";
 import type { Connection } from "./net.ts";
@@ -219,6 +219,9 @@ export class Field {
   seenVersion = 0; // 这一层看过的格子变了几次（世界地图的全图范围据此重算）
   private pending = new Map<string, number>();
   private navigationAttempt = "";
+  private routeSearch: Generator<void, number[] | null> | null = null;
+  private navigationNpc: NpcPos | null = null;
+  private navigationProgressAt = 0;
   minimapReveal = false;
   navigationStatus = "";
   private mapNavigation = false;
@@ -231,6 +234,7 @@ export class Field {
   private navigationChunkAt = 0;
   setMinimapReveal(enabled: boolean) { this.minimapReveal = enabled; this.mapVersion++; this.seenVersion++; }
   navigateTo(x: number, y: number) {
+    this.routeSearch = null; this.navigationNpc = null;
     this.path = []; this.pathGoal = ""; this.navigationAttempt = ""; this.wantDir = -1;
     this.target = null; this.mapNavigation = false;
     this.navigationEntrances = []; this.navigationChunks = []; this.navigationChunkAt = 0;
@@ -239,6 +243,7 @@ export class Field {
     if (x < 0 || y < 0 || x >= this.width || y >= this.height) { this.navigationStatus = "目标在地图范围外"; return; }
     if (this.walk[y * this.width + x] === 1) { this.navigationStatus = "目标不可达：目标格为墙体或障碍"; return; }
     this.target = [x,y]; this.mapNavigation = true;
+    this.navigationProgressAt = performance.now();
     this.prioritizeNavigationChunks(x,y);
     this.navigationStatus = "正在加载地图并规划路线…";
   }
@@ -255,6 +260,44 @@ export class Field {
     if (!entries.length) { this.navigateTo(place.entrances[0].x,place.entrances[0].y); return; }
     this.navigateTo(entries[0].x,entries[0].y);
     if (this.target) this.navigationEntrances=entries.slice(1).map(p=>[p.x,p.y]);
+  }
+
+  /** Ordinary ground/NPC clicks replace minimap intent, including a search
+   * suspended between frames. Keep the legacy local click routing semantics. */
+  setManualTarget(target: [number,number] | null) {
+    this.routeSearch = null; this.navigationNpc = null;
+    this.mapNavigation = false; this.navigationStatus = "";
+    this.path = []; this.pathGoal = ""; this.navigationAttempt = "";
+    this.target = target;
+  }
+
+  /** NPC coordinates are server snapshots, not free-form names. Reach the exact
+   * cell when legal; a wall/warp cell instead uses the closest reachable plain
+   * neighbour within the server's one-cell interaction range. Never auto-talk
+   * or step onto a portal while approaching a named character. */
+  navigateNpc(floor: number, npc: NpcPos) {
+    if (floor !== this.floor || !this.npcLists.get(floor)?.includes(npc)) return;
+    if (!Number.isInteger(npc.x) || !Number.isInteger(npc.y) || npc.x < 0 || npc.y < 0 || npc.x >= this.width || npc.y >= this.height) return;
+    const cell = this.walk[npc.y*this.width+npc.x];
+    if (cell === 1 || cell === 3) {
+      const entries = this.npcApproaches(npc);
+      if (!entries.length) { this.navigateTo(npc.x,npc.y); this.navigationStatus = "NPC附近没有可达的停靠点"; this.target = null; this.mapNavigation = false; return; }
+      this.navigateTo(entries[0][0],entries[0][1]);
+      if (this.target) this.navigationEntrances = entries.slice(1);
+    } else this.navigateTo(npc.x,npc.y);
+    if (this.target) this.navigationNpc = npc;
+  }
+
+  private npcApproaches(npc: NpcPos): [number,number][] {
+    const s = this.self;
+    return MOVE.map(([dx,dy]): [number,number] => [npc.x+dx,npc.y+dy])
+      .filter(([x,y]) => x>=0 && y>=0 && x<this.width && y<this.height && this.walk[y*this.width+x]!==1 && this.walk[y*this.width+x]!==3)
+      .sort((a,b) => s ? Math.max(Math.abs(a[0]-s.x),Math.abs(a[1]-s.y))-Math.max(Math.abs(b[0]-s.x),Math.abs(b[1]-s.y)) : 0);
+  }
+
+  private arrivedStatus() {
+    const n = this.navigationNpc, s = this.self;
+    return n && s && (s.x !== n.x || s.y !== n.y) ? `已到达NPC附近（东 ${s.x} 南 ${s.y}）` : "已到达目标";
   }
 
   /** Load the target first (an unknown wall can reject immediately), then the
@@ -280,6 +323,7 @@ export class Field {
   /** Quick encounters suspend the existing intent. Do not emit Move while the
    * server owns a battle: its PosCorrect response would otherwise erase it. */
   beginBattle(quick: boolean) {
+    this.routeSearch = null;
     this.battlePaused = true;
     this.wantDir = -1;
     if (!quick) {
@@ -289,6 +333,8 @@ export class Field {
   }
 
   endBattle() {
+    this.routeSearch = null;
+    this.navigationProgressAt = performance.now();
     this.battlePaused = false;
     // Recompute from the current authoritative/predicted cell. Floor changes,
     // death warps and PosCorrect have already cancelled stale destinations.
@@ -350,8 +396,12 @@ export class Field {
     on("Self", (m) => { this.self = new Actor({ id: m.id, kind: "player", name: m.name, sprite: m.sprite, x: 0, y: 0, dir: 0 }); });
     on("EnterFloor", (m) => this.enterFloor(m));
     on("MapData", (m) => this.mapData(m));
-    on("NpcList", (m) => { this.npcLists.set(m.floor, m.npcs); this.placeLists.set(m.floor,m.places??[]); this.npcPending.delete(m.floor); });
-    on("PosCorrect", (m) => { this.corrections++; if (this.mapNavigation) this.navigationStatus = "移动被服务端阻止，请重新选择目标"; this.mapNavigation = false; this.path = []; this.pathGoal = ""; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
+    on("NpcList", (m) => {
+      this.placeLists.set(m.floor,m.places??[]);
+      if (m.floor !== this.floor) return; // A late response cannot restore prior-scene characters.
+      this.npcLists.set(m.floor,m.npcs); this.npcReceivedAt.set(m.floor,performance.now()); this.npcPending.delete(m.floor);
+    });
+    on("PosCorrect", (m) => { this.routeSearch = null; this.corrections++; if (this.mapNavigation) this.navigationStatus = "移动被服务端阻止，请重新选择目标"; this.mapNavigation = false; this.path = []; this.pathGoal = ""; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
     on("ObjAppear", (m) => { for (const o of m.objs) { this.actors.set(o.id, new Actor(o)); album.seen(o.sprite); } }); // 相簿的"看到"（CheckNewPet）
     on("ObjDisappear", (m) => { for (const id of m.ids) this.actors.delete(id); });
     on("ObjMove", (m) => {
@@ -393,10 +443,13 @@ export class Field {
     this.self = null;
     this.actors.clear(); this.cache.clear(); this.npcLists.clear(); this.placeLists.clear();
     this.pending.clear(); this.npcPending.clear();
+    this.npcReceivedAt.clear(); this.routeSearch = null;
     this.target = null; this.path = []; this.followSteps = [];
   }
 
   private enterFloor(m: S2CEnterFloor) {
+    this.routeSearch = null; this.navigationNpc = null;
+    this.npcLists.clear(); this.npcReceivedAt.clear(); this.npcPending.clear();
     this.followSteps = [];
     this.forgetNpcs(m.floor); // 这一层的 NPC 清单重新要（巴士会动、按时间出现的人会变）
     this.saveSeen();
@@ -477,6 +530,7 @@ export class Field {
       this.persist(m.floor);
       return;
     }
+    if (this.mapNavigation) this.navigationProgressAt = performance.now();
     for (let i = 0; i < m.tiles.length; i++) {
       const x = m.x1 + (i % w), y = m.y1 + Math.floor(i / w);
       if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
@@ -565,19 +619,24 @@ export class Field {
   private npcLists = new Map<number, NpcPos[]>();
   private placeLists = new Map<number, MapPlace[]>();
   private npcPending = new Map<number,number>();
+  private npcReceivedAt = new Map<number,number>();
   npcList(floor: number): NpcPos[] | null {
+    if (floor !== this.floor) return []; // Only the actual current scene is discoverable.
     const l = this.npcLists.get(floor);
-    if (l) return l;
     const now=performance.now(),pending=this.npcPending.get(floor);
-    if (pending===undefined || now-pending>=10_000) { this.npcPending.set(floor,now); this.net.send({ t: "NpcListReq", floor }); }
-    return null;
+    // Maps call this while visible. Retain a usable snapshot during refresh,
+    // but do not permanently pin buses/airplanes or time-limited NPC positions.
+    if ((!l || now-(this.npcReceivedAt.get(floor)??0)>=5000) && (pending===undefined || now-pending>=10_000)) {
+      this.npcPending.set(floor,now); this.net.send({ t: "NpcListReq", floor });
+    }
+    return l??null;
   }
   mapPlaces(floor: number): MapPlace[] | null {
     this.npcList(floor);
     return this.placeLists.get(floor)??null;
   }
   /** 换了楼层就把那一层的清单作废（巴士会动、按时间出现的人会变） */
-  forgetNpcs(floor: number) { this.npcLists.delete(floor); this.placeLists.delete(floor); this.npcPending.delete(floor); }
+  forgetNpcs(floor: number) { this.npcLists.delete(floor); this.placeLists.delete(floor); this.npcPending.delete(floor); this.npcReceivedAt.delete(floor); }
 
   /** 地图资料每到一批加一，自动地图据此重画 */
   mapVersion = 0;
@@ -659,8 +718,15 @@ export class Field {
     // ten seconds keeps the same small concurrency cap, including slow links.
     const requestNow = performance.now();
     for (const [key, at] of this.pending) if (requestNow - at >= 10_000) this.pending.delete(key);
+    // A disconnected/failed map service must not leave an armed route waiting
+    // forever. Count inactivity, not total trip time, and let a new click retry.
+    if (this.mapNavigation && !this.pathGoal && !this.routeSearch && !this.wholeReady && !this.battlePaused && requestNow-this.navigationProgressAt>=30_000) {
+      this.target = null; this.mapNavigation = false;
+      this.navigationStatus = "地图加载超时，请重新选择目的地重试";
+    }
     if (this.minimapReveal || this.mapNavigation && !this.pathGoal) this.requestWholeFloor();
     if (this.wantDir >= 0) {
+      this.routeSearch = null; this.navigationNpc = null;
       this.mapNavigation = false; this.navigationStatus = "";
       this.target = null; this.path = []; this.pathGoal = "";
     }
@@ -669,11 +735,12 @@ export class Field {
     if (this.battlePaused) { this.requestView(); return; }
     if (!s || this.floor < 0 || this.waitingWarp || s.moving(now)) { this.requestView(); return; }
     if (this.locked) {
-      this.target = null;
+      this.setManualTarget(null);
       if (this.wantDir >= 0 && s.dir !== this.wantDir) { s.dir = this.wantDir; this.net.send({ t: "Turn", dir: this.wantDir }); }
       this.requestView(); return;
     }
     if (this.follower || this.followSteps.length > 0) {
+      this.setManualTarget(null);
       // Party following and server automation share authoritative step animation.
       // 跟不上时（分页在背景、或队长是巴士）直接跳到最新的那一步，不让队伍越拉越长
       if (this.followSteps.length > 4) { const last = this.followSteps[this.followSteps.length - 1]; this.followSteps = []; s.warpTo(last[0], last[1], last[2]); this.requestView(); return; }
@@ -693,8 +760,16 @@ export class Field {
     if (d >= 0) this.path = [];
     if (d < 0 && this.target) {
       if (this.pathGoal !== `${this.target}`) {
-        const [tx, ty] = this.target;
+        let [tx, ty] = this.target;
         if (this.mapNavigation) {
+          const npc = this.navigationNpc;
+          if (npc && ((tx===npc.x && ty===npc.y && this.walk[ty*this.width+tx]===1) || this.walk[ty*this.width+tx]===3)) {
+            const entries = this.npcApproaches(npc);
+            if (!entries.length) { this.navigationStatus = "NPC附近没有可达的停靠点"; this.target = null; this.mapNavigation = false; this.routeSearch = null; return; }
+            this.target = entries[0]; [tx,ty] = this.target;
+            this.navigationEntrances = entries.slice(1); this.routeSearch = null;
+            this.prioritizeNavigationChunks(tx,ty);
+          }
           if (this.walk[ty * this.width + tx] === 1 && !this.navigationEntrances.some(([x,y])=>this.walk[y*this.width+x]!==1)) {
             this.navigationStatus = "目标不可达：目标格为墙体或障碍";
             this.target = null; this.mapNavigation = false; return;
@@ -702,19 +777,33 @@ export class Field {
           // Known cells can already contain a complete legal detour. Do not
           // delay that route behind unrelated chunks of a large floor.
           const attempt = `${this.floor},${s.x},${s.y},${tx},${ty},${this.mapVersion},${this.wholeReady}`;
-          if (this.navigationAttempt === attempt) { this.requestView(); return; }
-          this.navigationAttempt = attempt;
-          const path = gridPath(this.width,this.height,this.walk,s.x,s.y,tx,ty,this.navigationEntrances);
+          if (!this.routeSearch) {
+            if (this.navigationAttempt === attempt) { this.requestView(); return; }
+            this.navigationAttempt = attempt;
+            const entries = this.navigationNpc ? this.navigationEntrances.filter(([x,y])=>this.walk[y*this.width+x]!==3) : this.navigationEntrances;
+            this.routeSearch = gridPathSteps(this.width,this.height,this.walk,s.x,s.y,tx,ty,entries);
+          }
+          const result = this.routeSearch.next();
+          if (!result.done) { this.navigationStatus = "正在规划路线…"; this.requestView(); return; }
+          this.routeSearch = null;
+          const path = result.value;
           if (path === null) {
+            if (this.navigationAttempt !== attempt) { this.requestView(); return; }
             if (!this.wholeReady) { this.requestView(); return; }
             this.navigationStatus = "目标不可达：被障碍阻挡或需要经过传送点"; this.target = null; this.mapNavigation = false; return;
+          }
+          if (this.navigationNpc) {
+            const [x,y] = path.reduce<[number,number]>(([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
+            // An unknown approach can become a portal while a search is
+            // suspended. Re-plan without it instead of teleporting to talk.
+            if (this.walk[y*this.width+x]===3) { this.navigationAttempt = ""; this.requestView(); return; }
           }
           this.path = path; this.finalDir = -1;
           // The selected doorway edge may differ from the catalogue's first
           // coordinate. Keep the displayed target and resume intent accurate.
           this.target=path.reduce<[number,number]>(([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
           this.pathGoal = `${this.target}`;
-          this.navigationStatus = path.length ? "自动寻路中…" : "已到达目标";
+          this.navigationStatus = path.length ? "自动寻路中…" : this.arrivedStatus();
         } else {
         const r = routeTo(s.x, s.y, tx, ty, (x, y) => !this.canEnter(x, y));
         // 优先用原版路线（接近直线）；原版到不了目标时（遇障碍停下），若 BFS 能绕到就改走 BFS（H5 新增），
@@ -736,7 +825,7 @@ export class Field {
         if (this.finalDir >= 0 && s.dir !== this.finalDir) { s.dir = this.finalDir; this.net.send({ t: "Turn", dir: s.dir }); }
         this.target = null;
         this.pathGoal = "";
-        if (this.mapNavigation) { this.navigationStatus = "已到达目标"; this.mapNavigation = false; }
+        if (this.mapNavigation) { this.navigationStatus = this.arrivedStatus(); this.mapNavigation = false; }
       }
     }
     if (d >= 0) {

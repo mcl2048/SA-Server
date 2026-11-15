@@ -91,3 +91,16 @@
 完整Go test/race/vet、全src TypeScript、252客户端／构建、最终Chromium 28项（挂机14＋导航14）及78HTTP文件逐字节核验通过。两次构建摘要一致，两个最终浏览器实例正常SIGTERM退出0且位置存档一致。静态Linux AMD64 SHA-256 `6bbafe1e8812f04252630ceb12f6a1c182bec841e567b70557929a677ee4e731`，4380文件ZIP已逐文件验证并替换旧版；按用户后续确认包含其当前config.yaml。StoneAge Skill已同步，未新增Assets。
 
 [可视报告](Report/SA-1115-03/index.html) · [验收](Report/SA-1115-03/ACCEPTANCE.md) · [发行摘要](Report/SA-1115-03/release.json) · [发布说明](docs/v0.2.21-LYNX.md)。移动为Chromium触屏／视口模拟，未认证实体Android/iOS/Safari，未部署或停止生产实例。中间脚本／夹具失败、1/120遇敌概率超时、四项独立复核红绿和终端外壳143均保留；最终以匹配ELF的场景结果、真实子进程停服码与独立产物核验为准。
+
+
+---
+
+## v0.2.22-LYNX · SA-1115-04
+
+✅ 小地图有效地点全量核对：1206层／3309地点／4981物理入口／5002入口目标对应。静态目录按需缓存，当前层重复请求143→12次分配。
+
+✅ 追加当前场景NPC与精准导航：仅角色实际楼层，换层释放、迟到隔离，实时可见／有名／界内人物；不聚合洞窟或世界。可走坐标准确到达，墙／warp占位选择最短可达相邻普通格；移动NPC使用最近快照。地点／NPC／区域12px完整换行和自适应分页，右键误导航修复。
+
+✅ 分帧A*冻结地图修订，手动／锁定／跟随／换层取消释放，加载超时明确反馈；274客户端／构建、全src TypeScript、完整Go test／race／vet、最终真实Chromium19项与78HTTP字节核验通过。二进制重复构建一致，4380文件ZIP完整替换旧版。最终ELF `474c883b4e9d16b542d96dd76ec2be4adb9f50cde191ebfdbccc454b842fd441`。
+
+[可视报告](Report/SA-1115-04/index.html) · [完整验收](Report/SA-1115-04/ACCEPTANCE.md) · [发行摘要](Report/SA-1115-04/release.json)。StoneAge经验已同步，无新增Assets。移动是触屏／视口模拟，不冒充实体Android/iOS/Safari；未部署生产。所有红测／脚本修正／143中断均保留，最终仅采用匹配ELF且完整退出的证据。

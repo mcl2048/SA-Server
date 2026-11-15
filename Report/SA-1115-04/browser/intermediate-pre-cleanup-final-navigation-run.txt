@@ -1,0 +1,10 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: zero-coordinate native cave exit decodes, walks and returns to world
+Error: interrupted by SIGINT
+    at onInterrupt (file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:38:57)
+    at process.sigint (file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:39:18)
+    at process.emit (node:events:526:24)

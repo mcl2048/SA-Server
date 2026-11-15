@@ -8,6 +8,20 @@ export const PATH_MOVE                     = [[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1
  * without first stepping onto another warp. Never use an unknown cell to move. */
 export function gridPath(w        , h        , walk            , sx        , sy        , tx        , ty        ,
   alternatives                              = [])                  {
+  const search = gridPathSteps(w,h,walk,sx,sy,tx,ty,alternatives);
+  let result = search.next();
+  while (!result.done) result = search.next();
+  return result.value;
+}
+
+/** The field advances one slice per animation frame. Yielding by expansion
+ * count keeps failed world-size searches cancellable and leaves time for input;
+ * the synchronous wrapper above remains useful for independent BFS comparisons.
+ * A suspended search owns one map snapshot so new chunks cannot change edges
+ * underneath its closed nodes. The field retries a failed old revision against
+ * newly loaded data; it still checks each actual move before sending it. */
+export function* gridPathSteps(w        , h        , walk            , sx        , sy        , tx        , ty        ,
+  alternatives                              = [])                                   {
   if (!Number.isSafeInteger(w) || !Number.isSafeInteger(h) || w <= 0 || h <= 0 || w*h !== walk.length) return null;
   const inside = (x        , y        ) => Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < w && y < h;
   const enter = (x        , y        ) => inside(x,y) && walk[y*w+x] >= 2;
@@ -40,6 +54,9 @@ export function gridPath(w        , h        , walk            , sx        , sy 
   // Integer tile IDs avoid per-node Map entries and predecessor tuples. A
   // node has at most one heap slot: decrease-key avoids stale duplicate nodes
   // flooding the queue when a long obstacle produces improving detours.
+  // Only searches that may yield need a snapshot. Clear direct routes and
+  // unknown/invalid goals above retain their allocation-free early returns.
+  walk = walk.slice();
   const costs=new Uint32Array(w*h),ranks=new Uint32Array(w*h),positions=new Uint32Array(w*h),directions=new Uint8Array(w*h);
   const heap         =[];
   const before=(a       ,b       )=>ranks[a]<ranks[b] || ranks[a]===ranks[b] && costs[a]>costs[b];
@@ -62,7 +79,9 @@ export function gridPath(w        , h        , walk            , sx        , sy 
     return top;
   };
   costs[start]=1;ranks[start]=heuristic(sx,sy);promote(start);
+  let expanded = 0;
   while(heap.length) {
+    if (expanded++ === 256) { expanded = 0; yield; }
     const k=pop(),g=costs[k]-1;
     if(goals.has(k)) {
       const out         =[];

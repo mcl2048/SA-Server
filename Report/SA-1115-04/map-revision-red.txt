@@ -1,0 +1,146 @@
+✔ unreachable world search yields so input and rendering can run between bounded expansions (22.238263ms)
+✔ cooperative planner preserves shortest path and obstacle semantics (1.080358ms)
+✖ a suspended search uses one map revision while later chunks are handled by the next search (7.79223ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 340.974791
+
+✖ failing tests:
+
+test at client/test/pathfinding-budget.test.ts:23:1
+✖ a suspended search uses one map revision while later chunks are handled by the next search (7.79223ms)
+  AssertionError [ERR_ASSERTION]: adding edges cannot change an in-flight revision's result
+  + actual - expected
+
+  + [
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   7,
+  +   7,
+  +   7,
+  +   7,
+  +   4,
+  +   4,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6,
+  +   6
+  + ]
+  - null
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/pathfinding-budget.test.ts:30:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7,
+      7, 7, 7, 4, 4, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6
+    ],
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

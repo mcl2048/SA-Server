@@ -1,0 +1,109 @@
+{
+  "baseline": "08e2544",
+  "node": "v26.13.1",
+  "size": 600,
+  "samples": 6,
+  "warmup": 1,
+  "results": [
+    {
+      "name": "open-straight",
+      "variant": "baseline",
+      "length": 599,
+      "median_ms": 1.1893180000000712,
+      "max_ms": 7.672198999999978,
+      "slices": 0
+    },
+    {
+      "name": "open-straight",
+      "variant": "current",
+      "length": 599,
+      "median_ms": 0.5131920000000036,
+      "max_ms": 1.8424730000000409,
+      "slices": 0
+    },
+    {
+      "name": "open-straight",
+      "variant": "cooperative",
+      "length": 599,
+      "median_ms": 0.467200000000048,
+      "max_ms": 3.463749000000007,
+      "max_slice_ms": 3.3992940000000544,
+      "slices": 1
+    },
+    {
+      "name": "open-diagonal",
+      "variant": "baseline",
+      "length": 599,
+      "median_ms": 0.49231700000007095,
+      "max_ms": 3.2695919999999887,
+      "slices": 0
+    },
+    {
+      "name": "open-diagonal",
+      "variant": "current",
+      "length": 599,
+      "median_ms": 0.5283480000000509,
+      "max_ms": 0.5848389999999881,
+      "slices": 0
+    },
+    {
+      "name": "open-diagonal",
+      "variant": "cooperative",
+      "length": 599,
+      "median_ms": 0.5568469999999479,
+      "max_ms": 0.605034000000046,
+      "max_slice_ms": 0.5992439999999988,
+      "slices": 1
+    },
+    {
+      "name": "detour",
+      "variant": "baseline",
+      "length": 599,
+      "median_ms": 207.42543399999977,
+      "max_ms": 298.1159170000001,
+      "slices": 0
+    },
+    {
+      "name": "detour",
+      "variant": "current",
+      "length": 599,
+      "median_ms": 168.8794429999998,
+      "max_ms": 398.58048400000007,
+      "slices": 0
+    },
+    {
+      "name": "detour",
+      "variant": "cooperative",
+      "length": 599,
+      "median_ms": 265.34603000000016,
+      "max_ms": 396.3540549999998,
+      "max_slice_ms": 19.445191000000023,
+      "slices": 324
+    },
+    {
+      "name": "unreachable",
+      "variant": "baseline",
+      "length": null,
+      "median_ms": 381.13619899999867,
+      "max_ms": 407.8308559999996,
+      "slices": 0
+    },
+    {
+      "name": "unreachable",
+      "variant": "current",
+      "length": null,
+      "median_ms": 342.341367,
+      "max_ms": 485.06046399999923,
+      "slices": 0
+    },
+    {
+      "name": "unreachable",
+      "variant": "cooperative",
+      "length": null,
+      "median_ms": 352.70108900000014,
+      "max_ms": 402.594075,
+      "max_slice_ms": 8.732887999999548,
+      "slices": 701
+    }
+  ]
+}

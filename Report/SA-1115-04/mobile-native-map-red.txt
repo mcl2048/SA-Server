@@ -1,0 +1,59 @@
+✖ secondary mouse and stylus buttons never become native map destinations or pans (11.730091ms)
+✔ primary touch, pen and mouse taps retain exact native destination coordinates (5.864522ms)
+✔ cancelled native map pointer never routes, while a later primary tap still works (0.861698ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 550.733918
+
+✖ failing tests:
+
+test at client/test/mobile-native-map.test.ts:28:1
+✖ secondary mouse and stylus buttons never become native map destinations or pans (11.730091ms)
+  AssertionError [ERR_ASSERTION]: mouse button 1 must not pan
+  + actual - expected
+
+  + [
+  +   [
+  +     'map-area',
+  +     250,
+  +     150,
+  +     'start'
+  +   ],
+  +   [
+  +     'map-area',
+  +     280,
+  +     150,
+  +     'move'
+  +   ],
+  +   [
+  +     'map-area',
+  +     280,
+  +     150,
+  +     'move'
+  +   ],
+  +   [
+  +     'map-area',
+  +     280,
+  +     150,
+  +     'end'
+  +   ]
+  + ]
+  - []
+
+      at TestContext.<anonymous> (file:///home/coder/saserver/client/test/mobile-native-map.test.ts:35:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ [ 'map-area', 250, 150, 'start' ], [ 'map-area', 280, 150, 'move' ], [ 'map-area', 280, 150, 'move' ], [ 'map-area', 280, 150, 'end' ] ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

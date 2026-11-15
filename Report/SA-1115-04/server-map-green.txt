@@ -1,0 +1,68 @@
+=== RUN   TestNpcListIncludesAllPlayableWarpEntrances
+    mapplaces_test.go:98: catalogue coverage: 5002 entrances in 3309 places across 1206 floors
+--- PASS: TestNpcListIncludesAllPlayableWarpEntrances (1.55s)
+=== RUN   TestMapPlacesGroupsOnlyAdjacentEntriesWithSameDestination
+--- PASS: TestMapPlacesGroupsOnlyAdjacentEntriesWithSameDestination (0.00s)
+=== RUN   TestMapPlacesWorldFloorSummary
+    mapplaces_test.go:133: world floor 100 萨伊那斯: 21 places
+    mapplaces_test.go:136:   卡坦村 -> 1400 (258,170), 3 entry tiles, conditional=false
+    mapplaces_test.go:136:   奇努伊的海底通路 -> 31401 (666,235), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   岬之家 -> 121 (643,676), 2 entry tiles, conditional=false
+    mapplaces_test.go:136:   往柯尔克的道路１楼 -> 10101 (318,428), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   柯奥山的小洞窟１楼 -> 11001 (328,633), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   柯奥村 -> 1100 (470,631), 5 entry tiles, conditional=false
+    mapplaces_test.go:136:   柯尔克的大坑道１楼 -> 10901 (237,445), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   玛丽娜丝渔村 -> 2000 (78,614), 4 entry tiles, conditional=false
+    mapplaces_test.go:136:   玛丽娜丝渔村 -> 2000 (113,660), 4 entry tiles, conditional=false
+    mapplaces_test.go:136:   玛丽娜丝的庄园 -> 2030 (72,586), 7 entry tiles, conditional=false
+    mapplaces_test.go:136:   白狼勇士公会 -> 8216 (653,608), 3 entry tiles, conditional=false
+    mapplaces_test.go:136:   盗贼的洞窟地下１楼 -> 10701 (132,421), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   英雄战场 -> 8200 (396,186), 2 entry tiles, conditional=false
+    mapplaces_test.go:136:   萨姆吉尔庄园 -> 1040 (607,561), 5 entry tiles, conditional=false
+    mapplaces_test.go:136:   萨姆吉尔村 -> 1000 (706,487), 5 entry tiles, conditional=false
+    mapplaces_test.go:136:   萨姆吉尔村 -> 1000 (638,491), 4 entry tiles, conditional=false
+    mapplaces_test.go:136:   阿布的洞窟地下１楼 -> 10001 (191,365), 1 entry tiles, conditional=false
+    mapplaces_test.go:136:   阿布的独栋房屋 -> 101 (184,339), 2 entry tiles, conditional=false
+    mapplaces_test.go:136:   霍特尔村 -> 1300 (622,190), 8 entry tiles, conditional=false
+    mapplaces_test.go:136:   靠近水田的家 -> 120 (549,637), 2 entry tiles, conditional=false
+    mapplaces_test.go:136:   ＰＣ团本部１楼 -> 11301 (601,127), 1 entry tiles, conditional=false
+    mapplaces_test.go:133: world floor 200 加鲁卡: 29 places
+    mapplaces_test.go:133: world floor 300 吉鲁岛: 31 places
+    mapplaces_test.go:133: world floor 400 沙姆岛: 6 places
+    mapplaces_test.go:133: world floor 700 伊甸园区: 10 places
+    mapplaces_test.go:133: world floor 701 伊甸大陆西方: 4 places
+    mapplaces_test.go:133: world floor 702 尼克斯城区: 6 places
+    mapplaces_test.go:133: world floor 703 伊甸大陆南方: 12 places
+    mapplaces_test.go:133: world floor 704 亚伊欧城区: 9 places
+    mapplaces_test.go:133: world floor 705 伊甸大陆东方: 8 places
+--- PASS: TestMapPlacesWorldFloorSummary (0.05s)
+=== RUN   TestMapPlacesIncludesEffectiveConditionalBranchDestinations
+--- PASS: TestMapPlacesIncludesEffectiveConditionalBranchDestinations (0.05s)
+=== RUN   TestMapPlacesConditionalTargetsValidateAndDeduplicateWithoutEvaluatingGates
+--- PASS: TestMapPlacesConditionalTargetsValidateAndDeduplicateWithoutEvaluatingGates (0.00s)
+=== RUN   TestNpcListRepeatedRequestsKeepStaticWorkBoundedAndNPCsLive
+    mapplaces_test.go:236: repeated real NpcList request: 12 allocations
+--- PASS: TestNpcListRepeatedRequestsKeepStaticWorkBoundedAndNPCsLive (0.16s)
+=== RUN   TestMapPlacesResourceExclusionAudit
+    mapplaces_test.go:293: resource audit: 1382 loaded floors, 5832 effective physical warp sources, 135 source-blocked; rejected target candidates: same-floor=735 nonexistent=0 out-of-bounds=2
+    mapplaces_test.go:294: catalogue: 4981 unique physical sources, 5002 source/destination pairs; largest JSON catalogue=9725 bytes on floor 3021 (100 places)
+    mapplaces_test.go:319: cave NPC browser candidate: floor=10001 name=查罕族青年 point=(16,4) plain-walkable=true
+    mapplaces_test.go:328:   adjacent approach cell=(15,5)
+    mapplaces_test.go:352: cave floor10001 actual scene response: 1 visible in-bounds NPC, 223 bytes JSON including static places
+    mapplaces_test.go:337: out-of-bounds NPC resource: floor=7200 name=小孩 point=(126,118)
+    mapplaces_test.go:337: out-of-bounds NPC resource: floor=31902 name=采石场的青年 point=(9,67)
+    mapplaces_test.go:319: cave NPC browser candidate: floor=10701 name=怪力的小阵 point=(23,51) plain-walkable=true
+    mapplaces_test.go:328:   adjacent approach cell=(22,52)
+    mapplaces_test.go:356: scene cost bounds in current resources: max=100 visible NPCs on floor1021; max=14016 bytes JSON incl Places on floor3021
+    mapplaces_test.go:357: NPC scene projection: 3062 live NPCs, 3028 named, 3016 currently visible named, 43 moving transports, 2 out-of-bounds
+--- PASS: TestMapPlacesResourceExclusionAudit (0.09s)
+=== RUN   TestNpcListProjectsOnlyVisibleNamedNPCsFromCurrentWorld
+--- PASS: TestNpcListProjectsOnlyVisibleNamedNPCsFromCurrentWorld (0.09s)
+=== RUN   TestNpcListDuplicateNamesHaveStableCoordinateOrder
+--- PASS: TestNpcListDuplicateNamesHaveStableCoordinateOrder (0.07s)
+=== RUN   TestNpcListRemoteFloorRetainsStaticPlacesWithoutEnumeratingActors
+--- PASS: TestNpcListRemoteFloorRetainsStaticPlacesWithoutEnumeratingActors (0.09s)
+=== RUN   TestNpcList
+--- PASS: TestNpcList (0.09s)
+PASS
+ok  	sa/server/internal/world	2.314s

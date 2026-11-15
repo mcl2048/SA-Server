@@ -1,0 +1,12 @@
+{"variant":"candidate","stage":"server-ready"}
+{"variant":"candidate","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: zero-coordinate native cave exit decodes, walks and returns to world
+Error: desktop: NPC selection did not stop beside cave NPC
+    at wait (file:///home/coder/saserver/Report/SA-1115-04/browser/navigation-cases.mjs:17:161)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1115-04/browser/navigation-cases.mjs:116:4)
+    at async work (file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1115-04/browser/real-game.mjs:277:5
+{"variant":"candidate","probe":false,"result":"/home/coder/saserver/Report/SA-1115-04/browser/candidate-automation.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":10001,"x":16,"y":4},"stored_position":{"floor":10001,"x":16,"y":4},"position_matches":true}}

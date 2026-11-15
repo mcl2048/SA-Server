@@ -1,0 +1,5 @@
+--- FAIL: TestSaveQueueCoalesces (0.36s)
+    security_test.go:157: 应只写最新的一笔：[0 99 164 165 166 199]
+FAIL
+FAIL	sa/server/internal/world	232.143s
+FAIL

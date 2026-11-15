@@ -1,0 +1,23 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+desktop: complete current-world village/cave catalogue and native pagination
+desktop: native village location click walks and enters destination
+desktop: native cave location click walks and enters destination
+desktop: zero-coordinate native cave exit decodes, walks and returns to world
+desktop: current cave NPC list navigates to exact actual NPC coordinate
+desktop: NPC sidebar and requests stay on current scene during historical browsing
+desktop: native conditional world entrances retain both quest branches
+desktop: native map drag pans without click-through or movement
+desktop: native coordinate validation and input lifecycle
+mobile: complete current-world village/cave catalogue and native pagination
+mobile: native village location click walks and enters destination
+mobile: native cave location click walks and enters destination
+mobile: zero-coordinate native cave exit decodes, walks and returns to world
+mobile: current cave NPC list navigates to exact actual NPC coordinate
+mobile: NPC sidebar and requests stay on current scene during historical browsing
+mobile: native conditional world entrances retain both quest branches
+mobile: secondary mouse button does not navigate on native mobile map
+mobile: native map drag pans without click-through or movement
+mobile: native coordinate validation and input lifecycle
+{"variant":"final","stage":"scenario-finished"}
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1115-04/browser/final-navigation.json","success":true,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":100,"x":633,"y":491},"stored_position":{"floor":100,"x":633,"y":491},"position_matches":true}}

@@ -53,3 +53,48 @@ test("a location chooses a reachable doorway edge and manual input cancels it",a
  (field as any).navigatePlace(100,place);field.wantDir=7;field.update(start+3000);
  assert.equal(field.target,null,"direction input still cancels location navigation");
 });
+
+test("manual input cancels a suspended world-size search before it can emit moves",async()=>{
+ const {field,data,sent}=await fixture(96,96,1,1);
+ const rows=Array.from({length:96},()=>"1".repeat(48)+"0"+"1".repeat(47));
+ data(0,0,96,96,rows.join(""));field.navigateTo(90,90);
+ field.update(performance.now()+1000);
+ assert.equal(sent.filter(m=>m.t==="Move").length,0);
+ assert.ok(field.target,"failed search remains suspended between frames");
+ field.wantDir=7;field.update(performance.now()+1300);field.wantDir=-1;
+ for(let i=0;i<50;i++)field.update(performance.now()+1600+i*300);
+ assert.equal(field.target,null);
+ assert.equal(sent.filter(m=>m.t==="Move").length,1,"only the manual direction moves");
+});
+
+test("a stalled map load cancels navigation with retry feedback instead of waiting forever",async t=>{
+ let now=0;t.mock.method(performance,"now",()=>now);
+ const {field,sent}=await fixture(96,96,1,1);field.navigateTo(90,90);
+ for(now=0;now<=30001;now+=1000)field.update(now);
+ assert.equal(field.target,null);assert.match(field.navigationStatus,/超时/);
+ assert.equal(sent.filter(m=>m.t==="Move").length,0);
+ field.navigateTo(90,90);assert.deepEqual(field.target,[90,90],"a fresh click can retry");
+});
+
+test("a direct ground click replaces a suspended minimap plan instead of reviving its old goal",async()=>{
+ const {field,data,sent}=await fixture(96,96,1,1);
+ const rows=Array.from({length:96},()=>"1".repeat(48)+"0"+"1".repeat(47));
+ data(0,0,96,96,rows.join(""));field.navigateTo(90,90);field.update(performance.now()+1000);
+ field.setManualTarget([4,1]);const start=performance.now()+1500;
+ for(let i=0;i<25;i++)field.update(start+i*300);
+ assert.deepEqual([field.self!.x,field.self!.y],[4,1]);
+ assert.equal(field.target,null);assert.equal(sent.filter(m=>m.t==="Move").length,3);
+});
+
+for(const mode of ['locked','follower'] as const) test(`${mode} cancels and releases a suspended minimap search`,async()=>{
+ const {field,data,sent}=await fixture(96,96,1,1);
+ const rows=Array.from({length:96},()=>"1".repeat(48)+"0"+"1".repeat(47));
+ data(0,0,96,96,rows.join(""));field.navigateTo(90,90);field.update(performance.now()+1000);
+ assert.ok((field as any).routeSearch,"precondition: large search is suspended");
+ field[mode]=true;field.update(performance.now()+1300);field[mode]=false;
+ assert.equal(field.target,null);assert.equal((field as any).routeSearch,null,"release the cancelled generator and whole-floor buffers");
+ for(let i=0;i<50;i++)field.update(performance.now()+1600+i*300);
+ assert.equal(sent.filter(m=>m.t==="Move").length,0);
+ assert.equal((field as any).mapNavigation,false,"cancelled route cannot prefetch indefinitely");
+ assert.doesNotMatch(field.navigationStatus,/正在/);
+});

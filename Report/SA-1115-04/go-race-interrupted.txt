@@ -1,0 +1,6 @@
+ok  	sa/server/cmd/saserver	79.034s
+ok  	sa/server/internal/battle	5.058s
+ok  	sa/server/internal/data	88.736s
+?   	sa/server/internal/proto	[no test files]
+ok  	sa/server/internal/server	42.865s
+ok  	sa/server/internal/store	14.830s

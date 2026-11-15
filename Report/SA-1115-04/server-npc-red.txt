@@ -1,0 +1,9 @@
+=== RUN   TestNpcListProjectsOnlyVisibleNamedNPCsFromCurrentWorld
+    mapplaces_test.go:387: non-NPC or hidden actor entered scene catalogue: {Name:Outside fixture X:-1 Y:10}
+--- FAIL: TestNpcListProjectsOnlyVisibleNamedNPCsFromCurrentWorld (1.42s)
+=== RUN   TestNpcListDuplicateNamesHaveStableCoordinateOrder
+    mapplaces_test.go:421: same-name NPC list order must be stable by y/x across refreshes: got=[[10 12] [10 10] [12 10]] want=[[10 10] [12 10] [10 12]]
+--- FAIL: TestNpcListDuplicateNamesHaveStableCoordinateOrder (0.11s)
+FAIL
+FAIL	sa/server/internal/world	1.601s
+FAIL

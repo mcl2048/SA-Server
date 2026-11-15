@@ -1,27 +1,27 @@
 // H5 客户端入口。登录前的画面在 screens.ts，游戏画面在这里（FieldScreen）。
 
-import { Assets } from "./assets.js?v=5e4867fa738c689d";
-import { aiPetForSprite } from "./ai-pet-catalog.js?v=5e4867fa738c689d";
-import { Sound, setSfx } from "./audio.js?v=5e4867fa738c689d";
-import { MAP_BGM } from "./soundtable.js?v=5e4867fa738c689d";
-import { Connection, trafficRates } from "./net.js?v=5e4867fa738c689d";
-import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=5e4867fa738c689d";
-import { Renderer,              } from "./renderer.js?v=5e4867fa738c689d";
-import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=5e4867fa738c689d";
-import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=5e4867fa738c689d";
-import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=5e4867fa738c689d";
-import { ACTION_KEYS } from "./actions.js?v=5e4867fa738c689d";
-import { ETC, FieldPanel } from "./fieldpanel.js?v=5e4867fa738c689d";
-import { BattleScreen } from "./battle.js?v=5e4867fa738c689d";
-import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=5e4867fa738c689d";
-import { Shop } from "./shop.js?v=5e4867fa738c689d";
-import { PetSkillShop, drawPetSelect } from "./petshop.js?v=5e4867fa738c689d";
-import { loadAi } from "./ai.js?v=5e4867fa738c689d";
-import { AiMemory } from "./aismart.js?v=5e4867fa738c689d";
-import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.js?v=5e4867fa738c689d";
-import { MobileShell } from "./mobile-shell.js?v=5e4867fa738c689d";
-import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=5e4867fa738c689d";
-import { installControlPositions } from "./mobile-position.js?v=5e4867fa738c689d";
+import { Assets } from "./assets.js?v=16aad116d5c399c2";
+import { aiPetForSprite } from "./ai-pet-catalog.js?v=16aad116d5c399c2";
+import { Sound, setSfx } from "./audio.js?v=16aad116d5c399c2";
+import { MAP_BGM } from "./soundtable.js?v=16aad116d5c399c2";
+import { Connection, trafficRates } from "./net.js?v=16aad116d5c399c2";
+import { Field, MIND_KEEP, MOVE, dirTo,            } from "./field.js?v=16aad116d5c399c2";
+import { Renderer,              } from "./renderer.js?v=16aad116d5c399c2";
+import { LineScreen, CharSelectScreen, LoginScreen,                        CG } from "./screens.js?v=16aad116d5c399c2";
+import { FONT, FONT_FAMILY, FONT_SIZE, InputBox, Mouse, Ui, drawOverlay, fitOverlay, fitView, measure } from "./ui.js?v=16aad116d5c399c2";
+import { FONT_PAL, Menus, saveSettings, settings } from "./menus.js?v=16aad116d5c399c2";
+import { ACTION_KEYS } from "./actions.js?v=16aad116d5c399c2";
+import { ETC, FieldPanel } from "./fieldpanel.js?v=16aad116d5c399c2";
+import { BattleScreen } from "./battle.js?v=16aad116d5c399c2";
+import { AutoPlayIntent, BATTLE_AUTO_ACTIONS, drawAutoPlayToggles, serverOwnsAutoTurn } from "./autoplay-sync.js?v=16aad116d5c399c2";
+import { Shop } from "./shop.js?v=16aad116d5c399c2";
+import { PetSkillShop, drawPetSelect } from "./petshop.js?v=16aad116d5c399c2";
+import { loadAi } from "./ai.js?v=16aad116d5c399c2";
+import { AiMemory } from "./aismart.js?v=16aad116d5c399c2";
+import { isMobile, isImmersive, setMobileContext, setMobileLoginArtwork, setSceneFocus, resetSceneView, getSceneZoom } from "./mobile-view.js?v=16aad116d5c399c2";
+import { MobileShell } from "./mobile-shell.js?v=16aad116d5c399c2";
+import { mobileHitPoint, MobileMapPointer } from "./mobile-hit.js?v=16aad116d5c399c2";
+import { installControlPositions } from "./mobile-position.js?v=16aad116d5c399c2";
 
 
 const params = new URLSearchParams(location.search);
@@ -889,13 +889,13 @@ class FieldScreen                   {
     if (!isMobile() && mouse.down && onField && now - mouse.downAt >= 1000) this.moveMode = true;
     if (this.moveMode) {
       if (mouse.clicked) this.moveMode = false;
-      else if (grid && now - this.moveTick >= 250) { this.moveTick = now; this.talkTarget = null; f.target = grid; }
+      else if (grid && now - this.moveTick >= 250) { this.moveTick = now; this.talkTarget = null; f.setManualTarget(grid); }
     } else if (mouse.clicked && grid && now - this.moveTick >= 250) {
       // 单击：点到 NPC（或地上的宠物）就走过去说话，点地面就走到那一格（两次点击至少间隔 250ms，MOVE_CLICK_WAIT_TIME）
       this.moveTick = now;
       const npc = f.actorAt(mouse.x, mouse.y);
-      if (npc && (npc.kind === "npc" || npc.kind === "pet")) { this.talkTarget = npc.id; f.target = [npc.x, npc.y]; } // 地上的宠物也能点来说话（PET_Talkfunc）
-      else { this.talkTarget = null; f.target = grid; }
+      if (npc && (npc.kind === "npc" || npc.kind === "pet")) { this.talkTarget = npc.id; f.setManualTarget([npc.x, npc.y]); } // 地上的宠物也能点来说话（PET_Talkfunc）
+      else { this.talkTarget = null; f.setManualTarget(grid); }
     }
     // 地上的东西：滑鼠停着时下方显示名字（道具名、"N Stone"、宠物"名字  Lv：N"）
     const hov = f.actorAt(mouse.x, mouse.y);
@@ -928,7 +928,7 @@ class FieldScreen                   {
         // 能不能说话由服务端按各种 NPC 的距离判定（记录点、传送员是前方 2 格，原版就能隔着柜台说话）
         const dist = Math.max(Math.abs(npc.x - s.x), Math.abs(npc.y - s.y));
         if (!s.moving(now) && (dist <= 1 || (f.target === null && dist <= 3))) {
-          f.target = null;
+          f.setManualTarget(null);
           app.net?.send({ t: "Talk", id: npc.id });
           this.talkTarget = null;
         } else if (!s.moving(now) && f.target === null) this.talkTarget = null; // 走不过去，放弃
@@ -1259,7 +1259,7 @@ const mobile = new MobileShell(ui, {
   },
   direction(dir) {
     mobileDirection = isMobile() && screen instanceof FieldScreen && !modal && !battle && !screen.openCount() ? dir : -1;
-    if (mobileDirection >= 0 && field) field.target = null;
+    if (mobileDirection >= 0 && field) field.setManualTarget(null);
   },
   cancel() { cancelMobileMapPointer();mobileDirection = -1; mouse.cancel(); if (isMobile()) { keys.clear(); if (screen instanceof FieldScreen) screen.cancelMobileMotion(); } },
 });

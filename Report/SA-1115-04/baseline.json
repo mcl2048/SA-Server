@@ -1,0 +1,14 @@
+{
+  "task": "SA-1115-04",
+  "started_utc": "2026-11-15T09:53:53.826201+00:00",
+  "head": "08e254433fb722736abc4a9d8f441546a7188d0c",
+  "prompt_sha256": "0a12381c5c2807320b9be4e9b2f89304e667ebc791750115514f92ce82444945",
+  "binary_sha256": "6bbafe1e8812f04252630ceb12f6a1c182bec841e567b70557929a677ee4e731",
+  "initial_changes": [
+    " M Prompt/Task-Now.txt"
+  ],
+  "added_user_requirements": [
+    "current-scene NPC list and precise navigation",
+    "smaller readable full place names"
+  ]
+}

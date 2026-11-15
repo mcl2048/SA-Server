@@ -7,22 +7,22 @@
 // 坐标都是原版 800×600 模式下的值（这些窗口原版用 lpDraw->xSize 居中或固定在左上角，不再平移）。
 
 
-import { FONT, SYS, measure,          InputBox } from "./ui.js?v=5e4867fa738c689d";
-import { ItemWindow } from "./items.js?v=5e4867fa738c689d";
-import { TradeWindow } from "./trade.js?v=5e4867fa738c689d";
-import { ActionWindow } from "./actions.js?v=5e4867fa738c689d";
-import { MailWindow } from "./mail.js?v=5e4867fa738c689d";
-import { FamilyWindow } from "./family.js?v=5e4867fa738c689d";
-import { PetWindow } from "./pets.js?v=5e4867fa738c689d";
-import { MapWindow } from "./worldmap.js?v=5e4867fa738c689d";
-import { md5 } from "./md5.js?v=5e4867fa738c689d";
-import { VendorWindow } from "./vendor.js?v=5e4867fa738c689d";
+import { FONT, SYS, measure,          InputBox } from "./ui.js?v=16aad116d5c399c2";
+import { ItemWindow } from "./items.js?v=16aad116d5c399c2";
+import { TradeWindow } from "./trade.js?v=16aad116d5c399c2";
+import { ActionWindow } from "./actions.js?v=16aad116d5c399c2";
+import { MailWindow } from "./mail.js?v=16aad116d5c399c2";
+import { FamilyWindow } from "./family.js?v=16aad116d5c399c2";
+import { PetWindow } from "./pets.js?v=16aad116d5c399c2";
+import { MapWindow } from "./worldmap.js?v=16aad116d5c399c2";
+import { md5 } from "./md5.js?v=16aad116d5c399c2";
+import { VendorWindow } from "./vendor.js?v=16aad116d5c399c2";
 
 
-import { AiWindow } from "./aisetting.js?v=5e4867fa738c689d";
-import { GmWindow } from "./gm.js?v=5e4867fa738c689d";
-import { QuestWindow } from "./quests.js?v=5e4867fa738c689d";
-import { album } from "./album.js?v=5e4867fa738c689d";
+import { AiWindow } from "./aisetting.js?v=16aad116d5c399c2";
+import { GmWindow } from "./gm.js?v=16aad116d5c399c2";
+import { QuestWindow } from "./quests.js?v=16aad116d5c399c2";
+import { album } from "./album.js?v=16aad116d5c399c2";
 
 // 原版图号（anim_tbl.h，按 VER25_RELEASE 求值）
 const CG = {
@@ -193,7 +193,7 @@ export class Menus {
       ui, canvas: host.canvas, send: (t) => host.gmSend(t), list: (k) => host.gmList(k), detail: (k, id) => host.gmDetail(k, id), place: () => host.place(),
       status: () => host.status, pets: () => (this.pets?.pets ?? []).filter((p) => p.slot >= 0 && p.slot < 5).sort((a, b) => a.slot - b.slot),
     });
-    this.mapWnd = new MapWindow({ ui, canvas: host.canvas, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.target = [x, y]; },
+    this.mapWnd = new MapWindow({ ui, canvas: host.canvas, assets: host.assets, root: host.root, field: () => host.field(), walkTo: (x, y) => { const f = host.field(); if (f) f.setManualTarget([x, y]); },
       openMap: () => { if (!this.mapOpen) this.toggleMap(); }, closeMap: () => { this.mapOpen = false; } });
     this.vendor = new VendorWindow({
       ui, canvas: host.canvas, items: () => this.items.inv.items, pets: () => this.pets?.pets ?? [], ridePet: () => this.pets?.ride ?? -1,

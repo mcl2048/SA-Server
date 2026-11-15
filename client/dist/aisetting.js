@@ -7,8 +7,8 @@
 // 改了马上存（ai.ts saveAi）。对象的选项按精灵 / 技能的范围给（只能对自己的就只有"自己"；"其他人"类的可以选自己、宠物 / 主人、敌人）。
 
 
-import { AUTO, TARGET_LABEL, defaultAi, loadAi, saveAi,                                               } from "./ai.js?v=5e4867fa738c689d";
-import { FONT, measure, InputBox,         } from "./ui.js?v=5e4867fa738c689d";
+import { AUTO, TARGET_LABEL, defaultAi, loadAi, saveAi,                                               } from "./ai.js?v=16aad116d5c399c2";
+import { FONT, measure, InputBox,         } from "./ui.js?v=16aad116d5c399c2";
 
 
 

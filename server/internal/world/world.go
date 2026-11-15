@@ -141,12 +141,13 @@ type World struct {
 	// Rules 是 config.yaml 的 rules（rules.go），开机时设定，之后只读
 	Rules Rules
 	// panics 是 safe 拦下的 panic 次数
-	panics    atomic.Int64
-	buses     []*entity         // 会走动的 NPC（bus.go tickBuses）
-	warPlace  map[int]*warPlace // 对战场的位置（fmwar.go warPlaces，算一次）
-	qhints    map[int]string    // 事件编号 → 相关 NPC 的提示（quest.go questHints，算一次）
-	qsettable map[int]bool      // 资料里有办法设起来的事件（quest.go questSettable，算一次）
-	floorVers map[int]string    // 楼层资料的版本（floorVer，客户端拿它决定本机存的地图还能不能用）
+	panics        atomic.Int64
+	buses         []*entity                // 会走动的 NPC（bus.go tickBuses）
+	warPlace      map[int]*warPlace        // 对战场的位置（fmwar.go warPlaces，算一次）
+	qhints        map[int]string           // 事件编号 → 相关 NPC 的提示（quest.go questHints，算一次）
+	qsettable     map[int]bool             // 资料里有办法设起来的事件（quest.go questSettable，算一次）
+	floorVers     map[int]string           // 楼层资料的版本（floorVer，客户端拿它决定本机存的地图还能不能用）
+	mapPlaceCache map[int][]proto.MapPlace // Immutable loaded resources, populated only on the owning world loop.
 
 	// saves 是存档队列：由一个协程按顺序写库，保证同一角色的新存档不会被旧存档盖掉。
 	// enqueue 按 key 合并：同一个 key 还没写时只换掉要写的内容，不再排一笔（道具栏一秒动 40 次也只写一次），
@@ -846,21 +847,47 @@ func sign(v int) int {
 	return 0
 }
 
-// NpcList 是世界地图要的一层楼全部 NPC 的位置（H5 新增：原版自动地图只画视野内的人）。不限楼层（NPC 站哪里不是秘密），
-// 没名字的（传送点 npcgen_warp 等）与按时间消失的不列；巴士 / 飞机列当下的位置。
+// NpcList returns live named NPCs only for the character's current floor.
+// Hidden/out-of-bounds actors and unnamed warp triggers are omitted; buses /
+// airplanes use current world positions. Historical floors retain static Places.
 func (w *World) NpcList(charID, floor int) {
 	w.Do(func() {
 		e := w.players[charID]
 		if e == nil || w.game.Floors[floor] == nil {
 			return
 		}
-		m := &proto.NpcList{Floor: floor, Npcs: []proto.NpcPos{}, Places: mapPlaces(w.game, floor)}
-		for _, o := range w.floors[floor] {
-			if o.kind == "npc" && o.name != "" && !o.hidden() {
-				m.Npcs = append(m.Npcs, proto.NpcPos{Name: o.name, X: o.x, Y: o.y})
+		m := &proto.NpcList{Floor: floor, Npcs: []proto.NpcPos{}, Places: w.placesForFloor(floor)}
+		// NPC navigation is scoped to the character's current scene. Historical
+		// maps retain static place metadata without enumerating remote live actors.
+		if floor == e.floor {
+			for _, o := range w.floors[floor] {
+				// Resource NPCs can have coordinates outside their floor. They cannot
+				// be drawn or approached inside this scene; keep them out of its list.
+				if o.kind == "npc" && o.name != "" && !o.hidden() && w.game.Floors[floor].In(o.x, o.y) {
+					m.Npcs = append(m.Npcs, proto.NpcPos{Name: o.name, X: o.x, Y: o.y})
+				}
 			}
 		}
-		slices.SortFunc(m.Npcs, func(a, b proto.NpcPos) int { return strings.Compare(a.Name, b.Name) })
+		// Many villagers share a name. A total order keeps rows stable across
+		// periodic refreshes despite randomized Go map iteration.
+		slices.SortFunc(m.Npcs, func(a, b proto.NpcPos) int {
+			if c := strings.Compare(a.Name, b.Name); c != 0 {
+				return c
+			}
+			if a.Y < b.Y {
+				return -1
+			}
+			if a.Y > b.Y {
+				return 1
+			}
+			if a.X < b.X {
+				return -1
+			}
+			if a.X > b.X {
+				return 1
+			}
+			return 0
+		})
 		e.client.Send(m)
 	})
 }
