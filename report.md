@@ -121,3 +121,5 @@
 ✅ 发行：静态Linux AMD64 SHA-256 `50cb389bca454ad6b37aab1016c2066e5ec6f8ab57ded90c5f7b3777ee69788d`；4380文件完整ZIP逐文件／CRC／执行位校验后替换原包，ZIP SHA-256 `329c8131a2988debf62090630ccc571b98b44cf7940e30395ba103ca799bee2c`。StoneAge仓库／安装版经验同步并验证通过，无新增Assets、空素材补丁或数据库迁移。
 
 [可视报告](Report/SA-1121-01/index.html) · [完整验收](Report/SA-1121-01/ACCEPTANCE.md) · [发行摘要](Report/SA-1121-01/release.json) · [发布说明](docs/v0.2.23-LYNX.md) · [交付回执](Report/SA-1121-01/DELIVERY.json)。移动是Chromium触屏／视口模拟，未认证实体Android/iOS/Safari，未部署或重启生产。冷目录仍在世界循环同步计算，817独立冷测211.487ms；不可达模型930–1054帧，保留性能边界与长路线实际秒数，不作硬实时或生产吞吐承诺。
+
+实现提交 `29d46ee` 已推送并核对远端main完整摘要一致；[DELIVERY.json](Report/SA-1121-01/DELIVERY.json)记录发行产物与验证回执。

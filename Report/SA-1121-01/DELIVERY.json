@@ -1,0 +1,42 @@
+{
+  "task": "SA-1121-01",
+  "version": "v0.2.23-LYNX",
+  "repository": "https://github.com/mcl2048/SA-Server.git",
+  "branch": "main",
+  "baseline_commit": "5ffb526e98286b31a4b9a1f33a23aab1ee966a7e",
+  "implementation_commit": "29d46ee342eed01efa238778b208f864a65c64eb",
+  "remote_main_verified": "29d46ee342eed01efa238778b208f864a65c64eb",
+  "verified_at_utc": "2026-11-21T11:12:02.592040+00:00",
+  "status": "implementation pushed and remote HEAD verified",
+  "working_tree_clean_before_receipt": true,
+  "binary": {
+    "path": "bin/saserver",
+    "sha256": "50cb389bca454ad6b37aab1016c2066e5ec6f8ab57ded90c5f7b3777ee69788d",
+    "linux_amd64_static": true
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.23-LYNX-linux-amd64.zip",
+    "bytes": 42244923,
+    "files": 4380,
+    "sha256": "329c8131a2988debf62090630ccc571b98b44cf7940e30395ba103ca799bee2c"
+  },
+  "validation": {
+    "client_build_tests": 289,
+    "typescript": true,
+    "go_test_race_vet": true,
+    "source_stable": true,
+    "chromium_checks": 21,
+    "http_matched_files": 78,
+    "report_desktop_mobile_layout": true,
+    "stoneage_skill_synchronized_validated": true
+  },
+  "production_deployed": false,
+  "new_assets": false,
+  "database_migration": false,
+  "limits": [
+    "Real Chromium viewport/touch emulation, no physical-device certification",
+    "No production deployment or restart",
+    "Quest, conditional and dialogue teleport eligibility remains server-owned"
+  ],
+  "receipt_note": "The following documentation commit records this already verified implementation delivery."
+}
