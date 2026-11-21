@@ -1,0 +1,5 @@
+--- FAIL: TestNpcListIncludesSafeEdenReturnPassage (3.50s)
+    maptransfers_test.go:75: missing safe 702 -> 703 -> 702 return passage joining the isolated border and city
+FAIL
+FAIL	sa/server/internal/world	3.562s
+FAIL

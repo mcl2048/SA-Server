@@ -1,0 +1,5 @@
+--- FAIL: TestHistoricalNpcListDoesNotBuildNavigation (1.50s)
+    maptransfers_test.go:88: historical map request built a live navigation graph
+FAIL
+FAIL	sa/server/internal/world	1.565s
+FAIL

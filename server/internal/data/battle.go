@@ -3,6 +3,7 @@ package data
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -391,13 +392,20 @@ func (d *BattleData) NextLevelExp(level int) int {
 	return last + steps*delta
 }
 
-// enemyBaseExp 是 gmsv/include/enemyexptbl.h 的 enemybaseexptbl（按等级 1 起）。
+// enemyBaseExp 是 gmsv/include/enemyexptbl.h 的完整 1..200 级原表。
+// https://github.com/librae8226/gmsv/blob/master/include/enemyexptbl.h
+// 不能截成 100 级：当前敌人数据包含 101..700 级自动奖励敌人。
 var enemyBaseExp = []int{
 	1, 2, 3, 4, 5, 6, 9, 12, 15, 18, 22, 26, 30, 35, 40, 46, 52, 58, 65, 72,
 	79, 87, 95, 104, 113, 122, 131, 141, 151, 162, 173, 184, 196, 208, 220, 233, 246, 260, 274, 288,
 	303, 318, 333, 348, 365, 381, 398, 415, 432, 450, 468, 486, 506, 525, 545, 564, 585, 606, 627, 648,
 	670, 692, 714, 737, 760, 784, 808, 832, 857, 882, 907, 933, 959, 956, 1012, 1040, 1067, 1095, 1123, 1152,
 	1181, 1210, 1240, 1270, 1300, 1331, 1362, 1394, 1426, 1458, 1490, 1524, 1557, 1590, 1625, 1659, 1694, 1729, 1764, 1800,
+	1836, 1872, 1909, 1946, 1983, 2021, 2059, 2097, 2136, 2175, 2214, 2254, 2294, 2334, 2374, 2414, 2455, 2496, 2537, 2578,
+	2619, 2661, 2703, 2745, 2787, 2829, 2872, 2915, 2958, 3000, 3043, 3088, 3132, 3176, 3220, 3264, 3309, 3354, 3399, 3444,
+	3489, 3535, 3581, 3627, 3673, 3719, 3765, 3812, 3859, 3906, 3953, 4000, 4047, 4095, 4143, 4191, 4239, 4287, 4335, 4384,
+	4433, 4482, 4531, 4580, 4629, 4679, 4729, 4779, 4829, 4879, 4929, 4980, 5031, 5082, 5133, 5184, 5235, 5287, 5339, 5391,
+	5443, 5495, 5547, 5599, 5652, 5705, 5758, 5811, 5864, 5917, 5970, 6024, 6078, 6132, 6186, 6240, 6295, 6350, 6405, 6460,
 }
 
 // EnemyRank 是 ENEMY_getRank：四项成长率之和对应的档次 0..5。
@@ -416,15 +424,30 @@ func EnemyExp(e *Enemy, t *EnemyTemp, level int) int {
 	if e.Exp != -1 {
 		return e.Exp
 	}
-	if level < 1 || level > len(enemyBaseExp) {
+	if level < 1 {
 		return 0
+	}
+	base := enemyBaseExp[min(level, len(enemyBaseExp))-1]
+	if level > len(enemyBaseExp) {
+		// 本项目的高等级兼容策略，与 NextLevelExp 一致：保留全部原值，
+		// 表外沿最后增量（55）延伸，不凭拟合改写原曲线或把等级封顶。
+		// 先比较再相乘，保护任意 int 等级以及原生 32 位经验数值范围。
+		delta := enemyBaseExp[len(enemyBaseExp)-1] - enemyBaseExp[len(enemyBaseExp)-2]
+		steps := level - len(enemyBaseExp)
+		if steps > (math.MaxInt32-base)/delta {
+			return math.MaxInt32
+		}
+		base += steps * delta
 	}
 	rank := []float64{2.5, 2.0, 1.5, 1.0, 0.5, 0.0}[EnemyRank(t)]
 	pos := func(v int) int { return max(0, v) }
 	alpha := float64(pos(t.Critical)+pos(t.Counter)+pos(t.Get)+pos(t.Status[0])+pos(t.Status[1])+
 		pos(t.Status[2])+pos(t.Status[3])+pos(t.Status[4])+pos(t.Status[5]))/100.0 + float64(pos(t.Rare))
-	ret := int(float64(enemyBaseExp[level-1]) + (rank+alpha)*float64(level))
-	return max(1, ret)
+	ret := float64(base) + (rank+alpha)*float64(level)
+	if ret >= math.MaxInt32 {
+		return math.MaxInt32
+	}
+	return max(1, int(ret))
 }
 
 // Skill 是 petskill.txt 的一行（PETSKILL_DATACHAR / DATAINT，_CFREE_petskill + _PETSKILL2_TXT）：

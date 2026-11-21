@@ -1,0 +1,105 @@
+[
+  {
+    "device": "desktop",
+    "name": "baseline: real Sea of Tears NPC unreachable despite native same-floor portal",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "宝箱",
+        "x": 148,
+        "y": 35
+      },
+      "before": {
+        "floor": 817,
+        "x": 146,
+        "y": 19,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 24585
+      },
+      "after": {
+        "floor": 817,
+        "x": 146,
+        "y": 19,
+        "target": null,
+        "status": "目标不可达：被障碍阻挡或需要经过传送点",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 240000
+      },
+      "moves": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "baseline: zero experience for level 130 Gibi",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1969,
+        "level": 130
+      },
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 0,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 100,
+        "exp": 29628,
+        "nextExp": 1345723,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "baseline: zero experience for level 140 Gibi",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1971,
+        "level": 140
+      },
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 0,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 100,
+        "exp": 29628,
+        "nextExp": 1345723,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  }
+]

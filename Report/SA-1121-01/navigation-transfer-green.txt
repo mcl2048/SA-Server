@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: a disconnected destination is routed through its explicit same-floor transfer
+ok 1 - a disconnected destination is routed through its explicit same-floor transfer
+  ---
+  duration_ms: 24.230552
+  type: 'test'
+  ...
+# Subtest: unknown transfer destinations and unrelated portals remain blocked
+ok 2 - unknown transfer destinations and unrelated portals remain blocked
+  ---
+  duration_ms: 1.239302
+  type: 'test'
+  ...
+# Subtest: an NPC route resumes only after its planned same-floor EnterFloor confirmation
+ok 3 - an NPC route resumes only after its planned same-floor EnterFloor confirmation
+  ---
+  duration_ms: 110.51034
+  type: 'test'
+  ...
+# Subtest: manual cannot revive a route waiting for a portal
+ok 4 - manual cannot revive a route waiting for a portal
+  ---
+  duration_ms: 15.246275
+  type: 'test'
+  ...
+# Subtest: wrong-floor cannot revive a route waiting for a portal
+ok 5 - wrong-floor cannot revive a route waiting for a portal
+  ---
+  duration_ms: 8.38073
+  type: 'test'
+  ...
+# Subtest: wrong-position cannot revive a route waiting for a portal
+ok 6 - wrong-position cannot revive a route waiting for a portal
+  ---
+  duration_ms: 7.806172
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2804.623817

@@ -141,13 +141,16 @@ type World struct {
 	// Rules 是 config.yaml 的 rules（rules.go），开机时设定，之后只读
 	Rules Rules
 	// panics 是 safe 拦下的 panic 次数
-	panics        atomic.Int64
-	buses         []*entity                // 会走动的 NPC（bus.go tickBuses）
-	warPlace      map[int]*warPlace        // 对战场的位置（fmwar.go warPlaces，算一次）
-	qhints        map[int]string           // 事件编号 → 相关 NPC 的提示（quest.go questHints，算一次）
-	qsettable     map[int]bool             // 资料里有办法设起来的事件（quest.go questSettable，算一次）
-	floorVers     map[int]string           // 楼层资料的版本（floorVer，客户端拿它决定本机存的地图还能不能用）
-	mapPlaceCache map[int][]proto.MapPlace // Immutable loaded resources, populated only on the owning world loop.
+	panics           atomic.Int64
+	buses            []*entity                // 会走动的 NPC（bus.go tickBuses）
+	warPlace         map[int]*warPlace        // 对战场的位置（fmwar.go warPlaces，算一次）
+	qhints           map[int]string           // 事件编号 → 相关 NPC 的提示（quest.go questHints，算一次）
+	qsettable        map[int]bool             // 资料里有办法设起来的事件（quest.go questSettable，算一次）
+	floorVers        map[int]string           // 楼层资料的版本（floorVer，客户端拿它决定本机存的地图还能不能用）
+	mapPlaceCache    map[int][]proto.MapPlace // Immutable loaded resources, populated only on the owning world loop.
+	mapTransferCache map[int][]proto.MapTransfer
+	navigationFloors map[int]map[[2]int][]int32 // Only warp endpoint region IDs, never retained full grids.
+	navigationPoints map[int]map[[2]int]bool
 
 	// saves 是存档队列：由一个协程按顺序写库，保证同一角色的新存档不会被旧存档盖掉。
 	// enqueue 按 key 合并：同一个 key 还没写时只换掉要写的内容，不再排一笔（道具栏一秒动 40 次也只写一次），
@@ -860,6 +863,9 @@ func (w *World) NpcList(charID, floor int) {
 		// NPC navigation is scoped to the character's current scene. Historical
 		// maps retain static place metadata without enumerating remote live actors.
 		if floor == e.floor {
+			// Region analysis belongs to an active route, not a historical map
+			// catalogue request. Never build remote grids for map browsing.
+			m.Transfers = w.transfersForFloor(floor)
 			for _, o := range w.floors[floor] {
 				// Resource NPCs can have coordinates outside their floor. They cannot
 				// be drawn or approached inside this scene; keep them out of its list.

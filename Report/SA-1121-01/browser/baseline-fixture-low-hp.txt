@@ -1,0 +1,8 @@
+{"variant":"baseline","stage":"server-ready"}
+{"variant":"baseline","stage":"authenticated-real-field"}
+Error: desktop: baseline navigation defect was not reproduced
+    at wait (file:///home/coder/saserver/Report/SA-1121-01/browser/task-cases.mjs:18:150)
+    at async Module.run (file:///home/coder/saserver/Report/SA-1121-01/browser/task-cases.mjs:42:5)
+    at async work (file:///home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:277:5
+{"variant":"baseline","probe":false,"result":"/home/coder/saserver/Report/SA-1121-01/browser/baseline.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":200,"x":102,"y":1021},"stored_position":{"floor":200,"x":102,"y":1021},"position_matches":true}}

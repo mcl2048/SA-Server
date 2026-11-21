@@ -2,7 +2,7 @@
 # Build a matching web client and static Linux AMD64 server from any directory.
 set -euo pipefail
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
-version="${VERSION:-v0.2.22-LYNX}"
+version="${VERSION:-v0.2.23-LYNX}"
 go_bin="${GO_BIN:-go}"
 if [[ ! "$version" =~ ^[A-Za-z0-9._+-]+$ ]]; then
   echo 'VERSION must contain only letters, digits, dot, underscore, plus or hyphen' >&2

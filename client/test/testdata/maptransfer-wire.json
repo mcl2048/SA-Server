@@ -1,0 +1,1 @@
+{"t":"NpcList","floor":817,"npcs":[{"name":"宝箱","x":6}],"transfers":[{"x":2,"toX":5,"toY":1,"via":[{"floor":817,"x":2,"toFloor":900},{"floor":900,"x":2,"toFloor":817,"toX":5,"toY":1}]}]}

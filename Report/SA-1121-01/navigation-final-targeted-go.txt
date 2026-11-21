@@ -1,0 +1,2 @@
+ok  	sa/server/internal/proto	0.007s
+ok  	sa/server/internal/world	1.842s

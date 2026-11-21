@@ -1,0 +1,9 @@
+{
+  "identical": true,
+  "binary_sha256": "50cb389bca454ad6b37aab1016c2066e5ec6f8ab57ded90c5f7b3777ee69788d",
+  "builds": [
+    "build-first.txt",
+    "build-second.txt"
+  ],
+  "version": "v0.2.23-LYNX"
+}

@@ -1,0 +1,870 @@
+[
+  {
+    "device": "desktop",
+    "name": "Sea of Tears NPC via real same-floor portal",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "宝箱",
+        "x": 148,
+        "y": 35
+      },
+      "before": {
+        "floor": 817,
+        "x": 146,
+        "y": 19,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 24361
+      },
+      "after": {
+        "floor": 817,
+        "x": 148,
+        "y": 35,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 102912
+      },
+      "moves": 11,
+      "portals": [
+        {
+          "floor": 817,
+          "x": 143,
+          "y": 34
+        }
+      ],
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "sea-exit: native exit navigation",
+    "passed": true,
+    "evidence": {
+      "place": {
+        "name": "史东尔换气道",
+        "floor": 8000,
+        "entrances": [
+          {
+            "x": 386,
+            "y": 199
+          }
+        ],
+        "conditional": false
+      },
+      "before": {
+        "floor": 817,
+        "x": 148,
+        "y": 35,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 137728
+      },
+      "after": {
+        "floor": 8000,
+        "x": 17,
+        "y": 31,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "386,199",
+        "loaded": 0
+      },
+      "portals": [
+        {
+          "floor": 817,
+          "x": 145,
+          "y": 52
+        },
+        {
+          "floor": 817,
+          "x": 148,
+          "y": 70
+        },
+        {
+          "floor": 817,
+          "x": 262,
+          "y": 72
+        },
+        {
+          "floor": 817,
+          "x": 272,
+          "y": 40
+        },
+        {
+          "floor": 817,
+          "x": 358,
+          "y": 132
+        },
+        {
+          "floor": 8000,
+          "x": 17,
+          "y": 31
+        }
+      ],
+      "moves": 352,
+      "seconds": 178.684,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "manual direction cancels a portal navigation intent",
+    "passed": true,
+    "evidence": {
+      "after": {
+        "floor": 702,
+        "x": 389,
+        "y": 11,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 23642
+      },
+      "input": "ArrowRight keyboard"
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "nyx-return-passage: native NPC navigation",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "看板",
+        "x": 188,
+        "y": 41
+      },
+      "before": {
+        "floor": 702,
+        "x": 388,
+        "y": 10,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 64000
+      },
+      "after": {
+        "floor": 702,
+        "x": 188,
+        "y": 41,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 160000
+      },
+      "portals": [
+        {
+          "floor": 703,
+          "x": 9,
+          "y": 14
+        },
+        {
+          "floor": 702,
+          "x": 388,
+          "y": 49
+        }
+      ],
+      "moves": 610,
+      "seconds": 208.3,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "eden-west-ordinary: native NPC navigation",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "看板",
+        "x": 243,
+        "y": 22
+      },
+      "before": {
+        "floor": 701,
+        "x": 305,
+        "y": 14,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 21046
+      },
+      "after": {
+        "floor": 701,
+        "x": 243,
+        "y": 22,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 160000
+      },
+      "portals": [],
+      "moves": 66,
+      "seconds": 25.197,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "patched native experience for enemy 1969 level 130",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1969,
+        "level": 130,
+        "want": 3587
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 3587,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 130,
+        "exp": 3587,
+        "nextExp": 68889921,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "patched native experience for enemy 1971 level 140",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1971,
+        "level": 140,
+        "want": 4076
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 4076,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 4076,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "patched native experience for enemy 2165 level 130",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2165,
+        "level": 130,
+        "want": 3341
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 3341,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 130,
+        "exp": 3341,
+        "nextExp": 68889921,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "patched native experience for enemy 2168 level 140",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2168,
+        "level": 140,
+        "want": 4076
+      },
+      "mode": "ordinary automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 4076,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 4076,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "desktop",
+    "name": "patched native experience for enemy 2239 level 80",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2239,
+        "level": 80,
+        "want": 0
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 0,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 0,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "Sea of Tears NPC via real same-floor portal",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "宝箱",
+        "x": 148,
+        "y": 35
+      },
+      "before": {
+        "floor": 817,
+        "x": 146,
+        "y": 19,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 36864
+      },
+      "after": {
+        "floor": 817,
+        "x": 148,
+        "y": 35,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 104448
+      },
+      "moves": 11,
+      "portals": [
+        {
+          "floor": 817,
+          "x": 143,
+          "y": 34
+        }
+      ],
+      "corrections": 0
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "sea-exit: native exit navigation",
+    "passed": true,
+    "evidence": {
+      "place": {
+        "name": "史东尔换气道",
+        "floor": 8000,
+        "entrances": [
+          {
+            "x": 386,
+            "y": 199
+          }
+        ],
+        "conditional": false
+      },
+      "before": {
+        "floor": 817,
+        "x": 148,
+        "y": 35,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 145920
+      },
+      "after": {
+        "floor": 8000,
+        "x": 17,
+        "y": 31,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "386,199",
+        "loaded": 0
+      },
+      "portals": [
+        {
+          "floor": 817,
+          "x": 145,
+          "y": 52
+        },
+        {
+          "floor": 817,
+          "x": 148,
+          "y": 70
+        },
+        {
+          "floor": 817,
+          "x": 262,
+          "y": 72
+        },
+        {
+          "floor": 817,
+          "x": 272,
+          "y": 40
+        },
+        {
+          "floor": 817,
+          "x": 358,
+          "y": 132
+        },
+        {
+          "floor": 8000,
+          "x": 17,
+          "y": 31
+        }
+      ],
+      "moves": 352,
+      "seconds": 143.323,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "manual direction cancels a portal navigation intent",
+    "passed": true,
+    "evidence": {
+      "after": {
+        "floor": 702,
+        "x": 388,
+        "y": 10,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 72192
+      },
+      "input": "native touchscreen joystick"
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "nyx-return-passage: native NPC navigation",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "看板",
+        "x": 188,
+        "y": 41
+      },
+      "before": {
+        "floor": 702,
+        "x": 388,
+        "y": 10,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": false,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 115200
+      },
+      "after": {
+        "floor": 702,
+        "x": 188,
+        "y": 41,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 160000
+      },
+      "portals": [
+        {
+          "floor": 703,
+          "x": 9,
+          "y": 14
+        },
+        {
+          "floor": 702,
+          "x": 388,
+          "y": 49
+        }
+      ],
+      "moves": 610,
+      "seconds": 171.611,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "eden-west-ordinary: native NPC navigation",
+    "passed": true,
+    "evidence": {
+      "npc": {
+        "name": "看板",
+        "x": 243,
+        "y": 22
+      },
+      "before": {
+        "floor": 701,
+        "x": 305,
+        "y": 14,
+        "target": null,
+        "status": "",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 160000
+      },
+      "after": {
+        "floor": 701,
+        "x": 243,
+        "y": 22,
+        "target": null,
+        "status": "已到达目标",
+        "corrections": 0,
+        "mapNavigation": false,
+        "wholeReady": true,
+        "waitingWarp": false,
+        "search": false,
+        "locked": false,
+        "follower": false,
+        "wantDir": -1,
+        "goal": "",
+        "loaded": 160000
+      },
+      "portals": [],
+      "moves": 66,
+      "seconds": 21.513,
+      "corrections": 0
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "patched native experience for enemy 1969 level 130",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1969,
+        "level": 130,
+        "want": 3587
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 3587,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 130,
+        "exp": 3587,
+        "nextExp": 68889921,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "patched native experience for enemy 1971 level 140",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 1971,
+        "level": 140,
+        "want": 4076
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 4076,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 4076,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "patched native experience for enemy 2165 level 130",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2165,
+        "level": 130,
+        "want": 3341
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 3341,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 130,
+        "exp": 3341,
+        "nextExp": 68889921,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "patched native experience for enemy 2168 level 140",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2168,
+        "level": 140,
+        "want": 4076
+      },
+      "mode": "ordinary automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 4076,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 4076,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "patched native experience for enemy 2239 level 80",
+    "passed": true,
+    "evidence": {
+      "enemy": {
+        "id": 2239,
+        "level": 80,
+        "want": 0
+      },
+      "mode": "quick automatic",
+      "battle": {
+        "t": "BattleEnd",
+        "result": "win",
+        "exp": 0,
+        "gold": 0,
+        "levelUp": 0
+      },
+      "status": {
+        "t": "Status",
+        "level": 140,
+        "exp": 0,
+        "nextExp": 71244161,
+        "hp": 7000,
+        "maxHp": 7000,
+        "mp": 100,
+        "maxMp": 100
+      }
+    }
+  },
+  {
+    "device": "mobile",
+    "name": "mobile native map survives landscape rotation",
+    "passed": true,
+    "evidence": {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "inputsRemoved": true
+    }
+  }
+]

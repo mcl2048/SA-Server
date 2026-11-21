@@ -1,8 +1,9 @@
 // node --test client/test/net.test.ts
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { Connection } from "../src/net.ts";
-import { Field } from "../src/field.ts";
+import { Field, MOVE } from "../src/field.ts";
 import type { Assets } from "../src/assets.ts";
 import type { C2S } from "../src/proto.gen.ts";
 
@@ -283,4 +284,28 @@ test("wire-level location entries restore omitted zero coordinates before actual
  assert.ok(first.sent.some(m=>m.t==="Move"&&m.x===1&&m.y===8&&m.dir===1),"zero-coordinate doorway must cause a real legal Move");
  first.message({t:"NpcList",floor:1});
  assert.deepEqual(field.mapPlaces(1),[],"legacy servers without the new array remain compatible");
+});
+
+test("actual Go MapTransfer wire restores zero coordinates through both confirmed navigation hops",async t=>{
+ const {connection,first}=environment(t);hello(first);await connection.ready();
+ const field=new Field({} as Assets,connection);t.after(()=>field.dispose());
+ first.message({t:"Self",id:1,name:"wire navigator",sprite:100000});
+ const enter=(floor:number,x:number,y:number)=>first.message({t:"EnterFloor",floor,name:"wire passage",width:floor===817?7:3,height:floor===817?2:1,x,y,mapVer:String(floor),step:260});
+ enter(817,0,0);await new Promise(resolve=>setImmediate(resolve));
+ first.message({t:"MapData",floor:817,x2:7,y2:2,tiles:Array(14).fill(100),objs:Array(14).fill(0),walk:"11200111110021",ver:"817"});
+ const wire=JSON.parse(readFileSync(new URL("./testdata/maptransfer-wire.json",import.meta.url),"utf8"));
+ let decoded:any;connection.on("NpcList",m=>decoded=m);first.message(wire);
+ assert.deepEqual(decoded.transfers[0].via[0],{floor:817,x:2,y:0,toFloor:900,toX:0,toY:0});
+ assert.deepEqual(decoded.transfers[0].via[1],{floor:900,x:2,y:0,toFloor:817,toX:5,toY:1});
+ field.navigateNpc(817,field.npcList(817)![0]);first.sent.length=0;
+ const began=performance.now()+1000;let hops=0;
+ for(let i=0;i<30;i++){
+  field.update(began+i*300);
+  for(const m of first.sent.splice(0))if(m.t==="Move"&&m.x+MOVE[m.dir][0]===2){
+   hops++;const back=field.floor===900;enter(back?817:900,back?5:0,back?1:0);
+   if(!back)first.message({t:"MapData",floor:900,x2:3,y2:1,tiles:[100,100,100],objs:[0,0,0],walk:"112",ver:"900"});
+   await new Promise(resolve=>setImmediate(resolve));
+  }
+ }
+ assert.equal(hops,2);assert.equal(field.floor,817);assert.deepEqual([field.self!.x,field.self!.y],[6,0]);assert.match(field.navigationStatus,/到达/);
 });

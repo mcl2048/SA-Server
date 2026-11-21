@@ -229,6 +229,10 @@ func RollLuck(rnd *rand.Rand) int {
 // KillExp 是打倒一只敌人得到的经验（battle.c 的经验分配）：
 // 自己比敌人高 5 级以内拿全额；再高就按 (5 + 15 − 等级差) / 15 递减，至少 1。
 func KillExp(exp, myLevel, enemyLevel int) int {
+	// 显式零奖励事件不能被等级差折算的“至少 1”重新变成奖励。
+	if exp <= 0 {
+		return 0
+	}
 	const maxLevel, div = 5, 15 // EXPGET_MAXLEVEL / EXPGET_DIV
 	b := myLevel - enemyLevel
 	if b <= maxLevel {

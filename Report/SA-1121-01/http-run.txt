@@ -1,0 +1,1 @@
+Matched 78 real HTTP files; HEAD/304/private routes and SIGTERM passed

@@ -1,0 +1,140 @@
+{
+  "scope": "input safeNavigationWarp subset (walkable source and landing); ordinary region connectivity plus optimistic adjacent warp steps; no hop limit; excludes wall landings and FREE branches",
+  "input_sha256": "9a8be0bc43fab255ae1f5bc93effe1f0ad4e3e73a014443904020f4c6405efaa",
+  "native_edges": 5653,
+  "queries": [
+    {
+      "start": [
+        703,
+        238,
+        96
+      ],
+      "goals": [
+        [
+          703,
+          390,
+          261
+        ],
+        [
+          703,
+          390,
+          262
+        ],
+        [
+          703,
+          390,
+          263
+        ],
+        [
+          703,
+          390,
+          264
+        ],
+        [
+          703,
+          390,
+          265
+        ]
+      ],
+      "reachable_in_optimistic_graph": false,
+      "visited_arrival_coordinates": 867,
+      "reachable_floors": 164,
+      "source_floor_reachable_regions": [
+        1
+      ],
+      "goal_regions": [
+        18
+      ]
+    },
+    {
+      "start": [
+        704,
+        13,
+        81
+      ],
+      "goals": [
+        [
+          704,
+          11,
+          113
+        ]
+      ],
+      "reachable_in_optimistic_graph": false,
+      "visited_arrival_coordinates": 867,
+      "reachable_floors": 164,
+      "source_floor_reachable_regions": [
+        6
+      ],
+      "goal_regions": [
+        19
+      ]
+    },
+    {
+      "start": [
+        704,
+        13,
+        81
+      ],
+      "goals": [
+        [
+          704,
+          11,
+          115
+        ]
+      ],
+      "reachable_in_optimistic_graph": false,
+      "visited_arrival_coordinates": 867,
+      "reachable_floors": 164,
+      "source_floor_reachable_regions": [
+        6
+      ],
+      "goal_regions": [
+        19
+      ]
+    },
+    {
+      "start": [
+        704,
+        13,
+        81
+      ],
+      "goals": [
+        [
+          704,
+          9,
+          261
+        ],
+        [
+          704,
+          9,
+          262
+        ],
+        [
+          704,
+          9,
+          263
+        ],
+        [
+          704,
+          9,
+          264
+        ],
+        [
+          704,
+          9,
+          265
+        ]
+      ],
+      "reachable_in_optimistic_graph": false,
+      "visited_arrival_coordinates": 867,
+      "reachable_floors": 164,
+      "source_floor_reachable_regions": [
+        6
+      ],
+      "goal_regions": [
+        22,
+        24
+      ]
+    }
+  ]
+}

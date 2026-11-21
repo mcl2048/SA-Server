@@ -1,0 +1,157 @@
+{
+  "scope": "Independent global BFS limited to privately exported 11-floor dataset; not shipped behavior",
+  "results": [
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 2,
+        "conditional": false
+      },
+      "reachable": false,
+      "alreadyAtEntrance": false,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 472284
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 153,
+        "index": 11,
+        "conditional": false
+      },
+      "reachable": true,
+      "alreadyAtEntrance": true,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 1
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 5,
+        "conditional": false
+      },
+      "reachable": false,
+      "alreadyAtEntrance": false,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 472283
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 6,
+        "conditional": false
+      },
+      "reachable": false,
+      "alreadyAtEntrance": false,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 472283
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 7,
+        "conditional": false
+      },
+      "reachable": false,
+      "alreadyAtEntrance": false,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 472283
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "蒙达村地下通路",
+        "toFloor": 60300,
+        "index": 7,
+        "conditional": false
+      },
+      "reachable": true,
+      "alreadyAtEntrance": true,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 1
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 152,
+        "index": 6,
+        "conditional": false
+      },
+      "reachable": true,
+      "alreadyAtEntrance": true,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 1
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "加鲁卡",
+        "toFloor": 200,
+        "index": 0,
+        "conditional": false
+      },
+      "reachable": true,
+      "alreadyAtEntrance": true,
+      "steps": 0,
+      "warpChain": [],
+      "visited": 1
+    }
+  ]
+}

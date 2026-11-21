@@ -1,0 +1,46 @@
+{
+  "success": true,
+  "version": "v0.2.23-LYNX",
+  "binary_sha256": "50cb389bca454ad6b37aab1016c2066e5ec6f8ab57ded90c5f7b3777ee69788d",
+  "linux_amd64_static": true,
+  "binary_bytes": 16797856,
+  "repeat_identical": true,
+  "client_tests": 289,
+  "go_test_race_vet": true,
+  "typescript": true,
+  "http_files": 78,
+  "browser": {
+    "checks": 21,
+    "version": "156.0.8078.4",
+    "shutdown": {
+      "started": true,
+      "sigterm_sent": true,
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "expected_position": {
+        "id": 1,
+        "floor": 701,
+        "x": 243,
+        "y": 22
+      },
+      "stored_position": {
+        "floor": 701,
+        "x": 243,
+        "y": 22
+      },
+      "position_matches": true
+    }
+  },
+  "package": {
+    "path": "bin/saserver-v0.2.23-LYNX-linux-amd64.zip",
+    "bytes": 42244923,
+    "files": 4380,
+    "sha256": "329c8131a2988debf62090630ccc571b98b44cf7940e30395ba103ca799bee2c"
+  },
+  "limits": [
+    "Real Chromium viewport/touch emulation, no physical-device certification",
+    "No production deployment or restart",
+    "Quest, conditional and dialogue teleport eligibility remains server-owned"
+  ]
+}

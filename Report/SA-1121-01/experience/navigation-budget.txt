@@ -1,0 +1,5 @@
+=== RUN   TestIndependentNavigationColdRequestBudget
+    sa112101_nav_independent_review_test.go:22: independent cold floors=1382 audit total=14.760576014s max=375.644ms cached endpoint points=4293 ids=4746
+--- PASS: TestIndependentNavigationColdRequestBudget (19.55s)
+PASS
+ok  	sa/server/internal/world	19.683s

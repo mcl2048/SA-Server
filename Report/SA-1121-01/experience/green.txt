@@ -1,0 +1,33 @@
+=== RUN   TestEnemyExpPreservesCompleteNativeTable
+--- PASS: TestEnemyExpPreservesCompleteNativeTable (0.00s)
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/negative-level
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/zero-level
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/native-tail
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/after-native-tail
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/real-data-maximum
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/configured-maximum
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/huge-level-saturates
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-zero
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-zero-after-table
+=== RUN   TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-positive
+--- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/negative-level (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/zero-level (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/native-tail (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/after-native-tail (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/real-data-maximum (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/configured-maximum (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/huge-level-saturates (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-zero (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-zero-after-table (0.00s)
+    --- PASS: TestEnemyExpExtendedLevelsAndExplicitRewards/explicit-positive (0.00s)
+=== RUN   TestEnemyExpEveryAutomaticRealEnemyLevelHasReward
+    enemyexp_test.go:101: real automatic enemies=2143 ranges_crossing_100=425 checked_levels=13244 max_level=700
+--- PASS: TestEnemyExpEveryAutomaticRealEnemyLevelHasReward (0.17s)
+PASS
+ok  	sa/server/internal/data	0.198s
+=== RUN   TestKillExpNeverCreatesRewardForZeroExperienceEnemy
+--- PASS: TestKillExpNeverCreatesRewardForZeroExperienceEnemy (0.00s)
+PASS
+ok  	sa/server/internal/battle	0.015s

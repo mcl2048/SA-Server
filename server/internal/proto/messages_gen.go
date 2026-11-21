@@ -75,6 +75,23 @@ type MapPlace struct {
 	Conditional bool       `json:"conditional,omitempty"`
 }
 
+type MapTransferStep struct {
+	Floor   int `json:"floor,omitempty"`
+	X       int `json:"x,omitempty"`
+	Y       int `json:"y,omitempty"`
+	ToFloor int `json:"toFloor,omitempty"`
+	ToX     int `json:"toX,omitempty"`
+	ToY     int `json:"toY,omitempty"`
+}
+
+type MapTransfer struct {
+	X   int               `json:"x,omitempty"`
+	Y   int               `json:"y,omitempty"`
+	ToX int               `json:"toX,omitempty"`
+	ToY int               `json:"toY,omitempty"`
+	Via []MapTransferStep `json:"via,omitempty"`
+}
+
 type VendorEntry struct {
 	Index  int    `json:"index,omitempty"`
 	Kind   int    `json:"kind,omitempty"`
@@ -1073,9 +1090,10 @@ type MapData struct {
 func (*MapData) MsgType() string { return "MapData" }
 
 type NpcList struct {
-	Floor  int        `json:"floor,omitempty"`
-	Npcs   []NpcPos   `json:"npcs,omitempty"`
-	Places []MapPlace `json:"places,omitempty"`
+	Floor     int           `json:"floor,omitempty"`
+	Npcs      []NpcPos      `json:"npcs,omitempty"`
+	Places    []MapPlace    `json:"places,omitempty"`
+	Transfers []MapTransfer `json:"transfers,omitempty"`
 }
 
 func (*NpcList) MsgType() string { return "NpcList" }

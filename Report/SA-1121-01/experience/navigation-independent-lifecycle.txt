@@ -1,0 +1,3 @@
+(node:1733754) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"scenarios":9,"result":"PASS","modes":["manual-mid","normal-mid","quick-mid","correction-mid","wrong-final-floor","wrong-final-position","locked-final","follower-final","stale-npcs"]}

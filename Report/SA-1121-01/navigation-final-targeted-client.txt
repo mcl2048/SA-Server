@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: a disconnected destination is routed through its explicit same-floor transfer
+ok 1 - a disconnected destination is routed through its explicit same-floor transfer
+  ---
+  duration_ms: 9.272092
+  type: 'test'
+  ...
+# Subtest: unknown transfer destinations and unrelated portals remain blocked
+ok 2 - unknown transfer destinations and unrelated portals remain blocked
+  ---
+  duration_ms: 1.277826
+  type: 'test'
+  ...
+# Subtest: an NPC route resumes only after its planned same-floor EnterFloor confirmation
+ok 3 - an NPC route resumes only after its planned same-floor EnterFloor confirmation
+  ---
+  duration_ms: 61.233013
+  type: 'test'
+  ...
+# Subtest: manual cannot revive a route waiting for a portal
+ok 4 - manual cannot revive a route waiting for a portal
+  ---
+  duration_ms: 6.439833
+  type: 'test'
+  ...
+# Subtest: wrong-floor cannot revive a route waiting for a portal
+ok 5 - wrong-floor cannot revive a route waiting for a portal
+  ---
+  duration_ms: 6.225853
+  type: 'test'
+  ...
+# Subtest: wrong-position cannot revive a route waiting for a portal
+ok 6 - wrong-position cannot revive a route waiting for a portal
+  ---
+  duration_ms: 4.960192
+  type: 'test'
+  ...
+# Subtest: a safe return route confirms both floors before restoring the original NPC goal
+ok 7 - a safe return route confirms both floors before restoring the original NPC goal
+  ---
+  duration_ms: 8.535007
+  type: 'test'
+  ...
+# Subtest: quick preserves or cancels the complete portal intent before the first warp
+ok 8 - quick preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 5.286711
+  type: 'test'
+  ...
+# Subtest: normal preserves or cancels the complete portal intent before the first warp
+ok 9 - normal preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 7.748829
+  type: 'test'
+  ...
+# Subtest: locked preserves or cancels the complete portal intent before the first warp
+ok 10 - locked preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 6.210828
+  type: 'test'
+  ...
+# Subtest: follower preserves or cancels the complete portal intent before the first warp
+ok 11 - follower preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 6.802813
+  type: 'test'
+  ...
+# Subtest: new-target preserves or cancels the complete portal intent before the first warp
+ok 12 - new-target preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 4.259636
+  type: 'test'
+  ...
+# Subtest: locked cancels a portal route while the EnterFloor acknowledgement is pending
+ok 13 - locked cancels a portal route while the EnterFloor acknowledgement is pending
+  ---
+  duration_ms: 3.271238
+  type: 'test'
+  ...
+# Subtest: follower cancels a portal route while the EnterFloor acknowledgement is pending
+ok 14 - follower cancels a portal route while the EnterFloor acknowledgement is pending
+  ---
+  duration_ms: 3.047915
+  type: 'test'
+  ...
+# Subtest: ready waits for Hello and permits password login only after no-token handshake
+ok 15 - ready waits for Hello and permits password login only after no-token handshake
+  ---
+  duration_ms: 82.676344
+  type: 'test'
+  ...
+# Subtest: token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer
+ok 16 - token handshake waits for Session, dispatches snapshot settings before ready continuation, and redacts bearer
+  ---
+  duration_ms: 3.601808
+  type: 'test'
+  ...
+# Subtest: debug logs redact authentication credentials without modifying wire messages
+ok 17 - debug logs redact authentication credentials without modifying wire messages
+  ---
+  duration_ms: 1.864141
+  type: 'test'
+  ...
+# Subtest: recoveredSession identifies a resumed lobby and resets on explicit logout
+ok 18 - recoveredSession identifies a resumed lobby and resets on explicit logout
+  ---
+  duration_ms: 2.476075
+  type: 'test'
+  ...
+# Subtest: Hello and Session deadlines replace stale sockets while preserving one ready promise
+ok 19 - Hello and Session deadlines replace stale sockets while preserving one ready promise
+  ---
+  duration_ms: 2.533966
+  type: 'test'
+  ...
+# Subtest: waking an OPEN half-dead connection requires matching Pong within five seconds
+ok 20 - waking an OPEN half-dead connection requires matching Pong within five seconds
+  ---
+  duration_ms: 2.091875
+  type: 'test'
+  ...
+# Subtest: returning from a frozen tab immediately resumes a live socket and discards queued world history
+ok 21 - returning from a frozen tab immediately resumes a live socket and discards queued world history
+  ---
+  duration_ms: 2.757854
+  type: 'test'
+  ...
+# Subtest: lifecycle freeze without visibility changes discards old turns and resumes once when active
+ok 22 - lifecycle freeze without visibility changes discards old turns and resumes once when active
+  ---
+  duration_ms: 2.315273
+  type: 'test'
+  ...
+# Subtest: restoring from back-forward cache requests a snapshot even without a visibility event
+ok 23 - restoring from back-forward cache requests a snapshot even without a visibility event
+  ---
+  duration_ms: 3.24198
+  type: 'test'
+  ...
+# Subtest: a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot
+ok 24 - a token handshake while hidden completes readiness but defers world dispatch until a fresh visible snapshot
+  ---
+  duration_ms: 1.816697
+  type: 'test'
+  ...
+# Subtest: terminal replacement stops reconnecting without clearing another tab's bearer
+ok 25 - terminal replacement stops reconnecting without clearing another tab's bearer
+  ---
+  duration_ms: 1.197193
+  type: 'test'
+  ...
+# Subtest: failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token
+ok 26 - failed resume rejects readiness, stops timers, and cannot erase a newer sessionStorage token
+  ---
+  duration_ms: 9.264714
+  type: 'test'
+  ...
+# Subtest: initial connection has a thirty-second total limit and retains resumable credentials
+ok 27 - initial connection has a thirty-second total limit and retains resumable credentials
+  ---
+  duration_ms: 1.629602
+  type: 'test'
+  ...
+# Subtest: manual close rejects pending readiness and detaches all timers without clearing credentials
+ok 28 - manual close rejects pending readiness and detaches all timers without clearing credentials
+  ---
+  duration_ms: 0.883494
+  type: 'test'
+  ...
+# Subtest: no-token Hello timeout fails once and late messages cannot restore abandoned UI
+ok 29 - no-token Hello timeout fails once and late messages cannot restore abandoned UI
+  ---
+  duration_ms: 4.315948
+  type: 'test'
+  ...
+# Subtest: separate tabs do not inherit or overwrite another tab's actor credential
+ok 30 - separate tabs do not inherit or overwrite another tab's actor credential
+  ---
+  duration_ms: 1.617327
+  type: 'test'
+  ...
+# Subtest: legacy shared localStorage credential is discarded without implicit takeover
+ok 31 - legacy shared localStorage credential is discarded without implicit takeover
+  ---
+  duration_ms: 9.338034
+  type: 'test'
+  ...
+# Subtest: repeated character switching releases Field handlers and ignores disposed actors
+ok 32 - repeated character switching releases Field handlers and ignores disposed actors
+  ---
+  duration_ms: 28.379324
+  type: 'test'
+  ...
+# Subtest: unsubscribe preserves duplicate registrations and once removes its listener
+ok 33 - unsubscribe preserves duplicate registrations and once removes its listener
+  ---
+  duration_ms: 1.816469
+  type: 'test'
+  ...
+# Subtest: wire-level location entries restore omitted zero coordinates before actual navigation
+ok 34 - wire-level location entries restore omitted zero coordinates before actual navigation
+  ---
+  duration_ms: 117.116123
+  type: 'test'
+  ...
+# Subtest: actual Go MapTransfer wire restores zero coordinates through both confirmed navigation hops
+ok 35 - actual Go MapTransfer wire restores zero coordinates through both confirmed navigation hops
+  ---
+  duration_ms: 37.382831
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2191.117829

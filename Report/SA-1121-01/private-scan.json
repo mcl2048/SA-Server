@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "checked_files": 183,
+  "known_private_fields": [
+    "account",
+    "password",
+    "secret"
+  ],
+  "findings": [],
+  "scope": "all staged public text, including source, tests, Prompt, report and evidence; images restricted by runner to authenticated field; private fixture remains outside repository"
+}

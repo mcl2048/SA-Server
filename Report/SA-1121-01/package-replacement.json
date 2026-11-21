@@ -1,0 +1,16 @@
+{
+  "new": {
+    "path": "bin/saserver-v0.2.23-LYNX-linux-amd64.zip",
+    "files": 4380,
+    "bytes": 42244923,
+    "sha256": "329c8131a2988debf62090630ccc571b98b44cf7940e30395ba103ca799bee2c",
+    "crc_source_bytes_executable_verified": true
+  },
+  "replaced": {
+    "path": "bin/saserver-v0.2.22-LYNX-linux-amd64.zip",
+    "bytes": 42228859,
+    "files": 4380,
+    "sha256": "0a2ce2804f850b333532f8f21d0d127729ffdae4dc57369980904600c3edf52f"
+  },
+  "prior_sha_verified": true
+}

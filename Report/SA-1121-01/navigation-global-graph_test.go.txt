@@ -1,0 +1,36 @@
+package world
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestNavigationGlobalGraph(t *testing.T) {
+	_, _, g := setup(t)
+	w := &World{game: g}
+	type point struct {
+		Floor, X, Y int
+		Regions     []int32
+	}
+	type edge struct {
+		Floor, X, Y, ToFloor, ToX, ToY int
+		Source, Destination            []int32
+	}
+	points := []point{}
+	edges := []edge{}
+	for floor, warps := range g.Warps {
+		for _, wp := range warps {
+			if w.safeNavigationWarp(wp) {
+				edges = append(edges, edge{floor, wp.X, wp.Y, wp.ToFloor, wp.ToX, wp.ToY, w.navigationRegions(floor, wp.X, wp.Y), w.navigationRegions(wp.ToFloor, wp.ToX, wp.ToY)})
+			}
+		}
+	}
+	for _, p := range [][3]int{{703, 238, 96}, {704, 13, 81}, {703, 390, 261}, {703, 390, 262}, {703, 390, 263}, {703, 390, 264}, {703, 390, 265}, {704, 11, 113}, {704, 11, 115}, {704, 9, 261}, {704, 9, 262}, {704, 9, 263}, {704, 9, 264}, {704, 9, 265}} {
+		points = append(points, point{p[0], p[1], p[2], w.navigationRegions(p[0], p[1], p[2])})
+	}
+	b, _ := json.Marshal(map[string]any{"points": points, "edges": edges})
+	if err := os.WriteFile("/tmp/sa1121-navigation/global-graph.json", b, 0600); err != nil {
+		t.Fatal(err)
+	}
+}

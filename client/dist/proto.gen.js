@@ -150,6 +150,8 @@
 
 
 
+
+
 // 栏位的预设值表（fillDefaults 用）：i 数字、s 字串、b 布林、a 阵列、T:型别、A:型别阵列
 const SCHEMA                                     = {
   CharSummary: [["id","i"],["name","s"],["sprite","i"],["face","i"],["level","i"],["hp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["attrs","a"],["logins","i"],["hometown","i"],["online","b"],["background","b"],["lineId","i"]],
@@ -159,6 +161,8 @@ const SCHEMA                                     = {
   NpcPos: [["name","s"],["x","i"],["y","i"]],
   MapPoint: [["x","i"],["y","i"]],
   MapPlace: [["name","s"],["floor","i"],["entrances","A:MapPoint"],["conditional","b"]],
+  MapTransferStep: [["floor","i"],["x","i"],["y","i"],["toFloor","i"],["toX","i"],["toY","i"]],
+  MapTransfer: [["x","i"],["y","i"],["toX","i"],["toY","i"],["via","A:MapTransferStep"]],
   VendorEntry: [["index","i"],["kind","i"],["slot","i"],["price","i"],["name","s"],["pile","i"],["image","i"],["level","i"],["sprite","i"]],
   BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"],["ownerSlot","i"],["bagSlot","i"],["status","i"],["defenseBoost","i"],["defenseTurns","i"]],
   InvItem: [["slot","i"],["id","i"],["name","s"],["image","i"],["memo","s"],["level","i"],["pile","i"],["type","i"],["field","i"],["target","i"],["usable","b"],["equip","i"],["params","s"],["damage","s"],["magic","s"],["magicMemo","s"],["magicMp","i"],["magicField","i"],["magicTarget","i"],["magicDead","b"],["magicFunc","s"],["magicOption","s"],["flags","i"],["alch","s"],["merged","b"],["jigsaw","s"]],
@@ -220,7 +224,7 @@ const SCHEMA                                     = {
   Status: [["name","s"],["face","i"],["level","i"],["exp","i"],["nextExp","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["vital","i"],["str","i"],["tgh","i"],["dex","i"],["attrs","a"],["hometown","i"],["trans","i"],["points","i"],["detail","a"]],
   EnterFloor: [["floor","i"],["name","s"],["palette","i"],["width","i"],["height","i"],["x","i"],["y","i"],["dir","i"],["step","i"],["mapVer","s"]],
   MapData: [["floor","i"],["x1","i"],["y1","i"],["x2","i"],["y2","i"],["tiles","a"],["objs","a"],["walk","s"],["ver","s"]],
-  NpcList: [["floor","i"],["npcs","A:NpcPos"],["places","A:MapPlace"]],
+  NpcList: [["floor","i"],["npcs","A:NpcPos"],["places","A:MapPlace"],["transfers","A:MapTransfer"]],
   PosCorrect: [["x","i"],["y","i"],["dir","i"]],
   ObjAppear: [["objs","A:ObjInfo"]],
   ObjDisappear: [["ids","a"]],

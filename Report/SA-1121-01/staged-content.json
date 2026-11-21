@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "verified_staged_files": 204,
+  "verified_removed_files": 1,
+  "total_file_bytes": 78256666,
+  "working_tree_matches_index": true,
+  "binary_executable": true,
+  "raw_evidence_preserved": true
+}

@@ -9,6 +9,31 @@ import (
 	"sa/server/internal/proto"
 )
 
+// Only deterministic, effective same-floor warps can join navigation regions.
+// Conditional FREEMORE fallbacks and cross-floor travel stay server-owned and
+// must never become automatic shortcuts in an otherwise local route.
+func mapTransfers(g *data.Game, floor int) []proto.MapTransfer {
+	f := g.Floors[floor]
+	if f == nil {
+		return nil
+	}
+	out := []proto.MapTransfer{}
+	for xy, wp := range g.Warps[floor] {
+		if wp.Free != "" || wp.ToFloor != floor || xy == [2]int{wp.ToX, wp.ToY} ||
+			!g.Tiles.Walkable(f, xy[0], xy[1]) || !g.Tiles.Walkable(f, wp.ToX, wp.ToY) {
+			continue
+		}
+		out = append(out, proto.MapTransfer{X: xy[0], Y: xy[1], ToX: wp.ToX, ToY: wp.ToY})
+	}
+	slices.SortFunc(out, func(a, b proto.MapTransfer) int {
+		if c := cmp.Compare(a.Y, b.Y); c != 0 {
+			return c
+		}
+		return cmp.Compare(a.X, b.X)
+	})
+	return out
+}
+
 // mapPlaces uses the effective warp table after mapwarp/NPC overrides. Adjacent
 // tiles leading to the same floor form one doorway; all tiles remain available
 // to the client so it can route to a reachable edge rather than an interior

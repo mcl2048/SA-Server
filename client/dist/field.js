@@ -3,13 +3,13 @@
 //   屏幕 x = (gx + gy) × 32，屏幕 y = (gy − gx) × 24
 //   方向 0..7 的格子位移 = moveAddTbl；0 朝下，2 朝左，4 朝上，6 朝右
 
-import { album } from "./album.js?v=16aad116d5c399c2";
-import { gridPathSteps } from "./pathfinding.js?v=16aad116d5c399c2";
-import { ANIM, findAction,                              } from "./assets.js?v=16aad116d5c399c2";
-import { sfx } from "./audio.js?v=16aad116d5c399c2";
+import { album } from "./album.js?v=42f7c7453339825d";
+import { gridRouteSteps,                } from "./pathfinding.js?v=42f7c7453339825d";
+import { ANIM, findAction,                              } from "./assets.js?v=42f7c7453339825d";
+import { sfx } from "./audio.js?v=42f7c7453339825d";
 
 
-import { loadFloor, saveFloor,                } from "./mapcache.js?v=16aad116d5c399c2";
+import { loadFloor, saveFloor,                } from "./mapcache.js?v=42f7c7453339825d";
 
 
 export const MOVE                     = [[-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1]];
@@ -219,7 +219,7 @@ export class Field {
   seenVersion = 0; // 这一层看过的格子变了几次（世界地图的全图范围据此重算）
           pending = new Map                ();
           navigationAttempt = "";
-          routeSearch                                          = null;
+          routeSearch                                           = null;
           navigationNpc                = null;
           navigationProgressAt = 0;
   minimapReveal = false;
@@ -232,9 +232,13 @@ export class Field {
           navigationEntrances                     = [];
           navigationChunks           = [];
           navigationChunkAt = 0;
+          transferLists = new Map                      ();
+          navigationTransfer                                                                                                                             = null;
+          visitedTransfers = new Set        ();
   setMinimapReveal(enabled         ) { this.minimapReveal = enabled; this.mapVersion++; this.seenVersion++; }
   navigateTo(x        , y        ) {
     this.routeSearch = null; this.navigationNpc = null;
+    this.navigationTransfer = null; this.visitedTransfers.clear();
     this.path = []; this.pathGoal = ""; this.navigationAttempt = ""; this.wantDir = -1;
     this.target = null; this.mapNavigation = false;
     this.navigationEntrances = []; this.navigationChunks = []; this.navigationChunkAt = 0;
@@ -246,6 +250,7 @@ export class Field {
     this.navigationProgressAt = performance.now();
     this.prioritizeNavigationChunks(x,y);
     this.navigationStatus = "正在加载地图并规划路线…";
+    this.npcList(this.floor); // Same-floor transfer metadata is needed even for coordinate-only routes.
   }
 
   /** Only the current server-provided catalogue can start a location route.
@@ -266,6 +271,7 @@ export class Field {
    * suspended between frames. Keep the legacy local click routing semantics. */
   setManualTarget(target                        ) {
     this.routeSearch = null; this.navigationNpc = null;
+    this.navigationTransfer = null; this.visitedTransfers.clear();
     this.mapNavigation = false; this.navigationStatus = "";
     this.path = []; this.pathGoal = ""; this.navigationAttempt = "";
     this.target = target;
@@ -334,6 +340,12 @@ export class Field {
 
   endBattle() {
     this.routeSearch = null;
+    if (this.navigationTransfer?.at===0 && this.mapNavigation && !this.waitingWarp) {
+      this.target=this.navigationTransfer.target;
+      this.navigationEntrances=this.navigationTransfer.entrances;
+      this.navigationNpc=this.navigationTransfer.npc;
+      this.navigationTransfer=null;
+    }
     this.navigationProgressAt = performance.now();
     this.battlePaused = false;
     // Recompute from the current authoritative/predicted cell. Floor changes,
@@ -399,6 +411,9 @@ export class Field {
     on("NpcList", (m) => {
       this.placeLists.set(m.floor,m.places??[]);
       if (m.floor !== this.floor) return; // A late response cannot restore prior-scene characters.
+      const transfers=m.transfers??[];
+      if (JSON.stringify(this.transferLists.get(m.floor))!==JSON.stringify(transfers)) this.mapVersion++;
+      this.transferLists.set(m.floor,transfers);
       this.npcLists.set(m.floor,m.npcs); this.npcReceivedAt.set(m.floor,performance.now()); this.npcPending.delete(m.floor);
     });
     on("PosCorrect", (m) => { this.routeSearch = null; this.corrections++; if (this.mapNavigation) this.navigationStatus = "移动被服务端阻止，请重新选择目标"; this.mapNavigation = false; this.path = []; this.pathGoal = ""; this.self?.warpTo(m.x, m.y, m.dir); this.target = null; this.waitingWarp = false; });
@@ -441,14 +456,21 @@ export class Field {
     this.subscriptions = [];
     this.floor = -1;
     this.self = null;
-    this.actors.clear(); this.cache.clear(); this.npcLists.clear(); this.placeLists.clear();
+    this.actors.clear(); this.cache.clear(); this.npcLists.clear(); this.placeLists.clear(); this.transferLists.clear();
     this.pending.clear(); this.npcPending.clear();
     this.npcReceivedAt.clear(); this.routeSearch = null;
     this.target = null; this.path = []; this.followSteps = [];
   }
 
           enterFloor(m               ) {
+    const planned=this.navigationTransfer;
+    const expected=planned?.steps[planned.at];
+    // Resume only an explicitly planned local transfer with the exact server
+    // confirmation. Ordinary/cross-floor/death warps still cancel the intent.
+    const resume=this.mapNavigation && !this.locked && !this.follower && this.waitingWarp && planned && expected && expected.floor===this.floor
+      && m.floor===expected.toFloor && m.x===expected.toX && m.y===expected.toY ? planned : null;
     this.routeSearch = null; this.navigationNpc = null;
+    this.navigationTransfer = null;
     this.npcLists.clear(); this.npcReceivedAt.clear(); this.npcPending.clear();
     this.followSteps = [];
     this.forgetNpcs(m.floor); // 这一层的 NPC 清单重新要（巴士会动、按时间出现的人会变）
@@ -478,6 +500,17 @@ export class Field {
     this.target = null;
     this.waitingWarp = false;
     this.self?.warpTo(m.x, m.y, m.dir);
+    if (resume) {
+      resume.at++;
+      const next=resume.steps[resume.at];
+      this.target=next?[next.x,next.y]:resume.target; this.mapNavigation=true;
+      this.navigationNpc=next?null:resume.npc; this.navigationEntrances=next?[]:resume.entrances;
+      if (next) this.navigationTransfer=resume;
+      this.path=[]; this.pathGoal=""; this.navigationAttempt="";
+      this.navigationProgressAt=performance.now();
+      this.navigationStatus="正在继续规划路线…";
+      this.prioritizeNavigationChunks(...this.target);
+    } else this.visitedTransfers.clear();
     // 先看浏览器里存着的这一层（版本一样才用），读完才向服务端要缺的格子；最多等 800 ms
     this.mapVer = m.mapVer;
     const floor = m.floor, ver = m.mapVer;
@@ -714,17 +747,21 @@ export class Field {
   }
 
   update(now        ) {
+    // A lock/follow change can arrive while awaiting a portal confirmation.
+    // Cancel before the waiting-warp early return, so a later unlock is inert.
+    if (this.waitingWarp && this.mapNavigation && (this.locked || this.follower)) this.setManualTarget(null);
     // A dropped/rejected request must not occupy a slot forever. Retrying after
     // ten seconds keeps the same small concurrency cap, including slow links.
     const requestNow = performance.now();
     for (const [key, at] of this.pending) if (requestNow - at >= 10_000) this.pending.delete(key);
     // A disconnected/failed map service must not leave an armed route waiting
     // forever. Count inactivity, not total trip time, and let a new click retry.
-    if (this.mapNavigation && !this.pathGoal && !this.routeSearch && !this.wholeReady && !this.battlePaused && requestNow-this.navigationProgressAt>=30_000) {
+    if (this.mapNavigation && !this.pathGoal && !this.routeSearch && (!this.wholeReady || !this.transferLists.has(this.floor)) && !this.battlePaused && requestNow-this.navigationProgressAt>=30_000) {
       this.target = null; this.mapNavigation = false;
       this.navigationStatus = "地图加载超时，请重新选择目的地重试";
     }
     if (this.minimapReveal || this.mapNavigation && !this.pathGoal) this.requestWholeFloor();
+    if (this.mapNavigation && !this.pathGoal && !this.transferLists.has(this.floor)) this.npcList(this.floor);
     if (this.wantDir >= 0) {
       this.routeSearch = null; this.navigationNpc = null;
       this.mapNavigation = false; this.navigationStatus = "";
@@ -781,27 +818,40 @@ export class Field {
             if (this.navigationAttempt === attempt) { this.requestView(); return; }
             this.navigationAttempt = attempt;
             const entries = this.navigationNpc ? this.navigationEntrances.filter(([x,y])=>this.walk[y*this.width+x]!==3) : this.navigationEntrances;
-            this.routeSearch = gridPathSteps(this.width,this.height,this.walk,s.x,s.y,tx,ty,entries);
+            this.routeSearch = gridRouteSteps(this.width,this.height,this.walk,s.x,s.y,tx,ty,entries,
+              this.navigationTransfer?.at ? [] : this.transferLists.get(this.floor));
           }
           const result = this.routeSearch.next();
           if (!result.done) { this.navigationStatus = "正在规划路线…"; this.requestView(); return; }
           this.routeSearch = null;
-          const path = result.value;
-          if (path === null) {
+          const route = result.value;
+          if (route === null) {
             if (this.navigationAttempt !== attempt) { this.requestView(); return; }
             if (!this.wholeReady) { this.requestView(); return; }
+            if (!this.transferLists.has(this.floor)) { this.requestView(); return; }
             this.navigationStatus = "目标不可达：被障碍阻挡或需要经过传送点"; this.target = null; this.mapNavigation = false; return;
           }
+          const path=route.path;
           if (this.navigationNpc) {
             const [x,y] = path.reduce                 (([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
             // An unknown approach can become a portal while a search is
             // suspended. Re-plan without it instead of teleporting to talk.
-            if (this.walk[y*this.width+x]===3) { this.navigationAttempt = ""; this.requestView(); return; }
+            if (this.walk[y*this.width+x]===3 && !route.transfer) { this.navigationAttempt = ""; this.requestView(); return; }
           }
           this.path = path; this.finalDir = -1;
           // The selected doorway edge may differ from the catalogue's first
           // coordinate. Keep the displayed target and resume intent accurate.
-          this.target=path.reduce                 (([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
+          const endpoint=path.reduce                 (([x,y],d)=>[x+MOVE[d][0],y+MOVE[d][1]],[s.x,s.y]);
+          const edge=route.transfer                         ;
+          if (edge) {
+            const key=`${this.floor},${edge.x},${edge.y}`;
+            if (this.visitedTransfers.has(key)||this.visitedTransfers.size>=64) {
+              this.navigationStatus="传送路线发生循环，请重新选择目的地"; this.target=null; this.mapNavigation=false; return;
+            }
+            const steps=edge.via?.length?edge.via:[{floor:this.floor,x:edge.x,y:edge.y,toFloor:this.floor,toX:edge.toX,toY:edge.toY}];
+            this.navigationTransfer={steps,at:0,target:[tx,ty],entrances:this.navigationEntrances,npc:this.navigationNpc};
+          }
+          this.target=endpoint;
           this.pathGoal = `${this.target}`;
           this.navigationStatus = path.length ? "自动寻路中…" : this.arrivedStatus();
         } else {
@@ -834,10 +884,21 @@ export class Field {
         if (s.dir !== d) { s.dir = d; this.net.send({ t: "Turn", dir: d }); }
         this.target = null;
       } else {
+        const expected=this.navigationTransfer?.steps[this.navigationTransfer.at];
+        const plannedWarp=expected && expected.floor===this.floor && expected.x===nx && expected.y===ny;
+        const key=`${this.floor},${nx},${ny}`;
+        // Apply the bound to every native hop, including the second hop of a
+        // return passage. The original goal may otherwise chain many passages.
+        if (plannedWarp && (this.visitedTransfers.has(key) || this.visitedTransfers.size>=64)) {
+          this.setManualTarget(null); this.navigationStatus="传送路线发生循环，请重新选择目的地"; return;
+        }
         // 先走后等确认：服务端走不通会回 PosCorrect；踩到传送点则等 EnterFloor
         this.net.send({ t: "Move", x: s.x, y: s.y, dir: d });
         s.stepTo(nx, ny, d, now, true);
-        if (this.walk[ny * this.width + nx] === 3) { this.waitingWarp = true; this.wantDir = -1; this.target = null; }
+        if (this.walk[ny * this.width + nx] === 3) {
+          if (plannedWarp) this.visitedTransfers.add(key);
+          this.waitingWarp = true; this.wantDir = -1; this.target = null;
+        }
       }
     }
     this.requestView();

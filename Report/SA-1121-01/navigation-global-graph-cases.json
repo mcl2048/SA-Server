@@ -1,0 +1,254 @@
+{
+  "scope": "All 1382 loaded floors; eight-way ordinary components plus all valid unconditional native warps, with permissive adjacent-warp landing transitions; dialogue actions excluded; conditional eligibility never assumed by the product",
+  "wallLandingUpperBound": false,
+  "edgeCount": 5653,
+  "conditionalEdges": 0,
+  "emptySources": 38,
+  "emptyDestinations": 2,
+  "results": [
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "startRegions": [
+        1
+      ],
+      "goal": [
+        390,
+        261
+      ],
+      "goalRegions": [
+        18
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "startRegions": [
+        1
+      ],
+      "goal": [
+        390,
+        262
+      ],
+      "goalRegions": [
+        18
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "startRegions": [
+        1
+      ],
+      "goal": [
+        390,
+        263
+      ],
+      "goalRegions": [
+        18
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "startRegions": [
+        1
+      ],
+      "goal": [
+        390,
+        264
+      ],
+      "goalRegions": [
+        18
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "startRegions": [
+        1
+      ],
+      "goal": [
+        390,
+        265
+      ],
+      "goalRegions": [
+        18
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        11,
+        113
+      ],
+      "goalRegions": [
+        19
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        11,
+        115
+      ],
+      "goalRegions": [
+        19
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        9,
+        261
+      ],
+      "goalRegions": [
+        22,
+        24
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        9,
+        262
+      ],
+      "goalRegions": [
+        22,
+        24
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        9,
+        263
+      ],
+      "goalRegions": [
+        24
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        9,
+        264
+      ],
+      "goalRegions": [
+        22,
+        24
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "startRegions": [
+        6
+      ],
+      "goal": [
+        9,
+        265
+      ],
+      "goalRegions": [
+        22,
+        24
+      ],
+      "reachable": false,
+      "visitedRegions": 234,
+      "warpChain": []
+    }
+  ]
+}

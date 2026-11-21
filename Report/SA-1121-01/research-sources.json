@@ -1,0 +1,15 @@
+{
+  "accessed_utc": "2026-11-21T10:06:56.953871+00:00",
+  "sources": [
+    {
+      "url": "https://developer.chrome.com/docs/web-platform/long-animation-frames",
+      "sha256": "f9970f62258faebb8e4b6a4f5ebc4f8c7e433cf3a3c78b3b53d33600e40e7955",
+      "used": "Retain bounded planning slices and verify actual browser interactions."
+    },
+    {
+      "url": "https://go.dev/doc/diagnostics",
+      "retrieved": true,
+      "used": "Trace data-to-settlement boundaries and run diagnostics independently."
+    }
+  ]
+}

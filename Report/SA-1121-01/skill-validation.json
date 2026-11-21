@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "source_and_installed_match": true,
+  "files": {
+    "SKILL.md": "7bd052ae58f39ac8149f28cfbbc97788971c54d48b0a2302daed6f29999040a5",
+    "references/automation-and-navigation.md": "864ccbf5f291549575359942f6e8287190fc5012cad1196b44ada5dcb8f641ff",
+    "references/pet-storage-training.md": "c0a7c614d7fcab7ec20191227f80497899fd92e356224b6f22a9272054077606"
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "/home/coder/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "docs/skills/stoneage"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "command": [
+        "python3",
+        "/home/coder/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/home/coder/.codex/skills/stoneage"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    }
+  ]
+}

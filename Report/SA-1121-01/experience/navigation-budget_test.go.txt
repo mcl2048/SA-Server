@@ -1,0 +1,88 @@
+package world
+
+import (
+	"encoding/json"
+	"os"
+	"runtime"
+	"sort"
+	"syscall"
+	"testing"
+	"time"
+)
+
+func navigationReviewCPUUS() int64 {
+	var r syscall.Rusage
+	syscall.Getrusage(syscall.RUSAGE_SELF, &r)
+	return r.Utime.Sec*1000000 + r.Utime.Usec + r.Stime.Sec*1000000 + r.Stime.Usec
+}
+func TestIndependentNavigationColdRequestBudget(t *testing.T) {
+	_, _, g := setup(t)
+	ids := make([]int, 0, len(g.Floors))
+	for id := range g.Floors {
+		ids = append(ids, id)
+	}
+	sort.Ints(ids)
+	type row struct {
+		Floor, Cells, Transfers, ComputedFloors, ComputedCells int
+		ColdMS, CPU_MS, WarmMS                                 float64
+	}
+	rows := []row{}
+	total := time.Now()
+	for _, id := range ids {
+		w := &World{game: g}
+		cpuStart := navigationReviewCPUUS()
+		start := time.Now()
+		edges := w.transfersForFloor(id)
+		elapsed := time.Since(start)
+		cpuElapsed := navigationReviewCPUUS() - cpuStart
+		cells := 0
+		for fl := range w.navigationFloors {
+			cells += g.Floors[fl].W * g.Floors[fl].H
+		}
+		start = time.Now()
+		for i := 0; i < 1000; i++ {
+			w.transfersForFloor(id)
+		}
+		warm := float64(time.Since(start).Nanoseconds()) / 1e6 / 1000
+		rows = append(rows, row{id, g.Floors[id].W * g.Floors[id].H, len(edges), len(w.navigationFloors), cells, float64(elapsed.Microseconds()) / 1000, float64(cpuElapsed) / 1000, warm})
+	}
+	runtime.GC()
+	var before, after runtime.MemStats
+	runtime.ReadMemStats(&before)
+	all := &World{game: g}
+	buildStart := time.Now()
+	buildCPUStart := navigationReviewCPUUS()
+	for _, id := range ids {
+		all.transfersForFloor(id)
+	}
+	buildWallMS := float64(time.Since(buildStart).Microseconds()) / 1000
+	buildCPUMS := float64(navigationReviewCPUUS()-buildCPUStart) / 1000
+	runtime.GC()
+	runtime.ReadMemStats(&after)
+	runtime.KeepAlive(all)
+	cachedEndpoints, cachedIDs, cachedTransfers := 0, 0, 0
+	for _, points := range all.navigationFloors {
+		cachedEndpoints += len(points)
+		for _, ids := range points {
+			cachedIDs += len(ids)
+		}
+	}
+	for _, edges := range all.mapTransferCache {
+		cachedTransfers += len(edges)
+	}
+	sort.Slice(rows, func(i, j int) bool { return rows[i].ColdMS > rows[j].ColdMS })
+	targets := []row{}
+	for _, r := range rows {
+		if r.Floor >= 700 && r.Floor <= 705 || r.Floor == 817 {
+			targets = append(targets, r)
+		}
+	}
+	b, err := json.MarshalIndent(map[string]any{"measurement": "one fresh World cache per floor; shared immutable loaded Game; warm request mean over1000; Go1.27.3 GOMAXPROCS2", "floors_requested": len(ids), "cached_floors_all_requests": len(all.navigationFloors), "cached_endpoint_points": cachedEndpoints, "cached_region_ids": cachedIDs, "cached_region_id_payload_bytes": cachedIDs * 4, "cached_transfers": cachedTransfers, "all_requested_build_wall_ms": buildWallMS, "all_requested_build_cpu_ms": buildCPUMS, "all_requested_build_allocated_bytes": after.TotalAlloc - before.TotalAlloc, "all_requested_build_retained_heap_delta_bytes": int64(after.HeapAlloc) - int64(before.HeapAlloc), "cpu_note": "RUSAGE_SELF user+system CPU delta; concurrent runner wall latency retained separately", "total_audit_ms": float64(time.Since(total).Microseconds()) / 1000, "slowest": rows[:12], "task_floors": targets}, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile("/tmp/sa112101-nav-budget.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("independent cold floors=%d audit total=%s max=%.3fms cached endpoint points=%d ids=%d", len(ids), time.Since(total), rows[0].ColdMS, cachedEndpoints, cachedIDs)
+}

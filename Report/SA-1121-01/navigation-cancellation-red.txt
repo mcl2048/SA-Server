@@ -1,0 +1,146 @@
+TAP version 13
+# Subtest: a disconnected destination is routed through its explicit same-floor transfer
+ok 1 - a disconnected destination is routed through its explicit same-floor transfer
+  ---
+  duration_ms: 7.267461
+  type: 'test'
+  ...
+# Subtest: unknown transfer destinations and unrelated portals remain blocked
+ok 2 - unknown transfer destinations and unrelated portals remain blocked
+  ---
+  duration_ms: 1.400482
+  type: 'test'
+  ...
+# Subtest: an NPC route resumes only after its planned same-floor EnterFloor confirmation
+ok 3 - an NPC route resumes only after its planned same-floor EnterFloor confirmation
+  ---
+  duration_ms: 27.636577
+  type: 'test'
+  ...
+# Subtest: manual cannot revive a route waiting for a portal
+ok 4 - manual cannot revive a route waiting for a portal
+  ---
+  duration_ms: 3.639482
+  type: 'test'
+  ...
+# Subtest: wrong-floor cannot revive a route waiting for a portal
+ok 5 - wrong-floor cannot revive a route waiting for a portal
+  ---
+  duration_ms: 3.980308
+  type: 'test'
+  ...
+# Subtest: wrong-position cannot revive a route waiting for a portal
+ok 6 - wrong-position cannot revive a route waiting for a portal
+  ---
+  duration_ms: 3.982437
+  type: 'test'
+  ...
+# Subtest: a safe return route confirms both floors before restoring the original NPC goal
+ok 7 - a safe return route confirms both floors before restoring the original NPC goal
+  ---
+  duration_ms: 5.655976
+  type: 'test'
+  ...
+# Subtest: quick preserves or cancels the complete portal intent before the first warp
+ok 8 - quick preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 3.985837
+  type: 'test'
+  ...
+# Subtest: normal preserves or cancels the complete portal intent before the first warp
+ok 9 - normal preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 5.704094
+  type: 'test'
+  ...
+# Subtest: locked preserves or cancels the complete portal intent before the first warp
+ok 10 - locked preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 5.408181
+  type: 'test'
+  ...
+# Subtest: follower preserves or cancels the complete portal intent before the first warp
+ok 11 - follower preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 3.585132
+  type: 'test'
+  ...
+# Subtest: new-target preserves or cancels the complete portal intent before the first warp
+ok 12 - new-target preserves or cancels the complete portal intent before the first warp
+  ---
+  duration_ms: 7.004724
+  type: 'test'
+  ...
+# Subtest: locked cancels a portal route while the EnterFloor acknowledgement is pending
+not ok 13 - locked cancels a portal route while the EnterFloor acknowledgement is pending
+  ---
+  duration_ms: 5.11104
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:89:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   6,
+    +   0
+    -   5,
+    -   1
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 5
+    1: 1
+  actual:
+    0: 6
+    1: 0
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:93:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: follower cancels a portal route while the EnterFloor acknowledgement is pending
+not ok 14 - follower cancels a portal route while the EnterFloor acknowledgement is pending
+  ---
+  duration_ms: 4.436303
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:89:50'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   6,
+    +   0
+    -   5,
+    -   1
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 5
+    1: 1
+  actual:
+    0: 6
+    1: 0
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:93:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 12
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1984.380869

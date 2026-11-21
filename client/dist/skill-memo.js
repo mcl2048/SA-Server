@@ -1,4 +1,4 @@
-import { FONT, wrapBytes,         } from "./ui.js?v=16aad116d5c399c2";
+import { FONT, wrapBytes,         } from "./ui.js?v=42f7c7453339825d";
 
 // The new skill's full rules exceed the native three-line description area.
 // Keep every line reachable through ordinary Ui actions; never paint over the

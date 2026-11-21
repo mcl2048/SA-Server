@@ -1,0 +1,4589 @@
+{
+  "scope": "Field + effective native grid transport model; no live authority or browser",
+  "cases": 114,
+  "arrived": 106,
+  "failed": [
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 930,
+      "warpChain": [],
+      "end": [
+        703,
+        238,
+        96
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 1404
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 153,
+        "index": 11,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        703,
+        238,
+        96
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 958,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 1084
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 946,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 2116
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 1054,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 3321
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "蒙达村地下通路",
+        "toFloor": 60300,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        705,
+        82,
+        364
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 152,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        707,
+        308,
+        281
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "加鲁卡",
+        "toFloor": 200,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        817,
+        146,
+        19
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 4
+    }
+  ],
+  "results": [
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "汉斯",
+        "x": 103,
+        "y": 127,
+        "index": 0
+      },
+      "moves": 244,
+      "requests": 91,
+      "maxPending": 1,
+      "planningFrames": 88,
+      "warpChain": [],
+      "end": [
+        700,
+        103,
+        127
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1110
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "伊甸园告示牌",
+        "x": 94,
+        "y": 141,
+        "index": 1
+      },
+      "moves": 260,
+      "requests": 81,
+      "maxPending": 1,
+      "planningFrames": 78,
+      "warpChain": [],
+      "end": [
+        700,
+        94,
+        141
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 630
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 143,
+        "y": 58,
+        "index": 2
+      },
+      "moves": 202,
+      "requests": 112,
+      "maxPending": 1,
+      "planningFrames": 109,
+      "warpChain": [],
+      "end": [
+        700,
+        143,
+        58
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 384
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(F-1)",
+        "x": 143,
+        "y": 59,
+        "index": 3
+      },
+      "moves": 202,
+      "requests": 112,
+      "maxPending": 1,
+      "planningFrames": 109,
+      "warpChain": [],
+      "end": [
+        700,
+        143,
+        59
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 101
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "青年",
+        "x": 291,
+        "y": 61,
+        "index": 4
+      },
+      "moves": 69,
+      "requests": 14,
+      "maxPending": 1,
+      "planningFrames": 9,
+      "warpChain": [],
+      "end": [
+        700,
+        291,
+        61
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 97
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "东方沙漠洞穴内通道",
+        "toFloor": 60005,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 94,
+      "requests": 22,
+      "maxPending": 1,
+      "planningFrames": 16,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 373,
+          "y": 218,
+          "toFloor": 60005,
+          "toX": 0,
+          "toY": 24
+        }
+      ],
+      "end": [
+        700,
+        373,
+        218
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 234
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸园",
+        "toFloor": 7000,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 172,
+      "requests": 89,
+      "maxPending": 1,
+      "planningFrames": 86,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 173,
+          "y": 124,
+          "toFloor": 7000,
+          "toX": 85,
+          "toY": 23
+        }
+      ],
+      "end": [
+        700,
+        173,
+        124
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 794
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸园",
+        "toFloor": 7000,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 84,
+      "requests": 17,
+      "maxPending": 1,
+      "planningFrames": 12,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 277,
+          "y": 214,
+          "toFloor": 7000,
+          "toX": 187,
+          "toY": 111
+        }
+      ],
+      "end": [
+        700,
+        277,
+        214
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 118
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸园",
+        "toFloor": 7000,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 341,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 197,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 97,
+          "y": 223,
+          "toFloor": 7000,
+          "toX": 10,
+          "toY": 120
+        }
+      ],
+      "end": [
+        700,
+        97,
+        223
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 574
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸园",
+        "toFloor": 7000,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 255,
+      "requests": 118,
+      "maxPending": 1,
+      "planningFrames": 115,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 185,
+          "y": 293,
+          "toFloor": 7000,
+          "toX": 97,
+          "toY": 188
+        }
+      ],
+      "end": [
+        700,
+        185,
+        293
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 580
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸庄园",
+        "toFloor": 5030,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 1,
+      "requests": 2,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 346,
+          "y": 130,
+          "toFloor": 5030,
+          "toX": 5,
+          "toY": 63
+        }
+      ],
+      "end": [
+        700,
+        346,
+        130
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 8
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "北方沙漠洞穴内通道",
+        "toFloor": 60001,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 147,
+      "requests": 32,
+      "maxPending": 1,
+      "planningFrames": 29,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 205,
+          "y": 44,
+          "toFloor": 60001,
+          "toX": 23,
+          "toY": 39
+        }
+      ],
+      "end": [
+        700,
+        205,
+        44
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 560
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "南方沙漠洞穴内通道",
+        "toFloor": 60007,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 249,
+      "requests": 103,
+      "maxPending": 1,
+      "planningFrames": 100,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 195,
+          "y": 371,
+          "toFloor": 60007,
+          "toX": 29,
+          "toY": 3
+        }
+      ],
+      "end": [
+        700,
+        195,
+        371
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 274
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "地牢",
+        "toFloor": 8505,
+        "index": 8,
+        "conditional": false
+      },
+      "moves": 69,
+      "requests": 14,
+      "maxPending": 1,
+      "planningFrames": 9,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 292,
+          "y": 61,
+          "toFloor": 8505,
+          "toX": 34,
+          "toY": 30
+        }
+      ],
+      "end": [
+        700,
+        292,
+        61
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 42
+    },
+    {
+      "floor": 700,
+      "start": [
+        345,
+        130
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "西方沙漠洞穴內通道",
+        "toFloor": 60003,
+        "index": 9,
+        "conditional": false
+      },
+      "moves": 338,
+      "requests": 169,
+      "maxPending": 1,
+      "planningFrames": 166,
+      "warpChain": [
+        {
+          "floor": 700,
+          "x": 33,
+          "y": 214,
+          "toFloor": 60003,
+          "toX": 48,
+          "toY": 8
+        }
+      ],
+      "end": [
+        700,
+        33,
+        214
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 343
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 243,
+        "y": 22,
+        "index": 0
+      },
+      "moves": 66,
+      "requests": 25,
+      "maxPending": 2,
+      "planningFrames": 3,
+      "warpChain": [],
+      "end": [
+        701,
+        243,
+        22
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 78
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 307,
+        "y": 216,
+        "index": 1
+      },
+      "moves": 202,
+      "requests": 137,
+      "maxPending": 1,
+      "planningFrames": 134,
+      "warpChain": [],
+      "end": [
+        701,
+        307,
+        216
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 318
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(E-3)",
+        "x": 244,
+        "y": 22,
+        "index": 2
+      },
+      "moves": 65,
+      "requests": 25,
+      "maxPending": 2,
+      "planningFrames": 3,
+      "warpChain": [],
+      "end": [
+        701,
+        244,
+        22
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 16
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(F-11)",
+        "x": 307,
+        "y": 214,
+        "index": 3
+      },
+      "moves": 200,
+      "requests": 147,
+      "maxPending": 1,
+      "planningFrames": 144,
+      "warpChain": [],
+      "end": [
+        701,
+        307,
+        214
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 200
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "塔耳塔城区",
+        "toFloor": 708,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 1,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 701,
+          "x": 305,
+          "y": 13,
+          "toFloor": 708,
+          "toX": 305,
+          "toY": 390
+        }
+      ],
+      "end": [
+        701,
+        305,
+        13
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "塔耳塔城区",
+        "toFloor": 708,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 259,
+      "requests": 98,
+      "maxPending": 1,
+      "planningFrames": 95,
+      "warpChain": [
+        {
+          "floor": 701,
+          "x": 384,
+          "y": 15,
+          "toFloor": 708,
+          "toX": 382,
+          "toY": 387
+        }
+      ],
+      "end": [
+        701,
+        384,
+        15
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 167
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯城区",
+        "toFloor": 702,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 376,
+      "requests": 148,
+      "maxPending": 2,
+      "planningFrames": 82,
+      "warpChain": [
+        {
+          "floor": 701,
+          "x": 386,
+          "y": 390,
+          "toFloor": 702,
+          "toX": 386,
+          "toY": 10
+        }
+      ],
+      "end": [
+        701,
+        386,
+        390
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 208
+    },
+    {
+      "floor": 701,
+      "start": [
+        305,
+        14
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "西方沙漠洞穴外通道",
+        "toFloor": 60004,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 264,
+      "requests": 95,
+      "maxPending": 1,
+      "planningFrames": 92,
+      "warpChain": [
+        {
+          "floor": 701,
+          "x": 393,
+          "y": 225,
+          "toFloor": 60004,
+          "toX": 0,
+          "toY": 7
+        }
+      ],
+      "end": [
+        701,
+        393,
+        225
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 184
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 188,
+        "y": 41,
+        "index": 0
+      },
+      "moves": 610,
+      "requests": 175,
+      "maxPending": 1,
+      "planningFrames": 210,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        }
+      ],
+      "end": [
+        702,
+        188,
+        41
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1230
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(E-12)",
+        "x": 189,
+        "y": 41,
+        "index": 1
+      },
+      "moves": 609,
+      "requests": 175,
+      "maxPending": 1,
+      "planningFrames": 204,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        }
+      ],
+      "end": [
+        702,
+        189,
+        41
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1206
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "海贼小卒",
+        "x": 355,
+        "y": 110,
+        "index": 2
+      },
+      "moves": 110,
+      "requests": 20,
+      "maxPending": 1,
+      "planningFrames": 9,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        }
+      ],
+      "end": [
+        702,
+        355,
+        110
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 61
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "克拉肯",
+        "x": 213,
+        "y": 25,
+        "index": 3
+      },
+      "moves": 611,
+      "requests": 175,
+      "maxPending": 1,
+      "planningFrames": 203,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        }
+      ],
+      "end": [
+        702,
+        213,
+        25
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 535
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 4,
+      "requests": 4,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        }
+      ],
+      "end": [
+        702,
+        391,
+        12
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 41,
+      "requests": 14,
+      "maxPending": 2,
+      "planningFrames": 2,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        },
+        {
+          "floor": 702,
+          "x": 389,
+          "y": 49,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 48
+        }
+      ],
+      "end": [
+        702,
+        389,
+        49
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 56
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆西方",
+        "toFloor": 701,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 1,
+      "requests": 2,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 387,
+          "y": 9,
+          "toFloor": 701,
+          "toX": 387,
+          "toY": 389
+        }
+      ],
+      "end": [
+        702,
+        387,
+        9
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯庄园",
+        "toFloor": 7030,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 670,
+      "requests": 175,
+      "maxPending": 1,
+      "planningFrames": 229,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        },
+        {
+          "floor": 702,
+          "x": 128,
+          "y": 53,
+          "toFloor": 7030,
+          "toX": 76,
+          "toY": 15
+        }
+      ],
+      "end": [
+        702,
+        128,
+        53
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1181
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯水城",
+        "toFloor": 7200,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 660,
+      "requests": 175,
+      "maxPending": 1,
+      "planningFrames": 208,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        },
+        {
+          "floor": 702,
+          "x": 219,
+          "y": 227,
+          "toFloor": 7200,
+          "toX": 41,
+          "toY": 11
+        }
+      ],
+      "end": [
+        702,
+        219,
+        227
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1149
+    },
+    {
+      "floor": 702,
+      "start": [
+        388,
+        10
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "水龙洞窟",
+        "toFloor": 60009,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 109,
+      "requests": 20,
+      "maxPending": 1,
+      "planningFrames": 9,
+      "warpChain": [
+        {
+          "floor": 702,
+          "x": 391,
+          "y": 12,
+          "toFloor": 703,
+          "toX": 9,
+          "toY": 14
+        },
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        },
+        {
+          "floor": 702,
+          "x": 355,
+          "y": 109,
+          "toFloor": 60009,
+          "toX": 43,
+          "toY": 105
+        }
+      ],
+      "end": [
+        702,
+        355,
+        109
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 31
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "告示版",
+        "x": 30,
+        "y": 299,
+        "index": 0
+      },
+      "moves": 218,
+      "requests": 35,
+      "maxPending": 1,
+      "planningFrames": 32,
+      "warpChain": [],
+      "end": [
+        703,
+        30,
+        299
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 70
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "伐木工人",
+        "x": 144,
+        "y": 187,
+        "index": 1
+      },
+      "moves": 99,
+      "requests": 26,
+      "maxPending": 1,
+      "planningFrames": 23,
+      "warpChain": [],
+      "end": [
+        703,
+        144,
+        187
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 46
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "伐木工人",
+        "x": 202,
+        "y": 140,
+        "index": 2
+      },
+      "moves": 44,
+      "requests": 27,
+      "maxPending": 2,
+      "planningFrames": 4,
+      "warpChain": [],
+      "end": [
+        703,
+        202,
+        140
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 12
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "肯尔",
+        "x": 73,
+        "y": 189,
+        "index": 3
+      },
+      "moves": 176,
+      "requests": 47,
+      "maxPending": 1,
+      "planningFrames": 44,
+      "warpChain": [],
+      "end": [
+        703,
+        73,
+        189
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 82
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 152,
+      "requests": 42,
+      "maxPending": 1,
+      "planningFrames": 15,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 390,
+          "y": 9,
+          "toFloor": 704,
+          "toX": 12,
+          "toY": 11
+        }
+      ],
+      "end": [
+        703,
+        390,
+        9
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 35
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 152,
+      "requests": 23,
+      "maxPending": 1,
+      "planningFrames": 20,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 390,
+          "y": 81,
+          "toFloor": 704,
+          "toX": 13,
+          "toY": 81
+        }
+      ],
+      "end": [
+        703,
+        390,
+        81
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 42
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 930,
+      "warpChain": [],
+      "end": [
+        703,
+        238,
+        96
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 1404
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伐木工头的房间",
+        "toFloor": 7453,
+        "index": 3,
+        "conditional": true
+      },
+      "moves": 103,
+      "requests": 28,
+      "maxPending": 1,
+      "planningFrames": 25,
+      "warpChain": [],
+      "end": [
+        703,
+        334,
+        182
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": true,
+      "modelMs": 107
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伐木工头的房间",
+        "toFloor": 7454,
+        "index": 4,
+        "conditional": true
+      },
+      "moves": 103,
+      "requests": 28,
+      "maxPending": 1,
+      "planningFrames": 25,
+      "warpChain": [],
+      "end": [
+        703,
+        334,
+        182
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": true,
+      "modelMs": 86
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "南方沙漠洞穴外通道",
+        "toFloor": 60008,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 92,
+      "requests": 80,
+      "maxPending": 2,
+      "planningFrames": 4,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 222,
+          "y": 4,
+          "toFloor": 60008,
+          "toX": 26,
+          "toY": 49
+        }
+      ],
+      "end": [
+        703,
+        222,
+        4
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 26
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯城区",
+        "toFloor": 702,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 230,
+      "requests": 41,
+      "maxPending": 1,
+      "planningFrames": 15,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 14,
+          "toFloor": 702,
+          "toX": 390,
+          "toY": 12
+        }
+      ],
+      "end": [
+        703,
+        8,
+        14
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 77
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯城区",
+        "toFloor": 702,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 230,
+      "requests": 133,
+      "maxPending": 2,
+      "planningFrames": 24,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 48,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 49
+        }
+      ],
+      "end": [
+        703,
+        8,
+        48
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 111
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯城区",
+        "toFloor": 702,
+        "index": 8,
+        "conditional": false
+      },
+      "moves": 230,
+      "requests": 97,
+      "maxPending": 2,
+      "planningFrames": 23,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 52,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 53
+        }
+      ],
+      "end": [
+        703,
+        8,
+        52
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 88
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "尼克斯城区",
+        "toFloor": 702,
+        "index": 9,
+        "conditional": false
+      },
+      "moves": 230,
+      "requests": 98,
+      "maxPending": 2,
+      "planningFrames": 24,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 8,
+          "y": 54,
+          "toFloor": 702,
+          "toX": 388,
+          "toY": 55
+        }
+      ],
+      "end": [
+        703,
+        8,
+        54
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 50
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "风精灵住所",
+        "toFloor": 8517,
+        "index": 10,
+        "conditional": false
+      },
+      "moves": 103,
+      "requests": 35,
+      "maxPending": 1,
+      "planningFrames": 32,
+      "warpChain": [
+        {
+          "floor": 703,
+          "x": 147,
+          "y": 146,
+          "toFloor": 8517,
+          "toX": 24,
+          "toY": 59
+        }
+      ],
+      "end": [
+        703,
+        147,
+        146
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 69
+    },
+    {
+      "floor": 703,
+      "start": [
+        238,
+        96
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 153,
+        "index": 11,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        703,
+        238,
+        96
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 368,
+        "y": 129,
+        "index": 0
+      },
+      "moves": 355,
+      "requests": 172,
+      "maxPending": 2,
+      "planningFrames": 45,
+      "warpChain": [],
+      "end": [
+        704,
+        368,
+        129
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 124
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(F-4)",
+        "x": 368,
+        "y": 127,
+        "index": 1
+      },
+      "moves": 355,
+      "requests": 139,
+      "maxPending": 2,
+      "planningFrames": 45,
+      "warpChain": [],
+      "end": [
+        704,
+        368,
+        127
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 175
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "守卫",
+        "x": 341,
+        "y": 126,
+        "index": 2
+      },
+      "moves": 329,
+      "requests": 101,
+      "maxPending": 1,
+      "planningFrames": 98,
+      "warpChain": [],
+      "end": [
+        704,
+        341,
+        126
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 183
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "守卫",
+        "x": 310,
+        "y": 93,
+        "index": 3
+      },
+      "moves": 297,
+      "requests": 50,
+      "maxPending": 1,
+      "planningFrames": 47,
+      "warpChain": [],
+      "end": [
+        704,
+        310,
+        93
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 145
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧庄园",
+        "toFloor": 9030,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 337,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 205,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 307,
+          "y": 274,
+          "toFloor": 9030,
+          "toX": 84,
+          "toY": 19
+        }
+      ],
+      "end": [
+        704,
+        307,
+        274
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 443
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧风城",
+        "toFloor": 7400,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 90,
+      "requests": 32,
+      "maxPending": 1,
+      "planningFrames": 29,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 103,
+          "y": 104,
+          "toFloor": 7400,
+          "toX": 97,
+          "toY": 46
+        }
+      ],
+      "end": [
+        704,
+        103,
+        104
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 30
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆东方",
+        "toFloor": 705,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 78,
+      "requests": 46,
+      "maxPending": 2,
+      "planningFrames": 3,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 14,
+          "y": 9,
+          "toFloor": 705,
+          "toX": 13,
+          "toY": 389
+        }
+      ],
+      "end": [
+        704,
+        14,
+        9
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 9
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 77,
+      "requests": 9,
+      "maxPending": 1,
+      "planningFrames": 6,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 9,
+          "y": 14,
+          "toFloor": 703,
+          "toX": 389,
+          "toY": 13
+        }
+      ],
+      "end": [
+        704,
+        9,
+        14
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 8
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 2,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 11,
+          "y": 81,
+          "toFloor": 703,
+          "toX": 389,
+          "toY": 81
+        }
+      ],
+      "end": [
+        704,
+        11,
+        81
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 958,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 1084
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 946,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 2116
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆南方",
+        "toFloor": 703,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 1054,
+      "warpChain": [],
+      "end": [
+        704,
+        13,
+        81
+      ],
+      "status": "目标不可达：被障碍阻挡或需要经过传送点",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 3321
+    },
+    {
+      "floor": 704,
+      "start": [
+        13,
+        81
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "斯洛克洞窟第一层",
+        "toFloor": 60057,
+        "index": 8,
+        "conditional": false
+      },
+      "moves": 73,
+      "requests": 37,
+      "maxPending": 1,
+      "planningFrames": 34,
+      "warpChain": [
+        {
+          "floor": 704,
+          "x": 84,
+          "y": 29,
+          "toFloor": 60057,
+          "toX": 16,
+          "toY": 4
+        }
+      ],
+      "end": [
+        704,
+        84,
+        29
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 68
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 90,
+        "y": 32,
+        "index": 0
+      },
+      "moves": 339,
+      "requests": 280,
+      "maxPending": 2,
+      "planningFrames": 40,
+      "warpChain": [],
+      "end": [
+        705,
+        90,
+        32
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 285
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(E-11)",
+        "x": 90,
+        "y": 30,
+        "index": 1
+      },
+      "moves": 341,
+      "requests": 280,
+      "maxPending": 2,
+      "planningFrames": 40,
+      "warpChain": [],
+      "end": [
+        705,
+        90,
+        30
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 88
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "东方沙漠洞穴外通道",
+        "toFloor": 60006,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 172,
+      "requests": 28,
+      "maxPending": 1,
+      "planningFrames": 25,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 11,
+          "y": 209,
+          "toFloor": 60006,
+          "toX": 45,
+          "toY": 23
+        }
+      ],
+      "end": [
+        705,
+        11,
+        209
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 136
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "亚伊欧城区",
+        "toFloor": 704,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 100,
+      "requests": 14,
+      "maxPending": 1,
+      "planningFrames": 11,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 14,
+          "y": 390,
+          "toFloor": 704,
+          "toX": 15,
+          "toY": 10
+        }
+      ],
+      "end": [
+        705,
+        14,
+        390
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 57
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿城区",
+        "toFloor": 706,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 363,
+      "requests": 131,
+      "maxPending": 1,
+      "planningFrames": 70,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 257,
+          "y": 8,
+          "toFloor": 706,
+          "toX": 257,
+          "toY": 389
+        }
+      ],
+      "end": [
+        705,
+        257,
+        8
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 166
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿城区",
+        "toFloor": 706,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 362,
+      "requests": 61,
+      "maxPending": 2,
+      "planningFrames": 39,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 23,
+          "y": 9,
+          "toFloor": 706,
+          "toX": 22,
+          "toY": 390
+        }
+      ],
+      "end": [
+        705,
+        23,
+        9
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 222
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿庄园",
+        "toFloor": 8030,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 125,
+      "requests": 25,
+      "maxPending": 1,
+      "planningFrames": 22,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 174,
+          "y": 280,
+          "toFloor": 8030,
+          "toX": 63,
+          "toY": 36
+        }
+      ],
+      "end": [
+        705,
+        174,
+        280
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 123
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "萨伊洛山洞第一层",
+        "toFloor": 60063,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 360,
+      "requests": 282,
+      "maxPending": 2,
+      "planningFrames": 42,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 96,
+          "y": 11,
+          "toFloor": 60063,
+          "toX": 49,
+          "toY": 89
+        }
+      ],
+      "end": [
+        705,
+        96,
+        11
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 169
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "蒙达村",
+        "toFloor": 7350,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 198,
+      "requests": 78,
+      "maxPending": 1,
+      "planningFrames": 75,
+      "warpChain": [
+        {
+          "floor": 705,
+          "x": 280,
+          "y": 339,
+          "toFloor": 7350,
+          "toX": 33,
+          "toY": 26
+        }
+      ],
+      "end": [
+        705,
+        280,
+        339
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 135
+    },
+    {
+      "floor": 705,
+      "start": [
+        82,
+        364
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "蒙达村地下通路",
+        "toFloor": 60300,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        705,
+        82,
+        364
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 227,
+        "y": 78,
+        "index": 0
+      },
+      "moves": 364,
+      "requests": 61,
+      "maxPending": 1,
+      "planningFrames": 58,
+      "warpChain": [],
+      "end": [
+        706,
+        227,
+        78
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 181
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(F-7)",
+        "x": 227,
+        "y": 77,
+        "index": 1
+      },
+      "moves": 364,
+      "requests": 61,
+      "maxPending": 1,
+      "planningFrames": 58,
+      "warpChain": [],
+      "end": [
+        706,
+        227,
+        77
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 47
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆东方",
+        "toFloor": 705,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 309,
+      "requests": 85,
+      "maxPending": 1,
+      "planningFrames": 82,
+      "warpChain": [
+        {
+          "floor": 706,
+          "x": 260,
+          "y": 390,
+          "toFloor": 705,
+          "toX": 260,
+          "toY": 9
+        }
+      ],
+      "end": [
+        706,
+        260,
+        390
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 99
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆东方",
+        "toFloor": 705,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 1,
+      "requests": 2,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 706,
+          "x": 27,
+          "y": 391,
+          "toFloor": 705,
+          "toX": 28,
+          "toY": 10
+        }
+      ],
+      "end": [
+        706,
+        27,
+        391
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆北方",
+        "toFloor": 707,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 531,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 209,
+      "warpChain": [
+        {
+          "floor": 706,
+          "x": 11,
+          "y": 310,
+          "toFloor": 707,
+          "toX": 388,
+          "toY": 308
+        }
+      ],
+      "end": [
+        706,
+        11,
+        310
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 340
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆北方",
+        "toFloor": 707,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 25,
+      "requests": 30,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 706,
+          "x": 9,
+          "y": 371,
+          "toFloor": 707,
+          "toX": 388,
+          "toY": 370
+        }
+      ],
+      "end": [
+        706,
+        9,
+        371
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 3
+    },
+    {
+      "floor": 706,
+      "start": [
+        28,
+        390
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿火城",
+        "toFloor": 7300,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 303,
+      "requests": 46,
+      "maxPending": 1,
+      "planningFrames": 43,
+      "warpChain": [
+        {
+          "floor": 706,
+          "x": 194,
+          "y": 147,
+          "toFloor": 7300,
+          "toX": 13,
+          "toY": 68
+        }
+      ],
+      "end": [
+        706,
+        194,
+        147
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 56
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "看板",
+        "x": 222,
+        "y": 247,
+        "index": 0
+      },
+      "moves": 98,
+      "requests": 28,
+      "maxPending": 2,
+      "planningFrames": 15,
+      "warpChain": [],
+      "end": [
+        707,
+        222,
+        247
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 32
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "检查人员(E-5)",
+        "x": 224,
+        "y": 247,
+        "index": 1
+      },
+      "moves": 98,
+      "requests": 21,
+      "maxPending": 1,
+      "planningFrames": 15,
+      "warpChain": [],
+      "end": [
+        707,
+        224,
+        247
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 43
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "冒险者",
+        "x": 52,
+        "y": 150,
+        "index": 2
+      },
+      "moves": 257,
+      "requests": 96,
+      "maxPending": 2,
+      "planningFrames": 45,
+      "warpChain": [],
+      "end": [
+        707,
+        52,
+        150
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 33
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "北方沙漠洞穴外通道",
+        "toFloor": 60002,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 127,
+      "requests": 22,
+      "maxPending": 1,
+      "planningFrames": 19,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 228,
+          "y": 389,
+          "toFloor": 60002,
+          "toX": 34,
+          "toY": 4
+        }
+      ],
+      "end": [
+        707,
+        228,
+        389
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 15
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "塔耳塔城区",
+        "toFloor": 708,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 306,
+      "requests": 52,
+      "maxPending": 1,
+      "planningFrames": 49,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 10,
+          "y": 384,
+          "toFloor": 708,
+          "toX": 390,
+          "toY": 383
+        }
+      ],
+      "end": [
+        707,
+        10,
+        384
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 73
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "帕拉火洞窟",
+        "toFloor": 60053,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 257,
+      "requests": 70,
+      "maxPending": 1,
+      "planningFrames": 57,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 53,
+          "y": 150,
+          "toFloor": 60053,
+          "toX": 15,
+          "toY": 65
+        }
+      ],
+      "end": [
+        707,
+        53,
+        150
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 157
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿城区",
+        "toFloor": 706,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 81,
+      "requests": 55,
+      "maxPending": 2,
+      "planningFrames": 4,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 389,
+          "y": 304,
+          "toFloor": 706,
+          "toX": 12,
+          "toY": 307
+        }
+      ],
+      "end": [
+        707,
+        389,
+        304
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 30
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "弗烈顿城区",
+        "toFloor": 706,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 162,
+      "requests": 75,
+      "maxPending": 1,
+      "planningFrames": 72,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 389,
+          "y": 369,
+          "toFloor": 706,
+          "toX": 10,
+          "toY": 370
+        }
+      ],
+      "end": [
+        707,
+        389,
+        369
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 220
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "火山道场通道",
+        "toFloor": 60314,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 425,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 202,
+      "warpChain": [
+        {
+          "floor": 707,
+          "x": 385,
+          "y": 155,
+          "toFloor": 60314,
+          "toX": 34,
+          "toY": 5
+        }
+      ],
+      "end": [
+        707,
+        385,
+        155
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 415
+    },
+    {
+      "floor": 707,
+      "start": [
+        308,
+        281
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 152,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        707,
+        308,
+        281
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 0
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "神秘巨石像",
+        "x": 229,
+        "y": 254,
+        "index": 0
+      },
+      "moves": 159,
+      "requests": 31,
+      "maxPending": 1,
+      "planningFrames": 28,
+      "warpChain": [],
+      "end": [
+        708,
+        229,
+        254
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 160
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "帕加",
+        "x": 130,
+        "y": 137,
+        "index": 1
+      },
+      "moves": 291,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 196,
+      "warpChain": [],
+      "end": [
+        708,
+        130,
+        137
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 179
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "冒险者",
+        "x": 223,
+        "y": 254,
+        "index": 2
+      },
+      "moves": 164,
+      "requests": 30,
+      "maxPending": 1,
+      "planningFrames": 27,
+      "warpChain": [],
+      "end": [
+        708,
+        223,
+        254
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 186
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆北方",
+        "toFloor": 707,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 9,
+      "requests": 11,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 390,
+          "y": 379,
+          "toFloor": 707,
+          "toX": 11,
+          "toY": 380
+        }
+      ],
+      "end": [
+        708,
+        390,
+        379
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆西方",
+        "toFloor": 701,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 2,
+      "requests": 3,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 384,
+          "y": 388,
+          "toFloor": 701,
+          "toX": 386,
+          "toY": 16
+        }
+      ],
+      "end": [
+        708,
+        384,
+        388
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "伊甸大陆西方",
+        "toFloor": 701,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 82,
+      "requests": 18,
+      "maxPending": 1,
+      "planningFrames": 15,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 305,
+          "y": 391,
+          "toFloor": 701,
+          "toX": 305,
+          "toY": 14
+        }
+      ],
+      "end": [
+        708,
+        305,
+        391
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 15
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "塔耳塔地城入口",
+        "toFloor": 7100,
+        "index": 3,
+        "conditional": false
+      },
+      "moves": 397,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 240,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 143,
+          "y": 180,
+          "toFloor": 7100,
+          "toX": 12,
+          "toY": 29
+        }
+      ],
+      "end": [
+        708,
+        143,
+        180
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 295
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "塔耳塔庄园",
+        "toFloor": 6030,
+        "index": 4,
+        "conditional": false
+      },
+      "moves": 258,
+      "requests": 46,
+      "maxPending": 1,
+      "planningFrames": 43,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 183,
+          "y": 136,
+          "toFloor": 6030,
+          "toX": 46,
+          "toY": 3
+        }
+      ],
+      "end": [
+        708,
+        183,
+        136
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 136
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "库塔伊洞窟地下一楼",
+        "toFloor": 60049,
+        "index": 5,
+        "conditional": false
+      },
+      "moves": 162,
+      "requests": 29,
+      "maxPending": 1,
+      "planningFrames": 26,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 225,
+          "y": 254,
+          "toFloor": 60049,
+          "toX": 62,
+          "toY": 8
+        }
+      ],
+      "end": [
+        708,
+        225,
+        254
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 110
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "库沙达洞窟第一层",
+        "toFloor": 60072,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 377,
+      "requests": 170,
+      "maxPending": 1,
+      "planningFrames": 233,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 71,
+          "y": 51,
+          "toFloor": 60072,
+          "toX": 69,
+          "toY": 84
+        }
+      ],
+      "end": [
+        708,
+        71,
+        51
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 174
+    },
+    {
+      "floor": 708,
+      "start": [
+        382,
+        387
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "龙蜥洞窟",
+        "toFloor": 150,
+        "index": 7,
+        "conditional": false
+      },
+      "moves": 213,
+      "requests": 130,
+      "maxPending": 2,
+      "planningFrames": 20,
+      "warpChain": [
+        {
+          "floor": 708,
+          "x": 272,
+          "y": 178,
+          "toFloor": 150,
+          "toX": 43,
+          "toY": 37
+        }
+      ],
+      "end": [
+        708,
+        272,
+        178
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 19
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宫本蚊帐",
+        "x": 241,
+        "y": 264,
+        "index": 0
+      },
+      "moves": 492,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 480,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 255,
+          "y": 74,
+          "toFloor": 817,
+          "toX": 262,
+          "toY": 72
+        },
+        {
+          "floor": 817,
+          "x": 264,
+          "y": 42,
+          "toFloor": 817,
+          "toX": 272,
+          "toY": 40
+        },
+        {
+          "floor": 817,
+          "x": 365,
+          "y": 128,
+          "toFloor": 817,
+          "toX": 358,
+          "toY": 132
+        },
+        {
+          "floor": 817,
+          "x": 376,
+          "y": 204,
+          "toFloor": 817,
+          "toX": 369,
+          "toY": 207
+        }
+      ],
+      "end": [
+        817,
+        241,
+        264
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 742
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "皮尔克",
+        "x": 269,
+        "y": 116,
+        "index": 1
+      },
+      "moves": 150,
+      "requests": 66,
+      "maxPending": 1,
+      "planningFrames": 52,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        }
+      ],
+      "end": [
+        817,
+        269,
+        116
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 349
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宝箱",
+        "x": 148,
+        "y": 26,
+        "index": 2
+      },
+      "moves": 7,
+      "requests": 14,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        817,
+        148,
+        26
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 11
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宝箱",
+        "x": 148,
+        "y": 35,
+        "index": 3
+      },
+      "moves": 11,
+      "requests": 8,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        }
+      ],
+      "end": [
+        817,
+        148,
+        35
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 52
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宝箱",
+        "x": 153,
+        "y": 44,
+        "index": 4
+      },
+      "moves": 17,
+      "requests": 13,
+      "maxPending": 2,
+      "planningFrames": 0,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        }
+      ],
+      "end": [
+        817,
+        153,
+        44
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 41
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宝箱",
+        "x": 242,
+        "y": 72,
+        "index": 5
+      },
+      "moves": 123,
+      "requests": 54,
+      "maxPending": 1,
+      "planningFrames": 41,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        }
+      ],
+      "end": [
+        817,
+        242,
+        72
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 301
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "npc",
+        "name": "宝箱",
+        "x": 237,
+        "y": 98,
+        "index": 6
+      },
+      "moves": 118,
+      "requests": 48,
+      "maxPending": 1,
+      "planningFrames": 35,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        }
+      ],
+      "end": [
+        817,
+        237,
+        98
+      ],
+      "status": "已到达目标",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 178
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "加鲁卡",
+        "toFloor": 200,
+        "index": 0,
+        "conditional": false
+      },
+      "moves": 0,
+      "requests": 2,
+      "maxPending": 1,
+      "planningFrames": 0,
+      "warpChain": [],
+      "end": [
+        817,
+        146,
+        19
+      ],
+      "status": "已到达目标",
+      "arrived": false,
+      "conditionalBoundary": false,
+      "modelMs": 4
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "史东尔换气道",
+        "toFloor": 8000,
+        "index": 1,
+        "conditional": false
+      },
+      "moves": 359,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 286,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 255,
+          "y": 74,
+          "toFloor": 817,
+          "toX": 262,
+          "toY": 72
+        },
+        {
+          "floor": 817,
+          "x": 264,
+          "y": 42,
+          "toFloor": 817,
+          "toX": 272,
+          "toY": 40
+        },
+        {
+          "floor": 817,
+          "x": 365,
+          "y": 128,
+          "toFloor": 817,
+          "toX": 358,
+          "toY": 132
+        },
+        {
+          "floor": 817,
+          "x": 386,
+          "y": 199,
+          "toFloor": 8000,
+          "toX": 17,
+          "toY": 31
+        }
+      ],
+      "end": [
+        817,
+        386,
+        199
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 947
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "沙己夫换气道",
+        "toFloor": 8009,
+        "index": 2,
+        "conditional": false
+      },
+      "moves": 435,
+      "requests": 238,
+      "maxPending": 1,
+      "planningFrames": 227,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 52,
+          "y": 155,
+          "toFloor": 817,
+          "toX": 52,
+          "toY": 149
+        },
+        {
+          "floor": 817,
+          "x": 42,
+          "y": 132,
+          "toFloor": 817,
+          "toX": 41,
+          "toY": 125
+        },
+        {
+          "floor": 817,
+          "x": 23,
+          "y": 124,
+          "toFloor": 817,
+          "toX": 24,
+          "toY": 119
+        },
+        {
+          "floor": 817,
+          "x": 21,
+          "y": 117,
+          "toFloor": 8009,
+          "toX": 43,
+          "toY": 28
+        }
+      ],
+      "end": [
+        817,
+        21,
+        117
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 725
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "海底洞窟",
+        "toFloor": 8015,
+        "index": 3,
+        "conditional": true
+      },
+      "moves": 879,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 913,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 255,
+          "y": 74,
+          "toFloor": 817,
+          "toX": 262,
+          "toY": 72
+        },
+        {
+          "floor": 817,
+          "x": 264,
+          "y": 42,
+          "toFloor": 817,
+          "toX": 272,
+          "toY": 40
+        },
+        {
+          "floor": 817,
+          "x": 365,
+          "y": 128,
+          "toFloor": 817,
+          "toX": 358,
+          "toY": 132
+        },
+        {
+          "floor": 817,
+          "x": 376,
+          "y": 204,
+          "toFloor": 817,
+          "toX": 369,
+          "toY": 207
+        }
+      ],
+      "end": [
+        817,
+        189,
+        513
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": true,
+      "modelMs": 4024
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "海底洞窟",
+        "toFloor": 8027,
+        "index": 4,
+        "conditional": true
+      },
+      "moves": 879,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 913,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 255,
+          "y": 74,
+          "toFloor": 817,
+          "toX": 262,
+          "toY": 72
+        },
+        {
+          "floor": 817,
+          "x": 264,
+          "y": 42,
+          "toFloor": 817,
+          "toX": 272,
+          "toY": 40
+        },
+        {
+          "floor": 817,
+          "x": 365,
+          "y": 128,
+          "toFloor": 817,
+          "toX": 358,
+          "toY": 132
+        },
+        {
+          "floor": 817,
+          "x": 376,
+          "y": 204,
+          "toFloor": 817,
+          "toX": 369,
+          "toY": 207
+        }
+      ],
+      "end": [
+        817,
+        189,
+        513
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": true,
+      "modelMs": 1867
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "海底洞窟",
+        "toFloor": 8028,
+        "index": 5,
+        "conditional": true
+      },
+      "moves": 879,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 913,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 255,
+          "y": 74,
+          "toFloor": 817,
+          "toX": 262,
+          "toY": 72
+        },
+        {
+          "floor": 817,
+          "x": 264,
+          "y": 42,
+          "toFloor": 817,
+          "toX": 272,
+          "toY": 40
+        },
+        {
+          "floor": 817,
+          "x": 365,
+          "y": 128,
+          "toFloor": 817,
+          "toX": 358,
+          "toY": 132
+        },
+        {
+          "floor": 817,
+          "x": 376,
+          "y": 204,
+          "toFloor": 817,
+          "toX": 369,
+          "toY": 207
+        }
+      ],
+      "end": [
+        817,
+        189,
+        513
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": true,
+      "modelMs": 2560
+    },
+    {
+      "floor": 817,
+      "start": [
+        146,
+        19
+      ],
+      "goal": {
+        "kind": "place",
+        "name": "漩涡通道",
+        "toFloor": 8113,
+        "index": 6,
+        "conditional": false
+      },
+      "moves": 444,
+      "requests": 248,
+      "maxPending": 1,
+      "planningFrames": 243,
+      "warpChain": [
+        {
+          "floor": 817,
+          "x": 144,
+          "y": 25,
+          "toFloor": 817,
+          "toX": 143,
+          "toY": 34
+        },
+        {
+          "floor": 817,
+          "x": 146,
+          "y": 44,
+          "toFloor": 817,
+          "toX": 145,
+          "toY": 52
+        },
+        {
+          "floor": 817,
+          "x": 149,
+          "y": 63,
+          "toFloor": 817,
+          "toX": 148,
+          "toY": 70
+        },
+        {
+          "floor": 817,
+          "x": 52,
+          "y": 155,
+          "toFloor": 817,
+          "toX": 52,
+          "toY": 149
+        },
+        {
+          "floor": 817,
+          "x": 42,
+          "y": 132,
+          "toFloor": 817,
+          "toX": 41,
+          "toY": 125
+        },
+        {
+          "floor": 817,
+          "x": 23,
+          "y": 124,
+          "toFloor": 817,
+          "toX": 24,
+          "toY": 119
+        },
+        {
+          "floor": 817,
+          "x": 13,
+          "y": 117,
+          "toFloor": 8113,
+          "toX": 19,
+          "toY": 77
+        }
+      ],
+      "end": [
+        817,
+        13,
+        117
+      ],
+      "status": "自动寻路中…",
+      "arrived": true,
+      "conditionalBoundary": false,
+      "modelMs": 1266
+    }
+  ]
+}

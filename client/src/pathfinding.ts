@@ -2,6 +2,8 @@
 // server Move. Unknown cells and intermediate warps remain impassable.
 // https://www.redblobgames.com/pathfinding/a-star/implementation.html
 export const PATH_MOVE: [number, number][] = [[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1]];
+export interface PathTransfer { x: number; y: number; toX: number; toY: number; }
+export interface GridRoute { path: number[]; transfer?: PathTransfer; }
 
 /** Alternatives are tiles of the same doorway. One search chooses the nearest
  * reachable edge; a multi-tile entrance's geometric center may be unreachable
@@ -21,16 +23,36 @@ export function gridPath(w: number, h: number, walk: Uint8Array, sx: number, sy:
  * underneath its closed nodes. The field retries a failed old revision against
  * newly loaded data; it still checks each actual move before sending it. */
 export function* gridPathSteps(w: number, h: number, walk: Uint8Array, sx: number, sy: number, tx: number, ty: number,
-  alternatives: readonly [number, number][] = []): Generator<void, number[] | null> {
+  alternatives: readonly [number, number][] = [], transfers: readonly PathTransfer[] = []): Generator<void, number[] | null> {
+  return (yield* gridRouteSteps(w,h,walk,sx,sy,tx,ty,alternatives,transfers))?.path??null;
+}
+
+/** A route exposes its selected transfer separately from its walking leg:
+ * multiple return passages can share the same source tile. */
+export function* gridRouteSteps(w: number, h: number, walk: Uint8Array, sx: number, sy: number, tx: number, ty: number,
+  alternatives: readonly [number, number][] = [], transfers: readonly PathTransfer[] = []): Generator<void, GridRoute | null> {
   if (!Number.isSafeInteger(w) || !Number.isSafeInteger(h) || w <= 0 || h <= 0 || w*h !== walk.length) return null;
   const inside = (x: number, y: number) => Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < w && y < h;
   const enter = (x: number, y: number) => inside(x,y) && walk[y*w+x] >= 2;
   if (!inside(sx,sy)) return null;
+  // Preserve the normal A* fast path, cost and non-target-warp rules. Only a
+  // disconnected route needs a second search across explicit safe transfers.
+  // Dijkstra's zero heuristic remains admissible across arbitrary teleports,
+  // and avoids an O(portal-count) heuristic in every node expansion.
+  const jumps = new Map<number,PathTransfer[]>();
+  for (const p of transfers) if (enter(p.x,p.y) && walk[p.y*w+p.x] === 3 && enter(p.toX,p.toY)
+    && (p.x!==p.toX || p.y!==p.toY)) {
+      const k=p.y*w+p.x; jumps.set(k,[...(jumps.get(k)??[]),p]);
+    }
+  if (jumps.size) {
+    const direct = yield* gridRouteSteps(w,h,walk,sx,sy,tx,ty,alternatives);
+    if (direct !== null) return direct;
+  }
   const targets = [[tx,ty] as [number,number],...alternatives].filter(([x,y]) => enter(x,y));
   if (!targets.length) return null;
   const start = sy*w+sx, goals = new Set(targets.map(([x,y]) => y*w+x));
   const gx=targets[0][0],gy=targets[0][1];
-  const heuristic = targets.length===1 ? (x:number,y:number) => Math.max(Math.abs(x-gx),Math.abs(y-gy)) : (x:number,y:number) => {
+  const heuristic = jumps.size ? (_x:number,_y:number) => 0 : targets.length===1 ? (x:number,y:number) => Math.max(Math.abs(x-gx),Math.abs(y-gy)) : (x:number,y:number) => {
     let best=Infinity;
     for(const [gx,gy] of targets) best=Math.min(best,Math.max(Math.abs(x-gx),Math.abs(y-gy)));
     return best;
@@ -49,7 +71,7 @@ export function* gridPathSteps(w: number, h: number, walk: Uint8Array, sx: numbe
       if(!enter(nx,ny)||(mx&&my&&(!enter(nx,y)||!enter(x,ny)))||(i<steps&&walk[ny*w+nx]===3))break;
       direct.push(PATH_MOVE.findIndex(([vx,vy])=>vx===mx&&vy===my));x=nx;y=ny;
     }
-    if(direct.length===steps)return direct;
+    if(direct.length===steps)return {path:direct};
   }
   // Integer tile IDs avoid per-node Map entries and predecessor tuples. A
   // node has at most one heap slot: decrease-key avoids stale duplicate nodes
@@ -58,6 +80,8 @@ export function* gridPathSteps(w: number, h: number, walk: Uint8Array, sx: numbe
   // unknown/invalid goals above retain their allocation-free early returns.
   walk = walk.slice();
   const costs=new Uint32Array(w*h),ranks=new Uint32Array(w*h),positions=new Uint32Array(w*h),directions=new Uint8Array(w*h);
+  const parents = jumps.size ? new Uint32Array(w*h) : null;
+  const selectedTransfers = new Map<number,PathTransfer>();
   const heap:number[]=[];
   const before=(a:number,b:number)=>ranks[a]<ranks[b] || ranks[a]===ranks[b] && costs[a]>costs[b];
   const promote=(k:number)=>{
@@ -85,21 +109,35 @@ export function* gridPathSteps(w: number, h: number, walk: Uint8Array, sx: numbe
     const k=pop(),g=costs[k]-1;
     if(goals.has(k)) {
       const out:number[]=[];
-      for(let n=k;n!==start;) {const d=directions[n]&7;out.push(d);n-=PATH_MOVE[d][1]*w+PATH_MOVE[d][0];}
-      return out.reverse();
+      let transfer:PathTransfer|undefined;
+      for(let n=k;n!==start;) {
+        const d=directions[n]&7;
+        // A jump's predecessor stores the walking step onto its source. Drop
+        // later legs: the server must confirm EnterFloor before they execute.
+        if (directions[n]&16) { out.length=0; transfer=selectedTransfers.get(n); }
+        out.push(d); n=parents ? parents[n]-1 : n-PATH_MOVE[d][1]*w-PATH_MOVE[d][0];
+      }
+      return {path:out.reverse(),transfer};
     }
     // A consistent heuristic finalizes a node on pop. Bit 3 shares the compact
     // direction array so closed nodes need neither another allocation nor work.
     directions[k]|=8;
-    if(k!==start&&walk[k]===3)continue;
+    if(k!==start&&walk[k]===3&&!(directions[k]&16))continue;
     const x=k%w,y=Math.floor(k/w);
     for(let d=0;d<8;d++) {
-      const [dx,dy]=PATH_MOVE[d],nx=x+dx,ny=y+dy,nk=ny*w+nx;
+      const [dx,dy]=PATH_MOVE[d],nx=x+dx,ny=y+dy,entered=ny*w+nx;
       if(!enter(nx,ny)||(dx&&dy&&(!enter(x+dx,y)||!enter(x,y+dy))))continue;
-      if(directions[nk]&8)continue;
-      const next=g+1;
-      if(costs[nk]&&next+1>=costs[nk])continue;
-      costs[nk]=next+1;directions[nk]=d;ranks[nk]=next+heuristic(nx,ny);promote(nk);
+      const options=goals.has(entered)?undefined:jumps.get(entered);
+      for (const transfer of options??[undefined]) {
+        const nk=transfer?transfer.toY*w+transfer.toX:entered;
+        if(directions[nk]&8)continue;
+        const next=g+1;
+        if(costs[nk]&&next+1>=costs[nk])continue;
+        costs[nk]=next+1;directions[nk]=d|(transfer?16:0);
+        if (parents) parents[nk]=k+1;
+        if (transfer) selectedTransfers.set(nk,transfer); else selectedTransfers.delete(nk);
+        ranks[nk]=next+heuristic(nx,ny);promote(nk);
+      }
     }
   }
   return null;

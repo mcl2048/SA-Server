@@ -1,0 +1,41 @@
+{
+  "reason": "Desktop business cases passed; generic close saw a stale immediate-mode hit after back(). Full matrix aborted before mobile. Retained without claiming full success.",
+  "files": [
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-eden-west-ordinary-desktop.png",
+      "sha256": "9975ac1dabf6db5ec23ae7ab4c22702a55ed97d59fb26cf997bc2cb09ae70808"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-failure.png",
+      "sha256": "1456ac8f948925f8ee1febb77e04bb92d6db399478e90c48931ff50dc65e6775"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-nyx-return-passage-desktop.png",
+      "sha256": "18163377ebfc6f16053ad463583faea492143d143a99259b7ce747fc18bbfa8a"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-progress.json",
+      "sha256": "56cf9db8758b2b1ed167de5afc067f1a86d74d1520afd452f77783cc7a1b0450"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-run.txt",
+      "sha256": "703d67c3d6eaa0b28968ef0e98c8185e3bf1a8388c34fbc4f20d9924c88723aa"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-sea-exit-desktop.png",
+      "sha256": "056141717a3ef93f683c44ef98f036b5f35d41d29efe7bdf2420e1647008a5d9"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-sea-npc-arrived-desktop.png",
+      "sha256": "a1d80f9ecf16b7c8a50b5cc725ec9b3e3fcbca8693d4af98812c1b2b6620bda2"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race-status.json",
+      "sha256": "8a958e089c031f03a6ac49c12d727923f420f73153556c7ce02f11a51a5db817"
+    },
+    {
+      "path": "Report/SA-1121-01/browser/candidate-close-race.json",
+      "sha256": "c6bba54242dc201e3029e661eaf4f336898526bd4be146ca801d300da9bd4533"
+    }
+  ]
+}

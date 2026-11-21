@@ -106,3 +106,18 @@
 [可视报告](Report/SA-1115-04/index.html) · [完整验收](Report/SA-1115-04/ACCEPTANCE.md) · [发行摘要](Report/SA-1115-04/release.json)。StoneAge经验已同步，无新增Assets。移动是触屏／视口模拟，不冒充实体Android/iOS/Safari；未部署生产。所有红测／脚本修正／143中断均保留，最终仅采用匹配ELF且完整退出的证据。
 
 实现提交 `a3fb456` 已推送并核对远端main摘要一致；交付回执见 [DELIVERY.json](Report/SA-1115-04/DELIVERY.json)。
+
+
+---
+
+## v0.2.23-LYNX · SA-1121-01
+
+✅ 高等级经验：恢复两个独立原作仓库一致的完整1–200级基础表，前100级逐值保留；200级以上按55/级兼容延伸并保护32位奖励上限。修复显式0经验被等级差规则抬为1；2,984敌人／2,143自动奖励／13,244等级点全域核对，实际人物、宠物、培养、队伍及SQLite回归通过。
+
+✅ 小地图NPC／出口／坐标导航：普通A*失败后采用显式无条件传送边的分帧规划，支持817同图及702→703→702返回另一隔离区；精确确认权威EnterFloor后续行，保留手动／新目标／战斗／锁定／跟随取消与循环保护。114项真实网格模型110可达或已在入口；4组共12入口在含墙落点／89条件分支的全域5766边上界中仍无路，未虚构地图捷径，不推断对话／交通NPC／任务资格。
+
+✅ 完整检查：289客户端／构建、全src TypeScript、Go test／race／vet均通过，源码前后摘要稳定；最终真实Chromium桌面10＋移动11项、页面错误0，实际Move／EnterFloor零PosCorrect，横屏输入清理及SIGTERM退出0／SQLite位置一致。78个HTTP文件逐字节一致，两次ELF构建SHA相同。早期夹具、脚本、关闭热区竞态和不完整检查均保留，未冒充最终成功。
+
+✅ 发行：静态Linux AMD64 SHA-256 `50cb389bca454ad6b37aab1016c2066e5ec6f8ab57ded90c5f7b3777ee69788d`；4380文件完整ZIP逐文件／CRC／执行位校验后替换原包，ZIP SHA-256 `329c8131a2988debf62090630ccc571b98b44cf7940e30395ba103ca799bee2c`。StoneAge仓库／安装版经验同步并验证通过，无新增Assets、空素材补丁或数据库迁移。
+
+[可视报告](Report/SA-1121-01/index.html) · [完整验收](Report/SA-1121-01/ACCEPTANCE.md) · [发行摘要](Report/SA-1121-01/release.json) · [发布说明](docs/v0.2.23-LYNX.md) · [交付回执](Report/SA-1121-01/DELIVERY.json)。移动是Chromium触屏／视口模拟，未认证实体Android/iOS/Safari，未部署或重启生产。冷目录仍在世界循环同步计算，817独立冷测211.487ms；不可达模型930–1054帧，保留性能边界与长路线实际秒数，不作硬实时或生产吞吐承诺。

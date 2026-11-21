@@ -1,0 +1,17 @@
+{
+  "go": "go1.27.3 linux/amd64",
+  "node": "v26.13.1",
+  "typescript": "7.0.2",
+  "release": {
+    "GOOS": "linux",
+    "GOARCH": "amd64",
+    "CGO_ENABLED": "0",
+    "trimpath": true,
+    "buildvcs": false
+  },
+  "checks": {
+    "GOMAXPROCS": 2,
+    "GOMEMLIMIT": "600MiB"
+  },
+  "browser_scope": "Actual Chromium + SwiftShader; desktop 1280x900, mobile touch emulation 390x844 and landscape 844x390"
+}

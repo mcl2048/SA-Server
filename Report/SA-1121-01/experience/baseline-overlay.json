@@ -1,0 +1,6 @@
+{
+  "Replace": {
+    "/home/coder/saserver/server/internal/data/battle.go": "/home/coder/saserver/Report/SA-1121-01/experience/baseline-internal-data-battle.go",
+    "/home/coder/saserver/server/internal/battle/enemy.go": "/home/coder/saserver/Report/SA-1121-01/experience/baseline-internal-battle-enemy.go"
+  }
+}

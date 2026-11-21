@@ -1,0 +1,5 @@
+# Raw command captures and upstream evidence retain their exact bytes, including
+# upstream trailing spaces. This does not change source-code whitespace checks.
+*.txt -text -whitespace
+experience/upstream-*.h -text -whitespace
+experience/baseline-internal-*.go -text

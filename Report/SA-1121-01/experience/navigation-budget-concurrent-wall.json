@@ -1,0 +1,185 @@
+{
+  "cached_endpoint_points": 4293,
+  "cached_floors_all_requests": 589,
+  "cached_region_id_payload_bytes": 18984,
+  "cached_region_ids": 4746,
+  "cached_transfers": 1621,
+  "floors_requested": 1382,
+  "measurement": "one fresh World cache per floor; shared immutable loaded Game; warm request mean over1000; Go1.27.3 GOMAXPROCS2",
+  "slowest": [
+    {
+      "Floor": 817,
+      "Cells": 240000,
+      "Transfers": 20,
+      "ComputedFloors": 5,
+      "ComputedCells": 1214400,
+      "ColdMS": 772.617,
+      "WarmMS": 0.000010288
+    },
+    {
+      "Floor": 20301,
+      "Cells": 45000,
+      "Transfers": 1,
+      "ComputedFloors": 3,
+      "ComputedCells": 1015000,
+      "ColdMS": 575.044,
+      "WarmMS": 0.000010182999999999999
+    },
+    {
+      "Floor": 101,
+      "Cells": 900,
+      "Transfers": 0,
+      "ComputedFloors": 2,
+      "ComputedCells": 640900,
+      "ColdMS": 545.034,
+      "WarmMS": 0.000054094999999999996
+    },
+    {
+      "Floor": 20401,
+      "Cells": 2500,
+      "Transfers": 0,
+      "ComputedFloors": 3,
+      "ComputedCells": 965000,
+      "ColdMS": 525.607,
+      "WarmMS": 0.00001078
+    },
+    {
+      "Floor": 2000,
+      "Cells": 22500,
+      "Transfers": 0,
+      "ComputedFloors": 12,
+      "ComputedCells": 673300,
+      "ColdMS": 511.28,
+      "WarmMS": 0.000010284
+    },
+    {
+      "Floor": 201,
+      "Cells": 1200,
+      "Transfers": 0,
+      "ComputedFloors": 2,
+      "ComputedCells": 961200,
+      "ColdMS": 505.688,
+      "WarmMS": 0.000010294
+    },
+    {
+      "Floor": 2030,
+      "Cells": 6400,
+      "Transfers": 6,
+      "ComputedFloors": 4,
+      "ComputedCells": 646688,
+      "ColdMS": 483.948,
+      "WarmMS": 0.000010888
+    },
+    {
+      "Floor": 20101,
+      "Cells": 3500,
+      "Transfers": 0,
+      "ComputedFloors": 3,
+      "ComputedCells": 966300,
+      "ColdMS": 379.89,
+      "WarmMS": 0.000010174000000000001
+    },
+    {
+      "Floor": 100,
+      "Cells": 640000,
+      "Transfers": 35,
+      "ComputedFloors": 15,
+      "ComputedCells": 764700,
+      "ColdMS": 328.579,
+      "WarmMS": 0.000010215
+    },
+    {
+      "Floor": 3000,
+      "Cells": 22500,
+      "Transfers": 11,
+      "ComputedFloors": 12,
+      "ComputedCells": 993300,
+      "ColdMS": 305.822,
+      "WarmMS": 0.000010335
+    },
+    {
+      "Floor": 120,
+      "Cells": 900,
+      "Transfers": 0,
+      "ComputedFloors": 2,
+      "ComputedCells": 640900,
+      "ColdMS": 291.614,
+      "WarmMS": 0.000010419
+    },
+    {
+      "Floor": 704,
+      "Cells": 160000,
+      "Transfers": 25,
+      "ComputedFloors": 5,
+      "ComputedCells": 520000,
+      "ColdMS": 287.66,
+      "WarmMS": 0.000010209
+    }
+  ],
+  "task_floors": [
+    {
+      "Floor": 817,
+      "Cells": 240000,
+      "Transfers": 20,
+      "ComputedFloors": 5,
+      "ComputedCells": 1214400,
+      "ColdMS": 772.617,
+      "WarmMS": 0.000010288
+    },
+    {
+      "Floor": 704,
+      "Cells": 160000,
+      "Transfers": 25,
+      "ComputedFloors": 5,
+      "ComputedCells": 520000,
+      "ColdMS": 287.66,
+      "WarmMS": 0.000010209
+    },
+    {
+      "Floor": 702,
+      "Cells": 160000,
+      "Transfers": 35,
+      "ComputedFloors": 5,
+      "ComputedCells": 502144,
+      "ColdMS": 181.649,
+      "WarmMS": 0.000010153000000000001
+    },
+    {
+      "Floor": 703,
+      "Cells": 160000,
+      "Transfers": 9,
+      "ComputedFloors": 5,
+      "ComputedCells": 492500,
+      "ColdMS": 177.36,
+      "WarmMS": 0.000010129
+    },
+    {
+      "Floor": 705,
+      "Cells": 160000,
+      "Transfers": 4,
+      "ComputedFloors": 6,
+      "ComputedCells": 506600,
+      "ColdMS": 175.063,
+      "WarmMS": 0.000010267
+    },
+    {
+      "Floor": 701,
+      "Cells": 160000,
+      "Transfers": 10,
+      "ComputedFloors": 3,
+      "ComputedCells": 480000,
+      "ColdMS": 145.637,
+      "WarmMS": 0.000010226
+    },
+    {
+      "Floor": 700,
+      "Cells": 160000,
+      "Transfers": 30,
+      "ComputedFloors": 6,
+      "ComputedCells": 213000,
+      "ColdMS": 109.287,
+      "WarmMS": 0.000010168999999999999
+    }
+  ],
+  "total_audit_ms": 25211.36
+}

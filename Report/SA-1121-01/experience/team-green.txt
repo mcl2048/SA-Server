@@ -1,0 +1,8 @@
+=== RUN   TestHighLevelNativePartyPetAttribution
+=== RUN   TestHighLevelNativePartyPetAttribution/false
+=== RUN   TestHighLevelNativePartyPetAttribution/true
+--- PASS: TestHighLevelNativePartyPetAttribution (1.59s)
+    --- PASS: TestHighLevelNativePartyPetAttribution/false (1.44s)
+    --- PASS: TestHighLevelNativePartyPetAttribution/true (0.15s)
+PASS
+ok  	sa/server/internal/world	1.645s

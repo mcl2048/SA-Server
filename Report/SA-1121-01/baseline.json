@@ -1,0 +1,11 @@
+{
+  "task": "SA-1121-01",
+  "started_utc": "2026-11-21T10:03:18.432284+00:00",
+  "head": "5ffb526e98286b31a4b9a1f33a23aab1ee966a7e",
+  "prompt_sha256": "539c3dddd8f20437ed2f623e367fc974c7d1e021f87b4c028ae3a8de52952184",
+  "binary_sha256": "474c883b4e9d16b542d96dd76ec2be4adb9f50cde191ebfdbccc454b842fd441",
+  "initial_changes": [
+    " M Prompt/Task-Now.txt"
+  ],
+  "snapshot_note": "Agent temporary audit paths excluded; original status captured before delegation contained only the user Prompt edit."
+}

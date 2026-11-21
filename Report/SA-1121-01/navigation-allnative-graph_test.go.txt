@@ -1,0 +1,103 @@
+package world
+
+import (
+	"encoding/json"
+	"os"
+	"sa/server/internal/data"
+	"strings"
+	"testing"
+)
+
+func TestNavigationAllNativeGraph(t *testing.T) {
+	_, _, g := setup(t)
+	w := &World{game: g, navigationPoints: map[int]map[[2]int]bool{}}
+	type point struct {
+		Floor, X, Y int
+		Regions     []int32
+	}
+	type edge struct {
+		Floor, X, Y, ToFloor, ToX, ToY int
+		Source, Destination            []int32
+		Conditional                    bool
+	}
+	type candidate struct {
+		warp        data.Warp
+		conditional bool
+	}
+	expanded := []candidate{}
+	points := []point{}
+	edges := []edge{}
+	index := func(fl, x, y int) {
+		if w.navigationPoints[fl] == nil {
+			w.navigationPoints[fl] = map[[2]int]bool{}
+		}
+		w.navigationPoints[fl][[2]int{x, y}] = true
+	}
+	add := func(wp data.Warp, conditional bool) {
+		f, to := g.Floors[wp.Floor], g.Floors[wp.ToFloor]
+		if f == nil || to == nil || !g.Tiles.Walkable(f, wp.X, wp.Y) || !to.In(wp.ToX, wp.ToY) {
+			return
+		}
+		expanded = append(expanded, candidate{wp, conditional})
+		index(wp.Floor, wp.X, wp.Y)
+		index(wp.ToFloor, wp.ToX, wp.ToY)
+	}
+	for _, warps := range g.Warps {
+		for _, wp := range warps {
+			add(wp, wp.Free != "")
+			if wp.Free != "" {
+				for _, segment := range strings.Split(wp.Free, "OVER") {
+					if _, ok := data.ArgField(segment, "FREE"); ok {
+						for _, dest := range data.FreeWarpPoints(segment) {
+							next := wp
+							next.ToFloor = dest[0]
+							next.ToX = dest[1]
+							next.ToY = dest[2]
+							add(next, true)
+						}
+					}
+				}
+			}
+		}
+	}
+	queries := [][3]int{{703, 238, 96}, {704, 13, 81}, {703, 390, 261}, {703, 390, 262}, {703, 390, 263}, {703, 390, 264}, {703, 390, 265}, {704, 11, 113}, {704, 11, 115}, {704, 9, 261}, {704, 9, 262}, {704, 9, 263}, {704, 9, 264}, {704, 9, 265}}
+	for _, p := range queries {
+		index(p[0], p[1], p[2])
+	}
+	regions := map[int]map[[2]int][]int32{}
+	for floor, positions := range w.navigationPoints {
+		f := g.Floors[floor]
+		if f == nil {
+			continue
+		}
+		c := w.navigationComponents(floor)
+		regions[floor] = map[[2]int][]int32{}
+		for xy := range positions {
+			if !f.In(xy[0], xy[1]) {
+				continue
+			}
+			r := navigationPointRegions(f, c, xy[0], xy[1])
+			if c[xy[1]*f.W+xy[0]] == 0 {
+				for _, d := range MOVE {
+					nx, ny := xy[0]+d[0], xy[1]+d[1]
+					if f.In(nx, ny) && c[ny*f.W+nx] > 0 {
+						r = append(r, c[ny*f.W+nx])
+					}
+				}
+			}
+			regions[floor][xy] = r
+		}
+	}
+	get := func(fl, x, y int) []int32 { return regions[fl][[2]int{x, y}] }
+	for _, v := range expanded {
+		wp := v.warp
+		edges = append(edges, edge{wp.Floor, wp.X, wp.Y, wp.ToFloor, wp.ToX, wp.ToY, get(wp.Floor, wp.X, wp.Y), get(wp.ToFloor, wp.ToX, wp.ToY), v.conditional})
+	}
+	for _, p := range queries {
+		points = append(points, point{p[0], p[1], p[2], get(p[0], p[1], p[2])})
+	}
+	b, _ := json.Marshal(map[string]any{"wallLandingUpperBound": true, "points": points, "edges": edges})
+	if err := os.WriteFile("/tmp/sa1121-navigation/allnative-graph.json", b, 0600); err != nil {
+		t.Fatal(err)
+	}
+}

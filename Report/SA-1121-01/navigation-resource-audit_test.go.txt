@@ -1,0 +1,129 @@
+package world
+
+import (
+	"encoding/json"
+	"os"
+	"runtime"
+	"slices"
+	"testing"
+	"time"
+
+	"sa/server/internal/data"
+	"sa/server/internal/proto"
+)
+
+// Offline inventory: every emitted edge must refer to an effective, legal,
+// unconditional native warp. This audit retains endpoint IDs, not floor grids.
+func TestNavigationResourceAudit(t *testing.T) {
+	_, _, g := setup(t)
+	w := &World{game: g}
+	ids := []int{}
+	for id := range g.Floors {
+		ids = append(ids, id)
+	}
+	slices.Sort(ids)
+	type timing struct {
+		Floor          int
+		Cells          int
+		ColdMicros     int64
+		AllocatedBytes uint64
+		Transfers      int
+	}
+	timings := []timing{}
+	direct, via, floors := 0, 0, 0
+	for _, id := range ids {
+		var before, after runtime.MemStats
+		runtime.ReadMemStats(&before)
+		began := time.Now()
+		edges := w.transfersForFloor(id)
+		elapsed := time.Since(began)
+		runtime.ReadMemStats(&after)
+		if len(edges) > 0 {
+			floors++
+		}
+		timings = append(timings, timing{id, g.Floors[id].W * g.Floors[id].H, elapsed.Microseconds(), after.TotalAlloc - before.TotalAlloc, len(edges)})
+		for _, edge := range edges {
+			if len(edge.Via) == 0 {
+				direct++
+				wp, ok := g.WarpAt(id, edge.X, edge.Y)
+				if !ok || !w.safeNavigationWarp(wp) || wp.ToFloor != id || wp.ToX != edge.ToX || wp.ToY != edge.ToY {
+					t.Fatalf("unsafe direct %d %+v", id, edge)
+				}
+				continue
+			}
+			via++
+			if len(edge.Via) != 2 {
+				t.Fatalf("unbounded passage: %+v", edge)
+			}
+			for _, step := range edge.Via {
+				wp, ok := g.WarpAt(step.Floor, step.X, step.Y)
+				if !ok || !w.safeNavigationWarp(wp) || wp.ToFloor != step.ToFloor || wp.ToX != step.ToX || wp.ToY != step.ToY {
+					t.Fatalf("unsafe passage %+v", step)
+				}
+			}
+			a, b := edge.Via[0], edge.Via[1]
+			if a.Floor != id || a.ToFloor != b.Floor || b.ToFloor != id || a.X != edge.X || a.Y != edge.Y || b.ToX != edge.ToX || b.ToY != edge.ToY || a.ToX == b.X && a.ToY == b.Y {
+				t.Fatalf("inconsistent/zero-step passage %+v", edge)
+			}
+		}
+	}
+	points, regionIDs := 0, 0
+	for _, endpoints := range w.navigationFloors {
+		points += len(endpoints)
+		for _, ids := range endpoints {
+			regionIDs += len(ids)
+		}
+	}
+	slices.SortFunc(timings, func(a, b timing) int {
+		if a.ColdMicros > b.ColdMicros {
+			return -1
+		}
+		if a.ColdMicros < b.ColdMicros {
+			return 1
+		}
+		return 0
+	})
+	summary := map[string]any{"floors": len(ids), "transferFloors": floors, "sameFloorTransfers": direct, "returnPassages": via, "cachedRegionFloors": len(w.navigationFloors), "cachedEndpointCount": points, "cachedRegionIDBytes": regionIDs * 4, "largestColdCalls": timings[:min(12, len(timings))]}
+	b, _ := json.Marshal(summary)
+	t.Log(string(b))
+	// Optional private fixture export for the independent real-grid client audit.
+	if path := os.Getenv("SA_NAVIGATION_FIXTURES"); path != "" {
+		type fixture struct {
+			ID        int                 `json:"id"`
+			Name      string              `json:"name"`
+			W         int                 `json:"w"`
+			H         int                 `json:"h"`
+			Walk      string              `json:"walk"`
+			NPCs      []data.NPC          `json:"npcs"`
+			Warps     []data.Warp         `json:"warps"`
+			Places    []proto.MapPlace    `json:"places"`
+			Transfers []proto.MapTransfer `json:"transfers"`
+		}
+		fixtures := []fixture{}
+		for _, id := range []int{700, 701, 702, 703, 704, 705, 706, 707, 708, 817, 818} {
+			f := g.Floors[id]
+			walk := make([]byte, f.W*f.H)
+			for y := 0; y < f.H; y++ {
+				for x := 0; x < f.W; x++ {
+					k := y*f.W + x
+					walk[k] = '0'
+					if g.Tiles.Walkable(f, x, y) {
+						walk[k] = '1'
+						if _, ok := g.WarpAt(id, x, y); ok {
+							walk[k] = '2'
+						}
+					}
+				}
+			}
+			warps := []data.Warp{}
+			for _, wp := range g.Warps[id] {
+				warps = append(warps, wp)
+			}
+			fixtures = append(fixtures, fixture{id, f.Name, f.W, f.H, string(walk), g.NPCs[id], warps, mapPlaces(g, id), w.transfersForFloor(id)})
+		}
+		b, _ := json.Marshal(fixtures)
+		if err := os.WriteFile(path, b, 0600); err != nil {
+			t.Fatal(err)
+		}
+	}
+}

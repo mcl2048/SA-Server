@@ -1,0 +1,21 @@
+{"variant":"final","stage":"server-ready"}
+{"variant":"final","stage":"authenticated-real-field"}
+{"device":"desktop","stage":"selected-sea-npc","state":{"floor":817,"x":146,"y":19,"target":[148,35],"status":"正在加载地图并规划路线…","corrections":0,"mapNavigation":true,"wholeReady":false,"waitingWarp":false,"search":false,"locked":false,"follower":false,"wantDir":-1,"goal":"","loaded":26697}}
+desktop: Sea of Tears NPC via real same-floor portal
+desktop: sea-exit: native exit navigation
+desktop: manual direction cancels a portal navigation intent
+desktop: nyx-return-passage: native NPC navigation
+desktop: eden-west-ordinary: native NPC navigation
+desktop: patched native experience for enemy 1969 level 130
+desktop: patched native experience for enemy 1971 level 140
+desktop: patched native experience for enemy 2165 level 130
+desktop: patched native experience for enemy 2168 level 140
+desktop: patched native experience for enemy 2239 level 80
+page.waitForFunction: Timeout 15000ms exceeded.
+    at GameUI.action (/home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:77:19)
+    at GameUI.closePanels (/home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:206:17)
+    at async GameUI.flag (/home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:221:3)
+    at async Module.run (/home/coder/saserver/Report/SA-1121-01/browser/task-cases.mjs:115:33)
+    at async work (/home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:259:5)
+    at async file:///home/coder/saserver/Report/SA-1121-01/browser/real-game.mjs:277:5
+{"variant":"final","probe":false,"result":"/home/coder/saserver/Report/SA-1121-01/browser/final.json","success":false,"shutdown":{"started":true,"sigterm_sent":true,"exit_code":0,"signal":null,"timed_out":false,"expected_position":{"id":1,"floor":701,"x":243,"y":22},"stored_position":{"floor":701,"x":243,"y":22},"position_matches":true}}

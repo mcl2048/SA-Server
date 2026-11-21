@@ -1,0 +1,123 @@
+TAP version 13
+# Subtest: a disconnected destination is routed through its explicit same-floor transfer
+not ok 1 - a disconnected destination is routed through its explicit same-floor transfer
+  ---
+  duration_ms: 8.659031
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:9:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    return only the first legal leg ending at the chosen portal
+    + actual - expected
+    
+    + null
+    - [
+    -   5,
+    -   5
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 5
+    1: 5
+  actual: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:12:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: unknown transfer destinations and unrelated portals remain blocked
+ok 2 - unknown transfer destinations and unrelated portals remain blocked
+  ---
+  duration_ms: 1.44593
+  type: 'test'
+  ...
+# Subtest: an NPC route resumes only after its planned same-floor EnterFloor confirmation
+not ok 3 - an NPC route resumes only after its planned same-floor EnterFloor confirmation
+  ---
+  duration_ms: 54.026298
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:33:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:43:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: manual cannot revive a route waiting for a portal
+not ok 4 - manual cannot revive a route waiting for a portal
+  ---
+  duration_ms: 6.757602
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:47:72'
+  failureType: 'testCodeFailure'
+  error: 'precondition: planned portal entered'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:50:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: wrong-floor cannot revive a route waiting for a portal
+not ok 5 - wrong-floor cannot revive a route waiting for a portal
+  ---
+  duration_ms: 8.549556
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:47:72'
+  failureType: 'testCodeFailure'
+  error: 'precondition: planned portal entered'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:50:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: wrong-position cannot revive a route waiting for a portal
+not ok 6 - wrong-position cannot revive a route waiting for a portal
+  ---
+  duration_ms: 6.366304
+  type: 'test'
+  location: '/home/coder/saserver/client/test/navigation-transfers.test.ts:47:72'
+  failureType: 'testCodeFailure'
+  error: 'precondition: planned portal entered'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/coder/saserver/client/test/navigation-transfers.test.ts:50:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 1
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2408.70273

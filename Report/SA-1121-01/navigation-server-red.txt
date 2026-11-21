@@ -1,0 +1,5 @@
+--- FAIL: TestNpcListIncludesSafeSameFloorTransfers (2.29s)
+    maptransfers_test.go:42: missing native sea transfer (144,25) -> (143,34)
+FAIL
+FAIL	sa/server/internal/world	2.349s
+FAIL

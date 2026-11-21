@@ -1,0 +1,54 @@
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=false
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=false
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=false
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=false
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=true
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=true
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=true
+=== RUN   TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=true
+--- PASS: TestHighLevelNativeEnemySettlementAndPersistence (9.81s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=false (7.44s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=false (0.31s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=false (0.32s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=false (0.35s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=true (0.35s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=true (0.38s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=true (0.35s)
+    --- PASS: TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=true (0.31s)
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/win/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/lose/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/escape/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/dead/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/pvp/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/enemy-escaped/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/enemy-captured/shared=false
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/win/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/lose/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/escape/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/dead/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/pvp/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/enemy-escaped/shared=true
+=== RUN   TestHighLevelNativeRewardExclusionsAndTraining/enemy-captured/shared=true
+--- PASS: TestHighLevelNativeRewardExclusionsAndTraining (4.94s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/win/shared=false (0.41s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/lose/shared=false (0.44s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/escape/shared=false (0.37s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/dead/shared=false (0.30s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/pvp/shared=false (0.35s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=false (0.35s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/enemy-escaped/shared=false (0.22s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/enemy-captured/shared=false (0.26s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/win/shared=true (0.23s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/lose/shared=true (0.19s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/escape/shared=true (0.30s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/dead/shared=true (0.25s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/pvp/shared=true (0.30s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=true (0.32s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/enemy-escaped/shared=true (0.34s)
+    --- PASS: TestHighLevelNativeRewardExclusionsAndTraining/enemy-captured/shared=true (0.29s)
+PASS
+ok  	sa/server/internal/world	14.907s

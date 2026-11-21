@@ -1,0 +1,29 @@
+--- FAIL: TestHighLevelNativeEnemySettlementAndPersistence (3.82s)
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=false (2.93s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:130 Items:[] Pets:[]} want XP 3587
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=false (0.10s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want XP 4076
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=false (0.11s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:130 Items:[] Pets:[]} want XP 3341
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=false (0.18s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want XP 4076
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-130/shared=true (0.10s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:130 Items:[] Pets:[]} want XP 3587
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/fire-jibi-140/shared=true (0.16s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want XP 4076
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/tears-busudi-130/shared=true (0.13s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:130 Items:[] Pets:[]} want XP 3341
+    --- FAIL: TestHighLevelNativeEnemySettlementAndPersistence/tears-chigela-140/shared=true (0.10s)
+        enemyexp_test.go:39: real high-level settlement: got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want XP 4076
+--- FAIL: TestHighLevelNativeRewardExclusionsAndTraining (2.51s)
+    --- FAIL: TestHighLevelNativeRewardExclusionsAndTraining/win/shared=false (0.12s)
+        enemyexp_test.go:99: win XP got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want 4076
+    --- FAIL: TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=false (0.18s)
+        enemyexp_test.go:99: zero-event XP got &{Result:win Gold:0 Exp:1 LevelUp:0 Level:140 Items:[] Pets:[]} want 0
+    --- FAIL: TestHighLevelNativeRewardExclusionsAndTraining/win/shared=true (0.11s)
+        enemyexp_test.go:99: win XP got &{Result:win Gold:0 Exp:0 LevelUp:0 Level:140 Items:[] Pets:[]} want 4076
+    --- FAIL: TestHighLevelNativeRewardExclusionsAndTraining/zero-event/shared=true (0.15s)
+        enemyexp_test.go:99: zero-event XP got &{Result:win Gold:0 Exp:1 LevelUp:0 Level:140 Items:[] Pets:[]} want 0
+FAIL
+FAIL	sa/server/internal/world	6.415s
+FAIL

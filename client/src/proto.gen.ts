@@ -7,6 +7,8 @@ export interface ObjInfo { id: number; kind: string; name: string; sprite: numbe
 export interface NpcPos { name: string; x: number; y: number; }
 export interface MapPoint { x: number; y: number; }
 export interface MapPlace { name: string; floor: number; entrances: MapPoint[]; conditional: boolean; }
+export interface MapTransferStep { floor: number; x: number; y: number; toFloor: number; toX: number; toY: number; }
+export interface MapTransfer { x: number; y: number; toX: number; toY: number; via: MapTransferStep[]; }
 export interface VendorEntry { index: number; kind: number; slot: number; price: number; name: string; pile: number; image: number; level: number; sprite: number; }
 export interface BattleFighter { slot: number; name: string; sprite: number; level: number; hp: number; maxHp: number; mp: number; maxMp: number; rideName: string; rideLevel: number; rideHp: number; rideMaxHp: number; fallSprite: number; ownerSlot: number; bagSlot: number; status: number; defenseBoost: number; defenseTurns: number; }
 export interface InvItem { slot: number; id: number; name: string; image: number; memo: string; level: number; pile: number; type: number; field: number; target: number; usable: boolean; equip: number; params: string; damage: string; magic: string; magicMemo: string; magicMp: number; magicField: number; magicTarget: number; magicDead: boolean; magicFunc: string; magicOption: string; flags: number; alch: string; merged: boolean; jigsaw: string; }
@@ -130,7 +132,7 @@ export interface S2CSelf { t: "Self"; id: number; name: string; sprite: number; 
 export interface S2CStatus { t: "Status"; name: string; face: number; level: number; exp: number; nextExp: number; hp: number; maxHp: number; mp: number; maxMp: number; atk: number; def: number; agi: number; charm: number; dp: number; vital: number; str: number; tgh: number; dex: number; attrs: number[]; hometown: number; trans: number; points: number; detail: string[]; }
 export interface S2CEnterFloor { t: "EnterFloor"; floor: number; name: string; palette: number; width: number; height: number; x: number; y: number; dir: number; step: number; mapVer: string; }
 export interface S2CMapData { t: "MapData"; floor: number; x1: number; y1: number; x2: number; y2: number; tiles: number[]; objs: number[]; walk: string; ver: string; }
-export interface S2CNpcList { t: "NpcList"; floor: number; npcs: NpcPos[]; places: MapPlace[]; }
+export interface S2CNpcList { t: "NpcList"; floor: number; npcs: NpcPos[]; places: MapPlace[]; transfers: MapTransfer[]; }
 export interface S2CPosCorrect { t: "PosCorrect"; x: number; y: number; dir: number; }
 export interface S2CObjAppear { t: "ObjAppear"; objs: ObjInfo[]; }
 export interface S2CObjDisappear { t: "ObjDisappear"; ids: number[]; }
@@ -159,6 +161,8 @@ const SCHEMA: Record<string, [string, string][]> = {
   NpcPos: [["name","s"],["x","i"],["y","i"]],
   MapPoint: [["x","i"],["y","i"]],
   MapPlace: [["name","s"],["floor","i"],["entrances","A:MapPoint"],["conditional","b"]],
+  MapTransferStep: [["floor","i"],["x","i"],["y","i"],["toFloor","i"],["toX","i"],["toY","i"]],
+  MapTransfer: [["x","i"],["y","i"],["toX","i"],["toY","i"],["via","A:MapTransferStep"]],
   VendorEntry: [["index","i"],["kind","i"],["slot","i"],["price","i"],["name","s"],["pile","i"],["image","i"],["level","i"],["sprite","i"]],
   BattleFighter: [["slot","i"],["name","s"],["sprite","i"],["level","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["rideName","s"],["rideLevel","i"],["rideHp","i"],["rideMaxHp","i"],["fallSprite","i"],["ownerSlot","i"],["bagSlot","i"],["status","i"],["defenseBoost","i"],["defenseTurns","i"]],
   InvItem: [["slot","i"],["id","i"],["name","s"],["image","i"],["memo","s"],["level","i"],["pile","i"],["type","i"],["field","i"],["target","i"],["usable","b"],["equip","i"],["params","s"],["damage","s"],["magic","s"],["magicMemo","s"],["magicMp","i"],["magicField","i"],["magicTarget","i"],["magicDead","b"],["magicFunc","s"],["magicOption","s"],["flags","i"],["alch","s"],["merged","b"],["jigsaw","s"]],
@@ -220,7 +224,7 @@ const SCHEMA: Record<string, [string, string][]> = {
   Status: [["name","s"],["face","i"],["level","i"],["exp","i"],["nextExp","i"],["hp","i"],["maxHp","i"],["mp","i"],["maxMp","i"],["atk","i"],["def","i"],["agi","i"],["charm","i"],["dp","i"],["vital","i"],["str","i"],["tgh","i"],["dex","i"],["attrs","a"],["hometown","i"],["trans","i"],["points","i"],["detail","a"]],
   EnterFloor: [["floor","i"],["name","s"],["palette","i"],["width","i"],["height","i"],["x","i"],["y","i"],["dir","i"],["step","i"],["mapVer","s"]],
   MapData: [["floor","i"],["x1","i"],["y1","i"],["x2","i"],["y2","i"],["tiles","a"],["objs","a"],["walk","s"],["ver","s"]],
-  NpcList: [["floor","i"],["npcs","A:NpcPos"],["places","A:MapPlace"]],
+  NpcList: [["floor","i"],["npcs","A:NpcPos"],["places","A:MapPlace"],["transfers","A:MapTransfer"]],
   PosCorrect: [["x","i"],["y","i"],["dir","i"]],
   ObjAppear: [["objs","A:ObjInfo"]],
   ObjDisappear: [["ids","a"]],

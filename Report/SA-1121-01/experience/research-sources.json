@@ -1,0 +1,43 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/librae8226/gmsv/master/include/enemyexptbl.h",
+    "file": "upstream-enemyexptbl.h",
+    "sha256": "253d6dfce60ec14cf53c54f4200c92077fd1ac9aafb457f4e673297c27ac1bef",
+    "accessed_utc": "2026-11-21T10:04:25.041158+00:00",
+    "upstream_commit": "49928c291c6789013cba56d7c07d389f87cdfb0c",
+    "pinned_url": "https://raw.githubusercontent.com/librae8226/gmsv/49928c291c6789013cba56d7c07d389f87cdfb0c/include/enemyexptbl.h"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/chenmingbiao/stone-age/master/gmsv/include/enemyexptbl.h",
+    "file": "upstream-second-enemyexptbl.h",
+    "sha256": "c6a6e71dc61ac252d539c77fbf2016ad761a33033df1b7d5cc6f471cacc0c3a4",
+    "accessed_utc": "2026-11-21T10:04:26.579657+00:00"
+  },
+  {
+    "url": "https://go.dev/doc/go1.27",
+    "file": "go-1.27-release-excerpts.txt",
+    "sha256": "a4c56ba584ac26614537ac40bf07aa638314decdacf32ea96acb60dbfe57393e",
+    "accessed_utc": "2026-11-21T10:04:28.461179+00:00",
+    "original_local_file": "/tmp/sa-1121-01-experience-research-html/go-1.27-release.html",
+    "sha256_scope": "downloaded original HTML; retained locally outside repository",
+    "excerpt_note": "Selected plain-text passages, script/style removed; excerpts are not the full source."
+  },
+  {
+    "url": "https://go.dev/doc/security/fuzz/",
+    "file": "go-fuzzing-excerpts.txt",
+    "sha256": "f4ada4d8b1a009fb5ad0e48daa16c2b6edf90403a6729804778c75b591edb8fa",
+    "accessed_utc": "2026-11-21T10:04:30.387244+00:00",
+    "original_local_file": "/tmp/sa-1121-01-experience-research-html/go-fuzzing.html",
+    "sha256_scope": "downloaded original HTML; retained locally outside repository",
+    "excerpt_note": "Selected plain-text passages, script/style removed; excerpts are not the full source."
+  },
+  {
+    "url": "https://sre.google/workbook/canarying-releases/",
+    "file": "google-canarying-excerpts.txt",
+    "sha256": "2129ec6fefdb7807073a7877344e7f0409c27e4fde1021d30114a38338fd039f",
+    "accessed_utc": "2026-11-21T10:04:32.349253+00:00",
+    "original_local_file": "/tmp/sa-1121-01-experience-research-html/google-canarying.html",
+    "sha256_scope": "downloaded original HTML; retained locally outside repository",
+    "excerpt_note": "Selected plain-text passages, script/style removed; excerpts are not the full source."
+  }
+]
